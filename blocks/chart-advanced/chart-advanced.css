@@ -1,1 +1,1 @@
-
+main[data-mode=light]{--chart-advanced-title-color: #181818;--chart-advanced-info-color: #181818}main[data-mode=dark]{--chart-advanced-title-color: #ffffff;--chart-advanced-info-color: #ffffff}main{--chart-advanced-chat-column-width: 100%}.chart-advanced .chart-advanced-title{color:var(--chart-advanced-title-color)}.chart-advanced .chart-advanced-info{color:var(--chart-advanced-info-color)}.chart-advanced .title>h4{margin:0}@media(min-width: 730px){.chart-advanced .chat-column-width{width:var(--chart-advanced-chat-column-width)}}

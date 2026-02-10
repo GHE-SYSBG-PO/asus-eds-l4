@@ -184,12 +184,12 @@
     ]
   },
   {
-    "id": "columns-section",
+    "id": "container-2cols",
     "fields": [
       {
         "component": "hidden",
         "name": "style",
-        "value": "columns-section"
+        "value": "container-2cols"
       },
       {
         "component": "tab",

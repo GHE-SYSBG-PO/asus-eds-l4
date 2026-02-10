@@ -3,7 +3,7 @@
     "id": "main",
     "components": [
       "section",
-      "columns-section"
+      "container-2cols"
     ]
   },
   {

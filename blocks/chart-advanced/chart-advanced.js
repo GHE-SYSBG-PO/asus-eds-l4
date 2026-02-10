@@ -6,8 +6,8 @@ import {
 
 // 统一高度，标题以最高为基准，设置其他容器的高度
 const setUnifiedHeight = (block) => {
-  const containers = block.querySelectorAll('.new-chart-advanced h4');
-  const parentContainers = block.querySelectorAll('.new-chart-advanced'); // 获取父容器
+  const containers = block.querySelectorAll('.chart-advanced .title>h4');
+  const parentContainers = block.querySelectorAll('.chart-advanced .title'); // 获取父容器
 
   // 获取容器内最高的高度
   let maxHeight = 0;
@@ -20,14 +20,14 @@ const setUnifiedHeight = (block) => {
   });
   // console.log('最高容器内容的高度:', maxHeight);
 
-  // 给所有 .new-chart-advanced 容器设置最小高度
+  // 给所有 .title 容器设置最小高度
   const setMinHeight = () => {
     if (window.innerWidth >= 730) {
       parentContainers.forEach((parentContainer) => {
         parentContainer.style.minHeight = `${maxHeight}px`;
       });
     } else {
-      // 屏幕宽度小于730时，移除所有 .new-chart-advanced 的最小高度
+      // 屏幕宽度小于730时，移除所有 .title 的最小高度
       parentContainers.forEach((parentContainer) => {
         parentContainer.style.minHeight = '';
       });
@@ -73,12 +73,12 @@ const setUnifiedHeight = (block) => {
       // console.log('窗口调整后最高容器内容的高度:', newMaxHeight);
 
       maxHeight = newMaxHeight;
-      // 更新所有 .new-chart-advanced 容器的最小高度
+      // 更新所有 .title 容器的最小高度
       parentContainers.forEach((parentContainer) => {
         parentContainer.style.minHeight = `${newMaxHeight}px`;
       });
     } else {
-      // 屏幕宽度小于730时，移除所有 .new-chart-advanced 的最小高度
+      // 屏幕宽度小于730时，移除所有 .title 的最小高度
       parentContainers.forEach((parentContainer) => {
         parentContainer.style.minHeight = '';
       });
@@ -109,9 +109,9 @@ export default async function decorate(block) {
       // console.log(val);
       try {
         itemHtml += `
-          <div class="flex items-center">
-            <div class="w-[46px] h-[46px] flex items-center justify-center">${val.iconAssets.html}</div>
-            <span>${val.infoRichtext.text}</span> 
+          <div class="flex items-center gap-[20px]">
+            <div class="w-[46px] h-[46px] flex items-center justify-center shrink-0">${val.iconAssets.html}</div>
+            <span class="ro-rg-18 chart-advanced-info">${val.infoRichtext.text}</span> 
           </div>
         `;
       } catch (error) {
@@ -123,10 +123,10 @@ export default async function decorate(block) {
     v = getFieldValue(config);
     // console.log('执行chart-advanced-config', config);
     return `
-      <div class="md:flex-1"">
-        <div class="new-chart-advanced bg-red-600"><h4 class="break-all">${v('titleRichtext')}</h4></div>
+      <div class="${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'} chat-column-width" style="--chart-advanced-chat-column-width: ${v('chartColumnWidth')}%;">
+        <div class="title"><h4 class="break-all tt-bd-28 chart-advanced-title">${v('titleRichtext')}</h4></div>
         <div class="h-[1px] bg-[#181818] w-full my-[16px]"></div>
-        <div class="bg-green-300 break-all flex flex-col content-start items-start">
+        <div class="bg-green-300 break-all flex flex-col content-start items-start gap-[16px]">
           ${itemHtml}
         </div>
       </div>
@@ -138,10 +138,12 @@ export default async function decorate(block) {
   containerHtml = htmlParts.join('');
 
   const wrap = `
-    <div class="flex flex-col md:flex-row md:flex-nowrap gap-[20px] w-full">
+    <div class="flex flex-col md:flex-row md:flex-nowrap gap-[40px] w-full chart-advanced">
       ${containerHtml}
     </div>
   `;
   block.innerHTML = wrap;
-  setUnifiedHeight(block);
+  setTimeout(() => {
+    setUnifiedHeight(block);
+  }, 500);
 }

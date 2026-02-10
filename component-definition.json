@@ -77,16 +77,16 @@
           }
         },
         {
-          "title": "Columns Section(ID:12)",
-          "id": "columns-section",
+          "title": "Container 2Cols(ID:12)",
+          "id": "container-2cols",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/section/v1/section",
                 "template": {
-                  "name": "Columns Section",
-                  "model": "columns-section",
-                  "filter": "columns-section"
+                  "name": "Container 2Cols",
+                  "model": "container-2cols",
+                  "filter": "container-2cols"
                 }
               }
             }
