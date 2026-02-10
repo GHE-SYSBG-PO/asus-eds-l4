@@ -144,7 +144,7 @@ export default async function decorate(block) {
     wrap.style.setProperty('--chart-advanced-chat-column-width', `${v('chartColumnWidth')}%`);
     wrap.innerHTML = `
       <div class="title"><h4 class="break-all ${v('titleFont')} chart-advanced-title" style="${titleFontColor}">${v('titleRichtext', 'html')}</h4></div>
-      <div class="h-[1px] my-[16px] line-bg" style="width: ${v('lineWidth')}; ${lineColor}"></div>
+      <div class="h-[1px] mx-auto my-[16px] line-bg" style="width: ${v('lineWidth')}; ${lineColor}"></div>
       <div class="break-all flex ${v('wrapLine') === 'on' ? 'flex-wrap' : 'flex-col'} content-start items-start gap-[16px]">
         ${itemHtml}
       </div>
