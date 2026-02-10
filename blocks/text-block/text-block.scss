@@ -1,144 +1,145 @@
-.text-block-animation {
-  &>a,
-  &>div,
-  &>figure,
-  &>h1,
-  &>h2,
-  &>h3,
-  &>h4,
-  &>img,
-  &>span {
-    opacity: 0;
-    transform: translateZ(0) translateY(30px);
-    transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1);
-  }
-}
+.l4-pdp {
+  &[data-product="asus"] {
+    /* ASUS Light Theme */
+    &[data-mode="light"] {
+      --text-block-category-color: #666666;
+      --text-block-title-color: transparent;
+      --text-block-title-gradient: linear-gradient(270deg, #0062CD 0%, #004691 100%);
+      --text-block-body-color: #181818;
+      --text-block-disclaimer-color: #666666;
+      --text-block-cta-start: #0062CD;
+      --text-block-cta-end: #004691;
+    }
 
-main[data-product="asus"] {
-  /* ASUS Light Theme */
-  &[data-mode="light"] {
-    --text-block-category-color: #666666;
-    --text-block-title-color: transparent;
-    --text-block-title-gradient: linear-gradient(270deg, #0062CD 0%, #004691 100%);
-    --text-block-body-color: #181818;
-    --text-block-disclaimer-color: #666666;
-    --text-block-cta-start: #0062CD;
-    --text-block-cta-end: #004691;
+    /* ASUS Dark Theme */
+    &[data-mode="dark"] {
+      --text-block-category-color: #999999;
+      --text-block-title-color: transparent;
+      --text-block-title-gradient: linear-gradient(270deg, #C3E0FF 0%, #78BCFF 100%);
+      --text-block-body-color: #FFFFFF;
+      --text-block-disclaimer-color: #999999;
+      --text-block-cta-start: #C3E0FF;
+      --text-block-cta-end: #78BCFF;
+    }
   }
 
-  /* ASUS Dark Theme */
-  &[data-mode="dark"] {
-    --text-block-category-color: #999999;
-    --text-block-title-color: transparent;
-    --text-block-title-gradient: linear-gradient(270deg, #C3E0FF 0%, #78BCFF 100%);
-    --text-block-body-color: #FFFFFF;
-    --text-block-disclaimer-color: #999999;
-    --text-block-cta-start: #C3E0FF;
-    --text-block-cta-end: #78BCFF;
-  }
-}
+  &[data-product="proart"] {
+    /* PROART Light Theme */
+    &[data-mode="light"] {
+      --text-block-category-color: #666666;
+      --text-block-title-color: transparent;
+      --text-block-title-gradient: linear-gradient(270deg, #6B4F35 0%, #8D684E 100%);
+      --text-block-body-color: #181818;
+      --text-block-disclaimer-color: #666666;
+      --text-block-cta-start: #6B4F35;
+      --text-block-cta-end: #8D684E;
+    }
 
-main[data-product="proart"] {
-  /* PROART Light Theme */
-  &[data-mode="light"] {
-    --text-block-category-color: #666666;
-    --text-block-title-color: transparent;
-    --text-block-title-gradient: linear-gradient(270deg, #6B4F35 0%, #8D684E 100%);
-    --text-block-body-color: #181818;
-    --text-block-disclaimer-color: #666666;
-    --text-block-cta-start: #6B4F35;
-    --text-block-cta-end: #8D684E;
-  }
-
-  /* PROART Dark Theme */
-  &[data-mode="dark"] {
-    --text-block-category-color: #999999;
-    --text-block-title-color: transparent;
-    --text-block-title-gradient: linear-gradient(270deg, #9F7A56 0%, #DFC9A9 100%);
-    --text-block-body-color: #FFFFFF;
-    --text-block-disclaimer-color: #999999;
-    --text-block-cta-start: #9F7A56;
-    --text-block-cta-end: #DFC9A9;
-  }
-}
-
-main[data-product="rog"] {
-  /* ROG Light Theme */
-  &[data-mode="light"] {
-    --text-block-category-color: #CC000E;
-    --text-block-title-color: #181818;
-    --text-block-title-gradient: '';
-    --text-block-body-color: #181818;
-    --text-block-disclaimer-color: #666666;
-    --text-block-cta-start: #CC000E;
-    --text-block-cta-end: #CC000E;
+    /* PROART Dark Theme */
+    &[data-mode="dark"] {
+      --text-block-category-color: #999999;
+      --text-block-title-color: transparent;
+      --text-block-title-gradient: linear-gradient(270deg, #9F7A56 0%, #DFC9A9 100%);
+      --text-block-body-color: #FFFFFF;
+      --text-block-disclaimer-color: #999999;
+      --text-block-cta-start: #9F7A56;
+      --text-block-cta-end: #DFC9A9;
+    }
   }
 
-  /* ROG Dark Theme */
-  &[data-mode="dark"] {
-    --text-block-category-color: #FF0F0F;
-    --text-block-title-color: #FFFFFF;
-    --text-block-title-gradient: '';
-    --text-block-body-color: #FFFFFF;
-    --text-block-disclaimer-color: #999999;
-    --text-block-cta-start: #FF0F0F;
-    --text-block-cta-end: #FF0F0F;
+  &[data-product="rog"] {
+    /* ROG Light Theme */
+    &[data-mode="light"] {
+      --text-block-category-color: #CC000E;
+      --text-block-title-color: #181818;
+      --text-block-title-gradient: '';
+      --text-block-body-color: #181818;
+      --text-block-disclaimer-color: #666666;
+      --text-block-cta-start: #CC000E;
+      --text-block-cta-end: #CC000E;
+    }
+
+    /* ROG Dark Theme */
+    &[data-mode="dark"] {
+      --text-block-category-color: #FF0F0F;
+      --text-block-title-color: #FFFFFF;
+      --text-block-title-gradient: '';
+      --text-block-body-color: #FFFFFF;
+      --text-block-disclaimer-color: #999999;
+      --text-block-cta-start: #FF0F0F;
+      --text-block-cta-end: #FF0F0F;
+    }
   }
-}
 
-main[data-product="tuf"] {
-  /* TUF Light Theme */
-  &[data-mode="light"] {
-    --text-block-category-color: #666666;
-    --text-block-title-color: #181818;
-    --text-block-title-gradient: '';
-    --text-block-body-color: #181818;
-    --text-block-disclaimer-color: #666666;
-    --text-block-cta-start: #181818;
-    --text-block-cta-end: #181818;
+  &[data-product="tuf"] {
+    /* TUF Light Theme */
+    &[data-mode="light"] {
+      --text-block-category-color: #666666;
+      --text-block-title-color: #181818;
+      --text-block-title-gradient: '';
+      --text-block-body-color: #181818;
+      --text-block-disclaimer-color: #666666;
+      --text-block-cta-start: #181818;
+      --text-block-cta-end: #181818;
+    }
+
+    /* TUF Dark Theme */
+    &[data-mode="dark"] {
+      --text-block-category-color: #FF9E1B;
+      --text-block-title-color: #FFFFFF;
+      --text-block-title-gradient: '';
+      --text-block-body-color: #FFFFFF;
+      --text-block-disclaimer-color: #999999;
+      --text-block-cta-start: #FF9E1B;
+      --text-block-cta-end: #FF9E1B;
+    }
+  }
+  /* Text Block Component Styles */
+  .text-block-category {
+    color: var(--text-block-category-color);
   }
 
-  /* TUF Dark Theme */
-  &[data-mode="dark"] {
-    --text-block-category-color: #FF9E1B;
-    --text-block-title-color: #FFFFFF;
-    --text-block-title-gradient: '';
-    --text-block-body-color: #FFFFFF;
-    --text-block-disclaimer-color: #999999;
-    --text-block-cta-start: #FF9E1B;
-    --text-block-cta-end: #FF9E1B;
+  .text-block-title {
+    color: var(--text-block-title-color, inherit);
+    background: var(--text-block-title-gradient, none);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
-}
 
-/* Text Block Component Styles */
-.text-block-category {
-  color: var(--text-block-category-color);
-}
+  .text-block-body {
+    color: var(--text-block-body-color);
+  }
 
-.text-block-title {
-  color: var(--text-block-title-color, inherit);
-  background: var(--text-block-title-gradient, none);
-  -webkit-background-clip: text;
-  background-clip: text;
-}
+  .text-block-disclaimer {
+    color: var(--text-block-disclaimer-color);
+  }
 
-.text-block-body {
-  color: var(--text-block-body-color);
-}
-
-.text-block-disclaimer {
-  color: var(--text-block-disclaimer-color);
-}
-
-a.text-block-cta {
-  color: transparent;
-  background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  &:hover { 
+  a.text-block-cta {
     color: transparent;
     background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    &:hover { 
+      color: transparent;
+      background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  }
+  .text-block-animation {
+    &>a,
+    &>div,
+    &>figure,
+    &>h1,
+    &>h2,
+    &>h3,
+    &>h4,
+    &>img,
+    &>span {
+      opacity: 0;
+      transform: translateZ(0) translateY(30px);
+      transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1);
+    }
   }
 }
+

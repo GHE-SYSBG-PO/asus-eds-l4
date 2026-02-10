@@ -1,6 +1,6 @@
 
 
-main {  
+.l4-pdp {  
   /* Light  */
   &[data-mode="light"] {
     --chart-advanced-title-color: #181818;
@@ -13,25 +13,24 @@ main {
     --chart-advanced-info-color: #ffffff;
   }
   --chart-advanced-chat-column-width: 100%;
-}
 
-
-.chart-advanced {
-  .chart-advanced-title {
-    color: var(--chart-advanced-title-color);
-  }
-  .chart-advanced-info {
-    color: var(--chart-advanced-info-color);
-  }
-  .title {
-    &>h4 {
-      margin: 0;
+  .chart-advanced {
+    .chart-advanced-title {
+      color: var(--chart-advanced-title-color);
     }
-  }
-  // 响应式版本
-  @media (min-width: 730px) {
-    .chat-column-width {
-      width: var(--chart-advanced-chat-column-width);
+    .chart-advanced-info {
+      color: var(--chart-advanced-info-color);
+    }
+    .title {
+      &>h4 {
+        margin: 0;
+      }
+    }
+    // 响应式版本
+    @media (min-width: 730px) {
+      .chat-column-width {
+        width: var(--chart-advanced-chat-column-width);
+      }
     }
   }
 }
