@@ -15,8 +15,8 @@
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
     "tailwind": "tailwindcss -i ./styles/tailwind.css -o ./dist/out.css --watch --minify",
     "tailwind:build": "tailwindcss -i ./styles/tailwind.css -o ./dist/out.css --minify",
-    "scss": "sass --watch styles:styles blocks:blocks --style=compressed --no-source-map",
-    "scss:build": "sass styles:styles blocks:blocks --style=compressed --no-source-map",
+    "scss": "sass --watch styles:styles blocks:blocks components:components --style=compressed --no-source-map",
+    "scss:build": "sass styles:styles blocks:blocks components:components --style=compressed --no-source-map",
     "prepare": "husky",
     "dev": "concurrently -k -n AEM,SASS,TAILWIND -c blue,green,yellow \"npm run aem\" \"npm run scss\" \"npm run tailwind\"",
     "build": "npm-run-all build:json scss:build tailwind:build"
