@@ -38,7 +38,7 @@ export const buildCloseButtonHtml = (v) => {
   }
 
 function prefixHex(arr) {
-  return arr.map((c) => `#${c}`);
+  return arr.filter(c=>c).map((c) => `#${c}`);
 }
 
 
