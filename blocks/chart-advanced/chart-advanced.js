@@ -125,6 +125,7 @@ export default async function decorate(block) {
 
     // 获取有重复项的数组
     const [item = []] = getBlockRepeatConfigs(wrap);
+    console.log('item', item)
     item.forEach((val) => {
       // console.log(val);
       try {
