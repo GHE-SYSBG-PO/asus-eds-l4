@@ -4,7 +4,7 @@
   "version": "1.3.0",
   "description": "Starter project for Adobe Helix",
   "scripts": {
-    "aem": "aem up",
+    "aem": "aem up --url https://dev--asus-eds-l4-dev--ghe-sysbg-po.aem.page",
     "lint:js": "eslint . --ext .json,.js,.mjs",
     "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\"",
     "lint": "npm run lint:js && npm run lint:css",
