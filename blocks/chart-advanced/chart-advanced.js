@@ -109,8 +109,6 @@ export default async function decorate(block) {
   // 创建所有异步操作的 Promise 数组
   // 每个chat
   Array.from(wrapper).forEach(async (wrap) => {
-    const [item = []] = getBlockRepeatConfigs(wrap);
-    console.log('item', item)
     console.log('wrap', wrap)
     config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
     v = getFieldValue(config);
@@ -126,6 +124,8 @@ export default async function decorate(block) {
       lineColor = `--chart-advanced-line-bg-color: #${v('lineColor')}`;
     }
     // 获取有重复项的数组
+    const [item = []] = getBlockRepeatConfigs(wrap);
+    console.log('item', item)
     item.forEach((val) => {
       // console.log(val);
       try {
