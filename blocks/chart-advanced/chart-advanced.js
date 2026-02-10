@@ -98,53 +98,51 @@ export default async function decorate(block) {
   const wrapper = block.querySelectorAll(':scope > div');
   // console.log('执行chart-advanced', wrapper);
   let config = {};
-  // let v = '';
+  let v = '';
   let containerHtml = '';
+  let itemHtml = '';
   // 创建所有异步操作的 Promise 数组
-  const promises = Array.from(wrapper).map(async (item) => {
-    // console.log(getBlockRepeatConfigs(item));
-    config = await getBlockConfigs(item, DEFAULT_CONFIG, 'chart-advanced-item');
-    // v = getFieldValue(config);
+  // 每个chat
+  const promises = Array.from(wrapper).map(async (wrap) => {
+    // 获取有重复项的数组
+    const [item = []] = getBlockRepeatConfigs(wrap);
+    item.forEach((val) => {
+      // console.log(val);
+      try {
+        itemHtml += `
+          <div class="flex items-center">
+            <div class="w-[46px] h-[46px] flex items-center justify-center">${val.iconAssets.html}</div>
+            <span>${val.infoRichtext.text}</span> 
+          </div>
+        `;
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error:', error);
+      }
+    });
+    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+    v = getFieldValue(config);
     // console.log('执行chart-advanced-config', config);
-    // return `
-    //   <div class="md:flex-1"">
-    //     <div class="new-chart-advanced bg-red-600"><h4 class="break-all">Media andEntertainmentMediaand Entertainment 55555555555555555555555555555555555</h4></div>
-    //     <div class="h-[3px] bg-black w-full my-[10px]"></div>
-    //     <div class="bg-green-300 break-all flex flex-col content-start items-start">
-    //       <div class="flex items-center">
-    //         <img class="mr-[10px] my-[10px]" style="width: 40px; height: 18px;" src="https://img1.baidu.com/it/u=593588352,2241402332&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=208" />
-    //         <span>66666666666666</span> 
-    //       </div>
-    //       <div class="flex items-center">
-    //         <img class="mr-[10px] my-[10px]" style="width: 40px; height: 18px;" src="https://img1.baidu.com/it/u=593588352,2241402332&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=208" />
-    //         <span>wq</span> 
-    //       </div>
-    //       <div class="flex items-center">
-    //         <img class="mr-[10px] my-[10px]" style="width: 40px; height: 18px;" src="https://img1.baidu.com/it/u=593588352,2241402332&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=208" />
-    //         <span>wq</span> 
-    //       </div>
-    //       <div class="flex items-center">
-    //         <img class="mr-[10px] my-[10px]" style="width: 40px; height: 18px;" src="https://img1.baidu.com/it/u=593588352,2241402332&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=208" />
-    //         <span>wqjiwqoj</span> 
-    //       </div>
-    //       <div class="flex items-center">
-    //         <img class="mr-[10px] my-[10px]" style="width: 40px; height: 18px;" src="https://img1.baidu.com/it/u=593588352,2241402332&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=208" />
-    //         <span>wqjiwqoj</span> 
-    //       </div>
-    //     </div>
-    //   </div>
-    // `;
+    return `
+      <div class="md:flex-1"">
+        <div class="new-chart-advanced bg-red-600"><h4 class="break-all">${v('titleRichtext')}</h4></div>
+        <div class="h-[1px] bg-[#181818] w-full my-[16px]"></div>
+        <div class="bg-green-300 break-all flex flex-col content-start items-start">
+          ${itemHtml}
+        </div>
+      </div>
+    `;
   });
 
-  // // 等待所有异步操作完成
-  // const htmlParts = await Promise.all(promises);
-  // containerHtml = htmlParts.join('');
+  // 等待所有异步操作完成
+  const htmlParts = await Promise.all(promises);
+  containerHtml = htmlParts.join('');
 
-  // const wrap = `
-  //   <div class="flex flex-col md:flex-row md:flex-nowrap gap-[20px] w-full">
-  //     ${containerHtml}
-  //   </div>
-  // `;
+  const wrap = `
+    <div class="flex flex-col md:flex-row md:flex-nowrap gap-[20px] w-full">
+      ${containerHtml}
+    </div>
+  `;
 
-  // block.innerHTML = wrap;
+  block.innerHTML = wrap;
 }
