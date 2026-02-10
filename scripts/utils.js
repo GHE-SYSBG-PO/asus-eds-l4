@@ -91,7 +91,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
             // 拿user输入的值。没有时，用配置的默认值
             console.log(row?.innerHTML.trim())
             let value = cell?.textContent.trim() || (config[fieldName] || '');
-            const html = row?.innerHTML.trim() || (config[fieldName] || '');
+            const html = cell?.innerHTML.trim() || (config[fieldName] || '');
             // If text content is empty, check for image/picture elements
             if (value === '') {
               const img = cell.querySelector('img');
