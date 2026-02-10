@@ -402,6 +402,7 @@ export const getBlockRepeatConfigs = (block) => {
     // 检查当前子元素的 outerHTML 是否包含 "L4TagMulti-" 标记
     if (item.outerHTML.includes('L4TagMulti-')) {
       // 如果包含，则调用 parseL4TagMulti 函数解析该子元素的内容
+      console.log('item', item)
       arr.push(parseL4TagMulti(item));
     }
   });
