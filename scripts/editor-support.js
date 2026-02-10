@@ -12,7 +12,7 @@ import {
 
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
-import initializePublish from './editor-support-publish.js';
+// import initializePublish from './editor-support-publish.js';
 import { loadSectionBlockJs } from './utils.js';
 
 let editorRules = null;
@@ -220,7 +220,7 @@ function attachEventListners(main) {
   }));
 }
 
-initializePublish();
+// initializePublish();
 
 attachEventListners(document.querySelector('main'));
 
