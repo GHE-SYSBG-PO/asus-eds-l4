@@ -103,22 +103,22 @@ export default async function decorate(block) {
   let config = {};
   let v = '';
   let itemHtml = '';
-  let lineColor = '';
-  let titleFontColor = '';
-  let infoFontColor = '';
   // 创建所有异步操作的 Promise 数组
   // 每个chat
   Array.from(wrapper).forEach(async (wrap) => {
+    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+    v = getFieldValue(config);
+    console.log('执行chart-advanced-config', config);
+
     // 获取有重复项的数组
     const [item = []] = getBlockRepeatConfigs(wrap);
-    console.log('item', item)
     item.forEach((val) => {
       // console.log(val);
       try {
         itemHtml += `
           <div class="flex items-center gap-[20px]">
             <div class="w-[46px] h-[46px] flex items-center justify-center shrink-0">${val.iconAssets.html}</div>
-            <span class="chart-advanced-info" style="${infoFontColor}">${val.infoRichtext.text}</span> 
+            <span class="${v('infoFont')} chart-advanced-info">${val.infoRichtext.text}</span> 
           </div>
         `;
       } catch (error) {
@@ -126,26 +126,12 @@ export default async function decorate(block) {
         console.error('Error:', error);
       }
     });
-    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
-    v = getFieldValue(config);
-    console.log('执行chart-advanced-config', config);
-
-    if (v('titleFontColor')) {
-      titleFontColor = `--chart-advanced-title-color: #${v('titleFontColor')}`;
-    }
-    if (v('infoFontColor')) {
-      infoFontColor = `--chart-advanced-info-color: #${v('infoFontColor')}`;
-    }
-    if (v('lineColor')) {
-      lineColor = `--chart-advanced-line-bg-color: #${v('lineColor')}`;
-    }
-    console.log('wrap', wrap)
 
     wrap.classList.add(`${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'}`, 'chat-column-width');
     wrap.style.setProperty('--chart-advanced-chat-column-width', `${v('chartColumnWidth')}%`);
     wrap.innerHTML = `
-      <div class="title"><h4 class="break-all ${v('titleFont')} chart-advanced-title" style="${titleFontColor}">${v('titleRichtext', 'html')}</h4></div>
-      <div class="h-[1px] mx-auto my-[16px] line-bg" style="width: ${v('lineWidth')}; ${lineColor}"></div>
+      <div class="title"><h4 class="break-all ${v('titleFont')} chart-advanced-title">${v('titleRichtext', 'html')}</h4></div>
+      <div class="h-[1px] bg-[#181818] w-full my-[16px]"></div>
       <div class="break-all flex ${v('wrapLine') === 'on' ? 'flex-wrap' : 'flex-col'} content-start items-start gap-[16px]">
         ${itemHtml}
       </div>
