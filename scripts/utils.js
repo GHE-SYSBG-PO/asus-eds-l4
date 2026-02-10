@@ -293,6 +293,7 @@ export const parseL4TagMulti = (htmlString) => {
   paragraphs.forEach((p) => {
     const textContent = p.textContent.trim(); // 获取当前 <p> 标签的纯文本内容
 
+    console.log('textContent', textContent)
     // 判断是否是新的字段标记（以 "L4TagMulti-" 开头）
     if (textContent.startsWith('L4TagMulti-')) {
       // 如果当前已有字段（currentKey 不为空），说明上一个字段已结束，需要保存到结果中
@@ -317,7 +318,6 @@ export const parseL4TagMulti = (htmlString) => {
       if (img && img.src) {
         currentText += img.src;
       }
-      console.log('p', p)
       // 将当前 <p> 标签的完整 HTML 和文本内容追加到当前字段中
       currentHtml += p.outerHTML;
       currentText += textContent;
