@@ -1,6 +1,5 @@
 import { loadCSS } from '../../scripts/aem.js';
 
-loadCSS(`${window.hlx.codeBasePath}/components/button/button.css`);
 /**
  * 构建圆角样式 - 只在有配置时才返回
  */
@@ -34,6 +33,7 @@ export function prefixHex(colors) {
  * @returns {string} 关闭按钮的 HTML 字符串
  */
 export const buildCloseButtonHtml = (v) => {
+  loadCSS(`${window.hlx.codeBasePath}/components/button/button.css`);
   const gBtnStyle = v('gBtnStyle', 'text') || 'default';
   // 默认关闭按钮
   if (gBtnStyle !== 'customized') {

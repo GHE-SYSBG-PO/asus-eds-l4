@@ -9,7 +9,7 @@
  * Theme基础变量区 product/mode
  * ======================================== */
 .l4-pdp {
-  [data-product="asus"] {
+  &[data-product="asus"] {
     &[data-mode="light"] {
       .btn-component {
         --bg-d-start: #4379b1;
@@ -37,7 +37,7 @@
     }
   }
 
-  [data-product="proart"] {
+  &[data-product="proart"] {
     &[data-mode="light"] {
       .btn-component {
         --bg-d-start: #806238;
@@ -65,7 +65,7 @@
     }
   }
 
-  [data-product="rog"] {
+  &[data-product="rog"] {
     &[data-mode="light"] {
       .btn-component {
         --bg-d-start: #db0004;
@@ -93,7 +93,7 @@
     }
   }
 
-  [data-product="tuf"] {
+  &[data-product="tuf"] {
     &[data-mode="light"] {
       .btn-component {
         --bg-d-start: #181818;
