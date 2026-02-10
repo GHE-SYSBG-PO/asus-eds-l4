@@ -239,7 +239,7 @@ const handlTColSpan = (scale) => {
 };
 
 export default function decorate(block) {
-  // console.log('执行columns-section', block);
+  // console.log('执行container-2cols', block);
   if (!block.children || block.children.length < 2) return;
   const [col1, col2] = [...block.children];
   col1.classList.add('md:row-1', 'lg:row-1', 'md:order-1', 'md:z-1');

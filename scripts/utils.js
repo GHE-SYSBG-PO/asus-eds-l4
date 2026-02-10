@@ -166,7 +166,7 @@ export const handleDecide = (
 });
 
 /**
- * Loads and decorates a section block (e.g., columns-section).
+ * Loads and decorates a section block (e.g., container-2cols).
  * @param {Element} section The section element
  * @param {string} name The section block name
  */
@@ -190,8 +190,8 @@ const loadSectionBlock = async (section, name) => {
  */
 export const loadSectionBlockJs = async (main) => {
   // Load section blocks (sections with their own JS/CSS)
-  const columnsSections = main.querySelectorAll('.section.columns-section');
-  await Promise.all([...columnsSections].map((section) => loadSectionBlock(section, 'columns-section')));
+  const columnsSections = main.querySelectorAll('.section.container-2cols');
+  await Promise.all([...columnsSections].map((section) => loadSectionBlock(section, 'container-2cols')));
 };
 
 /**

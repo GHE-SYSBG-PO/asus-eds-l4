@@ -146,4 +146,4 @@ export default async function decorate(block) {
   setTimeout(() => {
     setUnifiedHeight(block);
   }, 500);
-};
+}
