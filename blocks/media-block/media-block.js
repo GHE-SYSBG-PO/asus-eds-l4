@@ -70,6 +70,14 @@ const getButtonPositionClass = (position) => {
 };
 
 /**
+ * 获取当前device
+ */
+const getDevice = ()=>{
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+  const isDesktop = window.innerWidth >= 1024;
+  return isTablet?'T':(isDesktop?'D':'M')
+}
+/**
  * 构建尺寸样式对象
  */
 const getSizeStyles = (config) => {
@@ -346,7 +354,14 @@ export default async function decorate(block) {
       mediaContent += createImageElement('D', configD, stylesD, objectPositionD);
     } else if (mediaType === 'video') {
       // 视频：创建单个视频元素，通过 JS 动态切换源
-      mediaContent = createVideoElement(configM, stylesM, objectPositionM);
+      const device = getDevice();
+      if (device === 'D') {
+        mediaContent = createVideoElement(configD, stylesD, objectPositionD);
+      } else if (device === 'T') {
+        mediaContent = createVideoElement(configT, stylesT, objectPositionT);
+      } else {
+        mediaContent = createVideoElement(configM, stylesM, objectPositionM);
+      }
     }
 
     // 构建最终的 HTML
@@ -386,6 +401,9 @@ export default async function decorate(block) {
       setTimeout(() => {
         const videoElement = block.querySelector('video');
         const container = block.querySelector('.media-block-video-container');
+        if(!container){
+          return false;
+        }
         const existingControlsDiv = container.querySelector('.media-block-controls');
         if (!videoElement || !container) return;
 
@@ -502,6 +520,10 @@ export default async function decorate(block) {
                 });
               }
             }
+          }
+
+          if(newSrc === ''){
+            videoElement.src = '';
           }
 
           if (newObjectPosition) {
