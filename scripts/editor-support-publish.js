@@ -4,7 +4,7 @@ import { getConfigValue } from './configs.js';
  */
 export default async function initializePublish() {
   try {
-    const { canPublish } = await getAccountPublishAuth();
+    //const { canPublish } = await getAccountPublishAuth();
     // if (!canPublish) {
     //   updateHeadMetaTag('urn:adobe:aue:config:disable', 'publish,publish-live');
     // }
