@@ -149,6 +149,7 @@ function getPageMetadata() {
     const main = document.body.querySelector('main');
     main.dataset.product = productLine;
     main.dataset.mode = mode;
+    main.classList.add('l4-pdp');
   });
 }
 

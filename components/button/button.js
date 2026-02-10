@@ -21,6 +21,13 @@ export const getRadiusStyle = (tl, tr, br, bl) => {
   return '';
 };
 
+export function prefixHex(colors) {
+  if (typeof colors === 'object') {
+    return colors.filter((c) => c).map((c) => `#${c}`);
+  }
+  return colors ? `#${colors}` : '';
+}
+
 /**
  * 构建关闭按钮 HTML
  * @param {Function} v - 配置获取函数
@@ -36,19 +43,13 @@ export const buildCloseButtonHtml = (v) => {
       </button>
     `;
   }
-
-function prefixHex(arr) {
-  return arr.filter(c=>c).map((c) => `#${c}`);
-}
-
-
   // 自定义关闭按钮 - 应用完整样式
   const label = v('gBtnLabel', 'text') || 'Close';
   const fontDesktop = v('gBtnFontDesktop', 'text') || 'ro-md-16';
   const fontMobile = v('gBtnFontM', 'text') || 'ro-md-14';
-  const fontColorDefault = v('gBtnFontColorDefault', 'text') || '#ffffff';
-  const fontColorHover = v('gBtnFontColorHover', 'text') || '';
-  const fontColorActive = v('gBtnFontColorActive', 'text') || '';
+  const fontColorDefault = prefixHex(v('gBtnFontColorDefault', 'text') || '');
+  const fontColorHover = prefixHex(v('gBtnFontColorHover', 'text') || '');
+  const fontColorActive = prefixHex(v('gBtnFontColorActive', 'text') || '');
   // 背景颜色（支持渐变）
   const bgColorDefaultArr = prefixHex((v('gBtnbgColorDefault', 'text') || '').split(','));
   const bgColorDefault = bgColorDefaultArr[0] || '';
@@ -68,7 +69,7 @@ function prefixHex(arr) {
   const radiusBL = v('gBtnContainerRadiusBL', 'text') || '';
   // 边框设置
   const gBtnBorderWidth = v('gBtnBorderWidth', 'text') || '';
-  const gBtnBorderColor = v('gBtnBorderColor', 'text') || '';
+  const gBtnBorderColor = prefixHex(v('gBtnBorderColor', 'text') || '');
   // 构建内联样式
   let inlineStyle = '';
   // 默认背景色 CSS 变量

@@ -1,7 +1,7 @@
 import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { openModal } from '../modal/modal.js';
-import { getRadiusStyle, buildCloseButtonHtml } from '../../components/button/button.js';
+import { getRadiusStyle, buildCloseButtonHtml, prefixHex } from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
   // 基础配置
@@ -89,10 +89,6 @@ async function handleQuickView(modalPath, closeButtonHtml) {
   );
 }
 
-function prefixHex(arr) {
-  return arr.filter(c=>c).map((c) => `#${c}`);
-}
-
 export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'btn');
@@ -120,13 +116,13 @@ export default async function decorate(block) {
     const containerRadiusBR = v('containerRadiusBR', 'text') || '';
     const containerRadiusBL = v('containerRadiusBL', 'text') || '';
     const containerBorderWidth = v('borderWidth', 'text') || '';
-    const containerBorderColor = v('borderColor', 'text') || '';
+    const containerBorderColor = prefixHex(v('borderColor', 'text') || '');
     // 获取字体配置
     const fontDesktop = v('fontDesktop', 'text') || DEFAULT_CONFIG.fontDesktop;
     const fontMobile = v('fontMobile', 'text') || DEFAULT_CONFIG.fontMobile;
-    const fontColorDefault = v('fontColorDefault', 'text') || '';
-    const fontColorHover = v('fontColorHover', 'text') || '';
-    const fontColorActive = v('fontColorActive', 'text') || '';
+    const fontColorDefault = prefixHex(v('fontColorDefault', 'text') || '');
+    const fontColorHover = prefixHex(v('fontColorHover', 'text') || '');
+    const fontColorActive = prefixHex(v('fontColorActive', 'text') || '');
     // 获取链接配置
     const linkType = v('linkType', 'text') || DEFAULT_CONFIG.linkType;
     const externalLink = v('externalLink', 'text') || DEFAULT_CONFIG.externalLink;
@@ -209,10 +205,10 @@ export default async function decorate(block) {
     // 构建图标 HTML
     let iconHtml = '';
     if (supportsIcon(style)) {
-      const iconBgColorDefault = v('iconBgColorDefault', 'text') || '';
-      const iconBgColorHover = v('iconBgColorHover', 'text') || '';
-      const iconBgColorActive = v('iconBgColorActive', 'text') || '';
-      const iconColor = v('iconColor', 'text') || '';
+      const iconBgColorDefault = prefixHex(v('iconBgColorDefault', 'text') || '');
+      const iconBgColorHover = prefixHex(v('iconBgColorHover', 'text') || '');
+      const iconBgColorActive = prefixHex(v('iconBgColorActive', 'text') || '');
+      const iconColor = prefixHex(v('iconColor', 'text') || '');
       let iconBgStyle = '';
       if (iconBgColorDefault) iconBgStyle += `--icon-bg-default: ${iconBgColorDefault};`;
       if (iconBgColorHover) iconBgStyle += `--icon-bg-hover: ${iconBgColorHover};`;
@@ -229,12 +225,10 @@ export default async function decorate(block) {
           iconPath = 'M8 5v14l11-7z';
         }
 
-        const getSvgLinearHtml = (id,start,end)=>{
-          return `<linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+        const getSvgLinearHtml = (id, start, end) => `<linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="${start}" />
                   <stop offset="100%" stop-color="${end}" />
-                </linearGradient>`
-        }
+                </linearGradient>`;
 
         iconHtml = `
           <div class="btn-icon-wrapper flex items-center justify-center transition-all"
@@ -244,11 +238,11 @@ export default async function decorate(block) {
                data-bg-active="${iconBgColorActive}">
             <svg viewBox="0 0 24 24" class="btn-icon-svg">
               <defs>
-                ${getSvgLinearHtml('icon-filled-default','var(--bg-d-start)','var(--bg-d-end)')}
-                ${getSvgLinearHtml('icon-filled-hover-active','var(--bg-h-a-start)','var(--bg-h-a-end)')}
-                ${getSvgLinearHtml('icon-outline-default','var(--icon-d)','var(--icon-d)')}
-                ${getSvgLinearHtml('icon-outline-hover','var(--bg-d-start)','var(--bg-d-end)')}
-                ${getSvgLinearHtml('icon-outline-active','var(--bg-h-a-start)','var(--bg-h-a-end)')}
+                ${getSvgLinearHtml('icon-filled-default', 'var(--bg-d-start)', 'var(--bg-d-end)')}
+                ${getSvgLinearHtml('icon-filled-hover-active', 'var(--bg-h-a-start)', 'var(--bg-h-a-end)')}
+                ${getSvgLinearHtml('icon-outline-default', 'var(--icon-d)', 'var(--icon-d)')}
+                ${getSvgLinearHtml('icon-outline-hover', 'var(--bg-d-start)', 'var(--bg-d-end)')}
+                ${getSvgLinearHtml('icon-outline-active', 'var(--bg-h-a-start)', 'var(--bg-h-a-end)')}
               </defs>
               <path d="${iconPath}" ${iconColor ? 'fill="var(--icon-color) !important"' : ''}/>
             </svg>
