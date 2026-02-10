@@ -94,12 +94,12 @@ const DEFAULT_CONFIG = {
 };
 
 export default async function decorate(block) {
-  // const wrapper = block.querySelectorAll(':scope > div');
-  // // console.log('执行chart-advanced', block);
-  // let config = {};
-  // let v = '';
-  // let containerHtml = '';
-  // let itemHtml = '';
+  const wrapper = block.querySelectorAll(':scope > div');
+  // console.log('执行chart-advanced', block);
+  let config = {};
+  let v = '';
+  let containerHtml = '';
+  let itemHtml = '';
   // // 创建所有异步操作的 Promise 数组
   // // 每个chat
   // const promises = Array.from(wrapper).map(async (wrap) => {
