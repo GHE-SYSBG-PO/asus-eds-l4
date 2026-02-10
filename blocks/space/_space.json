@@ -1,7 +1,7 @@
 {
     "definitions": [
         {
-            "title": "Space(ID:183)",
+            "title": "Space (ID:183)",
             "id": "space",
             "plugins": {
                 "xwalk": {
