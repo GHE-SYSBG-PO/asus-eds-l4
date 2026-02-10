@@ -136,10 +136,10 @@ export default async function decorate(block) {
 
   // 等待所有异步操作完成
   const htmlParts = await Promise.all(promises);
-  containerHtml = htmlParts.join('');
+  // containerHtml = htmlParts.join('');
 
-  block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced')
-  block.innerHTML = containerHtml;
+  // block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced')
+  // block.innerHTML = containerHtml;
   setTimeout(() => {
     setUnifiedHeight(block);
   }, 500);
