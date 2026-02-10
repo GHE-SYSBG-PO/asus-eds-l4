@@ -136,15 +136,15 @@ export default async function decorate(block) {
   let icon2 = '';
   let categoryClass = '';
   let categoryFontColor = '';
-  const titleFontColor = v('titleFontColor') ? `style='--text-block-title-color: ${v('titleFontColor')};--text-block-title-gradient: '';'` : '';
-  const bodyFontColor = v('bodyFontColor') ? `style='--text-block-body-color: ${v('bodyFontColor')};'` : '';
-  const disclaimerFontColor = v('disclaimerFontColor') ? `style='--text-block-disclaimer-color: ${v('disclaimerFontColor')};'` : '';
+  const titleFontColor = v('titleFontColor') ? `style='--text-block-title-color: #${v('titleFontColor')};--text-block-title-gradient: '';'` : '';
+  const bodyFontColor = v('bodyFontColor') ? `style='--text-block-body-color: #${v('bodyFontColor')};'` : '';
+  const disclaimerFontColor = v('disclaimerFontColor') ? `style='--text-block-disclaimer-color: #${v('disclaimerFontColor')};'` : '';
   let motion = '';
   let ctaFontColor = '';
 
   if (v('ctaLinkType') === 'text-link' && v('ctaFontColor')) {
     const [start, end = start] = v('ctaFontColor').split(',');
-    ctaFontColor = `style='--text-block-cta-start: ${start}; --text-block-cta-end: ${end};'`;
+    ctaFontColor = `style='--text-block-cta-start: #${start}; --text-block-cta-end: #${end};'`;
   }
   if (v('motion') === 'on') {
     motion = 'text-block-animation';
@@ -152,7 +152,7 @@ export default async function decorate(block) {
   }
   try {
     if (v('categoryFontColor')) {
-      categoryFontColor = `style='--text-block-category-color: ${v('categoryFontColor')};'`;
+      categoryFontColor = `style='--text-block-category-color: #${v('categoryFontColor')};'`;
     }
     await handleDecide(v('categoryIcon') === 'yes');
     await handleDecide(v('categoryIcon1'));

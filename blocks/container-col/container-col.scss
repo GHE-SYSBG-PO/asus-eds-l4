@@ -1,4 +1,4 @@
-main {
+.l4-pdp {
   &[data-mode="light"] {
   --container-col-bg-color: rgba(255, 255, 255, 1);
   }
@@ -6,8 +6,7 @@ main {
   &[data-mode="dark"] {
     --container-col-bg-color: rgba(0, 0, 0, 1);
   }
-}
-
-.container-col-bg {
-  background-color: var(--container-col-bg-color);
+  .container-col-bg {
+    background-color: var(--container-col-bg-color);
+  }
 }
