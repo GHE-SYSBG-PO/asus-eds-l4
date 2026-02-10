@@ -90,7 +90,7 @@ async function handleQuickView(modalPath, closeButtonHtml) {
 }
 
 function prefixHex(arr) {
-  return arr.map((c) => `#${c}`);
+  return arr.filter(c=>c).map((c) => `#${c}`);
 }
 
 export default async function decorate(block) {

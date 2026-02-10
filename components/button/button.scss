@@ -1,0 +1,45 @@
+main .g-button {
+  --btn-bg-default-image: none;
+  --btn-bg-default: #000;
+  --btn-bg-hover-image: none;
+  --btn-bg-hover: #000;
+  --btn-bg-active-image: none;
+  --btn-bg-active: #000;
+  --btn-color-default: #fff;
+  --btn-color-hover: #fff;
+  --btn-color-active: #fff;
+  --container-border-color: transparent;
+  --container-border-width: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+  cursor: pointer;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  gap: 8px;
+  padding-left: 18px;
+  padding-right: 18px;
+  height: 44px;
+  background-image: var(--btn-bg-default-image);
+  background-color: var(--btn-bg-default);
+  color: var(--btn-color-default);
+  border-radius: 24px;
+  border: var(--container-border-width) solid var(--container-border-color);
+  &:hover {
+    background-image: var(--btn-bg-hover-image);
+    background-color: var(--btn-bg-hover);
+    color: var(--btn-color-hover);
+  }
+  &:active {
+    background-image: var(--btn-bg-active-image);
+    background-color: var(--btn-bg-active);
+    color: var(--btn-color-active);
+  }
+}
