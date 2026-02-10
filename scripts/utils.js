@@ -278,6 +278,7 @@ export const nestBlockExecuteJs = (block) => {
 export const parseL4TagMulti = (htmlString) => {
   // 获取所有符合条件的 <p> 标签（即嵌套在两层 <p> 中的元素）
   const paragraphs = htmlString.querySelectorAll(':scope > p');
+  console.log('paragraphs', [...paragraphs])
 
   // 存储最终解析结果的数组
   const result = [];
