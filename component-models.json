@@ -20,6 +20,48 @@
         "name": "keywords",
         "multi": true,
         "label": "Keywords"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "productLine",
+        "label": "Product Line",
+        "value": "asus",
+        "options": [
+          {
+            "name": "ASUS",
+            "value": "asus"
+          },
+          {
+            "name": "Proart",
+            "value": "proart"
+          },
+          {
+            "name": "ROG",
+            "value": "rog"
+          },
+          {
+            "name": "TUF",
+            "value": "tuf"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "mode",
+        "label": "Mode",
+        "value": "light",
+        "options": [
+          {
+            "name": "Light",
+            "value": "light"
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
+          }
+        ]
       }
     ]
   },
@@ -142,6 +184,1150 @@
     ]
   },
   {
+    "id": "columns-section",
+    "fields": [
+      {
+        "component": "hidden",
+        "name": "style",
+        "value": "columns-section"
+      },
+      {
+        "component": "tab",
+        "label": "Desktop Layout",
+        "name": "desktopLayout"
+      },
+      {
+        "component": "select",
+        "label": "layout Variation",
+        "name": "dLayoutVariation",
+        "valueType": "string",
+        "placeholder": "The default value is Variant 1.",
+        "options": [
+          {
+            "name": "Variant 1",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5",
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "dColSpan1",
+        "valueType": "string",
+        "placeholder": "The default value is 3:9.",
+        "options": [
+          {
+            "name": "3:9",
+            "value": "3:9"
+          },
+          {
+            "name": "4:8",
+            "value": "4:8"
+          },
+          {
+            "name": "5:7",
+            "value": "5:7"
+          },
+          {
+            "name": "6:6",
+            "value": "6:6"
+          },
+          {
+            "name": "7:5",
+            "value": "7:5"
+          },
+          {
+            "name": "8:4",
+            "value": "8:4"
+          },
+          {
+            "name": "9:3",
+            "value": "9:3"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "dLayoutVariation"
+            },
+            "1"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "dColSpan2",
+        "valueType": "string",
+        "placeholder": "The default value is 7:6.",
+        "options": [
+          {
+            "name": "7:6",
+            "value": "7:6"
+          },
+          {
+            "name": "8:6",
+            "value": "8:6"
+          },
+          {
+            "name": "9:6",
+            "value": "9:6"
+          },
+          {
+            "name": "100vw:6",
+            "value": "100vw:6"
+          },
+          {
+            "name": "6:7",
+            "value": "6:7"
+          },
+          {
+            "name": "6:8",
+            "value": "6:8"
+          },
+          {
+            "name": "6:9",
+            "value": "6:9"
+          },
+          {
+            "name": "6:100vw",
+            "value": "6:100vw"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "dLayoutVariation"
+            },
+            "2"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "dColSpan3",
+        "valueType": "string",
+        "placeholder": "The default value is 8:5.",
+        "options": [
+          {
+            "name": "8:5",
+            "value": "8:5"
+          },
+          {
+            "name": "9:5",
+            "value": "9:5"
+          },
+          {
+            "name": "10:5",
+            "value": "10:5"
+          },
+          {
+            "name": "100vw:5",
+            "value": "100vw:5"
+          },
+          {
+            "name": "5:8",
+            "value": "5:8"
+          },
+          {
+            "name": "5:9",
+            "value": "5:9"
+          },
+          {
+            "name": "5:10",
+            "value": "5:10"
+          },
+          {
+            "name": "5:100vw",
+            "value": "5:100vw"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "dLayoutVariation"
+            },
+            "3"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "dColSpan4",
+        "valueType": "string",
+        "placeholder": "The default value is 9:4.",
+        "options": [
+          {
+            "name": "9:4",
+            "value": "9:4"
+          },
+          {
+            "name": "10:4",
+            "value": "10:4"
+          },
+          {
+            "name": "11:4",
+            "value": "11:4"
+          },
+          {
+            "name": "100vw:4",
+            "value": "100vw:4"
+          },
+          {
+            "name": "4:9",
+            "value": "4:9"
+          },
+          {
+            "name": "4:10",
+            "value": "4:10"
+          },
+          {
+            "name": "4:11",
+            "value": "4:11"
+          },
+          {
+            "name": "4:100vw",
+            "value": "4:100vw"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "dLayoutVariation"
+            },
+            "4"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "dColSpan5",
+        "valueType": "string",
+        "placeholder": "The default value is 100vw:12.",
+        "options": [
+          {
+            "name": "100vw:12",
+            "value": "100vw:12"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "dLayoutVariation"
+            },
+            "5"
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "Tablet Layout",
+        "name": "tabletLayout"
+      },
+      {
+        "component": "select",
+        "label": "layout Variation",
+        "name": "tLayoutVariation",
+        "valueType": "string",
+        "placeholder": "The default value is Variant 1.",
+        "options": [
+          {
+            "name": "Variant 1",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "tColSpan1",
+        "valueType": "string",
+        "placeholder": "The default value is 5:7.",
+        "options": [
+          {
+            "name": "5:7",
+            "value": "5:7"
+          },
+          {
+            "name": "6:6",
+            "value": "6:6"
+          },
+          {
+            "name": "7:5",
+            "value": "7:5"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "tLayoutVariation"
+            },
+            "1"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "tColSpan2",
+        "valueType": "string",
+        "placeholder": "The default value is 7:6.",
+        "options": [
+          {
+            "name": "7:6",
+            "value": "7:6"
+          },
+          {
+            "name": "8:6",
+            "value": "8:6"
+          },
+          {
+            "name": "9:6",
+            "value": "9:6"
+          },
+          {
+            "name": "100vw:6",
+            "value": "100vw:6"
+          },
+          {
+            "name": "6:7",
+            "value": "6:7"
+          },
+          {
+            "name": "6:8",
+            "value": "6:8"
+          },
+          {
+            "name": "6:9",
+            "value": "6:9"
+          },
+          {
+            "name": "6:100vw",
+            "value": "6:100vw"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "tLayoutVariation"
+            },
+            "2"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "tColSpan3",
+        "valueType": "string",
+        "placeholder": "The default value is 8:5.",
+        "options": [
+          {
+            "name": "8:5",
+            "value": "8:5"
+          },
+          {
+            "name": "9:5",
+            "value": "9:5"
+          },
+          {
+            "name": "10:5",
+            "value": "10:5"
+          },
+          {
+            "name": "100vw:5",
+            "value": "100vw:5"
+          },
+          {
+            "name": "5:8",
+            "value": "5:8"
+          },
+          {
+            "name": "5:9",
+            "value": "5:9"
+          },
+          {
+            "name": "5:10",
+            "value": "5:10"
+          },
+          {
+            "name": "5:100vw",
+            "value": "5:100vw"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "tLayoutVariation"
+            },
+            "3"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2 cols span",
+        "name": "tColSpan4",
+        "valueType": "string",
+        "placeholder": "The default value is 100vw:12.",
+        "options": [
+          {
+            "name": "100vw:12",
+            "value": "100vw:12"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "tLayoutVariation"
+            },
+            "4"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "tablet stack on",
+        "name": "tabletStackOn",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "yes",
+            "value": "yes"
+          },
+          {
+            "name": "no",
+            "value": "no"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "Mobile Layout",
+        "name": "mobileLayout"
+      },
+      {
+        "component": "select",
+        "label": "layout Variation",
+        "name": "mLayoutVariation",
+        "valueType": "string",
+        "placeholder": "The default value is Variant 1.",
+        "options": [
+          {
+            "name": "Variant 1",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "reverse",
+        "name": "mReverse",
+        "valueType": "string",
+        "placeholder": "The default value is no.",
+        "options": [
+          {
+            "name": "yes",
+            "value": "yes"
+          },
+          {
+            "name": "no",
+            "value": "no"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "btn",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "style",
+        "name": "styleTab"
+      },
+      {
+        "component": "select",
+        "label": "layout group",
+        "name": "styleLayout",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 - filled style",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 - filled style+icon",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 - filled style+icon(Size-Small)",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 - outline style",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 - outline style+icon",
+            "value": "5"
+          },
+          {
+            "name": "Variant 6 - outline style+icon(Size-Small)",
+            "value": "6"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "hyperlink style",
+        "name": "linkType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "external link",
+            "value": "external"
+          },
+          {
+            "name": "inner page",
+            "value": "inner"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "external link",
+        "name": "externalLink",
+        "valueType": "string",
+        "placeholder": "https://",
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "external"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "inner page content",
+        "name": "innerPageLink",
+        "placeholder": "/modals/page",
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "inner"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "close btn style",
+        "name": "gBtnStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "default",
+            "value": "default"
+          },
+          {
+            "name": "customized",
+            "value": "customized"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "inner"
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "close btn customized",
+        "name": "gBtnCustomized",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "gBtnStyle"
+            },
+            "customized"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "label Text",
+            "name": "gBtnLabel",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "gBtnFontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "gBtnFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "gBtnFontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "gBtnFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "gBtnFontColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color default",
+            "name": "gBtnContainerBgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color hover",
+            "name": "gBtnContainerBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color active",
+            "name": "gBtnContainerBgColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TL",
+            "name": "gBtnContainerRadiusTL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TR",
+            "name": "gBtnContainerRadiusTR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BR",
+            "name": "gBtnContainerRadiusBR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BL",
+            "name": "gBtnContainerRadiusBL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width",
+            "name": "gBtnBorderWidth",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color",
+            "name": "gBtnBorderColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "icon style",
+        "name": "iconStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "SVG",
+            "value": "svg"
+          },
+          {
+            "name": "PNG",
+            "value": "png"
+          }
+        ],
+        "condition": {
+          "in": [
+            {
+              "var": "styleLayout"
+            },
+            [
+              "2",
+              "3",
+              "5",
+              "6"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon color",
+        "name": "iconColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color default",
+        "name": "iconBgColorDefault",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color hover",
+        "name": "iconBgColorHover",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color active",
+        "name": "iconBgColorActive",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "default asset",
+        "name": "iconAssetDefault",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "hover asset",
+        "name": "iconAssetHover",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "active asset",
+        "name": "iconAssetActive",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "label",
+        "name": "labelTab"
+      },
+      {
+        "component": "text",
+        "label": "label text",
+        "name": "label",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "label advanced",
+        "name": "labelAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "label font (D/T)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "label font (M)",
+            "name": "fontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "fontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "fontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "fontColorActive",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "container",
+        "name": "containerTab"
+      },
+      {
+        "component": "text",
+        "label": "bg-color default",
+        "name": "containerBgColorDefault",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bg-color hover",
+        "name": "containerBgColorHover",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bg-color active",
+        "name": "containerBgColorActive",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius TL",
+        "name": "containerRadiusTL",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius TR",
+        "name": "containerRadiusTR",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius BR",
+        "name": "containerRadiusBR",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius BL",
+        "name": "containerRadiusBL",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "container advanced",
+        "name": "containerAdvanced",
+        "collapsible": true,
+        "condition": {
+          "in": [
+            {
+              "var": "styleLayout"
+            },
+            [
+              "3",
+              "4",
+              "6"
+            ]
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "border-width",
+            "name": "borderWidth",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color",
+            "name": "borderColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--btn",
+        "hidden": true
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -156,6 +1342,171 @@
         "name": "text",
         "value": "",
         "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "chart-advanced-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "text",
+        "label": "chart column width (%)",
+        "name": "chartColumnWidth",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "title",
+        "name": "titleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "valueType": "string[]",
+        "name": "item",
+        "label": "Item",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-iconAssets",
+            "value": "L4TagMulti-iconAssets",
+            "hidden": true
+          },
+          {
+            "component": "reference",
+            "valueType": "string",
+            "label": "icon assets",
+            "name": "iconAssets",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-infoRichtext",
+            "value": "L4TagMulti-infoRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "info",
+            "name": "infoRichtext",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "wrap line",
+        "name": "wrapLine",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "name": "chart style",
+        "label": "chartStyle",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-titleFont",
+            "value": "L4TagMulti-titleFont",
+            "hidden": true
+          },
+          {
+            "component": "select",
+            "label": "title font",
+            "name": "titleFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-20",
+                "value": "ro-rg-20-md"
+              },
+              {
+                "name": "ro-rg-24",
+                "value": "ro-rg-24-md"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-titleFontColor",
+            "value": "L4TagMulti-titleFontColor",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "title font color",
+            "name": "titleFontColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-infoFont",
+            "value": "L4TagMulti-infoFont",
+            "hidden": true
+          },
+          {
+            "component": "select",
+            "label": "item info font",
+            "name": "infoFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-20",
+                "value": "ro-rg-20-md"
+              },
+              {
+                "name": "ro-rg-24",
+                "value": "ro-rg-24-md"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-infoFontColor",
+            "value": "L4TagMulti-infoFontColor",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "item info font color",
+            "name": "infoFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "line color",
+        "name": "lineColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "line width",
+        "name": "lineWidth",
         "valueType": "string"
       }
     ]
@@ -176,6 +1527,299 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      }
+    ]
+  },
+  {
+    "id": "container-col",
+    "fields": [
+      {
+        "component": "container",
+        "label": "horizontal alignment",
+        "name": "hAlign",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "desktop",
+            "name": "hAlignD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "left",
+                "value": "lg:items-start"
+              },
+              {
+                "name": "right",
+                "value": "lg:items-end"
+              },
+              {
+                "name": "center",
+                "value": "lg:items-center"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "tablet",
+            "name": "hAlignT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "left",
+                "value": "md:items-start"
+              },
+              {
+                "name": "right",
+                "value": "md:items-end"
+              },
+              {
+                "name": "center",
+                "value": "md:items-center"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "mobile",
+            "name": "hAlignM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "left",
+                "value": "items-start"
+              },
+              {
+                "name": "right",
+                "value": "items-end"
+              },
+              {
+                "name": "center",
+                "value": "items-center"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "vertical alignment",
+        "name": "vAlign",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "desktop",
+            "name": "vAlignD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "top",
+                "value": "lg:justify-start"
+              },
+              {
+                "name": "bottom",
+                "value": "lg:justify-end"
+              },
+              {
+                "name": "center",
+                "value": "lg:justify-center"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "tablet",
+            "name": "vAlignT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "top",
+                "value": "md:justify-start"
+              },
+              {
+                "name": "bottom",
+                "value": "md:justify-end"
+              },
+              {
+                "name": "center",
+                "value": "md:justify-center"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "mobile",
+            "name": "vAlignM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "top",
+                "value": "justify-start"
+              },
+              {
+                "name": "bottom",
+                "value": "justify-end"
+              },
+              {
+                "name": "center",
+                "value": "justify-center"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "margin left",
+        "name": "marginLeft",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "desktop",
+            "name": "marginLeftD",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "tablet",
+            "name": "marginLeftT",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "mobile",
+            "name": "marginLeftM",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "margin right",
+        "name": "marginRight",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "desktop",
+            "name": "marginRightD",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "tablet",
+            "name": "marginRightT",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "mobile",
+            "name": "marginRightM",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "margin top",
+        "name": "marginTop",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "desktop",
+            "name": "marginTopD",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "tablet",
+            "name": "marginTopT",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "mobile",
+            "name": "marginTopM",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "width fixed",
+        "name": "width",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "desktop",
+            "name": "widthD",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "tablet",
+            "name": "widthT",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "mobile",
+            "name": "widthM",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "bg color",
+        "name": "backgroundColor",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "max width (px)",
+        "name": "maxWidth",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "desktop",
+            "name": "maxWidthD",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "tablet",
+            "name": "maxWidthT",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "mobile",
+            "name": "maxWidthM",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "clip",
+        "name": "clip",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "on",
+            "value": "on"
+          },
+          {
+            "name": "off",
+            "value": "off"
+          }
+        ]
       }
     ]
   },
@@ -212,6 +1856,1330 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "media-block",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "select",
+        "label": "media type",
+        "name": "mediaType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "image",
+            "value": "image"
+          },
+          {
+            "name": "video",
+            "value": "video"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "radius",
+        "placeholder": "px",
+        "name": "radius",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "image alt text",
+        "name": "imageAlt",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "image"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
+        "label": "video auto play(on / off)",
+        "name": "videoAutoPlay",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
+        "label": "loop(on / off)",
+        "name": "loop",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
+        "label": "pause and play btn(show / hide)",
+        "name": "pauseAndPlayBtn",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "pause play btn color",
+        "name": "pausePlayBtnColor",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "pause play btn position",
+        "name": "pausePlayBtnPosition",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        },
+        "options": [
+          {
+            "name": "TL",
+            "value": "top-left"
+          },
+          {
+            "name": "TR",
+            "value": "top-right"
+          },
+          {
+            "name": "BL",
+            "value": "bottom-left"
+          },
+          {
+            "name": "BR",
+            "value": "bottom-right"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "asset(D)",
+        "name": "assetContainerD",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "assets",
+            "name": "assetsD",
+            "multi": false
+          },
+          {
+            "component": "select",
+            "label": "width",
+            "name": "widthD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "px",
+                "value": "px"
+              },
+              {
+                "name": "%",
+                "value": "%"
+              },
+              {
+                "name": "Auto",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "width value",
+            "name": "widthValueD",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "height",
+            "name": "heightD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "px",
+                "value": "px"
+              },
+              {
+                "name": "%",
+                "value": "%"
+              },
+              {
+                "name": "Auto",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "height value",
+            "name": "heightValueD",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "ratio",
+            "name": "ratioD",
+            "valueType": "string",
+            "description": "If both height and width are set, the ratio is ignored.",
+            "options": [
+              {
+                "name": "16:9",
+                "value": "16:9"
+              },
+              {
+                "name": "16:10",
+                "value": "16:10"
+              },
+              {
+                "name": "1:1",
+                "value": "1:1"
+              },
+              {
+                "name": "customized",
+                "value": "customized"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "ratio value(customized)",
+            "name": "ratioValueCustomizedD",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "object position",
+            "name": "objectPositionD",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "mediaType"
+                },
+                "image"
+              ]
+            },
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "asset(T)",
+        "name": "assetContainerT",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "assets",
+            "name": "assetsT",
+            "multi": false
+          },
+          {
+            "component": "select",
+            "label": "width",
+            "name": "widthT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "px",
+                "value": "px"
+              },
+              {
+                "name": "%",
+                "value": "%"
+              },
+              {
+                "name": "auto",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "width value",
+            "name": "widthValueT",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "height",
+            "name": "heightT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "px",
+                "value": "px"
+              },
+              {
+                "name": "%",
+                "value": "%"
+              },
+              {
+                "name": "auto",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "height value",
+            "name": "heightValueT",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "ratio",
+            "name": "ratioT",
+            "valueType": "string",
+            "description": "If both height and width are set, the ratio is ignored.",
+            "options": [
+              {
+                "name": "16:9",
+                "value": "16:9"
+              },
+              {
+                "name": "16:10",
+                "value": "16:10"
+              },
+              {
+                "name": "1:1",
+                "value": "1:1"
+              },
+              {
+                "name": "customized",
+                "value": "customized"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "ratio value(customized)",
+            "name": "ratioValueCustomizedT",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "object position",
+            "name": "objectPositionT",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "mediaType"
+                },
+                "image"
+              ]
+            },
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "asset(M)",
+        "name": "assetContainerM",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "assetsM",
+            "name": "assets",
+            "multi": false
+          },
+          {
+            "component": "select",
+            "label": "width",
+            "name": "widthM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "px",
+                "value": "px"
+              },
+              {
+                "name": "%",
+                "value": "%"
+              },
+              {
+                "name": "auto",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "width value",
+            "name": "widthValueM",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "height",
+            "name": "heightM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "px",
+                "value": "px"
+              },
+              {
+                "name": "%",
+                "value": "%"
+              },
+              {
+                "name": "auto",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "height value",
+            "name": "heightValueM",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "ratio",
+            "name": "ratioM",
+            "valueType": "string",
+            "description": "If both height and width are set, the ratio is ignored.",
+            "options": [
+              {
+                "name": "16:9",
+                "value": "16:9"
+              },
+              {
+                "name": "16:10",
+                "value": "16:10"
+              },
+              {
+                "name": "1:1",
+                "value": "1:1"
+              },
+              {
+                "name": "customized",
+                "value": "customized"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "ratio value(customized)",
+            "name": "ratioValueCustomizedM",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "object position",
+            "name": "objectPositionM",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "mediaType"
+                },
+                "image"
+              ]
+            },
+            "options": [
+              {
+                "name": "Left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "media width(D)",
+        "name": "mediaWidthD",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "max",
+            "name": "maxD",
+            "valueType": "string",
+            "placeholder": "px, %, or vw"
+          },
+          {
+            "component": "text",
+            "label": "min",
+            "name": "minD",
+            "valueType": "string",
+            "placeholder": "px, %, or vw"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "media width(T)",
+        "name": "mediaWidthT",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "max",
+            "name": "maxT",
+            "valueType": "string",
+            "placeholder": "px, %, or vw"
+          },
+          {
+            "component": "text",
+            "label": "min",
+            "name": "minT",
+            "valueType": "string",
+            "placeholder": "px, %, or vw"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "media width(M)",
+        "name": "mediaWidthM",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "max",
+            "name": "maxM",
+            "valueType": "string",
+            "placeholder": "px, %, or vw"
+          },
+          {
+            "component": "text",
+            "label": "min",
+            "name": "minM",
+            "valueType": "string",
+            "placeholder": "px, %, or vw"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--media-block",
+        "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "space",
+    "fields": [
+      {
+        "component": "select",
+        "label": "Variant",
+        "name": "variant",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 (Sec to Sec - Single BG)",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 (Sec to Sec - Two Colors)",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 (Section Top)",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 (Section Bottom)",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 (Text to Image/Object)",
+            "value": "5"
+          },
+          {
+            "name": "Variant 6 (Text to HL)",
+            "value": "6"
+          },
+          {
+            "name": "Variant 7 (Custom)",
+            "value": "7"
+          }
+        ],
+        "default": "1"
+      },
+      {
+        "component": "text",
+        "label": "Custom Value (px)",
+        "name": "customValue",
+        "valueType": "number",
+        "visible": "this.variant === '7'",
+        "validation": {
+          "min": 2,
+          "max": 120
+        },
+        "hint": "Enter a value between 2 and 120"
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--space",
+        "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "text-block",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "layout",
+        "name": "layout"
+      },
+      {
+        "component": "select",
+        "label": "desktop alignment",
+        "name": "desktopAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "tablet alignment",
+        "name": "tabletAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "mobile alignment",
+        "name": "mobileAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "category",
+        "name": "categoryRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "title",
+        "name": "titleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "body",
+        "name": "bodyRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "disclaimer",
+        "name": "disclaimerRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "motion",
+        "name": "motion",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "CTA Visibility Toggle",
+        "name": "ctaVisible",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "show"
+          },
+          {
+            "name": "Hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "CTA text",
+        "name": "ctaText",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "CTA link type",
+        "name": "ctaLinkType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Text Link",
+            "value": "text-link"
+          },
+          {
+            "name": "Button",
+            "value": "button"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "select",
+        "label": "category icon",
+        "name": "categoryIcon",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "yes"
+          },
+          {
+            "name": "No",
+            "value": "no"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "category icon num",
+        "name": "categoryIconNum",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "1",
+            "value": "1"
+          },
+          {
+            "name": "2",
+            "value": "2"
+          }
+        ],
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "categoryIcon"
+                },
+                "yes"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "category",
+        "name": "categoryAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "icon position",
+            "name": "categoryIconPosition",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "1",
+                "value": "1"
+              },
+              {
+                "name": "2",
+                "value": "2"
+              },
+              {
+                "name": "3",
+                "value": "3"
+              },
+              {
+                "name": "4",
+                "value": "4"
+              },
+              {
+                "name": "5",
+                "value": "5"
+              },
+              {
+                "name": "6",
+                "value": "6"
+              }
+            ],
+            "condition": {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "categoryIcon"
+                    },
+                    "yes"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "categoryIconNum"
+                    },
+                    "1"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "valueType": "string",
+            "label": "first icon",
+            "name": "categoryIcon1",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "categoryIcon"
+                    },
+                    "yes"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "valueType": "string",
+            "label": "second icon",
+            "name": "categoryIcon2",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "categoryIcon"
+                    },
+                    "yes"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "categoryIconNum"
+                    },
+                    "2"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "select",
+            "label": "font (D/T/M)",
+            "name": "categoryFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md-16",
+                "value": "tt-md-16"
+              },
+              {
+                "name": "tt-md-18",
+                "value": "tt-md-18"
+              },
+              {
+                "name": "tt-md-20",
+                "value": "tt-md-20"
+              },
+              {
+                "name": "tt-md-24",
+                "value": "tt-md-24"
+              },
+              {
+                "name": "tt-nr-16",
+                "value": "tt-nr-16"
+              },
+              {
+                "name": "tt-nr-18",
+                "value": "tt-nr-18"
+              },
+              {
+                "name": "tt-nr-20",
+                "value": "tt-nr-20"
+              },
+              {
+                "name": "tt-nr-24",
+                "value": "tt-nr-24"
+              },
+              {
+                "name": "tt-bd-16",
+                "value": "tt-bd-16"
+              },
+              {
+                "name": "tt-bd-18",
+                "value": "tt-bd-18"
+              },
+              {
+                "name": "tt-bd-20",
+                "value": "tt-bd-20"
+              },
+              {
+                "name": "tt-bd-24",
+                "value": "tt-bd-24"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color (hex)",
+            "name": "categoryFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "title",
+        "name": "titleAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D/T/M)",
+            "name": "titleFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md-32",
+                "value": "tt-md-32"
+              },
+              {
+                "name": "tt-md-36",
+                "value": "tt-md-36"
+              },
+              {
+                "name": "tt-md-40",
+                "value": "tt-md-40"
+              },
+              {
+                "name": "tt-md-44",
+                "value": "tt-md-44"
+              },
+              {
+                "name": "tt-md-48",
+                "value": "tt-md-48"
+              },
+              {
+                "name": "tt-bd-32",
+                "value": "tt-bd-16"
+              },
+              {
+                "name": "tt-bd-36",
+                "value": "tt-bd-36"
+              },
+              {
+                "name": "tt-bd-40",
+                "value": "tt-bd-40"
+              },
+              {
+                "name": "tt-bd-44",
+                "value": "tt-bd-44"
+              },
+              {
+                "name": "tt-bd-48",
+                "value": "tt-bd-48"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color (hex)",
+            "name": "titleFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "body",
+        "name": "bodyAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "bodyFontDT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-20",
+                "value": "ro-rg-20-md"
+              },
+              {
+                "name": "ro-rg-24",
+                "value": "ro-rg-24-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "bodyFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-18",
+                "value": "ro-rg-18"
+              },
+              {
+                "name": "ro-rg-20",
+                "value": "ro-rg-20"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font Color",
+            "name": "bodyFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "disclaimer",
+        "name": "disclaimerAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "font color (hex)",
+            "name": "disclaimerFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "CTA textLink style",
+        "name": "ctaAdvanced",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "text-link"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "ctaFontDT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "ctaFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-rg-20"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color",
+            "name": "ctaFontColor",
+            "valueType": "string"
+          },
+          {
+            "component": "aem-content",
+            "label": "hyperlink (external)",
+            "name": "ctaHyperlink",
+            "multi": false,
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "CTA button style",
+        "name": "cTAButtonStyle",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "button"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "label Text",
+            "name": "gBtnLabel",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "gBtnFontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "gBtnFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "gBtnFontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "gBtnFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "gBtnFontColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color default",
+            "name": "gBtnContainerBgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color hover",
+            "name": "gBtnContainerBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color active",
+            "name": "gBtnContainerBgColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TL",
+            "name": "gBtnContainerRadiusTL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TR",
+            "name": "gBtnContainerRadiusTR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BR",
+            "name": "gBtnContainerRadiusBR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BL",
+            "name": "gBtnContainerRadiusBL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width",
+            "name": "gBtnBorderWidth",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color",
+            "name": "gBtnBorderColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--text-block",
+        "hidden": true
       }
     ]
   }

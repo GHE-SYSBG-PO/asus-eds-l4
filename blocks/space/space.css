@@ -1,0 +1,134 @@
+/* space.css */
+
+.space-item {
+    display: block;
+    width: 100%;
+}
+
+/* Variant 1: Section to section 单一背景色 (D: 120px / T: 80px / M: 64px) */
+.space-v1 {
+    height: 64px;
+}
+
+@media (min-width: 768px) {
+    .space-v1 {
+        height: 80px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .space-v1 {
+        height: 120px;
+    }
+}
+
+/* Variant 2: Section to section 两种背景色 (D: 80px / T: 64px / M: 48px) */
+.space-v2 {
+    height: 48px;
+}
+
+@media (min-width: 768px) {
+    .space-v2 {
+        height: 64px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .space-v2 {
+        height: 80px;
+    }
+}
+
+/* Variant 3: Section top (D: 64px / T: 40px / M: 32px) */
+.space-v3 {
+    height: 32px;
+}
+
+@media (min-width: 768px) {
+    .space-v3 {
+        height: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .space-v3 {
+        height: 64px;
+    }
+}
+
+/* Variant 4: Section bottom (D: 120px / T: 80px / M: 64px) */
+.space-v4 {
+    height: 64px;
+}
+
+@media (min-width: 768px) {
+    .space-v4 {
+        height: 80px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .space-v4 {
+        height: 120px;
+    }
+}
+
+/* Variant 5: Text to image / Text to 物件 (D: 56px / T: 48px / M: 40px) */
+.space-v5 {
+    height: 40px;
+}
+
+@media (min-width: 768px) {
+    .space-v5 {
+        height: 48px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .space-v5 {
+        height: 56px;
+    }
+}
+
+/* Variant 6: Text to HL (D: 48px / T: 40px / M: 28px) */
+.space-v6 {
+    height: 28px;
+}
+
+@media (min-width: 768px) {
+    .space-v6 {
+        height: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .space-v6 {
+        height: 48px;
+    }
+}
+
+/* Variant 7 handles custom height via inline style in JS */
+.space-v7 {
+    /* Base styles if needed */
+}
+
+/* UE Edit Mode Visual Aid */
+.adobe-ue-edit .space-item {
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.02);
+    position: relative;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.adobe-ue-edit .space-item::before {
+    content: "Space (Var " attr(data-variant) ")";
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #999;
+    pointer-events: none;
+}

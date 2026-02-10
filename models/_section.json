@@ -13,6 +13,22 @@
           }
         }
       }
+    },
+    {
+      "title": "Columns Section(ID:12)",
+      "id": "columns-section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Columns Section",
+              "model": "columns-section",
+              "filter": "columns-section"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -37,6 +53,14 @@
           ]
         }
       ]
+    },
+    {
+      "id": "columns-section",
+      "fields": [
+        {
+          "...": "./_columns-section.json#/fields"
+        }
+      ]
     }
   ],
   "filters": [
@@ -50,7 +74,18 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "text-block",
+        "media-block",
+        "btn",
+        "chart-advanced",
+        "space"
+      ]
+    },
+    {
+      "id": "columns-section",
+      "components": [
+        "container-col"
       ]
     }
   ]

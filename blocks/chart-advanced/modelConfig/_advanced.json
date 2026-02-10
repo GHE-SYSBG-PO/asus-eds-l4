@@ -1,0 +1,85 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "name": "chart style",
+      "label": "chartStyle",
+      "multi": true,
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-titleFont",
+          "value": "L4TagMulti-titleFont",
+          "hidden": true
+        },
+        {
+          "component": "select",
+          "label": "title font",
+          "name": "titleFont",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-20", "value": "ro-rg-20-md" },
+            { "name": "ro-rg-24", "value": "ro-rg-24-md" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-titleFontColor",
+          "value": "L4TagMulti-titleFontColor",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "title font color",
+          "name": "titleFontColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-infoFont",
+          "value": "L4TagMulti-infoFont",
+          "hidden": true
+        },
+        {
+          "component": "select",
+          "label": "item info font",
+          "name": "infoFont",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-20", "value": "ro-rg-20-md" },
+            { "name": "ro-rg-24", "value": "ro-rg-24-md" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-infoFontColor",
+          "value": "L4TagMulti-infoFontColor",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "item info font color",
+          "name": "infoFontColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "line color",
+      "name": "lineColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "line width",
+      "name": "lineWidth",
+      "valueType": "string"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import {
   loadSections,
   loadCSS,
 } from './aem.js';
+import { loadSectionBlockJs } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -118,6 +119,7 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  await loadSectionBlockJs(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
@@ -139,7 +141,18 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+function getPageMetadata() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const productLine = getMetadata('productline');
+    const mode = getMetadata('mode');
+    const main = document.body.querySelector('main');
+    main.dataset.product = productLine;
+    main.dataset.mode = mode;
+  });
+}
+
 async function loadPage() {
+  getPageMetadata();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();

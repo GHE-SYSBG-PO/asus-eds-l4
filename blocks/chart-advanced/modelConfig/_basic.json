@@ -1,0 +1,65 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "text",
+      "label": "chart column width (%)",
+      "name": "chartColumnWidth",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "title",
+      "name": "titleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "container",
+      "valueType": "string[]",
+      "name": "item",
+      "label": "Item",
+      "multi": true,
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-iconAssets",
+          "value": "L4TagMulti-iconAssets",
+          "hidden": true
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "label": "icon assets",
+          "name": "iconAssets",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-infoRichtext",
+          "value": "L4TagMulti-infoRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "info",
+          "name": "infoRichtext",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "wrap line",
+      "name": "wrapLine",
+      "valueType": "string",
+      "options": [
+        { "name": "On", "value": "on" },
+        { "name": "Off", "value": "off" }
+      ]
+    }
+  ]
+}

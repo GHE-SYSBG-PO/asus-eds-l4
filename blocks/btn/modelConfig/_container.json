@@ -1,0 +1,83 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "container",
+      "name": "containerTab"
+    },
+    {
+      "component": "text",
+      "label": "bg-color default",
+      "name": "containerBgColorDefault",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "bg-color hover",
+      "name": "containerBgColorHover",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "bg-color active",
+      "name": "containerBgColorActive",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius TL",
+      "name": "containerRadiusTL",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius TR",
+      "name": "containerRadiusTR",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius BR",
+      "name": "containerRadiusBR",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius BL",
+      "name": "containerRadiusBL",
+      "valueType": "string"
+    },
+    {
+      "component": "container",
+      "label": "container advanced",
+      "name": "containerAdvanced",
+      "collapsible": true,
+      "condition": {
+        "in": [
+          {
+            "var": "styleLayout"
+          },
+          [
+            "3",
+            "4",
+            "6"
+          ]
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "border-width",
+          "name": "borderWidth",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "border-color",
+          "name": "borderColor",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

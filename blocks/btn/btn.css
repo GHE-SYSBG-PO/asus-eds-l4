@@ -1,0 +1,601 @@
+
+/**
+ * Button Component Styles - 6 Style Variants
+ * 基于 Figma 设计规范
+ * 支持通过 CSS 变量自定义背景色和字体颜色
+ * 默认颜色变量
+ */
+
+
+/* ========================================
+ * Theme基础变量区 product/mode
+ * ======================================== */
+
+[data-product="asus"][data-mode="light"]{
+  --bg-d-start:#4379B1; 
+  --bg-d-end:#5977A1;
+  --bg-h-a-start:#566E91;
+  --bg-h-a-end:#0E447C;
+  --font-d-start:#00438A;
+  --font-d-end:#274568;
+  --icon-d:#fff;
+  --icon-radius:50%;
+}
+
+[data-product="asus"][data-mode="dark"]{
+  --bg-d-start:#476991;
+  --bg-d-end:#5C6F80;
+  --bg-h-a-start:#98AABA;
+  --bg-h-a-end:#658DBC;
+  --font-d-start:#A2C2E2;
+  --font-d-end: #B2C0C7;
+  --icon-d:#181818;
+  --icon-radius:50%;
+}
+
+[data-product="proart"][data-mode="light"]{
+  --bg-d-start:#806238;
+  --bg-d-end:#87715A;
+  --bg-h-a-start:#654313;
+  --bg-h-a-end:#665441;
+  --font-d-start:#663600;
+  --font-d-end:#613D00;
+  --icon-d:#fff;
+  --icon-radius:50%;
+}
+
+[data-product="proart"][data-mode="dark"]{
+  --bg-d-start:#84643E;
+  --bg-d-end:#7E6746;
+  --bg-h-a-start:#8F6E4D;
+  --bg-h-a-end:#A49073;
+  --font-d-start:#DAB983;
+  --font-d-end:#D8C5AC;
+  --icon-d:#181818;
+  --icon-radius:50%;
+}
+
+[data-product="rog"][data-mode="light"]{
+  --bg-d-start:#DB0004;
+  --bg-d-end:#DB0004;
+  --bg-h-a-start:#A8000C;
+  --bg-h-a-end:#A8000C;
+  --font-d-start:#8F0002;
+  --font-d-end:#8F0002;
+  --icon-d:#fff;
+  --icon-radius:0;
+}
+
+[data-product="rog"][data-mode="dark"]{
+  --bg-d-start:#D1000E;
+  --bg-d-end:#D1000E;
+  --bg-h-a-start:#DA1723;
+  --bg-h-a-end:#DA1723;
+  --font-d-start:#FF230F;
+  --font-d-end:#FF230F;
+  --icon-d:#181818;
+  --icon-radius:0;
+}
+
+/* ========================================
+ * 应用theme变量区 
+ * ======================================== */
+
+
+/* Filled 样式 (1, 2, 3) */
+.btn-component[data-filled="true"] {
+  --btn-bg-default-image: linear-gradient(270deg, var(--bg-d-start) 0%, var(--bg-d-end) 100%);
+  --btn-bg-default: transparent;
+  --btn-bg-hover-image: linear-gradient(270deg, var(--bg-h-a-start) 0%, var(--bg-h-a-end) 100%);
+  --btn-bg-hover: transparent;
+  --btn-bg-active-image: linear-gradient(270deg, var(--bg-h-a-start) 0%, var(--bg-h-a-end) 100%);
+  --btn-bg-active: transparent;
+  --btn-color-default: #fff;
+  --btn-color-hover: #fff;
+  --btn-color-active: #fff;
+  --icon-color-start:var(--bg-d-start);
+  --icon-color-end:var(--bg-d-end);
+}
+
+
+
+/*  Outlined 样式 (4, 5, 6) */
+.btn-component[data-filled="false"] {
+  --btn-bg-default-image: none;
+  --btn-bg-default: transparent;
+  --btn-bg-hover-image: linear-gradient(270deg, var(--bg-d-start) 0%, var(--bg-d-end) 100%);
+  --btn-bg-hover: transparent;
+  --btn-bg-active-image: linear-gradient(270deg, var(--bg-h-a-start) 0%, var(--bg-h-a-end) 100%);
+  --btn-bg-active: transparent;
+  --btn-color-default: linear-gradient(270deg, var(--font-d-start) 0%, var(--font-d-end) 100%);
+  --btn-color-hover: #fff;
+  --btn-color-active: #fff;
+  --container-border-color: linear-gradient(270deg, var(--font-d-start) 0%, var(--font-d-end) 100%);
+  --container-border-width: 2px;
+  --icon-color-start:#fff;
+  --icon-color-end:#fff;
+}
+
+/* style=2 和 style=3 */
+.btn-component[data-style="2"] .btn-icon-wrapper,
+.btn-component[data-style="3"] .btn-icon-wrapper {
+  --icon-bg-default:#fff;
+  --icon-bg-hover: #fff;
+  --icon-bg-active: #fff;
+
+  border-radius:var(--icon-radius);
+}
+.btn-component[data-style="2"] svg path,
+.btn-component[data-style="3"] svg path{
+  fill:url("#icon-filled-default")
+}
+
+.btn-component[data-style="2"]:hover svg path,
+.btn-component[data-style="3"]:hover svg path{
+  fill:url(#icon-filled-hover-active)
+}
+
+.btn-component[data-style="2"]:active svg path,
+.btn-component[data-style="3"]:active svg path{
+  fill:url(#icon-filled-hover-active)
+}
+
+/* style=5 和 style=6 */
+.btn-component[data-style="5"] .btn-icon-wrapper,
+.btn-component[data-style="6"] .btn-icon-wrapper {
+  --icon-bg-default:linear-gradient(270deg, var(--font-d-start) 0%, var(--font-d-end) 100%);
+  --icon-bg-hover: #fff;
+  --icon-bg-active: #fff;
+
+  border-radius:var(--icon-radius);
+}
+
+.btn-component[data-style="5"] svg path,
+.btn-component[data-style="6"] svg path{
+  fill:url(#icon-outline-default)
+}
+
+.btn-component[data-style="5"]:hover svg path,
+.btn-component[data-style="6"]:hover svg path{
+  fill:url(#icon-outline-hover)
+}
+
+.btn-component[data-style="5"]:active svg path,
+.btn-component[data-style="6"]:active svg path{
+  fill:url(#icon-outline-active)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================
+ * Style 
+ * ======================================== */
+
+/* 基础按钮样式 */
+.btn-component {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border: none;
+  position: relative;
+  white-space: nowrap;
+  gap: 8px;
+  font-family: inherit;
+  border-radius: 24px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* 覆盖全局 a 标签 hover 时的下划线 */
+.btn-component:hover {
+  text-decoration: none;
+}
+
+/* 图标包装器 */
+.btn-component .btn-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 10px;
+  background: var(--icon-bg-default);
+}
+
+.btn-component:hover .btn-icon-wrapper{
+  background: var(--icon-bg-hover);
+}
+
+.btn-component:active .btn-icon-wrapper{
+  background: var(--icon-bg-active);
+}
+
+/* png */
+.btn-component .btn-icon-wrapper.btn-icon-png,.btn-component:hover .btn-icon-wrapper.btn-icon-png,.btn-component:active .btn-icon-wrapper.btn-icon-png{
+  background:transparent;
+}
+.btn-component .btn-icon-png img{
+  width:100%;
+  height:100%;
+  border-radius:100%;
+}
+
+.btn-component:hover .btn-icon-wrapper.btn-icon-png .btn-icon-default{
+  display:none;
+}
+.btn-component:hover .btn-icon-wrapper.btn-icon-png .btn-icon-active{
+  display:none;
+}
+.btn-component:hover .btn-icon-wrapper.btn-icon-png .btn-icon-hover{
+  display:block;
+}
+
+.btn-component:active .btn-icon-wrapper.btn-icon-png .btn-icon-default{
+  display:none;
+}
+.btn-component:active .btn-icon-wrapper.btn-icon-png .btn-icon-hover{
+  display:none;
+}
+.btn-component:active .btn-icon-wrapper.btn-icon-png .btn-icon-active{
+  display:block;
+}
+
+/* 不同样式的图标容器尺寸 */
+.btn-component[data-style="2"] .btn-icon-wrapper,
+.btn-component[data-style="5"] .btn-icon-wrapper {
+  width: 36px;
+  height: 36px;
+}
+
+.btn-component[data-style="3"] .btn-icon-wrapper,
+.btn-component[data-style="6"] .btn-icon-wrapper {
+  width: 24px;
+  height: 24px;
+}
+
+/* 不同样式的 SVG 图标尺寸 */
+.btn-component[data-style="2"] .btn-icon-wrapper svg.btn-icon-svg,
+.btn-component[data-style="5"] .btn-icon-wrapper svg.btn-icon-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-component[data-style="3"] .btn-icon-wrapper svg.btn-icon-svg,
+.btn-component[data-style="6"] .btn-icon-wrapper svg.btn-icon-svg {
+  width: 18px;
+  height: 18px;
+}
+
+
+/* SVG 图标基础样式 */
+.btn-component .btn-icon-wrapper svg.btn-icon-svg {
+  display: block;
+  transition: fill 0.3s ease;
+}
+
+/* 图标 SVG 和图片（通用） */
+.btn-component .btn-icon-wrapper svg,
+.btn-component .btn-icon-wrapper img {
+  object-fit: cover;
+}
+
+
+/* 隐藏状态 */
+.btn-component .hidden {
+  display: none;
+}
+
+/* ========================================
+ * 样式 1: Filled (填充型) - 默认
+ * height: 44px, radius: 24px
+ * ======================================== */
+.btn-component[data-style="1"] {
+  height: 44px;
+  background-image: var(--btn-bg-default-image);
+  background-color: var(--btn-bg-default);
+  color: var(--btn-color-default);
+  border-radius: 24px;
+}
+
+.btn-component[data-style="1"]:hover {
+  background-image: var(--btn-bg-hover-image);
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-color-hover);
+}
+
+.btn-component[data-style="1"]:active {
+  background-image: var(--btn-bg-active-image);
+  background-color: var(--btn-bg-active);
+  color: var(--btn-color-active);
+}
+
+/* ========================================
+ * 样式 2: Filled + Icon (填充型 + 图标) - 中等尺寸
+ * height: 56px, radius: 28px, icon: 36px
+ * ======================================== */
+.btn-component[data-style="2"] {
+  height: 56px;
+  background-image: var(--btn-bg-default-image);
+  background-color: var(--btn-bg-default);
+  color: var(--btn-color-default);
+  border-radius: 28px;
+}
+
+.btn-component[data-style="2"]:hover {
+  background-image: var(--btn-bg-hover-image);
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-color-hover);
+}
+
+.btn-component[data-style="2"]:active {
+  background-image: var(--btn-bg-active-image);
+  background-color: var(--btn-bg-active);
+  color: var(--btn-color-active);
+}
+
+
+
+/* ========================================
+ * 样式 3: Filled + Icon (填充型 + 图标) - 小尺寸
+ * height: 44px, radius: 28px, icon: 24px
+ * ======================================== */
+.btn-component[data-style="3"] {
+  height: 44px;
+  background-image: var(--btn-bg-default-image);
+  background-color: var(--btn-bg-default);
+  color: var(--btn-color-default);
+  border-radius: 28px;
+}
+
+.btn-component[data-style="3"]:hover {
+  background-image: var(--btn-bg-hover-image);
+  background-color: var(--btn-bg-hover);
+  color: var(--btn-color-hover);
+}
+
+.btn-component[data-style="3"]:active {
+  background-image: var(--btn-bg-active-image);
+  background-color: var(--btn-bg-active);
+  color: var(--btn-color-active);
+}
+
+
+/* ========================================
+ * 样式 4: Outlined (描边型 + 渐变文字) - 默认
+ * height: 44px, radius: 24px
+ * ======================================== */
+.btn-component[data-style="4"] {
+  height: 44px;
+  background-image: none;
+  color: var(--btn-color-default);
+  border-radius: 24px;
+  position:relative;
+}
+
+.btn-component[data-style="4"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: var(--container-border-width);
+  background:  var(--container-border-color);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);        
+  -webkit-mask-composite: xor;        
+  mask-composite: exclude;         
+  z-index: -1;
+}
+
+.btn-component[data-style="4"] .btn-label{
+  background: var(--btn-color-default);
+  background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-component[data-style="4"]:hover {
+  background-image: var(--btn-bg-hover-image);
+  background-color: var(--btn-bg-hover);
+  border: none;
+  height: 44px;
+  color: var(--btn-color-hover);
+  -webkit-text-fill-color: var(--btn-color-hover);
+}
+
+.btn-component[data-style="4"]:hover::before {
+  display:none;
+}
+
+.btn-component[data-style="4"]:hover .btn-label{
+  background: var(--btn-color-hover);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+.btn-component[data-style="4"]:active {
+  background-image: var(--btn-bg-active-image);
+  background-color: var(--btn-bg-active);
+  border: none;
+  height: 44px;
+  color: var(--btn-color-active);
+  -webkit-text-fill-color: var(--btn-color-active);
+}
+
+.btn-component[data-style="4"]:active::before {
+  display:none;
+}
+
+.btn-component[data-style="4"]:active .btn-label{
+  background: var(--btn-color-active);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========================================
+ * 样式 5: Outlined + Icon (描边型 + 渐变文字) - 中等尺寸
+ * height: 56px, radius: 28px, icon: 36px
+ * ======================================== */
+.btn-component[data-style="5"] {
+  height: 56px;
+  background-image: none;
+  color: linear-gradient(270deg, var(--font-d-start) 0%, red 100%);
+  border-radius: 28px;
+  position:relative;
+}
+
+.btn-component[data-style="5"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: var(--container-border-width);
+  background:  var(--container-border-color);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);        
+  -webkit-mask-composite: xor;        
+  mask-composite: exclude;         
+  z-index: -1;
+}
+
+.btn-component[data-style="5"] .btn-label{
+  background: var(--btn-color-default);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-component[data-style="5"]:hover {
+  background-image: var(--btn-bg-hover-image);
+  background-color: var(--btn-bg-hover);
+  border: none;
+  height: 56px;
+  color: var(--btn-color-hover);
+  -webkit-text-fill-color: var(--btn-color-hover);
+}
+
+.btn-component[data-style="5"]:hover::before {
+  display:none;
+}
+
+.btn-component[data-style="5"]:hover .btn-label{
+  background: var(--btn-color-hover);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-component[data-style="5"]:active {
+  background-image: var(--btn-bg-active-image);
+  background-color: var(--btn-bg-active);
+  border: none;
+  height: 56px;
+  color: var(--btn-color-active);
+  -webkit-text-fill-color: var(--btn-color-active);
+}
+
+.btn-component[data-style="5"]:active::before {
+  display:none;
+}
+
+.btn-component[data-style="5"]:active .btn-label{
+  background: var(--btn-color-active);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* ========================================
+ * 样式 6: Outlined + Icon (描边型 + 渐变文字) - 小尺寸
+ * height: 44px, radius: 28px, icon: 24px
+ * ======================================== */
+.btn-component[data-style="6"] {
+  height: 44px;
+  background-image: none;
+  color: var(--btn-color-default);
+  border-radius: 28px;
+  position:relative;
+}
+
+.btn-component[data-style="6"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  padding: var(--container-border-width);
+  background:  var(--container-border-color);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);        
+  -webkit-mask-composite: xor;        
+  mask-composite: exclude;         
+  z-index: -1;
+}
+
+.btn-component[data-style="6"] .btn-label{
+  background: var(--btn-color-default);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-component[data-style="6"]:hover {
+  background-image: var(--btn-bg-hover-image);
+  background-color: var(--btn-bg-hover);
+  border: none;
+  height: 44px;
+  color: var(--btn-color-hover);
+  -webkit-text-fill-color: var(--btn-color-hover);
+}
+
+
+.btn-component[data-style="6"]:hover::before {
+  display:none;
+}
+
+.btn-component[data-style="6"]:hover .btn-label{
+  background: var(--btn-color-hover);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-component[data-style="6"]:active {
+  background-image: var(--btn-bg-active-image);
+  background-color: var(--btn-bg-active);
+  border: none;
+  height: 44px;
+  color: var(--btn-color-active);
+  -webkit-text-fill-color: var(--btn-color-active);
+}
+
+.btn-component[data-style="6"]:active::before {
+  display:none;
+}
+
+.btn-component[data-style="6"]:active .btn-label{
+  background: var(--btn-color-active);
+  -webkit-background-clip: text, border-box;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+

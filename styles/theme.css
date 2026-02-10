@@ -1,0 +1,24 @@
+/* styles/theme.css */
+@layer theme {
+  :root {
+    /* ===== 色彩系统 ===== */
+    --color-primary: rgba(235, 241, 246, 1);
+    --color-mode: rgba(255, 255, 255, 1);
+  }
+
+  [data-product="proart"] {
+    --color-primary: rgba(183, 140, 108, 1);
+  }
+
+  [data-product="rog"] {
+    --color-primary: rgba(245, 25, 40, 1);
+  }
+
+  [data-product="tuf"] {
+    --color-primary: rgba(255, 158, 27, 0.7);
+  }
+
+  [data-mode="dark"] {
+    --color-mode: rgba(0, 0, 0, 1);
+  }
+}
