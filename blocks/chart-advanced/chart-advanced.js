@@ -122,15 +122,16 @@ export default async function decorate(block) {
     config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
     v = getFieldValue(config);
     // console.log('执行chart-advanced-config', config);
-    return `
-      <div class="${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'} chat-column-width" style="--chart-advanced-chat-column-width: ${v('chartColumnWidth')}%;">
-        <div class="title"><h4 class="break-all tt-bd-28 chart-advanced-title">${v('titleRichtext')}</h4></div>
-        <div class="h-[1px] bg-[#181818] w-full my-[16px]"></div>
-        <div class="bg-green-300 break-all flex flex-col content-start items-start gap-[16px]">
-          ${itemHtml}
-        </div>
+    wrap.classList.add(`${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'}`, 'chat-column-width');
+    wrap.style.setProperty('--chart-advanced-chat-column-width', `${v('chartColumnWidth')}%`);
+    wrap.innerHTML = `
+      <div class="title"><h4 class="break-all tt-bd-28 chart-advanced-title">${v('titleRichtext')}</h4></div>
+      <div class="h-[1px] bg-[#181818] w-full my-[16px]"></div>
+      <div class="bg-green-300 break-all flex flex-col content-start items-start gap-[16px]">
+        ${itemHtml}
       </div>
     `;
+    return wrap.outerHTML;
   });
 
   // 等待所有异步操作完成
