@@ -93,7 +93,6 @@ const setUnifiedHeight = (block) => {
 const DEFAULT_CONFIG = {
 };
 
-
 export default async function decorate(block) {
   const wrapper = block.querySelectorAll(':scope > div');
   // console.log('执行chart-advanced', wrapper);
@@ -143,6 +142,6 @@ export default async function decorate(block) {
       ${containerHtml}
     </div>
   `;
-
   block.innerHTML = wrap;
+  setUnifiedHeight(block);
 }
