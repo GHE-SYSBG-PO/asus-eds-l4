@@ -5,12 +5,14 @@
   &[data-mode="light"] {
     --chart-advanced-title-color: #181818;
     --chart-advanced-info-color: #181818;
+    --chart-advanced-line-bg-color: #181818;
   }
 
   /* Dark*/
   &[data-mode="dark"] {
     --chart-advanced-title-color: #ffffff;
     --chart-advanced-info-color: #ffffff;
+    --chart-advanced-line-bg-color: #F5F5F5;
   }
 
   --chart-advanced-chat-column-width: 100%;
@@ -25,6 +27,9 @@
       &>h4 {
         margin: 0;
       }
+    }
+    .line-bg {
+      background-color: var(--chart-advanced-line-bg-color);
     }
     // 响应式版本
     @media (min-width: 730px) {

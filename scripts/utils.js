@@ -69,7 +69,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
     return config;
   }
 
-  const rows = [...block.children];
+  let rows = [...block.children];
   // console.log('rows', rows)
 
   if (blockName) {
@@ -80,16 +80,17 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
     const finalFieldOrder = fieldOrder.length > 0 ? fieldOrder : Object.keys(defaults);
     // console.log('finalFieldOrder', finalFieldOrder)
     if (finalFieldOrder.length > 0) {
+      // L4TagMulti-有该标识，说明row中是多行数据，过滤掉
+      rows = rows.filter((row) => !row?.innerHTML?.includes('L4TagMulti-'));
       rows.forEach((row, index) => {
         if (index < finalFieldOrder.length) {
           const cell = row.children[0];
-          // L4TagMulti-有该标识，说明row中是多行数据
-          if (cell && !cell?.innerHTML?.includes('L4TagMulti-')) {
+          // 如果这行是非空值或者有默认值defaults有传默认值
+          if (cell || config[finalFieldOrder[index]]) {
             const fieldName = finalFieldOrder[index];
             // 拿user输入的值。没有时，用配置的默认值
-            let value = cell.textContent.trim() || (config[fieldName] || '');
-            const html = cell.innerHTML.trim() || (config[fieldName] || '');
-
+            let value = cell?.textContent.trim() || (config[fieldName] || '');
+            const html = row?.innerHTML.trim() || (config[fieldName] || '');
             // If text content is empty, check for image/picture elements
             if (value === '') {
               const img = cell.querySelector('img');
