@@ -70,7 +70,6 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
   }
 
   let rows = [...block.children];
-  // console.log('rows', rows)
 
   if (blockName) {
     // Universal Editor format - load field order and map by position
@@ -78,7 +77,6 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
 
     // Fallback to defaults keys if JSON fetch failed (e.g., on author instance)
     const finalFieldOrder = fieldOrder.length > 0 ? fieldOrder : Object.keys(defaults);
-    // console.log('finalFieldOrder', finalFieldOrder)
     if (finalFieldOrder.length > 0) {
       // L4TagMulti-有该标识，说明row中是多行数据，过滤掉
       rows = rows.filter((row) => !row?.innerHTML?.includes('L4TagMulti-'));
@@ -278,7 +276,6 @@ export const nestBlockExecuteJs = (block) => {
 export const parseL4TagMulti = (htmlString) => {
   // 获取所有符合条件的 <p> 标签（即嵌套在两层 <p> 中的元素）
   const paragraphs = htmlString.querySelectorAll(':scope p');
-  console.log('paragraphs', [...paragraphs])
 
   // 存储最终解析结果的数组
   const result = [];
@@ -294,7 +291,6 @@ export const parseL4TagMulti = (htmlString) => {
   paragraphs.forEach((p) => {
     const textContent = p.textContent.trim(); // 获取当前 <p> 标签的纯文本内容
 
-    console.log('textContent', textContent)
     // 判断是否是新的字段标记（以 "L4TagMulti-" 开头）
     if (textContent.startsWith('L4TagMulti-')) {
       // 如果当前已有字段（currentKey 不为空），说明上一个字段已结束，需要保存到结果中
@@ -402,7 +398,6 @@ export const getBlockRepeatConfigs = (block) => {
     // 检查当前子元素的 outerHTML 是否包含 "L4TagMulti-" 标记
     if (item.outerHTML.includes('L4TagMulti-')) {
       // 如果包含，则调用 parseL4TagMulti 函数解析该子元素的内容
-      console.log('item', item)
       arr.push(parseL4TagMulti(item));
     }
   });
