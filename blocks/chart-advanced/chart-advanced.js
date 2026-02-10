@@ -110,22 +110,22 @@ export default async function decorate(block) {
   // 每个chat
   Array.from(wrapper).forEach(async (wrap) => {
     console.log('wrap', wrap)
-    // config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
-    // v = getFieldValue(config);
-    // console.log('执行chart-advanced-config', config);
+    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+    v = getFieldValue(config);
+    console.log('执行chart-advanced-config', config);
 
-    // if (v('titleFontColor')) {
-    //   titleFontColor = `--chart-advanced-title-color: #${v('titleFontColor')}`;
-    // }
-    // if (v('infoFontColor')) {
-    //   infoFontColor = `--chart-advanced-info-color: #${v('infoFontColor')}`;
-    // }
-    // if (v('lineColor')) {
-    //   lineColor = `--chart-advanced-line-bg-color: #${v('lineColor')}`;
-    // }
-    // // 获取有重复项的数组
-    // const [item = []] = getBlockRepeatConfigs(wrap);
-    // console.log('item', item)
+    if (v('titleFontColor')) {
+      titleFontColor = `--chart-advanced-title-color: #${v('titleFontColor')}`;
+    }
+    if (v('infoFontColor')) {
+      infoFontColor = `--chart-advanced-info-color: #${v('infoFontColor')}`;
+    }
+    if (v('lineColor')) {
+      lineColor = `--chart-advanced-line-bg-color: #${v('lineColor')}`;
+    }
+    // 获取有重复项的数组
+    const [item = []] = getBlockRepeatConfigs(wrap);
+    console.log('item', item)
     // item.forEach((val) => {
     //   // console.log(val);
     //   try {
