@@ -1,0 +1,37 @@
+
+
+main {  
+  /* Light  */
+  &[data-mode="light"] {
+    --chart-advanced-title-color: #181818;
+    --chart-advanced-info-color: #181818;
+  }
+
+  /* Dark*/
+  &[data-mode="dark"] {
+    --chart-advanced-title-color: #ffffff;
+    --chart-advanced-info-color: #ffffff;
+  }
+  --chart-advanced-chat-column-width: 100%;
+}
+
+
+.chart-advanced {
+  .chart-advanced-title {
+    color: var(--chart-advanced-title-color);
+  }
+  .chart-advanced-info {
+    color: var(--chart-advanced-info-color);
+  }
+  .title {
+    &>h4 {
+      margin: 0;
+    }
+  }
+  // 响应式版本
+  @media (min-width: 730px) {
+    .chat-column-width {
+      width: var(--chart-advanced-chat-column-width);
+    }
+  }
+}
