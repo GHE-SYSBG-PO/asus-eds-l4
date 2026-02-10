@@ -90,7 +90,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
             const fieldName = finalFieldOrder[index];
             // 拿user输入的值。没有时，用配置的默认值
             let value = cell?.textContent.trim() || (config[fieldName] || '');
-            const html = row?.innerHTML.trim() || (config[fieldName] || '');
+            const html = cell?.innerHTML.trim() || (config[fieldName] || '');
             // If text content is empty, check for image/picture elements
             if (value === '') {
               const img = cell.querySelector('img');
@@ -277,7 +277,7 @@ export const nestBlockExecuteJs = (block) => {
  */
 export const parseL4TagMulti = (htmlString) => {
   // 获取所有符合条件的 <p> 标签（即嵌套在两层 <p> 中的元素）
-  const paragraphs = htmlString.querySelectorAll(':scope > p');
+  const paragraphs = htmlString.querySelectorAll(':scope p');
 
   // 存储最终解析结果的数组
   const result = [];
