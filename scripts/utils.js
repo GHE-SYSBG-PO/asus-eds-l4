@@ -90,7 +90,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
             const fieldName = finalFieldOrder[index];
             // 拿user输入的值。没有时，用配置的默认值
             let value = cell?.textContent.trim() || (config[fieldName] || '');
-            const html = cell?.innerHTML.trim() || (config[fieldName] || '');
+            const html = row?.innerHTML.trim() || (config[fieldName] || '');
             // If text content is empty, check for image/picture elements
             if (value === '') {
               const img = cell.querySelector('img');
@@ -317,7 +317,7 @@ export const parseL4TagMulti = (htmlString) => {
       if (img && img.src) {
         currentText += img.src;
       }
-
+      console.log('p', p)
       // 将当前 <p> 标签的完整 HTML 和文本内容追加到当前字段中
       currentHtml += p.outerHTML;
       currentText += textContent;
