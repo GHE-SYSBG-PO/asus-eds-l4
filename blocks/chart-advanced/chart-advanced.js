@@ -109,10 +109,10 @@ export default async function decorate(block) {
   // 创建所有异步操作的 Promise 数组
   // 每个chat
   Array.from(wrapper).forEach(async (wrap) => {
-    console.log('wrap', wrap)
+    // console.log('wrap', wrap)
     config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
     v = getFieldValue(config);
-    console.log('执行chart-advanced-config', config);
+    // console.log('执行chart-advanced-config', config);
 
     if (v('titleFontColor')) {
       titleFontColor = `--chart-advanced-title-color: #${v('titleFontColor')}`;
@@ -125,10 +125,8 @@ export default async function decorate(block) {
     }
     // 获取有重复项的数组
     const [item = []] = getBlockRepeatConfigs(wrap);
-    console.log('item', item)
     itemHtml = '';
     item.forEach((val) => {
-      // console.log(val);
       try {
         itemHtml += `
           <div class="flex items-center gap-[20px]">
