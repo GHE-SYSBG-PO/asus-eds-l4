@@ -101,9 +101,12 @@ export default async function decorate(block) {
   // let v = '';
   let containerHtml = '';
   // 创建所有异步操作的 Promise 数组
-  const promises = Array.from(wrapper).map(async (item) => {
-    // console.log(getBlockRepeatConfigs(item));
-    config = await getBlockConfigs(item, DEFAULT_CONFIG, 'chart-advanced-item');
+  // 每个chat
+  const promises = Array.from(wrapper).map(async (wrap) => {
+    // 获取两个有重复项的数组
+    const [item] = getBlockRepeatConfigs(wrap);
+    // console.log(item);
+    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
     // v = getFieldValue(config);
     // console.log('执行chart-advanced-config', config);
     // return `
