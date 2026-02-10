@@ -72,11 +72,11 @@ const getButtonPositionClass = (position) => {
 /**
  * 获取当前device
  */
-const getDevice = ()=>{
+const getDevice = () => {
   const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
   const isDesktop = window.innerWidth >= 1024;
-  return isTablet?'T':(isDesktop?'D':'M')
-}
+  return isTablet ? 'T' : (isDesktop ? 'D' : 'M');
+};
 /**
  * 构建尺寸样式对象
  */
@@ -166,36 +166,35 @@ const getDeviceConfig = (device, v) => {
       ratioValueCustomized: v('ratioValueCustomizedD', 'text') || '',
       objectPosition: v('objectPositionD', 'text') || 'center',
       maxWidth: v('maxD', 'text') || '',
-      minWidth: v('minD', 'text') || ''
+      minWidth: v('minD', 'text') || '',
     };
-  } else if (device === 'T') {
+  } if (device === 'T') {
     return {
       assets: v('assetsT', 'text') || '',
       widthUnit: v('widthT', 'text') || 'auto',
       widthValue: v('widthValueT', 'text') || '',
       heightUnit: v('heightT', 'text') || 'auto',
       heightValue: v('heightValueT', 'text') || '',
-      ratio: v('ratioT', 'text') ,
+      ratio: v('ratioT', 'text'),
       ratioValueCustomized: v('ratioValueCustomizedT', 'text') || '',
       objectPosition: v('objectPositionT', 'text') || 'center',
       maxWidth: v('maxT', 'text') || '',
-      minWidth: v('minT', 'text') || ''
-    };
-  } else {
-    // Mobile
-    return {
-      assets: v('assets', 'text') || '',
-      widthUnit: v('widthM', 'text') || 'auto',
-      widthValue: v('widthValueM', 'text') || '',
-      heightUnit: v('heightM', 'text') || 'auto',
-      heightValue: v('heightValueM', 'text') || '',
-      ratio: v('ratioM', 'text'),
-      ratioValueCustomized: v('ratioValueCustomizedM', 'text') || '',
-      objectPosition: v('objectPositionM', 'text') || 'center',
-      maxWidth: v('maxM', 'text') || '',
-      minWidth: v('minM', 'text') || ''
+      minWidth: v('minT', 'text') || '',
     };
   }
+  // Mobile
+  return {
+    assets: v('assets', 'text') || '',
+    widthUnit: v('widthM', 'text') || 'auto',
+    widthValue: v('widthValueM', 'text') || '',
+    heightUnit: v('heightM', 'text') || 'auto',
+    heightValue: v('heightValueM', 'text') || '',
+    ratio: v('ratioM', 'text'),
+    ratioValueCustomized: v('ratioValueCustomizedM', 'text') || '',
+    objectPosition: v('objectPositionM', 'text') || 'center',
+    maxWidth: v('maxM', 'text') || '',
+    minWidth: v('minM', 'text') || '',
+  };
 };
 
 /**
@@ -401,7 +400,7 @@ export default async function decorate(block) {
       setTimeout(() => {
         const videoElement = block.querySelector('video');
         const container = block.querySelector('.media-block-video-container');
-        if(!container){
+        if (!container) {
           return false;
         }
         const existingControlsDiv = container.querySelector('.media-block-controls');
@@ -522,7 +521,7 @@ export default async function decorate(block) {
             }
           }
 
-          if(newSrc === ''){
+          if (newSrc === '') {
             videoElement.src = '';
           }
 

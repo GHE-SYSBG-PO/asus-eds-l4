@@ -9,7 +9,8 @@
       "component": "text",
       "label": "bg-color default",
       "name": "containerBgColorDefault",
-      "valueType": "string"
+      "valueType": "string",
+      "description":"Accepts only hex values, e.g., 00ffee (without #)"
     },
     {
       "component": "text",

@@ -25,7 +25,7 @@ document.addEventListener('mousedown', () => {
 
 export async function createModal(contentNodes, modal = true, dialogId = 'dialog', dialogClasses = [], contentWrapperClass = null, closeButtonHtml = '') {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
-  
+
   // Create the dialog container with common structure
   const dialogContainer = document.createElement('div');
   dialogContainer.classList.add('dialog-container');
@@ -49,14 +49,14 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
   dialogContent.classList.add('dialog-content');
   dialogContent.setAttribute('role', 'dialog');
   dialogContent.setAttribute('aria-modal', 'true');
-  
+
   // Create the close button
   let closeButton = document.createElement('bottom');
-  if(closeButtonHtml) {
+  if (closeButtonHtml) {
     const container = document.createElement('div');
     container.innerHTML = closeButtonHtml;
     closeButton = container.querySelector('button');
-  }else{
+  } else {
     closeButton.innerHTML = 'Close';
   }
 
@@ -64,10 +64,9 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
   closeButton.setAttribute('type', 'button');
   closeButton.setAttribute('data-a11y-dialog-hide', dialogId);
   closeButton.setAttribute('aria-label', 'Close dialog');
-  
-  
+
   dialogContent.appendChild(closeButton);
-  
+
   // If a content wrapper class is specified, wrap the content
   if (contentWrapperClass) {
     const contentWrapper = document.createElement('div');
@@ -111,7 +110,7 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
     if (e.key === 'Escape') {
       closeDialog(dialogContainer);
     }
-    
+
     if (e.key === 'Enter') {
       const { target } = e;
       // Check if Enter is pressed within a form context
@@ -157,7 +156,7 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
     showModal: () => {
       dialogContainer.setAttribute('aria-hidden', 'false');
       // reset scroll position
-      setTimeout(() => { 
+      setTimeout(() => {
         dialogContent.scrollTop = 0;
         // Focus the dialog container so keyboard events (ESC) work
         dialogContainer.focus();
@@ -177,18 +176,18 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
  * @param {String} contentWrapperClass optional class name to wrap the content in a div.
  * @param {String} closeButtonHtml optional close button html.
  */
-export async function openModal(fragmentUrl, modal = true, dialogId = 'dialog', dialogClasses = [], contentWrapperClass = null,closeButtonHtml='') {
+export async function openModal(fragmentUrl, modal = true, dialogId = 'dialog', dialogClasses = [], contentWrapperClass = null, closeButtonHtml = '') {
   // Load modal CSS first before loading fragment content
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
-  
+
   const path = fragmentUrl.startsWith('http')
     ? new URL(fragmentUrl, window.location).pathname
     : fragmentUrl;
 
   const fragment = await loadFragment(path);
-  const { showModal,closeModal } = await createModal(fragment.childNodes, modal, dialogId, dialogClasses, contentWrapperClass,closeButtonHtml);
+  const { showModal, closeModal } = await createModal(fragment.childNodes, modal, dialogId, dialogClasses, contentWrapperClass, closeButtonHtml);
   showModal();
-  if(!window.__closeModal){
+  if (!window.__closeModal) {
     window.__closeModal = {};
   }
   window.__closeModal[dialogId] = closeModal;
