@@ -1,1 +1,1 @@
-.l4-pdp[data-mode=light]{--container-col-bg-color: rgba(255, 255, 255, 1)}.l4-pdp[data-mode=dark]{--container-col-bg-color: rgba(0, 0, 0, 1)}.l4-pdp .container-col-bg{background-color:var(--container-col-bg-color)}
+.l4-pdp[data-mode=light]{--container-col-bg-color: transparent}.l4-pdp[data-mode=dark]{--container-col-bg-color: transparent}.l4-pdp .container-col-bg{background-color:var(--container-col-bg-color)}
