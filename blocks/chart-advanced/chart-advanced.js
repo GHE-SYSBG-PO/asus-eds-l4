@@ -91,27 +91,48 @@ const setUnifiedHeight = (block) => {
 
 // 默认值
 const DEFAULT_CONFIG = {
+  wrapLine: 'on',
+  titleFont: 'tt-bd-28',
+  infoFont: 'ro-rg-18-sh',
+  lineWidth: '100%',
 };
 
 export default async function decorate(block) {
   const wrapper = block.querySelectorAll(':scope > div');
-  // console.log('执行chart-advanced', wrapper);
+  // console.log('执行chart-advanced', block);
   let config = {};
   let v = '';
-  let containerHtml = '';
   let itemHtml = '';
+  let lineColor = '';
+  let titleFontColor = '';
+  let infoFontColor = '';
   // 创建所有异步操作的 Promise 数组
   // 每个chat
-  const promises = Array.from(wrapper).map(async (wrap) => {
+  Array.from(wrapper).forEach(async (wrap) => {
+    // console.log('wrap', wrap)
+    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+    v = getFieldValue(config);
+    console.log('执行chart-advanced-config', config);
+
+    if (v('titleFontColor')) {
+      titleFontColor = `--chart-advanced-title-color: #${v('titleFontColor')}`;
+    }
+    if (v('infoFontColor')) {
+      infoFontColor = `--chart-advanced-info-color: #${v('infoFontColor')}`;
+    }
+    if (v('lineColor')) {
+      lineColor = `--chart-advanced-line-bg-color: #${v('lineColor')}`;
+    }
     // 获取有重复项的数组
     const [item = []] = getBlockRepeatConfigs(wrap);
+    console.log('item', item)
+    itemHtml = '';
     item.forEach((val) => {
-      // console.log(val);
       try {
         itemHtml += `
           <div class="flex items-center gap-[20px]">
             <div class="w-[46px] h-[46px] flex items-center justify-center shrink-0">${val.iconAssets.html}</div>
-            <span class="ro-rg-18 chart-advanced-info">${val.infoRichtext.text}</span> 
+            <span class="${v('infoFont')} chart-advanced-info" style="${infoFontColor}">${val.infoRichtext.text}</span> 
           </div>
         `;
       } catch (error) {
@@ -119,30 +140,19 @@ export default async function decorate(block) {
         console.error('Error:', error);
       }
     });
-    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
-    v = getFieldValue(config);
-    // console.log('执行chart-advanced-config', config);
-    return `
-      <div class="${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'} chat-column-width" style="--chart-advanced-chat-column-width: ${v('chartColumnWidth')}%;">
-        <div class="title"><h4 class="break-all tt-bd-28 chart-advanced-title">${v('titleRichtext')}</h4></div>
-        <div class="h-[1px] bg-[#181818] w-full my-[16px]"></div>
-        <div class="bg-green-300 break-all flex flex-col content-start items-start gap-[16px]">
-          ${itemHtml}
-        </div>
+
+    wrap.classList.add(`${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'}`, 'chat-column-width');
+    wrap.style.setProperty('--chart-advanced-chat-column-width', `${v('chartColumnWidth')}%`);
+    wrap.innerHTML = `
+      <div class="title"><h4 class="break-all ${v('titleFont')} chart-advanced-title" style="${titleFontColor}">${v('titleRichtext', 'html')}</h4></div>
+      <div class="h-[1px] mx-auto my-[16px] line-bg" style="width: ${v('lineWidth')}; ${lineColor}"></div>
+      <div class="break-all flex ${v('wrapLine') === 'on' ? 'flex-wrap' : 'flex-col'} content-start items-start gap-[16px]">
+        ${itemHtml}
       </div>
     `;
   });
 
-  // 等待所有异步操作完成
-  const htmlParts = await Promise.all(promises);
-  containerHtml = htmlParts.join('');
-
-  const wrap = `
-    <div class="flex flex-col md:flex-row md:flex-nowrap gap-[40px] w-full chart-advanced">
-      ${containerHtml}
-    </div>
-  `;
-  block.innerHTML = wrap;
+  block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced');
   setTimeout(() => {
     setUnifiedHeight(block);
   }, 500);

@@ -144,8 +144,8 @@ function loadDelayed() {
 
 function getPageMetadata() {
   document.addEventListener('DOMContentLoaded', () => {
-    const productLine = getMetadata('productline');
-    const mode = getMetadata('mode');
+    const productLine = getMetadata('productline') || 'asus';
+    const mode = getMetadata('mode') || 'light';
     const main = document.body.querySelector('main');
     main.dataset.product = productLine;
     main.dataset.mode = mode;

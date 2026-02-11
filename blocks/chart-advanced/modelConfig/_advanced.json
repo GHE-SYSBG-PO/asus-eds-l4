@@ -11,8 +11,9 @@
       "name": "titleFont",
       "valueType": "string",
       "options": [
-        { "name": "ro-rg-20", "value": "ro-rg-20-md" },
-        { "name": "ro-rg-24", "value": "ro-rg-24-md" }
+        { "name": "tt-bd-24", "value": "tt-bd-24" },
+        { "name": "tt-bd-28", "value": "tt-bd-28" },
+        { "name": "tt-bd-32", "value": "tt-bd-32" }
       ]
     },
     {
@@ -27,8 +28,9 @@
       "name": "infoFont",
       "valueType": "string",
       "options": [
-        { "name": "ro-rg-20", "value": "ro-rg-20-md" },
-        { "name": "ro-rg-24", "value": "ro-rg-24-md" }
+        { "name": "ro-rg-16-sh", "value": "ro-rg-16-sh" },
+        { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh" },
+        { "name": "ro-rg-20-sh", "value": "ro-rg-20-sh" }
       ]
     },
     {

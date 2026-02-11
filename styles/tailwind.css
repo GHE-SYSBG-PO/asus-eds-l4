@@ -2,13 +2,9 @@
  * Tailwind CSS 优先级别
  * @layer theme
  * @layer base
- * @layer components
- * @layer utilities
  */
 @import "./theme.css";
 @import "./base.css";
-@import "./components.css";
-@import "./utilities.css";
 
 @import "tailwindcss";
 @config "../tailwind.config.js";
