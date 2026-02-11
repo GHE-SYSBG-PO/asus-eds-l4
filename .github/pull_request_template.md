@@ -3,5 +3,5 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main--asus-eds-dev-l4--GHE-SYSBG-PO.aem.live/<your-pag>
-- After: https://<branch>--asus-eds-dev-l4--GHE-SYSBG-PO.aem.live/<your-pag>
+- Before: https://dev--asus-eds-l4-dev--GHE-SYSBG-PO.aem.page/<your-pag>
+- After: https://<branch>--asus-eds-l4-dev--GHE-SYSBG-PO.aem.live/<your-pag>
