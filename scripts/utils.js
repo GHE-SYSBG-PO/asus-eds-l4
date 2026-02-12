@@ -405,3 +405,10 @@ export const getBlockRepeatConfigs = (block) => {
   // 返回最终的解析结果数组
   return arr;
 };
+
+export function isAuthorEnvironment() {
+  if (window?.location?.origin?.includes('author')) {
+    return true;
+  }
+  return false;
+}
