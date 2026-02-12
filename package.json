@@ -5,6 +5,7 @@
   "description": "Starter project for Adobe Helix",
   "scripts": {
     "aem": "aem up --url https://dev--asus-eds-l4-dev--ghe-sysbg-po.aem.page",
+    "aem:branch": "aem up --url https://feat-Imgchange-71--asus-eds-l4-dev--ghe-sysbg-po.aem.page",
     "lint:js": "eslint . --ext .json,.js,.mjs",
     "lint:css": "stylelint \"blocks/**/*.scss\" \"styles/*.scss\"",
     "lint": "npm run lint:js && npm run lint:css",
