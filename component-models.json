@@ -1321,10 +1321,9 @@
         ]
       },
       {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--btn",
-        "hidden": true
+        "component": "hidden",
+        "name": "style",
+        "value": "L4--nested-block--btn"
       }
     ]
   },
