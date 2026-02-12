@@ -87,7 +87,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
 
       if (finalFieldOrder.length > 0) {
         // Filter out multi-row data marked with L4TagMulti-
-        rows = rows.filter((row) => !row?.innerHTML?.includes('L4TagMulti-'));
+        console.log('rows', rows)
         rows.forEach((row, index) => {
           if (index < finalFieldOrder.length) {
             const cell = row.children[0];
