@@ -302,6 +302,7 @@ export default async function decorate(block) {
       }
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error decorating btn block:', error);
     block.innerHTML = '<div class="error-message">Failed to load btn block</div>';
   }
