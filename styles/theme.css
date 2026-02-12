@@ -2,23 +2,23 @@
 @layer theme {
   :root {
     /* ===== 色彩系统 ===== */
-    --color-primary: rgba(235, 241, 246, 1);
-    --color-mode: rgba(255, 255, 255, 1);
+    --color-primary: rgb(235 241 246 / 100%);
+    --color-mode: rgb(255 255 255 / 100%);
   }
 
   [data-product="proart"] {
-    --color-primary: rgba(183, 140, 108, 1);
+    --color-primary: rgb(183 140 108 / 100%);
   }
 
   [data-product="rog"] {
-    --color-primary: rgba(245, 25, 40, 1);
+    --color-primary: rgb(245 25 40 / 100%);
   }
 
   [data-product="tuf"] {
-    --color-primary: rgba(255, 158, 27, 0.7);
+    --color-primary: rgb(255 158 27 / 70%);
   }
 
   [data-mode="dark"] {
-    --color-mode: rgba(0, 0, 0, 1);
+    --color-mode: rgb(0 0 0 / 100%);
   }
 }

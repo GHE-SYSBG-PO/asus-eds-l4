@@ -8,31 +8,36 @@
     --chart-advanced-line-bg-color: #181818;
   }
 
-  /* Dark*/
+  /* Dark */
   &[data-mode="dark"] {
-    --chart-advanced-title-color: #ffffff;
-    --chart-advanced-info-color: #ffffff;
+    --chart-advanced-title-color: #fff;
+    --chart-advanced-info-color: #fff;
     --chart-advanced-line-bg-color: #F5F5F5;
   }
 
   --chart-advanced-chat-column-width: 100%;
+
   .chart-advanced {
     .chart-advanced-title {
       color: var(--chart-advanced-title-color);
     }
+
     .chart-advanced-info {
       color: var(--chart-advanced-info-color);
     }
+
     .title {
       &>h4 {
         margin: 0;
       }
     }
+
     .line-bg {
       background-color: var(--chart-advanced-line-bg-color);
     }
+
     // 响应式版本
-    @media (min-width: 730px) {
+    @media (width >= 730px) {
       .chat-column-width {
         width: var(--chart-advanced-chat-column-width);
       }

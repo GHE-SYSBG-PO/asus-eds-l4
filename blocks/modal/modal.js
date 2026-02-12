@@ -3,20 +3,6 @@ import {
   buildBlock, decorateBlock, loadBlock, loadCSS,
 } from '../../scripts/aem.js';
 
-// Track keyboard navigation
-let usingKeyboard = false;
-
-// Event listeners to detect keyboard navigation
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Tab') {
-    usingKeyboard = true;
-  }
-});
-
-document.addEventListener('mousedown', () => {
-  usingKeyboard = false;
-});
-
 /*
   This is not a traditional block, so there is no decorate function.
   Instead, links to a /modals/ path are automatically transformed into a modal.
@@ -25,7 +11,7 @@ document.addEventListener('mousedown', () => {
 
 export async function createModal(contentNodes, modal = true, dialogId = 'dialog', dialogClasses = [], contentWrapperClass = null, closeButtonHtml = '') {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
-
+  console.log(modal);
   // Create the dialog container with common structure
   const dialogContainer = document.createElement('div');
   dialogContainer.classList.add('dialog-container');
@@ -85,10 +71,19 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
   decorateBlock(block);
   await loadBlock(block);
 
+  function closeDialog(container) {
+    container.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    // Remove after animation completes
+    setTimeout(() => {
+      block.remove();
+    }, 300);
+  }
+
   // Handle close buttons from individual blocks
   dialogContainer.addEventListener('click', (e) => {
     // Check if clicked element is a close button
-    const closeButton = e.target.closest(`[data-a11y-dialog-hide="${dialogId}"], .dialog-close, .close-icon`);
+    // const closeButton = e.target.closest(`[data-a11y-dialog-hide="${dialogId}"], .dialog-close, .close-icon`);
     if (closeButton) {
       e.preventDefault();
       closeDialog(dialogContainer);
@@ -130,21 +125,7 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
         }
       }
     }
-    // FIX: Stop OneTrust from intercepting Tab keys in modal
-    if (e.key === 'Tab') {
-      e.stopPropagation(); // Prevents OneTrust from seeing this event
-      usingKeyboard = true;
-    }
   });
-
-  function closeDialog(container) {
-    container.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
-    // Remove after animation completes
-    setTimeout(() => {
-      block.remove();
-    }, 300);
-  }
 
   block.innerHTML = '';
   block.append(dialogContainer);
@@ -187,8 +168,8 @@ export async function openModal(fragmentUrl, modal = true, dialogId = 'dialog', 
   const fragment = await loadFragment(path);
   const { showModal, closeModal } = await createModal(fragment.childNodes, modal, dialogId, dialogClasses, contentWrapperClass, closeButtonHtml);
   showModal();
-  if (!window.__closeModal) {
-    window.__closeModal = {};
+  if (!window._closeModal) {
+    window._closeModal = {};
   }
-  window.__closeModal[dialogId] = closeModal;
+  window._closeModal[dialogId] = closeModal;
 }

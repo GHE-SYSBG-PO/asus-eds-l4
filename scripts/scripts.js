@@ -12,7 +12,7 @@ import {
   loadCSS,
   getMetadata,
 } from './aem.js';
-import { loadSectionBlockJs,isAuthorEnvironment } from './utils.js';
+import { loadSectionBlockJs, isAuthorEnvironment } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.

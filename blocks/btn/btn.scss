@@ -149,17 +149,16 @@
       border-radius: $height / 2;
       padding: var(--container-border-width);
       background: var(--container-border-color);
-      -webkit-mask:
+      mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
+      mask-composite: xor;
       mask-composite: exclude;
       z-index: -1;
     }
 
     .btn-label {
       background: var(--btn-color-default);
-      background-clip: text, border-box;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -178,7 +177,6 @@
 
       .btn-label {
         background: var(--btn-color-hover);
-        -webkit-background-clip: text, border-box;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
@@ -198,7 +196,6 @@
 
       .btn-label {
         background: var(--btn-color-active);
-        -webkit-background-clip: text, border-box;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
@@ -303,6 +300,7 @@
         --icon-bg-default: #fff;
         --icon-bg-hover: #fff;
         --icon-bg-active: #fff;
+
         border-radius: var(--icon-radius);
       }
 
@@ -312,13 +310,13 @@
 
       &:hover {
         svg path {
-          fill: url(#icon-filled-hover-active);
+          fill: url("#icon-filled-hover-active");
         }
       }
 
       &:active {
         svg path {
-          fill: url(#icon-filled-hover-active);
+          fill: url("#icon-filled-hover-active");
         }
       }
     }
@@ -334,22 +332,23 @@
         );
         --icon-bg-hover: #fff;
         --icon-bg-active: #fff;
+
         border-radius: var(--icon-radius);
       }
 
       svg path {
-        fill: url(#icon-outline-default);
+        fill: url("#icon-outline-default");
       }
 
       &:hover {
         svg path {
-          fill: url(#icon-outline-hover);
+          fill: url("#icon-outline-hover");
         }
       }
 
       &:active {
         svg path {
-          fill: url(#icon-outline-active);
+          fill: url("#icon-outline-active");
         }
       }
     }
@@ -357,6 +356,7 @@
     /* ========================================
    * Style
    * ======================================== */
+
     /* 基础按钮样式 */
     display: inline-flex;
     align-items: center;

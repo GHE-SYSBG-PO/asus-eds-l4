@@ -139,7 +139,7 @@ const getRadiusStyle = (radius) => {
 
   // 如果是字符串且只包含数字，也是数字类型
   const numRadius = parseFloat(radius);
-  if (!isNaN(numRadius)) {
+  if (!Number.isNaN(numRadius)) {
     // 检查是否已经包含单位
     if (radius.includes('px') || radius.includes('%') || radius.includes('rem') || radius.includes('em')) {
       return radius;
@@ -251,15 +251,22 @@ export default async function decorate(block) {
     };
 
     // 创建图片元素
-    const createImageElement = (device, config, styles, objectPosition) => {
-      const { assets } = config;
+    const createImageElement = (device, configObj, styles, objectPosition) => {
+      const { assets } = configObj;
       if (!assets) return '';
 
       // 构建基础样式
       const baseStyle = `position: relative; overflow-hidden; ${containerRadiusStyle} ${stylesToInline(styles)}`;
 
+      let dClass = 'hidden lg:block';
+      if (device === 'M') {
+        dClass = 'md:hidden lg:hidden';
+      }
+      if (device === 'T') {
+        dClass = 'hidden md:block lg:hidden';
+      }
       return `
-        <div class="device-${device} ${device === 'M' ? 'md:hidden lg:hidden' : device === 'T' ? 'hidden md:block lg:hidden' : 'hidden lg:block'}" style="${baseStyle}">
+        <div class="device-${device} ${dClass}" style="${baseStyle}">
           <img
             src="${assets}"
             alt="${imageAlt}"
