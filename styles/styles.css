@@ -105,8 +105,6 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
   font-weight: 600;
   line-height: 1.25;
@@ -120,17 +118,6 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
-p {
-    margin: 0;
-}
-dl,
-ol,
-ul,
-pre,
-blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
-}
 
 code,
 pre {
