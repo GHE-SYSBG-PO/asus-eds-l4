@@ -1,5 +1,12 @@
 import { loadCSS, decorateBlock, loadBlock } from './aem.js';
 
+export function isAuthorEnvironment() {
+  if (window?.location?.origin?.includes('author')) {
+    return true;
+  }
+  return false;
+}
+
 // Recursively collect all field names, excluding container component name values
 export const getAllFieldNames = (fields) => {
   const names = [];
@@ -87,7 +94,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
 
       if (finalFieldOrder.length > 0) {
         // Filter out multi-row data marked with L4TagMulti-
-        console.log('rows', rows)
+        rows = rows.filter((row) => !row?.innerHTML?.includes('L4TagMulti-'));
         rows.forEach((row, index) => {
           if (index < finalFieldOrder.length) {
             const cell = row.children[0];
@@ -97,7 +104,12 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
             if (cell || config[fieldName]) {
               // Extract value from cell or use default
               let value = cell?.textContent.trim() || (config[fieldName] || '');
-              const html = cell?.innerHTML.trim() || (config[fieldName] || '');
+              let html = '';
+              if (isAuthorEnvironment()) {
+                html = cell?.innerHTML.trim() || (config[fieldName] || '');
+              } else {
+                html = row?.innerHTML.trim() || (config[fieldName] || '');
+              }
 
               // Handle image elements when text content is empty
               if (value === '') {
@@ -406,10 +418,3 @@ export const getBlockRepeatConfigs = (block) => {
 
   return arr;
 };
-
-export function isAuthorEnvironment() {
-  if (window?.location?.origin?.includes('author')) {
-    return true;
-  }
-  return false;
-}
