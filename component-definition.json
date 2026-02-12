@@ -235,14 +235,14 @@
           }
         },
         {
-          "title": "Line Info",
+          "title": "Line Info(ID:26)",
           "id": "line-info",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
-                  "name": "LineInfo",
+                  "name": "Line Info",
                   "model": "line-info"
                 }
               }
