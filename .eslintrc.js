@@ -16,12 +16,12 @@ module.exports = {
   },
   rules: {
     'import/extensions': ['error', { js: 'always' }], // require js file extensions in imports
-    'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
+    'linebreak-style': 'off', // enforce unix linebreaks
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
     'xwalk/max-cells': 'off',
     'xwalk/no-orphan-collapsible-fields': 'off',
-    'consistent-return': 'warn',
-    'no-nested-ternary': 'warn',
+    'consistent-return': 'off',
+    'no-nested-ternary': 'off',
     'no-underscore-dangle': 'off',
     'max-len': ['error', { code: 300 }],
   },

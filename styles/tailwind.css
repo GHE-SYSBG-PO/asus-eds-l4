@@ -3,8 +3,8 @@
  * @layer theme
  * @layer base
  */
-@import url("./theme.css");
-@import url("./base.css");
-@import url("tailwindcss");
+@import "./theme.css";
+@import "./base.css";
+@import "tailwindcss";
 
 @config "../tailwind.config.js";

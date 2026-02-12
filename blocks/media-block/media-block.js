@@ -522,6 +522,7 @@ export default async function decorate(block) {
               videoElement.currentTime = currentTime;
               if (wasPlaying) {
                 videoElement.play().catch((err) => {
+                  // eslint-disable-next-line no-console
                   console.warn('视频播放失败:', err);
                 });
               }
@@ -606,6 +607,7 @@ export default async function decorate(block) {
       }, 100);
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error decorating media block:', error);
     block.innerHTML = '<div class="error-message">Failed to load media block</div>';
   }

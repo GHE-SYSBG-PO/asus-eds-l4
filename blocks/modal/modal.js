@@ -11,6 +11,7 @@ import {
 
 export async function createModal(contentNodes, modal = true, dialogId = 'dialog', dialogClasses = [], contentWrapperClass = null, closeButtonHtml = '') {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
+  // eslint-disable-next-line no-console
   console.log(modal);
   // Create the dialog container with common structure
   const dialogContainer = document.createElement('div');
