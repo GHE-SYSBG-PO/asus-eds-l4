@@ -1837,6 +1837,661 @@
     ]
   },
   {
+    "id": "line-info",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "style",
+        "name": "styleTab"
+      },
+      {
+        "component": "select",
+        "label": "layout group",
+        "name": "styleLayout",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 - filled style",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 - filled style+icon",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 - filled style+icon(Size-Small)",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 - outline style",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 - outline style+icon",
+            "value": "5"
+          },
+          {
+            "name": "Variant 6 - outline style+icon(Size-Small)",
+            "value": "6"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "hyperlink style",
+        "name": "linkType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "external link",
+            "value": "external"
+          },
+          {
+            "name": "inner page",
+            "value": "inner"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "external link",
+        "name": "externalLink",
+        "valueType": "string",
+        "placeholder": "https://",
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "external"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "inner page content",
+        "name": "innerPageLink",
+        "placeholder": "/modals/page",
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "inner"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "close btn style",
+        "name": "gBtnStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "default",
+            "value": "default"
+          },
+          {
+            "name": "customized",
+            "value": "customized"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "inner"
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "close btn customized",
+        "name": "gBtnCustomized",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "gBtnStyle"
+            },
+            "customized"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "label Text",
+            "name": "gBtnLabel",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "gBtnFontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "gBtnFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "gBtnFontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "gBtnFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "gBtnFontColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color default",
+            "name": "gBtnContainerBgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color hover",
+            "name": "gBtnContainerBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color active",
+            "name": "gBtnContainerBgColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TL",
+            "name": "gBtnContainerRadiusTL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TR",
+            "name": "gBtnContainerRadiusTR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BR",
+            "name": "gBtnContainerRadiusBR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BL",
+            "name": "gBtnContainerRadiusBL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width",
+            "name": "gBtnBorderWidth",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color",
+            "name": "gBtnBorderColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "icon style",
+        "name": "iconStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "SVG",
+            "value": "svg"
+          },
+          {
+            "name": "PNG",
+            "value": "png"
+          }
+        ],
+        "condition": {
+          "in": [
+            {
+              "var": "styleLayout"
+            },
+            [
+              "2",
+              "3",
+              "5",
+              "6"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon color",
+        "name": "iconColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color default",
+        "name": "iconBgColorDefault",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color hover",
+        "name": "iconBgColorHover",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color active",
+        "name": "iconBgColorActive",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "default asset",
+        "name": "iconAssetDefault",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "hover asset",
+        "name": "iconAssetHover",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "active asset",
+        "name": "iconAssetActive",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyle"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "label",
+        "name": "labelTab"
+      },
+      {
+        "component": "text",
+        "label": "label text",
+        "name": "label",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "label advanced",
+        "name": "labelAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "label font (D/T)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "label font (M)",
+            "name": "fontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "fontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "fontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "fontColorActive",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "container",
+        "name": "containerTab"
+      },
+      {
+        "component": "text",
+        "label": "bg-color default",
+        "name": "containerBgColorDefault",
+        "valueType": "string",
+        "description": "Accepts only hex values, e.g., 00ffee (without #)"
+      },
+      {
+        "component": "text",
+        "label": "bg-color hover",
+        "name": "containerBgColorHover",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bg-color active",
+        "name": "containerBgColorActive",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius TL",
+        "name": "containerRadiusTL",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius TR",
+        "name": "containerRadiusTR",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius BR",
+        "name": "containerRadiusBR",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius BL",
+        "name": "containerRadiusBL",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "container advanced",
+        "name": "containerAdvanced",
+        "collapsible": true,
+        "condition": {
+          "in": [
+            {
+              "var": "styleLayout"
+            },
+            [
+              "3",
+              "4",
+              "6"
+            ]
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "border-width",
+            "name": "borderWidth",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color",
+            "name": "borderColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--line-info",
+        "hidden": true
+      }
+    ]
+  },
+  {
     "id": "media-block",
     "fields": [
       {

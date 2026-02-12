@@ -1,0 +1,130 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "style",
+      "name": "styleTab"
+    },
+    {
+      "component": "select",
+      "label": "layout group",
+      "name": "styleLayout",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Variant 1 - filled style",
+          "value": "1"
+        },
+        {
+          "name": "Variant 2 - filled style+icon",
+          "value": "2"
+        },
+        {
+          "name": "Variant 3 - filled style+icon(Size-Small)",
+          "value": "3"
+        },
+        {
+          "name": "Variant 4 - outline style",
+          "value": "4"
+        },
+        {
+          "name": "Variant 5 - outline style+icon",
+          "value": "5"
+        },
+        {
+          "name": "Variant 6 - outline style+icon(Size-Small)",
+          "value": "6"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "hyperlink style",
+      "name": "linkType",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "external link",
+          "value": "external"
+        },
+        {
+          "name": "inner page",
+          "value": "inner"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "external link",
+      "name": "externalLink",
+      "valueType": "string",
+      "placeholder": "https://",
+      "condition": {
+        "===": [
+          {
+            "var": "linkType"
+          },
+          "external"
+        ]
+      }
+    },
+    {
+      "component": "text",
+      "valueType": "string",
+      "label": "inner page content",
+      "name": "innerPageLink",
+      "placeholder": "/modals/page",
+      "condition": {
+        "===": [
+          {
+            "var": "linkType"
+          },
+          "inner"
+        ]
+      }
+    },
+    {
+      "component": "select",
+      "label": "close btn style",
+      "name": "gBtnStyle",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "default",
+          "value": "default"
+        },
+        {
+          "name": "customized",
+          "value": "customized"
+        }
+      ],
+      "condition": {
+        "===": [
+          {
+            "var": "linkType"
+          },
+          "inner"
+        ]
+      }
+    },
+    {
+      "component": "container",
+      "label": "close btn customized",
+      "name": "gBtnCustomized",
+      "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "gBtnStyle"
+          },
+          "customized"
+        ]
+      },
+      "fields": [
+        {
+          "...": "../../../components/button/_button.json#/fields"
+        }
+      ]
+    }
+  ]
+}
