@@ -1,7 +1,7 @@
 /**
- * 获取桌面比例
- * @param {*} scale 比例参数
- * @returns 返回col1和col2的类名
+ * Get desktop column proportions
+ * @param {*} scale Proportion parameter
+ * @returns Returns class names for col1 and col2
  */
 const handlDColSpan = (scale) => {
   let colClass1 = '';
@@ -136,16 +136,15 @@ const handlDColSpan = (scale) => {
       colClass2 = 'lg:col-[1/13]';
       break;
     default:
-      // 默认情况下不添加特殊类名或添加默认样式
       break;
   }
   return { colClass1, colClass2 };
 };
 
 /**
- * 获取平板比例
- * @param {*} scale 比例参数
- * @returns 返回col1和col2的类名
+ * Get tablet column proportions
+ * @param {*} scale Proportion parameter
+ * @returns Returns class names for col1 and col2
  */
 const handlTColSpan = (scale) => {
   let colClass1 = '';
@@ -232,21 +231,20 @@ const handlTColSpan = (scale) => {
       colClass2 = 'md:col-[1/13]';
       break;
     default:
-      // 默认情况下不添加特殊类名或添加默认样式
       break;
   }
   return { colClass1, colClass2 };
 };
 
 export default function decorate(block) {
-  // console.log('执行container-2cols', block);
+  // Exit early if there are fewer than 2 children
   if (!block.children || block.children.length < 2) return;
   const [col1, col2] = [...block.children];
   col1.classList.add('md:row-1', 'lg:row-1', 'md:order-1', 'md:z-1');
   col2.classList.add('md:row-1', 'lg:row-1', 'md:order-2');
 
   const config = block.dataset;
-  // 默认值
+  // Set default values for layout variations
   const dlayoutvariation = config.dlayoutvariation || '1';
   const tlayoutvariation = config.tlayoutvariation || '1';
   const mlayoutvariation = config.mlayoutvariation || '1';
@@ -262,7 +260,7 @@ export default function decorate(block) {
   config.tcolspan3 = config.tcolspan3 || '8:5';
   config.tcolspan4 = config.tcolspan4 || '100vw:12';
 
-  // 默认类名
+  // Add default width and height classes
   col1.classList.add('w-full', 'h-full');
   col2.classList.add('w-full', 'h-full');
 
@@ -298,7 +296,6 @@ export default function decorate(block) {
         col2.classList.add('col-[1/13]', 'row-1');
         break;
       default:
-        // 默认情况下不添加特殊类名或添加默认样式
         break;
     }
   }

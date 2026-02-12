@@ -4,7 +4,7 @@ import {
   handleDecide,
 } from '../../scripts/utils.js';
 
-// 默认值
+// DEFAULT
 const DEFAULT_CONFIG = {
   desktopAlignment: 'center',
   tabletAlignment: 'center',
@@ -36,7 +36,6 @@ const DEFAULT_CONFIG = {
   ctaHyperlink: '',
 };
 
-// 处理category的外部class
 const handleCategoryClass = (num) => {
   switch (num) {
     case 1:
@@ -56,43 +55,47 @@ const handleCategoryClass = (num) => {
   }
 };
 
-// 将原来的动画逻辑提取为独立函数
+/**
+ * Sets up animation logic for elements with the class `.text-block-animation`.
+ * Observes when these elements enter the viewport and applies animations to their child elements.
+ * @param {HTMLElement} block - The parent block element containing animated elements.
+ */
 const setupAnimation = (block) => {
   const containers = block.querySelectorAll('.text-block-animation');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        let time = 100;
+        let delay = 100;
         const spans = entry.target.querySelectorAll('span');
         spans.forEach((span) => {
-          time += 100;
+          delay += 100;
           setTimeout(() => {
-            if (span && span.style) {
+            if (span?.style) {
               span.style.opacity = 1;
               span.style.transform = 'translateZ(0px) translateY(0px)';
             }
-          }, time);
+          }, delay);
         });
         const imgs = entry.target.querySelectorAll('img');
         imgs.forEach((img) => {
-          time += 100;
+          delay += 100;
           setTimeout(() => {
-            if (img && img.style) {
+            if (img?.style) {
               img.style.opacity = 1;
               img.style.transform = 'translateZ(0px) translateY(0px)';
             }
-          }, time);
+          }, delay);
         });
         const divs = entry.target.querySelectorAll('div');
         divs.forEach((div) => {
-          time += 100;
+          delay += 100;
           setTimeout(() => {
-            if (div && div.style) {
+            if (div?.style) {
               div.style.opacity = 1;
               div.style.transform = 'translateZ(0px) translateY(0px)';
             }
-          }, time);
+          }, delay);
         });
       }
     });
@@ -103,16 +106,20 @@ const setupAnimation = (block) => {
   });
 };
 
-// 执行动画
+/**
+ * Handles the execution of animations based on document readiness.
+ * Ensures animations are triggered only after the document is fully loaded.
+ * @param {HTMLElement} block - The parent block element containing animated elements.
+ */
 const handleMotion = (block) => {
-  // 检查文档是否已经加载完成
+  // Check if the document is still loading
   if (document.readyState === 'loading') {
-    // 如果还在加载中，添加事件监听器
+    // If still loading, wait for the DOMContentLoaded event
     block.addEventListener('DOMContentLoaded', () => {
       setupAnimation(block);
     });
   } else {
-    // 如果已经加载完成，直接执行动画设置
+    // If already loaded, execute the animation setup immediately
     setTimeout(() => {
       setupAnimation(block);
     }, 0);
@@ -166,8 +173,7 @@ export default async function decorate(block) {
     `;
     categoryClass = handleCategoryClass(7);
   } catch (error) {
-    // eslint-disable-next-line no-console
-    // console.error('Error:', error);
+    // console.warn('Error:', error);
   }
 
   const category = `

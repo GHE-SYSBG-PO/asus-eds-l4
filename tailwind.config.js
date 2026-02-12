@@ -1,6 +1,6 @@
 module.exports = {
   theme: {
-    // 核心：修正断点配置（确保单位正确，无语法错误）
+    // Core: Correct breakpoint configuration
     screens: {
       sm: '320px', // Mobile
       md: '730px', // Tablet

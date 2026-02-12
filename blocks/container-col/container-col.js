@@ -2,7 +2,7 @@ import {
   getBlockConfigs, getFieldValue, nestBlockExecuteJs,
 } from '../../scripts/utils.js';
 
-// 默认值
+// DEFAULT
 const DEFAULT_CONFIG = {
   hAlignD: 'lg:items-start',
   hAlignT: 'md:items-start',
@@ -29,13 +29,11 @@ const DEFAULT_CONFIG = {
   clip: 'on',
 };
 export default async function decorate(block) {
-  // console.log('执行container-col', block);
-  // 获取配置
+  // Fetch configuration settings
   const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'container-col');
-  // console.log('config', config);
-  // 简化取值
+  // Simplify value retrieval
   const v = getFieldValue(config);
-  // 嵌套block执行js
+  // Execute nested block JavaScript
   nestBlockExecuteJs(block);
 
   ['hAlignD', 'hAlignT', 'hAlignM', 'vAlignD', 'vAlignT', 'vAlignM'].forEach((item) => {
@@ -43,8 +41,8 @@ export default async function decorate(block) {
       block.classList.add(v(item));
     }
   });
+  // Define margin, width, and max-width configurations
   const data = [
-    // 添加 marginLeft 配置
     {
       key: 'marginLeftD',
       className: 'lg:ml-(--container-col-margin-left-lg)',
@@ -63,7 +61,6 @@ export default async function decorate(block) {
       variableName: '--container-col-margin-left',
       value: v('marginLeftM'),
     },
-    // 添加 marginRight 配置
     {
       key: 'marginRightD',
       className: 'lg:mr-(--container-col-margin-right-lg)',
@@ -82,7 +79,6 @@ export default async function decorate(block) {
       variableName: '--container-col-margin-right',
       value: v('marginRightM'),
     },
-    // 添加 marginTop 配置
     {
       key: 'marginTopD',
       className: 'lg:mt-(--container-col-margin-top-lg)',
@@ -101,7 +97,6 @@ export default async function decorate(block) {
       variableName: '--container-col-margin-top',
       value: v('marginTopM'),
     },
-    // 添加 width 配置
     {
       key: 'widthD',
       className: 'lg:w-(--container-col-width-lg)',
@@ -120,7 +115,6 @@ export default async function decorate(block) {
       variableName: '--container-col-width',
       value: v('widthM'),
     },
-    // 添加 maxWidth 配置
     {
       key: 'maxWidthD',
       className: 'lg:max-w-(--container-col-max-width-lg)',
