@@ -1322,8 +1322,14 @@
       },
       {
         "component": "text",
+        "label": "radius BR",
+        "name": "textBtns",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
         "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--xxxxxxxx",
+        "value": "L4--nested-block--btn",
         "hidden": true
       }
     ]
