@@ -19,6 +19,7 @@
       "fragment",
       "text-block",
       "media-block",
+      "effect-media-reveal",
       "btn",
       "chart-advanced",
       "space"

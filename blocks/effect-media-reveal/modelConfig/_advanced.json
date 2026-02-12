@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "label": "title",
+      "name": "titleAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_title.json#/fields"
+        }
+      ]
+    }
+  ]
+}

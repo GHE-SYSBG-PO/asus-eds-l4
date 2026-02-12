@@ -1,0 +1,21 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "richtext",
+      "label": "title",
+      "name": "titleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "description",
+      "name": "descriptionRichtext",
+      "valueType": "string"
+    }
+  ]
+}
