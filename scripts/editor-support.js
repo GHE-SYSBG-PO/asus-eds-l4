@@ -10,7 +10,6 @@ import {
 } from './aem.js';
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
-import { loadSectionBlockJs } from './utils.js';
 
 async function applyChanges(event) {
   // redecorate default content and blocks on patches (in the properties rail)
@@ -39,7 +38,6 @@ async function applyChanges(event) {
       element.insertAdjacentElement('afterend', newMain);
       decorateMain(newMain);
       decorateRichtext(newMain);
-      await loadSectionBlockJs(newMain);
       await loadSections(newMain);
       element.remove();
       newMain.style.display = null;
@@ -78,7 +76,6 @@ async function applyChanges(event) {
           decorateRichtext(newSection);
           decorateSections(parentElement);
           decorateBlocks(parentElement);
-          await loadSectionBlockJs(parentElement);
           await loadSections(parentElement);
           element.remove();
           newSection.style.display = null;
