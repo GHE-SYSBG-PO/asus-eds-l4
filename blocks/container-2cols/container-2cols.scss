@@ -1,4 +1,6 @@
-.l4-pdp > .container-2cols > div {
-  max-width: none;
-  padding: 0;
+.l4-pdp {
+  .container-2cols > div {
+    max-width: none;
+    padding: 0;
+  }
 }
