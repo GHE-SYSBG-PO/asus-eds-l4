@@ -43,7 +43,7 @@ const DEFAULT_CONFIG = {
 };
 
 /**
- * 生成对象定位样式
+ * Generate object position style
  */
 const getObjectPositionStyle = (objectPosition) => {
   const positionMap = {
@@ -57,7 +57,7 @@ const getObjectPositionStyle = (objectPosition) => {
 };
 
 /**
- * 生成视频控制按钮位置样式
+ * Generate video control button position style
  */
 const getButtonPositionClass = (position) => {
   const positionMap = {
@@ -70,7 +70,7 @@ const getButtonPositionClass = (position) => {
 };
 
 /**
- * 获取当前device
+ * Get current device
  */
 const getDevice = () => {
   const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
@@ -78,11 +78,11 @@ const getDevice = () => {
   return isTablet ? 'T' : (isDesktop ? 'D' : 'M');
 };
 /**
- * 构建尺寸样式对象
+ * Build size style object
  */
 const getSizeStyles = (config) => {
   const styles = {};
-  // 宽度处理
+  // Width handling
   if (config.widthUnit === 'px' && config.widthValue) {
     styles.width = `${config.widthValue}px`;
   } else if (config.widthUnit === '%' && config.widthValue) {
@@ -91,7 +91,7 @@ const getSizeStyles = (config) => {
     styles.width = 'auto';
   }
 
-  // 高度处理
+  // Height handling
   if (config.heightUnit === 'px' && config.heightValue) {
     styles.height = `${config.heightValue}px`;
   } else if (config.heightUnit === '%' && config.heightValue) {
@@ -100,7 +100,7 @@ const getSizeStyles = (config) => {
     styles.height = 'auto';
   }
 
-  // 宽高比处理
+  // Aspect ratio handling
   const ratio = config.ratioValueCustomized || config.ratio;
   if (ratio && ratio !== 'customized' && ratio !== '') {
     styles.aspectRatio = ratio.replace(':', '/');
@@ -110,7 +110,7 @@ const getSizeStyles = (config) => {
 };
 
 /**
- * 构建最大/最小宽度样式对象
+ * Build max/min width style object
  */
 const getMinMaxWidthStyles = (config) => {
   const styles = {};
@@ -127,32 +127,32 @@ const getMinMaxWidthStyles = (config) => {
 };
 
 /**
- * 构建圆角样式
+ * Build border-radius style
  */
 const getRadiusStyle = (radius) => {
   if (!radius) return '';
 
-  // 如果是数字，直接返回带px的样式
+  // If it is a number, return style with px directly
   if (typeof radius === 'number') {
     return `${radius}px`;
   }
 
-  // 如果是字符串且只包含数字，也是数字类型
+  // If it is a string and only contains numbers, it is also a number type
   const numRadius = parseFloat(radius);
   if (!Number.isNaN(numRadius)) {
-    // 检查是否已经包含单位
+    // Check if unit is already included
     if (radius.includes('px') || radius.includes('%') || radius.includes('rem') || radius.includes('em')) {
       return radius;
     }
     return `${radius}px`;
   }
 
-  // 如果是非数字字符串，直接返回
+  // If it is a non-numeric string, return directly
   return radius;
 };
 
 /**
- * 获取当前设备的配置
+ * Get configuration for the current device
  */
 const getDeviceConfig = (device, v) => {
   if (device === 'D') {
@@ -198,11 +198,11 @@ const getDeviceConfig = (device, v) => {
 };
 
 /**
- * 将样式对象转换为行内样式字符串
+ * Convert style object to inline style string
  */
 const stylesToInline = (styles) => Object.entries(styles)
   .map(([key, value]) => {
-    // 将 camelCase 转换为 kebab-case
+    // Convert camelCase to kebab-case
     const kebabKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
     return `${kebabKey}: ${value}`;
   })
@@ -213,7 +213,7 @@ export default async function decorate(block) {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'media-block');
     const v = getFieldValue(config);
 
-    // 获取基础配置
+    // Get basic configuration
     const mediaType = v('mediaType', 'text') || 'image';
     const radius = v('radius', 'text') || '0px';
     const imageAlt = v('imageAlt', 'text') || '';
@@ -222,21 +222,21 @@ export default async function decorate(block) {
     const pauseAndPlayBtn = v('pauseAndPlayBtn', 'text') === 'true';
     const pausePlayBtnColor = v('pausePlayBtnColor', 'text') || '#ffffff';
     const pausePlayBtnPosition = getButtonPositionClass(v('pausePlayBtnPosition', 'text'));
-    // 获取各设备配置
+    // Get configurations for each device
     const configD = getDeviceConfig('D', v);
     const configT = getDeviceConfig('T', v);
     const configM = getDeviceConfig('M', v);
 
-    // 构建对象定位样式
+    // Build object position styles
     const objectPositionD = getObjectPositionStyle(configD.objectPosition);
     const objectPositionT = getObjectPositionStyle(configT.objectPosition);
     const objectPositionM = getObjectPositionStyle(configM.objectPosition);
 
-    // 构建圆角样式
+    // Build border-radius style
     const radiusStyle = getRadiusStyle(radius);
     const containerRadiusStyle = radiusStyle ? `border-radius: ${radiusStyle};` : '';
 
-    // 构建各设备的样式对象
+    // Build style objects for each device
     const stylesM = {
       ...getSizeStyles(configM),
       ...getMinMaxWidthStyles(configM),
@@ -250,12 +250,12 @@ export default async function decorate(block) {
       ...getMinMaxWidthStyles(configD),
     };
 
-    // 创建图片元素
+    // Create image element
     const createImageElement = (device, configObj, styles, objectPosition) => {
       const { assets } = configObj;
       if (!assets) return '';
 
-      // 构建基础样式
+      // Build base style
       const baseStyle = `position: relative; overflow-hidden; ${containerRadiusStyle} ${stylesToInline(styles)}`;
 
       let dClass = 'hidden lg:block';
@@ -277,16 +277,16 @@ export default async function decorate(block) {
       `;
     };
 
-    // 创建视频元素
+    // Create video element
     const createVideoElement = (defaultConfig, defaultStyles, defaultObjectPosition) => {
       const { assets: defaultAssets } = defaultConfig;
       if (!defaultAssets) return '';
 
-      // 确定初始按钮显示状态
+      // Determine initial button display state
       const initialPlayBtnDisplay = videoAutoPlay ? 'none' : 'flex';
       const initialPauseBtnDisplay = videoAutoPlay ? 'flex' : 'none';
 
-      // 构建控制按钮
+      // Build control buttons
       let controlButtons = '';
       controlButtons = `
           <div class="media-block-controls absolute ${pausePlayBtnPosition} z-10">
@@ -350,16 +350,16 @@ export default async function decorate(block) {
       `;
     };
 
-    // 根据媒体类型渲染内容
+    // Render content based on media type
     let mediaContent = '';
 
     if (mediaType === 'image') {
-      // 图片：为每个设备创建独立的图片元素
+      // Image: create independent image elements for each device
       mediaContent += createImageElement('M', configM, stylesM, objectPositionM);
       mediaContent += createImageElement('T', configT, stylesT, objectPositionT);
       mediaContent += createImageElement('D', configD, stylesD, objectPositionD);
     } else if (mediaType === 'video') {
-      // 视频：创建单个视频元素，通过 JS 动态切换源
+      // Video: create a single video element, switch source dynamically via JS
       const device = getDevice();
       if (device === 'D') {
         mediaContent = createVideoElement(configD, stylesD, objectPositionD);
@@ -370,7 +370,7 @@ export default async function decorate(block) {
       }
     }
 
-    // 构建最终的 HTML
+    // Build final HTML
     block.innerHTML = `
       <div class="media-block-container relative">
         ${mediaContent}
@@ -402,7 +402,7 @@ export default async function decorate(block) {
       }
     }
 
-    // 添加视频控制逻辑和响应式源切换
+    // Add video control logic and responsive source switching
     if (mediaType === 'video') {
       setTimeout(() => {
         const videoElement = block.querySelector('video');
@@ -413,7 +413,7 @@ export default async function decorate(block) {
         const existingControlsDiv = container.querySelector('.media-block-controls');
         if (!videoElement || !container) return;
 
-        // 禁用原生 controls
+        // Disable native controls
         videoElement.removeAttribute('controls');
         videoElement.controls = false;
 
@@ -422,7 +422,7 @@ export default async function decorate(block) {
         const controlsDiv = container.querySelector('.media-block-controls');
         const replayBtnElement = container.querySelector('.media-block-replay-btn');
 
-        // 按钮事件绑定
+        // Button event binding
         const bindButtonEvents = (playBtnEl, pauseBtnEl) => {
           if (playBtnEl) {
             playBtnEl.addEventListener('click', (e) => {
@@ -441,12 +441,12 @@ export default async function decorate(block) {
           }
         };
 
-        // 如果初始按钮存在，直接绑定事件
+        // If initial buttons exist, bind events directly
         if (playBtn && pauseBtn) {
           bindButtonEvents(playBtn, pauseBtn);
         }
 
-        // 播放/暂停事件监听器（统一控制按钮显示/隐藏）
+        // Play/pause event listeners (unified control for button show/hide)
         const handlePlay = () => {
           const currentPlayBtn = container.querySelector('.media-block-play-btn');
           const currentPauseBtn = container.querySelector('.media-block-pause-btn');
@@ -466,11 +466,11 @@ export default async function decorate(block) {
           if (currentPauseBtn) currentPauseBtn.style.display = 'none';
         };
 
-        // 绑定视频事件监听器
+        // Bind video event listeners
         videoElement.addEventListener('play', handlePlay);
         videoElement.addEventListener('pause', handlePause);
 
-        // 重播按钮事件绑定
+        // Replay button event binding
         if (replayBtnElement) {
           replayBtnElement.addEventListener('click', (e) => {
             e.preventDefault();
@@ -480,7 +480,7 @@ export default async function decorate(block) {
           });
         }
 
-        // 响应式视频源切换函数
+        // Responsive video source switching function
         const updateVideoSource = () => {
           const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
           const isDesktop = window.innerWidth >= 1024;
@@ -510,20 +510,20 @@ export default async function decorate(block) {
             newStyles = stylesM;
           }
 
-          // 切换视频源
+          // Switch video source
           if (newSrc && newSrc !== videoElement.src) {
             const { currentTime } = videoElement;
             const wasPlaying = !videoElement.paused;
 
             videoElement.src = newSrc;
 
-            // 恢复播放状态
+            // Restore playback state
             if (currentTime > 0) {
               videoElement.currentTime = currentTime;
               if (wasPlaying) {
                 videoElement.play().catch((err) => {
                   // eslint-disable-next-line no-console
-                  console.warn('视频播放失败:', err);
+                  console.warn('Video playback failed:', err);
                 });
               }
             }
@@ -537,7 +537,7 @@ export default async function decorate(block) {
             videoElement.style.objectPosition = newObjectPosition;
           }
 
-          // 更新容器尺寸样式
+          // Update container size styles
           const containerStyleStr = containerRadiusStyle + stylesToInline(newStyles);
           container.style.cssText = containerStyleStr;
 
@@ -555,37 +555,37 @@ export default async function decorate(block) {
           }
         };
 
-        // 监听窗口大小变化
+        // Listen for window resize
         let resizeTimer;
         window.addEventListener('resize', () => {
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(updateVideoSource, 200);
         });
 
-        // 需求：
-        // 1. 当 pauseAndPlayBtn 配置为 true 时：所有视频都显示播放/暂停按钮
-        // 2. 当 pauseAndPlayBtn 配置为 false 时：只有视频超过5秒时，才强制显示按钮
+        // Requirements:
+        // 1. When pauseAndPlayBtn is configured as true: all videos show play/pause buttons
+        // 2. When pauseAndPlayBtn is configured as false: only videos longer than 5 seconds force display of buttons
 
-        // 只有当配置为 'false' 且视频超过5秒时，才需要动态添加按钮
+        // Only when configured as 'false' and video is longer than 5 seconds, dynamically add buttons
         const needToAddButtonsDynamically = pauseAndPlayBtn === false;
 
-        // 初始化pauseAndPlayBtn为false时，动态添加/隐藏按钮
+        // When pauseAndPlayBtn is false initially, dynamically add/hide buttons
         const addButtonsIfNeeded = () => {
           if (!needToAddButtonsDynamically) return;
 
           const { duration } = videoElement;
 
           if (duration > 5) {
-            // 视频超过5秒，需要显示按钮
+            // Video is longer than 5 seconds, need to show buttons
             existingControlsDiv.style.display = 'flex';
 
-            // 重置按钮状态：显示播放按钮，隐藏暂停按钮
+            // Reset button state: show play button, hide pause button
             const currentPlayBtn = existingControlsDiv.querySelector('.media-block-play-btn');
             const currentPauseBtn = existingControlsDiv.querySelector('.media-block-pause-btn');
             if (currentPlayBtn) currentPlayBtn.style.display = 'flex';
             if (currentPauseBtn) currentPauseBtn.style.display = 'none';
           } else {
-            // 视频不超过5秒，不需要显示按钮
+            // Video is not longer than 5 seconds, no need to show buttons
             // eslint-disable-next-line no-lonely-if
             if (existingControlsDiv) {
               existingControlsDiv.style.display = 'none';
@@ -597,7 +597,7 @@ export default async function decorate(block) {
 
         updateVideoSource();
 
-        // 播放结束事件（当 loop === false 时，视频播放结束后显示重播按钮）
+        // Play end event (when loop === false, show replay button after video ends)
         if (replayBtnElement && !loop) {
           videoElement.addEventListener('ended', () => {
             replayBtnElement.style.display = 'flex';

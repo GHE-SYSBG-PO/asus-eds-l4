@@ -30,7 +30,7 @@
       object-fit: cover;
     }
 
-    /* 媒体对象定位 */
+    /* Media Object Positioning */
     .object-position-left {
       object-position: left center;
     }
@@ -43,7 +43,7 @@
       object-position: center center;
     }
 
-    /* 加载状态 */
+    /* Loading State */
     &.loading {
       background-color: #e0e0e0;
       min-height: 200px;
@@ -62,7 +62,7 @@
       }
     }
 
-    /* error */
+    /* Error State */
     &.error {
       background-color: #ffebee;
       display: flex;
@@ -77,7 +77,7 @@
       }
     }
 
-    /* 视频控制按钮 */
+    /* Video Control Buttons */
     .media-block-controls {
       display: flex;
       gap: 8px;
@@ -90,7 +90,7 @@
       }
     }
 
-    /* 旋转动画关键帧 */
+    /* Rotation Animation Keyframes */
     @keyframes spin {
       0% {
         transform: translate(-50%, -50%) rotate(0deg);

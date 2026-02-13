@@ -1,12 +1,12 @@
 /**
  * Button Component Styles - 6 Style Variants
- * 基于 Figma 设计规范
- * 支持通过 CSS 变量自定义背景色和字体颜色
- * 默认颜色变量
+ * Based on Figma design specifications
+ * Supports custom background and font colors via CSS custom properties
+ * Default color variables
  */
 
 /* ========================================
- * Theme基础变量区 product/mode
+ * Theme Base Variables (product/mode)
  * ======================================== */
 .l4-pdp {
   &[data-product="asus"] {
@@ -125,7 +125,7 @@
  * Mixins
  * ======================================== */
 
-  // Filled 样式的 hover/active 逻辑
+  // Hover/active logic for Filled style
   @mixin btn-filled-state {
     &:hover {
       background-image: var(--btn-bg-hover-image);
@@ -140,7 +140,7 @@
     }
   }
 
-  // Outlined 样式的 hover/active 逻辑（包含 ::before 和 .btn-label 的隐藏）
+  // Hover/active logic for Outlined style (includes ::before and .btn-label hiding)
   @mixin btn-outlined-state($height) {
     &::before {
       content: "";
@@ -202,7 +202,7 @@
     }
   }
 
-  // PNG 图标切换逻辑
+  // PNG icon switching logic
   @mixin png-icon-state($state: "hover") {
     .btn-icon-wrapper.btn-icon-png {
       .btn-icon-default {
@@ -230,10 +230,10 @@
   }
 
   /* ========================================
- * 应用theme变量区
+ * Apply theme variables area
  * ======================================== */
   .btn-component {
-    /* Filled 样式 (1, 2, 3) */
+    /* Filled style (1, 2, 3) */
     &[data-filled="true"] {
       --btn-bg-default-image: linear-gradient(
         270deg,
@@ -260,7 +260,7 @@
       --icon-color-end: var(--bg-d-end);
     }
 
-    /* Outlined 样式 (4, 5, 6) */
+    /* Outlined style (4, 5, 6)  */
     &[data-filled="false"] {
       --btn-bg-default-image: none;
       --btn-bg-default: transparent;
@@ -293,7 +293,7 @@
       --icon-color-end: #fff;
     }
 
-    /* style=2 和 style=3 */
+    /* style=2 and style=3 */
     &[data-style="2"],
     &[data-style="3"] {
       .btn-icon-wrapper {
@@ -321,7 +321,7 @@
       }
     }
 
-    /* style=5 和 style=6 */
+    /* style=5 and style=6 */
     &[data-style="5"],
     &[data-style="6"] {
       .btn-icon-wrapper {
@@ -357,7 +357,7 @@
    * Style
    * ======================================== */
 
-    /* 基础按钮样式 */
+    /* Base button style */
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -424,7 +424,7 @@
       }
     }
 
-    /* 不同样式的图标容器尺寸 */
+    /* Icon container sizes for different styles */
     &[data-style="2"],
     &[data-style="5"] {
       .btn-icon-wrapper {
@@ -441,7 +441,7 @@
       }
     }
 
-    /* 不同样式的 SVG 图标尺寸 */
+    /* SVG icon sizes for different styles */
     &[data-style="2"],
     &[data-style="5"] {
       .btn-icon-wrapper svg.btn-icon-svg {
@@ -458,20 +458,20 @@
       }
     }
 
-    /* SVG 图标基础样式 */
+    /* Base SVG icon style */
     .btn-icon-wrapper svg.btn-icon-svg {
       display: block;
       transition: fill 0.3s ease;
     }
 
-    /* 图标 SVG 和图片（通用） */
+    /* Icon SVG and images (common) */
     .btn-icon-wrapper svg,
     .btn-icon-wrapper img {
       object-fit: cover;
     }
 
     /* ========================================
-   * 样式 1: Filled (填充型) - 默认
+   * Style 1: Filled - Default
    * height: 44px, radius: 24px
    * ======================================== */
     &[data-style="1"] {
@@ -485,7 +485,7 @@
     }
 
     /* ========================================
-   * 样式 2: Filled + Icon (填充型 + 图标) - 中等尺寸
+   * Style 2: Filled + Icon - Medium size
    * height: 56px, radius: 28px, icon: 36px
    * ======================================== */
     &[data-style="2"] {
@@ -499,7 +499,7 @@
     }
 
     /* ========================================
-   * 样式 3: Filled + Icon (填充型 + 图标) - 小尺寸
+   * Style 3: Filled + Icon - Small size
    * height: 44px, radius: 28px, icon: 24px
    * ======================================== */
     &[data-style="3"] {
@@ -513,7 +513,7 @@
     }
 
     /* ========================================
-   * 样式 4: Outlined (描边型 + 渐变文字) - 默认
+   * Style 4: Outlined (with gradient text) - Default
    * height: 44px, radius: 24px
    * ======================================== */
     &[data-style="4"] {
@@ -527,7 +527,7 @@
     }
 
     /* ========================================
-   * 样式 5: Outlined + Icon (描边型 + 渐变文字) - 中等尺寸
+   * Style 5: Outlined + Icon (with gradient text) - Medium size
    * height: 56px, radius: 28px, icon: 36px
    * ======================================== */
     &[data-style="5"] {
@@ -541,7 +541,7 @@
     }
 
     /* ========================================
-   * 样式 6: Outlined + Icon (描边型 + 渐变文字) - 小尺寸
+   * Style 6: Outlined + Icon (with gradient text) - Small size
    * height: 44px, radius: 28px, icon: 24px
    * ======================================== */
     &[data-style="6"] {
