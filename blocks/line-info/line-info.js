@@ -6,7 +6,7 @@ import { getRadiusStyle, buildCloseButtonHtml, prefixHex } from '../../component
 const DEFAULT_CONFIG = {
   // 基础配置
   styleLayout: '1',
-  label: 'Line Info',
+  label: 'Line Info 測試文字',
   // 容器配置 - 默认为空，由 CSS 控制
   containerBgColorDefault: '',
   containerBgColorDefault2: '',
