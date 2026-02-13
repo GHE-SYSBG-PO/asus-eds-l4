@@ -21,32 +21,15 @@
       "id": "starter-block",
       "fields": [
         {
-          "component": "text",
-          "name": "title",
-          "label": "Title",
-          "valueType": "string"
+          "...": "./modelConfig/_basic.json#/fields"
         },
         {
-          "component": "textarea",
-          "name": "description",
-          "label": "Description",
-          "valueType": "string"
-        },
-        {
-          "component": "select",
-          "name": "styleLayout",
-          "label": "Layout",
-          "valueType": "string",
-          "options": [
-            { "name": "Left", "value": "left" },
-            { "name": "Center", "value": "center" },
-            { "name": "Right", "value": "right" }
-          ]
+          "...": "./modelConfig/_advanced.json#/fields"
         },
         {
           "component": "text",
           "name": "L4TagNestedBlock",
-          "value": "L4--nested-block--starter-block",
+          "value": "L4--nested-block--media-block",
           "hidden": true
         }
       ]
