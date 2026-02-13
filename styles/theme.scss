@@ -1,0 +1,23 @@
+/* styles/theme.css */
+@layer theme {
+  .l4-pdp{
+    --color-primary: rgb(235 241 246 / 100%);
+    --color-mode: #fff;
+
+    &[data-product="proart"] {
+      --color-primary: rgb(183 140 108 / 100%);
+    }
+
+    &[data-product="rog"] {
+      --color-primary: rgb(245 25 40 / 100%);
+    }
+
+    &[data-product="tuf"] {
+      --color-primary: rgb(255 158 27 / 70%);
+    }
+
+    &[data-mode="dark"] {
+      --color-mode: #000;
+    }
+  }
+}

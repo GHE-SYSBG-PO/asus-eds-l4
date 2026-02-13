@@ -50,7 +50,7 @@
         "component": "select",
         "valueType": "string",
         "name": "mode",
-        "label": "Mode",
+        "label": "Color Group",
         "value": "light",
         "options": [
           {
