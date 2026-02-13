@@ -59,7 +59,6 @@ async function applyChanges(event) {
         decorateIcons(newBlock);
         decorateBlock(newBlock);
         decorateRichtext(newBlock);
-        await loadSectionBlockJs(newBlock);
         await loadBlock(newBlock);
         block.remove();
         newBlock.style.display = null;
