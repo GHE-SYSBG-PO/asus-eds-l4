@@ -1,7 +1,6 @@
 import {
   getBlockConfigs,
   getFieldValue,
-  handleDecide,
 } from '../../scripts/utils.js';
 
 // 默认值
@@ -12,11 +11,6 @@ const DEFAULT_CONFIG = {
   titleRichtext: '',
   motion: 'off',
   titleFont: 'tt-md-40',
-};
-
-// 将原来的动画逻辑提取为独立函数
-const setupAnimation = (block) => {
-
 };
 
 export default async function decorate(block) {
