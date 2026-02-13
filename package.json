@@ -19,7 +19,7 @@
     "scss:build": "sass styles:styles blocks:blocks components:components --style=compressed --no-source-map",
     "prepare": "husky",
     "dev": "concurrently -k -n AEM,SASS,TAILWIND -c blue,green,yellow \"npm run aem\" \"npm run scss\" \"npm run tailwind\"",
-    "build": "npm-run-all build:json scss:build tailwind:build"
+    "build": "npm-run-all build:json scss:build tailwind:build lint"
   },
   "repository": {
     "type": "git",

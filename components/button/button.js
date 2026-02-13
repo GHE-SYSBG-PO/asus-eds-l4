@@ -1,10 +1,10 @@
 import { loadCSS } from '../../scripts/aem.js';
 
 /**
- * 构建圆角样式 - 只在有配置时才返回
+ * Build border-radius styles - only return if configured
  */
 export const getRadiusStyle = (tl, tr, br, bl) => {
-  // 如果都没有配置，返回空（使用 CSS 默认值）
+  // If none are configured, return empty (use CSS default)
   if (!tl && !tr && !br && !bl) return '';
   const radiuses = [];
   if (tl) radiuses.push(`${tl}px 0 0 0`);
@@ -28,14 +28,14 @@ export function prefixHex(colors) {
 }
 
 /**
- * 构建关闭按钮 HTML
- * @param {Function} v - 配置获取函数
- * @returns {string} 关闭按钮的 HTML 字符串
+ * Build close button HTML
+ * @param {Function} v - Configuration getter function
+ * @returns {string} HTML string for the close button
  */
 export const buildCloseButtonHtml = (v) => {
   loadCSS(`${window.hlx.codeBasePath}/components/button/button.css`);
   const gBtnStyle = v('gBtnStyle', 'text') || 'default';
-  // 默认关闭按钮
+  // Default close button
   if (gBtnStyle !== 'customized') {
     return `
       <button class="g-button">
@@ -43,14 +43,14 @@ export const buildCloseButtonHtml = (v) => {
       </button>
     `;
   }
-  // 自定义关闭按钮 - 应用完整样式
+  // Custom close button - apply full styles
   const label = v('gBtnLabel', 'text') || 'Close';
   const fontDesktop = v('gBtnFontDesktop', 'text') || 'ro-md-16';
   const fontMobile = v('gBtnFontM', 'text') || 'ro-md-14';
   const fontColorDefault = prefixHex(v('gBtnFontColorDefault', 'text') || '');
   const fontColorHover = prefixHex(v('gBtnFontColorHover', 'text') || '');
   const fontColorActive = prefixHex(v('gBtnFontColorActive', 'text') || '');
-  // 背景颜色（支持渐变）
+  // Background colors (support gradient)
   const bgColorDefaultArr = prefixHex((v('gBtnbgColorDefault', 'text') || '').split(','));
   const bgColorDefault = bgColorDefaultArr[0] || '';
   const bgColorDefault2 = bgColorDefaultArr[1] || '';
@@ -62,50 +62,50 @@ export const buildCloseButtonHtml = (v) => {
   const bgColorActiveArr = prefixHex((v('gBtnbgColorHover', 'text') || '').split(','));
   const bgColorActive = bgColorActiveArr[0] || '';
   const bgColorActive2 = bgColorActiveArr[1] || '';
-  // 圆角设置
+  // Border radius settings
   const radiusTL = v('gBtnContainerRadiusTL', 'text') || '';
   const radiusTR = v('gBtnContainerRadiusTR', 'text') || '';
   const radiusBR = v('gBtnContainerRadiusBR', 'text') || '';
   const radiusBL = v('gBtnContainerRadiusBL', 'text') || '';
-  // 边框设置
+  // Border settings
   const gBtnBorderWidth = v('gBtnBorderWidth', 'text') || '';
   const gBtnBorderColor = prefixHex(v('gBtnBorderColor', 'text') || '');
-  // 构建内联样式
+  // Build inline styles
   let inlineStyle = '';
-  // 默认背景色 CSS 变量
+  // Default background color CSS variables
   if (bgColorDefault) {
     if (bgColorDefault2) {
-      // 渐变 - 两个颜色都配置时
+      // Gradient - when two colors are configured
       inlineStyle += `--btn-bg-default-image: linear-gradient(270deg, ${bgColorDefault} 0%, ${bgColorDefault2} 100%);`;
     } else {
-      // 纯色 - 只配置一个颜色
+      // Solid - only one color configured
       inlineStyle += `--btn-bg-default: ${bgColorDefault};`;
       inlineStyle += '--btn-bg-default-image: none;';
     }
   }
-  // Hover 背景色 CSS 变量
+  // Hover background color CSS variables
   if (bgColorHover) {
     if (bgColorHover2) {
-      // 渐变 - 两个颜色都配置时
+      // Gradient - when two colors are configured
       inlineStyle += `--btn-bg-hover-image: linear-gradient(270deg, ${bgColorHover} 0%, ${bgColorHover2} 100%);`;
     } else {
-      // 纯色 - 只配置一个颜色
+      // Solid - only one color configured
       inlineStyle += `--btn-bg-hover: ${bgColorHover};`;
       inlineStyle += '--btn-bg-hover-image: none;';
     }
   }
-  // Active 背景色 CSS 变量
+  // Active background color CSS variables
   if (bgColorActive) {
     if (bgColorActive2) {
-      // 渐变 - 两个颜色都配置时
+      // Gradient - when two colors are configured
       inlineStyle += `--btn-bg-active-image: linear-gradient(270deg, ${bgColorActive} 0%, ${bgColorActive2} 100%);`;
     } else {
-      // 纯色 - 只配置一个颜色
+      // Solid - only one color configured
       inlineStyle += `--btn-bg-active: ${bgColorActive};`;
       inlineStyle += '--btn-bg-active-image: none;';
     }
   }
-  // 字体颜色 CSS 变量
+  // Font color CSS variables
   if (fontColorDefault) {
     inlineStyle += `--btn-color-default: ${fontColorDefault};`;
   }
@@ -115,21 +115,21 @@ export const buildCloseButtonHtml = (v) => {
   if (fontColorActive) {
     inlineStyle += `--btn-color-active: ${fontColorActive};`;
   }
-  // 圆角自定义
+  // Custom border radius
   // eslint-disable-next-line max-len
   const radiusStyle = getRadiusStyle(radiusTL, radiusTR, radiusBR, radiusBL);
   if (radiusStyle) {
     inlineStyle += radiusStyle;
   }
 
-  // container边框变量
+  // Container border variables
   if (gBtnBorderColor) {
     inlineStyle += `--container-border-color: ${gBtnBorderColor};`;
   }
   if (gBtnBorderWidth) {
     inlineStyle += `--container-border-width: ${gBtnBorderWidth}px;`;
   }
-  // 构建自定义关闭按钮 HTML
+  // Build custom close button HTML
   return `
     <button class="g-button ${fontDesktop} ${fontMobile}" style="${inlineStyle}">
       <span>${label}</span>
