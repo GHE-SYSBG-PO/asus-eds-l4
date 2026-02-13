@@ -32,12 +32,6 @@
         },
         {
           "...": "./modelConfig/_advanced.json#/fields"
-        },
-        {
-          "component": "text",
-          "name": "L4TagNestedBlock",
-          "value": "L4--nested-block--effect-media-reveal",
-          "hidden": true
         }
       ]
     }

@@ -17,12 +17,6 @@
         { "name": "tt-bd-44", "value": "tt-bd-44" },
         { "name": "tt-bd-48", "value": "tt-bd-48" }
       ]
-    },
-    {
-      "component": "text",
-      "label": "font color (hex)",
-      "name": "titleFontColor",
-      "valueType": "string"
     }
   ]
 }

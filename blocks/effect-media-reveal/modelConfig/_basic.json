@@ -10,12 +10,6 @@
       "label": "title",
       "name": "titleRichtext",
       "valueType": "string"
-    },
-    {
-      "component": "richtext",
-      "label": "description",
-      "name": "descriptionRichtext",
-      "valueType": "string"
     }
   ]
 }

@@ -1822,12 +1822,6 @@
         "valueType": "string"
       },
       {
-        "component": "richtext",
-        "label": "description",
-        "name": "descriptionRichtext",
-        "valueType": "string"
-      },
-      {
         "component": "tab",
         "label": "advanced",
         "name": "advanced"
@@ -1885,20 +1879,8 @@
                 "value": "tt-bd-48"
               }
             ]
-          },
-          {
-            "component": "text",
-            "label": "font color (hex)",
-            "name": "titleFontColor",
-            "valueType": "string"
           }
         ]
-      },
-      {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--effect-media-reveal",
-        "hidden": true
       }
     ]
   },
