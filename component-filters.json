@@ -65,5 +65,11 @@
       "media-block",
       "btn"
     ]
+  },
+  {
+    "id": "starter-block",
+    "components": [
+      "starter-block-item"
+    ]
   }
 ]

@@ -1,32 +1,27 @@
-.starter-block {
-    /* 這裡定義 Block 本身的樣式 */
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
+.cards > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  gap: 24px;
 }
 
-.starter-block .starter-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+.cards > ul > li {
+  border: 1px solid #dadada;
+  background-color: var(--background-color);
 }
 
-.starter-block .starter-desc {
-    font-size: 16px;
-    color: #666;
-    line-height: 1.5;
+.cards .cards-card-body {
+  margin: 16px;
 }
 
-/* Layout Variations */
-.starter-block .layout-left {
-    text-align: left;
+.cards .cards-card-image {
+  line-height: 0;
 }
 
-.starter-block .layout-center {
-    text-align: center;
-}
-
-.starter-block .layout-right {
-    text-align: right;
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
