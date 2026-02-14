@@ -49,11 +49,11 @@
           "options": [
             {
               "name": "Light",
-              "value": "sction-light"
+              "value": "section-light"
             },
             {
               "name": "Dark",
-              "value": "sction-dark"
+              "value": "section-dark"
             }
           ]
         }
