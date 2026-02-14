@@ -1,7 +1,6 @@
 /**
- * Tailwind CSS 优先级别
+ * Tailwind Priority Levels
  * @layer theme
- * @layer base
  */
 @import "./theme.css";
 @import "tailwindcss";

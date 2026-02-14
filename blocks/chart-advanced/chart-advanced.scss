@@ -34,7 +34,6 @@
       background-color: var(--chart-advanced-line-bg-color);
     }
 
-    // 响应式版本
     @media (width >= 730px) {
       .chat-column-width {
         width: var(--chart-advanced-chat-column-width);
