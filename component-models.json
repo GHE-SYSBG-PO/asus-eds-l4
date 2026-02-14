@@ -171,13 +171,18 @@
         "description": "The label shown for this section in the Content Tree"
       },
       {
-        "component": "multiselect",
+        "component": "select",
+        "valueType": "string",
         "name": "style",
-        "label": "Style",
+        "label": "Override Color",
         "options": [
           {
-            "name": "Highlight",
-            "value": "highlight"
+            "name": "Light",
+            "value": "sction-light"
+          },
+          {
+            "name": "Dark",
+            "value": "sction-dark"
           }
         ]
       }
