@@ -260,7 +260,6 @@ export default function decorate(block) {
     config.tcolspan2 = config.tcolspan2 || '7:6';
     config.tcolspan3 = config.tcolspan3 || '8:5';
     config.tcolspan4 = config.tcolspan4 || '100vw:12';
-    config.colorGroup = config.colorGroup || '';
 
     // Add default width and height classes
     col1.classList.add('w-full', 'h-full');
@@ -307,6 +306,11 @@ export default function decorate(block) {
       col2.classList.add('col-[1/13]', 'order-1');
     }
     block.classList.add('grid', 'grid-cols-12', config.colorGroup);
+
+    if (config.colorGroup) {
+      block.classList.add(config.colorGroup);
+    }
+
     block.append(col1, col2);
   } catch (error) {
     // eslint-disable-next-line no-console
