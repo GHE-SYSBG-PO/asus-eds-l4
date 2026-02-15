@@ -1,6 +1,22 @@
 {
   "fields": [
     {
+      "component": "select",
+      "valueType": "string",
+      "name": "colorGroup",
+      "label": "Color Group",
+      "options": [
+        {
+          "name": "Light",
+          "value": "section-light"
+        },
+        {
+          "name": "Dark",
+          "value": "section-dark"
+        }
+      ]
+    },
+    {
       "component": "hidden",
       "name": "style",
       "value": "container-2cols"

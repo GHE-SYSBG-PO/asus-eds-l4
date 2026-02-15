@@ -45,7 +45,7 @@
           "component": "select",
           "valueType": "string",
           "name": "style",
-          "label": "Override Color",
+          "label": "Color Group",
           "options": [
             {
               "name": "Light",
