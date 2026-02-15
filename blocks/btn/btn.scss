@@ -10,7 +10,8 @@
  * ======================================== */
 .l4-pdp {
   &[data-product="asus"] {
-    &[data-mode="light"] {
+    &[data-mode="light"],
+    .section-light {
       .btn-component {
         --bg-d-start: #4379b1;
         --bg-d-end: #5977a1;
@@ -23,7 +24,8 @@
       }
     }
 
-    &[data-mode="dark"] {
+    &[data-mode="dark"],
+    .section-dark {
       .btn-component {
         --bg-d-start: #476991;
         --bg-d-end: #5c6f80;
@@ -38,7 +40,8 @@
   }
 
   &[data-product="proart"] {
-    &[data-mode="light"] {
+    &[data-mode="light"],
+    .section-light {
       .btn-component {
         --bg-d-start: #806238;
         --bg-d-end: #87715a;
@@ -51,7 +54,8 @@
       }
     }
 
-    &[data-mode="dark"] {
+    &[data-mode="dark"],
+    .section-dark {
       .btn-component {
         --bg-d-start: #84643e;
         --bg-d-end: #7e6746;
@@ -66,7 +70,8 @@
   }
 
   &[data-product="rog"] {
-    &[data-mode="light"] {
+    &[data-mode="light"],
+    .section-light {
       .btn-component {
         --bg-d-start: #db0004;
         --bg-d-end: #db0004;
@@ -79,7 +84,8 @@
       }
     }
 
-    &[data-mode="dark"] {
+    &[data-mode="dark"],
+    .section-dark {
       .btn-component {
         --bg-d-start: #d1000e;
         --bg-d-end: #d1000e;
@@ -94,7 +100,8 @@
   }
 
   &[data-product="tuf"] {
-    &[data-mode="light"] {
+    &[data-mode="light"],
+    .section-light {
       .btn-component {
         --bg-d-start: #181818;
         --bg-d-end: #181818;
@@ -107,7 +114,8 @@
       }
     }
 
-    &[data-mode="dark"] {
+    &[data-mode="dark"],
+    .section-dark {
       .btn-component {
         --bg-d-start: #ff9e1b;
         --bg-d-end: #ff9e1b;

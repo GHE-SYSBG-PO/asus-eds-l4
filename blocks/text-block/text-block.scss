@@ -1,6 +1,5 @@
 .l4-pdp {
   &[data-product="asus"] {
-    /* ASUS Light Theme */
     &[data-mode="light"],
     .section-light {
       --text-block-category-color: #666;
@@ -12,7 +11,6 @@
       --text-block-cta-end: #004691;
     }
 
-    /* ASUS Dark Theme */
     &[data-mode="dark"],
     .section-dark {
       --text-block-category-color: #999;
@@ -26,7 +24,6 @@
   }
 
   &[data-product="proart"] {
-    /* PROART Light Theme */
     &[data-mode="light"],
     .section-light {
       --text-block-category-color: #666;
@@ -38,7 +35,6 @@
       --text-block-cta-end: #8D684E;
     }
 
-    /* PROART Dark Theme */
     &[data-mode="dark"],
     .section-dark {
       --text-block-category-color: #999;
@@ -52,7 +48,6 @@
   }
 
   &[data-product="rog"] {
-    /* ROG Light Theme */
     &[data-mode="light"],
     .section-light {
       --text-block-category-color: #CC000E;
@@ -64,7 +59,6 @@
       --text-block-cta-end: #CC000E;
     }
 
-    /* ROG Dark Theme */
     &[data-mode="dark"],
     .section-dark {
       --text-block-category-color: #FF0F0F;
@@ -78,7 +72,6 @@
   }
 
   &[data-product="tuf"] {
-    /* TUF Light Theme */
     &[data-mode="light"],
     .section-light {
       --text-block-category-color: #666;
@@ -90,7 +83,6 @@
       --text-block-cta-end: #181818;
     }
 
-    /* TUF Dark Theme */
     &[data-mode="dark"],
     .section-dark {
       --text-block-category-color: #FF9E1B;
@@ -103,7 +95,6 @@
     }
   }
 
-  /* Text Block Component Styles */
   .text-block-category {
     color: var(--text-block-category-color);
   }

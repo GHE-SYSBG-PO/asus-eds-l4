@@ -1,9 +1,11 @@
 .l4-pdp {
-  &[data-mode="light"] {
+  &[data-mode="light"],
+  .section-light {
   --container-col-bg-color: transparent;
   }
 
-  &[data-mode="dark"] {
+  &[data-mode="dark"],
+  .section-dark {
     --container-col-bg-color: transparent;
   }
 

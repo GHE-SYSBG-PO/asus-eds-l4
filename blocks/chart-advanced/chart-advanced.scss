@@ -1,13 +1,13 @@
 .l4-pdp {  
-  /* Light  */
-  &[data-mode="light"] {
+  &[data-mode="light"],
+  .section-light {
     --chart-advanced-title-color: #181818;
     --chart-advanced-info-color: #181818;
     --chart-advanced-line-bg-color: #181818;
   }
 
-  /* Dark */
-  &[data-mode="dark"] {
+  &[data-mode="dark"],
+  .section-dark {
     --chart-advanced-title-color: #fff;
     --chart-advanced-info-color: #fff;
     --chart-advanced-line-bg-color: #F5F5F5;
