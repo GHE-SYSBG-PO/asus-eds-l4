@@ -1,0 +1,55 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "select",
+      "label": "title font",
+      "name": "titleFont",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-bd-24", "value": "tt-bd-24" },
+        { "name": "tt-bd-28", "value": "tt-bd-28" },
+        { "name": "tt-bd-32", "value": "tt-bd-32" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "title font color",
+      "name": "titleFontColor",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "item info font",
+      "name": "infoFont",
+      "valueType": "string",
+      "options": [
+        { "name": "ro-rg-16-sh", "value": "ro-rg-16-sh" },
+        { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh" },
+        { "name": "ro-rg-20-sh", "value": "ro-rg-20-sh" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "item info font color",
+      "name": "infoFontColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "line color",
+      "name": "lineColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "line width",
+      "name": "lineWidth",
+      "valueType": "string"
+    }
+  ]
+}

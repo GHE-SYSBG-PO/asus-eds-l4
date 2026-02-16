@@ -1,0 +1,265 @@
+{
+  "definitions": [
+    {
+      "title": "Container Col",
+      "id": "container-col",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Container Col",
+              "model": "container-col",
+              "filter": "container-col"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "container-col",
+      "fields": [
+        {
+          "component": "container",
+          "label": "horizontal alignment",
+          "name": "hAlign",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "select",
+              "label": "desktop",
+              "name": "hAlignD",
+              "valueType": "string",
+              "options": [
+                { "name": "left", "value": "lg:items-start" },
+                { "name": "right", "value": "lg:items-end" },
+                { "name": "center", "value": "lg:items-center" }
+              ]
+            },
+            {
+              "component": "select",
+              "label": "tablet",
+              "name": "hAlignT",
+              "valueType": "string",
+              "options": [
+                { "name": "left", "value": "md:items-start" },
+                { "name": "right", "value": "md:items-end" },
+                { "name": "center", "value": "md:items-center" }
+              ]
+            },
+            {
+              "component": "select",
+              "label": "mobile",
+              "name": "hAlignM",
+              "valueType": "string",
+              "options": [
+                { "name": "left", "value": "items-start" },
+                { "name": "right", "value": "items-end" },
+                { "name": "center", "value": "items-center" }
+              ]
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "label": "vertical alignment",
+          "name": "vAlign",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "select",
+              "label": "desktop",
+              "name": "vAlignD",
+              "valueType": "string",
+              "options": [
+                { "name": "top", "value": "lg:justify-start" },
+                { "name": "bottom", "value": "lg:justify-end" },
+                { "name": "center", "value": "lg:justify-center" }
+              ]
+            },
+            {
+              "component": "select",
+              "label": "tablet",
+              "name": "vAlignT",
+              "valueType": "string",
+              "options": [
+                { "name": "top", "value": "md:justify-start" },
+                { "name": "bottom", "value": "md:justify-end" },
+                { "name": "center", "value": "md:justify-center" }
+              ]
+            },
+            {
+              "component": "select",
+              "label": "mobile",
+              "name": "vAlignM",
+              "valueType": "string",
+              "options": [
+                { "name": "top", "value": "justify-start" },
+                { "name": "bottom", "value": "justify-end" },
+                { "name": "center", "value": "justify-center" }
+              ]
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "label": "margin left",
+          "name": "marginLeft",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "label": "desktop",
+              "name": "marginLeftD",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "tablet",
+              "name": "marginLeftT",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "mobile",
+              "name": "marginLeftM",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "label": "margin right",
+          "name": "marginRight",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "label": "desktop",
+              "name": "marginRightD",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "tablet",
+              "name": "marginRightT",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "mobile",
+              "name": "marginRightM",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "label": "margin top",
+          "name": "marginTop",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "label": "desktop",
+              "name": "marginTopD",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "tablet",
+              "name": "marginTopT",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "mobile",
+              "name": "marginTopM",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "label": "width fixed",
+          "name": "width",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "label": "desktop",
+              "name": "widthD",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "tablet",
+              "name": "widthT",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "mobile",
+              "name": "widthM",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "bg color",
+          "name": "backgroundColor",
+          "valueType": "string"
+        },
+        {
+          "component": "container",
+          "label": "max width (px)",
+          "name": "maxWidth",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "label": "desktop",
+              "name": "maxWidthD",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "tablet",
+              "name": "maxWidthT",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "mobile",
+              "name": "maxWidthM",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "clip",
+          "name": "clip",
+          "valueType": "string",
+          "options": [
+            { "name": "on", "value": "on" },
+            { "name": "off", "value": "off" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "container-col",
+      "components": [
+        "text-block",
+        "media-block",
+        "btn"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "fields": [
+    {
+      "component": "text",
+      "label": "font color (hex)",
+      "name": "disclaimerFontColor",
+      "valueType": "string"
+    }
+  ]
+}

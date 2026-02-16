@@ -2,7 +2,8 @@
   {
     "id": "main",
     "components": [
-      "section"
+      "section",
+      "container-2cols"
     ]
   },
   {
@@ -15,13 +16,30 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "text-block",
+      "media-block",
+      "btn",
+      "chart-advanced",
+      "space"
+    ]
+  },
+  {
+    "id": "container-2cols",
+    "components": [
+      "container-col"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "chart-advanced",
+    "components": [
+      "chart-advanced-item"
     ]
   },
   {
@@ -37,6 +55,14 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "container-col",
+    "components": [
+      "text-block",
+      "media-block",
+      "btn"
     ]
   }
 ]

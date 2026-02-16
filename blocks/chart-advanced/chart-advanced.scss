@@ -1,0 +1,43 @@
+.l4-pdp {  
+  &[data-mode="light"],
+  .section-light {
+    --chart-advanced-title-color: #181818;
+    --chart-advanced-info-color: #181818;
+    --chart-advanced-line-bg-color: #181818;
+  }
+
+  &[data-mode="dark"],
+  .section-dark {
+    --chart-advanced-title-color: #fff;
+    --chart-advanced-info-color: #fff;
+    --chart-advanced-line-bg-color: #F5F5F5;
+  }
+
+  --chart-advanced-chat-column-width: 100%;
+
+  .chart-advanced {
+    .chart-advanced-title {
+      color: var(--chart-advanced-title-color);
+    }
+
+    .chart-advanced-info {
+      color: var(--chart-advanced-info-color);
+    }
+
+    .title {
+      &>h4 {
+        margin: 0;
+      }
+    }
+
+    .line-bg {
+      background-color: var(--chart-advanced-line-bg-color);
+    }
+
+    @media (width >= 730px) {
+      .chat-column-width {
+        width: var(--chart-advanced-chat-column-width);
+      }
+    }
+  }
+}

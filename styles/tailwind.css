@@ -1,0 +1,9 @@
+/**
+ * Tailwind Priority Levels
+ * @layer theme
+ */
+@import "./theme.css";
+@import "./base.css";
+@import "tailwindcss";
+
+@config "../tailwind.config.js";

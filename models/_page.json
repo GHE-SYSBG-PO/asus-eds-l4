@@ -21,6 +21,48 @@
           "name": "keywords",
           "multi": true,
           "label": "Keywords"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "productLine",
+          "label": "Product Line",
+          "value": "asus",
+          "options": [
+            {
+              "name": "ASUS",
+              "value": "asus"
+            },
+            {
+              "name": "Proart",
+              "value": "proart"
+            },
+            {
+              "name": "ROG",
+              "value": "rog"
+            },
+            {
+              "name": "TUF",
+              "value": "tuf"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "mode",
+          "label": "Color Group",
+          "value": "light",
+          "options": [
+            {
+              "name": "Light",
+              "value": "light"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
+            }
+          ]
         }
       ]
     }

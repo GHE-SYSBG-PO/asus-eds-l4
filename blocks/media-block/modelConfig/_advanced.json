@@ -1,0 +1,75 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "label": "media width(D)",
+      "name": "mediaWidthD",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "max",
+          "name": "maxD",
+          "valueType": "string",
+          "placeholder": "px, %, or vw"
+        },
+        {
+          "component": "text",
+          "label": "min",
+          "name": "minD",
+          "valueType": "string",
+          "placeholder": "px, %, or vw"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "media width(T)",
+      "name": "mediaWidthT",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "max",
+          "name": "maxT",
+          "valueType": "string",
+          "placeholder": "px, %, or vw"
+        },
+        {
+          "component": "text",
+          "label": "min",
+          "name": "minT",
+          "valueType": "string",
+          "placeholder": "px, %, or vw"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "media width(M)",
+      "name": "mediaWidthM",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "max",
+          "name": "maxM",
+          "valueType": "string",
+          "placeholder": "px, %, or vw"
+        },
+        {
+          "component": "text",
+          "label": "min",
+          "name": "minM",
+          "valueType": "string",
+          "placeholder": "px, %, or vw"
+        }
+      ]
+    }
+  ]
+}

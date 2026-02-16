@@ -8,6 +8,10 @@ const run = (cmd) => new Promise((resolve, reject) => exec(
   }
 ));
 
+//check lint
+const lintOutput = await run('npm run lint');
+console.log(lintOutput);
+
 const changeset = await run('git diff --cached --name-only --diff-filter=ACMR');
 const modifiedFiles = changeset.split('\n').filter(Boolean);
 
@@ -18,3 +22,4 @@ if (modifledPartials.length > 0) {
   console.log(output);
   await run('git add component-models.json component-definition.json component-filters.json');
 }
+

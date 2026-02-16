@@ -13,6 +13,22 @@
           }
         }
       }
+    },
+    {
+      "title": "Container 2Cols(ID:12)",
+      "id": "container-2cols",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Container 2Cols",
+              "model": "container-2cols",
+              "filter": "container-2cols"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -26,15 +42,28 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "component": "multiselect",
+          "component": "select",
+          "valueType": "string",
           "name": "style",
-          "label": "Style",
+          "label": "Color Group",
           "options": [
             {
-              "name": "Highlight",
-              "value": "highlight"
+              "name": "Light",
+              "value": "section-light"
+            },
+            {
+              "name": "Dark",
+              "value": "section-dark"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "container-2cols",
+      "fields": [
+        {
+          "...": "./_container-2cols.json#/fields"
         }
       ]
     }
@@ -50,7 +79,18 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "text-block",
+        "media-block",
+        "btn",
+        "chart-advanced",
+        "space"
+      ]
+    },
+    {
+      "id": "container-2cols",
+      "components": [
+        "container-col"
       ]
     }
   ]
