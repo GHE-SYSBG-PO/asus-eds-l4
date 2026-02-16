@@ -1,0 +1,30 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "font (D/T)",
+      "name": "bodyFontDT",
+      "valueType": "string",
+      "options": [
+        { "name": "ro-rg-20", "value": "ro-rg-20-md" },
+        { "name": "ro-rg-24", "value": "ro-rg-24-md" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (M)",
+      "name": "bodyFontM",
+      "valueType": "string",
+      "options": [
+        { "name": "ro-rg-18", "value": "ro-rg-18" },
+        { "name": "ro-rg-20", "value": "ro-rg-20" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "font Color",
+      "name": "bodyFontColor",
+      "valueType": "string"
+    }
+  ]
+}
