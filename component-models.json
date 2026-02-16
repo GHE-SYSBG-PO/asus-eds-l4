@@ -2433,67 +2433,7 @@
     ]
   },
   {
-    "id": "space",
-    "fields": [
-      {
-        "component": "select",
-        "label": "Variant",
-        "name": "variant",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Variant 1 (Sec to Sec - Single BG)",
-            "value": "1"
-          },
-          {
-            "name": "Variant 2 (Sec to Sec - Two Colors)",
-            "value": "2"
-          },
-          {
-            "name": "Variant 3 (Section Top)",
-            "value": "3"
-          },
-          {
-            "name": "Variant 4 (Section Bottom)",
-            "value": "4"
-          },
-          {
-            "name": "Variant 5 (Text to Image/Object)",
-            "value": "5"
-          },
-          {
-            "name": "Variant 6 (Text to HL)",
-            "value": "6"
-          },
-          {
-            "name": "Variant 7 (Custom)",
-            "value": "7"
-          }
-        ],
-        "default": "1"
-      },
-      {
-        "component": "text",
-        "label": "Custom Value (px)",
-        "name": "customValue",
-        "valueType": "number",
-        "visible": "this.variant === '7'",
-        "validation": {
-          "min": 2,
-          "max": 120
-        },
-        "hint": "Enter a value between 2 and 120"
-      },
-      {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--space",
-        "hidden": true
-      }
-    ]
-  },
-  {
-    "id": "text-block",
+    "id": "small-card",
     "fields": [
       {
         "component": "tab",
@@ -3182,7 +3122,67 @@
     ]
   },
   {
-    "id": "small-card",
+    "id": "space",
+    "fields": [
+      {
+        "component": "select",
+        "label": "Variant",
+        "name": "variant",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 (Sec to Sec - Single BG)",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 (Sec to Sec - Two Colors)",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 (Section Top)",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 (Section Bottom)",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 (Text to Image/Object)",
+            "value": "5"
+          },
+          {
+            "name": "Variant 6 (Text to HL)",
+            "value": "6"
+          },
+          {
+            "name": "Variant 7 (Custom)",
+            "value": "7"
+          }
+        ],
+        "default": "1"
+      },
+      {
+        "component": "text",
+        "label": "Custom Value (px)",
+        "name": "customValue",
+        "valueType": "number",
+        "visible": "this.variant === '7'",
+        "validation": {
+          "min": 2,
+          "max": 120
+        },
+        "hint": "Enter a value between 2 and 120"
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--space",
+        "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "text-block",
     "fields": [
       {
         "component": "tab",
