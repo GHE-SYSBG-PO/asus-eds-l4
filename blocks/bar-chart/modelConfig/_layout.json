@@ -1,0 +1,59 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "layout",
+      "name": "layout"
+    },
+    {
+      "component": "select",
+      "label": "Layout Variant",
+      "name": "style",
+      "valueType": "string",
+      "options": [
+        { "name": "Variant 1 - Small bar num, text next to bar", "value": "1" },
+        { "name": "Variant 2 - Small bar num, text next to bar, with arrow", "value": "2" },
+        { "name": "Variant 3 - Small bar num, text on top of bar", "value": "3" },
+        { "name": "Variant 4 - Small bar num, text on top of bar, with arrow", "value": "4" },
+        { "name": "Variant 5 - Large bar num (default)", "value": "5" },
+        { "name": "Variant 6 - Large bar num, with arrow", "value": "6" }
+      ]
+    },
+    {
+      "component": "number",
+      "label": "Item Text Width (%)",
+      "name": "itemTextWidth",
+      "valueType": "number",
+      "condition": {
+        "in": [{ "var": "style" }, ["1", "2"]]
+      }
+    },
+    {
+      "component": "number",
+      "label": "Bar Width (%)",
+      "name": "barWidth",
+      "valueType": "number",
+      "condition": {
+        "in": [{ "var": "style" }, ["1", "2"]]
+      }
+    },
+    {
+      "component": "number",
+      "label": "Item Text & Bar Width (%)",
+      "name": "itemBarWidth",
+      "valueType": "number",
+      "condition": {
+        "in": [{ "var": "style" }, ["3", "4"]]
+      }
+    },
+    {
+      "component": "number",
+      "label": "Arrow & Num Width (%)",
+      "name": "arrowNumWidth",
+      "valueType": "number",
+      "condition": {
+        "in": [{ "var": "style" }, ["2", "4", "6"]]
+      }
+    }
+  ]
+}

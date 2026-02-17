@@ -1,0 +1,25 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "Font (DTM)",
+      "name": "titleFont",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-md-24", "value": "tt-md-24" },
+        { "name": "tt-bd-24", "value": "tt-bd-24" },
+        { "name": "tt-md-28", "value": "tt-md-28" },
+        { "name": "tt-bd-28", "value": "tt-bd-28" },
+        { "name": "tt-md-32", "value": "tt-md-32" },
+        { "name": "tt-bd-32", "value": "tt-bd-32" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Font Color",
+      "name": "titleFontColor",
+      "valueType": "string",
+      "description": "Hex without #"
+    }
+  ]
+}
