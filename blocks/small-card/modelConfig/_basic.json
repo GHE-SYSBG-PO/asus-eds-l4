@@ -39,34 +39,34 @@
     },
     {
       "component": "reference",
-      "name": "Image",
-      "label": "image",
+      "name": "image",
+      "label": "Image",
       "description": "Support JPG, PNG, SVG, AVIF.",
       "multi": false
     },
     {
       "component": "reference",
-      "name": "Video",
-      "label": "video",
+      "name": "video",
+      "label": "Video",
       "description": "Support MP4, WEBM.",
       "multi": false
     },
     {
       "component": "richtext",
-      "label": "Title",
       "name": "title",
+      "label": "Title",
       "valueType": "string"
     },
     {
       "component": "richtext",
-      "label": "Info",
       "name": "info",
+      "label": "Info",
       "valueType": "string"
     },
     {
       "component": "text",
-      "label": "CTA text",
       "name": "ctaText",
+      "label": "CTA text",
       "valueType": "string"
     },
     {
