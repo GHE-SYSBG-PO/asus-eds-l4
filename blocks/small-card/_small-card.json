@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Small Cards (ID:13)",
+      "title": "Small Cards",
       "id": "small-cards",
       "plugins": {
         "xwalk": {
@@ -16,7 +16,7 @@
       }
     },
     {
-      "title": "Small Card (ID:13)",
+      "title": "Small Card",
       "id": "small-card",
       "plugins": {
         "xwalk": {
