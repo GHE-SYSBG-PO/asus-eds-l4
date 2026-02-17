@@ -128,10 +128,10 @@ const handleMotion = (block) => {
 
 export default async function decorate(block) {
   try {
-    // console.log('执行text-block', block);
-    const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'text-block');
+    // console.log('执行small-cards', block);
+    const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'small-cards');
     const v = getFieldValue(config);
-    // console.log('执行text-block-config', config);
+    // console.log('执行small-cards-config', config);
 
     const dAlignment = v('desktopAlignment') === 'left' ? 'lg:items-start' : 'lg:items-center';
     const tAlignment = v('tabletAlignment') === 'left' ? 'md:items-start' : 'md:items-center';
