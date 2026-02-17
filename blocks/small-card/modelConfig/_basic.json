@@ -6,6 +6,22 @@
       "name": "basic"
     },
     {
+      "component": "select",
+      "label": "Card Variant",
+      "name": "ctaVisible",
+      "valueType": "string",
+      "options": [
+        { "name": "Variant 1 -Image-Text Integrated Layout， text on top", "value": "1" },
+        { "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ", "value": "2" },
+        { "name": "Variant 3 -Image-Text Separate Layout，text at  bottom  ", "value": "3" },
+        { "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ", "value": "2" },
+        { "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ", "value": "2" },
+        { "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ", "value": "2" },
+        { "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ", "value": "2" },
+        { "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ", "value": "2" }
+      ]
+    },
+    {
       "component": "richtext",
       "label": "category",
       "name": "categoryRichtext",
