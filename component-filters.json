@@ -64,5 +64,11 @@
       "media-block",
       "btn"
     ]
+  },
+  {
+    "id": "small-cards",
+    "components": [
+      "small-card"
+    ]
   }
 ]
