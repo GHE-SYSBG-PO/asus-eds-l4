@@ -1,0 +1,48 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "Top Left Radius",
+      "name": "borderRadiusTopLeft",
+      "valueType": "string",
+      "options": [
+        { "name": "rounded-tl-lg", "value": "rounded-tl-lg" },
+        { "name": "rounded-tl-md", "value": "rounded-tl-md" },
+        { "name": "rounded-tl-sm", "value": "rounded-tl-sm" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Top Right Radius",
+      "name": "borderRadiusTopRight",
+      "valueType": "string",
+      "options": [
+        { "name": "rounded-tr-lg", "value": "rounded-tr-lg" },
+        { "name": "rounded-tr-md", "value": "rounded-tr-md" },
+        { "name": "rounded-tr-sm", "value": "rounded-tr-sm" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Bottom Right Radius",
+      "name": "borderRadiusBottomRight",
+      "valueType": "string",
+      "options": [
+        { "name": "rounded-br-lg", "value": "rounded-br-lg" },
+        { "name": "rounded-br-md", "value": "rounded-br-md" },
+        { "name": "rounded-br-sm", "value": "rounded-br-sm" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Bottom Left Radius",
+      "name": "borderRadiusBottomLeft",
+      "valueType": "string",
+      "options": [
+        { "name": "rounded-bl-lg", "value": "rounded-bl-lg" },
+        { "name": "rounded-bl-md", "value": "rounded-bl-md" },
+        { "name": "rounded-bl-sm", "value": "rounded-bl-sm" }
+      ]
+    }
+  ]
+}

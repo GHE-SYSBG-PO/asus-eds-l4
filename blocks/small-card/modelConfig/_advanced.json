@@ -6,9 +6,6 @@
       "name": "advanced"
     },
     {
-      "...": "./_category.json#/fields"
-    },
-    {
       "component": "container",
       "label": "title",
       "name": "titleAdvanced",
@@ -21,24 +18,45 @@
     },
     {
       "component": "container",
-      "label": "body",
-      "name": "bodyAdvanced",
+      "label": "info",
+      "name": "infoAdvanced",
       "collapsible": true,
       "fields": [
         {
-          "...": "./_body.json#/fields"
+          "...": "./_info.json#/fields"
         }
       ]
     },
     {
       "component": "container",
-      "label": "disclaimer",
-      "name": "disclaimerAdvanced",
+      "label": "border",
+      "name": "borderAdvanced",
       "collapsible": true,
       "fields": [
         {
-          "...": "./_disclaimer.json#/fields"
+          "...": "./_border.json#/fields"
         }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "borderRadius",
+      "name": "borderRadiusAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_border-radius.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "alignment",
+      "name": "alignmentAdvanced",
+      "valueType": "string",
+      "options": [
+        { "name": "Center", "value": "center" },
+        { "name": "Left", "value": "left" }
       ]
     },
     {

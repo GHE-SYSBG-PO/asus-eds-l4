@@ -2586,218 +2586,6 @@
         "name": "advanced"
       },
       {
-        "component": "select",
-        "label": "category icon",
-        "name": "categoryIcon",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Yes",
-            "value": "yes"
-          },
-          {
-            "name": "No",
-            "value": "no"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "category icon num",
-        "name": "categoryIconNum",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "1",
-            "value": "1"
-          },
-          {
-            "name": "2",
-            "value": "2"
-          }
-        ],
-        "condition": {
-          "and": [
-            {
-              "===": [
-                {
-                  "var": "categoryIcon"
-                },
-                "yes"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "container",
-        "label": "category",
-        "name": "categoryAdvanced",
-        "collapsible": true,
-        "fields": [
-          {
-            "component": "select",
-            "label": "icon position",
-            "name": "categoryIconPosition",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "1",
-                "value": "1"
-              },
-              {
-                "name": "2",
-                "value": "2"
-              },
-              {
-                "name": "3",
-                "value": "3"
-              },
-              {
-                "name": "4",
-                "value": "4"
-              },
-              {
-                "name": "5",
-                "value": "5"
-              },
-              {
-                "name": "6",
-                "value": "6"
-              }
-            ],
-            "condition": {
-              "and": [
-                {
-                  "===": [
-                    {
-                      "var": "categoryIcon"
-                    },
-                    "yes"
-                  ]
-                },
-                {
-                  "===": [
-                    {
-                      "var": "categoryIconNum"
-                    },
-                    "1"
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "component": "reference",
-            "valueType": "string",
-            "label": "first icon",
-            "name": "categoryIcon1",
-            "multi": false,
-            "condition": {
-              "and": [
-                {
-                  "===": [
-                    {
-                      "var": "categoryIcon"
-                    },
-                    "yes"
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "component": "reference",
-            "valueType": "string",
-            "label": "second icon",
-            "name": "categoryIcon2",
-            "multi": false,
-            "condition": {
-              "and": [
-                {
-                  "===": [
-                    {
-                      "var": "categoryIcon"
-                    },
-                    "yes"
-                  ]
-                },
-                {
-                  "===": [
-                    {
-                      "var": "categoryIconNum"
-                    },
-                    "2"
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "component": "select",
-            "label": "font (D/T/M)",
-            "name": "categoryFont",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-md-16",
-                "value": "tt-md-16"
-              },
-              {
-                "name": "tt-md-18",
-                "value": "tt-md-18"
-              },
-              {
-                "name": "tt-md-20",
-                "value": "tt-md-20"
-              },
-              {
-                "name": "tt-md-24",
-                "value": "tt-md-24"
-              },
-              {
-                "name": "tt-nr-16",
-                "value": "tt-nr-16"
-              },
-              {
-                "name": "tt-nr-18",
-                "value": "tt-nr-18"
-              },
-              {
-                "name": "tt-nr-20",
-                "value": "tt-nr-20"
-              },
-              {
-                "name": "tt-nr-24",
-                "value": "tt-nr-24"
-              },
-              {
-                "name": "tt-bd-16",
-                "value": "tt-bd-16"
-              },
-              {
-                "name": "tt-bd-18",
-                "value": "tt-bd-18"
-              },
-              {
-                "name": "tt-bd-20",
-                "value": "tt-bd-20"
-              },
-              {
-                "name": "tt-bd-24",
-                "value": "tt-bd-24"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "label": "font color (hex)",
-            "name": "categoryFontColor",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
         "component": "container",
         "label": "title",
         "name": "titleAdvanced",
@@ -2805,49 +2593,37 @@
         "fields": [
           {
             "component": "select",
-            "label": "font (D/T/M)",
-            "name": "titleFont",
+            "label": "font (D)",
+            "name": "infoFontD",
             "valueType": "string",
             "options": [
               {
-                "name": "tt-md-32",
-                "value": "tt-md-32"
-              },
+                "name": "tt-md--32",
+                "value": "tt-bd-32"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "infoFontT",
+            "valueType": "string",
+            "options": [
               {
-                "name": "tt-md-36",
-                "value": "tt-md-36"
-              },
+                "name": "tt-md--28",
+                "value": "tt-bd-28"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "infoFontM",
+            "valueType": "string",
+            "options": [
               {
-                "name": "tt-md-40",
-                "value": "tt-md-40"
-              },
-              {
-                "name": "tt-md-44",
-                "value": "tt-md-44"
-              },
-              {
-                "name": "tt-md-48",
-                "value": "tt-md-48"
-              },
-              {
-                "name": "tt-bd-32",
-                "value": "tt-bd-16"
-              },
-              {
-                "name": "tt-bd-36",
-                "value": "tt-bd-36"
-              },
-              {
-                "name": "tt-bd-40",
-                "value": "tt-bd-40"
-              },
-              {
-                "name": "tt-bd-44",
-                "value": "tt-bd-44"
-              },
-              {
-                "name": "tt-bd-48",
-                "value": "tt-bd-48"
+                "name": "tt-md--24",
+                "value": "tt-bd-24"
               }
             ]
           },
@@ -2861,61 +2637,139 @@
       },
       {
         "component": "container",
-        "label": "body",
-        "name": "bodyAdvanced",
+        "label": "info",
+        "name": "infoAdvanced",
         "collapsible": true,
         "fields": [
           {
-            "component": "select",
-            "label": "font (D/T)",
-            "name": "bodyFontDT",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "ro-rg-20",
-                "value": "ro-rg-20-md"
-              },
-              {
-                "name": "ro-rg-24",
-                "value": "ro-rg-24-md"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "label": "font (M)",
-            "name": "bodyFontM",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "ro-rg-18",
-                "value": "ro-rg-18"
-              },
-              {
-                "name": "ro-rg-20",
-                "value": "ro-rg-20"
-              }
-            ]
-          },
-          {
             "component": "text",
             "label": "font Color",
-            "name": "bodyFontColor",
+            "name": "infoFontColor",
             "valueType": "string"
           }
         ]
       },
       {
         "component": "container",
-        "label": "disclaimer",
-        "name": "disclaimerAdvanced",
+        "label": "border",
+        "name": "borderAdvanced",
         "collapsible": true,
         "fields": [
           {
             "component": "text",
-            "label": "font color (hex)",
-            "name": "disclaimerFontColor",
+            "label": "border color (hex)",
+            "name": "borderColor",
             "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border width (%)",
+            "name": "borderWidth",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "borderRadius",
+        "name": "borderRadiusAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Top Left Radius",
+            "name": "borderRadiusTopLeft",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-tl-lg",
+                "value": "rounded-tl-lg"
+              },
+              {
+                "name": "rounded-tl-md",
+                "value": "rounded-tl-md"
+              },
+              {
+                "name": "rounded-tl-sm",
+                "value": "rounded-tl-sm"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Top Right Radius",
+            "name": "borderRadiusTopRight",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-tr-lg",
+                "value": "rounded-tr-lg"
+              },
+              {
+                "name": "rounded-tr-md",
+                "value": "rounded-tr-md"
+              },
+              {
+                "name": "rounded-tr-sm",
+                "value": "rounded-tr-sm"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Bottom Right Radius",
+            "name": "borderRadiusBottomRight",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-br-lg",
+                "value": "rounded-br-lg"
+              },
+              {
+                "name": "rounded-br-md",
+                "value": "rounded-br-md"
+              },
+              {
+                "name": "rounded-br-sm",
+                "value": "rounded-br-sm"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Bottom Left Radius",
+            "name": "borderRadiusBottomLeft",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-bl-lg",
+                "value": "rounded-bl-lg"
+              },
+              {
+                "name": "rounded-bl-md",
+                "value": "rounded-bl-md"
+              },
+              {
+                "name": "rounded-bl-sm",
+                "value": "rounded-bl-sm"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "alignment",
+        "name": "alignmentAdvanced",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
           }
         ]
       },
