@@ -2817,7 +2817,15 @@
               }
             ]
           }
-        ]
+        ],
+        "condition": {
+          "!==": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
       },
       {
         "component": "container",
@@ -2938,7 +2946,15 @@
               }
             ]
           }
-        ]
+        ],
+        "condition": {
+          "!==": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
       },
       {
         "component": "container",
@@ -3059,7 +3075,15 @@
               }
             ]
           }
-        ]
+        ],
+        "condition": {
+          "!==": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
       },
       {
         "component": "richtext",
