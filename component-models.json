@@ -2433,7 +2433,7 @@
     ]
   },
   {
-    "id": "small-card",
+    "id": "small-cards",
     "fields": [
       {
         "component": "tab",
@@ -2487,7 +2487,12 @@
             "value": "left"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "small-card",
+    "fields": [
       {
         "component": "tab",
         "label": "basic",
