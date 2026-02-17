@@ -2495,99 +2495,61 @@
       },
       {
         "component": "select",
-        "label": "Card Variant",
-        "name": "ctaVisible",
+        "label": "Card type",
+        "name": "cardType",
         "valueType": "string",
         "options": [
           {
-            "name": "Variant 1 -Image-Text Integrated Layout， text on top",
-            "value": "1"
+            "name": "Variant 1 – ImageText Integrated Top",
+            "value": "img_txt_integrated_top"
           },
           {
-            "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ",
-            "value": "2"
+            "name": "Variant 2 – ImageText Integrated Bottom",
+            "value": "img_txt_integrated_bottom"
           },
           {
-            "name": "Variant 3 -Image-Text Separate Layout，text at  bottom  ",
-            "value": "3"
+            "name": "Variant 3 – ImageText Separate Bottom",
+            "value": "img_txt_separate_bottom"
           },
           {
-            "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ",
-            "value": "2"
+            "name": "Variant 4 – Text Only",
+            "value": "text_only"
           },
           {
-            "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ",
-            "value": "2"
+            "name": "Variant 5 – TextImg Attached Top",
+            "value": "txt_img_attached_top"
           },
           {
-            "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ",
-            "value": "2"
-          },
-          {
-            "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ",
-            "value": "2"
-          },
-          {
-            "name": "Variant 2 -Image-Text Integrated Layout，text at bottom  ",
-            "value": "2"
+            "name": "Variant 6 – TextImg Attached Bottom",
+            "value": "txt_img_attached_bottom"
           }
         ]
       },
       {
+        "component": "reference",
+        "name": "Image",
+        "label": "image",
+        "description": "Support JPG, PNG, SVG, AVIF.",
+        "multi": false
+      },
+      {
+        "component": "reference",
+        "name": "Video",
+        "label": "video",
+        "description": "Support MP4, WEBM.",
+        "multi": false
+      },
+      {
         "component": "richtext",
-        "label": "category",
-        "name": "categoryRichtext",
+        "label": "Title",
+        "name": "title",
         "valueType": "string"
       },
       {
         "component": "richtext",
-        "label": "title",
-        "name": "titleRichtext",
+        "label": "Info",
+        "name": "info",
         "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "label": "body",
-        "name": "bodyRichtext",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "label": "disclaimer",
-        "name": "disclaimerRichtext",
-        "valueType": "string"
-      },
-      {
-        "component": "select",
-        "label": "motion",
-        "name": "motion",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "On",
-            "value": "on"
-          },
-          {
-            "name": "Off",
-            "value": "off"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "CTA Visibility Toggle",
-        "name": "ctaVisible",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Show",
-            "value": "show"
-          },
-          {
-            "name": "Hide",
-            "value": "hide"
-          }
-        ]
       },
       {
         "component": "text",
