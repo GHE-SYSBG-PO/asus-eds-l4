@@ -44,15 +44,15 @@
       "valueType": "string",
       "options": [
         {
-          "name": "Image",
+          "name": "image",
           "value": "image"
         },
         {
-          "name": "Video",
+          "name": "video",
           "value": "video"
         },
         {
-          "name": "Noise Canceling",
+          "name": "noise canceling",
           "value": "noise_canceling"
         }
       ]
