@@ -88,7 +88,7 @@ export default async function decorate(block) {
     // Process each wrapper asynchronously
     Array.from(wrapper).forEach(async (wrap) => {
       try {
-        const config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'small-cards');
+        const config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'small-card');
         const v = getFieldValue(config);
 
         const titleFontColor = v('titleFontColor') ? `--chart-advanced-title-color: #${v('titleFontColor')}` : '';
