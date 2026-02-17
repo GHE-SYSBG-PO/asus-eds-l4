@@ -3608,7 +3608,7 @@
       {
         "component": "text",
         "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--text-block",
+        "value": "L4--nested-block--small-card",
         "hidden": true
       }
     ]
