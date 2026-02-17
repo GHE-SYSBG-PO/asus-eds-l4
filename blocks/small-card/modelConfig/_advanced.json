@@ -82,16 +82,6 @@
       ]
     },
     {
-      "component": "select",
-      "label": "Alignment",
-      "name": "alignmentAdvanced",
-      "valueType": "string",
-      "options": [
-        { "name": "Center", "value": "center" },
-        { "name": "Left", "value": "left" }
-      ]
-    },
-    {
       "component": "container",
       "label": "Media Width(D)",
       "name": "mediaWidthD",
@@ -155,6 +145,16 @@
           "valueType": "string",
           "placeholder": "px, %, or vw"
         }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Alignment",
+      "name": "alignmentAdvanced",
+      "valueType": "string",
+      "options": [
+        { "name": "Center", "value": "center" },
+        { "name": "Left", "value": "left" }
       ]
     }
   ]
