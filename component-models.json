@@ -2716,7 +2716,7 @@
             ]
           },
           {
-            "component": "text",
+            "component": "select",
             "label": "Bottom Right Radius",
             "name": "borderRadiusBottomRight",
             "valueType": "string",
@@ -2754,22 +2754,6 @@
                 "value": "rounded-bl-sm"
               }
             ]
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "alignment",
-        "name": "alignmentAdvanced",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Center",
-            "value": "center"
-          },
-          {
-            "name": "Left",
-            "value": "left"
           }
         ]
       },
@@ -2973,6 +2957,22 @@
             "label": "border-color",
             "name": "gBtnBorderColor",
             "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "alignment",
+        "name": "alignmentAdvanced",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
           }
         ]
       },

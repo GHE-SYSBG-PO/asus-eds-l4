@@ -50,16 +50,6 @@
       ]
     },
     {
-      "component": "select",
-      "label": "alignment",
-      "name": "alignmentAdvanced",
-      "valueType": "string",
-      "options": [
-        { "name": "Center", "value": "center" },
-        { "name": "Left", "value": "left" }
-      ]
-    },
-    {
       "component": "container",
       "label": "CTA textLink style",
       "name": "ctaAdvanced",
@@ -89,6 +79,16 @@
         {
           "...": "../../../components/button/_button.json#/fields"
         }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "alignment",
+      "name": "alignmentAdvanced",
+      "valueType": "string",
+      "options": [
+        { "name": "Center", "value": "center" },
+        { "name": "Left", "value": "left" }
       ]
     }
   ]

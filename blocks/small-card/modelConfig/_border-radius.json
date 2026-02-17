@@ -23,7 +23,7 @@
       ]
     },
     {
-      "component": "text",
+      "component": "select",
       "label": "Bottom Right Radius",
       "name": "borderRadiusBottomRight",
       "valueType": "string",
