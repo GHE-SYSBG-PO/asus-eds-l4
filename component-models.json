@@ -3106,6 +3106,22 @@
         "valueType": "string"
       },
       {
+        "component": "select",
+        "label": "CTA Visibility Toggle",
+        "name": "ctaVisible",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "show"
+          },
+          {
+            "name": "Hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
         "component": "text",
         "name": "ctaText",
         "label": "CTA text",
