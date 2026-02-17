@@ -36,6 +36,17 @@
       "id": "small-card",
       "fields": [
         {
+          "component": "text",
+          "name": "L4TagNestedBlock",
+          "value": "L4--nested-block--small-card",
+          "hidden": true
+        }
+      ]
+    },
+    {
+      "id": "small-card",
+      "fields": [
+        {
           "...": "./modelConfig/_layout.json#/fields"
         },
         {
@@ -43,12 +54,6 @@
         },
         {
           "...": "./modelConfig/_advanced.json#/fields"
-        },
-        {
-          "component": "text",
-          "name": "L4TagNestedBlock",
-          "value": "L4--nested-block--small-card",
-          "hidden": true
         }
       ]
     }
