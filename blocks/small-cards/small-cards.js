@@ -128,6 +128,7 @@ const handleMotion = (block) => {
 
 export default async function decorate(block) {
   try {
+    // return;
     // console.log('执行small-cards', block);
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'small-cards');
     const v = getFieldValue(config);
