@@ -2532,15 +2532,15 @@
         "valueType": "string",
         "options": [
           {
-            "name": "image",
+            "name": "Image",
             "value": "image"
           },
           {
-            "name": "video",
+            "name": "Video",
             "value": "video"
           },
           {
-            "name": "noise canceling",
+            "name": "Noise Canceling",
             "value": "noise_canceling"
           }
         ]
