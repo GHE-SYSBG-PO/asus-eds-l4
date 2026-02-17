@@ -62,7 +62,8 @@
       "label": "radius",
       "placeholder": "px",
       "name": "radius",
-      "valueType": "string"
+      "valueType": "string",
+      "condition": { "!==": [{ "var": "mediaType" }, "noise_canceling"] }
     },
     {
       "component": "text",
