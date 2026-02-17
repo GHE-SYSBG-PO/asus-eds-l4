@@ -39,7 +39,7 @@
     },
     {
       "component": "select",
-      "label": "media type",
+      "label": "Media Type",
       "name": "mediaType",
       "valueType": "string",
       "options": [
@@ -59,7 +59,7 @@
     },
     {
       "component": "text",
-      "label": "radius",
+      "label": "Radius",
       "placeholder": "px",
       "name": "radius",
       "valueType": "string",
@@ -74,35 +74,35 @@
     },
     {
       "component": "boolean",
-      "label": "video auto play(on / off)",
+      "label": "Video auto play(on / off)",
       "name": "videoAutoPlay",
       "valueType": "boolean",
       "condition": { "===": [{ "var": "mediaType" }, "video"] }
     },
     {
       "component": "boolean",
-      "label": "loop(on / off)",
+      "label": "Loop(on / off)",
       "name": "loop",
       "valueType": "boolean",
       "condition": { "===": [{ "var": "mediaType" }, "video"] }
     },
     {
       "component": "boolean",
-      "label": "pause and play btn(show / hide)",
+      "label": "Pause and play btn(show / hide)",
       "name": "pauseAndPlayBtn",
       "valueType": "boolean",
       "condition": { "===": [{ "var": "mediaType" }, "video"] }
     },
     {
       "component": "text",
-      "label": "pause play btn color",
+      "label": "Pause play btn color",
       "name": "pausePlayBtnColor",
       "valueType": "string",
       "condition": { "===": [{ "var": "mediaType" }, "video"] }
     },
     {
       "component": "select",
-      "label": "pause play btn position",
+      "label": "Pause play btn position",
       "name": "pausePlayBtnPosition",
       "valueType": "string",
       "condition": { "===": [{ "var": "mediaType" }, "video"] },
@@ -150,7 +150,7 @@
     },
     {
       "component": "container",
-      "label": "asset(D)",
+      "label": "Asset(D)",
       "name": "assetContainerD",
       "collapsible": true,
       "fields": [
@@ -265,7 +265,7 @@
     },
     {
       "component": "container",
-      "label": "asset(T)",
+      "label": "Asset(T)",
       "name": "assetContainerT",
       "collapsible": true,
       "fields": [
@@ -380,7 +380,7 @@
     },
     {
       "component": "container",
-      "label": "asset(M)",
+      "label": "Asset(M)",
       "name": "assetContainerM",
       "collapsible": true,
       "fields": [

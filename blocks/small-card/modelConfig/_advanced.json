@@ -7,7 +7,7 @@
     },
     {
       "component": "container",
-      "label": "title",
+      "label": "Title",
       "name": "titleAdvanced",
       "collapsible": true,
       "fields": [
@@ -18,7 +18,7 @@
     },
     {
       "component": "container",
-      "label": "info",
+      "label": "Info",
       "name": "infoAdvanced",
       "collapsible": true,
       "fields": [
@@ -29,7 +29,7 @@
     },
     {
       "component": "container",
-      "label": "border",
+      "label": "Border",
       "name": "borderAdvanced",
       "collapsible": true,
       "fields": [
@@ -40,7 +40,7 @@
     },
     {
       "component": "container",
-      "label": "borderRadius",
+      "label": "Border Radius",
       "name": "borderRadiusAdvanced",
       "collapsible": true,
       "fields": [
@@ -83,7 +83,7 @@
     },
     {
       "component": "select",
-      "label": "alignment",
+      "label": "Alignment",
       "name": "alignmentAdvanced",
       "valueType": "string",
       "options": [
@@ -93,7 +93,7 @@
     },
     {
       "component": "container",
-      "label": "media width(D)",
+      "label": "Media Width(D)",
       "name": "mediaWidthD",
       "collapsible": true,
       "fields": [
@@ -115,7 +115,7 @@
     },
     {
       "component": "container",
-      "label": "media width(T)",
+      "label": "Media Width(T)",
       "name": "mediaWidthT",
       "collapsible": true,
       "fields": [
@@ -137,7 +137,7 @@
     },
     {
       "component": "container",
-      "label": "media width(M)",
+      "label": "Media Width(M)",
       "name": "mediaWidthM",
       "collapsible": true,
       "fields": [
