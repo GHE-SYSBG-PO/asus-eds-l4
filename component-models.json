@@ -3014,13 +3014,6 @@
         ]
       },
       {
-        "component": "reference",
-        "name": "Audio",
-        "label": "Noise Canceling Asset",
-        "description": "Support MP4, WEBM.",
-        "multi": false
-      },
-      {
         "component": "richtext",
         "name": "title",
         "label": "Title",
