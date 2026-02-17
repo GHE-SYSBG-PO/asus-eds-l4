@@ -2532,12 +2532,16 @@
         "valueType": "string",
         "options": [
           {
-            "name": "image",
+            "name": "Image",
             "value": "image"
           },
           {
-            "name": "video",
+            "name": "Video",
             "value": "video"
+          },
+          {
+            "name": "Noise Canceling",
+            "value": "noise_canceling"
           }
         ]
       },
@@ -2649,6 +2653,50 @@
             "value": "bottom-right"
           }
         ]
+      },
+      {
+        "component": "reference",
+        "label": "Noise Canceling Asset",
+        "name": "noiseCancelingAsset",
+        "description": "",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Noise Wave Color",
+        "name": "noiseWaveColor",
+        "description": "",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Voice Wave Color",
+        "name": "voiceWaveColor",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
       },
       {
         "component": "container",
