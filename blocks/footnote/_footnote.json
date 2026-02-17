@@ -1,0 +1,36 @@
+{
+    "definitions": [
+        {
+            "title": "Footnote(ID:7)",
+            "id": "footnote",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/franklin/components/block/v1/block",
+                        "template": {
+                            "name": "Footnote",
+                            "model": "footnote"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "footnote",
+            "fields": [
+                {
+                    "...": "./modelConfig/_basic.json#/fields"
+                },
+                {
+                    "component": "text",
+                    "name": "L4TagNestedBlock",
+                    "value": "L4--nested-block--footnote",
+                    "hidden": true
+                }
+            ]
+        }
+    ],
+    "filters": []
+}

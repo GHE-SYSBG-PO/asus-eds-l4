@@ -1822,6 +1822,59 @@
     ]
   },
   {
+    "id": "footnote",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "container",
+        "valueType": "string[]",
+        "name": "item",
+        "label": "Item",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "id",
+            "name": "idtext",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "label": "text",
+            "name": "textRichtext",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "arrow (on /off)",
+            "name": "arrowconfig",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "On",
+                "value": "on"
+              },
+              {
+                "name": "Off",
+                "value": "off"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--footnote",
+        "hidden": true
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
