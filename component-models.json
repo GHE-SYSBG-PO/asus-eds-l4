@@ -1065,65 +1065,51 @@
         "collapsible": true,
         "fields": [
           {
-            "component": "container",
-            "label": "item text",
-            "name": "itemTextStyle",
-            "fields": [
+            "component": "select",
+            "label": "Font (DTM)",
+            "name": "itemTextFont",
+            "valueType": "string",
+            "options": [
               {
-                "component": "select",
-                "label": "Font (DTM)",
-                "name": "itemTextFont",
-                "valueType": "string",
-                "options": [
-                  {
-                    "name": "tt-nr-16-sh",
-                    "value": "tt-nr-16-sh"
-                  },
-                  {
-                    "name": "tt-nr-18-sh",
-                    "value": "tt-nr-18-sh"
-                  }
-                ]
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
               },
               {
-                "component": "text",
-                "label": "Font Color",
-                "name": "itemTextFontColor",
-                "valueType": "string",
-                "description": "Hex without #"
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh"
               }
             ]
           },
           {
-            "component": "container",
-            "label": "radius",
-            "name": "barRadius",
-            "fields": [
-              {
-                "component": "text",
-                "label": "TL (Top Left)",
-                "name": "radiusTL",
-                "valueType": "string"
-              },
-              {
-                "component": "text",
-                "label": "TR (Top Right)",
-                "name": "radiusTR",
-                "valueType": "string"
-              },
-              {
-                "component": "text",
-                "label": "BR (Bottom Right)",
-                "name": "radiusBR",
-                "valueType": "string"
-              },
-              {
-                "component": "text",
-                "label": "BL (Bottom Left)",
-                "name": "radiusBL",
-                "valueType": "string"
-              }
-            ]
+            "component": "text",
+            "label": "Font Color",
+            "name": "itemTextFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius TL (Top Left)",
+            "name": "radiusTL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius TR (Top Right)",
+            "name": "radiusTR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius BR (Bottom Right)",
+            "name": "radiusBR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius BL (Bottom Left)",
+            "name": "radiusBL",
+            "valueType": "string"
           }
         ]
       },
@@ -1146,68 +1132,54 @@
         },
         "fields": [
           {
-            "component": "container",
-            "label": "arrow num",
-            "name": "arrowNumStyle",
-            "fields": [
+            "component": "text",
+            "label": "Font Color",
+            "name": "arrowNumFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "select",
+            "label": "Font (D/T)",
+            "name": "arrowTextFontDT",
+            "valueType": "string",
+            "options": [
               {
-                "component": "text",
-                "label": "Font Color",
-                "name": "arrowNumFontColor",
-                "valueType": "string",
-                "description": "Hex without #"
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh"
               }
             ]
           },
           {
-            "component": "container",
-            "label": "arrow text",
-            "name": "arrowTextStyle",
-            "fields": [
+            "component": "select",
+            "label": "Font (M)",
+            "name": "arrowTextFontM",
+            "valueType": "string",
+            "options": [
               {
-                "component": "select",
-                "label": "Font (D/T)",
-                "name": "arrowTextFontDT",
-                "valueType": "string",
-                "options": [
-                  {
-                    "name": "tt-nr-16-sh",
-                    "value": "tt-nr-16-sh"
-                  },
-                  {
-                    "name": "tt-nr-18-sh",
-                    "value": "tt-nr-18-sh"
-                  },
-                  {
-                    "name": "tt-nr-20-sh",
-                    "value": "tt-nr-20-sh"
-                  }
-                ]
+                "name": "tt-nr-14-sh",
+                "value": "tt-nr-14-sh"
               },
               {
-                "component": "select",
-                "label": "Font (M)",
-                "name": "arrowTextFontM",
-                "valueType": "string",
-                "options": [
-                  {
-                    "name": "tt-nr-14-sh",
-                    "value": "tt-nr-14-sh"
-                  },
-                  {
-                    "name": "tt-nr-16-sh",
-                    "value": "tt-nr-16-sh"
-                  }
-                ]
-              },
-              {
-                "component": "text",
-                "label": "Font Color",
-                "name": "arrowTextFontColor",
-                "valueType": "string",
-                "description": "Hex without #"
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
               }
             ]
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "arrowTextFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
           }
         ]
       },
