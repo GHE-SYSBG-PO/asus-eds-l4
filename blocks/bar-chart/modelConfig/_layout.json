@@ -21,7 +21,7 @@
     },
     {
       "component": "number",
-      "label": "Item Text Width (%)",
+      "label": "Item Text Width (%) (D/T)",
       "name": "itemTextWidth",
       "valueType": "number",
       "condition": {
@@ -30,7 +30,7 @@
     },
     {
       "component": "number",
-      "label": "Bar Width (%)",
+      "label": "Bar Width (%) (D/T)",
       "name": "barWidth",
       "valueType": "number",
       "condition": {
@@ -39,16 +39,16 @@
     },
     {
       "component": "number",
-      "label": "Item Text & Bar Width (%)",
+      "label": "Item Text & Bar Width (%) (D/T)",
       "name": "itemBarWidth",
       "valueType": "number",
       "condition": {
-        "in": [{ "var": "style" }, ["3", "4"]]
+        "in": [{ "var": "style" }, ["4", "6"]]
       }
     },
     {
       "component": "number",
-      "label": "Arrow & Num Width (%)",
+      "label": "Arrow & Num Width (%) (D/T)",
       "name": "arrowNumWidth",
       "valueType": "number",
       "condition": {
