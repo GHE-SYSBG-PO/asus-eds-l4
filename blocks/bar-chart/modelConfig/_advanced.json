@@ -29,7 +29,7 @@
       "name": "barRowStyleAdvanced",
       "collapsible": true,
       "fields": [
-        { "...": "./_bar-row-style.json#/fields" }
+        { "...": "./_bar-row-style.json" }
       ]
     },
     {
@@ -41,7 +41,7 @@
         "in": [{ "var": "style" }, ["2", "4", "6"]]
       },
       "fields": [
-        { "...": "./_arrow-block-style.json#/fields" }
+        { "...": "./_arrow-block-style.json" }
       ]
     }
   ]

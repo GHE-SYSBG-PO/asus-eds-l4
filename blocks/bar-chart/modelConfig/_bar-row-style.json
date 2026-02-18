@@ -1,59 +1,57 @@
-{
-  "fields": [
-    {
-      "component": "container",
-      "label": "item text",
-      "name": "itemTextStyle",
-      "fields": [
-        {
-          "component": "select",
-          "label": "Font (DTM)",
-          "name": "itemTextFont",
-          "valueType": "string",
-          "options": [
-            { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh" },
-            { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh" }
-          ]
-        },
-        {
-          "component": "text",
-          "label": "Font Color",
-          "name": "itemTextFontColor",
-          "valueType": "string",
-          "description": "Hex without #"
-        }
-      ]
-    },
-    {
-      "component": "container",
-      "label": "radius",
-      "name": "barRadius",
-      "fields": [
-        {
-          "component": "text",
-          "label": "TL (Top Left)",
-          "name": "radiusTL",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "TR (Top Right)",
-          "name": "radiusTR",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "BR (Bottom Right)",
-          "name": "radiusBR",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "BL (Bottom Left)",
-          "name": "radiusBL",
-          "valueType": "string"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "component": "container",
+    "label": "item text",
+    "name": "itemTextStyle",
+    "fields": [
+      {
+        "component": "select",
+        "label": "Font (DTM)",
+        "name": "itemTextFont",
+        "valueType": "string",
+        "options": [
+          { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh" },
+          { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh" }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "Font Color",
+        "name": "itemTextFontColor",
+        "valueType": "string",
+        "description": "Hex without #"
+      }
+    ]
+  },
+  {
+    "component": "container",
+    "label": "radius",
+    "name": "barRadius",
+    "fields": [
+      {
+        "component": "text",
+        "label": "TL (Top Left)",
+        "name": "radiusTL",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "TR (Top Right)",
+        "name": "radiusTR",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "BR (Bottom Right)",
+        "name": "radiusBR",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "BL (Bottom Left)",
+        "name": "radiusBL",
+        "valueType": "string"
+      }
+    ]
+  }
+]
