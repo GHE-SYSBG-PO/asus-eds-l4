@@ -205,7 +205,7 @@
           }
         },
         {
-          "title": "Footnote(ID:7)",
+          "title": "Footnote",
           "id": "footnote",
           "plugins": {
             "xwalk": {

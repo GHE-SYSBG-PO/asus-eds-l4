@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Footnote(ID:7)",
+      "title": "Footnote",
       "id": "footnote",
       "plugins": {
         "xwalk": {
@@ -38,7 +38,7 @@
                 {
                     "component": "text",
                     "label": "id",
-                    "name": "idtext",
+                    "name": "idText",
                     "valueType": "string"
                 },
                 {

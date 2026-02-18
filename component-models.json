@@ -1827,7 +1827,7 @@
       {
         "component": "text",
         "label": "id",
-        "name": "idtext",
+        "name": "idText",
         "valueType": "string"
       },
       {
