@@ -1822,55 +1822,89 @@
     ]
   },
   {
-    "id": "footnote",
+    "id": "footnoteItem",
     "fields": [
       {
-        "component": "tab",
-        "label": "basic",
-        "name": "basic"
+        "component": "text",
+        "label": "id",
+        "name": "idtext",
+        "valueType": "string"
       },
       {
-        "component": "container",
-        "valueType": "string[]",
-        "name": "item",
-        "label": "Item",
-        "multi": true,
-        "fields": [
+        "component": "richtext",
+        "label": "text",
+        "name": "textRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "arrow (on /off)",
+        "name": "arrowConfig",
+        "valueType": "string",
+        "options": [
           {
-            "component": "text",
-            "label": "id",
-            "name": "idtext",
-            "valueType": "string"
+            "name": "On",
+            "value": "on"
           },
           {
-            "component": "richtext",
-            "label": "text",
-            "name": "textRichtext",
-            "valueType": "string"
-          },
-          {
-            "component": "select",
-            "label": "arrow (on /off)",
-            "name": "arrowconfig",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "On",
-                "value": "on"
-              },
-              {
-                "name": "Off",
-                "value": "off"
-              }
-            ]
+            "name": "Off",
+            "value": "off"
           }
         ]
       },
       {
         "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--footnote",
-        "hidden": true
+        "label": "default",
+        "name": "default",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "hover",
+        "name": "hover",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "press",
+        "name": "press",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
       }
     ]
   },

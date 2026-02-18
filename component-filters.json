@@ -21,8 +21,7 @@
       "media-block",
       "btn",
       "chart-advanced",
-      "space",
-      "footnote"
+      "space"
     ]
   },
   {
@@ -64,6 +63,12 @@
       "text-block",
       "media-block",
       "btn"
+    ]
+  },
+  {
+    "id": "footnote",
+    "components": [
+      "footnoteItem"
     ]
   }
 ]
