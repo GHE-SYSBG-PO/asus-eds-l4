@@ -69,7 +69,7 @@
   {
     "id": "footnote",
     "components": [
-      "footnoteItem"
+      "footnoteitem"
     ]
   }
 ]

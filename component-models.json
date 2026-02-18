@@ -1822,7 +1822,7 @@
     ]
   },
   {
-    "id": "footnoteItem",
+    "id": "footnoteitem",
     "fields": [
       {
         "component": "text",

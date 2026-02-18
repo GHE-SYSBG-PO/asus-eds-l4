@@ -16,15 +16,15 @@
       }
     },
     {
-      "title": "FootnoteItem",
-      "id": "footnoteItem",
+      "title": "Footnoteitem",
+      "id": "footnoteitem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "FootnoteItem",
-              "model": "footnoteItem"
+              "name": "Footnoteitem",
+              "model": "Footnoteitem"
             }
           }
         }
@@ -33,7 +33,7 @@
   ],
   "models": [
     {
-      "id": "footnoteItem",
+      "id": "footnoteitem",
        "fields": [
                 {
                     "component": "text",
@@ -123,7 +123,7 @@
     {
       "id": "footnote",
       "components": [
-        "footnoteItem"
+        "footnoteitem"
       ]
     }
   ]
