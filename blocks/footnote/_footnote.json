@@ -36,6 +36,12 @@
             "id": "footnoteitem",
             "fields": [
                 {
+                    "component": "text",
+                    "name": "L4TagMulti-textRichtext",
+                    "value": "L4TagMulti-textRichtext",
+                    "hidden": true
+                },
+                {
                     "component": "richtext",
                     "name": "textRichtext",
                     "value": "",
