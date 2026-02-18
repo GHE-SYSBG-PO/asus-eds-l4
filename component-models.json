@@ -1851,60 +1851,6 @@
             "value": "off"
           }
         ]
-      },
-      {
-        "component": "text",
-        "label": "default",
-        "name": "default",
-        "valueType": "string",
-        "condition": {
-          "and": [
-            {
-              "===": [
-                {
-                  "var": "arrowConfig"
-                },
-                "on"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "hover",
-        "name": "hover",
-        "valueType": "string",
-        "condition": {
-          "and": [
-            {
-              "===": [
-                {
-                  "var": "arrowConfig"
-                },
-                "on"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "press",
-        "name": "press",
-        "valueType": "string",
-        "condition": {
-          "and": [
-            {
-              "===": [
-                {
-                  "var": "arrowConfig"
-                },
-                "on"
-              ]
-            }
-          ]
-        }
       }
     ]
   },
