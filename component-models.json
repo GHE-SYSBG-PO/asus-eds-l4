@@ -2557,11 +2557,14 @@
         "name": "radius",
         "valueType": "string",
         "condition": {
-          "!==": [
+          "in": [
             {
               "var": "mediaType"
             },
-            "noise_canceling"
+            [
+              "image",
+              "video"
+            ]
           ]
         }
       },
@@ -2832,11 +2835,14 @@
           }
         ],
         "condition": {
-          "!==": [
+          "in": [
             {
               "var": "mediaType"
             },
-            "noise_canceling"
+            [
+              "image",
+              "video"
+            ]
           ]
         }
       },
@@ -2961,11 +2967,14 @@
           }
         ],
         "condition": {
-          "!==": [
+          "in": [
             {
               "var": "mediaType"
             },
-            "noise_canceling"
+            [
+              "image",
+              "video"
+            ]
           ]
         }
       },
@@ -3090,11 +3099,14 @@
           }
         ],
         "condition": {
-          "!==": [
+          "in": [
             {
               "var": "mediaType"
             },
-            "noise_canceling"
+            [
+              "image",
+              "video"
+            ]
           ]
         }
       },
