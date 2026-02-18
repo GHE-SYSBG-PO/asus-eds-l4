@@ -1826,8 +1826,9 @@
     "fields": [
       {
         "component": "richtext",
-        "label": "text",
         "name": "textRichtext",
+        "value": "",
+        "label": "text",
         "valueType": "string"
       }
     ]

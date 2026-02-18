@@ -1,55 +1,56 @@
 {
-  "definitions": [
-    {
-      "title": "Footnote",
-      "id": "footnote",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
-            "template": {
-              "name": "Footnote",
-              "filter": "footnote"
+    "definitions": [
+        {
+            "title": "Footnote",
+            "id": "footnote",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/franklin/components/block/v1/block",
+                        "template": {
+                            "name": "Footnote",
+                            "filter": "footnote"
+                        }
+                    }
+                }
             }
-          }
-        }
-      }
-    },
-    {
-      "title": "Footnoteitem",
-      "id": "footnoteitem",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Footnoteitem",
-              "model": "footnoteitem"
+        },
+        {
+            "title": "Footnoteitem",
+            "id": "footnoteitem",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/franklin/components/block/v1/block/item",
+                        "template": {
+                            "name": "Footnoteitem",
+                            "model": "footnoteitem"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  ],
-  "models": [
-    {
-      "id": "footnoteitem",
-       "fields": [
+    ],
+    "models": [
+        {
+            "id": "footnoteitem",
+            "fields": [
                 {
                     "component": "richtext",
-                    "label": "text",
                     "name": "textRichtext",
+                    "value": "",
+                    "label": "text",
                     "valueType": "string"
                 }
             ]
-    }
-  ],
-  "filters": [
-    {
-      "id": "footnote",
-      "components": [
-        "footnoteitem"
-      ]
-    }
-  ]
+        }
+    ],
+    "filters": [
+        {
+            "id": "footnote",
+            "components": [
+                "footnoteitem"
+            ]
+        }
+    ]
 }
