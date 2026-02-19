@@ -1825,11 +1825,86 @@
     "id": "footnoteitem",
     "fields": [
       {
-        "component": "richtext",
-        "name": "textRichtext",
-        "value": "",
-        "label": "text",
+        "component": "text",
+        "label": "id",
+        "name": "idText",
         "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "text",
+        "name": "textRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "arrow (on /off)",
+        "name": "arrowConfig",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "default",
+        "name": "default",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "hover",
+        "name": "hover",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "press",
+        "name": "press",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
       }
     ]
   },
