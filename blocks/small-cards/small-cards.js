@@ -1,9 +1,6 @@
-export default async function decorate(block) {
-  try {
-    block.innerHTML = '<div>Test</div>';
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Error decorating chart-advanced block:', error);
-    block.innerHTML = '<div class="error-message">Failed to load chart-advanced block</div>';
-  }
+export default function decorate(block) {
+  const [quoteWrapper] = block.children;
+  const blockquote = document.createElement('blockquote');
+  blockquote.textContent = quoteWrapper.textContent.trim();
+  quoteWrapper.replaceChildren(blockquote);
 }
