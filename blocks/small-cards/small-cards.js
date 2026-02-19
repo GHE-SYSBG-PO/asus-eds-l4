@@ -507,7 +507,7 @@ export default async function decorate(block) {
 
   try {
     await loadSwiper();
-    block.innerHTML = '';
+    // block.innerHTML = '';
     // await renderCard(block);
 
     setTimeout(async () => {
