@@ -1394,9 +1394,6 @@
         "name": "item",
         "label": "Item",
         "multi": true,
-        "validation": {
-          "max": 3
-        },
         "fields": [
           {
             "component": "text",
