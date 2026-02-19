@@ -518,7 +518,7 @@ export default async function decorate(block) {
       await loadNoUiSliderJquery();
       await loadNoUiSlider();
       await loadNoUiSliderCSS();
-    }, 100);
+    }, 1000);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating chart-advanced block:', error);
