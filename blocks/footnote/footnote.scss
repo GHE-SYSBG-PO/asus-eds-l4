@@ -1,3 +1,109 @@
-.p{
-    color:red;
+.l4-pdp {
+    &[data-product="asus"] {
+        &[data-mode="light"],
+        .section-light {
+            --footnote-itemtext-color: #666;
+            --footnote-itemarrow-default-color: #0062CD;
+            --footnote-itemarrow-hover-color: #287BD7;
+            --footnote-itemarrow-press-color: #287BD7;
+        }
+
+        &[data-mode="dark"],
+        .section-dark {
+            --footnote-itemtext-color: #999;
+            --footnote-itemarrow-default-color: #0062CD;
+            --footnote-itemarrow-hover-color: #287BD7;
+            --footnote-itemarrow-press-color: #287BD7;
+
+        }
+    }
+
+    &[data-product="proart"] {
+        &[data-mode="light"],
+        .section-light {
+            --footnote-itemtext-color: #666;
+            --footnote-itemarrow-default-color: #936D51;
+            --footnote-itemarrow-hover-color: #A88063;
+            --footnote-itemarrow-press-color: #A88063;
+        }
+
+        &[data-mode="dark"],
+        .section-dark {
+            --footnote-itemtext-color: #999;
+            --footnote-itemarrow-default-color: #936D51;
+            --footnote-itemarrow-hover-color: #A88063;
+            --footnote-itemarrow-press-color: #A88063;
+        }
+    }
+
+    &[data-product="rog"] {
+        &[data-mode="light"],
+        .section-light {
+            --footnote-itemtext-color: #CC000E;
+            --footnote-itemarrow-default-color: #E20004;
+            --footnote-itemarrow-hover-color: #ED0C10;
+            --footnote-itemarrow-press-color: #ED0C10;
+
+        }
+
+        &[data-mode="dark"],
+        .section-dark {
+            --footnote-itemtext-color: #FF0F0F;
+            --footnote-itemarrow-default-color: #E20004;
+            --footnote-itemarrow-hover-color: #ED0C10;
+            --footnote-itemarrow-press-color: #ED0C10;
+        }
+    }
+
+    &[data-product="tuf"] {
+        &[data-mode="light"],
+        .section-light {
+            --footnote-itemtext-color: #666;
+            --footnote-itemarrow-default-color: #181818;
+            --footnote-itemarrow-hover-color: #181818;
+            --footnote-itemarrow-press-color: #181818;
+        }
+
+        &[data-mode="dark"],
+        .section-dark {
+            --footnote-itemtext-color: #FF9E1B;
+            --footnote-itemarrow-default-color: #FF9E1B;
+            --footnote-itemarrow-hover-color: #D37B00;
+            --footnote-itemarrow-press-color: #287BD7;
+        }
+    }
+
+    .footnote-wrapper {
+        padding: 48px 20px;
+
+        @media (width >=768px) {
+            padding: 64px 20px;
+        }
+
+        @media (width >=1280px) {
+            padding: 80px 20px;
+        }
+
+        .footnote-item {
+            color: var(--footnote-itemtext-color);
+
+            .footnote-arrow span {
+                display: inline-block;
+                width: rem(10px, 16px);
+                color: var(--footnote-itemarrow-default-color);
+                padding: 0 rem(5px, 16px);
+
+                &:hover {
+                    color: var(--footnote-itemarrow-hover-color);
+                }
+
+                &:active {
+                    color: var(--footnote-itemarrow-press-color);
+                }
+            }
+        }
+    }
+
+
+
 }
