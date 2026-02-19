@@ -418,3 +418,55 @@ export const getBlockRepeatConfigs = (block) => {
 
   return arr;
 };
+
+/**
+ * Processes inline //[id=VALUE]content// marker syntax within an HTML container.
+ *
+ * Syntax:
+ *   //[id=VALUE]content//
+ *   - Delimited by opening and closing //
+ *   - [id=VALUE] sets the id attribute on the parent element
+ *   - content is the text that remains after processing
+ *
+ * Example:
+ *   <sup>//[id=100]some link//</sup>  →  <sup id="100">some link</sup>
+ *
+ * @param {HTMLElement} container - The container element to process
+ */
+export const processInlineIdSyntax = (container) => {
+  if (!container) return;
+
+  const DETECT = /\/\/\[id=/;
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let node = walker.nextNode();
+
+  while (node) {
+    if (DETECT.test(node.textContent)) {
+      textNodes.push(node);
+    }
+    node = walker.nextNode();
+  }
+
+  const pattern = /\/\/\[id=([^\]]+)\]([\s\S]*?)\/\//g;
+
+  textNodes.forEach((textNode) => {
+    const parent = textNode.parentElement;
+    const originalText = textNode.textContent;
+    let newText = originalText;
+
+    pattern.lastIndex = 0;
+    let match = pattern.exec(originalText);
+    while (match !== null) {
+      const [fullMatch, id, content] = match;
+      parent.id = id;
+      // Use a function to avoid $ being interpreted as a replacement pattern
+      newText = newText.replace(fullMatch, () => content);
+      match = pattern.exec(originalText);
+    }
+
+    if (newText !== originalText) {
+      textNode.textContent = newText;
+    }
+  });
+};
