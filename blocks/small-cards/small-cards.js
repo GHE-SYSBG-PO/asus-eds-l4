@@ -508,9 +508,6 @@ export default async function decorate(block) {
   try {
     await loadSwiper();
 
-    const newConfig = fillSequentialConfig(document.querySelector(".small-cards.block"));
-    console.log("HHHHH", block, newConfig);
-
     await renderCard(block);
 
     setTimeout(async () => {
@@ -518,7 +515,7 @@ export default async function decorate(block) {
       await loadNoUiSliderJquery();
       await loadNoUiSlider();
       await loadNoUiSliderCSS();
-    }, 1000);
+    }, 100);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating chart-advanced block:', error);
