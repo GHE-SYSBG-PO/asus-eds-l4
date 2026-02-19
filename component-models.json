@@ -2986,8 +2986,8 @@
         "fields": [
           {
             "component": "reference",
-            "label": "assetsM",
-            "name": "assets",
+            "label": "assets",
+            "name": "assetsM",
             "multi": false
           },
           {
@@ -3174,7 +3174,7 @@
           {
             "component": "select",
             "label": "font (D)",
-            "name": "infoFontD",
+            "name": "titleFontD",
             "valueType": "string",
             "options": [
               {
@@ -3186,7 +3186,7 @@
           {
             "component": "select",
             "label": "font (T)",
-            "name": "infoFontT",
+            "name": "titleFontT",
             "valueType": "string",
             "options": [
               {
@@ -3198,7 +3198,7 @@
           {
             "component": "select",
             "label": "font (M)",
-            "name": "infoFontM",
+            "name": "titleFontM",
             "valueType": "string",
             "options": [
               {

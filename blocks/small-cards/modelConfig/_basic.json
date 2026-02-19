@@ -386,8 +386,8 @@
       "fields": [
         {
           "component": "reference",
-          "label": "assetsM",
-          "name": "assets",
+          "label": "assets",
+          "name": "assetsM",
           "multi": false
         },
         {
