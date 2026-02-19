@@ -502,14 +502,14 @@ export default async function decorate(block) {
 
 `;
 
-  await loadSwiper();
+  // await loadSwiper();
 
-  setTimeout(async () => {
-    await initializeSwiperCarousel(block);
-    await loadNoUiSliderJquery();
-    await loadNoUiSlider();
-    await loadNoUiSliderCSS();
-  }, 100);
+  // setTimeout(async () => {
+  //   await initializeSwiperCarousel(block);
+  //   await loadNoUiSliderJquery();
+  //   await loadNoUiSlider();
+  //   await loadNoUiSliderCSS();
+  // }, 100);
 }
 
 let noUiSliderPromisejs; let noUiSliderPromisecss; let
