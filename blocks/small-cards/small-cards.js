@@ -155,6 +155,8 @@ export default async function decorate(block) {
     const newConfig = fillSequentialConfig(document.querySelector(".small-cards.block"));
     console.log("HHHHH", block, newConfig);
 
+    block.innerHTML = `Test`;
+
     await loadSwiper();
 
     setTimeout(async () => {
