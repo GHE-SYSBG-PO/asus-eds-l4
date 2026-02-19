@@ -16,11 +16,11 @@ const DEFAULT_CONFIG = {
   radius: '',
   imageAlt: '',
 
-  videoAutoPlay: 'off',
-  loop: 'off',
-  pauseAndPlayBtn: 'hide',
+  videoAutoPlay: false,
+  loop: false,
+  pauseAndPlayBtn: false,
   pausePlayBtnColor: '',
-  pausePlayBtnPosition: 'BL',
+  pausePlayBtnPosition: 'top-left',
 
   noiseCancelingAsset: '',
   noiseWaveColor: '',
@@ -54,7 +54,7 @@ const DEFAULT_CONFIG = {
   title: '',
   info: '',
   ctaVisible: 'show',
-  ctaText: '',
+  ctaText: 'Learn More',
   ctaLinkType: 'button',
 
   // Advanced Tab
@@ -104,7 +104,6 @@ const DEFAULT_CONFIG = {
   mediaWidthT: '',
   mediaWidthM: '',
   alignmentAdvanced: 'left',
-
 };
 
 /**
@@ -112,38 +111,50 @@ const DEFAULT_CONFIG = {
  * @param {HTMLElement} block The block element.
  * @returns {object} A configuration object.
  */
-function extractText(div) {
-  // Extract from <p> if present, else direct text
-  const p = div.querySelector('p');
-  return p ? p.textContent.trim() : div.textContent.trim();
+function extractValue(div) {
+  // 1️⃣ If it contains picture → extract image URL
+  const img = div.querySelector('img');
+  if (img) {
+    return img.getAttribute('src') || null;
+  }
+
+  // 2️⃣ If it contains <p>
+  const p = div.querySelector(':scope > p');
+  if (p) {
+    return p.textContent.trim();
+  }
+
+  // 3️⃣ Fallback: direct text
+  const text = div.textContent.trim();
+  return text || null;
 }
 
-function fillSequentialConfig(block) {
-  // Clone so original defaults remain unchanged
+async function fillSequentialConfig(block) {
   const cfg = { ...DEFAULT_CONFIG };
 
-  // Get only the <div> groups representing card field sequences
   const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
 
-  // Flatten all the child div text values in exact order
   const flatValues = [];
+
   fieldGroups.forEach((group) => {
-    const children = Array.from(group.children);
-    children.forEach((child) => {
-      flatValues.push(extractText(child));
+    Array.from(group.children).forEach((child) => {
+      const value = extractValue(child);
+
+      // push even if it's image
+      if (value !== null) {
+        flatValues.push(value);
+      }
     });
   });
 
-  console.log('Extracted values:', flatValues);
-  // Override DEFAULT_CONFIG values sequentially
+  console.log('Extracted sequence:', flatValues);
+
   const keys = Object.keys(cfg);
-  console.log(' Keys:', keys);
-  let idx = 0;
-  keys.forEach((key) => {
-    if (idx < flatValues.length) {
-      cfg[key] = flatValues[idx] || cfg[key]; // override only if present
+
+  keys.forEach((key, index) => {
+    if (flatValues[index] !== undefined) {
+      cfg[key] = flatValues[index];
     }
-    idx++;
   });
 
   return cfg;
@@ -151,6 +162,11 @@ function fillSequentialConfig(block) {
 
 
 async function renderCard(block) {
+
+  const data = await fillSequentialConfig(block);
+  console.log('Final Card Data:', data);
+
+
   const smallCardsContainer = document.createElement('div');
   smallCardsContainer.className = 'small-cards-container';
 
