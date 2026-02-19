@@ -506,12 +506,12 @@ async function renderCard(block) {
 export default async function decorate(block) {
 
   try {
+    await loadSwiper();
+
     const newConfig = fillSequentialConfig(document.querySelector(".small-cards.block"));
     console.log("HHHHH", block, newConfig);
 
     await renderCard(block);
-
-    await loadSwiper();
 
     setTimeout(async () => {
       await initializeSwiperCarousel(block);
