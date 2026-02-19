@@ -155,7 +155,10 @@ export default async function decorate(block) {
     const newConfig = fillSequentialConfig(document.querySelector(".small-cards.block"));
     console.log("HHHHH", block, newConfig);
 
-    const wrap = `<div class="outer-view" id="CMD">
+    const helpMeChooseContainer = document.createElement('div');
+    helpMeChooseContainer.className = 'small-cards-container';
+
+    const html = `<div class="outer-view" id="CMD">
       <section class="wd__section section__aiApplication2025-outer-s4 aiApplication2025-outer wd__sections theme-white " id="section__aiApplication2025-outer-s4">
           <div class="sectionnNavPosition"></div>
           <div class="section_content">
@@ -498,7 +501,10 @@ export default async function decorate(block) {
     </div>
     </div>`;
 
-    // block.innerHTML = wrap;
+    helpMeChooseContainer.innerHTML = html;
+
+    // Replace in DOM
+    block.replaceChildren(...helpMeChooseContainer.children);
 
     await loadSwiper();
 
