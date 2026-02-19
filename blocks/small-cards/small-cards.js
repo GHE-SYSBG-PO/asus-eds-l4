@@ -501,10 +501,6 @@ async function renderCard(block) {
 
   // Replace in DOM
   const [quoteWrapper] = block.children;
-  // const blockquote = document.createElement('div');
-  // blockquote.textContent = quoteWrapper.textContent.trim();
-  // quoteWrapper.replaceChildren('Hello World');
-
   quoteWrapper.replaceChildren(...helpMeChooseContainer.children);
 }
 
@@ -515,12 +511,12 @@ export default async function decorate(block) {
     // block.innerHTML = '';
     await renderCard(block);
 
-    // setTimeout(async () => {
-    await initializeSwiperCarousel(block);
-    await loadNoUiSliderJquery();
-    await loadNoUiSlider();
-    await loadNoUiSliderCSS();
-    // }, 100);
+    setTimeout(async () => {
+      await initializeSwiperCarousel(block);
+      await loadNoUiSliderJquery();
+      await loadNoUiSlider();
+      await loadNoUiSliderCSS();
+    }, 100);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating chart-advanced block:', error);
