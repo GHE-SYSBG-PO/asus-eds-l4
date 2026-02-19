@@ -151,8 +151,8 @@ function fillSequentialConfig(block) {
 
 
 async function renderCard(block) {
-  const helpMeChooseContainer = document.createElement('div');
-  helpMeChooseContainer.className = 'small-cards-container';
+  const smallCardsContainer = document.createElement('div');
+  smallCardsContainer.className = 'small-cards-container';
 
   const html = `<div class="outer-view" id="CMD">
     <section class="wd__section section__aiApplication2025-outer-s4 aiApplication2025-outer wd__sections theme-white " id="section__aiApplication2025-outer-s4">
@@ -497,11 +497,11 @@ async function renderCard(block) {
   </div>
   </div>`;
 
-  helpMeChooseContainer.innerHTML = html;
+  smallCardsContainer.innerHTML = html;
 
   // Replace in DOM
-  const [quoteWrapper] = block.children;
-  quoteWrapper.replaceChildren(...helpMeChooseContainer.children);
+  const [mainWrapper] = block.children;
+  mainWrapper.replaceChildren(...smallCardsContainer.children);
 }
 
 export default async function decorate(block) {
