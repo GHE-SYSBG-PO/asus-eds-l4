@@ -1,6 +1,6 @@
 export default async function decorate(block) {
   try {
-    const wrapper = block.querySelectorAll(':scope > div');
+    const wrapper = block.querySelector('.small-cards.block');
 
     wrapper.innerHTML = '<div>Test</div>';
   } catch (error) {
