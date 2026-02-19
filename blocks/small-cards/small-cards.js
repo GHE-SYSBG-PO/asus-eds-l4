@@ -151,10 +151,6 @@ function fillSequentialConfig(block) {
 
 
 async function renderCard(block) {
-
-  const newConfig = fillSequentialConfig(document.querySelector(".small-cards.block"));
-  console.log("HHHHH", block, newConfig);
-
   const smallCardsContainer = document.createElement('div');
   smallCardsContainer.className = 'small-cards-container';
 
