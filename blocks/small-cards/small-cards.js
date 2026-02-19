@@ -151,8 +151,8 @@ function fillSequentialConfig(block) {
 
 
 async function renderCard(block) {
-  const smallCardsContainer = document.createElement('div');
-  smallCardsContainer.className = 'small-cards-container';
+  const helpMeChooseContainer = document.createElement('div');
+  helpMeChooseContainer.className = 'small-cards-container';
 
   const html = `<div class="outer-view" id="CMD">
     <section class="wd__section section__aiApplication2025-outer-s4 aiApplication2025-outer wd__sections theme-white " id="section__aiApplication2025-outer-s4">
@@ -497,10 +497,10 @@ async function renderCard(block) {
   </div>
   </div>`;
 
-  smallCardsContainer.innerHTML = html;
+  helpMeChooseContainer.innerHTML = html;
 
   // Replace in DOM
-  block.replaceChildren(...smallCardsContainer.children);
+  block.replaceChildren(...helpMeChooseContainer.children);
 }
 
 export default async function decorate(block) {
@@ -513,7 +513,6 @@ export default async function decorate(block) {
     await loadNoUiSliderJquery();
     await loadNoUiSlider();
     await loadNoUiSliderCSS();
-
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating chart-advanced block:', error);
