@@ -498,7 +498,7 @@ export default async function decorate(block) {
     </div>
     </div>`;
 
-    block.innerHTML = wrap;
+    // block.innerHTML = wrap;
 
     await loadSwiper();
 
