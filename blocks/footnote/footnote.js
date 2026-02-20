@@ -8,12 +8,20 @@ export default async function decorate(block) {
   try {
     const wrappers = Array.from(block.querySelectorAll(':scope > div'));
 
-    // block.innerHTML = `
+    // let fragment = `
     //   <div class="footnotes">
     //     <ol class="footnote flex flex-col gap-[10] list-decimal pl-[25]"></ol>
     //   </div>
     // `;
-    const list = block.querySelector('.footnote');
+
+    const footnotesContainer = document.createElement('div');
+    footnotesContainer.className = 'footnotes';
+
+    const list = document.createElement('ol');
+    list.className = 'footnote flex flex-col gap-[10] list-decimal pl-[25]';
+
+    // console.log('footnotescontainer', footnotescontainer);
+    // const list = fragment.querySelector('.footnote');
     const configs = await Promise.all(
       wrappers.map((wrap) => getBlockConfigs(wrap, DEFAULT_CONFIG, 'footnoteitem')),
     );
@@ -36,7 +44,7 @@ export default async function decorate(block) {
       ].join('');
 
       console.log('stylevars', configs, styleVars);
-      block.insertAdjacentHTML(
+      list.insertAdjacentHTML(
         'beforeend',
         `
             <li class="footnote-item ${DEFAULT_CONFIG.itemTextFont}"
@@ -54,6 +62,10 @@ export default async function decorate(block) {
           `,
       );
     });
+
+    console.log('block', block);
+    footnotesContainer.append(list);
+    block.replaceChildren(...footnotesContainer.children);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating footnote block:', error);
