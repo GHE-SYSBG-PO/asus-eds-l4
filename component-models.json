@@ -1822,6 +1822,93 @@
     ]
   },
   {
+    "id": "footnoteitem",
+    "fields": [
+      {
+        "component": "text",
+        "label": "id",
+        "name": "idText",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "text",
+        "name": "textRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "arrow (on /off)",
+        "name": "arrowConfig",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "default",
+        "name": "arrowDefaultColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "hover",
+        "name": "arrowHoverColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "press",
+        "name": "arrowPressColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
