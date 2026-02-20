@@ -8,18 +8,18 @@ export default async function decorate(block) {
   try {
     const wrappers = Array.from(block.querySelectorAll(':scope > div'));
 
-    block.innerHTML = `
-      <div class="footnotes">
-        <ol class="footnote flex flex-col gap-[10] list-decimal pl-[25]"></ol>
-      </div>
-    `;
+    // block.innerHTML = `
+    //   <div class="footnotes">
+    //     <ol class="footnote flex flex-col gap-[10] list-decimal pl-[25]"></ol>
+    //   </div>
+    // `;
     const list = block.querySelector('.footnote');
     // const configs = await Promise.all(
     //   wrappers.map((wrap) => getBlockConfigs(wrap, DEFAULT_CONFIG, 'footnoteitem')),
     // );
 
     // eslint-disable-next-line no-console
-    console.error('footnoteblock', list, wrappers);
+    console.log('footnoteblock', list, wrappers);
 
     //     configs.forEach((config, idx) => {
     //       const v = getFieldValue(config);
