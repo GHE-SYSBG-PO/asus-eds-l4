@@ -1,4 +1,8 @@
-import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
+import {
+  getBlockConfigs,
+  getFieldValue,
+  isAuthorEnvironment,
+} from '../../scripts/utils.js';
 
 const DEFAULT_CONFIG = {
   itemTextFont: 'ro-rg-13',
@@ -63,22 +67,20 @@ export const scrollToTargetWithHeaderOffset = (target) => {
 
 export default async function decorate(block) {
   try {
-    const wrappers = Array.from(block.querySelectorAll(':scope > div'));
+    const wrappers = Array.from(block.querySelectorAll(':scope > div:not(.footnotes)'));
+    const existingRendered = block.querySelector(':scope > .footnotes[data-generated="true"]');
+    if (existingRendered) existingRendered.remove();
+    const isAuthor = isAuthorEnvironment();
 
     const footnotesContainer = document.createElement('div');
     footnotesContainer.className = 'footnotes';
+    footnotesContainer.dataset.generated = 'true';
 
     const list = document.createElement('ol');
     list.className = 'footnote flex flex-col gap-[10] list-decimal pl-[25]';
-
-    // console.log('footnotescontainer', footnotescontainer);
-    // const list = fragment.querySelector('.footnote');
     const configs = await Promise.all(
       wrappers.map((wrap) => getBlockConfigs(wrap, DEFAULT_CONFIG, 'footnoteitem')),
     );
-
-    // eslint-disable-next-line no-console
-    console.log('footnoteblock', list, wrappers);
 
     configs.forEach((config, idx) => {
       const v = getFieldValue(config);
@@ -94,7 +96,6 @@ export default async function decorate(block) {
         v('arrowPressColor') ? `--footnote-itemarrow-press-color:#${v('arrowPressColor')};` : '',
       ].join('');
 
-      console.log('stylevars', configs, styleVars);
       list.insertAdjacentHTML(
         'beforeend',
         `
@@ -114,9 +115,13 @@ export default async function decorate(block) {
       );
     });
 
-    console.log('block', block);
     footnotesContainer.append(list);
-    block.appendChild(footnotesContainer);
+    block.append(footnotesContainer);
+    if (!isAuthor) {
+      wrappers.forEach((wrap) => {
+        wrap.remove();
+      });
+    }
 
     const arrowLinks = block.querySelectorAll('.footnote-arrow');
     arrowLinks?.forEach((arrow) => {
@@ -135,12 +140,6 @@ export default async function decorate(block) {
 
         scrollToTargetWithHeaderOffset(target);
       });
-    });
-
-    Array.from(block.children).forEach((child) => {
-      if (child !== footnotesContainer) {
-        child.remove();
-      }
     });
   } catch (error) {
     // eslint-disable-next-line no-console
