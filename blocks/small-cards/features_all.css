@@ -16974,7 +16974,7 @@ html {
 .wdblockimg .wdblockimg__container .block {
     position: relative;
     overflow: hidden;
-    border-radius: 28px;
+    /* border-radius: 28px; */
     background-color: transparent
 }
 
@@ -40537,10 +40537,10 @@ body {
     }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .img__bg {
-        position: relative;
+        /* position: relative;
         padding-bottom: 100%;
-        width: 100%;
-        height: 0
+        width: 100%; */
+        /* height: 0 */
     }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-content {
@@ -50223,7 +50223,7 @@ body {
     }
 
     .section__aiApplication2025-outer-s4 .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-content {
-        min-height: 400px;
+        /* min-height: 400px; */
     }
 
     .section__aiApplication2025-outer-s4 .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-].column-span-2 .ai__noise__container .noise__voice__container,.section__aiApplication2025-outer-s4 .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-].column-span-3 .ai__noise__container .noise__voice__container {
@@ -50231,12 +50231,12 @@ body {
     }
 
     .section__aiApplication2025-outer-s4 .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .img__bg,.section__aiApplication2025-outer-s4 .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .img__bg {
-        position: relative;
+        /* position: relative;
         left: 50%;
         margin-left: -150px;
         padding-bottom: 300px;
         width: 300px;
-        height: 0
+        height: 0 */
     }
 
     .section__aiApplication2025-outer-s4 .wd__content {
@@ -50872,10 +50872,10 @@ body {
     }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-6 .img__bg {
-        position: relative;
+        /* position: relative;
         padding-bottom: 100%;
         width: 100%;
-        height: 0
+        height: 0 */
     }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .img__bg {

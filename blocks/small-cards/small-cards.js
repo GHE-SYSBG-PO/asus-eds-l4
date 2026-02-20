@@ -109,25 +109,35 @@ const DEFAULT_CONFIG = {
   alignmentAdvanced: 'left',
 };
 
+
+/**
+ * Get current device
+ */
+const getDevice = () => {
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+  const isDesktop = window.innerWidth >= 1024;
+  return isTablet ? 'T' : (isDesktop ? 'D' : 'M');
+};
+
 /**
  * Reads configuration from the block's DOM structure.
  * @param {HTMLElement} block The block element.
  * @returns {object} A configuration object.
  */
 function extractValue(div) {
-  // 1️⃣ If it contains picture → extract image URL
+  // 1️ If it contains picture → extract image URL
   const img = div.querySelector('img');
   if (img) {
     return img.getAttribute('src') || null;
   }
 
-  // 2️⃣ If it contains <p>
+  // 2 If it contains <p>
   const p = div.querySelector(':scope > p');
   if (p) {
     return p.textContent.trim();
   }
 
-  // 3️⃣ Fallback: direct text
+  // 3️ Fallback: direct text
   const text = div.textContent.trim();
   return text || null;
 }
@@ -267,6 +277,11 @@ function getMediaHTML(data) {
   return content;
 }
 
+function getValueForDevice(fieldName, data) {
+  const device = getDevice();
+  return data[`${fieldName}${device}`] || '';
+}
+
 function getCardHTML(data) {
   const {
     cardType,
@@ -274,20 +289,46 @@ function getCardHTML(data) {
     info,
     ctaText,
     ctaHyperlink,
+    titleFontColor,
+    infoFontColor,
+    borderColor,
+    borderWidth,
+    ctaVisible,
+    ctaLinkType,
+    ctaFontDT,
+    ctaFontM,
+    ctaFontColor,
+    radius,
   } = data;
+
+  const titleFont = getValueForDevice('titleFont', data);
+
+  let ctaHTML = '';
+  if (ctaVisible === 'show') {
+    const fontClass = `${ctaFontDT} small_${ctaFontM}`;
+    const style = ctaFontColor ? `style="color: #${ctaFontColor}"` : '';
+
+    if (ctaLinkType === 'button') {
+      ctaHTML = `<button class="${fontClass}" 
+                  aria-label="${ctaText}" 
+                  onclick="window.open('${ctaHyperlink}', '_blank')"
+                  ${style}><span>${ctaText}</span></button>`;
+    } else {
+      ctaHTML = `<a class="${fontClass}" 
+                  aria-label="${ctaText} (opens in new window)" 
+                  href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer" 
+                  ${style}><span>${ctaText}</span></a>`;
+    }
+  }
 
   const blockContent = `
           <div class="block-content">
             <div class="wd__content   large__text-left medium__text-left small__text-center  sections-wdcontent">
-                <h3 class="content__title tt-md-32 medium_tt-md-28 small_tt-md-32 no-top-space">
-                  <span class="tt-md-32 medium_tt-md-28 small_tt-md-32 content__title-0">${title}</span>
+                <h3 class="${titleFont}">
+                  <span class="${titleFont}" style="color: #${titleFontColor}">${title}</span>
                 </h3>
-                <div class="content__info ro-rg-18 small_ro-rg-16 info--1">${info}</div>
-                <a class="content__link ro-md-20-sh small_ro-md-16-sh wdga link--1 wd__link__arrow asus-icon-chevronright  " 
-                  aria-label="${ctaText} (opens in new window)" 
-                  href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer" 
-                  data-galabel="sections AI Experience ${ctaText}" 
-                  data-eventname="ai2025s4_item1_learn_more_clicked"><span>${ctaText}</span></a>
+                <div style="color: #${infoFontColor}">${info}</div>
+                ${ctaHTML}
             </div>
           </div>`;
 
@@ -305,7 +346,7 @@ function getCardHTML(data) {
       flexDirection = 'column-reverse';
       break;
     case 'img_txt_separate_bottom':
-      flexDirection = 'column-reverse';
+      // flexDirection = 'column-reverse';
       contentStyle = 'margin-top: 10px;';
       break;
     case 'text_only':
@@ -329,7 +370,9 @@ function getCardHTML(data) {
   return `
       <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide" 
            data-blocktype="aiNoise" 
-           style="${containerStyle}" 
+           style="${containerStyle}; 
+           border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'}; 
+           border-radius: ${radius || '0'}px;" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
@@ -358,6 +401,7 @@ function setEqualHeight(block) {
 async function renderCard(block) {
 
   const data = await fillSequentialConfig(block);
+
   console.log('Extracted chunk, Final Card Data:', data);
 
 
@@ -377,12 +421,12 @@ async function renderCard(block) {
                 <div class="wdblockimg">
                     <div class="wdblockimg__container block__scroll">
                       <div class="swiper">
-                          <div class="swiper-button-prev"></div>
-                          <div class="swiper-button-next"></div>
                           <div class="swiper-wrapper">
                             ${cardHTML}
                           </div>
                       </div>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
                       <div class="scroll-trigger-end"></div>
                     </div>
                 </div>
@@ -393,6 +437,34 @@ async function renderCard(block) {
   </div>`;
 
   smallCardsContainer.innerHTML = html;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .small-cards-containers .swiper-button-prev,
+    .small-cards-containers .swiper-button-next {
+      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
+      color: #FFFFFF;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      top: auto;
+      bottom: 10px;
+      z-index: 2;
+    }
+    .small-cards-containers .swiper-button-next {
+      right: 10px;
+    }
+    .small-cards-containers .swiper-button-prev {
+      right: 60px;
+      left: auto;
+    }
+    .small-cards-containers .swiper-button-prev::after,
+    .small-cards-containers .swiper-button-next::after {
+      font-size: 20px;
+    }
+  `;
+  smallCardsContainer.appendChild(style);
 
   block.appendChild(smallCardsContainer);
 
