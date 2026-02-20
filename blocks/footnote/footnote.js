@@ -1,7 +1,6 @@
 import {
   getBlockConfigs,
   getFieldValue,
-  isAuthorEnvironment,
 } from '../../scripts/utils.js';
 
 const DEFAULT_CONFIG = {
@@ -69,8 +68,10 @@ export default async function decorate(block) {
   try {
     const wrappers = Array.from(block.querySelectorAll(':scope > div:not(.footnotes)'));
     const existingRendered = block.querySelector(':scope > .footnotes[data-generated="true"]');
+
+    // Block already decorated in current DOM.
+    if (wrappers.length === 0 && existingRendered) return;
     if (existingRendered) existingRendered.remove();
-    const isAuthor = isAuthorEnvironment();
 
     const footnotesContainer = document.createElement('div');
     footnotesContainer.className = 'footnotes';
@@ -78,12 +79,15 @@ export default async function decorate(block) {
 
     const list = document.createElement('ol');
     list.className = 'footnote flex flex-col gap-[10] list-decimal pl-[25]';
+
     const configs = await Promise.all(
       wrappers.map((wrap) => getBlockConfigs(wrap, DEFAULT_CONFIG, 'footnoteitem')),
     );
 
     configs.forEach((config, idx) => {
       const v = getFieldValue(config);
+      const wrap = wrappers[idx];
+      if (!wrap) return;
 
       const index = idx + 1;
       const id = v('idText') || `footnote-${index}`;
@@ -96,32 +100,27 @@ export default async function decorate(block) {
         v('arrowPressColor') ? `--footnote-itemarrow-press-color:#${v('arrowPressColor')};` : '',
       ].join('');
 
-      list.insertAdjacentHTML(
-        'beforeend',
-        `
-            <li class="footnote-item ${DEFAULT_CONFIG.itemTextFont}"
-                id="${id}"
-                data-footnote-index="${index}"
-                tabindex="0">
-              ${text}
-              ${showArrow
+      wrap.classList.add('footnote-item', DEFAULT_CONFIG.itemTextFont);
+      wrap.id = id;
+      wrap.dataset.footnoteIndex = `${index}`;
+      wrap.setAttribute('tabindex', '0');
+      wrap.innerHTML = `
+        ${text}
+        ${showArrow
     ? `<a class="footnote-arrow" href="#" aria-label="back to ${id} contents">
-                       <span class="ro-rg-18" style="${styleVars}">↑</span>
-                     </a>`
+             <span class="ro-rg-18" style="${styleVars}">&#8593;</span>
+           </a>`
     : ''
 }
-            </li>
-          `,
-      );
+      `;
+
+      const item = document.createElement('li');
+      item.append(wrap);
+      list.append(item);
     });
 
     footnotesContainer.append(list);
     block.append(footnotesContainer);
-    if (!isAuthor) {
-      wrappers.forEach((wrap) => {
-        wrap.remove();
-      });
-    }
 
     const arrowLinks = block.querySelectorAll('.footnote-arrow');
     arrowLinks?.forEach((arrow) => {
