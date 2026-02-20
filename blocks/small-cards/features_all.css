@@ -23057,7 +23057,7 @@ body {
     content: "test wdblockimg use imagesNextGenFormat 123122"
 }
 
-.image-webp .section__aiApplication2025-outer-s4 .wdblockimg .block-1 .img__bg {
+/* .image-webp .section__aiApplication2025-outer-s4 .wdblockimg .block-1 .img__bg {
     background-image: url(https://www.apple.com/v/iphone-17-pro/d/images/overview/shared-features/connectivity-gallery/messages__d78uxpds11ea_large_2x.jpg)
 }
 
@@ -23065,7 +23065,7 @@ body {
     .image-webp .section__aiApplication2025-outer-s4 .wdblockimg .block-1 .img__bg {
         background-image:url(https://www.apple.com/v/iphone-17-pro/d/images/overview/shared-features/connectivity-gallery/messages__d78uxpds11ea_large_2x.jpg)
     }
-}
+} */
 
 .image-old .section__aiApplication2025-outer-s4 .wdblockimg .block-1 .img__bg {
     background-image: url(../sections/aiApplication2025/images/outer/large/1x/s4/blockimg_1.jpg)
@@ -30662,9 +30662,9 @@ body {
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .img__bg {
         position: relative;
-        padding-bottom: 100%;
+        /* padding-bottom: 100%; */
         width: 100%;
-        height: 0
+        height: 100%
     }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-img {
