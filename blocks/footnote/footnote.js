@@ -65,7 +65,7 @@ export default async function decorate(block) {
 
     console.log('block', block);
     footnotesContainer.append(list);
-    block.replaceChildren(...footnotesContainer.children);
+    // block.replaceChildren(...footnotesContainer.children);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating footnote block:', error);
