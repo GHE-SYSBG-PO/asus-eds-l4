@@ -394,13 +394,7 @@ async function renderCard(block) {
 
   smallCardsContainer.innerHTML = html;
 
-  // Replace in DOM
-  // Array.from(block.children).forEach((child, i) => {
-  //   if (i > 0) {
-  //     child.remove();
-  //   }
-  // });
-
+  // Replace in the DOM
   const [mainWrapper] = block.children;
 
   mainWrapper.replaceChildren(...smallCardsContainer.children);
@@ -419,6 +413,12 @@ export default async function decorate(block) {
       await loadNoUiSlider();
       await loadNoUiSliderCSS();
       setEqualHeight(block);
+
+      Array.from(block.children).forEach((child, i) => {
+        if (i > 0) {
+          child.remove();
+        }
+      });
     }, 100);
 
     window.addEventListener('resize', () => {
