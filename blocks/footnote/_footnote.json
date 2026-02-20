@@ -66,7 +66,7 @@
                 {
                     "component": "text",
                     "label": "default",
-                    "name": "default",
+                    "name": "arrowDefaultColor",
                     "valueType": "string",
                     "condition": {
                         "and": [
@@ -84,7 +84,7 @@
                  {
                     "component": "text",
                     "label": "hover",
-                    "name": "hover",
+                    "name": "arrowHoverColor",
                     "valueType": "string",
                     "condition": {
                         "and": [
@@ -101,7 +101,7 @@
                 }, {
                     "component": "text",
                     "label": "press",
-                    "name": "press",
+                    "name": "arrowPressColor",
                     "valueType": "string",
                     "condition": {
                         "and": [

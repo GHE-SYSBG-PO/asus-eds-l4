@@ -39,7 +39,7 @@
     &[data-product="rog"] {
         &[data-mode="light"],
         .section-light {
-            --footnote-itemtext-color: #CC000E;
+            --footnote-itemtext-color: #666;
             --footnote-itemarrow-default-color: #E20004;
             --footnote-itemarrow-hover-color: #ED0C10;
             --footnote-itemarrow-press-color: #ED0C10;
@@ -48,7 +48,7 @@
 
         &[data-mode="dark"],
         .section-dark {
-            --footnote-itemtext-color: #FF0F0F;
+            --footnote-itemtext-color: #999;
             --footnote-itemarrow-default-color: #E20004;
             --footnote-itemarrow-hover-color: #ED0C10;
             --footnote-itemarrow-press-color: #ED0C10;
@@ -66,7 +66,7 @@
 
         &[data-mode="dark"],
         .section-dark {
-            --footnote-itemtext-color: #FF9E1B;
+            --footnote-itemtext-color: #999;
             --footnote-itemarrow-default-color: #FF9E1B;
             --footnote-itemarrow-hover-color: #D37B00;
             --footnote-itemarrow-press-color: #287BD7;
@@ -82,6 +82,7 @@
 
         @media (width >=1280px) {
             padding: 80px 20px;
+            max-width: 1236px;
         }
 
         .footnote-item {
@@ -89,16 +90,22 @@
 
             .footnote-arrow span {
                 display: inline-block;
-                width: rem(10px, 16px);
+                width: 10px;
+                height: 24px;
                 color: var(--footnote-itemarrow-default-color);
-                padding: 0 rem(5px, 16px);
+                padding: 0 0 0 5px;
+                transform: translateY(0) scale(1);
+                text-underline-offset: 0.3em;
+                
 
                 &:hover {
                     color: var(--footnote-itemarrow-hover-color);
+                     text-decoration: underline;
                 }
 
                 &:active {
                     color: var(--footnote-itemarrow-press-color);
+                    text-decoration: none;
                 }
             }
         }
