@@ -396,7 +396,12 @@ async function renderCard(block) {
 
   // Replace in
   const [mainWrapper] = block.children;
-  block.innerHTML = html;
+  const container = block.querySelector('.small-cards-container');
+
+  if (container) {
+    container.innerHTML = html;
+  }
+  // block.querySelector('.small-cards-container').innerHTML = html;
   // mainWrapper.replaceChildren(...smallCardsContainer.children);
 }
 
