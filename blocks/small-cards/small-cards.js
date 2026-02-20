@@ -396,10 +396,13 @@ async function renderCard(block) {
 
   block.appendChild(smallCardsContainer);
 
-  Array.from(block.children).forEach((child) => {
+  Array.from(block.children).forEach((child, index) => {
     if (child !== smallCardsContainer) {
       child.style.display = 'none';
       Array.from(child.children).forEach((grandchild) => grandchild.remove());
+      if (index > 2) {
+        child.remove();
+      }
     }
   });
 }
