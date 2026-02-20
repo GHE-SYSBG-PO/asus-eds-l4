@@ -1,8 +1,8 @@
-import { getBlockConfigs } from '../../scripts/utils.js';
+// import { getBlockConfigs } from '../../scripts/utils.js';
 
-const DEFAULT_CONFIG = {
-  itemTextFont: 'ro-rg-13',
-};
+// const DEFAULT_CONFIG = {
+//   itemTextFont: 'ro-rg-13',
+// };
 
 export default async function decorate(block) {
   try {
@@ -14,12 +14,12 @@ export default async function decorate(block) {
       </div>
     `;
     const list = block.querySelector('.footnote');
-    const configs = await Promise.all(
-      wrappers.map((wrap) => getBlockConfigs(wrap, DEFAULT_CONFIG, 'footnoteitem')),
-    );
+    // const configs = await Promise.all(
+    //   wrappers.map((wrap) => getBlockConfigs(wrap, DEFAULT_CONFIG, 'footnoteitem')),
+    // );
 
     // eslint-disable-next-line no-console
-    console.error('footnoteblock', list, configs);
+    console.error('footnoteblock', list, wrappers);
 
     //     configs.forEach((config, idx) => {
     //       const v = getFieldValue(config);
