@@ -116,7 +116,7 @@ export default async function decorate(block) {
 
     console.log('block', block);
     footnotesContainer.append(list);
-    block.append(...footnotesContainer.children);
+    block.appendChild(footnotesContainer);
 
     const arrowLinks = block.querySelectorAll('.footnote-arrow');
     arrowLinks?.forEach((arrow) => {
@@ -135,6 +135,12 @@ export default async function decorate(block) {
 
         scrollToTargetWithHeaderOffset(target);
       });
+    });
+
+    Array.from(block.children).forEach((child) => {
+      if (child !== footnotesContainer) {
+        child.remove();
+      }
     });
   } catch (error) {
     // eslint-disable-next-line no-console
