@@ -36,7 +36,7 @@ export default async function decorate(block) {
       ].join('');
 
       console.log('stylevars', configs, styleVars);
-      list.insertAdjacentHTML(
+      block.insertAdjacentHTML(
         'beforeend',
         `
             <li class="footnote-item ${DEFAULT_CONFIG.itemTextFont}"
