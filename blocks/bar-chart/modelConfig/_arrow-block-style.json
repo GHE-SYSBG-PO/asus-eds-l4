@@ -2,14 +2,14 @@
   "fields": [
     {
       "component": "text",
-      "label": "Font Color",
+      "label": "Arrow Num Font Color",
       "name": "arrowNumFontColor",
       "valueType": "string",
       "description": "Hex without #"
     },
     {
       "component": "select",
-      "label": "Font (D/T)",
+      "label": "Arrow Text Font (D/T)",
       "name": "arrowTextFontDT",
       "valueType": "string",
       "options": [
@@ -20,7 +20,7 @@
     },
     {
       "component": "select",
-      "label": "Font (M)",
+      "label": "Arrow Text Font (M)",
       "name": "arrowTextFontM",
       "valueType": "string",
       "options": [
@@ -30,7 +30,7 @@
     },
     {
       "component": "text",
-      "label": "Font Color",
+      "label": "Arrow Text Font Color",
       "name": "arrowTextFontColor",
       "valueType": "string",
       "description": "Hex without #"
