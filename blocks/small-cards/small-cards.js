@@ -400,9 +400,7 @@ async function renderCard(block) {
     if (child !== smallCardsContainer) {
       child.style.display = 'none';
       Array.from(child.children).forEach((grandchild) => grandchild.remove());
-      if (index > 2) {
-        child.remove();
-      }
+      child.remove();
     }
   });
 }
