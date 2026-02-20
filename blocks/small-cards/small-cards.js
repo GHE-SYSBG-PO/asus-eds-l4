@@ -395,8 +395,8 @@ async function renderCard(block) {
   smallCardsContainer.innerHTML = html;
 
   // Replace in DOM
-  Array.from(block.children).forEach((child) => {
-    if (child !== mainWrapper) {
+  Array.from(block.children).forEach((child, i) => {
+    if (i > 0) {
       child.remove();
     }
   });
