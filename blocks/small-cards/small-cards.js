@@ -394,10 +394,10 @@ async function renderCard(block) {
 
   smallCardsContainer.innerHTML = html;
 
-  // Replace in the DOM
+  // Replace in
   const [mainWrapper] = block.children;
-
-  mainWrapper.replaceChildren(...smallCardsContainer.children);
+  block.innerHTML = html;
+  // mainWrapper.replaceChildren(...smallCardsContainer.children);
 }
 
 export default async function decorate(block) {
@@ -413,12 +413,6 @@ export default async function decorate(block) {
       await loadNoUiSlider();
       await loadNoUiSliderCSS();
       setEqualHeight(block);
-
-      Array.from(block.children).forEach((child, i) => {
-        if (i > 0) {
-          child.style.display = 'none';
-        }
-      });
     }, 100);
 
     window.addEventListener('resize', () => {
