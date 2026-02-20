@@ -396,8 +396,8 @@ async function renderCard(block) {
 
   // Replace in
   const [mainWrapper] = block.children;
-  block.innerHTML = 'test';
-  block.replaceChildren(...smallCardsContainer.children);
+  mainWrapper.innerHTML = 'test';
+  mainWrapper.replaceChildren(...smallCardsContainer.children);
 }
 
 export default async function decorate(block) {
