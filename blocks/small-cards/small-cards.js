@@ -395,6 +395,13 @@ async function renderCard(block) {
   smallCardsContainer.innerHTML = html;
 
   block.appendChild(smallCardsContainer);
+
+  Array.from(block.children).forEach((child) => {
+    if (child !== smallCardsContainer) {
+      child.remove();
+    }
+  });
+  
 }
 
 export default async function decorate(block) {
