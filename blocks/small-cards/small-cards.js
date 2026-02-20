@@ -395,12 +395,14 @@ async function renderCard(block) {
   smallCardsContainer.innerHTML = html;
 
   // Replace in DOM
+  Array.from(block.children).forEach((child) => {
+    if (child !== mainWrapper) {
+      child.remove();
+    }
+  });
+
   const [mainWrapper] = block.children;
-  // Array.from(block.children).forEach((child) => {
-  //   if (child !== mainWrapper) {
-  //     child.remove();
-  //   }
-  // });
+
   mainWrapper.replaceChildren(...smallCardsContainer.children);
 }
 
