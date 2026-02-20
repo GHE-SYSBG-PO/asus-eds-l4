@@ -346,7 +346,7 @@ function getCardHTML(data) {
       flexDirection = 'column-reverse';
       break;
     case 'img_txt_separate_bottom':
-      // flexDirection = 'column-reverse';
+      flexDirection = 'column-reverse';
       contentStyle = 'margin-top: 10px;';
       break;
     case 'text_only':
@@ -365,7 +365,15 @@ function getCardHTML(data) {
   }
 
   const mediaHTML = showMedia ? getMediaHTML(data) : '';
-  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto;`;
+  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative;`;
+
+  const iconHTML = `
+    <div class="card-icon-down">
+        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L7 7L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+  `;
 
   return `
       <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide" 
@@ -376,6 +384,7 @@ function getCardHTML(data) {
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
+          ${iconHTML}
       </div>`;
 }
 
@@ -449,7 +458,7 @@ async function renderCard(block) {
       border-radius: 50%;
       position: absolute;
       top: auto;
-      bottom: 10px;
+      bottom: -50px;
       z-index: 2;
     }
     .small-cards-containers .swiper-button-next {
@@ -462,6 +471,26 @@ async function renderCard(block) {
     .small-cards-containers .swiper-button-prev::after,
     .small-cards-containers .swiper-button-next::after {
       font-size: 20px;
+    }
+    .small-cards-containers .swiper-button-disabled {
+      background: #CBCDD1;
+      color: #0000006B;
+      opacity: 0.42;
+      pointer-events: none;
+    }
+    .small-cards-containers .card-icon-down {
+      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
+      color: #FFFFFF;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   `;
   smallCardsContainer.appendChild(style);
