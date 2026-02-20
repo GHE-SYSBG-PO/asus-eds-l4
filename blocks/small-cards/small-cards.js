@@ -416,7 +416,7 @@ export default async function decorate(block) {
 
       Array.from(block.children).forEach((child, i) => {
         if (i > 0) {
-          child.remove();
+          child.style.display = 'none';
         }
       });
     }, 100);
