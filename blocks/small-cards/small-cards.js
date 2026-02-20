@@ -394,7 +394,7 @@ async function renderCard(block) {
 
   smallCardsContainer.innerHTML = html;
 
-  block.innerHTML = '';
+  block.innerHTML = '<div></div>';
   block.appendChild(smallCardsContainer);
 }
 
