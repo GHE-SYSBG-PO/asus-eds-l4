@@ -362,7 +362,7 @@ async function renderCard(block) {
 
 
   const smallCardsContainer = document.createElement('div');
-  smallCardsContainer.className = 'small-cards-container';
+  smallCardsContainer.className = 'small-cards-container1';
 
   const cardHTML = Array.isArray(data)
     ? data.map((item) => getCardHTML(item)).join('')
@@ -396,12 +396,12 @@ async function renderCard(block) {
 
   block.appendChild(smallCardsContainer);
 
-  Array.from(block.children).forEach((child) => {
-    if (child !== smallCardsContainer) {
-      child.style.display = 'none';
-      Array.from(child.children).forEach((grandchild) => grandchild.remove());
-    }
-  });
+  // Array.from(block.children).forEach((child) => {
+  //   if (child !== smallCardsContainer) {
+  //     child.style.display = 'none';
+  //     Array.from(child.children).forEach((grandchild) => grandchild.remove());
+  //   }
+  // });
 }
 
 export default async function decorate(block) {
