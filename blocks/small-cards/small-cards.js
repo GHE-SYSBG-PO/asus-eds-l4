@@ -396,12 +396,12 @@ async function renderCard(block) {
 
   block.appendChild(smallCardsContainer);
 
-  Array.from(block.children).forEach((child) => {
-    if (child !== smallCardsContainer) {
-      child.style.display = 'none';
-      Array.from(child.children).forEach((grandchild) => grandchild.remove());
-    }
-  });
+  // Array.from(block.children).forEach((child) => {
+  //   if (child !== smallCardsContainer) {
+  //     child.style.display = 'none';
+  //     Array.from(child.children).forEach((grandchild) => grandchild.remove());
+  //   }
+  // });
 }
 
 export default async function decorate(block) {
