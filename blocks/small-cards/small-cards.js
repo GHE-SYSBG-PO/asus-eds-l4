@@ -399,7 +399,7 @@ async function renderCard(block) {
   Array.from(block.children).forEach((child) => {
     if (child !== smallCardsContainer) {
       child.style.display = 'none';
-      child.children.forEach((grandchild) => grandchild.remove());
+      Array.from(child.children).forEach((grandchild) => grandchild.remove());
     }
   });
 }
