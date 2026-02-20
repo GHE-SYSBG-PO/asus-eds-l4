@@ -398,10 +398,10 @@ async function renderCard(block) {
 
   Array.from(block.children).forEach((child) => {
     if (child !== smallCardsContainer) {
-      child.remove();
+      child.style.display = 'none';
+      child.children.forEach((grandchild) => grandchild.remove());
     }
   });
-  
 }
 
 export default async function decorate(block) {
