@@ -2854,7 +2854,7 @@
           },
           {
             "component": "text",
-            "label": "border width (%)",
+            "label": "border width (px)",
             "name": "borderWidth",
             "valueType": "string"
           }

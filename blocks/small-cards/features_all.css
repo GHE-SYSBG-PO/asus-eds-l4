@@ -16981,15 +16981,15 @@ html {
 .wdblockimg .wdblockimg__container .block .block-content {
     position: relative;
     z-index: 1;
-    padding: 40px
+    /* padding: 40px */
 }
 
 .wdblockimg .wdblockimg__container .block .block-content .wd__content .content__info {
-    margin-top: 5px
+    /* margin-top: 5px */
 }
 
 .wdblockimg .wdblockimg__container .block .block-content .wd__content .content__link,.wdblockimg .wdblockimg__container .block .block-content .wd__content .content__link * {
-    font-weight: 200
+    /* font-weight: 200 */
 }
 
 .wdblockimg .wdblockimg__container .block .block-img {
