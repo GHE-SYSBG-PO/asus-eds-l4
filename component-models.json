@@ -1883,13 +1883,6 @@
       },
       {
         "component": "text",
-        "label": "radius",
-        "placeholder": "px",
-        "name": "radius",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
         "label": "image alt text",
         "name": "imageAlt",
         "valueType": "string",
