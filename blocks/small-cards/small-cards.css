@@ -1,4 +1,4 @@
-/* stylelint-disable media-feature-range-notation rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+/* stylelint-disable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
 .l4-pdp[data-product=asus][data-mode=light],
 .l4-pdp[data-product=asus] .section-light {
   --text-block-category-color: #666;
@@ -112,7 +112,7 @@
 .small-cards .small-cards-containers {
   width: 87.5vw;
   margin: 0 auto;
-  max-width: 420px;
+  max-width: 320px;
 }
 .small-cards .small-cards-containers .swiper-slide {
   width: 260px;
@@ -133,5 +133,17 @@
     width: 407px;
   }
 }
+.small-cards .rounded-tl-lg {
+  border-top-left-radius: 8px;
+}
+.small-cards .rounded-tr-lg {
+  border-top-right-radius: 8px;
+}
+.small-cards .rounded-br-lg {
+  border-bottom-right-radius: 8px;
+}
+.small-cards .rounded-bl-lg {
+  border-bottom-left-radius: 8px;
+}
 
-/* stylelint-enable media-feature-range-notation rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+/* stylelint-enable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
