@@ -2552,24 +2552,6 @@
       },
       {
         "component": "text",
-        "label": "Radius",
-        "placeholder": "px",
-        "name": "radius",
-        "valueType": "string",
-        "condition": {
-          "in": [
-            {
-              "var": "mediaType"
-            },
-            [
-              "image",
-              "video"
-            ]
-          ]
-        }
-      },
-      {
-        "component": "text",
         "label": "image alt text",
         "name": "imageAlt",
         "valueType": "string",

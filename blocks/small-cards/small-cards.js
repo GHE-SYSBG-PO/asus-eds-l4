@@ -13,7 +13,6 @@ const DEFAULT_CONFIG = {
   //  Base Tab
   cardType: '',
   mediaType: '',
-  radius: '',
   imageAlt: '',
 
   videoAutoPlay: false,
@@ -342,7 +341,10 @@ function getCardHTML(data) {
     ctaFontDT,
     ctaFontM,
     ctaFontColor,
-    radius,
+    borderRadiusTopLeft,
+    borderRadiusTopRight,
+    borderRadiusBottomLeft,
+    borderRadiusBottomRight,
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
@@ -424,7 +426,7 @@ function getCardHTML(data) {
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'}; 
-           border-radius: ${radius || '0'}px;" 
+           border-radius: ${borderRadiusTopLeft || '0'}px ${borderRadiusTopRight || '0'}px ${borderRadiusBottomLeft || '0'}px ${borderRadiusBottomRight || '0'}px;" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
