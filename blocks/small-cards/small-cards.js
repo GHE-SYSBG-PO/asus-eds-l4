@@ -511,7 +511,7 @@ export default async function decorate(block) {
       document.documentElement.style.setProperty('--global-scrollbar-width', scrollBarWidth);
 
       setEqualHeight(block);
-    }, 100);
+    }, 200);
 
     window.addEventListener('resize', () => {
       setEqualHeight(block);
