@@ -1,5 +1,5 @@
 /* stylelint-disable at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
-.l4-pdp[data-product="asus"][data-mode="light"],
+.l4-pdp[data-product=asus][data-mode=light],
 .l4-pdp[data-product=asus] .section-light {
   --text-block-category-color: #666;
   --text-block-title-color: transparent;
@@ -9,7 +9,7 @@
   --text-block-cta-start: #0062CD;
   --text-block-cta-end: #004691;
 }
-.l4-pdp[data-product="asus"][data-mode="dark"],
+.l4-pdp[data-product=asus][data-mode=dark],
 .l4-pdp[data-product=asus] .section-dark {
   --text-block-category-color: #999;
   --text-block-title-color: transparent;
@@ -19,7 +19,7 @@
   --text-block-cta-start: #C3E0FF;
   --text-block-cta-end: #78BCFF;
 }
-.l4-pdp[data-product="proart"][data-mode="light"],
+.l4-pdp[data-product=proart][data-mode=light],
 .l4-pdp[data-product=proart] .section-light {
   --text-block-category-color: #666;
   --text-block-title-color: transparent;
@@ -29,7 +29,7 @@
   --text-block-cta-start: #6B4F35;
   --text-block-cta-end: #8D684E;
 }
-.l4-pdp[data-product="proart"][data-mode="dark"],
+.l4-pdp[data-product=proart][data-mode=dark],
 .l4-pdp[data-product=proart] .section-dark {
   --text-block-category-color: #999;
   --text-block-title-color: transparent;
@@ -39,41 +39,41 @@
   --text-block-cta-start: #9F7A56;
   --text-block-cta-end: #DFC9A9;
 }
-.l4-pdp[data-product="rog"][data-mode="light"],
+.l4-pdp[data-product=rog][data-mode=light],
 .l4-pdp[data-product=rog] .section-light {
   --text-block-category-color: #CC000E;
   --text-block-title-color: #181818;
-  --text-block-title-gradient: '';
+  --text-block-title-gradient: "";
   --text-block-body-color: #181818;
   --text-block-disclaimer-color: #666;
   --text-block-cta-start: #CC000E;
   --text-block-cta-end: #CC000E;
 }
-.l4-pdp[data-product="rog"][data-mode="dark"],
+.l4-pdp[data-product=rog][data-mode=dark],
 .l4-pdp[data-product=rog] .section-dark {
   --text-block-category-color: #FF0F0F;
   --text-block-title-color: #FFF;
-  --text-block-title-gradient: '';
+  --text-block-title-gradient: "";
   --text-block-body-color: #FFF;
   --text-block-disclaimer-color: #999;
   --text-block-cta-start: #FF0F0F;
   --text-block-cta-end: #FF0F0F;
 }
-.l4-pdp[data-product="tuf"][data-mode="light"],
+.l4-pdp[data-product=tuf][data-mode=light],
 .l4-pdp[data-product=tuf] .section-light {
   --text-block-category-color: #666;
   --text-block-title-color: #181818;
-  --text-block-title-gradient: '';
+  --text-block-title-gradient: "";
   --text-block-body-color: #181818;
   --text-block-disclaimer-color: #666;
   --text-block-cta-start: #181818;
   --text-block-cta-end: #181818;
 }
-.l4-pdp[data-product="tuf"][data-mode="dark"],
+.l4-pdp[data-product=tuf][data-mode=dark],
 .l4-pdp[data-product=tuf] .section-dark {
   --text-block-category-color: #FF9E1B;
   --text-block-title-color: #FFF;
-  --text-block-title-gradient: '';
+  --text-block-title-gradient: "";
   --text-block-body-color: #FFF;
   --text-block-disclaimer-color: #999;
   --text-block-cta-start: #FF9E1B;
@@ -103,15 +103,7 @@
   background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
   background-clip: text;
 }
-.l4-pdp .text-block-animation > a,
-.l4-pdp .text-block-animation > div,
-.l4-pdp .text-block-animation > figure,
-.l4-pdp .text-block-animation > h1,
-.l4-pdp .text-block-animation > h2,
-.l4-pdp .text-block-animation > h3,
-.l4-pdp .text-block-animation > h4,
-.l4-pdp .text-block-animation > img,
-.l4-pdp .text-block-animation > span {
+.l4-pdp .text-block-animation > a, .l4-pdp .text-block-animation > div, .l4-pdp .text-block-animation > figure, .l4-pdp .text-block-animation > h1, .l4-pdp .text-block-animation > h2, .l4-pdp .text-block-animation > h3, .l4-pdp .text-block-animation > h4, .l4-pdp .text-block-animation > img, .l4-pdp .text-block-animation > span {
   opacity: 0;
   transform: translateZ(0) translateY(30px);
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -140,6 +132,10 @@
   .small-cards .small-cards-containers .swiper-slide {
     width: 407px;
   }
+}
+
+.small-cards .small-cards-containers .img__bg {
+  aspect-ratio: 1/1;
 }
 
 .small-cards .rounded-tl-lg {
