@@ -51,8 +51,8 @@ const DEFAULT_CONFIG = {
   // Border Radius
   borderRadiusTopLeft: '',
   borderRadiusTopRight: '',
-  borderRadiusBottomLeft: '',
   borderRadiusBottomRight: '',
+  borderRadiusBottomLeft: '',
 
   // CTA
   ctaFontDT: '',
@@ -362,7 +362,7 @@ function getCardHTML(data) {
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'}; 
-           border-radius: ${borderRadiusTopLeft || ''} ${borderRadiusTopRight || ''} ${borderRadiusBottomLeft || ''} ${borderRadiusBottomRight || ''};" 
+           border-radius: ${borderRadiusTopLeft || ''} ${borderRadiusTopRight || ''} ${borderRadiusBottomRight || ''} ${borderRadiusBottomLeft || ''};" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
