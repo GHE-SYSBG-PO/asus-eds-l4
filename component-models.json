@@ -2698,7 +2698,7 @@
       },
       {
         "component": "container",
-        "label": "Asset(D)",
+        "label": "Asset",
         "name": "assetContainerD",
         "collapsible": true,
         "fields": [
