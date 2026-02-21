@@ -454,8 +454,8 @@ async function renderCard(block) {
     .small-cards-containers .swiper-button-next {
       background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
       color: #FFFFFF;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       position: absolute;
       top: auto;
@@ -471,7 +471,7 @@ async function renderCard(block) {
     }
     .small-cards-containers .swiper-button-prev::after,
     .small-cards-containers .swiper-button-next::after {
-      font-size: 20px;
+      font-size: 12px;
     }
     .small-cards-containers .swiper-button-disabled {
       background: #CBCDD1;
@@ -482,8 +482,8 @@ async function renderCard(block) {
     .small-cards-containers .card-icon-down {
       background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
       color: #FFFFFF;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       position: absolute;
       bottom: 15px;
@@ -509,16 +509,23 @@ async function renderCard(block) {
 export default async function decorate(block) {
 
   try {
+    await loadNoUiSliderCSS();
+    await loadNoUiSlider();
     await loadSwiper();
-    // block.innerHTML = '';
     await renderCard(block);
 
     setTimeout(async () => {
+      // window.SingleCss = true;
+      // window.SingleJs = true;
+      // let scrollBarWidth = '0px';
+      // if (window.innerWidth > 1279) {
+      //   scrollBarWidth = `${window.innerWidth - document.body.clientWidth}px`;
+      // }
+      // document.documentElement.style.setProperty('--global-scrollbar-width', scrollBarWidth);
+
       await initializeSwiperCarousel(block);
-      await loadNoUiSliderJquery();
-      await loadNoUiSlider();
-      await loadNoUiSliderCSS();
       setEqualHeight(block);
+      loadAnimation();
     }, 100);
 
     window.addEventListener('resize', () => {
@@ -532,19 +539,18 @@ export default async function decorate(block) {
 
 }
 
-let noUiSliderPromisejs; let noUiSliderPromisecss; let
-  noUiSliderPromisejsJquery;
+let noUiSliderPromisejs; let noUiSliderPromisecss; let animationObj;
 
-function loadNoUiSliderJquery() {
-  if (!noUiSliderPromisejsJquery) {
-    noUiSliderPromisejsJquery = loadScript(
-      '/blocks/small-cards/jquery.min.js',
+function loadAnimation() {
+  if (!animationObj) {
+    animationObj = loadScript(
+      '/blocks/small-cards/animation.js',
     ).catch((err) => {
       console.error('Failed to load noUiSliderjs:', err);
       throw err;
     });
   }
-  return noUiSliderPromisejsJquery;
+  return animationObj;
 }
 
 function loadNoUiSlider() {
@@ -570,16 +576,6 @@ function loadNoUiSliderCSS() {
   }
   return noUiSliderPromisecss;
 }
-
-setTimeout(() => {
-  window.SingleCss = true;
-  window.SingleJs = true;
-  let scrollBarWidth = '0px';
-  if (window.innerWidth > 1279) {
-    scrollBarWidth = `${window.innerWidth - document.body.clientWidth}px`;
-  }
-  document.documentElement.style.setProperty('--global-scrollbar-width', scrollBarWidth);
-}, 100);
 
 // Initialize carousel functionality
 /**
