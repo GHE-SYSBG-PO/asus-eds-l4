@@ -174,19 +174,43 @@
   }
 
   .rounded-tl-lg {
-    border-top-left-radius: 8px;
+    border-top-left-radius: 0.5rem;
   }
-
   .rounded-tr-lg {
-    border-top-right-radius: 8px;
+    border-top-right-radius: 0.5rem;
   }
-
   .rounded-br-lg {
-    border-bottom-right-radius: 8px;
+    border-bottom-right-radius: 0.5rem;
   }
-
   .rounded-bl-lg {
-    border-bottom-left-radius: 8px;
+    border-bottom-left-radius: 0.5rem;
+  }
+  .rounded-tl-md {
+    border-top-left-radius: 0.375rem;
+  }
+  .rounded-tr-md {
+    border-top-right-radius: 0.375rem;
+  }
+  .rounded-br-md {
+    border-bottom-right-radius: 0.375rem;
+  }
+  .rounded-bl-md {
+    border-bottom-left-radius: 0.375rem;
+  }
+  .rounded-tl-sm {
+    border-top-left-radius: 0.25rem;
+  }
+  .rounded-tr-sm {
+    border-top-right-radius: 0.25rem;
+  }
+  .rounded-br-sm {
+    border-bottom-right-radius: 0.25rem;
+  }
+  .rounded-bl-sm {
+    border-bottom-left-radius: 0.25rem;
+  }
+  .rounded-circle {
+    border-radius: 50%;
   }
 }
 /* stylelint-enable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
