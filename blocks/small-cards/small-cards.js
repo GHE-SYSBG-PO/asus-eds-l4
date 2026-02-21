@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus, max-len, no-unused-vars, quotes, no-multiple-empty-lines, no-use-before-define, no-console, padded-blocks */
 
-import { loadScript, loadCSS } from '../../scripts/aem.js';
+import { loadScript, loadCSS, createOptimizedPicture } from '../../scripts/aem.js';
 import { loadSwiper } from '../../scripts/scripts.js';
 // import { getBlockConfigs, getFieldValue, handleDecide } from '../../scripts/utils.js';
 
@@ -243,15 +243,14 @@ function getMediaHTML(data) {
             </video>
           </div>`;
   } else {
+    const picture = createOptimizedPicture(asset, imageAlt, false, [{ width: '100%' }]);
+    const img = picture.querySelector('img');
+    img.classList.add('img', 'img__bg');
     content = `
           <div class="block-img">
-            <img class="img img__bg"
-                src="${asset}"
-                alt="${imageAlt}">
+            ${picture.outerHTML}
           </div>`;
   }
-
-  console.log("H1, Generated media HTML:", title, asset, data);
   return content;
 }
 
