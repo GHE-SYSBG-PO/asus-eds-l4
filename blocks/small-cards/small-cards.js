@@ -320,26 +320,32 @@ function getCardHTML(data) {
   };
 
   let flexDirection = '';
+  let cardBlockType = 'img_txt_integrated_top';
   let contentStyle = '';
   let showMedia = true;
 
   switch (cardType) {
     case 'img_txt_integrated_bottom':
       flexDirection = 'column-reverse';
+      cardBlockType = 'img_txt_integrated_bottom';
       break;
     case 'img_txt_separate_bottom':
       flexDirection = 'column-reverse';
       contentStyle = 'margin-top: 10px;';
+      cardBlockType = 'img_txt_separate_bottom';
       break;
     case 'text_only':
       showMedia = false;
+      cardBlockType = 'text_only';
       break;
     case 'txt_img_attached_top':
       contentStyle = 'margin-bottom: 10px;';
+      cardBlockType = 'txt_img_attached_top';
       break;
     case 'txt_img_attached_bottom':
       flexDirection = 'column-reverse';
       contentStyle = 'margin-top: 10px;';
+      cardBlockType = 'txt_img_attached_bottom';
       break;
     case 'img_txt_integrated_top':
     default:
@@ -358,7 +364,7 @@ function getCardHTML(data) {
   `;
 
   return `
-      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft}" 
+      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft} ${cardBlockType}" 
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'};" 

@@ -1,4 +1,4 @@
-  /* stylelint-disable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+/* stylelint-disable at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
 
 .l4-pdp {
   &[data-product="asus"] {
@@ -147,7 +147,7 @@
 }
 
 .small-cards {
-  #{&}-containers {
+  .small-cards-containers {
     width: 87.5vw;
     margin: 0 auto;
     max-width: 320px;
@@ -212,5 +212,81 @@
   .rounded-circle {
     border-radius: 50%;
   }
+
+  .img_txt_integrated_top .block-content {
+    padding: 24px 24px 0 24px;
+  }
+
+  .img_txt_integrated_bottom .block-content {
+    padding: 24px 24px 48px 24px;
+  }
+
+  .img_txt_separate_bottom .block-content {
+    padding: 24px 15px 0 15px;
+  }
+
+  .txt_img_attached_top .block-content {
+    padding: 24px;
+  }
+
+  .txt_img_attached_bottom .block-content {
+    padding: 24px 24px 48px 24px;
+  }
+
+  .text_only .block-content {
+    padding: 24px;
+  }
+
+  @media (width >= 768px) {
+    .img_txt_integrated_top .block-content {
+      padding: 28px 28px 0 28px;
+    }
+
+    .img_txt_integrated_bottom .block-content {
+      padding: 28px 28px 48px 28px;
+    }
+
+    .img_txt_separate_bottom .block-content {
+      padding: 28px 15px 0 15px;
+    }
+
+    .txt_img_attached_top .block-content {
+      padding: 28px;
+    }
+
+    .txt_img_attached_bottom .block-content {
+      padding: 28px 28px 48px 28px;
+    }
+
+    .text_only .block-content {
+      padding: 28px;
+    }
+  }
+
+  @media (width > 1024px) {
+    .img_txt_integrated_top .block-content {
+      padding: 32px 32px 0 32px;
+    }
+
+    .img_txt_integrated_bottom .block-content {
+      padding: 32px 32px 48px 32px;
+    }
+
+    .img_txt_separate_bottom .block-content {
+      padding: 32px 15px 0 15px;
+    }
+
+    .txt_img_attached_top .block-content {
+      padding: 32px;
+    }
+
+    .txt_img_attached_bottom .block-content {
+      padding: 32px 32px 48px 32px;
+    }
+
+    .text_only .block-content {
+      padding: 32px;
+    }
+  }
 }
-/* stylelint-enable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+/* stylelint-enable at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
