@@ -358,11 +358,10 @@ function getCardHTML(data) {
   `;
 
   return `
-      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide" 
+      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft};" 
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
-           border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'}; 
-           border-radius: ${borderRadiusTopLeft || ''} ${borderRadiusTopRight || ''} ${borderRadiusBottomRight || ''} ${borderRadiusBottomLeft || ''};" 
+           border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'};" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
