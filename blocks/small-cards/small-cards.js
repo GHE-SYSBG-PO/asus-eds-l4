@@ -362,7 +362,7 @@ function getCardHTML(data) {
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'}; 
-           border-radius: ${borderRadiusTopLeft || '0'}px ${borderRadiusTopRight || '0'}px ${borderRadiusBottomLeft || '0'}px ${borderRadiusBottomRight || '0'}px;" 
+           border-radius: ${borderRadiusTopLeft || ''} ${borderRadiusTopRight || ''} ${borderRadiusBottomLeft || ''} ${borderRadiusBottomRight || ''};" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
