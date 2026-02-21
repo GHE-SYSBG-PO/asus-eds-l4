@@ -286,6 +286,7 @@ function getCardHTML(data) {
     borderRadiusTopRight,
     borderRadiusBottomLeft,
     borderRadiusBottomRight,
+    alignmentAdvanced,
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
@@ -310,7 +311,7 @@ function getCardHTML(data) {
 
   const blockContent = `
           <div class="block-content">
-            <div class="wd__content   large__text-left medium__text-left small__text-center  sections-wdcontent">
+            <div class="wd__content" style="text-align: ${alignmentAdvanced};">
                 <h3 class="${titleFont}">
                   <span class="${titleFont}" style="color: #${titleFontColor}">${title}</span>
                 </h3>
