@@ -529,7 +529,7 @@ let noUiSliderPromisejs; let noUiSliderPromisecss; let animationObj;
 function loadAnimation() {
   if (!animationObj) {
     animationObj = loadScript(
-      '/blocks/small-cards/animation.js',
+      '/blocks/small-cards/jquery.min.js',
     ).catch((err) => {
       console.error('Failed to load noUiSliderjs:', err);
       throw err;
