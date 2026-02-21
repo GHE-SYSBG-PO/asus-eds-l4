@@ -553,7 +553,7 @@ function loadCustomJS() {
 function loadCustomCSS() {
   if (!noUiSliderPromisecss) {
     noUiSliderPromisecss = loadCSS(
-      '/blocks/small-cards/features_all.css',
+      '/blocks/small-cards/features-all.css',
     ).catch((err) => {
       console.error('Failed to load noUiSlidercss:', err);
       throw err;
