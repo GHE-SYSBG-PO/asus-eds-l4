@@ -24,31 +24,8 @@ const DEFAULT_CONFIG = {
   noiseCancelingAsset: '',
   noiseWaveColor: '',
   voiceWaveColor: '',
-  assetsD: '',
 
-  widthD: '',
-  widthValueD: 'auto',
-  heightD: '',
-  heightValueD: 'auto',
-  ratioD: '',
-  ratioValueCustomizedD: '',
-  objectPositionD: 'left',
-  assetsT: '',
-  widthT: '',
-  widthValueT: 'auto',
-  heightT: '',
-  heightValueT: 'auto',
-  ratioT: '',
-  ratioValueCustomizedT: '',
-  objectPositionT: 'left',
-  assetsM: '',
-  widthM: '',
-  widthValueM: 'auto',
-  heightM: '',
-  heightValueM: 'auto',
-  ratioM: '',
-  ratioValueCustomizedM: '',
-  objectPositionM: 'left',
+  assets: '',
 
   title: '',
   info: '',
@@ -185,41 +162,7 @@ function getMediaHTML(data) {
   } = data;
   let content = '';
 
-  const asset = getValueForDevice('assets', data) || data.assetsD;
-  const widthUnit = getValueForDevice('width', data);
-  const widthValue = getValueForDevice('widthValue', data);
-  const heightUnit = getValueForDevice('height', data);
-  const heightValue = getValueForDevice('heightValue', data);
-  const ratio = getValueForDevice('ratio', data);
-  const customRatio = getValueForDevice('ratioValueCustomized', data);
-  const objectPosition = getValueForDevice('objectPosition', data);
-
-  let styles = '';
-  if (widthUnit === 'px' || widthUnit === '%') {
-    styles += `width: ${widthValue}${widthUnit}; `;
-  } else if (widthUnit === 'auto') {
-    styles += 'width: auto; ';
-  }
-
-  if (heightUnit === 'px' || heightUnit === '%') {
-    styles += `height: ${heightValue}${heightUnit}; `;
-  } else if (heightUnit === 'auto') {
-    styles += 'height: auto; ';
-  }
-
-  if (ratio) {
-    let ratioValue = ratio;
-    if (ratio === 'customized' && customRatio) {
-      ratioValue = customRatio;
-    }
-    if (ratioValue !== 'customized') {
-      styles += `aspect-ratio: ${ratioValue.replace(':', ' / ')}; `;
-    }
-  }
-
-  if (objectPosition) {
-    styles += `object-position: ${objectPosition}; `;
-  }
+  const asset = getValueForDevice('assets', data) || data.assets;
 
   if (mediaType === 'noise_canceling') {
     content = `
@@ -302,8 +245,7 @@ function getMediaHTML(data) {
             <video class="img img__bg"
                 src="${asset}"
                 ${videoAutoPlay ? 'autoplay muted' : ''}
-                ${loop ? 'loop' : ''}
-                style="${styles}">
+                ${loop ? 'loop' : ''}>
             </video>
           </div>`;
   } else {
@@ -311,12 +253,11 @@ function getMediaHTML(data) {
           <div class="block-img">
             <img class="img img__bg"
                 src="${asset}"
-                alt="${imageAlt}"
-                style="${styles}">
+                alt="${imageAlt}">
           </div>`;
   }
 
-  console.log("H1, Generated media HTML:", title, asset, styles, data);
+  console.log("H1, Generated media HTML:", title, asset, data);
   return content;
 }
 
