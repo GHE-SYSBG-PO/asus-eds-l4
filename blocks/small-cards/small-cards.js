@@ -76,12 +76,6 @@ const DEFAULT_CONFIG = {
   gBtnContainerRadiusBL: '',
   gBtnBorderWidth: '',
   gBtnBorderColor: '',
-  maxD: '',
-  minD: '',
-  maxT: '',
-  minT: '',
-  maxM: '',
-  minM: '',
   alignmentAdvanced: 'left',
 };
 
