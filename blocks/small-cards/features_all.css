@@ -16961,7 +16961,7 @@ html {
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    max-width: 1144px
+    /* max-width: 1144px */
 }
 
  /* .wdblockimg .wdblockimg__container {
@@ -29655,13 +29655,13 @@ i {
 .section__aiApplication2025-outer-s4 {
     overflow: visible;
     z-index: 13;
-    padding-top: 120px
+    /* padding-top: 120px */
 }
 
 .section__aiApplication2025-outer-s4 .section_content {
     margin-right: auto;
     margin-left: auto;
-    width: var(--asus-column-width-12)
+    /* width: var(--asus-column-width-12) */
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white .ai__noise__container {
@@ -42637,11 +42637,11 @@ body {
     }
 
     .section__aiApplication2025-outer-s4 {
-        padding-top: 80px
+        /* padding-top: 80px */
     }
 
     .section__aiApplication2025-outer-s4 .wdblockimg {
-        margin-top: 49px
+        /* margin-top: 49px */
     }
 
     #section__aiApplication2025-outer-s5 {
@@ -52480,11 +52480,11 @@ body {
     }
 
     .section__aiApplication2025-outer-s4 {
-        padding-top: 64px
+        /* padding-top: 64px */
     }
 
     .section__aiApplication2025-outer-s4 .wdblockimg {
-        margin-top: 42px
+        /* margin-top: 42px */
     }
 
     .section__aiApplication2025-outer-s4 .wdblockimg .block-3.column-span-2 .wd__content .content__info,.section__aiApplication2025-outer-s4 .wdblockimg .block-3.column-span-3 .wd__content .content__info {

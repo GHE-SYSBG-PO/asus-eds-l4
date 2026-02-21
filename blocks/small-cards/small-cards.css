@@ -1,0 +1,137 @@
+/* stylelint-disable media-feature-range-notation rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+.l4-pdp[data-product=asus][data-mode=light],
+.l4-pdp[data-product=asus] .section-light {
+  --text-block-category-color: #666;
+  --text-block-title-color: transparent;
+  --text-block-title-gradient: linear-gradient(270deg, #0062CD 0%, #004691 100%);
+  --text-block-body-color: #181818;
+  --text-block-disclaimer-color: #666;
+  --text-block-cta-start: #0062CD;
+  --text-block-cta-end: #004691;
+}
+.l4-pdp[data-product=asus][data-mode=dark],
+.l4-pdp[data-product=asus] .section-dark {
+  --text-block-category-color: #999;
+  --text-block-title-color: transparent;
+  --text-block-title-gradient: linear-gradient(270deg, #C3E0FF 0%, #78BCFF 100%);
+  --text-block-body-color: #FFF;
+  --text-block-disclaimer-color: #999;
+  --text-block-cta-start: #C3E0FF;
+  --text-block-cta-end: #78BCFF;
+}
+.l4-pdp[data-product=proart][data-mode=light],
+.l4-pdp[data-product=proart] .section-light {
+  --text-block-category-color: #666;
+  --text-block-title-color: transparent;
+  --text-block-title-gradient: linear-gradient(270deg, #6B4F35 0%, #8D684E 100%);
+  --text-block-body-color: #181818;
+  --text-block-disclaimer-color: #666;
+  --text-block-cta-start: #6B4F35;
+  --text-block-cta-end: #8D684E;
+}
+.l4-pdp[data-product=proart][data-mode=dark],
+.l4-pdp[data-product=proart] .section-dark {
+  --text-block-category-color: #999;
+  --text-block-title-color: transparent;
+  --text-block-title-gradient: linear-gradient(270deg, #9F7A56 0%, #DFC9A9 100%);
+  --text-block-body-color: #FFF;
+  --text-block-disclaimer-color: #999;
+  --text-block-cta-start: #9F7A56;
+  --text-block-cta-end: #DFC9A9;
+}
+.l4-pdp[data-product=rog][data-mode=light],
+.l4-pdp[data-product=rog] .section-light {
+  --text-block-category-color: #CC000E;
+  --text-block-title-color: #181818;
+  --text-block-title-gradient: "";
+  --text-block-body-color: #181818;
+  --text-block-disclaimer-color: #666;
+  --text-block-cta-start: #CC000E;
+  --text-block-cta-end: #CC000E;
+}
+.l4-pdp[data-product=rog][data-mode=dark],
+.l4-pdp[data-product=rog] .section-dark {
+  --text-block-category-color: #FF0F0F;
+  --text-block-title-color: #FFF;
+  --text-block-title-gradient: "";
+  --text-block-body-color: #FFF;
+  --text-block-disclaimer-color: #999;
+  --text-block-cta-start: #FF0F0F;
+  --text-block-cta-end: #FF0F0F;
+}
+.l4-pdp[data-product=tuf][data-mode=light],
+.l4-pdp[data-product=tuf] .section-light {
+  --text-block-category-color: #666;
+  --text-block-title-color: #181818;
+  --text-block-title-gradient: "";
+  --text-block-body-color: #181818;
+  --text-block-disclaimer-color: #666;
+  --text-block-cta-start: #181818;
+  --text-block-cta-end: #181818;
+}
+.l4-pdp[data-product=tuf][data-mode=dark],
+.l4-pdp[data-product=tuf] .section-dark {
+  --text-block-category-color: #FF9E1B;
+  --text-block-title-color: #FFF;
+  --text-block-title-gradient: "";
+  --text-block-body-color: #FFF;
+  --text-block-disclaimer-color: #999;
+  --text-block-cta-start: #FF9E1B;
+  --text-block-cta-end: #FF9E1B;
+}
+.l4-pdp .text-block-category {
+  color: var(--text-block-category-color);
+}
+.l4-pdp .text-block-title {
+  color: var(--text-block-title-color, inherit);
+  background: var(--text-block-title-gradient, none);
+  background-clip: text;
+}
+.l4-pdp .text-block-body {
+  color: var(--text-block-body-color);
+}
+.l4-pdp .text-block-disclaimer {
+  color: var(--text-block-disclaimer-color);
+}
+.l4-pdp .text-block-cta {
+  color: transparent;
+  background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
+  background-clip: text;
+}
+.l4-pdp .text-block-cta:hover {
+  color: transparent;
+  background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
+  background-clip: text;
+}
+.l4-pdp .text-block-animation > a, .l4-pdp .text-block-animation > div, .l4-pdp .text-block-animation > figure, .l4-pdp .text-block-animation > h1, .l4-pdp .text-block-animation > h2, .l4-pdp .text-block-animation > h3, .l4-pdp .text-block-animation > h4, .l4-pdp .text-block-animation > img, .l4-pdp .text-block-animation > span {
+  opacity: 0;
+  transform: translateZ(0) translateY(30px);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.small-cards .small-cards-containers {
+  width: 87.5vw;
+  margin: 0 auto;
+  max-width: 420px;
+}
+.small-cards .small-cards-containers .swiper-slide {
+  width: 260px;
+}
+@media (width >= 768px) {
+  .small-cards .small-cards-containers {
+    max-width: 896px;
+  }
+  .small-cards .small-cards-containers .swiper-slide {
+    width: 326px;
+  }
+}
+@media (width > 1024px) {
+  .small-cards .small-cards-containers {
+    max-width: 1260px;
+  }
+  .small-cards .small-cards-containers .swiper-slide {
+    width: 407px;
+  }
+}
+
+/* stylelint-enable media-feature-range-notation rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */

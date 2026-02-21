@@ -114,8 +114,8 @@ const DEFAULT_CONFIG = {
  * Get current device
  */
 const getDevice = () => {
-  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-  const isDesktop = window.innerWidth >= 1024;
+  const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
+  const isDesktop = window.innerWidth > 1024;
   return isTablet ? 'T' : (isDesktop ? 'D' : 'M');
 };
 
@@ -594,8 +594,8 @@ async function initializeSwiperCarousel(block) {
   // Use modules explicitly (if using swiper modular build)
   const swiper = new window.Swiper(swiperContainer, {
     // Basic options
-    slidesPerView: 1,
-    spaceBetween: 8,
+    slidesPerView: 'auto',
+    spaceBetween: 20,
     snapToSlideEdge: true,
     watchOverflow: true,
     autoHeight: false,
@@ -618,15 +618,15 @@ async function initializeSwiperCarousel(block) {
 
     // Responsive behavior
     breakpoints: {
-      640: {
-        slidesPerView: 2.5,
-        spaceBetween: 10,
+      768: {
+        slidesPerView: 'auto',
+        spaceBetween: 20,
         pagination: {
           enabled: true,
         },
       },
-      1025: {
-        slidesPerView: 3,
+      1024: {
+        slidesPerView: 'auto',
         spaceBetween: 20,
         allowTouchMove: true,
         navigation: {

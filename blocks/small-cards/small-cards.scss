@@ -1,6 +1,6 @@
-.l4-pdp {
-  /* stylelint-disable media-feature-range-notation rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+  /* stylelint-disable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
 
+.l4-pdp {
   &[data-product="asus"] {
     &[data-mode="light"],
     .section-light {
@@ -97,58 +97,60 @@
     }
   }
 
-  .text-block-category {
-    color: var(--text-block-category-color);
-  }
+  .text-block {
+    &-category {
+      color: var(--text-block-category-color);
+    }
 
-  .text-block-title {
-    color: var(--text-block-title-color, inherit);
-    background: var(--text-block-title-gradient, none);
-    background-clip: text;
-  }
+    &-title {
+      color: var(--text-block-title-color, inherit);
+      background: var(--text-block-title-gradient, none);
+      background-clip: text;
+    }
 
-  .text-block-body {
-    color: var(--text-block-body-color);
-  }
+    &-body {
+      color: var(--text-block-body-color);
+    }
 
-  .text-block-disclaimer {
-    color: var(--text-block-disclaimer-color);
-  }
+    &-disclaimer {
+      color: var(--text-block-disclaimer-color);
+    }
 
-  a.text-block-cta {
-    color: transparent;
-    background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
-    background-clip: text;
-
-    &:hover { 
+    &-cta {
       color: transparent;
       background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
       background-clip: text;
-    }
-  }
 
-  .text-block-animation {
-    &>a,
-    &>div,
-    &>figure,
-    &>h1,
-    &>h2,
-    &>h3,
-    &>h4,
-    &>img,
-    &>span {
-      opacity: 0;
-      transform: translateZ(0) translateY(30px);
-      transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1);
+      &:hover {
+        color: transparent;
+        background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
+        background-clip: text;
+      }
+    }
+
+    &-animation {
+      & > a,
+      & > div,
+      & > figure,
+      & > h1,
+      & > h2,
+      & > h3,
+      & > h4,
+      & > img,
+      & > span {
+        opacity: 0;
+        transform: translateZ(0) translateY(30px);
+        transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1);
+      }
     }
   }
 }
 
 .small-cards {
-  .small-cards-containers {
+  #{&}-containers {
     width: 87.5vw;
     margin: 0 auto;
-    max-width: 420px;
+    max-width: 320px;
 
     .swiper-slide {
       width: 260px;
@@ -162,7 +164,7 @@
       }
     }
 
-    @media (width >= 1024px) {
+    @media (width > 1024px) {
       max-width: 1260px;
 
       .swiper-slide {
@@ -171,4 +173,4 @@
     }
   }
 }
-/* stylelint-enable media-feature-range-notation rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+/* stylelint-enable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
