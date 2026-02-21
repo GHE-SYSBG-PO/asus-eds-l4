@@ -337,7 +337,7 @@ function getCardHTML(data) {
     return blockContent.replace('class="block-content"', `class="block-content" style="${style}"`);
   };
 
-  let flexDirection = 'column';
+  let flexDirection = '';
   let contentStyle = '';
   let showMedia = true;
 
@@ -399,6 +399,7 @@ function setEqualHeight(block) {
   slides.forEach((slide) => {
     if (slide.offsetHeight > maxHeight) {
       maxHeight = slide.offsetHeight;
+      console.log('New max height found:', maxHeight, slide, slide.offsetHeight);
     }
   });
 
@@ -617,14 +618,14 @@ async function initializeSwiperCarousel(block) {
 
     // Responsive behavior
     breakpoints: {
-      768: {
-        slidesPerView: 1,
-        spaceBetween: 20,
+      640: {
+        slidesPerView: 2.5,
+        spaceBetween: 10,
         pagination: {
           enabled: true,
         },
       },
-      1024: {
+      1025: {
         slidesPerView: 3,
         spaceBetween: 20,
         allowTouchMove: true,
