@@ -181,8 +181,46 @@ async function fillSequentialConfig(block) {
 }
 
 function getMediaHTML(data) {
-  const { mediaType, assetsD, imageAlt } = data;
+  const {
+    mediaType, imageAlt, videoAutoPlay, loop, title,
+  } = data;
   let content = '';
+
+  const asset = getValueForDevice('assets', data) || data.assetsD;
+  const widthUnit = getValueForDevice('width', data);
+  const widthValue = getValueForDevice('widthValue', data);
+  const heightUnit = getValueForDevice('height', data);
+  const heightValue = getValueForDevice('heightValue', data);
+  const ratio = getValueForDevice('ratio', data);
+  const customRatio = getValueForDevice('ratioValueCustomized', data);
+  const objectPosition = getValueForDevice('objectPosition', data);
+
+  let styles = '';
+  if (widthUnit === 'px' || widthUnit === '%') {
+    styles += `width: ${widthValue}${widthUnit}; `;
+  } else if (widthUnit === 'auto') {
+    styles += 'width: auto; ';
+  }
+
+  if (heightUnit === 'px' || heightUnit === '%') {
+    styles += `height: ${heightValue}${heightUnit}; `;
+  } else if (heightUnit === 'auto') {
+    styles += 'height: auto; ';
+  }
+
+  if (ratio) {
+    let ratioValue = ratio;
+    if (ratio === 'customized' && customRatio) {
+      ratioValue = customRatio;
+    }
+    if (ratioValue !== 'customized') {
+      styles += `aspect-ratio: ${ratioValue.replace(':', ' / ')}; `;
+    }
+  }
+
+  if (objectPosition) {
+    styles += `object-position: ${objectPosition}; `;
+  }
 
   if (mediaType === 'noise_canceling') {
     content = `
@@ -190,10 +228,10 @@ function getMediaHTML(data) {
               <div class="nav__replay">
                   <div class="wd__play__btn video__play__btn">
                     <button class="wd__play__btn-button is-hidden" aria-label="replay the ai noise animation" tabindex="-1" id="aiApplication_s4_noise_replay_btn" aria-hidden="true" data-eventname="undefined">
-                        <svg class="svg-step svg_button_replay" 
-                          xmlns="http://www.w3.org/2000/svg" 
+                        <svg class="svg-step svg_button_replay"
+                          xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 30.63 30.88" aria-hidden="true">
-                          <path class="cls-1" 
+                          <path class="cls-1"
                               d="m15.44,28.37c-7.13,0-12.94-5.8-12.94-12.94S8.3,2.5,15.44,2.5c3.52,0,6.86,1.45,9.29,3.97l-2.73,2.29,8.63,3.25-1.71-9.06-2.27,1.91C23.73,1.77,19.7,0,15.44,0,6.92,0,0,6.92,0,15.44s6.92,15.44,15.44,15.44c7.3,0,13.66-5.18,15.12-12.33l-2.45-.5c-1.22,5.98-6.55,10.33-12.67,10.33h0Z">
                           </path>
                         </svg>
@@ -202,11 +240,11 @@ function getMediaHTML(data) {
                   </div>
               </div>
               <div class="nav__noise">
-                  <div class="wdga nav__item nav__1" data-index="1" data-status="off" data-gaid="noiseCancelBtn1" role="button" tabindex="0" 
+                  <div class="wdga nav__item nav__1" data-index="1" data-status="off" data-gaid="noiseCancelBtn1" role="button" tabindex="0"
                     aria-label="Play the simulated home sounds without noise cancelation.">
-                    <div class="nav__aria_data hide" 
-                        data-desc-start="Pause the simulated home sounds without noise cancelation." 
-                        data-desc-stop="Play the simulated home sounds without noise cancelation." 
+                    <div class="nav__aria_data hide"
+                        data-desc-start="Pause the simulated home sounds without noise cancelation."
+                        data-desc-stop="Play the simulated home sounds without noise cancelation."
                         data-desc-ai="Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself."></div>
                     <div class="nav__content">
                         <div class="img__icon" aria-hidden="true">
@@ -227,7 +265,7 @@ function getMediaHTML(data) {
                     </div>
                   </div>
               </div>
-              <div class="noise__voice__container" role="img" 
+              <div class="noise__voice__container" role="img"
                   aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
                   <figure class="img img__noise grace-show show animated" role="presentation" aria-hidden="true">
                     <div class="img__voice">
@@ -262,18 +300,24 @@ function getMediaHTML(data) {
   } else if (mediaType === 'video') {
     content = `
           <div class="block-img">
-            <img class="img img__bg" 
-                src="${assetsD}" 
-                alt="${imageAlt}">
+            <video class="img img__bg"
+                src="${asset}"
+                ${videoAutoPlay ? 'autoplay muted' : ''}
+                ${loop ? 'loop' : ''}
+                style="${styles}">
+            </video>
           </div>`;
   } else {
     content = `
           <div class="block-img">
-            <img class="img img__bg" 
-                src="${assetsD}" 
-                alt="${imageAlt}">
+            <img class="img img__bg"
+                src="${asset}"
+                alt="${imageAlt}"
+                style="${styles}">
           </div>`;
   }
+
+  console.log("H1, Generated media HTML:", title, asset, styles, data);
   return content;
 }
 
@@ -509,23 +553,21 @@ async function renderCard(block) {
 export default async function decorate(block) {
 
   try {
-    await loadNoUiSliderCSS();
-    await loadNoUiSlider();
-    await loadSwiper();
+    await loadAnimation();
     await renderCard(block);
+    await loadCustomCSS();
+    await loadCustomJS();
+    await loadSwiper();
+    await initializeSwiperCarousel(block);
 
     setTimeout(async () => {
-      // window.SingleCss = true;
-      // window.SingleJs = true;
-      // let scrollBarWidth = '0px';
-      // if (window.innerWidth > 1279) {
-      //   scrollBarWidth = `${window.innerWidth - document.body.clientWidth}px`;
-      // }
-      // document.documentElement.style.setProperty('--global-scrollbar-width', scrollBarWidth);
+      window.SingleCss = true;
+      window.SingleJs = true;
+      let scrollBarWidth = '0px';
+      scrollBarWidth = `${window.innerWidth - document.body.clientWidth}px`;
+      document.documentElement.style.setProperty('--global-scrollbar-width', scrollBarWidth);
 
-      await initializeSwiperCarousel(block);
       setEqualHeight(block);
-      loadAnimation();
     }, 100);
 
     window.addEventListener('resize', () => {
@@ -553,7 +595,7 @@ function loadAnimation() {
   return animationObj;
 }
 
-function loadNoUiSlider() {
+function loadCustomJS() {
   if (!noUiSliderPromisejs) {
     noUiSliderPromisejs = loadScript(
       '/blocks/small-cards/features_init.js',
@@ -565,7 +607,7 @@ function loadNoUiSlider() {
   return noUiSliderPromisejs;
 }
 
-function loadNoUiSliderCSS() {
+function loadCustomCSS() {
   if (!noUiSliderPromisecss) {
     noUiSliderPromisecss = loadCSS(
       '/blocks/small-cards/features_all.css',
