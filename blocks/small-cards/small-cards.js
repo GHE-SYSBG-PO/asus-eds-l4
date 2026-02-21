@@ -347,7 +347,7 @@ function getCardHTML(data) {
   }
 
   const mediaHTML = showMedia ? getMediaHTML(data) : '';
-  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative;`;
+  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative; overflow: hidden;`;
 
   const iconHTML = `
     <div class="card-icon-down">

@@ -172,5 +172,21 @@
       }
     }
   }
+
+  .rounded-tl-lg {
+    border-top-left-radius: 8px;
+  }
+
+  .rounded-tr-lg {
+    border-top-right-radius: 8px;
+  }
+
+  .rounded-br-lg {
+    border-bottom-right-radius: 8px;
+  }
+
+  .rounded-bl-lg {
+    border-bottom-left-radius: 8px;
+  }
 }
 /* stylelint-enable media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
