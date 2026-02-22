@@ -218,19 +218,8 @@ function getMediaHTML(data) {
                   aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
                   <figure class="img img__noise grace-show show animated" role="presentation" aria-hidden="true">
                     <div class="img__voice">
-                        <svg viewBox="0 0 324 324" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
-                          <linearGradient gradientUnits="userSpaceOnUse" x1="50.33" x2="273.67" y1="50.33" y2="273.67" id="Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_a_21">
-                              <stop offset="0" stop-color="var(--voice-start)"></stop>
-                              <stop offset="1" stop-color="var(--voice-end)"></stop>
-                          </linearGradient>
-                          <linearGradient id="Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_b_21" x1="108.23" x2="215.77" href="#Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_a_21" y1="88.2" y2="195.75"></linearGradient>
-                          <linearGradient id="Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_c_21" x1="110.96" x2="213.04" href="#Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_a_21" y1="132.72" y2="234.79"></linearGradient>
-                          <path d="M162 320C74.88 320 4 249.12 4 162S74.88 4 162 4s158 70.88 158 158-70.88 158-158 158z" fill="var(--voice-bgcolor)"></path>
-                          <path d="M162 320C74.88 320 4 249.12 4 162S74.88 4 162 4s158 70.88 158 158-70.88 158-158 158zm0-307C79.82 13 13 79.82 13 162s66.82 149 149 149 149-66.86 149-149S244.18 13 162 13z" fill="url(#Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_a_21)"></path>
-                          <path d="M162 233.67a38.37 38.37 0 0 1-38.33-38.32V88.6a38.33 38.33 0 0 1 76.66 0v106.75A38.37 38.37 0 0 1 162 233.67zm0-174.43a29.39 29.39 0 0 0-29.36 29.36v106.75a29.36 29.36 0 1 0 58.72 0V88.6A29.39 29.39 0 0 0 162 59.24z" fill="url(#Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_b_21)"></path>
-                          <path d="M211.39 132.74a4 4 0 0 0-4 4v58.14a45.35 45.35 0 0 1-90.7 0v-58.11a4 4 0 0 0-8.07 0v58.14a53.48 53.48 0 0 0 48 53.14v32.4h10.76v-32.4a53.48 53.48 0 0 0 48-53.14v-58.14a4 4 0 0 0-3.99-4.03z" fill="url(#Item_21_conferenceS1span3_aiNoiseSwitcher_gradient_c_21)"></path>
-                          <path d="M0 0h324v324H0z" fill="none"></path>
-                        </svg>
+                        <img src="${asset}" alt="${imageAlt}">
+                        
                     </div>
                     <canvas class="noise__left" width="800" height="400"></canvas>
                     <canvas class="noise__right" width="800" height="400"></canvas>
