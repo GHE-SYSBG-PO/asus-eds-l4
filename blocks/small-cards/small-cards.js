@@ -669,7 +669,7 @@ export default async function decorate(block) {
     }, 100);
 
     window.addEventListener('resize', () => {
-      setEqualHeight(block);
+      // setEqualHeight(block);
     });
   } catch (error) {
     // eslint-disable-next-line no-console
