@@ -17637,9 +17637,9 @@ html {
 }
 
 .wdblockimg .block.theme-white .ai__noise__container .img__noise .img__voice {
-    --voice-start: #74a1d3;
-    --voice-end: #406cac;
-    --voice-bgcolor: #fff
+    --voice-start: #EBBA9D;
+    --voice-end: #9DEBBC;
+    --voice-bgcolor: #EB9DE8;
 }
 
 .wdblockimg .block.theme-white .ai__noise__container .img__icon {
@@ -17662,14 +17662,14 @@ html {
 }
 
 .wdblockimg .block.theme-black .ai__noise__container .img__noise .img__voice {
-    --voice-start: #dfc9a9;
-    --voice-end: #9a7a59;
-    --voice-bgcolor: #000
+    --voice-start: #EBBA9D;
+    --voice-end: #9DEBBC;
+    --voice-bgcolor: #EB9DE8;
 }
 
 .wdblockimg .block.theme-black .ai__noise__container .img__icon {
-    --img-icon-base-color: #fff;
-    --img-icon-bg-color: #000
+     --img-icon-base-color: #9DEBE7;
+    --img-icon-bg-color: #E1EB9D
 }
 
 .wdblockimg .block.theme-black {
