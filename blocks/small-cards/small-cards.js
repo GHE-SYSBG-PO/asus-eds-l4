@@ -496,25 +496,25 @@ async function renderCard(block) {
 export default async function decorate(block) {
 
   try {
+    await loadSwiper();
     await loadNoUiSliderCSS();
     await loadNoUiSliderJquery();
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
-    await loadSwiper();
 
     setTimeout(async () => {
       await loadNoUiSlider();
 
       setEqualHeight(block);
-    }, 200);
+    }, 100);
 
     window.addEventListener('resize', () => {
       setEqualHeight(block);
     });
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error decorating chart-advanced block:', error);
-    block.innerHTML = '<div class="error-message">Failed to load chart-advanced block</div>';
+    console.error('Error decorating small cards block:', error);
+    block.innerHTML = '<div class="error-message">Failed to load small cards block</div>';
   }
 
 }
