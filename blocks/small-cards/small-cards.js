@@ -418,6 +418,96 @@ async function renderCard(block) {
                 <div class="wdblockimg">
                     <div class="wdblockimg__container block__scroll">
                       <div class="swiper">
+                          <div class="swiper-wrapper">
+                            ${cardHTML}
+                          </div>
+                      </div>
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+                      <div class="scroll-trigger-end"></div>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </section>
+  </div>`;
+
+  smallCardsContainer.innerHTML = html;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .small-cards-containers .swiper-button-prev,
+    .small-cards-containers .swiper-button-next {
+      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
+      color: #FFFFFF;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      position: absolute;
+      top: auto;
+      bottom: -50px;
+      z-index: 2;
+    }
+    .small-cards-containers .swiper-button-next {
+      right: 10px;
+    }
+    .small-cards-containers .swiper-button-prev {
+      right: 60px;
+      left: auto;
+    }
+    .small-cards-containers .swiper-button-prev::after,
+    .small-cards-containers .swiper-button-next::after {
+      font-size: 12px;
+    }
+    .small-cards-containers .swiper-button-disabled {
+      background: #CBCDD1;
+      color: #0000006B;
+      opacity: 0.42;
+      pointer-events: none;
+    }
+    .small-cards-containers .card-icon-down {
+      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
+      color: #FFFFFF;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  `;
+  smallCardsContainer.appendChild(style);
+
+  block.appendChild(smallCardsContainer);
+
+  Array.from(block.children).forEach((child) => {
+    if (child !== smallCardsContainer) {
+      child.style.display = 'none';
+      Array.from(child.children).forEach((grandchild) => grandchild.remove());
+    }
+  });
+}
+
+export default async function decorate(block) {
+
+  try {
+    await loadAnimation();
+    // await renderCard(block);
+    block.innerHTML = `
+    <div class="outer-view" id="CMD">
+    <section class="wd__section section__aiApplication2025-outer-s4 aiApplication2025-outer wd__sections theme-white " id="section__aiApplication2025-outer-s4">
+        <div class="sectionnNavPosition"></div>
+        <div class="section_content">
+          <div class="row">
+              <div class="col l12 m12 s12">
+                <div class="wdblockimg">
+                    <div class="wdblockimg__container block__scroll">
+                      <div class="swiper">
                           <div class="swiper-button-prev"></div>
                           <div class="swiper-button-next"></div>
                           <div class="swiper-wrapper">
@@ -750,73 +840,10 @@ async function renderCard(block) {
         </div>
     </section>
   </div>
-  </div>`;
+  </div>
 
-  smallCardsContainer.innerHTML = html;
 
-  const style = document.createElement('style');
-  style.textContent = `
-    .small-cards-containers .swiper-button-prev,
-    .small-cards-containers .swiper-button-next {
-      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
-      color: #FFFFFF;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      position: absolute;
-      top: auto;
-      bottom: -50px;
-      z-index: 2;
-    }
-    .small-cards-containers .swiper-button-next {
-      right: 10px;
-    }
-    .small-cards-containers .swiper-button-prev {
-      right: 60px;
-      left: auto;
-    }
-    .small-cards-containers .swiper-button-prev::after,
-    .small-cards-containers .swiper-button-next::after {
-      font-size: 12px;
-    }
-    .small-cards-containers .swiper-button-disabled {
-      background: #CBCDD1;
-      color: #0000006B;
-      opacity: 0.42;
-      pointer-events: none;
-    }
-    .small-cards-containers .card-icon-down {
-      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
-      color: #FFFFFF;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
   `;
-  smallCardsContainer.appendChild(style);
-
-  block.appendChild(smallCardsContainer);
-
-  Array.from(block.children).forEach((child) => {
-    if (child !== smallCardsContainer) {
-      child.style.display = 'none';
-      Array.from(child.children).forEach((grandchild) => grandchild.remove());
-    }
-  });
-}
-
-export default async function decorate(block) {
-
-  try {
-    await loadAnimation();
-    await renderCard(block);
     await loadCustomCSS();
     await loadCustomJS();
     await loadSwiper();
