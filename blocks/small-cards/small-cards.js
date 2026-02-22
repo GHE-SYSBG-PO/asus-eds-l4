@@ -157,9 +157,23 @@ function hexToRgb(hex) {
   return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : hex;
 }
 
+/**
+ * Generate video control button position style
+ */
+const getButtonPositionClass = (position) => {
+  const positionMap = {
+    'top-left': 'top-4 left-4',
+    'top-right': 'top-4 right-4',
+    'bottom-left': 'bottom-4 left-4',
+    'bottom-right': 'bottom-4 right-4',
+  };
+  return positionMap[position] || 'bottom-4 right-4';
+};
+
 function getMediaHTML(data) {
   const {
     mediaType, imageAlt, videoAutoPlay, loop, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
+    pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition,
   } = data;
   let content = '';
 
@@ -235,13 +249,33 @@ function getMediaHTML(data) {
               </div>
             </div>`;
   } else if (mediaType === 'video') {
+    const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
+    const isLoop = String(loop).toLowerCase() === 'true';
+    const isPauseAndPlayBtn = String(pauseAndPlayBtn).toLowerCase() === 'true';
+
+    const initialPlayBtnDisplay = isVideoAutoPlay ? 'none' : 'flex';
+    const initialPauseBtnDisplay = isVideoAutoPlay ? 'flex' : 'none';
+    const btnColor = pausePlayBtnColor || '#ffffff';
+    const positionClass = getButtonPositionClass(pausePlayBtnPosition);
+    const controlsDisplay = isPauseAndPlayBtn ? 'flex' : 'none';
+
     content = `
-          <div class="block-img">
-            <video class="img video__bg"
+          <div class="block-img media-block-video-container relative" data-pause-and-play-btn="${isPauseAndPlayBtn}">
+            <video class="img video__bg w-full h-full object-cover"
                 src="${asset}"
-                ${videoAutoPlay ? 'autoplay muted' : ''}
-                ${loop ? 'loop' : ''}>
+                ${isVideoAutoPlay ? 'autoplay muted' : ''}
+                ${isLoop ? 'loop' : ''}
+                playsinline>
             </video>
+            <div class="media-block-controls absolute ${positionClass} z-10" style="display: ${controlsDisplay}; gap: 10px;">
+                <button class="media-block-play-btn rounded-full flex items-center justify-center transition-all" aria-label="Play" style="display: ${initialPlayBtnDisplay}; border: 1px solid ${btnColor};">
+                    <svg viewBox="0 0 36 36" fill="${btnColor}"><path d="M8 5v14l11-7z" transform="translate(6,6)"></path></svg>
+                </button>
+                <button class="media-block-pause-btn rounded-full flex items-center justify-center transition-all" aria-label="Pause" style="display: ${initialPauseBtnDisplay}; border: 1px solid ${btnColor};">
+                    <svg viewBox="0 0 36 36" fill="${btnColor}"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" transform="translate(6,6)"/></svg>
+                </button>
+            </div>
+            ${!isLoop ? `<button class="media-block-replay-btn absolute ${positionClass} z-10 rounded-full flex items-center justify-center transition-all" aria-label="Replay" style="display: none; border: 1px solid ${btnColor};"><svg viewBox="0 0 36 36" fill="${btnColor}"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" transform="translate(6,6)"/></svg></button>` : ''}
           </div>`;
   } else {
     content = `
@@ -438,6 +472,81 @@ async function renderCard(block) {
 
   smallCardsContainer.innerHTML = html;
 
+  // Add event listeners for video controls
+  const videoContainers = smallCardsContainer.querySelectorAll('.media-block-video-container');
+  videoContainers.forEach((container) => {
+    const video = container.querySelector('video');
+    const playBtn = container.querySelector('.media-block-play-btn');
+    const pauseBtn = container.querySelector('.media-block-pause-btn');
+    const replayBtn = container.querySelector('.media-block-replay-btn');
+    const controlsDiv = container.querySelector('.media-block-controls');
+    const pauseAndPlayBtn = container.getAttribute('data-pause-and-play-btn') === 'true';
+
+    if (playBtn) {
+      playBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        video.play();
+      });
+    }
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        video.pause();
+      });
+    }
+    if (replayBtn) {
+      replayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        video.currentTime = 0;
+        video.play();
+      });
+    }
+
+    video.addEventListener('play', () => {
+      if (playBtn) playBtn.style.display = 'none';
+      if (pauseBtn) pauseBtn.style.display = 'flex';
+      if (replayBtn) replayBtn.style.display = 'none';
+      if (controlsDiv) controlsDiv.style.display = 'flex';
+    });
+
+    video.addEventListener('pause', () => {
+      if (playBtn) playBtn.style.display = 'flex';
+      if (pauseBtn) pauseBtn.style.display = 'none';
+    });
+
+    video.addEventListener('ended', () => {
+      if (replayBtn) {
+        replayBtn.style.display = 'flex';
+        if (controlsDiv) controlsDiv.style.display = 'none';
+      } else {
+        if (playBtn) playBtn.style.display = 'flex';
+        if (pauseBtn) pauseBtn.style.display = 'none';
+      }
+    });
+
+    const addButtonsIfNeeded = () => {
+      if (pauseAndPlayBtn) return;
+
+      const { duration } = video;
+      if (duration > 5) {
+        if (controlsDiv) controlsDiv.style.display = 'flex';
+        if (playBtn) playBtn.style.display = 'flex';
+        if (pauseBtn) pauseBtn.style.display = 'none';
+      } else if (controlsDiv) {
+        controlsDiv.style.display = 'none';
+      }
+    };
+
+    video.addEventListener('loadedmetadata', addButtonsIfNeeded);
+
+    if (video.readyState >= 1) {
+      addButtonsIfNeeded();
+    }
+  });
+
   const style = document.createElement('style');
   style.textContent = `
     .small-cards-containers .swiper-button-prev,
@@ -482,6 +591,34 @@ async function renderCard(block) {
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .small-cards-containers .absolute { position: absolute; }
+    .small-cards-containers .relative { position: relative; }
+    .small-cards-containers .z-10 { z-index: 10; }
+    .small-cards-containers .top-4 { top: 1rem; }
+    .small-cards-containers .left-4 { left: 1rem; }
+    .small-cards-containers .right-4 { right: 1rem; }
+    .small-cards-containers .bottom-4 { bottom: 1rem; }
+    .small-cards-containers .media-block-play-btn,
+    .small-cards-containers .media-block-pause-btn,
+    .small-cards-containers .media-block-replay-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    .small-cards-containers .media-block-play-btn svg,
+    .small-cards-containers .media-block-pause-btn svg,
+    .small-cards-containers .media-block-replay-btn svg {
+      width: 36px;
+      height: 36px;
+      display: block;
     }
   `;
   smallCardsContainer.appendChild(style);
