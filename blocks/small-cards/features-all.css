@@ -17643,8 +17643,8 @@ html {
 }
 
 .wdblockimg .block.theme-white .ai__noise__container .img__icon {
-    --img-icon-base-color: black;
-    --img-icon-bg-color: #fff
+    --img-icon-base-color: #9DEBE7;
+    --img-icon-bg-color: #E1EB9D
 }
 
 .wdblockimg .block.theme-white {
@@ -29671,9 +29671,9 @@ i {
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white .ai__noise__container .img__noise .img__voice {
-    --voice-start: #4aa9fd;
-    --voice-end: #127bd7;
-    --voice-bgcolor: #f5f5f5
+    --voice-start: #EBBA9D;
+    --voice-end: #9DEBBC;
+    --voice-bgcolor: #EB9DE8;
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white {
@@ -29693,8 +29693,8 @@ i {
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white .ai__noise__container .img__icon {
-    --img-icon-base-color: #707070;
-    --img-icon-bg-color: transparent
+    --img-icon-base-color: #9DEBE7;
+    --img-icon-bg-color: #E1EB9D
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wd__play__btn .svg_button_replay path {
