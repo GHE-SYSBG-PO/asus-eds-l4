@@ -2433,6 +2433,1213 @@
     ]
   },
   {
+    "id": "small-cards",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "layout",
+        "name": "layout"
+      },
+      {
+        "component": "select",
+        "label": "desktop alignment",
+        "name": "desktopAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "tablet alignment",
+        "name": "tabletAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "mobile alignment",
+        "name": "mobileAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "Arrow Style",
+        "name": "arrowStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "SVG",
+            "value": "svg"
+          },
+          {
+            "name": "PNG",
+            "value": "png"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "Arrow Container BG Color Default",
+        "name": "arrowContainerBgColorDefault",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Arrow Container BG Color Hover",
+        "name": "arrowContainerBgColorHover",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Arrow Container BG Color Press",
+        "name": "arrowContainerBgColorPress",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Arrow Container BG Color Disable",
+        "name": "arrowContainerBgColorDisable",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Arrow Color Default",
+        "name": "arrowColorDefault",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Arrow Color Hover",
+        "name": "arrowColorHover",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Arrow Color Press",
+        "name": "arrowColorPress",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Arrow Color Disable",
+        "name": "arrowColorDisable",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Arrow Default Asset",
+        "name": "arrowAssetDefault",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Arrow Hover Asset",
+        "name": "arrowAssetHover",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Arrow Disable Asset",
+        "name": "arrowAssetDisable",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "Arrow Style",
+        "name": "arrowStyleAdvanced",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "arrowStyle"
+            },
+            "svg"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Border Width Default",
+            "name": "arrowBorderWidthDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Width Hover",
+            "name": "arrowBorderWidthHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Width Press",
+            "name": "arrowBorderWidthPress",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Width Disable",
+            "name": "arrowBorderWidthDisable",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Default",
+            "name": "arrowBorderColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Hover",
+            "name": "arrowBorderColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Press",
+            "name": "arrowBorderColorPress",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Disable",
+            "name": "arrowBorderColorDisable",
+            "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "small-card",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "select",
+        "label": "Card type",
+        "name": "cardType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 – ImageText Integrated Top",
+            "value": "img_txt_integrated_top"
+          },
+          {
+            "name": "Variant 2 – ImageText Integrated Bottom",
+            "value": "img_txt_integrated_bottom"
+          },
+          {
+            "name": "Variant 3 – ImageText Separate Bottom",
+            "value": "img_txt_separate_bottom"
+          },
+          {
+            "name": "Variant 4 – Text Only",
+            "value": "text_only"
+          },
+          {
+            "name": "Variant 5 – TextImg Attached Top",
+            "value": "txt_img_attached_top"
+          },
+          {
+            "name": "Variant 6 – TextImg Attached Bottom",
+            "value": "txt_img_attached_bottom"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "Media Type",
+        "name": "mediaType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Image",
+            "value": "image"
+          },
+          {
+            "name": "Video",
+            "value": "video"
+          },
+          {
+            "name": "Noise Canceling",
+            "value": "noise_canceling"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "image alt text",
+        "name": "imageAlt",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "image"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
+        "label": "Video auto play(on / off)",
+        "name": "videoAutoPlay",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
+        "label": "Loop(on / off)",
+        "name": "loop",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
+        "label": "Nav Replay(on / off)",
+        "name": "navReplay",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
+        "label": "Pause and play btn(show / hide)",
+        "name": "pauseAndPlayBtn",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Pause play btn color",
+        "name": "pausePlayBtnColor",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "Pause play btn position",
+        "name": "pausePlayBtnPosition",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        },
+        "options": [
+          {
+            "name": "TL",
+            "value": "top-left"
+          },
+          {
+            "name": "TR",
+            "value": "top-right"
+          },
+          {
+            "name": "BL",
+            "value": "bottom-left"
+          },
+          {
+            "name": "BR",
+            "value": "bottom-right"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "label": "Noise Canceling Asset",
+        "name": "noiseCancelingAsset",
+        "description": "",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Noise Wave Color",
+        "name": "noiseWaveColor",
+        "description": "",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Voice Wave Color",
+        "name": "voiceWaveColor",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "noise_canceling"
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "Asset",
+        "name": "assetContainerD",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "assets",
+            "name": "assets",
+            "multi": false
+          }
+        ],
+        "condition": {
+          "in": [
+            {
+              "var": "mediaType"
+            },
+            [
+              "image",
+              "video"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "name": "bgColor",
+        "label": "Card BG Color",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "info",
+        "label": "Info",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "CTA Visibility Toggle",
+        "name": "ctaVisible",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "show"
+          },
+          {
+            "name": "Hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "ctaText",
+        "label": "CTA text",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "CTA link type",
+        "name": "ctaLinkType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Text Link",
+            "value": "text-link"
+          },
+          {
+            "name": "Button",
+            "value": "button"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "Anchor Visibility Toggle",
+        "name": "isAnchorVisible",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "true"
+          },
+          {
+            "name": "Hide",
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "Section ID",
+        "name": "sectionID",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "Anchor Style",
+        "name": "anchorStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "SVG",
+            "value": "svg"
+          },
+          {
+            "name": "PNG",
+            "value": "png"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "Anchor Color Default",
+        "name": "anchorColorDefault",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor Color Hover",
+        "name": "anchorColorHover",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor Color Press",
+        "name": "anchorColorPress",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor BG Color Default",
+        "name": "anchorBgColorDefault",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor BG Color Hover",
+        "name": "anchorBgColorHover",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor BG Color Press",
+        "name": "anchorBgColorPress",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Anchor Default Asset",
+        "name": "anchorAssetDefault",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Anchor Hover Asset",
+        "name": "anchorAssetHover",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Anchor Press Asset",
+        "name": "anchorAssetPress",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "Title",
+        "name": "titleAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D)",
+            "name": "titleFontD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md--32",
+                "value": "tt-bd-32"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "titleFontT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md--28",
+                "value": "tt-bd-28"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "titleFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md--24",
+                "value": "tt-bd-24"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color (hex)",
+            "name": "titleFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Info",
+        "name": "infoAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "font Color",
+            "name": "infoFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Border",
+        "name": "borderAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "border color (hex)",
+            "name": "borderColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border width (px)",
+            "name": "borderWidth",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Border Radius",
+        "name": "borderRadiusAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Top Left Radius",
+            "name": "borderRadiusTopLeft",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-tl-lg",
+                "value": "rounded-tl-lg"
+              },
+              {
+                "name": "rounded-tl-md",
+                "value": "rounded-tl-md"
+              },
+              {
+                "name": "rounded-tl-sm",
+                "value": "rounded-tl-sm"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Top Right Radius",
+            "name": "borderRadiusTopRight",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-tr-lg",
+                "value": "rounded-tr-lg"
+              },
+              {
+                "name": "rounded-tr-md",
+                "value": "rounded-tr-md"
+              },
+              {
+                "name": "rounded-tr-sm",
+                "value": "rounded-tr-sm"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Bottom Right Radius",
+            "name": "borderRadiusBottomRight",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-br-lg",
+                "value": "rounded-br-lg"
+              },
+              {
+                "name": "rounded-br-md",
+                "value": "rounded-br-md"
+              },
+              {
+                "name": "rounded-br-sm",
+                "value": "rounded-br-sm"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Bottom Left Radius",
+            "name": "borderRadiusBottomLeft",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "rounded-bl-lg",
+                "value": "rounded-bl-lg"
+              },
+              {
+                "name": "rounded-bl-md",
+                "value": "rounded-bl-md"
+              },
+              {
+                "name": "rounded-bl-sm",
+                "value": "rounded-bl-sm"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "CTA textLink style",
+        "name": "ctaAdvanced",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "text-link"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "ctaFontDT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "ctaFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-rg-20"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color",
+            "name": "ctaFontColor",
+            "valueType": "string"
+          },
+          {
+            "component": "aem-content",
+            "label": "hyperlink (external)",
+            "name": "ctaHyperlink",
+            "multi": false,
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "CTA button style",
+        "name": "cTAButtonStyle",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "button"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "label Text",
+            "name": "gBtnLabel",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "gBtnFontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "gBtnFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "gBtnFontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "gBtnFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "gBtnFontColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color default",
+            "name": "gBtnContainerBgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color hover",
+            "name": "gBtnContainerBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color active",
+            "name": "gBtnContainerBgColorActive",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TL",
+            "name": "gBtnContainerRadiusTL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TR",
+            "name": "gBtnContainerRadiusTR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BR",
+            "name": "gBtnContainerRadiusBR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BL",
+            "name": "gBtnContainerRadiusBL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width",
+            "name": "gBtnBorderWidth",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color",
+            "name": "gBtnBorderColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "Alignment",
+        "name": "alignmentAdvanced",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Anchor Style",
+        "name": "anchorStyleAdvanced",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Border Width Default",
+            "name": "anchorBorderWidthDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Width Hover",
+            "name": "anchorBorderWidthHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Width Press",
+            "name": "anchorBorderWidthPress",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Default",
+            "name": "anchorBorderColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Hover",
+            "name": "anchorBorderColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Press",
+            "name": "anchorBorderColorPress",
+            "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "space",
     "fields": [
       {

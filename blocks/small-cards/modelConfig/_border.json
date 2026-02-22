@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "component": "text",
+      "label": "border color (hex)",
+      "name": "borderColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "border width (px)",
+      "name": "borderWidth",
+      "valueType": "string"
+    }
+  ]
+}

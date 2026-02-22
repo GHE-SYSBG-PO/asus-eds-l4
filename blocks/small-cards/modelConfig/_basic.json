@@ -1,0 +1,305 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "select",
+       "label": "Card type",
+       "name": "cardType",
+       "valueType": "string",
+       "options": [
+        {
+          "name": "Variant 1 – ImageText Integrated Top",
+          "value": "img_txt_integrated_top"
+        },
+        {
+          "name": "Variant 2 – ImageText Integrated Bottom",
+          "value": "img_txt_integrated_bottom"
+        },
+        {
+          "name": "Variant 3 – ImageText Separate Bottom",
+          "value": "img_txt_separate_bottom"
+        },
+        {
+          "name": "Variant 4 – Text Only",
+          "value": "text_only"
+        },
+        {
+          "name": "Variant 5 – TextImg Attached Top",
+          "value": "txt_img_attached_top"
+        },
+        {
+          "name": "Variant 6 – TextImg Attached Bottom",
+          "value": "txt_img_attached_bottom"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Media Type",
+      "name": "mediaType",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Image",
+          "value": "image"
+        },
+        {
+          "name": "Video",
+          "value": "video"
+        },
+        {
+          "name": "Noise Canceling",
+          "value": "noise_canceling"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "image alt text",
+      "name": "imageAlt",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "mediaType" }, "image"] }
+    },
+    {
+      "component": "boolean",
+      "label": "Video auto play(on / off)",
+      "name": "videoAutoPlay",
+      "valueType": "boolean",
+      "condition": { "===": [{ "var": "mediaType" }, "video"] }
+    },
+    {
+      "component": "boolean",
+      "label": "Loop(on / off)",
+      "name": "loop",
+      "valueType": "boolean",
+      "condition": { "===": [{ "var": "mediaType" }, "video"] }
+    },
+    {
+      "component": "boolean",
+      "label": "Nav Replay(on / off)",
+      "name": "navReplay",
+      "valueType": "boolean",
+      "condition": { "===": [{ "var": "mediaType" }, "video"] }
+    },
+    {
+      "component": "boolean",
+      "label": "Pause and play btn(show / hide)",
+      "name": "pauseAndPlayBtn",
+      "valueType": "boolean",
+      "condition": { "===": [{ "var": "mediaType" }, "video"] }
+    },
+    {
+      "component": "text",
+      "label": "Pause play btn color",
+      "name": "pausePlayBtnColor",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "mediaType" }, "video"] }
+    },
+    {
+      "component": "select",
+      "label": "Pause play btn position",
+      "name": "pausePlayBtnPosition",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "mediaType" }, "video"] },
+      "options": [
+        {
+          "name": "TL",
+          "value": "top-left"
+        },
+        {
+          "name": "TR",
+          "value": "top-right"
+        },
+        {
+          "name": "BL",
+          "value": "bottom-left"
+        },
+        {
+          "name": "BR",
+          "value": "bottom-right"
+        }
+      ]
+    },
+    {
+      "component": "reference",
+       "label": "Noise Canceling Asset",
+       "name": "noiseCancelingAsset",
+       "description": "",
+       "multi": false,
+       "condition": { "===": [{ "var": "mediaType" }, "noise_canceling"] }
+    },
+    {
+      "component": "text",
+       "label": "Noise Wave Color",
+       "name": "noiseWaveColor",
+       "description": "",
+       "valueType": "string",
+       "condition": { "===": [{ "var": "mediaType" }, "noise_canceling"] }
+    },
+    {
+      "component": "text",
+       "label": "Voice Wave Color",
+       "name": "voiceWaveColor",
+       "valueType": "string",
+       "condition": { "===": [{ "var": "mediaType" }, "noise_canceling"] }
+    },
+    {
+      "component": "container",
+      "label": "Asset",
+      "name": "assetContainerD",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "reference",
+          "label": "assets",
+          "name": "assets",
+          "multi": false
+        }
+      ],
+      "condition": { "in": [{ "var": "mediaType" }, ["image", "video"]] }
+    },
+    {
+      "component": "text",
+      "name": "bgColor",
+      "label": "Card BG Color",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "name": "title",
+      "label": "Title",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "name": "info",
+      "label": "Info",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "CTA Visibility Toggle",
+      "name": "ctaVisible",
+      "valueType": "string",
+      "options": [
+        { "name": "Show", "value": "show" },
+        { "name": "Hide", "value": "hide" }
+      ]
+    },
+    {
+      "component": "text",
+      "name": "ctaText",
+      "label": "CTA text",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "CTA link type",
+      "name": "ctaLinkType",
+      "valueType": "string",
+      "options": [
+        { "name": "Text Link", "value": "text-link" },
+        { "name": "Button", "value": "button" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Anchor Visibility Toggle",
+      "name": "isAnchorVisible",
+      "valueType": "string",
+      "options": [
+        { "name": "Show", "value": "true" },
+        { "name": "Hide", "value": "false" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Section ID",
+      "name": "sectionID",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "Anchor Style",
+      "name": "anchorStyle",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "SVG",
+          "value": "svg"
+        },
+        {
+          "name": "PNG",
+          "value": "png"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Anchor Color Default",
+      "name": "anchorColorDefault",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor Color Hover",
+      "name": "anchorColorHover",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor Color Press",
+      "name": "anchorColorPress",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor BG Color Default",
+      "name": "anchorBgColorDefault",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor BG Color Hover",
+      "name": "anchorBgColorHover",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor BG Color Press",
+      "name": "anchorBgColorPress",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "reference",
+      "label": "Anchor Default Asset",
+      "name": "anchorAssetDefault",
+      "multi": false,
+      "condition": { "===": [{ "var": "anchorStyle" }, "png"] }
+    },
+    {
+      "component": "reference",
+      "label": "Anchor Hover Asset",
+      "name": "anchorAssetHover",
+      "multi": false,
+      "condition": { "===": [{ "var": "anchorStyle" }, "png"] }
+    },
+    {
+      "component": "reference",
+      "label": "Anchor Press Asset",
+      "name": "anchorAssetPress",
+      "multi": false,
+      "condition": { "===": [{ "var": "anchorStyle" }, "png"] }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "label": "Title",
+      "name": "titleAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_title.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Info",
+      "name": "infoAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_info.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Border",
+      "name": "borderAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_border.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Border Radius",
+      "name": "borderRadiusAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_border-radius.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "CTA textLink style",
+      "name": "ctaAdvanced",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{"var" : "ctaLinkType"}, "text-link"] }
+        ]
+      },
+      "fields": [
+        {
+          "...": "./_cta.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "CTA button style",
+      "name": "cTAButtonStyle",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{"var" : "ctaLinkType"}, "button"] }
+        ]
+      },
+      "fields": [
+        {
+          "...": "../../../components/button/_button.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Alignment",
+      "name": "alignmentAdvanced",
+      "valueType": "string",
+      "options": [
+        { "name": "Center", "value": "center" },
+        { "name": "Left", "value": "left" }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Anchor Style",
+      "name": "anchorStyleAdvanced",
+      "collapsible": true,
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Border Width Default",
+          "name": "anchorBorderWidthDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Border Width Hover",
+          "name": "anchorBorderWidthHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Border Width Press",
+          "name": "anchorBorderWidthPress",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Border Color Default",
+          "name": "anchorBorderColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Border Color Hover",
+          "name": "anchorBorderColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Border Color Press",
+          "name": "anchorBorderColorPress",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

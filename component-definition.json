@@ -250,6 +250,37 @@
           }
         },
         {
+          "title": "Small Cards (ID:13)",
+          "id": "small-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Small Cards",
+                  "model": "small-cards",
+                  "filter": "small-cards"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Small Card",
+          "id": "small-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Small Card",
+                  "model": "small-card"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Space(ID:183)",
           "id": "space",
           "plugins": {
