@@ -135,63 +135,6 @@
           "valueType": "string"
         }
       ]
-    },
-    {
-      "component": "container",
-      "label": "Arrow Style",
-      "name": "arrowStyleAdvanced",
-      "collapsible": true,
-      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] },
-      "fields": [
-        {
-          "component": "text",
-          "label": "Border Width Default",
-          "name": "arrowBorderWidthDefault",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Border Width Hover",
-          "name": "arrowBorderWidthHover",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Border Width Press",
-          "name": "arrowBorderWidthPress",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Border Width Disable",
-          "name": "arrowBorderWidthDisable",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Border Color Default",
-          "name": "arrowBorderColorDefault",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Border Color Hover",
-          "name": "arrowBorderColorHover",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Border Color Press",
-          "name": "arrowBorderColorPress",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Border Color Disable",
-          "name": "arrowBorderColorDisable",
-          "valueType": "string"
-        }
-      ]
     }
   ]
 }

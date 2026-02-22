@@ -10,6 +10,30 @@ const DEFAULT_CONFIG = {
   // tabletAlignment: 'center',
   // mobileAlignment: 'center',
 
+  // Swiper Arrow (Previous / Next)
+  arrowStyle: '',
+  arrowContainerBgColorDefault: '',
+  arrowContainerBgColorHover: '',
+  arrowContainerBgColorPress: '',
+  arrowContainerBgColorDisable: '',
+  arrowColorDefault: '',
+  arrowColorHover: '',
+  arrowColorPress: '',
+  arrowColorDisable: '',
+  arrowAssetDefault: '',
+  arrowAssetHover: '',
+  arrowAssetDisable: '',
+
+  // Swiper Arrow (Previous / Next)
+  arrowBorderWidthDefault: '',
+  arrowBorderWidthHover: '',
+  arrowBorderWidthPress: '',
+  arrowBorderWidthDisable: '',
+  arrowBorderColorDefault: '',
+  arrowBorderColorHover: '',
+  arrowBorderColorPress: '',
+  arrowBorderColorDisable: '',
+
   //  Base Tab
   cardType: '',
   mediaType: '',
@@ -50,21 +74,6 @@ const DEFAULT_CONFIG = {
   anchorAssetDefault: '',
   anchorAssetHover: '',
   anchorAssetPress: '',
-
-  // Swiper Arrow (Previous / Next)
-  arrowStyle: '',
-  arrowContainerBgColorDefault: '',
-  arrowContainerBgColorHover: '',
-  arrowContainerBgColorPress: '',
-  arrowContainerBgColorDisable: '',
-  arrowColorDefault: '',
-  arrowColorHover: '',
-  arrowColorPress: '',
-  arrowColorDisable: '',
-  arrowAssetDefault: '',
-  arrowAssetHover: '',
-  arrowAssetDisable: '',
-
 
   // Advanced Tab
 
@@ -119,15 +128,6 @@ const DEFAULT_CONFIG = {
   anchorBorderColorHover: '',
   anchorBorderColorPress: '',
 
-  // Swiper Arrow (Previous / Next)
-  arrowBorderWidthDefault: '',
-  arrowBorderWidthHover: '',
-  arrowBorderWidthPress: '',
-  arrowBorderWidthDisable: '',
-  arrowBorderColorDefault: '',
-  arrowBorderColorHover: '',
-  arrowBorderColorPress: '',
-  arrowBorderColorDisable: '',
 };
 
 
