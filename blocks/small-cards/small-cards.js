@@ -159,7 +159,7 @@ function hexToRgb(hex) {
 
 function getMediaHTML(data) {
   const {
-    mediaType, imageAlt, videoAutoPlay, loop, title, noiseWaveColor, voiceWaveColor,
+    mediaType, imageAlt, videoAutoPlay, loop, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
   } = data;
   let content = '';
 
@@ -218,8 +218,7 @@ function getMediaHTML(data) {
                   aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
                   <figure class="img img__noise grace-show show animated" role="presentation" aria-hidden="true">
                     <div class="img__voice">
-                        <img src="${asset}" alt="${imageAlt}">
-                        
+                        <img src="${noiseCancelingAsset}" alt="${imageAlt}">
                     </div>
                     <canvas class="noise__left" width="800" height="400"></canvas>
                     <canvas class="noise__right" width="800" height="400"></canvas>
