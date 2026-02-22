@@ -237,7 +237,7 @@ function getMediaHTML(data) {
   } else if (mediaType === 'video') {
     content = `
           <div class="block-img">
-            <video class="img img__bg"
+            <video class="img video__bg"
                 src="${asset}"
                 ${videoAutoPlay ? 'autoplay muted' : ''}
                 ${loop ? 'loop' : ''}>
