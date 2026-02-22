@@ -17469,9 +17469,9 @@ html {
 }
 
 .wdblockimg .ai__noise__container .img__noise .img__voice {
-    --voice-start: #EBBA9D;
-    --voice-end: #9DEBBC;
-    --voice-bgcolor: #EB9DE8;
+    --voice-start: #9db9eb;
+    --voice-end: #5a4f89;
+    --voice-bgcolor: #fff;
     margin-top: calc(var(--voice-iconSize) * -.5);
     margin-left: calc(var(--voice-iconSize) * -.5);
     width: var(--voice-iconSize);
@@ -17500,8 +17500,8 @@ html {
 }
 
 .wdblockimg .ai__noise__container .img__icon {
-    --img-icon-base-color: #9DEBE7;
-    --img-icon-bg-color: #E1EB9D
+    --img-icon-base-color: #4a47fe;
+    --img-icon-bg-color: #fff
 }
 
 .wdblockimg .ai__noise__container .img__icon .svg_button_play .svg-circle {
@@ -17637,14 +17637,14 @@ html {
 }
 
 .wdblockimg .block.theme-white .ai__noise__container .img__noise .img__voice {
-    --voice-start: #EBBA9D;
-    --voice-end: #9DEBBC;
-    --voice-bgcolor: #EB9DE8;
+    --voice-start: #74a1d3;
+    --voice-end: #406cac;
+    --voice-bgcolor: #fff
 }
 
 .wdblockimg .block.theme-white .ai__noise__container .img__icon {
-    --img-icon-base-color: #9DEBE7;
-    --img-icon-bg-color: #E1EB9D
+    --img-icon-base-color: black;
+    --img-icon-bg-color: #fff
 }
 
 .wdblockimg .block.theme-white {
@@ -17662,14 +17662,14 @@ html {
 }
 
 .wdblockimg .block.theme-black .ai__noise__container .img__noise .img__voice {
-    --voice-start: #EBBA9D;
-    --voice-end: #9DEBBC;
-    --voice-bgcolor: #EB9DE8;
+    --voice-start: #dfc9a9;
+    --voice-end: #9a7a59;
+    --voice-bgcolor: #000
 }
 
 .wdblockimg .block.theme-black .ai__noise__container .img__icon {
-     --img-icon-base-color: #9DEBE7;
-    --img-icon-bg-color: #E1EB9D
+    --img-icon-base-color: #fff;
+    --img-icon-bg-color: #000
 }
 
 .wdblockimg .block.theme-black {
@@ -29671,9 +29671,9 @@ i {
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white .ai__noise__container .img__noise .img__voice {
-    --voice-start: #EBBA9D;
-    --voice-end: #9DEBBC;
-    --voice-bgcolor: #EB9DE8;
+    --voice-start: #4aa9fd;
+    --voice-end: #127bd7;
+    --voice-bgcolor: #f5f5f5
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white {
@@ -29693,8 +29693,8 @@ i {
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white .ai__noise__container .img__icon {
-    --img-icon-base-color: #9DEBE7;
-    --img-icon-bg-color: #E1EB9D
+    --img-icon-base-color: #707070;
+    --img-icon-bg-color: transparent
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wd__play__btn .svg_button_replay path {
