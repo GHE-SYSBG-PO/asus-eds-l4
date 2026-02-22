@@ -496,13 +496,13 @@ async function renderCard(block) {
 export default async function decorate(block) {
 
   try {
-    await renderCard(block);
+    await loadNoUiSliderCSS();
+    await loadNoUiSliderJquery();
+    await renderCard(block); // Html structure and content
+    await initializeSwiperCarousel(block);
     await loadSwiper();
 
     setTimeout(async () => {
-      await initializeSwiperCarousel(block);
-      await loadNoUiSliderJquery();
-      await loadNoUiSliderCSS();
       await loadNoUiSlider();
 
       setEqualHeight(block);
