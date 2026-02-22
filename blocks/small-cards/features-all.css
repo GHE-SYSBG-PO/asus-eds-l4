@@ -17500,7 +17500,7 @@ html {
 }
 
 .wdblockimg .ai__noise__container .img__icon {
-    --img-icon-base-color: #4a47fe;
+    --img-icon-base-color: #2f2f2f;
     --img-icon-bg-color: #fff
 }
 
@@ -17643,7 +17643,7 @@ html {
 }
 
 .wdblockimg .block.theme-white .ai__noise__container .img__icon {
-    --img-icon-base-color: black;
+    --img-icon-base-color: #2f2f2f;
     --img-icon-bg-color: #fff
 }
 
@@ -29693,12 +29693,12 @@ i {
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wdblockimg .block.theme-white .ai__noise__container .img__icon {
-    --img-icon-base-color: #707070;
+    --img-icon-base-color: #2f2f2f;
     --img-icon-bg-color: transparent
 }
 
 .section__aiApplication2025-outer-s4 .section_content .wd__play__btn .svg_button_replay path {
-    fill: #707070
+    fill: #2f2f2f
 }
 
 .section__aiApplication2025-outer-s4 .wdblockimg .block .block-img::before {
