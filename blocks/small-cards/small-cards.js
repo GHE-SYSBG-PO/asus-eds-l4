@@ -541,9 +541,58 @@ async function renderCard(block) {
 
   console.log('Extracted chunk, Final Card Data:', data);
 
+  const configData = Array.isArray(data) ? data[0] : data;
+  const {
+    arrowStyle,
+    arrowContainerBgColorDefault,
+    arrowContainerBgColorHover,
+    arrowContainerBgColorPress,
+    arrowContainerBgColorDisable,
+    arrowColorDefault,
+    arrowColorHover,
+    arrowColorPress,
+    arrowColorDisable,
+    arrowAssetDefault,
+    arrowAssetHover,
+    arrowAssetDisable,
+    arrowBorderWidthDefault,
+    arrowBorderWidthHover,
+    arrowBorderWidthPress,
+    arrowBorderWidthDisable,
+    arrowBorderColorDefault,
+    arrowBorderColorHover,
+    arrowBorderColorPress,
+    arrowBorderColorDisable,
+  } = configData;
+
+  let arrowStyleVars = '';
+  if (arrowStyle === 'svg') {
+    if (arrowContainerBgColorDefault) arrowStyleVars += `--arrow-container-bg-default: #${arrowContainerBgColorDefault};`;
+    if (arrowContainerBgColorHover) arrowStyleVars += `--arrow-container-bg-hover: #${arrowContainerBgColorHover};`;
+    if (arrowContainerBgColorPress) arrowStyleVars += `--arrow-container-bg-press: #${arrowContainerBgColorPress};`;
+    if (arrowContainerBgColorDisable) arrowStyleVars += `--arrow-container-bg-disable: #${arrowContainerBgColorDisable};`;
+
+    if (arrowColorDefault) arrowStyleVars += `--arrow-color-default: #${arrowColorDefault};`;
+    if (arrowColorHover) arrowStyleVars += `--arrow-color-hover: #${arrowColorHover};`;
+    if (arrowColorPress) arrowStyleVars += `--arrow-color-press: #${arrowColorPress};`;
+    if (arrowColorDisable) arrowStyleVars += `--arrow-color-disable: #${arrowColorDisable};`;
+
+    if (arrowBorderWidthDefault) arrowStyleVars += `--arrow-border-width-default: ${arrowBorderWidthDefault}px;`;
+    if (arrowBorderWidthHover) arrowStyleVars += `--arrow-border-width-hover: ${arrowBorderWidthHover}px;`;
+    if (arrowBorderWidthPress) arrowStyleVars += `--arrow-border-width-press: ${arrowBorderWidthPress}px;`;
+    if (arrowBorderWidthDisable) arrowStyleVars += `--arrow-border-width-disable: ${arrowBorderWidthDisable}px;`;
+
+    if (arrowBorderColorDefault) arrowStyleVars += `--arrow-border-color-default: #${arrowBorderColorDefault};`;
+    if (arrowBorderColorHover) arrowStyleVars += `--arrow-border-color-hover: #${arrowBorderColorHover};`;
+    if (arrowBorderColorPress) arrowStyleVars += `--arrow-border-color-press: #${arrowBorderColorPress};`;
+    if (arrowBorderColorDisable) arrowStyleVars += `--arrow-border-color-disable: #${arrowBorderColorDisable};`;
+  }
 
   const smallCardsContainer = document.createElement('div');
   smallCardsContainer.className = 'small-cards-containers';
+  if (arrowStyleVars) {
+    smallCardsContainer.style.cssText = arrowStyleVars;
+  }
 
   const cardHTML = Array.isArray(data)
     ? data.map((item) => getCardHTML(item)).join('')
@@ -656,15 +705,20 @@ async function renderCard(block) {
   style.textContent = `
     .small-cards-containers .swiper-button-prev,
     .small-cards-containers .swiper-button-next {
-      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
-      color: #FFFFFF;
+      background: var(--arrow-container-bg-default, linear-gradient(180deg, #4379B1 0%, #5977A1 100%));
+      color: var(--arrow-color-default, #FFFFFF);
+      border: var(--arrow-border-width-default, 0px) solid var(--arrow-border-color-default, transparent);
       width: 36px;
       height: 36px;
       border-radius: 50%;
       position: absolute;
       top: auto;
-      bottom: -50px;
+      bottom: -60px;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
     }
     .small-cards-containers .swiper-button-next {
       right: 10px;
@@ -677,11 +731,65 @@ async function renderCard(block) {
     .small-cards-containers .swiper-button-next::after {
       font-size: 12px;
     }
-    .small-cards-containers .swiper-button-disabled {
-      background: #CBCDD1;
-      color: #0000006B;
+    .small-cards-containers .swiper-button-prev:hover,
+    .small-cards-containers .swiper-button-next:hover {
+      background: var(--arrow-container-bg-hover, var(--arrow-container-bg-default));
+      color: var(--arrow-color-hover, var(--arrow-color-default));
+      border-color: var(--arrow-border-color-hover, var(--arrow-border-color-default));
+      border-width: var(--arrow-border-width-hover, var(--arrow-border-width-default));
+    }
+    .small-cards-containers .swiper-button-prev:active,
+    .small-cards-containers .swiper-button-next:active {
+      background: var(--arrow-container-bg-press, var(--arrow-container-bg-hover));
+      color: var(--arrow-color-press, var(--arrow-color-hover));
+      border-color: var(--arrow-border-color-press, var(--arrow-border-color-hover));
+      border-width: var(--arrow-border-width-press, var(--arrow-border-width-hover));
+    }
+    .small-cards-containers .swiper-button-disabled,
+    .small-cards-containers .swiper-button-disabled:hover,
+    .small-cards-containers .swiper-button-disabled:active {
+      background: var(--arrow-container-bg-disable, #CBCDD1);
+      color: var(--arrow-color-disable, #0000006B);
+      border-color: var(--arrow-border-color-disable, transparent);
+      border-width: var(--arrow-border-width-disable, 0px);
       opacity: 0.42;
       pointer-events: none;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png,
+    .small-cards-containers .swiper-button-next.arrow-png {
+        background: none;
+        border: none;
+        border-radius: 0;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png img,
+    .small-cards-containers .swiper-button-next.arrow-png img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: none;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png .arrow-default,
+    .small-cards-containers .swiper-button-next.arrow-png .arrow-default {
+        display: block;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png:hover .arrow-default,
+    .small-cards-containers .swiper-button-next.arrow-png:hover .arrow-default {
+        display: none;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png:hover .arrow-hover,
+    .small-cards-containers .swiper-button-next.arrow-png:hover .arrow-hover {
+        display: block;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png:active .arrow-hover,
+    .small-cards-containers .swiper-button-next.arrow-png:active .arrow-hover {
+        display: none;
+    }
+    .small-cards-containers .swiper-button-disabled.arrow-png .arrow-default,
+    .small-cards-containers .swiper-button-disabled.arrow-png:hover .arrow-hover {
+        display: none;
+    }
+    .small-cards-containers .swiper-button-disabled.arrow-png .arrow-disable {
+        display: block;
     }
     .small-cards-containers .card-icon-down {
       width: 36px;
