@@ -178,10 +178,6 @@ function getMediaHTML(data) {
               <div class="nav__noise">
                   <div class="wdga nav__item nav__1" data-index="1" data-status="off" data-gaid="noiseCancelBtn1" role="button" tabindex="0"
                     aria-label="Play the simulated home sounds without noise cancelation.">
-                    <div class="nav__aria_data hide"
-                        data-desc-start="Pause the simulated home sounds without noise cancelation."
-                        data-desc-stop="Play the simulated home sounds without noise cancelation."
-                        data-desc-ai="Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself."></div>
                     <div class="nav__content">
                         <div class="img__icon" aria-hidden="true">
                           <svg class="svg_button_play" viewBox="0 0 85 85" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -226,7 +222,7 @@ function getMediaHTML(data) {
               <div class="noise__switcher" aria-hidden="true">
                   <p class="adaDesc noise_desc"></p>
                   <button class="aiNoiseSwitcher_btn img__switcher switcher_button wdga" id="Item_21_conferenceS1span3_aiNoiseSwitcher" role="switch" data-status="false" data-on="AI noise cancelation, pressed, on" data-off="AI noise cancelation, pressed, off" aria-checked="false">
-                  <label class="hide" for="Item_21_conferenceS1span3_aiNoiseSwitcher">AI noise cancelation, pressed, off</label>
+                    <label class="hide" for="Item_21_conferenceS1span3_aiNoiseSwitcher">AI noise cancelation, pressed, off</label>
                   </button>
                   <audio class="noise__audio" aria-hidden="true">
                     <source src="" type="audio/mpeg">
