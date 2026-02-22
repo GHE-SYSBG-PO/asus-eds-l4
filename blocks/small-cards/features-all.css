@@ -17505,8 +17505,8 @@ html {
 }
 
 .wdblockimg .ai__noise__container .img__icon .svg_button_play .svg-circle {
-    fill: var(--img-icon-bg-color)!important;
-    stroke: var(--img-icon-base-color)!important
+    /* fill: var(--img-icon-bg-color)!important;
+    stroke: var(--img-icon-base-color)!important */
 }
 
 .wdblockimg .ai__noise__container .img__icon .svg_button_play .svg-line {
