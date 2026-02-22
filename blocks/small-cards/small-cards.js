@@ -150,17 +150,34 @@ async function fillSequentialConfig(block) {
   return configArray;
 }
 
+function hexToRgb(hex) {
+  if (!hex) return '';
+  if (hex.includes(',')) return hex;
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : hex;
+}
+
 function getMediaHTML(data) {
   const {
-    mediaType, imageAlt, videoAutoPlay, loop, title,
+    mediaType, imageAlt, videoAutoPlay, loop, title, noiseWaveColor, voiceWaveColor,
   } = data;
   let content = '';
 
   const asset = getValueForDevice('assets', data) || data.assets;
 
   if (mediaType === 'noise_canceling') {
+    let style = '';
+    if (noiseWaveColor) {
+      const rgb = hexToRgb(noiseWaveColor);
+      if (rgb) style += `--themecolor-middle: ${rgb};`;
+    }
+    if (voiceWaveColor) {
+      const rgb = hexToRgb(voiceWaveColor);
+      if (rgb) style += `--themecolor-main: ${rgb}; --themecolor-filter: ${rgb};`;
+    }
+
     content = `
-             <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
+             <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style}">
               <div class="nav__replay">
                   <div class="wd__play__btn video__play__btn">
                     <button class="wd__play__btn-button is-hidden" aria-label="replay the ai noise animation" tabindex="-1" id="aiApplication_s4_noise_replay_btn" aria-hidden="true" data-eventname="undefined">
