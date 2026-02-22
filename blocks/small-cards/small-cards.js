@@ -623,10 +623,17 @@ async function renderCard(block) {
       height: 36px;
       display: block;
     }
-    .small-cards-containers .block:has(.card-icon-down) .nav__replay,
     .small-cards-containers .block:has(.card-icon-down) .nav__noise {
       bottom: 15px;
       left: 15px;
+      right: auto;
+      top: auto;
+      position: absolute;
+      z-index: 2;
+    }
+    .small-cards-containers .block:has(.card-icon-down) .nav__replay {
+      bottom: 15px;
+      left: 60px;
       right: auto;
       top: auto;
       position: absolute;
