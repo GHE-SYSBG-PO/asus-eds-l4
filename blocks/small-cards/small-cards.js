@@ -652,8 +652,6 @@ async function renderCard(block) {
       pointer-events: none;
     }
     .small-cards-containers .card-icon-down {
-      background: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
-      color: #FFFFFF;
       width: 36px;
       height: 36px;
       border-radius: 50%;
