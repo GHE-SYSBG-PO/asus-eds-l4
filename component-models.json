@@ -2724,7 +2724,7 @@
       {
         "component": "text",
         "name": "bgColor",
-        "label": "Card bg color",
+        "label": "Card BG Color",
         "valueType": "string"
       },
       {
