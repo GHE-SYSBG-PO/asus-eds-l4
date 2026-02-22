@@ -17469,9 +17469,9 @@ html {
 }
 
 .wdblockimg .ai__noise__container .img__noise .img__voice {
-    --voice-start: #9db9eb;
-    --voice-end: #5a4f89;
-    --voice-bgcolor: #fff;
+    --voice-start: #EBBA9D;
+    --voice-end: #9DEBBC;
+    --voice-bgcolor: #EB9DE8;
     margin-top: calc(var(--voice-iconSize) * -.5);
     margin-left: calc(var(--voice-iconSize) * -.5);
     width: var(--voice-iconSize);
