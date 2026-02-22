@@ -2800,6 +2800,148 @@
         "valueType": "string"
       },
       {
+        "component": "select",
+        "label": "Anchor Style",
+        "name": "anchorStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "SVG",
+            "value": "svg"
+          },
+          {
+            "name": "PNG",
+            "value": "png"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "Anchor Color Default",
+        "name": "anchorColorDefault",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor Color Hover",
+        "name": "anchorColorHover",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor Color Press",
+        "name": "anchorColorPress",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor BG Color Default",
+        "name": "anchorBgColorDefault",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor BG Color Hover",
+        "name": "anchorBgColorHover",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Anchor BG Color Press",
+        "name": "anchorBgColorPress",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Anchor Default Asset",
+        "name": "anchorAssetDefault",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Anchor Hover Asset",
+        "name": "anchorAssetHover",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "Anchor Press Asset",
+        "name": "anchorAssetPress",
+        "multi": false,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "png"
+          ]
+        }
+      },
+      {
         "component": "tab",
         "label": "advanced",
         "name": "advanced"
@@ -3192,6 +3334,58 @@
           {
             "name": "Left",
             "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Anchor Style",
+        "name": "anchorStyleAdvanced",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "anchorStyle"
+            },
+            "svg"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Border Width Default",
+            "name": "anchorBorderWidthDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Width Hover",
+            "name": "anchorBorderWidthHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Width Press",
+            "name": "anchorBorderWidthPress",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Default",
+            "name": "anchorBorderColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Hover",
+            "name": "anchorBorderColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Press",
+            "name": "anchorBorderColorPress",
+            "valueType": "string"
           }
         ]
       }

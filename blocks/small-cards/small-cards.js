@@ -35,6 +35,16 @@ const DEFAULT_CONFIG = {
   ctaLinkType: 'button',
   isAnchorVisible: 'false',
   sectionID: '',
+  anchorStyle: '',
+  anchorColorDefault: '',
+  anchorColorHover: '',
+  anchorColorPress: '',
+  anchorBgColorDefault: '',
+  anchorBgColorHover: '',
+  anchorBgColorPress: '',
+  anchorAssetDefault: '',
+  anchorAssetHover: '',
+  anchorAssetPress: '',
 
   // Advanced Tab
 
@@ -80,6 +90,12 @@ const DEFAULT_CONFIG = {
   gBtnBorderWidth: '',
   gBtnBorderColor: '',
   alignmentAdvanced: 'left',
+  anchorBorderWidthDefault: '',
+  anchorBorderWidthHover: '',
+  anchorBorderWidthPress: '',
+  anchorBorderColorDefault: '',
+  anchorBorderColorHover: '',
+  anchorBorderColorPress: '',
 };
 
 
@@ -311,6 +327,16 @@ function getCardHTML(data) {
     ctaLinkType,
     isAnchorVisible,
     sectionID,
+    anchorStyle,
+    anchorColorDefault,
+    anchorColorHover,
+    anchorColorPress,
+    anchorBgColorDefault,
+    anchorBgColorHover,
+    anchorBgColorPress,
+    anchorAssetDefault,
+    anchorAssetHover,
+    anchorAssetPress,
     ctaFontDT,
     ctaFontM,
     ctaFontColor,
@@ -319,6 +345,12 @@ function getCardHTML(data) {
     borderRadiusBottomLeft,
     borderRadiusBottomRight,
     alignmentAdvanced,
+    anchorBorderWidthDefault,
+    anchorBorderWidthHover,
+    anchorBorderWidthPress,
+    anchorBorderColorDefault,
+    anchorBorderColorHover,
+    anchorBorderColorPress,
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
@@ -393,13 +425,50 @@ function getCardHTML(data) {
   const mediaHTML = showMedia ? getMediaHTML(data) : '';
   const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative; overflow: hidden;`;
 
-  const iconHTML = `
-    <div class="card-icon-down">
-        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1L7 7L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </div>
-  `;
+  let iconHTML = '';
+  if (isAnchorVisible === 'true') {
+    let anchorStyleVars = '';
+    if (anchorStyle === 'svg') {
+      if (anchorColorDefault) anchorStyleVars += `--anchor-color-default: #${anchorColorDefault};`;
+      if (anchorColorHover) anchorStyleVars += `--anchor-color-hover: #${anchorColorHover};`;
+      if (anchorColorPress) anchorStyleVars += `--anchor-color-press: #${anchorColorPress};`;
+      if (anchorBgColorDefault) anchorStyleVars += `--anchor-bg-default: #${anchorBgColorDefault};`;
+      if (anchorBgColorHover) anchorStyleVars += `--anchor-bg-hover: #${anchorBgColorHover};`;
+      if (anchorBgColorPress) anchorStyleVars += `--anchor-bg-press: #${anchorBgColorPress};`;
+      if (anchorBorderWidthDefault) anchorStyleVars += `--anchor-border-width-default: ${anchorBorderWidthDefault}px;`;
+      if (anchorBorderWidthHover) anchorStyleVars += `--anchor-border-width-hover: ${anchorBorderWidthHover}px;`;
+      if (anchorBorderWidthPress) anchorStyleVars += `--anchor-border-width-press: ${anchorBorderWidthPress}px;`;
+      if (anchorBorderColorDefault) anchorStyleVars += `--anchor-border-color-default: #${anchorBorderColorDefault};`;
+      if (anchorBorderColorHover) anchorStyleVars += `--anchor-border-color-hover: #${anchorBorderColorHover};`;
+      if (anchorBorderColorPress) anchorStyleVars += `--anchor-border-color-press: #${anchorBorderColorPress};`;
+
+      iconHTML = `
+        <div class="card-icon-down anchor-svg" style="${anchorStyleVars}">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+      `;
+    } else if (anchorStyle === 'png') {
+      iconHTML = `
+        <div class="card-icon-down anchor-png">
+            <img src="${anchorAssetDefault}" alt="anchor" class="anchor-default"/>
+            ${anchorAssetHover ? `<img src="${anchorAssetHover}" alt="anchor hover" class="anchor-hover"/>` : ''}
+            ${anchorAssetPress ? `<img src="${anchorAssetPress}" alt="anchor press" class="anchor-press"/>` : ''}
+        </div>
+      `;
+    } else {
+      // Fallback to default SVG style if no style is selected or matched
+      iconHTML = `
+        <div class="card-icon-down">
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7 7L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+      `;
+    }
+  }
+
 
   return `
       <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft} ${cardBlockType}" 
@@ -639,6 +708,47 @@ async function renderCard(block) {
       top: auto;
       position: absolute;
       z-index: 2;
+    }
+    .small-cards-containers .card-icon-down.anchor-svg {
+      background-color: var(--anchor-bg-default, linear-gradient(180deg, #4379B1 0%, #5977A1 100%));
+      color: var(--anchor-color-default, #FFFFFF);
+      border: var(--anchor-border-width-default, 0px) solid var(--anchor-border-color-default, transparent);
+      transition: all 0.3s ease;
+    }
+    .small-cards-containers .card-icon-down.anchor-svg:hover {
+      background-color: var(--anchor-bg-hover, var(--anchor-bg-default));
+      color: var(--anchor-color-hover, var(--anchor-color-default));
+      border: var(--anchor-border-width-hover, var(--anchor-border-width-default)) solid var(--anchor-border-color-hover, var(--anchor-border-color-default));
+    }
+    .small-cards-containers .card-icon-down.anchor-svg:active {
+      background-color: var(--anchor-bg-press, var(--anchor-bg-hover));
+      color: var(--anchor-color-press, var(--anchor-color-hover));
+      border: var(--anchor-border-width-press, var(--anchor-border-width-hover)) solid var(--anchor-border-color-press, var(--anchor-border-color-hover));
+    }
+    .small-cards-containers .card-icon-down.anchor-png {
+      background: none;
+      border-radius: 0;
+    }
+    .small-cards-containers .card-icon-down.anchor-png img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+    .small-cards-containers .card-icon-down.anchor-png .anchor-default {
+      display: block;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:hover .anchor-default {
+      display: none;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:hover .anchor-hover {
+      display: block;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:active .anchor-hover {
+      display: none;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:active .anchor-press {
+      display: block;
     }
   `;
   smallCardsContainer.appendChild(style);

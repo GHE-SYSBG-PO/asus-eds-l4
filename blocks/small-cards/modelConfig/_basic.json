@@ -214,6 +214,85 @@
       "label": "Section ID",
       "name": "sectionID",
       "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "Anchor Style",
+      "name": "anchorStyle",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "SVG",
+          "value": "svg"
+        },
+        {
+          "name": "PNG",
+          "value": "png"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Anchor Color Default",
+      "name": "anchorColorDefault",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor Color Hover",
+      "name": "anchorColorHover",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor Color Press",
+      "name": "anchorColorPress",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor BG Color Default",
+      "name": "anchorBgColorDefault",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor BG Color Hover",
+      "name": "anchorBgColorHover",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Anchor BG Color Press",
+      "name": "anchorBgColorPress",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "anchorStyle" }, "svg"] }
+    },
+    {
+      "component": "reference",
+      "label": "Anchor Default Asset",
+      "name": "anchorAssetDefault",
+      "multi": false,
+      "condition": { "===": [{ "var": "anchorStyle" }, "png"] }
+    },
+    {
+      "component": "reference",
+      "label": "Anchor Hover Asset",
+      "name": "anchorAssetHover",
+      "multi": false,
+      "condition": { "===": [{ "var": "anchorStyle" }, "png"] }
+    },
+    {
+      "component": "reference",
+      "label": "Anchor Press Asset",
+      "name": "anchorAssetPress",
+      "multi": false,
+      "condition": { "===": [{ "var": "anchorStyle" }, "png"] }
     }
   ]
 }
