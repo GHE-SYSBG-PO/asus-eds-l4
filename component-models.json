@@ -2778,6 +2778,28 @@
         ]
       },
       {
+        "component": "select",
+        "label": "Anchor Visibility Toggle",
+        "name": "isAnchorVisible",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "true"
+          },
+          {
+            "name": "Hide",
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "Section ID",
+        "name": "sectionID",
+        "valueType": "string"
+      },
+      {
         "component": "tab",
         "label": "advanced",
         "name": "advanced"
