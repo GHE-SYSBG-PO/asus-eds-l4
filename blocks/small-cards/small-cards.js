@@ -41,6 +41,7 @@ const DEFAULT_CONFIG = {
 
   videoAutoPlay: false,
   loop: false,
+  navReplay: false,
   pauseAndPlayBtn: false,
   pausePlayBtnColor: '',
   pausePlayBtnPosition: 'top-left',
@@ -223,7 +224,7 @@ const getButtonPositionClass = (position) => {
 
 function getMediaHTML(data) {
   const {
-    mediaType, imageAlt, videoAutoPlay, loop, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
+    mediaType, imageAlt, videoAutoPlay, loop, navReplay, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
     pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition,
   } = data;
   let content = '';
@@ -299,6 +300,7 @@ function getMediaHTML(data) {
   } else if (mediaType === 'video') {
     const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
     const isLoop = String(loop).toLowerCase() === 'true';
+    const isNavReplay = String(navReplay).toLowerCase() === 'true';
     const isPauseAndPlayBtn = String(pauseAndPlayBtn).toLowerCase() === 'true';
 
     const initialPlayBtnDisplay = isVideoAutoPlay ? 'none' : 'flex';
@@ -313,6 +315,7 @@ function getMediaHTML(data) {
                 src="${asset}"
                 ${isVideoAutoPlay ? 'autoplay muted' : ''}
                 ${isLoop ? 'loop' : ''}
+                data-nav-replay="${isNavReplay}"
                 playsinline>
             </video>
             <div class="media-block-controls absolute ${positionClass} z-10" style="display: ${controlsDisplay}; gap: 10px;">

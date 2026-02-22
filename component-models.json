@@ -2828,6 +2828,20 @@
       },
       {
         "component": "boolean",
+        "label": "Nav Replay(on / off)",
+        "name": "navReplay",
+        "valueType": "boolean",
+        "condition": {
+          "===": [
+            {
+              "var": "mediaType"
+            },
+            "video"
+          ]
+        }
+      },
+      {
+        "component": "boolean",
         "label": "Pause and play btn(show / hide)",
         "name": "pauseAndPlayBtn",
         "valueType": "boolean",
