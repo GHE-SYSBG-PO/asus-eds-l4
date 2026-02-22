@@ -33,6 +33,8 @@ const DEFAULT_CONFIG = {
   ctaVisible: 'show',
   ctaText: 'Learn More',
   ctaLinkType: 'button',
+  isAnchorVisible: 'false',
+  sectionID: '',
 
   // Advanced Tab
 
@@ -307,6 +309,8 @@ function getCardHTML(data) {
     borderWidth,
     ctaVisible,
     ctaLinkType,
+    isAnchorVisible,
+    sectionID,
     ctaFontDT,
     ctaFontM,
     ctaFontColor,
@@ -406,7 +410,7 @@ function getCardHTML(data) {
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
-          ${iconHTML}
+          ${isAnchorVisible === 'true' ? iconHTML : ''}
       </div>`;
 }
 
