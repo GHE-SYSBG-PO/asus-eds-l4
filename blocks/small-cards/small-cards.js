@@ -405,28 +405,30 @@ async function renderCard(block) {
     ? data.map((item) => getCardHTML(item)).join('')
     : getCardHTML(data);
 
-  const html = `<div class="outer-view" id="CMD">
-    <section class="wd__section section__aiApplication2025-outer-s4 aiApplication2025-outer wd__sections theme-white " id="section__aiApplication2025-outer-s4">
-        <div class="sectionnNavPosition"></div>
-        <div class="section_content">
-          <div class="row">
-              <div class="col l12 m12 s12">
-                <div class="wdblockimg">
-                    <div class="wdblockimg__container block__scroll">
-                      <div class="swiper">
-                          <div class="swiper-wrapper">
-                            ${cardHTML}
-                          </div>
+  const html = `<div class="cmd-content">
+    <div class="outer-view" id="CMD">
+      <section class="wd__section section__aiApplication2025-outer-s4 aiApplication2025-outer wd__sections theme-white " id="section__aiApplication2025-outer-s4">
+          <div class="sectionnNavPosition"></div>
+          <div class="section_content">
+            <div class="row">
+                <div class="col l12 m12 s12">
+                  <div class="wdblockimg">
+                      <div class="wdblockimg__container block__scroll">
+                        <div class="swiper">
+                            <div class="swiper-wrapper">
+                              ${cardHTML}
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="scroll-trigger-end"></div>
                       </div>
-                      <div class="swiper-button-prev"></div>
-                      <div class="swiper-button-next"></div>
-                      <div class="scroll-trigger-end"></div>
-                    </div>
+                  </div>
                 </div>
-              </div>
+            </div>
           </div>
-        </div>
-    </section>
+      </section>
+    </div>
   </div>`;
 
   smallCardsContainer.innerHTML = html;
