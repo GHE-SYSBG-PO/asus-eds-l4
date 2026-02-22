@@ -27,6 +27,7 @@ const DEFAULT_CONFIG = {
 
   assets: '',
 
+  bgColor: 'FFFFFF',
   title: '',
   info: '',
   ctaVisible: 'show',
@@ -298,6 +299,7 @@ function getValueForDevice(fieldName, data) {
 function getCardHTML(data) {
   const {
     cardType,
+    bgColor,
     title,
     info,
     ctaText,
@@ -399,7 +401,7 @@ function getCardHTML(data) {
   `;
 
   return `
-      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft} ${cardBlockType}" 
+      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft} ${cardBlockType} ${bgColor}" 
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'};" 

@@ -157,6 +157,12 @@
     },
     {
       "component": "richtext",
+      "name": "bgcolor",
+      "label": "Card bg color",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
       "name": "title",
       "label": "Title",
       "valueType": "string"
