@@ -156,8 +156,8 @@
       "condition": { "in": [{ "var": "mediaType" }, ["image", "video"]] }
     },
     {
-      "component": "richtext",
-      "name": "bgcolor",
+      "component": "text",
+      "name": "bgColor",
       "label": "Card bg color",
       "valueType": "string"
     },
