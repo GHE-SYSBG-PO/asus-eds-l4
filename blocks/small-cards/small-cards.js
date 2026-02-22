@@ -385,6 +385,21 @@ function getCardHTML(data) {
     anchorBorderColorDefault,
     anchorBorderColorHover,
     anchorBorderColorPress,
+    gBtnLabel,
+    gBtnFontDesktop,
+    gBtnFontM,
+    gBtnFontColorDefault,
+    gBtnFontColorHover,
+    gBtnFontColorActive,
+    gBtnContainerBgColorDefault,
+    gBtnContainerBgColorHover,
+    gBtnContainerBgColorActive,
+    gBtnContainerRadiusTL,
+    gBtnContainerRadiusTR,
+    gBtnContainerRadiusBR,
+    gBtnContainerRadiusBL,
+    gBtnBorderWidth,
+    gBtnBorderColor,
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
@@ -395,10 +410,27 @@ function getCardHTML(data) {
     const style = ctaFontColor ? `style="color: #${ctaFontColor}"` : '';
 
     if (ctaLinkType === 'button') {
-      ctaHTML = `<button class="${fontClass}" 
+      const btnFontClass = `${gBtnFontDesktop} small_${gBtnFontM}`;
+      const colorDefault = gBtnFontColorDefault ? `#${gBtnFontColorDefault}` : 'inherit';
+      const bgDefault = gBtnContainerBgColorDefault ? `#${gBtnContainerBgColorDefault}` : 'transparent';
+      const colorHover = gBtnFontColorHover ? `#${gBtnFontColorHover}` : colorDefault;
+      const bgHover = gBtnContainerBgColorHover ? `#${gBtnContainerBgColorHover}` : bgDefault;
+      const borderColorVal = gBtnBorderColor ? `#${gBtnBorderColor}` : 'transparent';
+      const borderWidthVal = gBtnBorderWidth ? `${gBtnBorderWidth}px` : '0px';
+      const radius = `${gBtnContainerRadiusTL || 0}px ${gBtnContainerRadiusTR || 0}px ${gBtnContainerRadiusBR || 0}px ${gBtnContainerRadiusBL || 0}px`;
+      const btnStyle = `color: ${colorDefault}; background-color: ${bgDefault}; border: ${borderWidthVal} solid ${borderColorVal}; border-radius: ${radius}; padding: 10px 20px; display: inline-block; text-decoration: none; transition: all 0.3s ease; cursor: pointer;`;
+      const onHover = `this.style.color='${colorHover}'; this.style.backgroundColor='${bgHover}';`;
+      const onOut = `this.style.color='${colorDefault}'; this.style.backgroundColor='${bgDefault}';`;
+
+      ctaHTML = `<button class="${btnFontClass} wdga link--1 wd__link__arrow asus-icon-chevronright" 
                   aria-label="${ctaText}" 
                   onclick="window.open('${ctaHyperlink}', '_blank')"
-                  ${style}><span>${ctaText}</span></button>`;
+                  data-galabel="sections AI Experience ${ctaText}" 
+                  data-eventname="ai2025s4_item1_learn_more_clicked"
+                  style="${btnStyle}"
+                  onmouseover="${onHover}" 
+                  onmouseout="${onOut}"><span>${ctaText}</span></button>`;
+
     } else {
       ctaHTML = `<a class="${fontClass}" 
                   aria-label="${ctaText} (opens in new window)" 
