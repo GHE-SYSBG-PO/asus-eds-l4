@@ -21,18 +21,23 @@ const DEFAULT_CONFIG = {
   pausePlayBtnColor: '',
   pausePlayBtnPosition: 'top-left',
 
+  // Cards (Noise)
   noiseCancelingAsset: '',
   noiseWaveColor: '',
   voiceWaveColor: '',
 
+  // Cards (Image / Video)
   assets: '',
 
+  // Cards
   bgColor: 'FFFFFF',
   title: '',
   info: '',
   ctaVisible: 'show',
   ctaText: 'Learn More',
   ctaLinkType: 'button',
+
+  // Anchor (Down arrow on cards)
   isAnchorVisible: 'false',
   sectionID: '',
   anchorStyle: '',
@@ -46,28 +51,43 @@ const DEFAULT_CONFIG = {
   anchorAssetHover: '',
   anchorAssetPress: '',
 
+  // Swiper Arrow (Previous / Next)
+  arrowStyle: '',
+  arrowContainerBgColorDefault: '',
+  arrowContainerBgColorHover: '',
+  arrowContainerBgColorPress: '',
+  arrowContainerBgColorDisable: '',
+  arrowColorDefault: '',
+  arrowColorHover: '',
+  arrowColorPress: '',
+  arrowColorDisable: '',
+  arrowAssetDefault: '',
+  arrowAssetHover: '',
+  arrowAssetDisable: '',
+
+
   // Advanced Tab
 
-  // Title
+  // Cards Title
   titleFontD: '',
   titleFontT: '',
   titleFontM: '',
   titleFontColor: '',
 
-  // Info
+  // Cards Info
   infoFontColor: '',
 
-  // Border
+  // Cards Border
   borderColor: '',
   borderWidth: '',
 
-  // Border Radius
+  // Cards Border Radius
   borderRadiusTopLeft: '',
   borderRadiusTopRight: '',
   borderRadiusBottomRight: '',
   borderRadiusBottomLeft: '',
 
-  // CTA
+  // CTA Link
   ctaFontDT: '',
   ctaFontM: '',
   ctaFontColor: '',
@@ -90,12 +110,24 @@ const DEFAULT_CONFIG = {
   gBtnBorderWidth: '',
   gBtnBorderColor: '',
   alignmentAdvanced: 'left',
+
+  // Anchor (Down arrow on cards)
   anchorBorderWidthDefault: '',
   anchorBorderWidthHover: '',
   anchorBorderWidthPress: '',
   anchorBorderColorDefault: '',
   anchorBorderColorHover: '',
   anchorBorderColorPress: '',
+
+  // Swiper Arrow (Previous / Next)
+  arrowBorderWidthDefault: '',
+  arrowBorderWidthHover: '',
+  arrowBorderWidthPress: '',
+  arrowBorderWidthDisable: '',
+  arrowBorderColorDefault: '',
+  arrowBorderColorHover: '',
+  arrowBorderColorPress: '',
+  arrowBorderColorDisable: '',
 };
 
 

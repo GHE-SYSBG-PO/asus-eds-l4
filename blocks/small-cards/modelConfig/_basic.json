@@ -293,6 +293,99 @@
       "name": "anchorAssetPress",
       "multi": false,
       "condition": { "===": [{ "var": "anchorStyle" }, "png"] }
+    },
+    {
+      "component": "select",
+      "label": "Arrow Style",
+      "name": "arrowStyle",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "SVG",
+          "value": "svg"
+        },
+        {
+          "name": "PNG",
+          "value": "png"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Arrow Container BG Color Default",
+      "name": "arrowContainerBgColorDefault",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Arrow Container BG Color Hover",
+      "name": "arrowContainerBgColorHover",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Arrow Container BG Color Press",
+      "name": "arrowContainerBgColorPress",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Arrow Container BG Color Disable",
+      "name": "arrowContainerBgColorDisable",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Arrow Color Default",
+      "name": "arrowColorDefault",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Arrow Color Hover",
+      "name": "arrowColorHover",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Arrow Color Press",
+      "name": "arrowColorPress",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "text",
+      "label": "Arrow Color Disable",
+      "name": "arrowColorDisable",
+      "valueType": "string",
+      "condition": { "===": [{ "var": "arrowStyle" }, "svg"] }
+    },
+    {
+      "component": "reference",
+      "label": "Arrow Default Asset",
+      "name": "arrowAssetDefault",
+      "multi": false,
+      "condition": { "===": [{ "var": "arrowStyle" }, "png"] }
+    },
+    {
+      "component": "reference",
+      "label": "Arrow Hover Asset",
+      "name": "arrowAssetHover",
+      "multi": false,
+      "condition": { "===": [{ "var": "arrowStyle" }, "png"] }
+    },
+    {
+      "component": "reference",
+      "label": "Arrow Disable Asset",
+      "name": "arrowAssetDisable",
+      "multi": false,
+      "condition": { "===": [{ "var": "arrowStyle" }, "png"] }
     }
   ]
 }
