@@ -135,7 +135,7 @@
 }
 
 .small-cards .small-cards-containers .img__bg {
-  aspect-ratio: 1/1;
+  /* aspect-ratio: 1/1; */
 }
 
 .small-cards .rounded-tl-lg {
