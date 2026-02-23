@@ -397,9 +397,8 @@
           }
         }
       }
-    }
 
-    .bar-chart__bar-item {
+      .bar-chart__bar-item {
         flex-direction: column-reverse;
           gap: 6px;
 
@@ -411,6 +410,7 @@
       .bar-chart__bars {
           gap: 0;
       }
+    }
   }
 }
 
