@@ -16,39 +16,102 @@
     {
       "component": "text",
       "label": "radius (TL/TR/BR/BL)",
-      "name": "boxRadius"
+      "name": "boxRadius",
+      "valueType": "string",
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "5"
+        ]
+      }
     },
     {
       "component": "container",
       "label": "border",
       "name": "boxBorderGroup",
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "5"
+        ]
+      },
       "fields": [
         {
           "component": "text",
           "label": "width",
-          "name": "boxBorderWidth"
+          "name": "boxBorderWidth",
+          "valueType": "string"
         },
         {
           "component": "text",
           "label": "color",
-          "name": "boxBorderColor"
+          "name": "boxBorderColor",
+          "valueType": "string"
         }
       ]
     },
     {
       "component": "text",
       "label": "bg color",
-      "name": "boxBgColor"
+      "name": "boxBgColor",
+      "valueType": "string",
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "5"
+        ]
+      }
     },
     {
-      "component": "text",
-      "label": "padding(left/top/right/bottom)",
-      "name": "boxPadding"
+      "component": "container",
+      "label": "padding (L/T/R/B)",
+      "name": "boxPaddingGroup",
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "5"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "left",
+          "name": "boxPaddingLeft",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "top",
+          "name": "boxPaddingTop",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "right",
+          "name": "boxPaddingRight",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bottom",
+          "name": "boxPaddingBottom",
+          "valueType": "string"
+        }
+      ]
     },
     {
       "component": "select",
       "label": "content alignment (left/ center)",
       "name": "boxContentAlignment",
+      "valueType": "string",
       "options": [
         {
           "name": "Left",
@@ -58,7 +121,15 @@
           "name": "Center",
           "value": "center"
         }
-      ]
+      ],
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "5"
+        ]
+      }
     }
   ]
 }
