@@ -392,11 +392,16 @@
       }
 
       .bar-chart__content {
+        .bar-chart__arrow-block {
         @media (width >= 730px) {
+          flex-direction: row;
+          align-items: center;
+          
           .bar-chart__arrow-num {
             font-size: 56px;
           }
         }
+      }
       }
 
       .bar-chart__bar-item {
