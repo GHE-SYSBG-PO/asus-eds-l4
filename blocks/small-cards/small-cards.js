@@ -948,6 +948,10 @@ async function renderCard(block) {
     .small-cards-containers .card-icon-down.anchor-png:active .anchor-press {
       display: block;
     }
+    .small-cards-containers a.asus-icon-chevronright span::after {
+      content: " >";
+      font-weight: bold;
+    }
   `;
 
   const slideCount = Array.isArray(data) ? data.length : 1;
