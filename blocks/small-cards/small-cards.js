@@ -435,7 +435,7 @@ function getCardHTML(data) {
       const onHover = `this.style.color='${colorHover}'; this.style.backgroundColor='${bgHover}';`;
       const onOut = `this.style.color='${colorDefault}'; this.style.backgroundColor='${bgDefault}';`;
 
-      ctaHTML = `<button class="${btnFontClass} wdga link--1 wd__link__arrow asus-icon-chevronright" 
+      ctaHTML = `<button class="${btnFontClass} wdga link--1" 
                   aria-label="${ctaText}" 
                   onclick="window.open('${ctaHyperlink}', '_blank')"
                   data-galabel="sections AI Experience ${ctaText}" 
@@ -445,7 +445,7 @@ function getCardHTML(data) {
                   onmouseout="${onOut}"><span>${ctaText}</span></button>`;
 
     } else {
-      ctaHTML = `<a class="${fontClass}" 
+      ctaHTML = `<a class="${fontClass} wd__link__arrow asus-icon-chevronright" 
                   aria-label="${ctaText} (opens in new window)" 
                   href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer" 
                   ${style}><span>${ctaText}</span></a>`;
