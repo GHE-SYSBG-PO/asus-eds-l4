@@ -179,7 +179,7 @@ async function fillSequentialConfig(block) {
   const alignmentKeys = ['desktopAlignment', 'tabletAlignment', 'mobileAlignment'];
 
   fieldGroups.forEach((group, index) => {
-    if (index <= 20) {
+    if (index <= 23) {
       const value = extractValue(group);
       // if (value) {
       alignmentConfig[alignmentKeys[index]] = value;
