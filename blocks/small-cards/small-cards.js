@@ -181,9 +181,9 @@ async function fillSequentialConfig(block) {
   fieldGroups.forEach((group, index) => {
     if (index <= 20) {
       const value = extractValue(group);
-      if (value) {
-        alignmentConfig[alignmentKeys[index]] = value;
-      }
+      // if (value) {
+      alignmentConfig[alignmentKeys[index]] = value;
+      // }
       return;
     }
 
