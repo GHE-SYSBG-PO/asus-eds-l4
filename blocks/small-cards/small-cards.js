@@ -61,23 +61,23 @@ const DEFAULT_CONFIG = {
   assets: '',
 
   // Cards
-  bgColor: 'FFFFFF',
+  bgColor: 'F5F5F5',
   title: '',
   info: '',
-  ctaVisible: 'show',
+  ctaVisible: 'hide',
   ctaText: 'Learn More',
   ctaLinkType: 'button',
 
   // Anchor (Down arrow on cards)
   isAnchorVisible: 'false',
-  sectionID: '',
-  anchorStyle: '',
-  anchorColorDefault: '',
-  anchorColorHover: '',
-  anchorColorPress: '',
-  anchorBgColorDefault: '',
-  anchorBgColorHover: '',
-  anchorBgColorPress: '',
+  sectionID: '#',
+  anchorStyle: 'SVG',
+  anchorColorDefault: 'FFFFFF',
+  anchorColorHover: 'FFFFFF',
+  anchorColorPress: 'FFFFFF',
+  anchorBgColorDefault: '4379B1',
+  anchorBgColorHover: '0b5da799',
+  anchorBgColorPress: '0b5da799',
   anchorAssetDefault: '',
   anchorAssetHover: '',
   anchorAssetPress: '',
@@ -85,23 +85,23 @@ const DEFAULT_CONFIG = {
   // Advanced Tab
 
   // Cards Title
-  titleFontD: '',
-  titleFontT: '',
-  titleFontM: '',
-  titleFontColor: '',
+  titleFontD: 'tt-md--32',
+  titleFontT: 'tt-md--28',
+  titleFontM: 'tt-md--24',
+  titleFontColor: '181818',
 
   // Cards Info
-  infoFontColor: '',
+  infoFontColor: '4D4D4D',
 
   // Cards Border
-  borderColor: '',
-  borderWidth: '',
+  borderColor: 'F5F5F5',
+  borderWidth: '1',
 
   // Cards Border Radius
-  borderRadiusTopLeft: '',
-  borderRadiusTopRight: '',
-  borderRadiusBottomRight: '',
-  borderRadiusBottomLeft: '',
+  borderRadiusTopLeft: 'rounded-tl-lg',
+  borderRadiusTopRight: 'rounded-tl-lg',
+  borderRadiusBottomRight: 'rounded-tl-lg',
+  borderRadiusBottomLeft: 'rounded-tl-lg',
 
   // CTA Link
   ctaFontDT: '',
@@ -110,30 +110,30 @@ const DEFAULT_CONFIG = {
   ctaHyperlink: '',
 
   // Button Style
-  gBtnLabel: '',
-  gBtnFontDesktop: '',
-  gBtnFontM: '',
-  gBtnFontColorDefault: '',
-  gBtnFontColorHover: '',
-  gBtnFontColorActive: '',
-  gBtnContainerBgColorDefault: '',
-  gBtnContainerBgColorHover: '',
-  gBtnContainerBgColorActive: '',
-  gBtnContainerRadiusTL: '',
-  gBtnContainerRadiusTR: '',
-  gBtnContainerRadiusBR: '',
-  gBtnContainerRadiusBL: '',
-  gBtnBorderWidth: '',
-  gBtnBorderColor: '',
+  gBtnLabel: 'Learn More',
+  gBtnFontDesktop: 'ro-md-16',
+  gBtnFontM: 'ro-md-16',
+  gBtnFontColorDefault: 'FFFFFF',
+  gBtnFontColorHover: 'FFFFFF',
+  gBtnFontColorActive: 'FFFFFF',
+  gBtnContainerBgColorDefault: '4379B1',
+  gBtnContainerBgColorHover: '0b5da799',
+  gBtnContainerBgColorActive: '0b5da799',
+  gBtnContainerRadiusTL: '32',
+  gBtnContainerRadiusTR: '32',
+  gBtnContainerRadiusBR: '32',
+  gBtnContainerRadiusBL: '32',
+  gBtnBorderWidth: '0',
+  gBtnBorderColor: 'transparent',
   alignmentAdvanced: 'left',
 
   // Anchor (Down arrow on cards)
-  anchorBorderWidthDefault: '',
-  anchorBorderWidthHover: '',
-  anchorBorderWidthPress: '',
-  anchorBorderColorDefault: '',
-  anchorBorderColorHover: '',
-  anchorBorderColorPress: '',
+  anchorBorderWidthDefault: '1',
+  anchorBorderWidthHover: '1',
+  anchorBorderWidthPress: '1',
+  anchorBorderColorDefault: '4379B1',
+  anchorBorderColorHover: '0b5da799',
+  anchorBorderColorPress: '0b5da799',
 
 };
 
@@ -458,7 +458,7 @@ function getCardHTML(data) {
                 <h3 class="${titleFont}">
                   <span class="${titleFont}" style="color: #${titleFontColor}">${title}</span>
                 </h3>
-                <div style="color: #${infoFontColor}">${info}</div>
+                <div style="color: #${infoFontColor};font-size:18px;">${info}</div>
                 ${ctaHTML}
             </div>
           </div>`;
