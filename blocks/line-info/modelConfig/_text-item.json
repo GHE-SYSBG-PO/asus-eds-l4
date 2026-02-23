@@ -1,0 +1,145 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Text Item",
+      "name": "textItemTab"
+    },
+    {
+      "component": "multifield",
+      "label": "Text Items",
+      "name": "textItems",
+      "field": {
+        "component": "container",
+        "name": "textItem",
+        "fields": [
+          {
+            "component": "select",
+            "label": "side (left/ right)(DT)",
+            "name": "side",
+            "options": [
+              {
+                "name": "Left",
+                "value": "left"
+              },
+              {
+                "name": "Right",
+                "value": "right"
+              }
+            ],
+            "condition": {
+              "===": [
+                {
+                  "var": "styleLayout"
+                },
+                "1"
+              ]
+            }
+          },
+          {
+            "component": "select",
+            "label": "layout style (left/ right)",
+            "name": "layoutStyleSide",
+            "options": [
+              {
+                "name": "Left",
+                "value": "left"
+              },
+              {
+                "name": "Right",
+                "value": "right"
+              }
+            ],
+            "condition": {
+              "===": [
+                {
+                  "var": "styleLayout"
+                },
+                "2"
+              ]
+            }
+          },
+          {
+            "component": "select",
+            "label": "alignment (left / right)(DT)",
+            "name": "alignment",
+            "options": [
+              {
+                "name": "Left",
+                "value": "left"
+              },
+              {
+                "name": "Right",
+                "value": "right"
+              }
+            ],
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4",
+                  "5"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text width (px)(DT)",
+            "name": "textWidthPx",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4",
+                  "5"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "X value(left)(DT)",
+            "name": "xValue",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4",
+                  "5"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "Y value(top)(DT)",
+            "name": "yValue",
+            "description": "文案太多可以是負值"
+          },
+          {
+            "component": "richtext",
+            "label": "title richtext",
+            "name": "titleRichtext",
+             "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "label": "info richtext",
+            "name": "infoRichtext",
+             "valueType": "string"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Advanced",
+      "name": "advancedTab"
+    },
+    {
+      "component": "container",
+      "label": "Title Richtext Style",
+      "name": "titleStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font (DT)",
+          "name": "titleFontDT",
+          "options": [
+            { "name": "ro-md-14-sh", "value": "ro-md-14-sh" },
+            { "name": "ro-md-16-sh", "value": "ro-md-16-sh" },
+            { "name": "ro-md-18-sh", "value": "ro-md-18-sh" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "titleFontM",
+          "options": [
+            { "name": "ro-md-13", "value": "ro-md-13" },
+            { "name": "ro-md-14-sh", "value": "ro-md-14-sh" },
+            { "name": "ro-md-16-sh", "value": "ro-md-16-sh" }
+          ]
+        },
+        {
+           "component": "text",
+           "label": "font color",
+           "name": "titleFontColor"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Info Richtext Style",
+      "name": "infoStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font (DT)",
+          "name": "infoFontDT",
+          "options": [
+            { "name": "ro-rg-13", "value": "ro-rg-13" },
+            { "name": "ro-rg-14-sh", "value": "ro-rg-14-sh" },
+            { "name": "ro-rg-16-sh", "value": "ro-rg-16-sh" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "infoFontM",
+          "options": [
+            { "name": "ro-rg-12", "value": "ro-rg-12" },
+            { "name": "ro-rg-13", "value": "ro-rg-13" },
+            { "name": "ro-rg-14-sh", "value": "ro-rg-14-sh" }
+          ]
+        },
+        {
+           "component": "text",
+           "label": "font color",
+           "name": "infoFontColor"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "circle num color(M)",
+      "name": "circleNumColorM"
+    }
+  ]
+}

@@ -24,13 +24,16 @@
           "...": "./modelConfig/_style.json#/fields"
         },
         {
-          "...": "./modelConfig/_icon.json#/fields"
+          "...": "./modelConfig/_asset.json#/fields"
         },
         {
-          "...": "./modelConfig/_label.json#/fields"
+          "...": "./modelConfig/_text-item.json#/fields"
         },
         {
-          "...": "./modelConfig/_container.json#/fields"
+           "...": "./modelConfig/_dialog-box.json#/fields"
+        },
+        {
+           "...": "./modelConfig/_advanced.json#/fields"
         },
         {
           "component": "text",
