@@ -82,9 +82,9 @@ const DEFAULT_CONFIG = {
   // Advanced Tab
 
   // Cards Title
-  titleFontD: 'tt-md--32',
-  titleFontT: 'tt-md--28',
-  titleFontM: 'tt-md--24',
+  titleFontD: 'tt-bd-32',
+  titleFontT: 'tt-bd-28',
+  titleFontM: 'tt-bd-24',
   titleFontColor: '181818',
 
   // Cards Info

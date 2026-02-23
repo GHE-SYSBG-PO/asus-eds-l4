@@ -6,7 +6,7 @@
       "name": "titleFontD",
       "valueType": "string",
       "options": [
-        { "name": "tt-md--32", "value": "tt-bd-32" }
+        { "name": "tt-bd--32", "value": "tt-bd-32" }
       ]
     },
     {
@@ -15,7 +15,7 @@
       "name": "titleFontT",
       "valueType": "string",
       "options": [
-        { "name": "tt-md--28", "value": "tt-bd-28" }
+        { "name": "tt-bd--28", "value": "tt-bd-28" }
       ]
     },
     {
@@ -24,7 +24,7 @@
       "name": "titleFontM",
       "valueType": "string",
       "options": [
-        { "name": "tt-md--24", "value": "tt-bd-24" }
+        { "name": "tt-bd--24", "value": "tt-bd-24" }
       ]
     },
     {
