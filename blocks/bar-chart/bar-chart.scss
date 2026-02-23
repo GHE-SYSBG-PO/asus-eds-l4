@@ -139,10 +139,6 @@
       white-space: nowrap;
 
       &--external {
-        position: absolute;
-        right: 0;
-        bottom: -12px;
-        transform: translateX(100%);
         font-size: 28px;
         font-style: italic;
         font-weight: 700;
@@ -160,6 +156,8 @@
       .bar-chart__bar-container {
         position: relative;
         overflow: visible;
+        display: flex;
+        align-items: baseline;
       }
 
       .bar-chart__bar-fill {
@@ -364,18 +362,15 @@
 
       .bar-chart__bar-item {
         flex-direction: column-reverse;
+          gap: 6px;
 
           @media (width >= 730px) { 
-          gap: 12px;
+          gap: 4px;
         }
       }
 
       .bar-chart__bars {
-          gap: 20px;
-
-          @media (width >= 730px) { 
-          gap: 32px;
-        }
+          gap: 0;
       }
     }
 
@@ -404,12 +399,18 @@
       }
     }
 
-    // Animation States
-    &--animated {
-      .bar-chart__bar-fill {
-        width: 0%;
+    .bar-chart__bar-item {
+        flex-direction: column-reverse;
+          gap: 6px;
+
+          @media (width >= 730px) { 
+          gap: 4px;
+        }
       }
-    }
+
+      .bar-chart__bars {
+          gap: 0;
+      }
   }
 }
 
