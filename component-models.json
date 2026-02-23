@@ -1977,6 +1977,7 @@
         "field": {
           "component": "container",
           "name": "textItem",
+          "label": "Item",
           "fields": [
             {
               "component": "select",
@@ -2055,6 +2056,7 @@
               "component": "text",
               "label": "text width (px)(DT)",
               "name": "textWidthPx",
+              "valueType": "string",
               "condition": {
                 "in": [
                   {
@@ -2072,6 +2074,7 @@
               "component": "text",
               "label": "X value(left)(DT)",
               "name": "xValue",
+              "valueType": "string",
               "condition": {
                 "in": [
                   {
@@ -2089,6 +2092,7 @@
               "component": "text",
               "label": "Y value(top)(DT)",
               "name": "yValue",
+              "valueType": "string",
               "description": "文案太多可以是負值"
             },
             {
