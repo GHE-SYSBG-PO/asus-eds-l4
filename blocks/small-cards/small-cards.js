@@ -101,9 +101,9 @@ const DEFAULT_CONFIG = {
   borderRadiusBottomLeft: 'rounded-tl-lg',
 
   // CTA Link
-  ctaFontDT: '',
-  ctaFontM: '',
-  ctaFontColor: '',
+  ctaFontDT: 'ro-md-20-md',
+  ctaFontM: 'ro-md-18',
+  ctaFontColor: '024791',
   ctaHyperlink: '',
 
   // Button Style
