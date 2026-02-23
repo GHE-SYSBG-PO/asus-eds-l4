@@ -7,7 +7,7 @@
     },
     {
       "component": "multifield",
-      "label": "Text Items",
+      "label": "Text Items (Add multiple line info points here)",
       "name": "textItems",
       "field": {
         "component": "container",
@@ -147,13 +147,15 @@
             "component": "richtext",
             "label": "title richtext",
             "name": "titleRichtext",
-            "valueType": "string"
+            "valueType": "string",
+            "default": "<p>Item Title</p>"
           },
           {
             "component": "richtext",
             "label": "info richtext",
             "name": "infoRichtext",
-            "valueType": "string"
+            "valueType": "string",
+            "default": "<p>Description text here...</p>"
           }
         ]
       }
