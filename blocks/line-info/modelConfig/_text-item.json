@@ -130,13 +130,13 @@
             "component": "richtext",
             "label": "title richtext",
             "name": "titleRichtext",
-             "valueType": "string"
+            "valueType": "string"
           },
           {
             "component": "richtext",
             "label": "info richtext",
             "name": "infoRichtext",
-             "valueType": "string"
+            "valueType": "string"
           }
         ]
       }

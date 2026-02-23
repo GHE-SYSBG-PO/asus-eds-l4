@@ -6,59 +6,59 @@
       "name": "dialogBoxTab",
       "condition": {
         "===": [
-           {
-              "var": "styleLayout"
-           },
-           "5"
+          {
+            "var": "styleLayout"
+          },
+          "5"
         ]
       }
     },
     {
-       "component": "text",
-       "label": "radius (TL/TR/BR/BL)",
-       "name": "boxRadius"
+      "component": "text",
+      "label": "radius (TL/TR/BR/BL)",
+      "name": "boxRadius"
     },
     {
-       "component": "container",
-       "label": "border",
-       "name": "boxBorderGroup",
-       "fields": [
-          {
-             "component": "text",
-             "label": "width",
-             "name": "boxBorderWidth"
-          },
-          {
-             "component": "text",
-             "label": "color",
-             "name": "boxBorderColor"
-          }
-       ]
+      "component": "container",
+      "label": "border",
+      "name": "boxBorderGroup",
+      "fields": [
+        {
+          "component": "text",
+          "label": "width",
+          "name": "boxBorderWidth"
+        },
+        {
+          "component": "text",
+          "label": "color",
+          "name": "boxBorderColor"
+        }
+      ]
     },
     {
-       "component": "text",
-       "label": "bg color",
-       "name": "boxBgColor"
+      "component": "text",
+      "label": "bg color",
+      "name": "boxBgColor"
     },
     {
-       "component": "text",
-       "label": "padding(left/top/right/bottom)",
-       "name": "boxPadding"
+      "component": "text",
+      "label": "padding(left/top/right/bottom)",
+      "name": "boxPadding"
     },
     {
-       "component": "select",
-       "label": "content alignment (left/ center)",
-       "name": "boxContentAlignment",
-       "options": [
-          {
-             "name": "Left",
-             "value": "left"
-          },
-          {
-             "name": "Center",
-             "value": "center"
-          }
-       ]
+      "component": "select",
+      "label": "content alignment (left/ center)",
+      "name": "boxContentAlignment",
+      "options": [
+        {
+          "name": "Left",
+          "value": "left"
+        },
+        {
+          "name": "Center",
+          "value": "center"
+        }
+      ]
     }
   ]
 }

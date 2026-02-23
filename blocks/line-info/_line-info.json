@@ -30,10 +30,10 @@
           "...": "./modelConfig/_text-item.json#/fields"
         },
         {
-           "...": "./modelConfig/_dialog-box.json#/fields"
+          "...": "./modelConfig/_dialog-box.json#/fields"
         },
         {
-           "...": "./modelConfig/_advanced.json#/fields"
+          "...": "./modelConfig/_advanced.json#/fields"
         },
         {
           "component": "text",
