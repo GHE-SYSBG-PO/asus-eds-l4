@@ -40,7 +40,7 @@ const DEFAULT_CONFIG = {
   //  Base Tab
   cardType: 'img_txt_integrated_top',
   mediaType: 'image',
-  imageAlt: '',
+  imageAlt: 'ASUS Official Site',
 
   videoAutoPlay: false,
   loop: false,
