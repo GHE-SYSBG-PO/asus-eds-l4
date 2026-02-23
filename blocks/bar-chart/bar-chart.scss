@@ -201,7 +201,7 @@
       .bar-chart__bars {
         width: 100%;
       }
-      
+
       .bar-chart__bar-item {
         flex-direction: column;
         align-items: flex-start;
@@ -295,6 +295,22 @@
 
     &--variant-3 {
       // Stacked, no arrow
+      &.bar-chart {
+        max-width: 420px;
+        margin: 0 auto;
+
+        @media (width >= 730px) { 
+          max-width: 448px;
+        }
+
+        @media (width >= 1280px) { 
+          max-width: 630px;
+        }
+      }
+
+      .bar-chart__bars {
+        width: 100%;
+      }
     }
 
     &--variant-4 {
