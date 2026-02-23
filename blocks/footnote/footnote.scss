@@ -22,7 +22,7 @@
         &[data-mode="light"],
         .section-light {
             --footnote-itemtext-color: #666;
-            --footnote-itemarrow-default-color: #936D51;
+            --footnote-itemarrow-default-color:#936D51;
             --footnote-itemarrow-hover-color: #A88063;
             --footnote-itemarrow-press-color: #A88063;
         }
@@ -40,7 +40,7 @@
         &[data-mode="light"],
         .section-light {
             --footnote-itemtext-color: #666;
-            --footnote-itemarrow-default-color: #E20004;
+            --footnote-itemarrow-default-color: #E20004 ;
             --footnote-itemarrow-hover-color: #ED0C10;
             --footnote-itemarrow-press-color: #ED0C10;
 
@@ -67,9 +67,9 @@
         &[data-mode="dark"],
         .section-dark {
             --footnote-itemtext-color: #999;
-            --footnote-itemarrow-default-color: #FF9E1B;
+            --footnote-itemarrow-default-color:#FF9E1B;
             --footnote-itemarrow-hover-color: #D37B00;
-            --footnote-itemarrow-press-color: #287BD7;
+            --footnote-itemarrow-press-color: #D37B00;
         }
     }
 
@@ -85,9 +85,11 @@
             max-width: 1236px;
         }
 
-        .footnote-item {
-            color: var(--footnote-itemtext-color);
+        .liststyle{
+             color: var(--footnote-itemtext-color);
+        }
 
+        .footnote-item {
             .footnote-arrow span {
                 display: inline-block;
                 width: 10px;

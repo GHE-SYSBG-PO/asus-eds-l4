@@ -90,7 +90,7 @@ export default async function decorate(block) {
       if (!wrap) return;
 
       const index = idx + 1;
-      const id = v('idText') || `footnote-${index}`;
+      const id = `footnote-${v('idText')}` || `footnote-${index}`;
       const text = v('textRichtext') || '';
       const showArrow = v('arrowConfig') !== 'off';
 
@@ -100,7 +100,7 @@ export default async function decorate(block) {
         v('arrowPressColor') ? `--footnote-itemarrow-press-color:#${v('arrowPressColor')};` : '',
       ].join('');
 
-      wrap.classList.add('footnote-item', DEFAULT_CONFIG.itemTextFont);
+      wrap.classList.add('footnote-item');
       wrap.id = id;
       wrap.dataset.footnoteIndex = `${index}`;
       wrap.setAttribute('tabindex', '0');
@@ -115,6 +115,7 @@ export default async function decorate(block) {
       `;
 
       const item = document.createElement('li');
+      item.classList.add(DEFAULT_CONFIG.itemTextFont, 'liststyle');
       item.append(wrap);
       list.append(item);
     });
