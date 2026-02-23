@@ -137,6 +137,29 @@
     &__bar-text {
       font-weight: 600;
       white-space: nowrap;
+
+      &--external {
+        position: absolute;
+        right: 0;
+        padding-left: 12px;
+        transform: translateX(100%);
+
+        @media (width >= 730px) {
+          padding-left: 16px;
+        }
+      }
+    }
+
+    // Variants 5, 6 with external text
+    &__bar-item--external-text {
+      .bar-chart__bar-container {
+        position: relative;
+        overflow: visible;
+      }
+
+      .bar-chart__bar-fill {
+        padding-right: 0;
+      }
     }
 
     // Arrow Block Styles

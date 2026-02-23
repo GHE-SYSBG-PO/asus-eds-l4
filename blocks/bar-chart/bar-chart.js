@@ -179,9 +179,29 @@ const buildBarItem = (item, v, index, motionEnabled, calculatedBarWidth = null) 
   const initialWidth = motionEnabled ? '0%' : `${barLength}%`;
 
   if (isStacked) {
-    // Variants 3, 4, 5, 6 - text on top of bar
+    // Variants 3, 4 - text inside bar
+    // Variants 5, 6 - text outside bar
+    if (isLarge) {
+      // Variants 5, 6 - text on top of bar, bar text OUTSIDE to the right
+      return `
+        <div class="bar-chart__bar-item bar-chart__bar-item--stacked bar-chart__bar-item--large bar-chart__bar-item--external-text" data-index="${index}">
+          <div class="bar-chart__item-text ${v('itemTextFont')}" ${itemTextColor}>
+            ${item.barRowItemText.text || ''}
+          </div>
+          <div class="bar-chart__bar-container">
+            <div class="bar-chart__bar-fill"
+                 data-length="${barLength}"
+                 style="${barBgStyle} ${radiusStyle} width: ${initialWidth};">
+            </div>
+            <span class="bar-chart__bar-text bar-chart__bar-text--external tt-md-14" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Variants 3, 4 - text inside bar
     return `
-      <div class="bar-chart__bar-item bar-chart__bar-item--stacked ${isLarge ? 'bar-chart__bar-item--large' : ''}" data-index="${index}">
+      <div class="bar-chart__bar-item bar-chart__bar-item--stacked" data-index="${index}">
         <div class="bar-chart__item-text ${v('itemTextFont')}" ${itemTextColor}>
           ${item.barRowItemText.text || ''}
         </div>
