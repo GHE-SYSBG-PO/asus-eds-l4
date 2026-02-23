@@ -1850,6 +1850,7 @@
         "name": "styleLayout",
         "valueType": "string",
         "default": "1",
+        "defaultValue": "1",
         "options": [
           {
             "name": "Variant 1 - Text On Left & Right",
@@ -2129,7 +2130,7 @@
         "label": "Dialog Box",
         "name": "dialogBoxTab",
         "condition": {
-          "===": [
+          "==": [
             {
               "var": "styleLayout"
             },
@@ -2143,7 +2144,7 @@
         "name": "boxRadius",
         "valueType": "string",
         "condition": {
-          "===": [
+          "==": [
             {
               "var": "styleLayout"
             },
@@ -2156,7 +2157,7 @@
         "label": "border",
         "name": "boxBorderGroup",
         "condition": {
-          "===": [
+          "==": [
             {
               "var": "styleLayout"
             },
@@ -2184,7 +2185,7 @@
         "name": "boxBgColor",
         "valueType": "string",
         "condition": {
-          "===": [
+          "==": [
             {
               "var": "styleLayout"
             },
@@ -2197,7 +2198,7 @@
         "label": "padding (L/T/R/B)",
         "name": "boxPaddingGroup",
         "condition": {
-          "===": [
+          "==": [
             {
               "var": "styleLayout"
             },
@@ -2247,7 +2248,7 @@
           }
         ],
         "condition": {
-          "===": [
+          "==": [
             {
               "var": "styleLayout"
             },

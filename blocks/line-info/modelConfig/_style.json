@@ -11,6 +11,7 @@
       "name": "styleLayout",
       "valueType": "string",
       "default": "1",
+      "defaultValue": "1",
       "options": [
         {
           "name": "Variant 1 - Text On Left & Right",
