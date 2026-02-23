@@ -1841,8 +1841,8 @@
     "fields": [
       {
         "component": "tab",
-        "label": "Style",
-        "name": "styleTab"
+        "label": "Layout",
+        "name": "layoutTab"
       },
       {
         "component": "select",
@@ -1945,9 +1945,102 @@
         ]
       },
       {
+        "component": "container",
+        "label": "Dialog Box Settings",
+        "name": "dialogBoxSettings",
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "5"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "radius (TL/TR/BR/BL)",
+            "name": "boxRadius",
+            "valueType": "string"
+          },
+          {
+            "component": "container",
+            "label": "border",
+            "name": "boxBorderGroup",
+            "fields": [
+              {
+                "component": "text",
+                "label": "width",
+                "name": "boxBorderWidth",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "color",
+                "name": "boxBorderColor",
+                "valueType": "string"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "bg color",
+            "name": "boxBgColor",
+            "valueType": "string"
+          },
+          {
+            "component": "container",
+            "label": "padding (L/T/R/B)",
+            "name": "boxPaddingGroup",
+            "fields": [
+              {
+                "component": "text",
+                "label": "left",
+                "name": "boxPaddingLeft",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "top",
+                "name": "boxPaddingTop",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "right",
+                "name": "boxPaddingRight",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "bottom",
+                "name": "boxPaddingBottom",
+                "valueType": "string"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "content alignment (left/ center)",
+            "name": "boxContentAlignment",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Left",
+                "value": "left"
+              },
+              {
+                "name": "Center",
+                "value": "center"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "component": "tab",
-        "label": "Asset",
-        "name": "assetTab"
+        "label": "Basic",
+        "name": "basicTab"
       },
       {
         "component": "reference",
@@ -1966,11 +2059,6 @@
         "label": "asset (Mobile)",
         "name": "assetMobile",
         "multi": false
-      },
-      {
-        "component": "tab",
-        "label": "Text Item",
-        "name": "textItemTab"
       },
       {
         "component": "multifield",
@@ -2129,246 +2217,68 @@
       },
       {
         "component": "tab",
-        "label": "Dialog Box",
-        "name": "dialogBoxTab",
-        "condition": {
-          "==": [
-            {
-              "var": "styleLayout"
-            },
-            "5"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius (TL/TR/BR/BL)",
-        "name": "boxRadius",
-        "valueType": "string",
-        "condition": {
-          "==": [
-            {
-              "var": "styleLayout"
-            },
-            "5"
-          ]
-        }
-      },
-      {
-        "component": "container",
-        "label": "border",
-        "name": "boxBorderGroup",
-        "condition": {
-          "==": [
-            {
-              "var": "styleLayout"
-            },
-            "5"
-          ]
-        },
-        "fields": [
-          {
-            "component": "text",
-            "label": "width",
-            "name": "boxBorderWidth",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "color",
-            "name": "boxBorderColor",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "text",
-        "label": "bg color",
-        "name": "boxBgColor",
-        "valueType": "string",
-        "condition": {
-          "==": [
-            {
-              "var": "styleLayout"
-            },
-            "5"
-          ]
-        }
-      },
-      {
-        "component": "container",
-        "label": "padding (L/T/R/B)",
-        "name": "boxPaddingGroup",
-        "condition": {
-          "==": [
-            {
-              "var": "styleLayout"
-            },
-            "5"
-          ]
-        },
-        "fields": [
-          {
-            "component": "text",
-            "label": "left",
-            "name": "boxPaddingLeft",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "top",
-            "name": "boxPaddingTop",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "right",
-            "name": "boxPaddingRight",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "bottom",
-            "name": "boxPaddingBottom",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "content alignment (left/ center)",
-        "name": "boxContentAlignment",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Left",
-            "value": "left"
-          },
-          {
-            "name": "Center",
-            "value": "center"
-          }
-        ],
-        "condition": {
-          "==": [
-            {
-              "var": "styleLayout"
-            },
-            "5"
-          ]
-        }
-      },
-      {
-        "component": "tab",
         "label": "Advanced",
         "name": "advancedTab"
       },
       {
         "component": "container",
-        "label": "Title Richtext Style",
-        "name": "titleStyle",
-        "collapsible": true,
+        "label": "title richtext",
+        "name": "advancedTitleGroup",
         "fields": [
           {
-            "component": "select",
-            "label": "font (DT)",
-            "name": "titleFontDT",
-            "options": [
-              {
-                "name": "ro-md-14-sh",
-                "value": "ro-md-14-sh"
-              },
-              {
-                "name": "ro-md-16-sh",
-                "value": "ro-md-16-sh"
-              },
-              {
-                "name": "ro-md-18-sh",
-                "value": "ro-md-18-sh"
-              }
-            ]
+            "component": "text",
+            "label": "font(DT)",
+            "name": "titleFontDesktop",
+            "valueType": "string",
+            "description": "ro-md-14-sh / ro-md-16-sh / ro-md-18-sh"
           },
           {
-            "component": "select",
-            "label": "font (M)",
-            "name": "titleFontM",
-            "options": [
-              {
-                "name": "ro-md-13",
-                "value": "ro-md-13"
-              },
-              {
-                "name": "ro-md-14-sh",
-                "value": "ro-md-14-sh"
-              },
-              {
-                "name": "ro-md-16-sh",
-                "value": "ro-md-16-sh"
-              }
-            ]
+            "component": "text",
+            "label": "font(M)",
+            "name": "titleFontMobile",
+            "valueType": "string",
+            "description": "ro-md-13 / ro-md-14-sh / ro-md-16-sh"
           },
           {
             "component": "text",
             "label": "font color",
-            "name": "titleFontColor"
+            "name": "titleFontColor",
+            "valueType": "string"
           }
         ]
       },
       {
         "component": "container",
-        "label": "Info Richtext Style",
-        "name": "infoStyle",
-        "collapsible": true,
+        "label": "info richtext",
+        "name": "advancedInfoGroup",
         "fields": [
           {
-            "component": "select",
-            "label": "font (DT)",
-            "name": "infoFontDT",
-            "options": [
-              {
-                "name": "ro-rg-13",
-                "value": "ro-rg-13"
-              },
-              {
-                "name": "ro-rg-14-sh",
-                "value": "ro-rg-14-sh"
-              },
-              {
-                "name": "ro-rg-16-sh",
-                "value": "ro-rg-16-sh"
-              }
-            ]
+            "component": "text",
+            "label": "font(DT)",
+            "name": "infoFontDesktop",
+            "valueType": "string",
+            "description": "ro-rg-13 / ro-rg-14-sh / ro-rg-16-sh"
           },
           {
-            "component": "select",
-            "label": "font (M)",
-            "name": "infoFontM",
-            "options": [
-              {
-                "name": "ro-rg-12",
-                "value": "ro-rg-12"
-              },
-              {
-                "name": "ro-rg-13",
-                "value": "ro-rg-13"
-              },
-              {
-                "name": "ro-rg-14-sh",
-                "value": "ro-rg-14-sh"
-              }
-            ]
+            "component": "text",
+            "label": "font(M)",
+            "name": "infoFontMobile",
+            "valueType": "string",
+            "description": "ro-rg-12 / ro-rg-13 / ro-rg-14-sh"
           },
           {
             "component": "text",
             "label": "font color",
-            "name": "infoFontColor"
+            "name": "infoFontColor",
+            "valueType": "string"
           }
         ]
       },
       {
         "component": "text",
         "label": "circle num color(M)",
-        "name": "circleNumColorM"
+        "name": "circleNumColorMobile",
+        "valueType": "string"
       },
       {
         "component": "text",

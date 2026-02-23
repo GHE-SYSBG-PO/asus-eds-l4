@@ -2,8 +2,26 @@
   "fields": [
     {
       "component": "tab",
-      "label": "Text Item",
-      "name": "textItemTab"
+      "label": "Basic",
+      "name": "basicTab"
+    },
+    {
+      "component": "reference",
+      "label": "asset (Desktop)",
+      "name": "assetDesktop",
+      "multi": false
+    },
+    {
+      "component": "reference",
+      "label": "asset (Tablet)",
+      "name": "assetTablet",
+      "multi": false
+    },
+    {
+      "component": "reference",
+      "label": "asset (Mobile)",
+      "name": "assetMobile",
+      "multi": false
     },
     {
       "component": "multifield",

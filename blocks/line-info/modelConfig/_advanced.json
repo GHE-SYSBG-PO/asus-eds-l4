@@ -7,110 +7,63 @@
     },
     {
       "component": "container",
-      "label": "Title Richtext Style",
-      "name": "titleStyle",
-      "collapsible": true,
+      "label": "title richtext",
+      "name": "advancedTitleGroup",
       "fields": [
         {
-          "component": "select",
-          "label": "font (DT)",
-          "name": "titleFontDT",
-          "options": [
-            {
-              "name": "ro-md-14-sh",
-              "value": "ro-md-14-sh"
-            },
-            {
-              "name": "ro-md-16-sh",
-              "value": "ro-md-16-sh"
-            },
-            {
-              "name": "ro-md-18-sh",
-              "value": "ro-md-18-sh"
-            }
-          ]
+          "component": "text",
+          "label": "font(DT)",
+          "name": "titleFontDesktop",
+          "valueType": "string",
+          "description": "ro-md-14-sh / ro-md-16-sh / ro-md-18-sh"
         },
         {
-          "component": "select",
-          "label": "font (M)",
-          "name": "titleFontM",
-          "options": [
-            {
-              "name": "ro-md-13",
-              "value": "ro-md-13"
-            },
-            {
-              "name": "ro-md-14-sh",
-              "value": "ro-md-14-sh"
-            },
-            {
-              "name": "ro-md-16-sh",
-              "value": "ro-md-16-sh"
-            }
-          ]
+          "component": "text",
+          "label": "font(M)",
+          "name": "titleFontMobile",
+          "valueType": "string",
+          "description": "ro-md-13 / ro-md-14-sh / ro-md-16-sh"
         },
         {
           "component": "text",
           "label": "font color",
-          "name": "titleFontColor"
+          "name": "titleFontColor",
+          "valueType": "string"
         }
       ]
     },
     {
       "component": "container",
-      "label": "Info Richtext Style",
-      "name": "infoStyle",
-      "collapsible": true,
+      "label": "info richtext",
+      "name": "advancedInfoGroup",
       "fields": [
         {
-          "component": "select",
-          "label": "font (DT)",
-          "name": "infoFontDT",
-          "options": [
-            {
-              "name": "ro-rg-13",
-              "value": "ro-rg-13"
-            },
-            {
-              "name": "ro-rg-14-sh",
-              "value": "ro-rg-14-sh"
-            },
-            {
-              "name": "ro-rg-16-sh",
-              "value": "ro-rg-16-sh"
-            }
-          ]
+          "component": "text",
+          "label": "font(DT)",
+          "name": "infoFontDesktop",
+          "valueType": "string",
+          "description": "ro-rg-13 / ro-rg-14-sh / ro-rg-16-sh"
         },
         {
-          "component": "select",
-          "label": "font (M)",
-          "name": "infoFontM",
-          "options": [
-            {
-              "name": "ro-rg-12",
-              "value": "ro-rg-12"
-            },
-            {
-              "name": "ro-rg-13",
-              "value": "ro-rg-13"
-            },
-            {
-              "name": "ro-rg-14-sh",
-              "value": "ro-rg-14-sh"
-            }
-          ]
+          "component": "text",
+          "label": "font(M)",
+          "name": "infoFontMobile",
+          "valueType": "string",
+          "description": "ro-rg-12 / ro-rg-13 / ro-rg-14-sh"
         },
         {
           "component": "text",
           "label": "font color",
-          "name": "infoFontColor"
+          "name": "infoFontColor",
+          "valueType": "string"
         }
       ]
     },
     {
       "component": "text",
       "label": "circle num color(M)",
-      "name": "circleNumColorM"
+      "name": "circleNumColorMobile",
+      "valueType": "string"
     }
   ]
 }

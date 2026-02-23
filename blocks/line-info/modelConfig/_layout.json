@@ -1,0 +1,202 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Layout",
+      "name": "layoutTab"
+    },
+    {
+      "component": "select",
+      "label": "layout style",
+      "name": "styleLayout",
+      "valueType": "string",
+      "default": "1",
+      "defaultValue": "1",
+      "options": [
+        {
+          "name": "Variant 1 - Text On Left & Right",
+          "value": "1"
+        },
+        {
+          "name": "Variant 2 - Text On Left / Right Sides",
+          "value": "2"
+        },
+        {
+          "name": "Variant 3 - Text below",
+          "value": "3"
+        },
+        {
+          "name": "Variant 4 - Freeform",
+          "value": "4"
+        },
+        {
+          "name": "Variant 5 - Freeform-dialog box",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Module Style",
+      "name": "moduleStyleGroup",
+      "fields": [
+        {
+          "component": "text",
+          "label": "top padding",
+          "name": "paddingTop",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bottom padding",
+          "name": "paddingBottom",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "img width (px)",
+          "name": "imgWidth",
+          "valueType": "string",
+          "condition": {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        },
+        {
+          "component": "text",
+          "label": "text width(%)",
+          "name": "textWidthPercent",
+          "valueType": "string",
+          "condition": {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        },
+        {
+          "component": "text",
+          "label": "text max width(px)",
+          "name": "textMaxWidth",
+          "valueType": "string",
+          "condition": {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Dialog Box Settings",
+      "name": "dialogBoxSettings",
+      "condition": {
+        "==": [
+          {
+            "var": "styleLayout"
+          },
+          "5"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "radius (TL/TR/BR/BL)",
+          "name": "boxRadius",
+          "valueType": "string"
+        },
+        {
+          "component": "container",
+          "label": "border",
+          "name": "boxBorderGroup",
+          "fields": [
+            {
+              "component": "text",
+              "label": "width",
+              "name": "boxBorderWidth",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "color",
+              "name": "boxBorderColor",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "bg color",
+          "name": "boxBgColor",
+          "valueType": "string"
+        },
+        {
+          "component": "container",
+          "label": "padding (L/T/R/B)",
+          "name": "boxPaddingGroup",
+          "fields": [
+            {
+              "component": "text",
+              "label": "left",
+              "name": "boxPaddingLeft",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "top",
+              "name": "boxPaddingTop",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "right",
+              "name": "boxPaddingRight",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "label": "bottom",
+              "name": "boxPaddingBottom",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "content alignment (left/ center)",
+          "name": "boxContentAlignment",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Left",
+              "value": "left"
+            },
+            {
+              "name": "Center",
+              "value": "center"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

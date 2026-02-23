@@ -21,16 +21,10 @@
       "id": "line-info",
       "fields": [
         {
-          "...": "./modelConfig/_style.json#/fields"
+          "...": "./modelConfig/_layout.json#/fields"
         },
         {
-          "...": "./modelConfig/_asset.json#/fields"
-        },
-        {
-          "...": "./modelConfig/_text-item.json#/fields"
-        },
-        {
-          "...": "./modelConfig/_dialog-box.json#/fields"
+          "...": "./modelConfig/_basic.json#/fields"
         },
         {
           "...": "./modelConfig/_advanced.json#/fields"
