@@ -4,6 +4,12 @@ import { loadScript, loadCSS } from '../../scripts/aem.js';
 import { loadSwiper } from '../../scripts/scripts.js';
 // import { getBlockConfigs, getFieldValue, handleDecide } from '../../scripts/utils.js';
 
+const alignmentConfig = {
+  desktopAlignment: 'center',
+  tabletAlignment: 'center',
+  mobileAlignment: 'center',
+};
+
 const DEFAULT_CONFIG = {
   // Layout Tab
   // desktopAlignment: 'center',
@@ -170,9 +176,16 @@ async function fillSequentialConfig(block) {
   const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
 
   const flatValues = [];
+  const alignmentKeys = ['desktopAlignment', 'tabletAlignment', 'mobileAlignment'];
 
   fieldGroups.forEach((group, index) => {
-    if (index <= 2) return;
+    if (index <= 2) {
+      const value = extractValue(group);
+      if (value) {
+        alignmentConfig[alignmentKeys[index]] = value;
+      }
+      return;
+    }
 
     Array.from(group.children).forEach((child) => {
       const value = extractValue(child);
@@ -737,6 +750,19 @@ async function renderCard(block) {
 
   const style = document.createElement('style');
   style.textContent = `
+    .small-cards-containers .swiper-wrapper {
+      justify-content: ${alignmentConfig.mobileAlignment === 'center' ? 'center' : 'flex-start'};
+    }
+    @media (min-width: 768px) {
+      .small-cards-containers .swiper-wrapper {
+        justify-content: ${alignmentConfig.tabletAlignment === 'center' ? 'center' : 'flex-start'};
+      }
+    }
+    @media (min-width: 1025px) {
+      .small-cards-containers .swiper-wrapper {
+        justify-content: ${alignmentConfig.desktopAlignment === 'center' ? 'center' : 'flex-start'};
+      }
+    }
     .small-cards-containers .swiper-button-prev,
     .small-cards-containers .swiper-button-next {
       background: var(--arrow-container-bg-default, linear-gradient(180deg, #4379B1 0%, #5977A1 100%));
