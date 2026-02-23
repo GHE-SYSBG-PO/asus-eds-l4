@@ -141,11 +141,16 @@
       &--external {
         position: absolute;
         right: 0;
-        padding-left: 12px;
+        bottom: -12px;
         transform: translateX(100%);
+        font-size: 28px;
+        font-style: italic;
+        font-weight: 700;
+        line-height: 1.2;
+        padding-left: 8px;
 
         @media (width >= 730px) {
-          padding-left: 16px;
+          font-size: 44px;
         }
       }
     }
@@ -159,6 +164,7 @@
 
       .bar-chart__bar-fill {
         padding-right: 0;
+        height: 12px;
       }
     }
 
@@ -353,6 +359,22 @@
 
         @media (width >= 1280px) { 
           max-width: 840px;
+        }
+      }
+
+      .bar-chart__bar-item {
+        flex-direction: column-reverse;
+
+          @media (width >= 730px) { 
+          gap: 12px;
+        }
+      }
+
+      .bar-chart__bars {
+          gap: 20px;
+
+          @media (width >= 730px) { 
+          gap: 32px;
         }
       }
     }
