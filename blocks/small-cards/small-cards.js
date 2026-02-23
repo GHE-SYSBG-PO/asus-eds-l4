@@ -949,6 +949,40 @@ async function renderCard(block) {
       display: block;
     }
   `;
+
+  const slideCount = Array.isArray(data) ? data.length : 1;
+
+  if (slideCount <= 3) {
+    style.textContent += `
+      @media (min-width: 1025px) {
+        .small-cards-containers .swiper-button-prev,
+        .small-cards-containers .swiper-button-next {
+          display: none;
+        }
+      }
+    `;
+  }
+  if (slideCount <= 2) {
+    style.textContent += `
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .small-cards-containers .swiper-button-prev,
+        .small-cards-containers .swiper-button-next {
+          display: none;
+        }
+      }
+    `;
+  }
+  if (slideCount <= 1) {
+    style.textContent += `
+      @media (max-width: 767px) {
+        .small-cards-containers .swiper-button-prev,
+        .small-cards-containers .swiper-button-next {
+          display: none;
+        }
+      }
+    `;
+  }
+
   smallCardsContainer.appendChild(style);
 
   block.appendChild(smallCardsContainer);
