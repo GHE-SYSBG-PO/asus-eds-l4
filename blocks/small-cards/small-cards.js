@@ -2,7 +2,8 @@
 
 import { loadScript, loadCSS } from '../../scripts/aem.js';
 import { loadSwiper } from '../../scripts/scripts.js';
-// import { getBlockConfigs, getFieldValue, handleDecide } from '../../scripts/utils.js';
+
+const LAYOUT_CONFIG_COUNT = 22;
 
 const alignmentConfig = {
   desktopAlignment: 'center',
@@ -11,23 +12,23 @@ const alignmentConfig = {
 
   // Swiper Arrow (Previous / Next)
   arrowStyle: '',
-  arrowContainerBgColorDefault: '',
-  arrowContainerBgColorHover: '',
-  arrowContainerBgColorPress: '',
-  arrowContainerBgColorDisable: '',
-  arrowColorDefault: '',
-  arrowColorHover: '',
-  arrowColorPress: '',
-  arrowColorDisable: '',
+  arrowContainerBgColorDefault: '4379B1',
+  arrowContainerBgColorHover: '0b5da799',
+  arrowContainerBgColorPress: '0b5da799',
+  arrowContainerBgColorDisable: 'CBCDD16B',
+  arrowColorDefault: 'FFFFFF',
+  arrowColorHover: 'FFFFFF',
+  arrowColorPress: 'FFFFFF',
+  arrowColorDisable: '0000006B',
   arrowAssetDefault: '',
   arrowAssetHover: '',
   arrowAssetDisable: '',
 
   // Swiper Arrow (Previous / Next)
-  arrowBorderWidthDefault: '',
-  arrowBorderWidthHover: '',
-  arrowBorderWidthPress: '',
-  arrowBorderWidthDisable: '',
+  arrowBorderWidthDefault: '0',
+  arrowBorderWidthHover: '0',
+  arrowBorderWidthPress: '0',
+  arrowBorderWidthDisable: '0',
   arrowBorderColorDefault: '',
   arrowBorderColorHover: '',
   arrowBorderColorPress: '',
@@ -35,10 +36,6 @@ const alignmentConfig = {
 };
 
 const DEFAULT_CONFIG = {
-  // Layout Tab
-  // desktopAlignment: 'center',
-  // tabletAlignment: 'center',
-  // mobileAlignment: 'center',
 
   //  Base Tab
   cardType: '',
@@ -49,13 +46,13 @@ const DEFAULT_CONFIG = {
   loop: false,
   navReplay: false,
   pauseAndPlayBtn: false,
-  pausePlayBtnColor: '',
+  pausePlayBtnColor: '2F2F2F',
   pausePlayBtnPosition: 'top-left',
 
   // Cards (Noise)
   noiseCancelingAsset: '',
-  noiseWaveColor: '',
-  voiceWaveColor: '',
+  noiseWaveColor: 'b6c4d5',
+  voiceWaveColor: '5a7ca9',
 
   // Cards (Image / Video)
   assets: '',
@@ -137,7 +134,6 @@ const DEFAULT_CONFIG = {
 
 };
 
-
 /**
  * Get current device
  */
@@ -173,17 +169,14 @@ function extractValue(div) {
 async function fillSequentialConfig(block) {
   const cfg = { ...DEFAULT_CONFIG };
 
-  const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
-
   const flatValues = [];
-  const alignmentKeys = ['desktopAlignment', 'tabletAlignment', 'mobileAlignment', 'arrowStyle', 'arrowContainerBgColorDefault', 'arrowContainerBgColorHover', 'arrowContainerBgColorPress', 'arrowContainerBgColorDisable', 'arrowColorDefault', 'arrowColorHover', 'arrowColorPress', 'arrowColorDisable', 'arrowAssetDefault', 'arrowAssetHover', 'arrowAssetDisable', 'arrowBorderWidthDefault', 'arrowBorderWidthHover', 'arrowBorderWidthPress', 'arrowBorderWidthDisable', 'arrowBorderColorDefault', 'arrowBorderColorHover', 'arrowBorderColorPress', 'arrowBorderColorDisable'];
+  const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
+  const alignmentKeys = Object.keys(alignmentConfig);
 
   fieldGroups.forEach((group, index) => {
-    if (index <= 22) {
+    if (index <= LAYOUT_CONFIG_COUNT) {
       const value = extractValue(group);
-      // if (value) {
       alignmentConfig[alignmentKeys[index]] = value || alignmentConfig[alignmentKeys[index]];
-      // }
       return;
     }
 
