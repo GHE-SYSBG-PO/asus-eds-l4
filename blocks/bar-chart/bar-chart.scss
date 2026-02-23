@@ -315,24 +315,16 @@
 
     &--variant-4 {
       // Stacked + arrow
-      .bar-chart__content {
-        flex-direction: column;
-        
-        .bar-chart__bars {
-          width: 100%;
+      &.bar-chart {
+        max-width: 420px;
+        margin: 0 auto;
+
+        @media (width >= 730px) { 
+          max-width: 630px;
         }
 
-        .bar-chart__arrow-block {
-          width: 100%;
-          margin-top: 16px;
-        }
-
-        @media (width >= 730px) {
-          flex-direction: row;
-
-          .bar-chart__arrow-block {
-            margin-top: 0;
-          }
+        @media (width >= 1280px) { 
+          max-width: 630px;
         }
       }
     }
