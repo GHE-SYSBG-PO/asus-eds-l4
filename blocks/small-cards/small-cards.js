@@ -1038,19 +1038,18 @@ export default async function decorate(block) {
 
   try {
     await loadSwiper();
-    await loadNoUiSliderCSS();
-    await loadNoUiSliderJquery();
+    await loadFeatureCSS();
+    await loadAnimationFun();
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
     setTimeout(async () => {
-      await loadNoUiSlider();
-
+      await loadFeatureFun();
       setEqualHeight(block);
     }, 100);
 
     window.addEventListener('resize', () => {
-      // setEqualHeight(block);
+      setEqualHeight(block);
     });
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -1060,55 +1059,55 @@ export default async function decorate(block) {
 
 }
 
-let noUiSliderPromisejs; let noUiSliderPromisecss; let
-  noUiSliderPromisejsJquery;
+let loadFeatureJS; let loadFeature; let
+  loadAnimation;
 
 /**
  * Loads the noUiSlider jQuery plugin.
  * @returns {Promise} A promise that resolves when the script is loaded.
  */
-function loadNoUiSliderJquery() {
-  if (!noUiSliderPromisejsJquery) {
-    noUiSliderPromisejsJquery = loadScript(
-      '/blocks/small-cards/jquery.min.js',
+function loadAnimationFun() {
+  if (!loadAnimation) {
+    loadAnimation = loadScript(
+      '/blocks/small-cards/animation.js',
     ).catch((err) => {
-      console.error('Failed to load noUiSliderjs:', err);
+      console.error('Failed to load animation:', err);
       throw err;
     });
   }
-  return noUiSliderPromisejsJquery;
+  return loadAnimation;
 }
 
 /**
  * Loads the noUiSlider library.
  * @returns {Promise} A promise that resolves when the script is loaded.
  */
-function loadNoUiSlider() {
-  if (!noUiSliderPromisejs) {
-    noUiSliderPromisejs = loadScript(
+function loadFeatureFun() {
+  if (!loadFeatureJS) {
+    loadFeatureJS = loadScript(
       '/blocks/small-cards/features_init.js',
     ).catch((err) => {
-      console.error('Failed to load noUiSliderjs:', err);
+      console.error('Failed to load Feature JS:', err);
       throw err;
     });
   }
-  return noUiSliderPromisejs;
+  return loadFeatureJS;
 }
 
 /**
  * Loads the noUiSlider CSS.
  * @returns {Promise} A promise that resolves when the CSS is loaded.
  */
-function loadNoUiSliderCSS() {
-  if (!noUiSliderPromisecss) {
-    noUiSliderPromisecss = loadCSS(
+function loadFeatureCSS() {
+  if (!loadFeature) {
+    loadFeature = loadCSS(
       '/blocks/small-cards/features-all.css',
     ).catch((err) => {
-      console.error('Failed to load noUiSlidercss:', err);
+      console.error('Failed to load Feature CSS:', err);
       throw err;
     });
   }
-  return noUiSliderPromisecss;
+  return loadFeature;
 }
 
 setTimeout(() => {
