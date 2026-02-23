@@ -10,13 +10,7 @@ const alignmentConfig = {
   mobileAlignment: 'center',
 };
 
-const DEFAULT_CONFIG = {
-  // Layout Tab
-  // desktopAlignment: 'center',
-  // tabletAlignment: 'center',
-  // mobileAlignment: 'center',
-
-  // Swiper Arrow (Previous / Next)
+const arrowConfig = {
   arrowStyle: '',
   arrowContainerBgColorDefault: '',
   arrowContainerBgColorHover: '',
@@ -29,8 +23,6 @@ const DEFAULT_CONFIG = {
   arrowAssetDefault: '',
   arrowAssetHover: '',
   arrowAssetDisable: '',
-
-  // Swiper Arrow (Previous / Next)
   arrowBorderWidthDefault: '',
   arrowBorderWidthHover: '',
   arrowBorderWidthPress: '',
@@ -39,7 +31,15 @@ const DEFAULT_CONFIG = {
   arrowBorderColorHover: '',
   arrowBorderColorPress: '',
   arrowBorderColorDisable: '',
+};
 
+const DEFAULT_CONFIG = {
+  // Layout Tab
+  // desktopAlignment: 'center',
+  // tabletAlignment: 'center',
+  // mobileAlignment: 'center',
+
+  // Swiper Arrow (Previous / Next)
   //  Base Tab
   cardType: '',
   mediaType: '',
@@ -589,50 +589,34 @@ async function renderCard(block) {
   console.log('Extracted chunk, Final Card Data:', data);
 
   const configData = Array.isArray(data) ? data[0] : data;
-  const {
-    arrowStyle,
-    arrowContainerBgColorDefault,
-    arrowContainerBgColorHover,
-    arrowContainerBgColorPress,
-    arrowContainerBgColorDisable,
-    arrowColorDefault,
-    arrowColorHover,
-    arrowColorPress,
-    arrowColorDisable,
-    arrowAssetDefault,
-    arrowAssetHover,
-    arrowAssetDisable,
-    arrowBorderWidthDefault,
-    arrowBorderWidthHover,
-    arrowBorderWidthPress,
-    arrowBorderWidthDisable,
-    arrowBorderColorDefault,
-    arrowBorderColorHover,
-    arrowBorderColorPress,
-    arrowBorderColorDisable,
-  } = configData;
+
+  Object.keys(arrowConfig).forEach((key) => {
+    if (configData[key] !== undefined) {
+      arrowConfig[key] = configData[key];
+    }
+  });
 
   let arrowStyleVars = '';
-  if (arrowStyle === 'svg') {
-    if (arrowContainerBgColorDefault) arrowStyleVars += `--arrow-container-bg-default: #${arrowContainerBgColorDefault};`;
-    if (arrowContainerBgColorHover) arrowStyleVars += `--arrow-container-bg-hover: #${arrowContainerBgColorHover};`;
-    if (arrowContainerBgColorPress) arrowStyleVars += `--arrow-container-bg-press: #${arrowContainerBgColorPress};`;
-    if (arrowContainerBgColorDisable) arrowStyleVars += `--arrow-container-bg-disable: #${arrowContainerBgColorDisable};`;
+  if (arrowConfig.arrowStyle === 'svg') {
+    if (arrowConfig.arrowContainerBgColorDefault) arrowStyleVars += `--arrow-container-bg-default: #${arrowConfig.arrowContainerBgColorDefault};`;
+    if (arrowConfig.arrowContainerBgColorHover) arrowStyleVars += `--arrow-container-bg-hover: #${arrowConfig.arrowContainerBgColorHover};`;
+    if (arrowConfig.arrowContainerBgColorPress) arrowStyleVars += `--arrow-container-bg-press: #${arrowConfig.arrowContainerBgColorPress};`;
+    if (arrowConfig.arrowContainerBgColorDisable) arrowStyleVars += `--arrow-container-bg-disable: #${arrowConfig.arrowContainerBgColorDisable};`;
 
-    if (arrowColorDefault) arrowStyleVars += `--arrow-color-default: #${arrowColorDefault};`;
-    if (arrowColorHover) arrowStyleVars += `--arrow-color-hover: #${arrowColorHover};`;
-    if (arrowColorPress) arrowStyleVars += `--arrow-color-press: #${arrowColorPress};`;
-    if (arrowColorDisable) arrowStyleVars += `--arrow-color-disable: #${arrowColorDisable};`;
+    if (arrowConfig.arrowColorDefault) arrowStyleVars += `--arrow-color-default: #${arrowConfig.arrowColorDefault};`;
+    if (arrowConfig.arrowColorHover) arrowStyleVars += `--arrow-color-hover: #${arrowConfig.arrowColorHover};`;
+    if (arrowConfig.arrowColorPress) arrowStyleVars += `--arrow-color-press: #${arrowConfig.arrowColorPress};`;
+    if (arrowConfig.arrowColorDisable) arrowStyleVars += `--arrow-color-disable: #${arrowConfig.arrowColorDisable};`;
 
-    if (arrowBorderWidthDefault) arrowStyleVars += `--arrow-border-width-default: ${arrowBorderWidthDefault}px;`;
-    if (arrowBorderWidthHover) arrowStyleVars += `--arrow-border-width-hover: ${arrowBorderWidthHover}px;`;
-    if (arrowBorderWidthPress) arrowStyleVars += `--arrow-border-width-press: ${arrowBorderWidthPress}px;`;
-    if (arrowBorderWidthDisable) arrowStyleVars += `--arrow-border-width-disable: ${arrowBorderWidthDisable}px;`;
+    if (arrowConfig.arrowBorderWidthDefault) arrowStyleVars += `--arrow-border-width-default: ${arrowConfig.arrowBorderWidthDefault}px;`;
+    if (arrowConfig.arrowBorderWidthHover) arrowStyleVars += `--arrow-border-width-hover: ${arrowConfig.arrowBorderWidthHover}px;`;
+    if (arrowConfig.arrowBorderWidthPress) arrowStyleVars += `--arrow-border-width-press: ${arrowConfig.arrowBorderWidthPress}px;`;
+    if (arrowConfig.arrowBorderWidthDisable) arrowStyleVars += `--arrow-border-width-disable: ${arrowConfig.arrowBorderWidthDisable}px;`;
 
-    if (arrowBorderColorDefault) arrowStyleVars += `--arrow-border-color-default: #${arrowBorderColorDefault};`;
-    if (arrowBorderColorHover) arrowStyleVars += `--arrow-border-color-hover: #${arrowBorderColorHover};`;
-    if (arrowBorderColorPress) arrowStyleVars += `--arrow-border-color-press: #${arrowBorderColorPress};`;
-    if (arrowBorderColorDisable) arrowStyleVars += `--arrow-border-color-disable: #${arrowBorderColorDisable};`;
+    if (arrowConfig.arrowBorderColorDefault) arrowStyleVars += `--arrow-border-color-default: #${arrowConfig.arrowBorderColorDefault};`;
+    if (arrowConfig.arrowBorderColorHover) arrowStyleVars += `--arrow-border-color-hover: #${arrowConfig.arrowBorderColorHover};`;
+    if (arrowConfig.arrowBorderColorPress) arrowStyleVars += `--arrow-border-color-press: #${arrowConfig.arrowBorderColorPress};`;
+    if (arrowConfig.arrowBorderColorDisable) arrowStyleVars += `--arrow-border-color-disable: #${arrowConfig.arrowBorderColorDisable};`;
   }
 
   const smallCardsContainer = document.createElement('div');
