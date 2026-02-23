@@ -189,7 +189,7 @@ const buildBarItem = (item, v, index, motionEnabled, calculatedBarWidth = null) 
           <div class="bar-chart__bar-fill"
                data-length="${barLength}"
                style="${barBgStyle} ${radiusStyle} width: ${initialWidth};">
-            <span class="bar-chart__bar-text tt-md-14" style="${barTextColor}">${item.barRowBarText || ''}</span>
+            <span class="bar-chart__bar-text tt-md-14" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
           </div>
         </div>
       </div>
