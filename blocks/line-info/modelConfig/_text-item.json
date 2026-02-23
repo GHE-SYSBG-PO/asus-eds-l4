@@ -128,7 +128,20 @@
             "label": "Y value(top)(DT)",
             "name": "yValue",
             "valueType": "string",
-            "description": "文案太多可以是負值"
+            "description": "文案太多可以是負值",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2",
+                  "4",
+                  "5"
+                ]
+              ]
+            }
           },
           {
             "component": "richtext",
