@@ -166,6 +166,11 @@ function extractValue(div) {
   return text || null;
 }
 
+/**
+ * Fills the sequential configuration from the block.
+ * @param {HTMLElement} block The block element.
+ * @returns {Promise<Array>} An array of configuration objects.
+ */
 async function fillSequentialConfig(block) {
   const cfg = { ...DEFAULT_CONFIG };
 
@@ -208,6 +213,11 @@ async function fillSequentialConfig(block) {
   return configArray;
 }
 
+/**
+ * Converts a hex color code to an RGB string.
+ * @param {string} hex The hex color code.
+ * @returns {string} The RGB string (e.g., "255, 255, 255").
+ */
 function hexToRgb(hex) {
   if (!hex) return '';
   if (hex.includes(',')) return hex;
@@ -228,6 +238,11 @@ const getButtonPositionClass = (position) => {
   return positionMap[position] || 'bottom-4 right-4';
 };
 
+/**
+ * Generates the HTML for the media content (image, video, or noise canceling animation).
+ * @param {object} data The card data.
+ * @returns {string} The HTML string for the media content.
+ */
 function getMediaHTML(data) {
   const {
     mediaType, imageAlt, videoAutoPlay, loop, navReplay, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
@@ -346,11 +361,22 @@ function getMediaHTML(data) {
   return content;
 }
 
+/**
+ * Retrieves a value from the data object based on the current device.
+ * @param {string} fieldName The base field name.
+ * @param {object} data The data object.
+ * @returns {string} The value for the current device.
+ */
 function getValueForDevice(fieldName, data) {
   const device = getDevice();
   return data[`${fieldName}${device}`] || '';
 }
 
+/**
+ * Generates the HTML for a single card.
+ * @param {object} data The card data.
+ * @returns {string} The HTML string for the card.
+ */
 function getCardHTML(data) {
   const {
     cardType,
@@ -456,6 +482,11 @@ function getCardHTML(data) {
             </div>
           </div>`;
 
+  /**
+   * Generates the styled block content HTML.
+   * @param {string} style The inline style string.
+   * @returns {string} The HTML string for the block content.
+   */
   const getStyledBlockContent = (style) => {
     if (!style) return blockContent;
     return blockContent.replace('class="block-content"', `class="block-content" style="${style}"`);
@@ -555,6 +586,10 @@ function getCardHTML(data) {
       </div>`;
 }
 
+/**
+ * Sets equal height for all slides in the block.
+ * @param {HTMLElement} block The block element.
+ */
 function setEqualHeight(block) {
   const slides = block.querySelectorAll('.swiper-slide');
   let maxHeight = 0;
@@ -575,6 +610,10 @@ function setEqualHeight(block) {
   });
 }
 
+/**
+ * Renders the cards in the block.
+ * @param {HTMLElement} block The block element.
+ */
 async function renderCard(block) {
 
   const data = await fillSequentialConfig(block);
@@ -991,6 +1030,10 @@ async function renderCard(block) {
   });
 }
 
+/**
+ * Decorates the block.
+ * @param {HTMLElement} block The block element.
+ */
 export default async function decorate(block) {
 
   try {
@@ -1020,6 +1063,10 @@ export default async function decorate(block) {
 let noUiSliderPromisejs; let noUiSliderPromisecss; let
   noUiSliderPromisejsJquery;
 
+/**
+ * Loads the noUiSlider jQuery plugin.
+ * @returns {Promise} A promise that resolves when the script is loaded.
+ */
 function loadNoUiSliderJquery() {
   if (!noUiSliderPromisejsJquery) {
     noUiSliderPromisejsJquery = loadScript(
@@ -1032,6 +1079,10 @@ function loadNoUiSliderJquery() {
   return noUiSliderPromisejsJquery;
 }
 
+/**
+ * Loads the noUiSlider library.
+ * @returns {Promise} A promise that resolves when the script is loaded.
+ */
 function loadNoUiSlider() {
   if (!noUiSliderPromisejs) {
     noUiSliderPromisejs = loadScript(
@@ -1044,6 +1095,10 @@ function loadNoUiSlider() {
   return noUiSliderPromisejs;
 }
 
+/**
+ * Loads the noUiSlider CSS.
+ * @returns {Promise} A promise that resolves when the CSS is loaded.
+ */
 function loadNoUiSliderCSS() {
   if (!noUiSliderPromisecss) {
     noUiSliderPromisecss = loadCSS(
