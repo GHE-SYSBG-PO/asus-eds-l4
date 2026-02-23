@@ -38,8 +38,8 @@ const alignmentConfig = {
 const DEFAULT_CONFIG = {
 
   //  Base Tab
-  cardType: '',
-  mediaType: '',
+  cardType: 'img_txt_integrated_top',
+  mediaType: 'image',
   imageAlt: '',
 
   videoAutoPlay: false,
