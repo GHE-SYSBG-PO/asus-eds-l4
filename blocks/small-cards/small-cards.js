@@ -176,13 +176,13 @@ async function fillSequentialConfig(block) {
   const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
 
   const flatValues = [];
-  const alignmentKeys = ['desktopAlignment', 'tabletAlignment', 'mobileAlignment'];
+  const alignmentKeys = ['desktopAlignment', 'tabletAlignment', 'mobileAlignment', 'arrowStyle', 'arrowContainerBgColorDefault', 'arrowContainerBgColorHover', 'arrowContainerBgColorPress', 'arrowContainerBgColorDisable', 'arrowColorDefault', 'arrowColorHover', 'arrowColorPress', 'arrowColorDisable', 'arrowAssetDefault', 'arrowAssetHover', 'arrowAssetDisable', 'arrowBorderWidthDefault', 'arrowBorderWidthHover', 'arrowBorderWidthPress', 'arrowBorderWidthDisable', 'arrowBorderColorDefault', 'arrowBorderColorHover', 'arrowBorderColorPress', 'arrowBorderColorDisable'];
 
   fieldGroups.forEach((group, index) => {
     if (index <= 22) {
       const value = extractValue(group);
       // if (value) {
-      alignmentConfig[alignmentKeys[index]] = value;
+      alignmentConfig[alignmentKeys[index]] = value || alignmentConfig[alignmentKeys[index]];
       // }
       return;
     }
@@ -207,7 +207,7 @@ async function fillSequentialConfig(block) {
 
     keys.forEach((key, index) => {
       if (chunk[index] !== undefined) {
-        chunkCfg[key] = chunk[index];
+        chunkCfg[key] = chunk[index] || DEFAULT_CONFIG[key];
       }
     });
     configArray.push(chunkCfg);
