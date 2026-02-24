@@ -2988,106 +2988,114 @@
         "valueType": "string"
       },
       {
-        "component": "select",
-        "label": "CTA Button Layout Group",
-        "name": "styleLayoutCTA",
-        "valueType": "string",
-        "options": [
+        "component": "container",
+        "label": "Configure CTA Button",
+        "name": "configureButton",
+        "collapsible": true,
+        "fields": [
           {
-            "name": "Variant 1 - filled style",
-            "value": "1"
+            "component": "select",
+            "label": "CTA Button Layout Group",
+            "name": "styleLayoutCTA",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Variant 1 - filled style",
+                "value": "1"
+              },
+              {
+                "name": "Variant 2 - filled style+icon",
+                "value": "2"
+              },
+              {
+                "name": "Variant 3 - filled style+icon(Size-Small)",
+                "value": "3"
+              },
+              {
+                "name": "Variant 4 - outline style",
+                "value": "4"
+              },
+              {
+                "name": "Variant 5 - outline style+icon",
+                "value": "5"
+              },
+              {
+                "name": "Variant 6 - outline style+icon(Size-Small)",
+                "value": "6"
+              }
+            ]
           },
           {
-            "name": "Variant 2 - filled style+icon",
-            "value": "2"
+            "component": "select",
+            "label": "Hyper Link",
+            "name": "linkTypeCTA",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "External Link",
+                "value": "external"
+              },
+              {
+                "name": "Inner Page Link",
+                "value": "inner"
+              }
+            ]
           },
           {
-            "name": "Variant 3 - filled style+icon(Size-Small)",
-            "value": "3"
+            "component": "text",
+            "label": "External Link",
+            "name": "externalLinkCTA",
+            "valueType": "string",
+            "placeholder": "https://",
+            "condition": {
+              "===": [
+                {
+                  "var": "linkTypeCTA"
+                },
+                "external"
+              ]
+            }
           },
           {
-            "name": "Variant 4 - outline style",
-            "value": "4"
+            "component": "text",
+            "valueType": "string",
+            "label": "Inner Page Link",
+            "name": "innerPageLinkCTA",
+            "placeholder": "/modals/page",
+            "condition": {
+              "===": [
+                {
+                  "var": "linkTypeCTA"
+                },
+                "inner"
+              ]
+            }
           },
           {
-            "name": "Variant 5 - outline style+icon",
-            "value": "5"
-          },
-          {
-            "name": "Variant 6 - outline style+icon(Size-Small)",
-            "value": "6"
+            "component": "select",
+            "label": "Close Button Style",
+            "name": "gBtnStyleCTA",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Default",
+                "value": "default"
+              },
+              {
+                "name": "Customized",
+                "value": "customized"
+              }
+            ],
+            "condition": {
+              "===": [
+                {
+                  "var": "linkTypeCTA"
+                },
+                "inner"
+              ]
+            }
           }
         ]
-      },
-      {
-        "component": "select",
-        "label": "Hyper Link",
-        "name": "linkTypeCTA",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "External Link",
-            "value": "external"
-          },
-          {
-            "name": "Inner Page Link",
-            "value": "inner"
-          }
-        ]
-      },
-      {
-        "component": "text",
-        "label": "External Link",
-        "name": "externalLinkCTA",
-        "valueType": "string",
-        "placeholder": "https://",
-        "condition": {
-          "===": [
-            {
-              "var": "linkTypeCTA"
-            },
-            "external"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "label": "Inner Page Link",
-        "name": "innerPageLinkCTA",
-        "placeholder": "/modals/page",
-        "condition": {
-          "===": [
-            {
-              "var": "linkTypeCTA"
-            },
-            "inner"
-          ]
-        }
-      },
-      {
-        "component": "select",
-        "label": "Close Button Style",
-        "name": "gBtnStyleCTA",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Default",
-            "value": "default"
-          },
-          {
-            "name": "Customized",
-            "value": "customized"
-          }
-        ],
-        "condition": {
-          "===": [
-            {
-              "var": "linkTypeCTA"
-            },
-            "inner"
-          ]
-        }
       },
       {
         "component": "container",
@@ -3224,395 +3232,411 @@
         ]
       },
       {
-        "component": "select",
-        "label": "Icon Style",
-        "name": "iconStyleCTA",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "SVG",
-            "value": "svg"
-          },
-          {
-            "name": "PNG",
-            "value": "png"
-          }
-        ],
-        "condition": {
-          "in": [
-            {
-              "var": "styleLayoutCTA"
-            },
-            [
-              "2",
-              "3",
-              "5",
-              "6"
-            ]
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "Icon Color",
-        "name": "iconColorCTA",
-        "valueType": "string",
-        "condition": {
-          "and": [
-            {
-              "in": [
-                {
-                  "var": "styleLayoutCTA"
-                },
-                [
-                  "2",
-                  "3",
-                  "5",
-                  "6"
-                ]
-              ]
-            },
-            {
-              "===": [
-                {
-                  "var": "iconStyleCTA"
-                },
-                "svg"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "Icon BG Color Default",
-        "name": "iconBgColorDefaultCTA",
-        "valueType": "string",
-        "condition": {
-          "and": [
-            {
-              "in": [
-                {
-                  "var": "styleLayoutCTA"
-                },
-                [
-                  "2",
-                  "3",
-                  "5",
-                  "6"
-                ]
-              ]
-            },
-            {
-              "===": [
-                {
-                  "var": "iconStyleCTA"
-                },
-                "svg"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "Icon BG Color Hover",
-        "name": "iconBgColorHoverCTA",
-        "valueType": "string",
-        "condition": {
-          "and": [
-            {
-              "in": [
-                {
-                  "var": "styleLayoutCTA"
-                },
-                [
-                  "2",
-                  "3",
-                  "5",
-                  "6"
-                ]
-              ]
-            },
-            {
-              "===": [
-                {
-                  "var": "iconStyleCTA"
-                },
-                "svg"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "Icon BG Color Active",
-        "name": "iconBgColorActiveCTA",
-        "valueType": "string",
-        "condition": {
-          "and": [
-            {
-              "in": [
-                {
-                  "var": "styleLayoutCTA"
-                },
-                [
-                  "2",
-                  "3",
-                  "5",
-                  "6"
-                ]
-              ]
-            },
-            {
-              "===": [
-                {
-                  "var": "iconStyleCTA"
-                },
-                "svg"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "reference",
-        "label": "Default Asset",
-        "name": "iconAssetDefaultCTA",
-        "multi": false,
-        "condition": {
-          "and": [
-            {
-              "in": [
-                {
-                  "var": "styleLayoutCTA"
-                },
-                [
-                  "2",
-                  "3",
-                  "5",
-                  "6"
-                ]
-              ]
-            },
-            {
-              "===": [
-                {
-                  "var": "iconStyleCTA"
-                },
-                "png"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "reference",
-        "label": "Hover Asset",
-        "name": "iconAssetHoverCTA",
-        "multi": false,
-        "condition": {
-          "and": [
-            {
-              "in": [
-                {
-                  "var": "styleLayoutCTA"
-                },
-                [
-                  "2",
-                  "3",
-                  "5",
-                  "6"
-                ]
-              ]
-            },
-            {
-              "===": [
-                {
-                  "var": "iconStyleCTA"
-                },
-                "png"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "reference",
-        "label": "Active Asset",
-        "name": "iconAssetActiveCTA",
-        "multi": false,
-        "condition": {
-          "and": [
-            {
-              "in": [
-                {
-                  "var": "styleLayoutCTA"
-                },
-                [
-                  "2",
-                  "3",
-                  "5",
-                  "6"
-                ]
-              ]
-            },
-            {
-              "===": [
-                {
-                  "var": "iconStyleCTA"
-                },
-                "png"
-              ]
-            }
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "Label",
-        "name": "labelCTA",
-        "valueType": "string"
-      },
-      {
         "component": "container",
-        "label": "Label Advanced",
-        "name": "labelAdvancedCTA",
+        "label": "Customize Button Icon",
+        "name": "customizeButtonIcon",
         "collapsible": true,
         "fields": [
           {
             "component": "select",
-            "label": "Label Font (D/T)",
-            "name": "fontDesktopCTA",
+            "label": "Icon Style",
+            "name": "iconStyleCTA",
             "valueType": "string",
             "options": [
               {
-                "name": "ro-md-16",
-                "value": "ro-md-16"
+                "name": "SVG",
+                "value": "svg"
               },
               {
-                "name": "ro-md-18",
-                "value": "ro-md-18"
-              },
-              {
-                "name": "ro-md-20",
-                "value": "ro-md-20"
+                "name": "PNG",
+                "value": "png"
               }
-            ]
+            ],
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            }
           },
           {
-            "component": "select",
-            "label": "Label Font (M)",
-            "name": "fontMCTA",
+            "component": "text",
+            "label": "Icon Color",
+            "name": "iconColorCTA",
             "valueType": "string",
-            "options": [
-              {
-                "name": "ro-md-14",
-                "value": "ro-md-14"
-              },
-              {
-                "name": "ro-md-16",
-                "value": "ro-md-16"
-              },
-              {
-                "name": "ro-md-18",
-                "value": "ro-md-18"
-              }
-            ]
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "styleLayoutCTA"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "iconStyleCTA"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
           },
           {
             "component": "text",
-            "label": "Font Color Default",
-            "name": "fontColorDefaultCTA",
-            "valueType": "string"
+            "label": "Icon BG Color Default",
+            "name": "iconBgColorDefaultCTA",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "styleLayoutCTA"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "iconStyleCTA"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
           },
           {
             "component": "text",
-            "label": "Font Color Hover",
-            "name": "fontColorHoverCTA",
-            "valueType": "string"
+            "label": "Icon BG Color Hover",
+            "name": "iconBgColorHoverCTA",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "styleLayoutCTA"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "iconStyleCTA"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
           },
           {
             "component": "text",
-            "label": "Font Color Active",
-            "name": "fontColorActiveCTA",
-            "valueType": "string"
+            "label": "Icon BG Color Active",
+            "name": "iconBgColorActiveCTA",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "styleLayoutCTA"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "iconStyleCTA"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "Default Asset",
+            "name": "iconAssetDefaultCTA",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "styleLayoutCTA"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "iconStyleCTA"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "Hover Asset",
+            "name": "iconAssetHoverCTA",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "styleLayoutCTA"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "iconStyleCTA"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "Active Asset",
+            "name": "iconAssetActiveCTA",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "styleLayoutCTA"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "iconStyleCTA"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
           }
         ]
       },
       {
-        "component": "text",
-        "label": "Container BG Color Default",
-        "name": "containerBgColorDefaultCTA",
-        "valueType": "string",
-        "description": "Accepts only hex values, e.g., 00ffee (without #)"
-      },
-      {
-        "component": "text",
-        "label": "Container BG Color Hover",
-        "name": "containerBgColorHoverCTA",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Container BG Color Active",
-        "name": "containerBgColorActiveCTA",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Container Radius TL",
-        "name": "containerRadiusTLCTA",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Container Radius TR",
-        "name": "containerRadiusTRCTA",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Container Radius BR",
-        "name": "containerRadiusBRCTA",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Container Radius BL",
-        "name": "containerRadiusBLCTA",
-        "valueType": "string"
-      },
-      {
         "component": "container",
-        "label": "Container Advanced",
-        "name": "containerAdvancedCTA",
+        "label": "Customize Button Container",
+        "name": "customizeButtonContainer",
         "collapsible": true,
-        "condition": {
-          "in": [
-            {
-              "var": "styleLayoutCTA"
-            },
-            [
-              "3",
-              "4",
-              "6"
-            ]
-          ]
-        },
         "fields": [
           {
             "component": "text",
-            "label": "Container Border Width",
-            "name": "borderWidthCTA",
+            "label": "Label",
+            "name": "labelCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "container",
+            "label": "Label Advanced",
+            "name": "labelAdvancedCTA",
+            "collapsible": true,
+            "fields": [
+              {
+                "component": "select",
+                "label": "Label Font (D/T)",
+                "name": "fontDesktopCTA",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18"
+                  },
+                  {
+                    "name": "ro-md-20",
+                    "value": "ro-md-20"
+                  }
+                ]
+              },
+              {
+                "component": "select",
+                "label": "Label Font (M)",
+                "name": "fontMCTA",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-14",
+                    "value": "ro-md-14"
+                  },
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18"
+                  }
+                ]
+              },
+              {
+                "component": "text",
+                "label": "Font Color Default",
+                "name": "fontColorDefaultCTA",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "Font Color Hover",
+                "name": "fontColorHoverCTA",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "Font Color Active",
+                "name": "fontColorActiveCTA",
+                "valueType": "string"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Container BG Color Default",
+            "name": "containerBgColorDefaultCTA",
+            "valueType": "string",
+            "description": "Accepts only hex values, e.g., 00ffee (without #)"
+          },
+          {
+            "component": "text",
+            "label": "Container BG Color Hover",
+            "name": "containerBgColorHoverCTA",
             "valueType": "string"
           },
           {
             "component": "text",
-            "label": "Container Border Color",
-            "name": "borderColorCTA",
+            "label": "Container BG Color Active",
+            "name": "containerBgColorActiveCTA",
             "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Container Radius TL",
+            "name": "containerRadiusTLCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Container Radius TR",
+            "name": "containerRadiusTRCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Container Radius BR",
+            "name": "containerRadiusBRCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Container Radius BL",
+            "name": "containerRadiusBLCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "container",
+            "label": "Container Advanced",
+            "name": "containerAdvancedCTA",
+            "collapsible": true,
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "3",
+                  "4",
+                  "6"
+                ]
+              ]
+            },
+            "fields": [
+              {
+                "component": "text",
+                "label": "Container Border Width",
+                "name": "borderWidthCTA",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "Container Border Color",
+                "name": "borderColorCTA",
+                "valueType": "string"
+              }
+            ]
           }
         ]
       },
