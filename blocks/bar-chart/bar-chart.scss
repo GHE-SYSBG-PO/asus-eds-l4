@@ -11,6 +11,8 @@
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
       --bar-radius: 0px 11px 11px 0px;
+      --arrow-num-color: #181818;
+      --arrow-text-color: #181818;
     }
 
     &[data-mode="dark"],
@@ -21,6 +23,8 @@
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
       --bar-radius: 0px 11px 11px 0px;
+      --arrow-num-color: #FFF;
+      --arrow-text-color: #FFF;
     }
   }
 
@@ -33,6 +37,8 @@
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
       --bar-radius: 0px 11px 11px 0px;
+      --arrow-num-color: #181818;
+      --arrow-text-color: #181818;
     }
 
     &[data-mode="dark"],
@@ -43,6 +49,8 @@
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
       --bar-radius: 0px 11px 11px 0px;
+      --arrow-num-color: #FFF;
+      --arrow-text-color: #FFF;
     }
   }
 
@@ -55,6 +63,8 @@
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
       --bar-radius: 0;
+      --arrow-num-color: #181818;
+      --arrow-text-color: #181818;
     }
 
     &[data-mode="dark"],
@@ -65,6 +75,8 @@
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
       --bar-radius: 0;
+      --arrow-num-color: #FFF;
+      --arrow-text-color: #FFF;
     }
   }
 
@@ -77,6 +89,8 @@
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
       --bar-radius: 0;
+      --arrow-num-color: #181818;
+      --arrow-text-color: #181818;
     }
 
     &[data-mode="dark"],
@@ -87,6 +101,8 @@
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
       --bar-radius: 0;
+      --arrow-num-color: #FFF;
+      --arrow-text-color: #FFF;
     }
   }
 
