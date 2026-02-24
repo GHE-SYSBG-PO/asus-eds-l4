@@ -154,14 +154,15 @@
         {
           "component": "text",
           "name": "L4TagMulti-side",
-          "hidden": true,
-          "value": "L4TagMulti-side"
+          "value": "L4TagMulti-side",
+          "hidden": true
         },
         {
           "component": "select",
           "label": "side (left/right)(DT)",
           "name": "side",
           "default": "left",
+          "multi": false,
           "options": [
             {
               "name": "left",
@@ -176,8 +177,8 @@
         {
           "component": "text",
           "name": "L4TagMulti-yValue",
-          "hidden": true,
-          "value": "L4TagMulti-yValue"
+          "value": "L4TagMulti-yValue",
+          "hidden": true
         },
         {
           "component": "text",
@@ -185,33 +186,36 @@
           "name": "yValue",
           "valueType": "string",
           "placeholder": "px",
-          "description": "Vertical Y axis positioning. Can be negative if content is too long."
+          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-titleRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-titleRichtext"
+          "value": "L4TagMulti-titleRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "title richtext",
           "name": "titleRichtext",
           "valueType": "string",
-          "default": "<p>Item Title</p>"
+          "default": "<p>Item Title</p>",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-infoRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-infoRichtext"
+          "value": "L4TagMulti-infoRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
           "name": "infoRichtext",
           "valueType": "string",
-          "default": "<p>Description text here...</p>"
+          "default": "<p>Description text here...</p>",
+          "multi": false
         }
       ]
     },
@@ -233,14 +237,15 @@
         {
           "component": "text",
           "name": "L4TagMulti-layoutStyle",
-          "hidden": true,
-          "value": "L4TagMulti-layoutStyle"
+          "value": "L4TagMulti-layoutStyle",
+          "hidden": true
         },
         {
           "component": "select",
           "label": "layout style (left/right)",
           "name": "layoutStyle",
           "default": "left",
+          "multi": false,
           "options": [
             {
               "name": "left",
@@ -255,8 +260,8 @@
         {
           "component": "text",
           "name": "L4TagMulti-yValue",
-          "hidden": true,
-          "value": "L4TagMulti-yValue"
+          "value": "L4TagMulti-yValue",
+          "hidden": true
         },
         {
           "component": "text",
@@ -264,33 +269,36 @@
           "name": "yValue",
           "valueType": "string",
           "placeholder": "px",
-          "description": "Vertical Y axis positioning. Can be negative if content is too long."
+          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-titleRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-titleRichtext"
+          "value": "L4TagMulti-titleRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "title richtext",
           "name": "titleRichtext",
           "valueType": "string",
-          "default": "<p>Item Title</p>"
+          "default": "<p>Item Title</p>",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-infoRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-infoRichtext"
+          "value": "L4TagMulti-infoRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
           "name": "infoRichtext",
           "valueType": "string",
-          "default": "<p>Description text here...</p>"
+          "default": "<p>Description text here...</p>",
+          "multi": false
         }
       ]
     },
@@ -312,14 +320,15 @@
         {
           "component": "text",
           "name": "L4TagMulti-alignment",
-          "hidden": true,
-          "value": "L4TagMulti-alignment"
+          "value": "L4TagMulti-alignment",
+          "hidden": true
         },
         {
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
           "default": "left",
+          "multi": false,
           "options": [
             {
               "name": "left",
@@ -334,34 +343,36 @@
         {
           "component": "text",
           "name": "L4TagMulti-textWidth",
-          "hidden": true,
-          "value": "L4TagMulti-textWidth"
+          "value": "L4TagMulti-textWidth",
+          "hidden": true
         },
         {
           "component": "text",
           "label": "text width (px)(DT)",
           "name": "textWidth",
           "valueType": "string",
-          "placeholder": "px"
+          "placeholder": "px",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-xValue",
-          "hidden": true,
-          "value": "L4TagMulti-xValue"
+          "value": "L4TagMulti-xValue",
+          "hidden": true
         },
         {
           "component": "text",
           "label": "X value (left)(DT)",
           "name": "xValue",
           "valueType": "string",
-          "placeholder": "px"
+          "placeholder": "px",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-yValue",
-          "hidden": true,
-          "value": "L4TagMulti-yValue"
+          "value": "L4TagMulti-yValue",
+          "hidden": true
         },
         {
           "component": "text",
@@ -369,33 +380,36 @@
           "name": "yValue",
           "valueType": "string",
           "placeholder": "px",
-          "description": "Vertical Y axis positioning. Can be negative if content is too long."
+          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-titleRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-titleRichtext"
+          "value": "L4TagMulti-titleRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "title richtext",
           "name": "titleRichtext",
           "valueType": "string",
-          "default": "<p>Item Title</p>"
+          "default": "<p>Item Title</p>",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-infoRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-infoRichtext"
+          "value": "L4TagMulti-infoRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
           "name": "infoRichtext",
           "valueType": "string",
-          "default": "<p>Description text here...</p>"
+          "default": "<p>Description text here...</p>",
+          "multi": false
         }
       ]
     },
@@ -417,14 +431,15 @@
         {
           "component": "text",
           "name": "L4TagMulti-alignment",
-          "hidden": true,
-          "value": "L4TagMulti-alignment"
+          "value": "L4TagMulti-alignment",
+          "hidden": true
         },
         {
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
           "default": "left",
+          "multi": false,
           "options": [
             {
               "name": "left",
@@ -439,34 +454,36 @@
         {
           "component": "text",
           "name": "L4TagMulti-textWidth",
-          "hidden": true,
-          "value": "L4TagMulti-textWidth"
+          "value": "L4TagMulti-textWidth",
+          "hidden": true
         },
         {
           "component": "text",
           "label": "text width (px)(DT)",
           "name": "textWidth",
           "valueType": "string",
-          "placeholder": "px"
+          "placeholder": "px",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-xValue",
-          "hidden": true,
-          "value": "L4TagMulti-xValue"
+          "value": "L4TagMulti-xValue",
+          "hidden": true
         },
         {
           "component": "text",
           "label": "X value (left)(DT)",
           "name": "xValue",
           "valueType": "string",
-          "placeholder": "px"
+          "placeholder": "px",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-yValue",
-          "hidden": true,
-          "value": "L4TagMulti-yValue"
+          "value": "L4TagMulti-yValue",
+          "hidden": true
         },
         {
           "component": "text",
@@ -474,33 +491,36 @@
           "name": "yValue",
           "valueType": "string",
           "placeholder": "px",
-          "description": "Vertical Y axis positioning. Can be negative if content is too long."
+          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-titleRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-titleRichtext"
+          "value": "L4TagMulti-titleRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "title richtext",
           "name": "titleRichtext",
           "valueType": "string",
-          "default": "<p>Item Title</p>"
+          "default": "<p>Item Title</p>",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-infoRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-infoRichtext"
+          "value": "L4TagMulti-infoRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
           "name": "infoRichtext",
           "valueType": "string",
-          "default": "<p>Description text here...</p>"
+          "default": "<p>Description text here...</p>",
+          "multi": false
         }
       ]
     },
@@ -522,14 +542,15 @@
         {
           "component": "text",
           "name": "L4TagMulti-alignment",
-          "hidden": true,
-          "value": "L4TagMulti-alignment"
+          "value": "L4TagMulti-alignment",
+          "hidden": true
         },
         {
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
           "default": "left",
+          "multi": false,
           "options": [
             {
               "name": "left",
@@ -544,34 +565,36 @@
         {
           "component": "text",
           "name": "L4TagMulti-textWidth",
-          "hidden": true,
-          "value": "L4TagMulti-textWidth"
+          "value": "L4TagMulti-textWidth",
+          "hidden": true
         },
         {
           "component": "text",
           "label": "text width (px)(DT)",
           "name": "textWidth",
           "valueType": "string",
-          "placeholder": "px"
+          "placeholder": "px",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-xValue",
-          "hidden": true,
-          "value": "L4TagMulti-xValue"
+          "value": "L4TagMulti-xValue",
+          "hidden": true
         },
         {
           "component": "text",
           "label": "X value (left)(DT)",
           "name": "xValue",
           "valueType": "string",
-          "placeholder": "px"
+          "placeholder": "px",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-yValue",
-          "hidden": true,
-          "value": "L4TagMulti-yValue"
+          "value": "L4TagMulti-yValue",
+          "hidden": true
         },
         {
           "component": "text",
@@ -579,33 +602,36 @@
           "name": "yValue",
           "valueType": "string",
           "placeholder": "px",
-          "description": "Vertical Y axis positioning. Can be negative if content is too long."
+          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-titleRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-titleRichtext"
+          "value": "L4TagMulti-titleRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "title richtext",
           "name": "titleRichtext",
           "valueType": "string",
-          "default": "<p>Item Title</p>"
+          "default": "<p>Item Title</p>",
+          "multi": false
         },
         {
           "component": "text",
           "name": "L4TagMulti-infoRichtext",
-          "hidden": true,
-          "value": "L4TagMulti-infoRichtext"
+          "value": "L4TagMulti-infoRichtext",
+          "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
           "name": "infoRichtext",
           "valueType": "string",
-          "default": "<p>Description text here...</p>"
+          "default": "<p>Description text here...</p>",
+          "multi": false
         }
       ]
     },

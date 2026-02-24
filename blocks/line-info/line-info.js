@@ -5,8 +5,8 @@ export default async function decorate(block) {
     const config = await getBlockConfigs(block, {}, 'line-info');
     const v = getFieldValue(config);
 
-    // 1. Get Style Layout
-    const styleLayout = v('styleLayout') || '1';
+    // 1. Get Style Layout (direct access for select field)
+    const styleLayout = config.styleLayout?.text || config.styleLayout || '1';
 
     // 2. Get Asset Paths
     const assetDesktop = v('assetDesktop');
