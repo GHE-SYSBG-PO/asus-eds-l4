@@ -16,15 +16,15 @@
       }
     },
     {
-      "title": "Feature Item",
-      "id": "featureitem",
+      "title": "Featureitem Block Item",
+      "id": "featureitem-block-item",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Feature Item",
-              "model": "featureitem"
+              "name": "Featureitem Block Item",
+              "model": "featureitem-block-item"
             }
           }
         }
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "id": "featureitem",
+      "id": "featureitem-block-item",
       "fields": [
         {
           "...": "./modelConfig/_basic.json#/fields"
@@ -58,5 +58,12 @@
       ]
     }
   ],
-  "filters": []
+  "filters": [
+    {
+      "id": "featureitem-block",
+      "components": [
+        "featureitem-block-item"
+      ]
+    }
+  ]
 }

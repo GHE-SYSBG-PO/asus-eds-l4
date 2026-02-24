@@ -1902,7 +1902,7 @@
     ]
   },
   {
-    "id": "featureitem",
+    "id": "featureitem-block-item",
     "fields": [
       {
         "component": "tab",

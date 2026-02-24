@@ -69,6 +69,12 @@
     ]
   },
   {
+    "id": "featureitem-block",
+    "components": [
+      "featureitem-block-item"
+    ]
+  },
+  {
     "id": "footnote",
     "components": [
       "footnoteitem"
