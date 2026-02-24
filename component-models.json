@@ -1845,26 +1845,138 @@
         "name": "basicTab"
       },
       {
-        "component": "reference",
-        "label": "asset (Desktop)",
-        "name": "assetDesktop",
-        "multi": false
+        "component": "select",
+        "label": "style (layout variant)",
+        "name": "styleLayout",
+        "valueType": "string",
+        "default": "1",
+        "options": [
+          {
+            "name": "Variant 1 - Text On Left & Right",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 - Text On Left / Right Sides",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 - Text below",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 - Freeform",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 - Freeform-dialog box",
+            "value": "5"
+          }
+        ]
       },
       {
-        "component": "reference",
-        "label": "asset (Tablet)",
-        "name": "assetTablet",
-        "multi": false
+        "component": "container",
+        "label": "Asset",
+        "name": "assetGroup",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "asset (D)",
+            "name": "assetDesktop",
+            "multi": false
+          },
+          {
+            "component": "reference",
+            "label": "asset (T)",
+            "name": "assetTablet",
+            "multi": false
+          },
+          {
+            "component": "reference",
+            "label": "asset (M)",
+            "name": "assetMobile",
+            "multi": false
+          }
+        ]
       },
       {
-        "component": "reference",
-        "label": "asset (Mobile)",
-        "name": "assetMobile",
-        "multi": false
+        "component": "container",
+        "label": "Module Style",
+        "name": "moduleStyleGroup",
+        "fields": [
+          {
+            "component": "text",
+            "label": "top padding",
+            "name": "paddingTop",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "bottom padding",
+            "name": "paddingBottom",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "img width",
+            "name": "imgWidth",
+            "valueType": "string",
+            "placeholder": "px",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text width",
+            "name": "textWidthPercent",
+            "valueType": "string",
+            "placeholder": "%",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text max width",
+            "name": "textMaxWidth",
+            "valueType": "string",
+            "placeholder": "px",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2"
+                ]
+              ]
+            }
+          }
+        ]
       },
       {
         "component": "multifield",
-        "label": "Text Items (Add multiple line info points here)",
+        "label": "Text Items",
         "name": "textItems",
         "field": {
           "component": "container",
@@ -1873,20 +1985,21 @@
           "fields": [
             {
               "component": "select",
-              "label": "side (left/ right)(DT)",
+              "label": "side (left/right)(DT)",
               "name": "side",
+              "default": "left",
               "options": [
                 {
-                  "name": "Left",
+                  "name": "left",
                   "value": "left"
                 },
                 {
-                  "name": "Right",
+                  "name": "right",
                   "value": "right"
                 }
               ],
               "condition": {
-                "===": [
+                "==": [
                   {
                     "var": "styleLayout"
                   },
@@ -1896,20 +2009,21 @@
             },
             {
               "component": "select",
-              "label": "layout style (left/ right)",
-              "name": "layoutStyleSide",
+              "label": "layout style (left/right)",
+              "name": "layoutStyle",
+              "default": "left",
               "options": [
                 {
-                  "name": "Left",
+                  "name": "left",
                   "value": "left"
                 },
                 {
-                  "name": "Right",
+                  "name": "right",
                   "value": "right"
                 }
               ],
               "condition": {
-                "===": [
+                "==": [
                   {
                     "var": "styleLayout"
                   },
@@ -1919,15 +2033,16 @@
             },
             {
               "component": "select",
-              "label": "alignment (left / right)(DT)",
+              "label": "alignment (left/right)(DT)",
               "name": "alignment",
+              "default": "left",
               "options": [
                 {
-                  "name": "Left",
+                  "name": "left",
                   "value": "left"
                 },
                 {
-                  "name": "Right",
+                  "name": "right",
                   "value": "right"
                 }
               ],
@@ -1947,8 +2062,9 @@
             {
               "component": "text",
               "label": "text width (px)(DT)",
-              "name": "textWidthPx",
+              "name": "textWidth",
               "valueType": "string",
+              "placeholder": "px",
               "condition": {
                 "in": [
                   {
@@ -1964,9 +2080,10 @@
             },
             {
               "component": "text",
-              "label": "X value(left)(DT)",
+              "label": "X value (left)(DT)",
               "name": "xValue",
               "valueType": "string",
+              "placeholder": "px",
               "condition": {
                 "in": [
                   {
@@ -1982,23 +2099,11 @@
             },
             {
               "component": "text",
-              "label": "Y value(top)(DT)",
+              "label": "Y value (top)(DT)",
               "name": "yValue",
               "valueType": "string",
-              "description": "文案太多可以是負值",
-              "condition": {
-                "in": [
-                  {
-                    "var": "styleLayout"
-                  },
-                  [
-                    "1",
-                    "2",
-                    "4",
-                    "5"
-                  ]
-                ]
-              }
+              "placeholder": "px",
+              "description": "Vertical Y axis positioning. Can be negative if content is too long."
             },
             {
               "component": "richtext",
@@ -2018,6 +2123,126 @@
         }
       },
       {
+        "component": "container",
+        "label": "Dialog Box Style",
+        "name": "dialogBoxStyle",
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "5"
+          ]
+        },
+        "fields": [
+          {
+            "component": "select",
+            "label": "radius",
+            "name": "radius",
+            "default": "tl",
+            "options": [
+              {
+                "name": "TL",
+                "value": "tl"
+              },
+              {
+                "name": "TR",
+                "value": "tr"
+              },
+              {
+                "name": "BR",
+                "value": "br"
+              },
+              {
+                "name": "BL",
+                "value": "bl"
+              }
+            ]
+          },
+          {
+            "component": "container",
+            "label": "border",
+            "name": "borderGroup",
+            "collapsible": true,
+            "fields": [
+              {
+                "component": "text",
+                "label": "width",
+                "name": "borderWidth",
+                "valueType": "string",
+                "placeholder": "px"
+              },
+              {
+                "component": "text",
+                "label": "color",
+                "name": "borderColor",
+                "valueType": "string",
+                "placeholder": "#000"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "bg color",
+            "name": "bgColor",
+            "valueType": "string",
+            "placeholder": "#000"
+          },
+          {
+            "component": "container",
+            "label": "padding",
+            "name": "paddingGroup",
+            "collapsible": true,
+            "fields": [
+              {
+                "component": "text",
+                "label": "padding left",
+                "name": "paddingLeft",
+                "valueType": "string",
+                "placeholder": "px"
+              },
+              {
+                "component": "text",
+                "label": "padding top",
+                "name": "paddingTop",
+                "valueType": "string",
+                "placeholder": "px"
+              },
+              {
+                "component": "text",
+                "label": "padding right",
+                "name": "paddingRight",
+                "valueType": "string",
+                "placeholder": "px"
+              },
+              {
+                "component": "text",
+                "label": "padding bottom",
+                "name": "paddingBottom",
+                "valueType": "string",
+                "placeholder": "px"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "content alignment (left/center)",
+            "name": "contentAlignment",
+            "default": "left",
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "center",
+                "value": "center"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "component": "tab",
         "label": "Advanced",
         "name": "advancedTab"
@@ -2028,24 +2253,51 @@
         "name": "advancedTitleGroup",
         "fields": [
           {
-            "component": "text",
+            "component": "select",
             "label": "font(DT)",
-            "name": "titleFontDesktop",
-            "valueType": "string",
-            "description": "ro-md-14-sh / ro-md-16-sh / ro-md-18-sh"
+            "name": "titleFontDTselect",
+            "default": "ro-md-14-sh",
+            "options": [
+              {
+                "name": "ro-md-14-sh",
+                "value": "ro-md-14-sh"
+              },
+              {
+                "name": "ro-md-16-sh",
+                "value": "ro-md-16-sh"
+              },
+              {
+                "name": "ro-md-18-sh",
+                "value": "ro-md-18-sh"
+              }
+            ]
           },
           {
-            "component": "text",
+            "component": "select",
             "label": "font(M)",
-            "name": "titleFontMobile",
-            "valueType": "string",
-            "description": "ro-md-13 / ro-md-14-sh / ro-md-16-sh"
+            "name": "titleFontMselect",
+            "default": "ro-md-13",
+            "options": [
+              {
+                "name": "ro-md-13",
+                "value": "ro-md-13"
+              },
+              {
+                "name": "ro-md-14-sh",
+                "value": "ro-md-14-sh"
+              },
+              {
+                "name": "ro-md-16-sh",
+                "value": "ro-md-16-sh"
+              }
+            ]
           },
           {
             "component": "text",
             "label": "font color",
             "name": "titleFontColor",
-            "valueType": "string"
+            "valueType": "string",
+            "placeholder": "#000"
           }
         ]
       },
@@ -2055,32 +2307,60 @@
         "name": "advancedInfoGroup",
         "fields": [
           {
-            "component": "text",
+            "component": "select",
             "label": "font(DT)",
-            "name": "infoFontDesktop",
-            "valueType": "string",
-            "description": "ro-rg-13 / ro-rg-14-sh / ro-rg-16-sh"
+            "name": "infoFontDTselect",
+            "default": "ro-rg-13",
+            "options": [
+              {
+                "name": "ro-rg-13",
+                "value": "ro-rg-13"
+              },
+              {
+                "name": "ro-md-14-sh",
+                "value": "ro-md-14-sh"
+              },
+              {
+                "name": "ro-md-16-sh",
+                "value": "ro-md-16-sh"
+              }
+            ]
           },
           {
-            "component": "text",
+            "component": "select",
             "label": "font(M)",
-            "name": "infoFontMobile",
-            "valueType": "string",
-            "description": "ro-rg-12 / ro-rg-13 / ro-rg-14-sh"
+            "name": "infoFontMselect",
+            "default": "ro-rg-12",
+            "options": [
+              {
+                "name": "ro-rg-12",
+                "value": "ro-rg-12"
+              },
+              {
+                "name": "ro-rg-13",
+                "value": "ro-rg-13"
+              },
+              {
+                "name": "ro-rg-14-sh",
+                "value": "ro-rg-14-sh"
+              }
+            ]
           },
           {
             "component": "text",
             "label": "font color",
             "name": "infoFontColor",
-            "valueType": "string"
+            "valueType": "string",
+            "placeholder": "#000"
           }
         ]
       },
       {
         "component": "text",
         "label": "circle num color(M)",
-        "name": "circleNumColorMobile",
-        "valueType": "string"
+        "name": "circleNameColorM",
+        "valueType": "string",
+        "placeholder": "#000"
       },
       {
         "component": "text",

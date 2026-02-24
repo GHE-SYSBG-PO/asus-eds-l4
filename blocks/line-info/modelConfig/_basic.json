@@ -1,165 +1,24 @@
-{
-  "fields": [
-    {
-      "component": "tab",
-      "label": "Basic",
-      "name": "basicTab"
-    },
-    {
-      "component": "reference",
-      "label": "asset (Desktop)",
-      "name": "assetDesktop",
-      "multi": false
-    },
-    {
-      "component": "reference",
-      "label": "asset (Tablet)",
-      "name": "assetTablet",
-      "multi": false
-    },
-    {
-      "component": "reference",
-      "label": "asset (Mobile)",
-      "name": "assetMobile",
-      "multi": false
-    },
-    {
-      "component": "multifield",
-      "label": "Text Items (Add multiple line info points here)",
-      "name": "textItems",
-      "field": {
-        "component": "container",
-        "name": "textItem",
-        "label": "Item",
-        "fields": [
-          {
-            "component": "select",
-            "label": "side (left/ right)(DT)",
-            "name": "side",
-            "options": [
-              {
-                "name": "Left",
-                "value": "left"
-              },
-              {
-                "name": "Right",
-                "value": "right"
-              }
-            ],
-            "condition": {
-              "===": [
-                {
-                  "var": "styleLayout"
-                },
-                "1"
-              ]
-            }
-          },
-          {
-            "component": "select",
-            "label": "layout style (left/ right)",
-            "name": "layoutStyleSide",
-            "options": [
-              {
-                "name": "Left",
-                "value": "left"
-              },
-              {
-                "name": "Right",
-                "value": "right"
-              }
-            ],
-            "condition": {
-              "===": [
-                {
-                  "var": "styleLayout"
-                },
-                "2"
-              ]
-            }
-          },
-          {
-            "component": "select",
-            "label": "alignment (left / right)(DT)",
-            "name": "alignment",
-            "options": [
-              {
-                "name": "Left",
-                "value": "left"
-              },
-              {
-                "name": "Right",
-                "value": "right"
-              }
-            ],
-            "condition": {
-              "in": [
-                {
-                  "var": "styleLayout"
-                },
-                [
-                  "3",
-                  "4",
-                  "5"
-                ]
-              ]
-            }
-          },
+{  "fields": [    {      "component": "tab",      "label": "Basic",      "name": "basicTab"    },    {      "component": "select",      "label": "style (layout variant)",      "name": "styleLayout",      "valueType": "string",      "default": "1",      "options": [        {          "name": "Variant 1 - Text On Left & Right",          "value": "1"        },        {          "name": "Variant 2 - Text On Left / Right Sides",          "value": "2"        },        {          "name": "Variant 3 - Text below",          "value": "3"        },        {          "name": "Variant 4 - Freeform",          "value": "4"        },        {          "name": "Variant 5 - Freeform-dialog box",          "value": "5"        }      ]    },    {      "component": "container",      "label": "Asset",      "name": "assetGroup",      "collapsible": true,      "fields": [        {          "component": "reference",          "label": "asset (D)",          "name": "assetDesktop",          "multi": false        },        {          "component": "reference",          "label": "asset (T)",          "name": "assetTablet",          "multi": false        },        {          "component": "reference",          "label": "asset (M)",          "name": "assetMobile",          "multi": false        }      ]    },    {      "component": "container",      "label": "Module Style",      "name": "moduleStyleGroup",      "fields": [        {          "component": "text",          "label": "top padding",          "name": "paddingTop",          "valueType": "string",          "placeholder": "px"        },        {          "component": "text",          "label": "bottom padding",          "name": "paddingBottom",          "valueType": "string",          "placeholder": "px"        },        {          "component": "text",          "label": "img width",          "name": "imgWidth",          "valueType": "string",          "placeholder": "px",          "condition": {            "in": [              {"var": "styleLayout"},              ["1", "2"]            ]          }        },        {          "component": "text",          "label": "text width",          "name": "textWidthPercent",          "valueType": "string",          "placeholder": "%",          "condition": {            "in": [              {"var": "styleLayout"},              ["1", "2"]            ]          }        },        {          "component": "text",          "label": "text max width",          "name": "textMaxWidth",          "valueType": "string",          "placeholder": "px",          "condition": {            "in": [              {"var": "styleLayout"},              ["1", "2"]            ]          }        }      ]    },    {      "component": "multifield",      "label": "Text Items",      "name": "textItems",      "field": {        "component": "container",        "name": "textItem",        "label": "Item",        "fields": [          {            "component": "select",            "label": "side (left/right)(DT)",            "name": "side",            "default": "left",            "options": [              {"name": "left", "value": "left"},              {"name": "right", "value": "right"}            ],            "condition": {"==": [{"var": "styleLayout"}, "1"]}          },          {            "component": "select",            "label": "layout style (left/right)",            "name": "layoutStyle",            "default": "left",            "options": [              {"name": "left", "value": "left"},              {"name": "right", "value": "right"}            ],            "condition": {"==": [{"var": "styleLayout"}, "2"]}          },          {            "component": "select",            "label": "alignment (left/right)(DT)",            "name": "alignment",            "default": "left",            "options": [              {"name": "left", "value": "left"},              {"name": "right", "value": "right"}            ],            "condition": {              "in": [                {"var": "styleLayout"},                ["3", "4", "5"]              ]            }          },          {            "component": "text",            "label": "text width (px)(DT)",            "name": "textWidth",            "valueType": "string",            "placeholder": "px",            "condition": {              "in": [                {"var": "styleLayout"},                ["3", "4", "5"]              ]            }          },
           {
             "component": "text",
-            "label": "text width (px)(DT)",
-            "name": "textWidthPx",
-            "valueType": "string",
-            "condition": {
-              "in": [
-                {
-                  "var": "styleLayout"
-                },
-                [
-                  "3",
-                  "4",
-                  "5"
-                ]
-              ]
-            }
-          },
-          {
-            "component": "text",
-            "label": "X value(left)(DT)",
+            "label": "X value (left)(DT)",
             "name": "xValue",
             "valueType": "string",
+            "placeholder": "px",
             "condition": {
               "in": [
-                {
-                  "var": "styleLayout"
-                },
-                [
-                  "3",
-                  "4",
-                  "5"
-                ]
+                {"var": "styleLayout"},
+                ["3", "4", "5"]
               ]
             }
           },
           {
             "component": "text",
-            "label": "Y value(top)(DT)",
+            "label": "Y value (top)(DT)",
             "name": "yValue",
             "valueType": "string",
-            "description": "文案太多可以是負值",
-            "condition": {
-              "in": [
-                {
-                  "var": "styleLayout"
-                },
-                [
-                  "1",
-                  "2",
-                  "4",
-                  "5"
-                ]
-              ]
-            }
+            "placeholder": "px",
+            "description": "Vertical Y axis positioning. Can be negative if content is too long."
           },
           {
             "component": "richtext",
@@ -177,6 +36,101 @@
           }
         ]
       }
+    },
+    {
+      "component": "container",
+      "label": "Dialog Box Style",
+      "name": "dialogBoxStyle",
+      "condition": {"==": [{"var": "styleLayout"}, "5"]},
+      "fields": [
+        {
+          "component": "select",
+          "label": "radius",
+          "name": "radius",
+          "default": "tl",
+          "options": [
+            {"name": "TL", "value": "tl"},
+            {"name": "TR", "value": "tr"},
+            {"name": "BR", "value": "br"},
+            {"name": "BL", "value": "bl"}
+          ]
+        },
+        {
+          "component": "container",
+          "label": "border",
+          "name": "borderGroup",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "label": "width",
+              "name": "borderWidth",
+              "valueType": "string",
+              "placeholder": "px"
+            },
+            {
+              "component": "text",
+              "label": "color",
+              "name": "borderColor",
+              "valueType": "string",
+              "placeholder": "#000"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "bg color",
+          "name": "bgColor",
+          "valueType": "string",
+          "placeholder": "#000"
+        },
+        {
+          "component": "container",
+          "label": "padding",
+          "name": "paddingGroup",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text",
+              "label": "padding left",
+              "name": "paddingLeft",
+              "valueType": "string",
+              "placeholder": "px"
+            },
+            {
+              "component": "text",
+              "label": "padding top",
+              "name": "paddingTop",
+              "valueType": "string",
+              "placeholder": "px"
+            },
+            {
+              "component": "text",
+              "label": "padding right",
+              "name": "paddingRight",
+              "valueType": "string",
+              "placeholder": "px"
+            },
+            {
+              "component": "text",
+              "label": "padding bottom",
+              "name": "paddingBottom",
+              "valueType": "string",
+              "placeholder": "px"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "content alignment (left/center)",
+          "name": "contentAlignment",
+          "default": "left",
+          "options": [
+            {"name": "left", "value": "left"},
+            {"name": "center", "value": "center"}
+          ]
+        }
+      ]
     }
   ]
 }
