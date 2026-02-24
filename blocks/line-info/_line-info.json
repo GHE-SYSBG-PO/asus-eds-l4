@@ -21,9 +21,6 @@
       "id": "line-info",
       "fields": [
         {
-          "...": "./modelConfig/_layout.json#/fields"
-        },
-        {
           "...": "./modelConfig/_basic.json#/fields"
         },
         {
