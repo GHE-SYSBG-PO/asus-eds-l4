@@ -27,6 +27,21 @@ export default async function decorate(block) {
       textItems = textItems ? [textItems] : [];
     }
 
+    // If empty, check if data is flattened with index-based keys
+    if (textItems.length === 0) {
+      // eslint-disable-next-line no-console
+      console.log('textItems is empty, checking for flattened structure...');
+      const flattenedItems = {};
+      const pattern = new RegExp(`^${textItemsKey}\\[\\d+\\]`);
+
+      Object.keys(config).forEach(key => {
+        if (pattern.test(key)) {
+          // eslint-disable-next-line no-console
+          console.log(`Found flattened key: ${key}`);
+        }
+      });
+    }
+
     // 5. Construct HTML Structure for RWD Image
     let pictureHtml = '';
 
@@ -48,17 +63,27 @@ export default async function decorate(block) {
 
     // 6. Construct Text Items HTML based on style
     // eslint-disable-next-line no-console
+    console.log('=== DEBUG: Multifield Data Structure ===');
+    // eslint-disable-next-line no-console
     console.log('styleLayout:', styleLayout);
     // eslint-disable-next-line no-console
     console.log('textItemsKey:', textItemsKey);
     // eslint-disable-next-line no-console
     console.log('textItems raw:', textItems);
     // eslint-disable-next-line no-console
-    console.log('textItems type:', typeof textItems);
-    // eslint-disable-next-line no-console
-    console.log('textItems is Array:', Array.isArray(textItems));
+    console.log('All config keys:', Object.keys(config));
     // eslint-disable-next-line no-console
     console.log('Full config object:', config);
+
+    // Check if data might be flattened with prefixes
+    const flattenedKeys = Object.keys(config).filter(k => k.includes(textItemsKey));
+    // eslint-disable-next-line no-console
+    console.log(`Keys matching "${textItemsKey}":`, flattenedKeys);
+
+    // Check if there's hidden tag data
+    const hiddenTagKeys = Object.keys(config).filter(k => k.includes('L4TagMulti'));
+    // eslint-disable-next-line no-console
+    console.log('Hidden tag keys found:', hiddenTagKeys);
 
     let textItemsHtml = '';
     if (textItems.length > 0) {
