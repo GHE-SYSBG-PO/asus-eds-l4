@@ -19,7 +19,8 @@ export default async function decorate(block) {
 
     // 4. Get Text Items (based on style)
     const textItemsKey = `textItems${styleLayout}`;
-    let textItems = v(textItemsKey) || [];
+    // Multifield is stored directly as an array, not nested in 'text' property
+    let textItems = config[textItemsKey] || [];
 
     // Ensure textItems is an array
     if (!Array.isArray(textItems)) {
