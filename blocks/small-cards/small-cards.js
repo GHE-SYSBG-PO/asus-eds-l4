@@ -783,6 +783,9 @@ async function renderCard(block) {
 
   const style = document.createElement('style');
   style.textContent = `
+    .small-cards-containers .swiper-wrapper {
+      justify-content: flex-start;
+    }
     @media (min-width: 768px) {
       .small-cards-containers .swiper-wrapper {
         justify-content: ${slideCount <= 2 && alignmentConfig.tabletAlignment === 'center' ? 'center' : 'flex-start'};
@@ -792,6 +795,195 @@ async function renderCard(block) {
       .small-cards-containers .swiper-wrapper {
         justify-content: ${slideCount <= 3 && alignmentConfig.desktopAlignment === 'center' ? 'center' : 'flex-start'};
       }
+    }
+    .small-cards-containers .swiper-button-prev,
+    .small-cards-containers .swiper-button-next {
+      background: var(--arrow-container-bg-default, linear-gradient(180deg, #4379B1 0%, #5977A1 100%));
+      color: var(--arrow-color-default, #FFFFFF);
+      border: var(--arrow-border-width-default, 0px) solid var(--arrow-border-color-default, transparent);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      position: absolute;
+      top: auto;
+      bottom: -60px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .small-cards-containers .swiper-button-next {
+      right: 10px;
+    }
+    .small-cards-containers .swiper-button-prev {
+      right: 60px;
+      left: auto;
+    }
+    .small-cards-containers .swiper-button-prev::after,
+    .small-cards-containers .swiper-button-next::after {
+      font-size: 12px;
+    }
+    .small-cards-containers .swiper-button-prev:hover,
+    .small-cards-containers .swiper-button-next:hover {
+      background: var(--arrow-container-bg-hover, var(--arrow-container-bg-default));
+      color: var(--arrow-color-hover, var(--arrow-color-default));
+      border-color: var(--arrow-border-color-hover, var(--arrow-border-color-default));
+      border-width: var(--arrow-border-width-hover, var(--arrow-border-width-default));
+    }
+    .small-cards-containers .swiper-button-prev:active,
+    .small-cards-containers .swiper-button-next:active {
+      background: var(--arrow-container-bg-press, var(--arrow-container-bg-hover));
+      color: var(--arrow-color-press, var(--arrow-color-hover));
+      border-color: var(--arrow-border-color-press, var(--arrow-border-color-hover));
+      border-width: var(--arrow-border-width-press, var(--arrow-border-width-hover));
+    }
+    .small-cards-containers .swiper-button-disabled,
+    .small-cards-containers .swiper-button-disabled:hover,
+    .small-cards-containers .swiper-button-disabled:active {
+      background: var(--arrow-container-bg-disable, #CBCDD1);
+      color: var(--arrow-color-disable, #0000006B);
+      border-color: var(--arrow-border-color-disable, transparent);
+      border-width: var(--arrow-border-width-disable, 0px);
+      opacity: 0.42;
+      pointer-events: none;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png,
+    .small-cards-containers .swiper-button-next.arrow-png {
+        background: none;
+        border: none;
+        border-radius: 0;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png img,
+    .small-cards-containers .swiper-button-next.arrow-png img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: none;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png .arrow-default,
+    .small-cards-containers .swiper-button-next.arrow-png .arrow-default {
+        display: block;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png:hover .arrow-default,
+    .small-cards-containers .swiper-button-next.arrow-png:hover .arrow-default {
+        display: none;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png:hover .arrow-hover,
+    .small-cards-containers .swiper-button-next.arrow-png:hover .arrow-hover {
+        display: block;
+    }
+    .small-cards-containers .swiper-button-prev.arrow-png:active .arrow-hover,
+    .small-cards-containers .swiper-button-next.arrow-png:active .arrow-hover {
+        display: none;
+    }
+    .small-cards-containers .swiper-button-disabled.arrow-png .arrow-default,
+    .small-cards-containers .swiper-button-disabled.arrow-png:hover .arrow-hover {
+        display: none;
+    }
+    .small-cards-containers .swiper-button-disabled.arrow-png .arrow-disable {
+        display: block;
+    }
+    .small-cards-containers .card-icon-down {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .small-cards-containers .absolute { position: absolute; }
+    .small-cards-containers .relative { position: relative; }
+    .small-cards-containers .z-10 { z-index: 10; }
+    .small-cards-containers .top-4 { top: 1rem; }
+    .small-cards-containers .left-4 { left: 1rem; }
+    .small-cards-containers .right-4 { right: 1rem; }
+    .small-cards-containers .bottom-4 { bottom: 1rem; }
+    .small-cards-containers .media-block-play-btn,
+    .small-cards-containers .media-block-pause-btn,
+    .small-cards-containers .media-block-replay-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    .small-cards-containers .media-block-play-btn svg,
+    .small-cards-containers .media-block-pause-btn svg,
+    .small-cards-containers .media-block-replay-btn svg {
+      width: 36px;
+      height: 36px;
+      display: block;
+    }
+    .small-cards-containers .block:has(.card-icon-down) .nav__noise {
+      bottom: 15px;
+      left: 15px;
+      right: auto;
+      top: auto;
+      position: absolute;
+      z-index: 2;
+    }
+    .small-cards-containers .block:has(.card-icon-down) .nav__replay {
+      bottom: 15px;
+      left: 60px;
+      right: auto;
+      top: auto;
+      position: absolute;
+      z-index: 2;
+    }
+    .small-cards-containers .card-icon-down.anchor-svg {
+      background-color: var(--anchor-bg-default, linear-gradient(180deg, #4379B1 0%, #5977A1 100%));
+      color: var(--anchor-color-default, #FFFFFF);
+      border: var(--anchor-border-width-default, 0px) solid var(--anchor-border-color-default, transparent);
+      transition: all 0.3s ease;
+    }
+    .small-cards-containers .card-icon-down.anchor-svg:hover {
+      background-color: var(--anchor-bg-hover, var(--anchor-bg-default));
+      color: var(--anchor-color-hover, var(--anchor-color-default));
+      border: var(--anchor-border-width-hover, var(--anchor-border-width-default)) solid var(--anchor-border-color-hover, var(--anchor-border-color-default));
+    }
+    .small-cards-containers .card-icon-down.anchor-svg:active {
+      background-color: var(--anchor-bg-press, var(--anchor-bg-hover));
+      color: var(--anchor-color-press, var(--anchor-color-hover));
+      border: var(--anchor-border-width-press, var(--anchor-border-width-hover)) solid var(--anchor-border-color-press, var(--anchor-border-color-hover));
+    }
+    .small-cards-containers .card-icon-down.anchor-png {
+      background: none;
+      border-radius: 0;
+    }
+    .small-cards-containers .card-icon-down.anchor-png img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+    .small-cards-containers .card-icon-down.anchor-png .anchor-default {
+      display: block;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:hover .anchor-default {
+      display: none;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:hover .anchor-hover {
+      display: block;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:active .anchor-hover {
+      display: none;
+    }
+    .small-cards-containers .card-icon-down.anchor-png:active .anchor-press {
+      display: block;
+    }
+    .small-cards-containers a.asus-icon-chevronright span::after {
+      content: " >";
+      font-weight: bold;
     }
   `;
 
