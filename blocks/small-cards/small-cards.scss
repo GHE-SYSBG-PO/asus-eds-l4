@@ -4,7 +4,7 @@
   &[data-product="asus"] {
     &[data-mode="light"],
     .section-light {
-      --text-block-category-color: #666; 
+      --arrow-container-bg-default: #666; 
       --text-block-title-color: transparent;
       --text-block-title-gradient: linear-gradient(270deg, #0062CD 0%, #004691 100%);
       --text-block-body-color: #181818;
@@ -28,7 +28,7 @@
   &[data-product="proart"] {
     &[data-mode="light"],
     .section-light {
-      --text-block-category-color: #666;
+      --text-block-category-color: #123;
       --text-block-title-color: transparent;
       --text-block-title-gradient: linear-gradient(270deg, #6B4F35 0%, #8D684E 100%);
       --text-block-body-color: #181818;
@@ -94,54 +94,6 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #FF9E1B;
       --text-block-cta-end: #FF9E1B;
-    }
-  }
-
-  .text-block {
-    &-category {
-      color: var(--text-block-category-color);
-    }
-
-    &-title {
-      color: var(--text-block-title-color, inherit);
-      background: var(--text-block-title-gradient, none);
-      background-clip: text;
-    }
-
-    &-body {
-      color: var(--text-block-body-color);
-    }
-
-    &-disclaimer {
-      color: var(--text-block-disclaimer-color);
-    }
-
-    &-cta {
-      color: transparent;
-      background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
-      background-clip: text;
-
-      &:hover {
-        color: transparent;
-        background: linear-gradient(270deg, var(--text-block-cta-start) 0%, var(--text-block-cta-end) 100%);
-        background-clip: text;
-      }
-    }
-
-    &-animation {
-      & > a,
-      & > div,
-      & > figure,
-      & > h1,
-      & > h2,
-      & > h3,
-      & > h4,
-      & > img,
-      & > span {
-        opacity: 0;
-        transform: translateZ(0) translateY(30px);
-        transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1);
-      }
     }
   }
 }
@@ -295,4 +247,5 @@
     }
   }
 }
+
 /* stylelint-enable at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
