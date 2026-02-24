@@ -2,7 +2,51 @@ import {
   getBlockConfigs,
   getFieldValue,
   getBlockRepeatConfigs,
+  getProductLine,
+  getThemeMode,
 } from '../../scripts/utils.js';
+
+// Product and device/theme-specific defaults
+const PRODUCT_DEFAULTS = {
+  fonts: {
+    titleFont: {
+      asus: { D: 'tt-md-32', T: 'tt-md-28', M: 'tt-md-24' },
+      proart: { D: 'tt-md-32', T: 'tt-md-28', M: 'tt-md-24' },
+      rog: { D: 'tg-bd-32', T: 'tg-bd-28', M: 'tg-bd-24' },
+      tuf: { D: 'dp-cb-32', T: 'dp-cb-28', M: 'dp-cb-24' },
+    },
+  },
+  colors: {
+    arrowColor: {
+      asus: { light: '181818', dark: 'F5F5F5' },
+      proart: { light: '181818', dark: 'F5F5F5' },
+      rog: { light: '181818', dark: 'F5F5F5' },
+      tuf: { light: '181818', dark: 'F5F5F5' },
+    },
+  },
+};
+
+/**
+ * Get product-specific default value for device-based properties
+ * @param {string} category - Category (fonts/colors)
+ * @param {string} fieldName - Field name (e.g., 'titleFont')
+ * @param {string} product - Product line (asus/proart/rog/tuf)
+ * @param {string} deviceOrTheme - Device (D/T/M) or theme (light/dark)
+ * @param {*} fallback - Fallback value if not found
+ * @returns {*} Product-specific default or fallback
+ */
+const getProductDefault = (category, fieldName, product, deviceOrTheme, fallback) => PRODUCT_DEFAULTS[category]?.[fieldName]?.[product]?.[deviceOrTheme] || fallback;
+
+/**
+ * Get value with theme-aware fallbacks
+ * @param {Function} v - Value getter function from getFieldValue
+ * @param {string} fieldName - Base field name (e.g., 'arrowColor')
+ * @param {*} defaultValue - Final fallback value
+ * @returns {*} The resolved value
+ */
+const getThemeAwareValue = (v, fieldName, defaultValue) => v(`${fieldName}Advanced.${fieldName}`)
+  || v(fieldName)
+  || defaultValue;
 
 // DEFAULT CONFIGURATION
 const DEFAULT_CONFIG = {
@@ -103,7 +147,7 @@ const buildArrowSVG = (colors) => {
 /**
  * Build arrow block HTML
  */
-const buildArrowBlock = (v) => {
+const buildArrowBlock = (v, productLine, theme) => {
   const variant = v('style');
   const hasArrow = [2, 4, 6].includes(variant);
 
@@ -114,8 +158,11 @@ const buildArrowBlock = (v) => {
 
   let arrowIcon = '';
   if (v('arrowStyle') === 'svg') {
-    const colorValue = v('arrowColor') || '';
-    const colorStr = typeof colorValue === 'string' ? colorValue : '';
+    // Get arrow color with product+theme-specific defaults
+    const defaultArrowColor = getProductDefault('colors', 'arrowColor', productLine, theme, '');
+    const arrowColor = getThemeAwareValue(v, 'arrowColor', defaultArrowColor);
+
+    const colorStr = typeof arrowColor === 'string' ? arrowColor : '';
     const colors = colorStr.split(',').map((c) => prefixHex(c.trim())).filter((c) => c);
     if (colors.length > 0) {
       arrowIcon = buildArrowSVG(colors);
@@ -295,6 +342,10 @@ export default async function decorate(block) {
     const v = getFieldValue(config);
     const [barItems = []] = getBlockRepeatConfigs(block);
 
+    // Detect product line and theme from DOM using utility functions
+    const productLine = getProductLine();
+    const theme = getThemeMode();
+
     const variant = v('style');
     const hasArrow = [2, 4, 6].includes(variant);
     const isStacked = [3, 4, 5, 6].includes(variant);
@@ -335,7 +386,7 @@ export default async function decorate(block) {
     }).join('');
 
     // Build arrow block if needed
-    const arrowHtml = buildArrowBlock(v);
+    const arrowHtml = buildArrowBlock(v, productLine, theme);
 
     // Get title font - try nested path first, then fallback to root
     const titleFont = v('titleAdvanced.titleFont') || v('titleFont') || 'tt-bd-28';
