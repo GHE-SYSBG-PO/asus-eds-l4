@@ -1,9 +1,14 @@
 /* eslint-disable no-plusplus, max-len, no-unused-vars, quotes, no-multiple-empty-lines, no-use-before-define, no-console, padded-blocks */
 
-import { loadScript, loadCSS } from '../../scripts/aem.js';
-import { loadSwiper } from '../../scripts/scripts.js';
-import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
-import { buildCloseButtonHtml } from '../../components/button/button.js';
+import {
+  loadScript, loadCSS, loadBlock, buildBlock, decorateBlock,
+} from '../../scripts/aem.js';
+import {
+  loadSwiper,
+} from '../../scripts/scripts.js';
+import {
+  getBlockFieldOrder,
+} from '../../scripts/utils.js';
 
 const LAYOUT_CONFIG_COUNT = 22;
 
@@ -474,73 +479,58 @@ function getCardHTML(data) {
     anchorBorderColorDefault,
     anchorBorderColorHover,
     anchorBorderColorPress,
-    styleLayoutCTA,
-    linkTypeCTA,
-    externalLinkCTA,
-    innerPageLinkCTA,
-    gBtnStyleCTA,
-    gBtnLabelCTA,
-    gBtnFontDesktopCTA,
-    gBtnFontMCTA,
-    gBtnFontColorDefaultCTA,
-    gBtnFontColorHoverCTA,
-    gBtnFontColorActiveCTA,
-    gBtnContainerBgColorDefaultCTA,
-    gBtnContainerBgColorHoverCTA,
-    gBtnContainerBgColorActiveCTA,
-    gBtnContainerRadiusTLCTA,
-    gBtnContainerRadiusTRCTA,
-    gBtnContainerRadiusBRCTA,
-    gBtnContainerRadiusBLCTA,
-    gBtnBorderWidthCTA,
-    gBtnBorderColorCTA,
-    iconStyleCTA,
-    iconColorCTA,
-    iconBgColorDefaultCTA,
-    iconBgColorHoverCTA,
-    iconBgColorActiveCTA,
-    iconAssetDefaultCTA,
-    iconAssetHoverCTA,
-    iconAssetActiveCTA,
-    labelCTA,
-    fontDesktopCTA,
-    fontMCTA,
-    fontColorDefaultCTA,
-    fontColorHoverCTA,
-    fontColorActiveCTA,
-    containerBgColorDefaultCTA,
-    containerBgColorHoverCTA,
-    containerBgColorActiveCTA,
-    containerRadiusTLCTA,
-    containerRadiusTRCTA,
-    containerRadiusBRCTA,
-    containerRadiusBLCTA,
-    borderWidthCTA,
-    borderColorCTA,
-    // gBtnLabel,
-    // gBtnFontDesktop,
-    // gBtnFontM,
-    // gBtnFontColorDefault,
-    // gBtnFontColorHover,
-    // gBtnFontColorActive,
-    // gBtnContainerBgColorDefault,
-    // gBtnContainerBgColorHover,
-    // gBtnContainerBgColorActive,
-    // gBtnContainerRadiusTL,
-    // gBtnContainerRadiusTR,
-    // gBtnContainerRadiusBR,
-    // gBtnContainerRadiusBL,
-    // gBtnBorderWidth,
-    // gBtnBorderColor,
+    gBtnLabel,
+    gBtnFontDesktop,
+    gBtnFontM,
+    gBtnFontColorDefault,
+    gBtnFontColorHover,
+    gBtnFontColorActive,
+    gBtnContainerBgColorDefault,
+    gBtnContainerBgColorHover,
+    gBtnContainerBgColorActive,
+    gBtnContainerRadiusTL,
+    gBtnContainerRadiusTR,
+    gBtnContainerRadiusBR,
+    gBtnContainerRadiusBL,
+    gBtnBorderWidth,
+    gBtnBorderColor,
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
-
   let ctaHTML = '';
-
-  const v = getFieldValue({ gBtnLabel: { text: data.gBtnLabelCTA }, gBtnStyle: { text: data.gBtnStyleCTA } });
-  console.log("H1, Small cards:", data, v);
-  ctaHTML = buildCloseButtonHtml(v);
+  if (data.styleLayoutCTA) {
+    ctaHTML = `<div class="btn-placeholder" data-card-index="${data.cardIndex || 0}"></div>`;
+  }
+  // if (ctaVisible === 'show') {
+  //   const fontClass = `${ctaFontDT} small_${ctaFontM}`;
+  //   const style = ctaFontColor ? `style="color: #${ctaFontColor}"` : '';
+  //   if (ctaLinkType === 'button') {
+  //     const btnFontClass = `${gBtnFontDesktop} small_${gBtnFontM}`;
+  //     const colorDefault = gBtnFontColorDefault ? `#${gBtnFontColorDefault}` : 'inherit';
+  //     const bgDefault = gBtnContainerBgColorDefault ? `#${gBtnContainerBgColorDefault}` : 'transparent';
+  //     const colorHover = gBtnFontColorHover ? `#${gBtnFontColorHover}` : colorDefault;
+  //     const bgHover = gBtnContainerBgColorHover ? `#${gBtnContainerBgColorHover}` : bgDefault;
+  //     const borderColorVal = gBtnBorderColor ? `#${gBtnBorderColor}` : 'transparent';
+  //     const borderWidthVal = gBtnBorderWidth ? `${gBtnBorderWidth}px` : '0px';
+  //     const radius = `${gBtnContainerRadiusTL || 0}px ${gBtnContainerRadiusTR || 0}px ${gBtnContainerRadiusBR || 0}px ${gBtnContainerRadiusBL || 0}px`;
+  //     const btnStyle = `color: ${colorDefault}; background-color: ${bgDefault}; border: ${borderWidthVal} solid ${borderColorVal}; border-radius: ${radius}; padding: 10px 20px; display: inline-block; text-decoration: none; transition: all 0.3s ease; cursor: pointer;`;
+  //     const onHover = `this.style.color='${colorHover}'; this.style.backgroundColor='${bgHover}';`;
+  //     const onOut = `this.style.color='${colorDefault}'; this.style.backgroundColor='${bgDefault}';`;
+  //     ctaHTML = `<button class="${btnFontClass} wdga link--1"
+  //                 aria-label="${ctaText}"
+  //                 onclick="window.open('${ctaHyperlink}', '_blank')"
+  //                 data-galabel="sections AI Experience ${ctaText}"
+  //                 data-eventname="ai2025s4_item1_learn_more_clicked"
+  //                 style="${btnStyle}"
+  //                 onmouseover="${onHover}"
+  //                 onmouseout="${onOut}"><span>${ctaText}</span></button>`;
+  //   } else {
+  //     ctaHTML = `<a class="${fontClass} asus-icon-chevronright"
+  //                 aria-label="${ctaText} (opens in new window)"
+  //                 href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer"
+  //                 ${style}><span>${ctaText}</span></a>`;
+  //   }
+  // }
   const blockContent = `
           <div class="block-content">
             <div class="wd__content" style="text-align: ${alignmentAdvanced};">
@@ -773,6 +763,32 @@ async function renderCard(block) {
   </div>`;
 
   smallCardsContainer.innerHTML = html;
+
+  const placeholders = smallCardsContainer.querySelectorAll('.btn-placeholder');
+  if (placeholders.length > 0) {
+    const btnFieldOrder = await getBlockFieldOrder('btn');
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const placeholder of placeholders) {
+      const cardIndex = parseInt(placeholder.dataset.cardIndex, 10);
+      const cardData = Array.isArray(data) ? data[cardIndex] : data;
+
+      if (cardData) {
+        const btnContent = [];
+        btnFieldOrder.forEach((fieldName) => {
+          const cardFieldName = `${fieldName}CTA`;
+          const value = cardData[cardFieldName];
+          btnContent.push([value !== undefined && value !== null ? String(value) : '']);
+        });
+
+        const btnBlock = buildBlock('btn', btnContent);
+        placeholder.replaceWith(btnBlock);
+        decorateBlock(btnBlock);
+        // eslint-disable-next-line no-await-in-loop
+        await loadBlock(btnBlock);
+      }
+    }
+  }
 
   // Add event listeners for video controls
   const videoContainers = smallCardsContainer.querySelectorAll('.media-block-video-container');
