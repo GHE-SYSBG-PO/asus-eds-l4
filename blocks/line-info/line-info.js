@@ -53,16 +53,43 @@ export default async function decorate(block) {
     // eslint-disable-next-line no-console
     console.log('textItems raw:', textItems);
     // eslint-disable-next-line no-console
-    console.log('textItems length:', textItems.length);
+    console.log('textItems type:', typeof textItems);
+    // eslint-disable-next-line no-console
+    console.log('textItems is Array:', Array.isArray(textItems));
+    // eslint-disable-next-line no-console
+    console.log('Full config object:', config);
 
     let textItemsHtml = '';
     if (textItems.length > 0) {
       textItemsHtml = textItems.map((item, index) => {
-        // Parse item if it's a string (JSON encoded)
-        let itemData = typeof item === 'string' ? JSON.parse(item) : item;
-
         // eslint-disable-next-line no-console
-        console.log(`Item ${index} raw data:`, itemData);
+        console.log(`\n=== Item ${index} ===`);
+        // eslint-disable-next-line no-console
+        console.log('Raw item:', item);
+        // eslint-disable-next-line no-console
+        console.log('Item type:', typeof item);
+
+        // Handle different data formats
+        let itemData = item;
+
+        // If item is a string, try to parse it
+        if (typeof item === 'string') {
+          try {
+            itemData = JSON.parse(item);
+            // eslint-disable-next-line no-console
+            console.log('Parsed item:', itemData);
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error('Failed to parse item string:', e);
+          }
+        }
+
+        // If item is an object with 'text' and 'html' properties (AEM format)
+        if (itemData.text && itemData.html && !itemData.titleRichtext) {
+          // eslint-disable-next-line no-console
+          console.log('Item is in AEM format {text, html}, need to extract multifield data');
+          // This might be the case where multifield data is encoded differently
+        }
 
         // Filter out hidden L4TagMulti fields to get clean data
         const cleanData = {};
@@ -74,7 +101,7 @@ export default async function decorate(block) {
         itemData = cleanData;
 
         // eslint-disable-next-line no-console
-        console.log(`Item ${index} cleaned data:`, itemData);
+        console.log('Cleaned data:', itemData);
 
         // Directly use itemData values (no need for getFieldValue)
         const xValue = itemData.xValue || '0';
@@ -86,7 +113,14 @@ export default async function decorate(block) {
         const side = itemData.side || 'left';
 
         // eslint-disable-next-line no-console
-        console.log(`Item ${index} values:`, { titleRichtext, infoRichtext, side, yValue });
+        console.log(`Item ${index} extracted values:`, {
+          titleRichtext,
+          infoRichtext,
+          side,
+          yValue,
+          xValue,
+          textWidth
+        });
 
         // Build style-specific HTML
         let itemHtml = '';
