@@ -1903,6 +1903,7 @@
         "component": "container",
         "label": "Module Style",
         "name": "moduleStyleGroup",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
@@ -1975,157 +1976,155 @@
         ]
       },
       {
-        "component": "multifield",
+        "component": "container",
+        "valueType": "string[]",
         "label": "Text Items",
         "name": "textItems",
-        "field": {
-          "component": "container",
-          "name": "textItem",
-          "label": "Item",
-          "fields": [
-            {
-              "component": "select",
-              "label": "side (left/right)(DT)",
-              "name": "side",
-              "default": "left",
-              "options": [
+        "multi": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "side (left/right)(DT)",
+            "name": "side",
+            "default": "left",
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ],
+            "condition": {
+              "==": [
                 {
-                  "name": "left",
-                  "value": "left"
+                  "var": "styleLayout"
                 },
-                {
-                  "name": "right",
-                  "value": "right"
-                }
-              ],
-              "condition": {
-                "==": [
-                  {
-                    "var": "styleLayout"
-                  },
-                  "1"
-                ]
-              }
-            },
-            {
-              "component": "select",
-              "label": "layout style (left/right)",
-              "name": "layoutStyle",
-              "default": "left",
-              "options": [
-                {
-                  "name": "left",
-                  "value": "left"
-                },
-                {
-                  "name": "right",
-                  "value": "right"
-                }
-              ],
-              "condition": {
-                "==": [
-                  {
-                    "var": "styleLayout"
-                  },
-                  "2"
-                ]
-              }
-            },
-            {
-              "component": "select",
-              "label": "alignment (left/right)(DT)",
-              "name": "alignment",
-              "default": "left",
-              "options": [
-                {
-                  "name": "left",
-                  "value": "left"
-                },
-                {
-                  "name": "right",
-                  "value": "right"
-                }
-              ],
-              "condition": {
-                "in": [
-                  {
-                    "var": "styleLayout"
-                  },
-                  [
-                    "3",
-                    "4",
-                    "5"
-                  ]
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "label": "text width (px)(DT)",
-              "name": "textWidth",
-              "valueType": "string",
-              "placeholder": "px",
-              "condition": {
-                "in": [
-                  {
-                    "var": "styleLayout"
-                  },
-                  [
-                    "3",
-                    "4",
-                    "5"
-                  ]
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "label": "X value (left)(DT)",
-              "name": "xValue",
-              "valueType": "string",
-              "placeholder": "px",
-              "condition": {
-                "in": [
-                  {
-                    "var": "styleLayout"
-                  },
-                  [
-                    "3",
-                    "4",
-                    "5"
-                  ]
-                ]
-              }
-            },
-            {
-              "component": "text",
-              "label": "Y value (top)(DT)",
-              "name": "yValue",
-              "valueType": "string",
-              "placeholder": "px",
-              "description": "Vertical Y axis positioning. Can be negative if content is too long."
-            },
-            {
-              "component": "richtext",
-              "label": "title richtext",
-              "name": "titleRichtext",
-              "valueType": "string",
-              "default": "<p>Item Title</p>"
-            },
-            {
-              "component": "richtext",
-              "label": "info richtext",
-              "name": "infoRichtext",
-              "valueType": "string",
-              "default": "<p>Description text here...</p>"
+                "1"
+              ]
             }
-          ]
-        }
+          },
+          {
+            "component": "select",
+            "label": "layout style (left/right)",
+            "name": "layoutStyle",
+            "default": "left",
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ],
+            "condition": {
+              "==": [
+                {
+                  "var": "styleLayout"
+                },
+                "2"
+              ]
+            }
+          },
+          {
+            "component": "select",
+            "label": "alignment (left/right)(DT)",
+            "name": "alignment",
+            "default": "left",
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ],
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4",
+                  "5"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text width (px)(DT)",
+            "name": "textWidth",
+            "valueType": "string",
+            "placeholder": "px",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4",
+                  "5"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "X value (left)(DT)",
+            "name": "xValue",
+            "valueType": "string",
+            "placeholder": "px",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4",
+                  "5"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "Y value (top)(DT)",
+            "name": "yValue",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": "Vertical Y axis positioning. Can be negative if content is too long."
+          },
+          {
+            "component": "richtext",
+            "label": "title richtext",
+            "name": "titleRichtext",
+            "valueType": "string",
+            "default": "<p>Item Title</p>"
+          },
+          {
+            "component": "richtext",
+            "label": "info richtext",
+            "name": "infoRichtext",
+            "valueType": "string",
+            "default": "<p>Description text here...</p>"
+          }
+        ]
       },
       {
         "component": "container",
         "label": "Dialog Box Style",
         "name": "dialogBoxStyle",
+        "collapsible": true,
         "condition": {
           "==": [
             {
