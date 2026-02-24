@@ -470,3 +470,74 @@ export const processInlineIdSyntax = (container) => {
     }
   });
 };
+
+/**
+ * Sets up animation logic for elements with the class `.g-block-animation`.
+ * Observes when these elements enter the viewport and applies animations to their child elements.
+ * @param {HTMLElement} block - The parent block element containing animated elements.
+ */
+export const setupAnimation = (block) => {
+  const containers = block.querySelectorAll('.g-block-animation');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let delay = 100;
+        const spans = entry.target.querySelectorAll('span');
+        spans.forEach((span) => {
+          delay += 100;
+          setTimeout(() => {
+            if (span?.style) {
+              span.style.opacity = 1;
+              span.style.transform = 'translateZ(0px) translateY(0px)';
+            }
+          }, delay);
+        });
+        const imgs = entry.target.querySelectorAll('img');
+        imgs.forEach((img) => {
+          delay += 100;
+          setTimeout(() => {
+            if (img?.style) {
+              img.style.opacity = 1;
+              img.style.transform = 'translateZ(0px) translateY(0px)';
+            }
+          }, delay);
+        });
+        const divs = entry.target.querySelectorAll('div');
+        divs.forEach((div) => {
+          delay += 100;
+          setTimeout(() => {
+            if (div?.style) {
+              div.style.opacity = 1;
+              div.style.transform = 'translateZ(0px) translateY(0px)';
+            }
+          }, delay);
+        });
+      }
+    });
+  });
+
+  containers.forEach((item) => {
+    observer.observe(item);
+  });
+};
+
+/**
+ * Handles the execution of animations based on document readiness.
+ * Ensures animations are triggered only after the document is fully loaded.
+ * @param {HTMLElement} block - The parent block element containing animated elements.
+ */
+export const handleMotion = (block) => {
+  // Check if the document is still loading
+  if (document.readyState === 'loading') {
+    // If still loading, wait for the DOMContentLoaded event
+    block.addEventListener('DOMContentLoaded', () => {
+      setupAnimation(block);
+    });
+  } else {
+    // If already loaded, execute the animation setup immediately
+    setTimeout(() => {
+      setupAnimation(block);
+    }, 0);
+  }
+};
