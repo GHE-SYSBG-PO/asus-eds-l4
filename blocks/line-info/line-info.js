@@ -19,7 +19,12 @@ export default async function decorate(block) {
 
     // 4. Get Text Items (based on style)
     const textItemsKey = `textItems${styleLayout}`;
-    const textItems = v(textItemsKey) || [];
+    let textItems = v(textItemsKey) || [];
+
+    // Ensure textItems is an array
+    if (!Array.isArray(textItems)) {
+      textItems = textItems ? [textItems] : [];
+    }
 
     // 5. Construct HTML Structure for RWD Image
     let pictureHtml = '';
@@ -40,11 +45,11 @@ export default async function decorate(block) {
       `;
     }
 
-    // 6. Construct Text Items HTML
+    // 6. Construct Text Items HTML based on style
     let textItemsHtml = '';
-    if (Array.isArray(textItems) && textItems.length > 0) {
-      textItemsHtml = textItems.map((item) => {
-        // Handle both object and string formats
+    if (textItems.length > 0) {
+      textItemsHtml = textItems.map((item, index) => {
+        // Parse item if it's a string (JSON encoded)
         const itemData = typeof item === 'string' ? JSON.parse(item) : item;
 
         const xValue = itemData.xValue || '0';
@@ -52,13 +57,60 @@ export default async function decorate(block) {
         const titleRichtext = itemData.titleRichtext || '<p>Item Title</p>';
         const infoRichtext = itemData.infoRichtext || '<p>Description text here...</p>';
         const textWidth = itemData.textWidth || 'auto';
+        const alignment = itemData.alignment || 'left';
+        const side = itemData.side || 'left';
 
-        return `
-          <div class="line-info-item" style="left: ${xValue}; top: ${yValue}; width: ${textWidth};">
-            <div class="line-info-item-title">${titleRichtext}</div>
-            <div class="line-info-item-info">${infoRichtext}</div>
-          </div>
-        `;
+        // Build style-specific HTML
+        let itemHtml = '';
+        let itemClass = 'line-info-item';
+
+        switch (styleLayout) {
+          case '1':
+            // Style 1: Text On Left & Right
+            itemClass += ` line-info-item--side-${side}`;
+            itemHtml = `
+              <div class="${itemClass}" style="top: ${yValue}px;">
+                <div class="line-info-item-title">${titleRichtext}</div>
+                <div class="line-info-item-info">${infoRichtext}</div>
+              </div>
+            `;
+            break;
+
+          case '2':
+            // Style 2: Text On Left / Right Sides
+            const layoutStyle = itemData.layoutStyle || 'left';
+            itemClass += ` line-info-item--layout-${layoutStyle}`;
+            itemHtml = `
+              <div class="${itemClass}" style="top: ${yValue}px;">
+                <div class="line-info-item-title">${titleRichtext}</div>
+                <div class="line-info-item-info">${infoRichtext}</div>
+              </div>
+            `;
+            break;
+
+          case '3':
+          case '4':
+          case '5':
+            // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
+            itemClass += ` line-info-item--align-${alignment}`;
+            itemHtml = `
+              <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px; width: ${textWidth}px;">
+                <div class="line-info-item-title">${titleRichtext}</div>
+                <div class="line-info-item-info">${infoRichtext}</div>
+              </div>
+            `;
+            break;
+
+          default:
+            itemHtml = `
+              <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px;">
+                <div class="line-info-item-title">${titleRichtext}</div>
+                <div class="line-info-item-info">${infoRichtext}</div>
+              </div>
+            `;
+        }
+
+        return itemHtml;
       }).join('');
     }
 
@@ -67,9 +119,9 @@ export default async function decorate(block) {
     if (paddingTop) containerStyle += `padding-top: ${paddingTop};`;
     if (paddingBottom) containerStyle += `padding-bottom: ${paddingBottom};`;
 
-    // 8. Render
+    // 8. Render with style class
     block.innerHTML = `
-      <div class="line-info-container" style="${containerStyle}">
+      <div class="line-info-container line-info--style${styleLayout}" style="${containerStyle}">
         ${pictureHtml}
         <div class="line-info-items">
           ${textItemsHtml}

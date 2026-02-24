@@ -23,4 +23,110 @@
     height: 100%;
     pointer-events: none; /* Allow clicks to pass through to image or background if needed */
   }
+
+  .line-info-item {
+    position: absolute;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+
+    .line-info-item-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .line-info-item-info {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      opacity: 0.8;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  /* Style 1: Text On Left & Right */
+  &.line-info--style1 {
+    .line-info-item {
+      width: 45%;
+      max-width: 300px;
+
+      &.line-info-item--side-left {
+        left: 20px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      &.line-info-item--side-right {
+        right: 20px;
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+  }
+
+  /* Style 2: Text On Left / Right Sides */
+  &.line-info--style2 {
+    .line-info-item {
+      width: 45%;
+      max-width: 300px;
+
+      &.line-info-item--layout-left {
+        left: 20px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      &.line-info-item--layout-right {
+        right: 20px;
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+  }
+
+  /* Style 3: Text Below */
+  &.line-info--style3 {
+    .line-info-item {
+      &.line-info-item--align-left {
+        text-align: left;
+      }
+
+      &.line-info-item--align-right {
+        text-align: right;
+      }
+    }
+  }
+
+  /* Style 4: Freeform */
+  &.line-info--style4 {
+    .line-info-item {
+      &.line-info-item--align-left {
+        text-align: left;
+      }
+
+      &.line-info-item--align-right {
+        text-align: right;
+      }
+    }
+  }
+
+  /* Style 5: Freeform-dialog box */
+  &.line-info--style5 {
+    .line-info-item {
+      &.line-info-item--align-left {
+        text-align: left;
+      }
+
+      &.line-info-item--align-right {
+        text-align: right;
+      }
+    }
+  }
 }
