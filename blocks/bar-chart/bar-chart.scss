@@ -10,6 +10,7 @@
       --bar-chart-item-text-color: #4D4D4D;
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
+      --bar-radius: 0px 11px 11px 0px;
     }
 
     &[data-mode="dark"],
@@ -152,7 +153,7 @@
       justify-content: flex-end;
       padding-right: 8px;
       transition: width 1s ease-out;
-      border-radius: var(--bar-radius, 4px);
+      border-radius: var(--bar-radius, inherit);
       background: var(--bar-chart-bar-color, inherit);
 
       @media (width >= 730px) {
