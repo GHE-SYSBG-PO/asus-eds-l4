@@ -11,7 +11,9 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #0062CD;
       --text-block-cta-end: #004691;
-      --anchor-bg-default: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
+      --anchor-bg-default: linear-gradient(90deg, #4379B1 0%, #5977A1 100%);
+      --anchor-bg-hover: linear-gradient(90deg, #00346B 0%, #192533 100%);
+      --anchor-bg-press: linear-gradient(90deg, #566E91 0%, #0E447C 100%);
     }
 
     &[data-mode="dark"],
@@ -23,7 +25,9 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #C3E0FF;
       --text-block-cta-end: #78BCFF;
-      --anchor-bg-default: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
+      --anchor-bg-default: linear-gradient(90deg, #476991 0%, #5C6F80 100%);
+      --anchor-bg-hover: linear-gradient(90deg, #98AABA 0%, #658DBC 100%);
+      --anchor-bg-press: linear-gradient(90deg, #98AABA 0%, #658DBC 100%);
     }
   }
 
@@ -37,7 +41,9 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #6B4F35;
       --text-block-cta-end: #8D684E;
-      --anchor-bg-default: linear-gradient(180deg, #806238 0%, #87715A 100%);
+      --anchor-bg-default: linear-gradient(90deg, #806238 0%, #87715A 100%);
+      --anchor-bg-hover: linear-gradient(90deg, #654313 0%, #665441 100%);
+      --anchor-bg-press: linear-gradient(90deg, #654313 0%, #665441 100%);
     }
 
     &[data-mode="dark"],
@@ -49,7 +55,9 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #9F7A56;
       --text-block-cta-end: #DFC9A9;
-      --anchor-bg-default: linear-gradient(180deg, #806238 0%, #87715A 100%);
+      --anchor-bg-default: linear-gradient(90deg, #84643E 0%, #7E6746 100%);
+      --anchor-bg-hover: linear-gradient(90deg, #8F6E4D 0%, #A49073 100%);
+      --anchor-bg-press: linear-gradient(90deg, #8F6E4D 0%, #A49073 100%);
     }
   }
 
@@ -63,7 +71,9 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #CC000E;
       --text-block-cta-end: #CC000E;
-      --anchor-bg-default: linear-gradient(180deg, #DB0004 0%, #DB0004 100%);
+      --anchor-bg-default: #DB0004;
+      --anchor-bg-hover: #A8000C;
+      --anchor-bg-press: #A8000C;
     }
 
     &[data-mode="dark"],
@@ -75,7 +85,9 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #FF0F0F;
       --text-block-cta-end: #FF0F0F;
-      --anchor-bg-default: linear-gradient(180deg, #DB0004 0%, #DB0004 100%);
+      --anchor-bg-default: #D1000E;
+      --anchor-bg-hover: #DA1723;
+      --anchor-bg-press: #DA1723;
     }
   }
 
@@ -89,7 +101,9 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #181818;
       --text-block-cta-end: #181818;
-      --anchor-bg-default: linear-gradient(180deg, #181818 0%, #181818 100%);
+      --anchor-bg-default: #D1000E;
+      --anchor-bg-hover: #DA1723;
+      --anchor-bg-press: #DA1723;
     }
 
     &[data-mode="dark"],
@@ -101,7 +115,9 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #FF9E1B;
       --text-block-cta-end: #FF9E1B;
-      --anchor-bg-default: linear-gradient(180deg, #181818 0%, #181818 100%);
+      --anchor-bg-default: #FF9E1B;
+      --anchor-bg-hover: #D37B00;
+      --anchor-bg-press: #D37B00;
     }
   }
 }
