@@ -57,8 +57,14 @@
       "name": "wrapLine",
       "valueType": "string",
       "options": [
-        { "name": "On", "value": "on" },
-        { "name": "Off", "value": "off" }
+        {
+          "name": "On",
+          "value": "on"
+        },
+        {
+          "name": "Off",
+          "value": "off"
+        }
       ]
     }
   ]

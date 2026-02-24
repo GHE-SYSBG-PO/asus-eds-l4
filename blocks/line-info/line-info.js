@@ -34,29 +34,9 @@ export default async function decorate(block) {
 
     // 4. Get Multifield Data (L4TagMulti- rows)
     // Multifield data is stored separately in L4TagMulti- marked rows and needs special parsing
-    const repeatConfigs = getBlockRepeatConfigs(block);
+    const [textItems = []] = getBlockRepeatConfigs(block);
     // eslint-disable-next-line no-console
-    console.log('Multifield repeat configs:', repeatConfigs);
-
-    // 5. Get Text Items based on style
-    const textItemsKey = `textItems${styleLayout}`;
-    let textItems = [];
-
-    // Parse the multifield data into the textItems array
-    if (repeatConfigs.length > 0) {
-      // repeatConfigs is a 2D array: [[{fieldName: {html, text}}], ...]
-      // Merge all fields from all repeat configs into flat objects
-      repeatConfigs.forEach(items => {
-        const itemData = {};
-        items.forEach(fieldObj => {
-          // Each fieldObj is like {fieldName: {html: '...', text: '...'}}
-          Object.assign(itemData, fieldObj);
-        });
-        if (Object.keys(itemData).length > 0) {
-          textItems.push(itemData);
-        }
-      });
-    }
+    console.log('Text Items from multifield:', textItems);
 
     // eslint-disable-next-line no-console
     console.log('Parsed textItems:', textItems);
@@ -81,14 +61,6 @@ export default async function decorate(block) {
     }
 
     // 6. Construct Text Items HTML based on style
-    // eslint-disable-next-line no-console
-    console.log('=== DEBUG: Line-Info Component ===');
-    // eslint-disable-next-line no-console
-    console.log('styleLayout:', styleLayout);
-    // eslint-disable-next-line no-console
-    console.log('textItems count:', textItems.length);
-    // eslint-disable-next-line no-console
-    console.log('textItems:', textItems);
 
     let textItemsHtml = '';
     if (textItems.length > 0) {
@@ -96,19 +68,16 @@ export default async function decorate(block) {
         // eslint-disable-next-line no-console
         console.log(`\n=== Item ${index} ===`, item);
 
-        // itemData from parseL4TagMulti contains fields like:
-        // { side: {html, text}, yValue: {html, text}, titleRichtext: {html, text}, infoRichtext: {html, text} }
-        const itemData = item;
-
         // Extract values from {html, text} format
-        const xValue = itemData.xValue?.text || '0';
-        const yValue = itemData.yValue?.text || '0';
-        const titleRichtext = itemData.titleRichtext?.html || '<p>Item Title</p>';
-        const infoRichtext = itemData.infoRichtext?.html || '<p>Description text here...</p>';
-        const textWidth = itemData.textWidth?.text || 'auto';
-        const alignment = itemData.alignment?.text || 'left';
-        const side = itemData.side?.text || 'left';
-        const layoutStyle = itemData.layoutStyle?.text || 'left';
+        // item contains fields like: { side: {html, text}, yValue: {html, text}, ... }
+        const xValue = item.xValue?.text || '0';
+        const yValue = item.yValue?.text || '0';
+        const titleRichtext = item.titleRichtext?.html || '<p>Item Title</p>';
+        const infoRichtext = item.infoRichtext?.html || '<p>Description text here...</p>';
+        const textWidth = item.textWidth?.text || 'auto';
+        const alignment = item.alignment?.text || 'left';
+        const side = item.side?.text || 'left';
+        const layoutStyle = item.layoutStyle?.text || 'left';
 
         // eslint-disable-next-line no-console
         console.log(`Item ${index} extracted values:`, {
@@ -138,7 +107,6 @@ export default async function decorate(block) {
 
           case '2':
             // Style 2: Text On Left / Right Sides
-            const layoutStyle = itemData.layoutStyle || 'left';
             itemClass += ` line-info-item--layout-${layoutStyle}`;
             itemHtml = `
               <div class="${itemClass}" style="top: ${yValue}px;">
