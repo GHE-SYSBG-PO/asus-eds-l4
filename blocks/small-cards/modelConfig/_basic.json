@@ -509,6 +509,19 @@
       "label": "Customize Button Icon",
       "name": "customizeButtonIcon",
       "collapsible": true,
+      "condition": {
+        "in": [
+          {
+            "var": "styleLayoutCTA"
+          },
+          [
+            "2",
+            "3",
+            "5",
+            "6"
+          ]
+        ]
+      },
       "fields": [
         {
           "component": "select",
@@ -878,38 +891,38 @@
           "label": "Container Radius BL",
           "name": "containerRadiusBLCTA",
           "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Container Advanced",
+      "name": "containerAdvancedCTA",
+      "collapsible": true,
+      "condition": {
+        "in": [
+          {
+            "var": "styleLayoutCTA"
+          },
+          [
+            "3",
+            "4",
+            "6"
+          ]
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Container Border Width",
+          "name": "borderWidthCTA",
+          "valueType": "string"
         },
         {
-          "component": "container",
-          "label": "Container Advanced",
-          "name": "containerAdvancedCTA",
-          "collapsible": true,
-          "condition": {
-            "in": [
-              {
-                "var": "styleLayoutCTA"
-              },
-              [
-                "3",
-                "4",
-                "6"
-              ]
-            ]
-          },
-          "fields": [
-            {
-              "component": "text",
-              "label": "Container Border Width",
-              "name": "borderWidthCTA",
-              "valueType": "string"
-            },
-            {
-              "component": "text",
-              "label": "Container Border Color",
-              "name": "borderColorCTA",
-              "valueType": "string"
-            }
-          ]
+          "component": "text",
+          "label": "Container Border Color",
+          "name": "borderColorCTA",
+          "valueType": "string"
         }
       ]
     },
