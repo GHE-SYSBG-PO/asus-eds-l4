@@ -262,19 +262,19 @@
       justify-content: center;
 
       &.anchor-svg {
-        background-color: var(--anchor-bg-default, linear-gradient(180deg, #4379B1 0%, #5977A1 100%));
+        background: var(--anchor-bg-default, linear-gradient(180deg, #4379B1 0%, #5977A1 100%));
         color: var(--anchor-color-default, #FFF);
         border: var(--anchor-border-width-default, 0px) solid var(--anchor-border-color-default, transparent);
         transition: all 0.3s ease;
 
         &:hover {
-          background-color: var(--anchor-bg-hover, var(--anchor-bg-default));
+          background: var(--anchor-bg-hover, var(--anchor-bg-default));
           color: var(--anchor-color-hover, var(--anchor-color-default));
           border: var(--anchor-border-width-hover, var(--anchor-border-width-default)) solid var(--anchor-border-color-hover, var(--anchor-border-color-default));
         }
 
         &:active {
-          background-color: var(--anchor-bg-press, var(--anchor-bg-hover));
+          background: var(--anchor-bg-press, var(--anchor-bg-hover));
           color: var(--anchor-color-press, var(--anchor-color-hover));
           border: var(--anchor-border-width-press, var(--anchor-border-width-hover)) solid var(--anchor-border-color-press, var(--anchor-border-color-hover));
         }
