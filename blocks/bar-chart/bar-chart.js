@@ -114,7 +114,8 @@ const buildArrowBlock = (v) => {
 
   let arrowIcon = '';
   if (v('arrowStyle') === 'svg') {
-    const colorStr = v('arrowColor') || '';
+    const colorValue = v('arrowColor') || '';
+    const colorStr = typeof colorValue === 'string' ? colorValue : '';
     const colors = colorStr.split(',').map((c) => prefixHex(c.trim())).filter((c) => c);
     if (colors.length > 0) {
       arrowIcon = buildArrowSVG(colors);
@@ -148,7 +149,8 @@ const buildBarItem = (item, v, index, motionEnabled, calculatedBarWidth = null) 
 
   // Parse bar color (supports gradient)
   // Handle both richtext object and plain string
-  const colorStr = item.barRowColor?.text || item.barRowColor || '';
+  const colorValue = item.barRowColor?.text || item.barRowColor || '';
+  const colorStr = typeof colorValue === 'string' ? colorValue : '';
   const [color1, color2] = colorStr.split(',').map((c) => prefixHex(c.trim())).filter((c) => c);
   const isGradient = color2 && color2 !== color1;
 
