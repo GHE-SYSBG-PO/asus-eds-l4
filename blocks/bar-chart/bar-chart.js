@@ -6,7 +6,7 @@ import {
 
 // DEFAULT CONFIGURATION
 const DEFAULT_CONFIG = {
-  style: '1',
+  style: '5',
   titleRichtext: '',
   disclaimerRichtext: '',
   motion: 'off',
