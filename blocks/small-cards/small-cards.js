@@ -2,7 +2,7 @@
 
 import { loadScript, loadCSS } from '../../scripts/aem.js';
 import { loadSwiper } from '../../scripts/scripts.js';
-import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue, getFieldValue1 } from '../../scripts/utils.js';
 import { buildCloseButtonHtml } from '../../components/button/button.js';
 
 const LAYOUT_CONFIG_COUNT = 22;
@@ -538,7 +538,7 @@ function getCardHTML(data) {
 
   let ctaHTML = '';
 
-  const v = getFieldValue(data);
+  const v = getFieldValue1(data);
   console.log("H1, Small cards:", data, v);
   ctaHTML = buildCloseButtonHtml(v);
   const blockContent = `

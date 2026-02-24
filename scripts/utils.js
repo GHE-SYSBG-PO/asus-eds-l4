@@ -158,6 +158,11 @@ export const getFieldValue = (obj) => {
   return (key, type = 'text') => config?.[key]?.[type] || '';
 };
 
+export const getFieldValue1 = (obj) => {
+  const config = obj || {};
+  return (key) => config?.[key] || '';
+};
+
 /**
  * Promise utility function that resolves or rejects based on a condition
  *
