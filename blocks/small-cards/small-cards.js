@@ -538,7 +538,7 @@ function getCardHTML(data) {
 
   let ctaHTML = '';
 
-  const v = getFieldValue({ gBtnLabel: { text: data.gBtnLabelCTA, gBtnStyle: data.gBtnStyleCTA } });
+  const v = getFieldValue({ gBtnLabel: { text: data.gBtnLabelCTA }, gBtnStyle: { text: data.gBtnStyleCTA } });
   console.log("H1, Small cards:", data, v);
   ctaHTML = buildCloseButtonHtml(v);
   const blockContent = `
