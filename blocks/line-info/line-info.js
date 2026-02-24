@@ -1,4 +1,4 @@
-import { getBlockConfigs, getFieldValue, getBlockRepeatConfigs } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue, getBlockRepeatConfigs, getBlockRepeatConfigsByDataAueProps } from '../../scripts/utils.js';
 
 export default async function decorate(block) {
   try {
@@ -32,11 +32,18 @@ export default async function decorate(block) {
     const paddingTop = v('paddingTop');
     const paddingBottom = v('paddingBottom');
 
-    // 4. Get Multifield Data (L4TagMulti- rows)
-    // Multifield data is stored separately in L4TagMulti- marked rows and needs special parsing
-    const [textItems = []] = getBlockRepeatConfigs(block);
+    // 4. Get Multifield Data (L4TagMulti- rows or data-aue-prop format)
+    // Try new format first (data-aue-prop), then fall back to L4TagMulti- format
+    const textItemsKey = `textItems${styleLayout}`;
+    let textItems = getBlockRepeatConfigsByDataAueProps(block, textItemsKey);
+
+    // If new format returned empty, try old L4TagMulti- format
+    if (textItems.length === 0) {
+      const [oldFormatItems = []] = getBlockRepeatConfigs(block);
+      textItems = oldFormatItems;
+    }
     // eslint-disable-next-line no-console
-    console.log('Text Items from multifield:', textItems);
+    console.log(`Text Items from multifield (${textItemsKey}):`, textItems);
 
     // eslint-disable-next-line no-console
     console.log('Parsed textItems:', textItems);

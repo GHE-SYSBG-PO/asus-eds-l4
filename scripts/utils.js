@@ -412,3 +412,51 @@ export function isAuthorEnvironment() {
   }
   return false;
 }
+
+/**
+ * 解析基於 data-aue-prop 屬性的多字段結構（新格式）
+ * 例如：data-aue-prop="textItems1/0/titleRichtext" 表示 textItems1[0].titleRichtext
+ * @param {HTMLElement} block - 包含多個子元素的 block 元素
+ * @param {string} containerName - 多字段容器的名稱（如 'textItems1'）
+ * @returns {Array<Object>} - 返回解析後的多字段數據數組
+ */
+export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
+  // 存储多字段数据的对象，key 是索引，value 是该项的字段对象
+  const itemsMap = {};
+
+  // 遍历所有包含 data-aue-prop 属性的元素
+  const elementsWithAueProp = block.querySelectorAll('[data-aue-prop]');
+
+  elementsWithAueProp.forEach((element) => {
+    const aueProp = element.getAttribute('data-aue-prop');
+
+    // 只处理与指定容器相关的 prop
+    if (aueProp && aueProp.startsWith(`${containerName}/`)) {
+      // 解析 prop 路径：textItems1/0/titleRichtext -> ['textItems1', '0', 'titleRichtext']
+      const parts = aueProp.split('/');
+      if (parts.length === 3) {
+        const [, itemIndex, fieldName] = parts;
+        const index = parseInt(itemIndex, 10);
+
+        // 初始化该项（如果不存在）
+        if (!itemsMap[index]) {
+          itemsMap[index] = {};
+        }
+
+        // 获取 HTML 和文本内容
+        const html = element.innerHTML.trim();
+        const text = element.textContent.trim();
+
+        // 储存字段数据
+        itemsMap[index][fieldName] = {
+          html,
+          text,
+        };
+      }
+    }
+  });
+
+  // 将对象转换为数组（保留顺序）
+  const sortedIndices = Object.keys(itemsMap).map(Number).sort((a, b) => a - b);
+  return sortedIndices.map(index => itemsMap[index]);
+};
