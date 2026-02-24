@@ -20,6 +20,7 @@
       --bar-chart-item-text-color: #DCDCDC;
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
+      --bar-radius: 0px 11px 11px 0px;
     }
   }
 
@@ -31,6 +32,7 @@
       --bar-chart-item-text-color: #4D4D4D;
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
+      --bar-radius: 0px 11px 11px 0px;
     }
 
     &[data-mode="dark"],
@@ -40,6 +42,7 @@
       --bar-chart-item-text-color: #DCDCDC;
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
+      --bar-radius: 0px 11px 11px 0px;
     }
   }
 
@@ -51,6 +54,7 @@
       --bar-chart-item-text-color: #4D4D4D;
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
+      --bar-radius: 0;
     }
 
     &[data-mode="dark"],
@@ -60,6 +64,7 @@
       --bar-chart-item-text-color: #DCDCDC;
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
+      --bar-radius: 0;
     }
   }
 
@@ -71,6 +76,7 @@
       --bar-chart-item-text-color: #4D4D4D;
       --bar-chart-bar-text-color: #F5F5F5;
       --bar-chart-bar-color: #181818;
+      --bar-radius: 0;
     }
 
     &[data-mode="dark"],
@@ -80,6 +86,7 @@
       --bar-chart-item-text-color: #DCDCDC;
       --bar-chart-bar-text-color: #181818;
       --bar-chart-bar-color: #F5F5F5;
+      --bar-radius: 0;
     }
   }
 
