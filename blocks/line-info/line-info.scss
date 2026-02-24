@@ -21,7 +21,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Allow clicks to pass through to image or background if needed */
+    pointer-events: none;
   }
 
   .line-info-item {
@@ -52,81 +52,46 @@
   }
 
   /* Style 1: Text On Left & Right */
-  &.line-info--style1 {
-    .line-info-item {
-      width: 45%;
-      max-width: 300px;
+  .line-info-item--side-left {
+    left: 20px;
+    align-items: flex-start;
+    text-align: left;
+    width: 45%;
+    max-width: 300px;
+  }
 
-      &.line-info-item--side-left {
-        left: 20px;
-        align-items: flex-start;
-        text-align: left;
-      }
-
-      &.line-info-item--side-right {
-        right: 20px;
-        align-items: flex-end;
-        text-align: right;
-      }
-    }
+  .line-info-item--side-right {
+    right: 20px;
+    align-items: flex-end;
+    text-align: right;
+    width: 45%;
+    max-width: 300px;
   }
 
   /* Style 2: Text On Left / Right Sides */
-  &.line-info--style2 {
-    .line-info-item {
-      width: 45%;
-      max-width: 300px;
-
-      &.line-info-item--layout-left {
-        left: 20px;
-        align-items: flex-start;
-        text-align: left;
-      }
-
-      &.line-info-item--layout-right {
-        right: 20px;
-        align-items: flex-end;
-        text-align: right;
-      }
-    }
+  .line-info-item--layout-left {
+    left: 20px;
+    align-items: flex-start;
+    text-align: left;
+    width: 45%;
+    max-width: 300px;
   }
 
-  /* Style 3: Text Below */
-  &.line-info--style3 {
-    .line-info-item {
-      &.line-info-item--align-left {
-        text-align: left;
-      }
-
-      &.line-info-item--align-right {
-        text-align: right;
-      }
-    }
+  .line-info-item--layout-right {
+    right: 20px;
+    align-items: flex-end;
+    text-align: right;
+    width: 45%;
+    max-width: 300px;
   }
 
-  /* Style 4: Freeform */
-  &.line-info--style4 {
-    .line-info-item {
-      &.line-info-item--align-left {
-        text-align: left;
-      }
-
-      &.line-info-item--align-right {
-        text-align: right;
-      }
-    }
+  /* Style 3, 4, 5: Alignment modifiers */
+  .line-info-item--align-left {
+    text-align: left;
   }
 
-  /* Style 5: Freeform-dialog box */
-  &.line-info--style5 {
-    .line-info-item {
-      &.line-info-item--align-left {
-        text-align: left;
-      }
-
-      &.line-info-item--align-right {
-        text-align: right;
-      }
-    }
+  .line-info-item--align-right {
+    text-align: right;
   }
 }
+
