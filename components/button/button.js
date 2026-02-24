@@ -41,7 +41,7 @@ export const buildCloseButtonHtml = (v) => {
   if (gBtnStyle !== 'customized') {
     return `
       <button class="g-button">
-        <span>Close</span>
+        <span>Close1</span>
       </button>
     `;
   }
@@ -134,7 +134,7 @@ export const buildCloseButtonHtml = (v) => {
   // Build custom close button HTML
   return `
     <button class="g-button ${fontDesktop} ${fontMobile}" style="${inlineStyle}">
-      <span>${label}</span>
+      <span>${label}2</span>
     </button>
   `;
 };
