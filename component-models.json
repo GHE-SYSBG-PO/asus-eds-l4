@@ -2988,21 +2988,131 @@
         "valueType": "string"
       },
       {
+        "component": "select",
+        "label": "layout group",
+        "name": "styleLayoutCTA",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 - filled style",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 - filled style+icon",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 - filled style+icon(Size-Small)",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 - outline style",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 - outline style+icon",
+            "value": "5"
+          },
+          {
+            "name": "Variant 6 - outline style+icon(Size-Small)",
+            "value": "6"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "hyperlink style",
+        "name": "linkTypeCTA",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "external link",
+            "value": "external"
+          },
+          {
+            "name": "inner page",
+            "value": "inner"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "external link",
+        "name": "externalLinkCTA",
+        "valueType": "string",
+        "placeholder": "https://",
+        "condition": {
+          "===": [
+            {
+              "var": "linkTypeCTA"
+            },
+            "external"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "inner page content",
+        "name": "innerPageLinkCTA",
+        "placeholder": "/modals/page",
+        "condition": {
+          "===": [
+            {
+              "var": "linkTypeCTA"
+            },
+            "inner"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "close btn style",
+        "name": "gBtnStyleCTA",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "default",
+            "value": "default"
+          },
+          {
+            "name": "customized",
+            "value": "customized"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "linkTypeCTA"
+            },
+            "inner"
+          ]
+        }
+      },
+      {
         "component": "container",
-        "label": "CTA",
-        "name": "cta",
+        "label": "close btn customized",
+        "name": "gBtnCustomizedCTA",
         "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "gBtnStyleCTA"
+            },
+            "customized"
+          ]
+        },
         "fields": [
           {
             "component": "text",
             "label": "label Text",
-            "name": "gBtnLabel",
+            "name": "gBtnLabelCTA",
             "valueType": "string"
           },
           {
             "component": "select",
             "label": "font (D/T)",
-            "name": "gBtnFontDesktop",
+            "name": "gBtnFontDesktopCTA",
             "valueType": "string",
             "options": [
               {
@@ -3022,7 +3132,7 @@
           {
             "component": "select",
             "label": "font (M)",
-            "name": "gBtnFontM",
+            "name": "gBtnFontMCTA",
             "valueType": "string",
             "options": [
               {
@@ -3042,76 +3152,475 @@
           {
             "component": "text",
             "label": "font color default",
-            "name": "gBtnFontColorDefault",
+            "name": "gBtnFontColorDefaultCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "font color hover",
-            "name": "gBtnFontColorHover",
+            "name": "gBtnFontColorHoverCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "font color active",
-            "name": "gBtnFontColorActive",
+            "name": "gBtnFontColorActiveCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "bg-color default",
-            "name": "gBtnContainerBgColorDefault",
+            "name": "gBtnContainerBgColorDefaultCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "bg-color hover",
-            "name": "gBtnContainerBgColorHover",
+            "name": "gBtnContainerBgColorHoverCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "bg-color active",
-            "name": "gBtnContainerBgColorActive",
+            "name": "gBtnContainerBgColorActiveCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "radius TL",
-            "name": "gBtnContainerRadiusTL",
+            "name": "gBtnContainerRadiusTLCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "radius TR",
-            "name": "gBtnContainerRadiusTR",
+            "name": "gBtnContainerRadiusTRCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "radius BR",
-            "name": "gBtnContainerRadiusBR",
+            "name": "gBtnContainerRadiusBRCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "radius BL",
-            "name": "gBtnContainerRadiusBL",
+            "name": "gBtnContainerRadiusBLCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "border-width",
-            "name": "gBtnBorderWidth",
+            "name": "gBtnBorderWidthCTA",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "border-color",
-            "name": "gBtnBorderColor",
+            "name": "gBtnBorderColorCTA",
             "valueType": "string"
           }
         ]
+      },
+      {
+        "component": "select",
+        "label": "icon style",
+        "name": "iconStyleCTA",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "SVG",
+            "value": "svg"
+          },
+          {
+            "name": "PNG",
+            "value": "png"
+          }
+        ],
+        "condition": {
+          "in": [
+            {
+              "var": "styleLayoutCTA"
+            },
+            [
+              "2",
+              "3",
+              "5",
+              "6"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon color",
+        "name": "iconColorCTA",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyleCTA"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color default",
+        "name": "iconBgColorDefaultCTA",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyleCTA"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color hover",
+        "name": "iconBgColorHoverCTA",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyleCTA"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "icon-bg color active",
+        "name": "iconBgColorActiveCTA",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyleCTA"
+                },
+                "svg"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "default asset",
+        "name": "iconAssetDefaultCTA",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyleCTA"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "hover asset",
+        "name": "iconAssetHoverCTA",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyleCTA"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "label": "active asset",
+        "name": "iconAssetActiveCTA",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "iconStyleCTA"
+                },
+                "png"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "label text",
+        "name": "labelCTA",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "label advanced",
+        "name": "labelAdvancedCTA",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "label font (D/T)",
+            "name": "fontDesktopCTA",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "label font (M)",
+            "name": "fontMCTA",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "fontColorDefaultCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "fontColorHoverCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "fontColorActiveCTA",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "bg-color default",
+        "name": "containerBgColorDefaultCTA",
+        "valueType": "string",
+        "description": "Accepts only hex values, e.g., 00ffee (without #)"
+      },
+      {
+        "component": "text",
+        "label": "bg-color hover",
+        "name": "containerBgColorHoverCTA",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bg-color active",
+        "name": "containerBgColorActiveCTA",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius TL",
+        "name": "containerRadiusTLCTA",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius TR",
+        "name": "containerRadiusTRCTA",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius BR",
+        "name": "containerRadiusBRCTA",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "radius BL",
+        "name": "containerRadiusBLCTA",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "container advanced",
+        "name": "containerAdvancedCTA",
+        "collapsible": true,
+        "condition": {
+          "in": [
+            {
+              "var": "styleLayoutCTA"
+            },
+            [
+              "3",
+              "4",
+              "6"
+            ]
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "border-width",
+            "name": "borderWidthCTA",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color",
+            "name": "borderColorCTA",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlockCTA",
+        "value": "L4--nested-block--small-cards",
+        "hidden": true
       },
       {
         "component": "select",
