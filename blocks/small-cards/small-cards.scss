@@ -11,6 +11,7 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #0062CD;
       --text-block-cta-end: #004691;
+      --anchor-bg-default: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
     }
 
     &[data-mode="dark"],
@@ -22,6 +23,7 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #C3E0FF;
       --text-block-cta-end: #78BCFF;
+      --anchor-bg-default: linear-gradient(180deg, #4379B1 0%, #5977A1 100%);
     }
   }
 
@@ -35,6 +37,7 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #6B4F35;
       --text-block-cta-end: #8D684E;
+      --anchor-bg-default: linear-gradient(180deg, #806238 0%, #87715A 100%);
     }
 
     &[data-mode="dark"],
@@ -46,6 +49,7 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #9F7A56;
       --text-block-cta-end: #DFC9A9;
+      --anchor-bg-default: linear-gradient(180deg, #806238 0%, #87715A 100%);
     }
   }
 
@@ -59,6 +63,7 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #CC000E;
       --text-block-cta-end: #CC000E;
+      --anchor-bg-default: linear-gradient(180deg, #DB0004 0%, #DB0004 100%);
     }
 
     &[data-mode="dark"],
@@ -70,6 +75,7 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #FF0F0F;
       --text-block-cta-end: #FF0F0F;
+      --anchor-bg-default: linear-gradient(180deg, #DB0004 0%, #DB0004 100%);
     }
   }
 
@@ -83,6 +89,7 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #181818;
       --text-block-cta-end: #181818;
+      --anchor-bg-default: linear-gradient(180deg, #181818 0%, #181818 100%);
     }
 
     &[data-mode="dark"],
@@ -94,6 +101,7 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #FF9E1B;
       --text-block-cta-end: #FF9E1B;
+      --anchor-bg-default: linear-gradient(180deg, #181818 0%, #181818 100%);
     }
   }
 }
