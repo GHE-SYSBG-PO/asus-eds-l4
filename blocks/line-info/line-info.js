@@ -1,4 +1,4 @@
-import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue, getBlockRepeatConfigs } from '../../scripts/utils.js';
 
 export default async function decorate(block) {
   try {
@@ -17,30 +17,34 @@ export default async function decorate(block) {
     const paddingTop = v('paddingTop');
     const paddingBottom = v('paddingBottom');
 
-    // 4. Get Text Items (based on style)
+    // 4. Get Multifield Data (L4TagMulti- rows)
+    // Multifield data is stored separately in L4TagMulti- marked rows and needs special parsing
+    const repeatConfigs = getBlockRepeatConfigs(block);
+    // eslint-disable-next-line no-console
+    console.log('Multifield repeat configs:', repeatConfigs);
+
+    // 5. Get Text Items based on style
     const textItemsKey = `textItems${styleLayout}`;
-    // Multifield is stored directly as an array, not nested in 'text' property
-    let textItems = config[textItemsKey] || [];
+    let textItems = [];
 
-    // Ensure textItems is an array
-    if (!Array.isArray(textItems)) {
-      textItems = textItems ? [textItems] : [];
-    }
-
-    // If empty, check if data is flattened with index-based keys
-    if (textItems.length === 0) {
-      // eslint-disable-next-line no-console
-      console.log('textItems is empty, checking for flattened structure...');
-      const flattenedItems = {};
-      const pattern = new RegExp(`^${textItemsKey}\\[\\d+\\]`);
-
-      Object.keys(config).forEach(key => {
-        if (pattern.test(key)) {
-          // eslint-disable-next-line no-console
-          console.log(`Found flattened key: ${key}`);
+    // Parse the multifield data into the textItems array
+    if (repeatConfigs.length > 0) {
+      // repeatConfigs is a 2D array: [[{fieldName: {html, text}}], ...]
+      // Merge all fields from all repeat configs into flat objects
+      repeatConfigs.forEach(items => {
+        const itemData = {};
+        items.forEach(fieldObj => {
+          // Each fieldObj is like {fieldName: {html: '...', text: '...'}}
+          Object.assign(itemData, fieldObj);
+        });
+        if (Object.keys(itemData).length > 0) {
+          textItems.push(itemData);
         }
       });
     }
+
+    // eslint-disable-next-line no-console
+    console.log('Parsed textItems:', textItems);
 
     // 5. Construct HTML Structure for RWD Image
     let pictureHtml = '';
@@ -63,80 +67,33 @@ export default async function decorate(block) {
 
     // 6. Construct Text Items HTML based on style
     // eslint-disable-next-line no-console
-    console.log('=== DEBUG: Multifield Data Structure ===');
+    console.log('=== DEBUG: Line-Info Component ===');
     // eslint-disable-next-line no-console
     console.log('styleLayout:', styleLayout);
     // eslint-disable-next-line no-console
-    console.log('textItemsKey:', textItemsKey);
+    console.log('textItems count:', textItems.length);
     // eslint-disable-next-line no-console
-    console.log('textItems raw:', textItems);
-    // eslint-disable-next-line no-console
-    console.log('All config keys:', Object.keys(config));
-    // eslint-disable-next-line no-console
-    console.log('Full config object:', config);
-
-    // Check if data might be flattened with prefixes
-    const flattenedKeys = Object.keys(config).filter(k => k.includes(textItemsKey));
-    // eslint-disable-next-line no-console
-    console.log(`Keys matching "${textItemsKey}":`, flattenedKeys);
-
-    // Check if there's hidden tag data
-    const hiddenTagKeys = Object.keys(config).filter(k => k.includes('L4TagMulti'));
-    // eslint-disable-next-line no-console
-    console.log('Hidden tag keys found:', hiddenTagKeys);
+    console.log('textItems:', textItems);
 
     let textItemsHtml = '';
     if (textItems.length > 0) {
       textItemsHtml = textItems.map((item, index) => {
         // eslint-disable-next-line no-console
-        console.log(`\n=== Item ${index} ===`);
-        // eslint-disable-next-line no-console
-        console.log('Raw item:', item);
-        // eslint-disable-next-line no-console
-        console.log('Item type:', typeof item);
+        console.log(`\n=== Item ${index} ===`, item);
 
-        // Handle different data formats
-        let itemData = item;
+        // itemData from parseL4TagMulti contains fields like:
+        // { side: {html, text}, yValue: {html, text}, titleRichtext: {html, text}, infoRichtext: {html, text} }
+        const itemData = item;
 
-        // If item is a string, try to parse it
-        if (typeof item === 'string') {
-          try {
-            itemData = JSON.parse(item);
-            // eslint-disable-next-line no-console
-            console.log('Parsed item:', itemData);
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.error('Failed to parse item string:', e);
-          }
-        }
-
-        // If item is an object with 'text' and 'html' properties (AEM format)
-        if (itemData.text && itemData.html && !itemData.titleRichtext) {
-          // eslint-disable-next-line no-console
-          console.log('Item is in AEM format {text, html}, need to extract multifield data');
-          // This might be the case where multifield data is encoded differently
-        }
-
-        // Filter out hidden L4TagMulti fields to get clean data
-        const cleanData = {};
-        Object.keys(itemData).forEach((key) => {
-          if (!key.startsWith('L4TagMulti-')) {
-            cleanData[key] = itemData[key];
-          }
-        });
-        itemData = cleanData;
-
-        // eslint-disable-next-line no-console
-        console.log('Cleaned data:', itemData);
-
-        // Directly use itemData values (no need for getFieldValue)
-        const xValue = itemData.xValue || '0';
-        const yValue = itemData.yValue || '0';
-        const titleRichtext = itemData.titleRichtext || '<p>Item Title</p>';
-        const infoRichtext = itemData.infoRichtext || '<p>Description text here...</p>';
-        const textWidth = itemData.textWidth || 'auto';
-        const alignment = itemData.alignment || 'left';
-        const side = itemData.side || 'left';
+        // Extract values from {html, text} format
+        const xValue = itemData.xValue?.text || '0';
+        const yValue = itemData.yValue?.text || '0';
+        const titleRichtext = itemData.titleRichtext?.html || '<p>Item Title</p>';
+        const infoRichtext = itemData.infoRichtext?.html || '<p>Description text here...</p>';
+        const textWidth = itemData.textWidth?.text || 'auto';
+        const alignment = itemData.alignment?.text || 'left';
+        const side = itemData.side?.text || 'left';
+        const layoutStyle = itemData.layoutStyle?.text || 'left';
 
         // eslint-disable-next-line no-console
         console.log(`Item ${index} extracted values:`, {
