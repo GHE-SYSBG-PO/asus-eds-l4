@@ -18,7 +18,7 @@
     {
       "component": "richtext",
       "label": "highlight text",
-      "name": "highlightText",
+      "name": "highlightTextBasic",
       "valueType": "string",
       "condition": {
         "and": [
@@ -41,7 +41,7 @@
     {
       "component": "container",
       "label": "top text",
-      "name": "topText",
+      "name": "topTextBasic",
       "collapsible": true,
       "fields": [
         {
@@ -65,7 +65,7 @@
     {
       "component": "container",
       "label": "bottom text",
-      "name": "bottomText",
+      "name": "bottomTextBasic",
       "collapsible": true,
       "fields": [
         {
