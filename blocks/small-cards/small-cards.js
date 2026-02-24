@@ -788,12 +788,12 @@ async function renderCard(block) {
     }
     @media (min-width: 768px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${slideCount < 2 && alignmentConfig.tabletAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount <= 2 && alignmentConfig.tabletAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     @media (min-width: 1025px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${slideCount < 3 && alignmentConfig.desktopAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount <= 3 && alignmentConfig.desktopAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     .small-cards-containers .swiper-button-prev,
