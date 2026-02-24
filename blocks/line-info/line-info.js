@@ -2,6 +2,21 @@ import { getBlockConfigs, getFieldValue, getBlockRepeatConfigs } from '../../scr
 
 export default async function decorate(block) {
   try {
+    // DEBUG: Check block structure FIRST
+    // eslint-disable-next-line no-console
+    console.log('=== BLOCK STRUCTURE DEBUG ===');
+    // eslint-disable-next-line no-console
+    console.log('Block HTML:', block.outerHTML.substring(0, 500));
+    // eslint-disable-next-line no-console
+    console.log('Block children count:', block.children.length);
+    // eslint-disable-next-line no-console
+    console.log('Block children:', [...block.children].map(child => ({
+      tagName: child.tagName,
+      className: child.className,
+      outerHTML: child.outerHTML.substring(0, 200),
+      hasL4TagMulti: child.outerHTML.includes('L4TagMulti-'),
+    })));
+
     const config = await getBlockConfigs(block, {}, 'line-info');
     const v = getFieldValue(config);
 
