@@ -16,9 +16,18 @@
           "name": "titleFontDTselect",
           "default": "ro-md-14-sh",
           "options": [
-            {"name": "ro-md-14-sh", "value": "ro-md-14-sh"},
-            {"name": "ro-md-16-sh", "value": "ro-md-16-sh"},
-            {"name": "ro-md-18-sh", "value": "ro-md-18-sh"}
+            {
+              "name": "ro-md-14-sh",
+              "value": "ro-md-14-sh"
+            },
+            {
+              "name": "ro-md-16-sh",
+              "value": "ro-md-16-sh"
+            },
+            {
+              "name": "ro-md-18-sh",
+              "value": "ro-md-18-sh"
+            }
           ]
         },
         {
@@ -27,9 +36,18 @@
           "name": "titleFontMselect",
           "default": "ro-md-13",
           "options": [
-            {"name": "ro-md-13", "value": "ro-md-13"},
-            {"name": "ro-md-14-sh", "value": "ro-md-14-sh"},
-            {"name": "ro-md-16-sh", "value": "ro-md-16-sh"}
+            {
+              "name": "ro-md-13",
+              "value": "ro-md-13"
+            },
+            {
+              "name": "ro-md-14-sh",
+              "value": "ro-md-14-sh"
+            },
+            {
+              "name": "ro-md-16-sh",
+              "value": "ro-md-16-sh"
+            }
           ]
         },
         {
@@ -52,9 +70,18 @@
           "name": "infoFontDTselect",
           "default": "ro-rg-13",
           "options": [
-            {"name": "ro-rg-13", "value": "ro-rg-13"},
-            {"name": "ro-md-14-sh", "value": "ro-md-14-sh"},
-            {"name": "ro-md-16-sh", "value": "ro-md-16-sh"}
+            {
+              "name": "ro-rg-13",
+              "value": "ro-rg-13"
+            },
+            {
+              "name": "ro-md-14-sh",
+              "value": "ro-md-14-sh"
+            },
+            {
+              "name": "ro-md-16-sh",
+              "value": "ro-md-16-sh"
+            }
           ]
         },
         {
@@ -63,9 +90,18 @@
           "name": "infoFontMselect",
           "default": "ro-rg-12",
           "options": [
-            {"name": "ro-rg-12", "value": "ro-rg-12"},
-            {"name": "ro-rg-13", "value": "ro-rg-13"},
-            {"name": "ro-rg-14-sh", "value": "ro-rg-14-sh"}
+            {
+              "name": "ro-rg-12",
+              "value": "ro-rg-12"
+            },
+            {
+              "name": "ro-rg-13",
+              "value": "ro-rg-13"
+            },
+            {
+              "name": "ro-rg-14-sh",
+              "value": "ro-rg-14-sh"
+            }
           ]
         },
         {
