@@ -779,19 +779,21 @@ async function renderCard(block) {
     }
   });
 
+  const slideCount = Array.isArray(data) ? data.length : 1;
+
   const style = document.createElement('style');
   style.textContent = `
     .small-cards-containers .swiper-wrapper {
-      justify-content: ${alignmentConfig.mobileAlignment === 'center' ? 'center' : 'flex-start'};
+      justify-content: flex-start;
     }
     @media (min-width: 768px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${alignmentConfig.tabletAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount < 2 && alignmentConfig.mobileAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     @media (min-width: 1025px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${alignmentConfig.desktopAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount < 3 && alignmentConfig.mobileAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     .small-cards-containers .swiper-button-prev,
@@ -984,8 +986,6 @@ async function renderCard(block) {
       font-weight: bold;
     }
   `;
-
-  const slideCount = Array.isArray(data) ? data.length : 1;
 
   if (slideCount <= 3) {
     style.textContent += `
