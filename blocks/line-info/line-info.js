@@ -44,25 +44,8 @@ export default async function decorate(block) {
         </div>
       `;
     }
+
     // 6. Construct Text Items HTML based on style
-    // Helper function to extract text from richtext field
-    const extractRichText = (richText) => {
-      if (!richText) return '';
-
-      // If it's already a string, return it
-      if (typeof richText === 'string') {
-        return richText;
-      }
-
-      // If it's an object, try to extract content
-      if (typeof richText === 'object') {
-        if (richText.content) return richText.content;
-        if (richText.html) return richText.html;
-      }
-
-      return '';
-    };
-
     let textItemsHtml = '';
     if (textItems.length > 0) {
       textItemsHtml = textItems.map((item, index) => {
@@ -78,10 +61,13 @@ export default async function decorate(block) {
         });
         itemData = cleanData;
 
+        // Create a getFieldValue function for this item to handle richtext properly
+        const itemFieldValue = getFieldValue(itemData);
+
         const xValue = itemData.xValue || '0';
         const yValue = itemData.yValue || '0';
-        let titleRichtext = extractRichText(itemData.titleRichtext) || '<p>Item Title</p>';
-        let infoRichtext = extractRichText(itemData.infoRichtext) || '<p>Description text here...</p>';
+        const titleRichtext = itemFieldValue('titleRichtext', 'html') || '<p>Item Title</p>';
+        const infoRichtext = itemFieldValue('infoRichtext', 'html') || '<p>Description text here...</p>';
         const textWidth = itemData.textWidth || 'auto';
         const alignment = itemData.alignment || 'left';
         const side = itemData.side || 'left';
