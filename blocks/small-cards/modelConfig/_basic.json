@@ -262,7 +262,7 @@
     },
     {
       "component": "select",
-      "label": "layout group",
+      "label": "CTA Button Layout Group",
       "name": "styleLayoutCTA",
       "valueType": "string",
       "options": [
@@ -294,23 +294,23 @@
     },
     {
       "component": "select",
-      "label": "hyperlink style",
+      "label": "Hyper Link",
       "name": "linkTypeCTA",
       "valueType": "string",
       "options": [
         {
-          "name": "external link",
+          "name": "External Link",
           "value": "external"
         },
         {
-          "name": "inner page",
+          "name": "Inner Page Link",
           "value": "inner"
         }
       ]
     },
     {
       "component": "text",
-      "label": "external link",
+      "label": "External Link",
       "name": "externalLinkCTA",
       "valueType": "string",
       "placeholder": "https://",
@@ -326,7 +326,7 @@
     {
       "component": "text",
       "valueType": "string",
-      "label": "inner page content",
+      "label": "Inner Page Link",
       "name": "innerPageLinkCTA",
       "placeholder": "/modals/page",
       "condition": {
@@ -340,16 +340,16 @@
     },
     {
       "component": "select",
-      "label": "close btn style",
+      "label": "Close Button Style",
       "name": "gBtnStyleCTA",
       "valueType": "string",
       "options": [
         {
-          "name": "default",
+          "name": "Default",
           "value": "default"
         },
         {
-          "name": "customized",
+          "name": "Customized",
           "value": "customized"
         }
       ],
@@ -364,7 +364,7 @@
     },
     {
       "component": "container",
-      "label": "close btn customized",
+      "label": "Close Button Customize",
       "name": "gBtnCustomizedCTA",
       "collapsible": true,
       "condition": {
@@ -378,13 +378,13 @@
       "fields": [
         {
           "component": "text",
-          "label": "label Text",
+          "label": "Label Text",
           "name": "gBtnLabelCTA",
           "valueType": "string"
         },
         {
           "component": "select",
-          "label": "font (D/T)",
+          "label": "Font (D/T)",
           "name": "gBtnFontDesktopCTA",
           "valueType": "string",
           "options": [
@@ -424,73 +424,73 @@
         },
         {
           "component": "text",
-          "label": "font color default",
+          "label": "Font Color Default",
           "name": "gBtnFontColorDefaultCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "font color hover",
+          "label": "Font Color Hover",
           "name": "gBtnFontColorHoverCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "font color active",
+          "label": "Font Color Active",
           "name": "gBtnFontColorActiveCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "bg-color default",
+          "label": "BG Color Default",
           "name": "gBtnContainerBgColorDefaultCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "bg-color hover",
+          "label": "BG Color Hover",
           "name": "gBtnContainerBgColorHoverCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "bg-color active",
+          "label": "BG Color Active",
           "name": "gBtnContainerBgColorActiveCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "radius TL",
+          "label": "Radius TL",
           "name": "gBtnContainerRadiusTLCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "radius TR",
+          "label": "Radius TR",
           "name": "gBtnContainerRadiusTRCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "radius BR",
+          "label": "Radius BR",
           "name": "gBtnContainerRadiusBRCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "radius BL",
+          "label": "Radius BL",
           "name": "gBtnContainerRadiusBLCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "border-width",
+          "label": "Border Width",
           "name": "gBtnBorderWidthCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "border-color",
+          "label": "Border Color",
           "name": "gBtnBorderColorCTA",
           "valueType": "string"
         }
@@ -498,7 +498,7 @@
     },
     {
       "component": "select",
-      "label": "icon style",
+      "label": "Icon Style",
       "name": "iconStyleCTA",
       "valueType": "string",
       "options": [
@@ -527,7 +527,7 @@
     },
     {
       "component": "text",
-      "label": "icon color",
+      "label": "Icon Color",
       "name": "iconColorCTA",
       "valueType": "string",
       "condition": {
@@ -558,7 +558,7 @@
     },
     {
       "component": "text",
-      "label": "icon-bg color default",
+      "label": "Icon BG Color Default",
       "name": "iconBgColorDefaultCTA",
       "valueType": "string",
       "condition": {
@@ -589,7 +589,7 @@
     },
     {
       "component": "text",
-      "label": "icon-bg color hover",
+      "label": "Icon BG Color Hover",
       "name": "iconBgColorHoverCTA",
       "valueType": "string",
       "condition": {
@@ -620,7 +620,7 @@
     },
     {
       "component": "text",
-      "label": "icon-bg color active",
+      "label": "Icon BG Color Active",
       "name": "iconBgColorActiveCTA",
       "valueType": "string",
       "condition": {
@@ -651,7 +651,7 @@
     },
     {
       "component": "reference",
-      "label": "default asset",
+      "label": "Default Asset",
       "name": "iconAssetDefaultCTA",
       "multi": false,
       "condition": {
@@ -682,7 +682,7 @@
     },
     {
       "component": "reference",
-      "label": "hover asset",
+      "label": "Hover Asset",
       "name": "iconAssetHoverCTA",
       "multi": false,
       "condition": {
@@ -713,7 +713,7 @@
     },
     {
       "component": "reference",
-      "label": "active asset",
+      "label": "Active Asset",
       "name": "iconAssetActiveCTA",
       "multi": false,
       "condition": {
@@ -744,19 +744,19 @@
     },
     {
       "component": "text",
-      "label": "label text",
+      "label": "Label",
       "name": "labelCTA",
       "valueType": "string"
     },
     {
       "component": "container",
-      "label": "label advanced",
+      "label": "Label Advanced",
       "name": "labelAdvancedCTA",
       "collapsible": true,
       "fields": [
         {
           "component": "select",
-          "label": "label font (D/T)",
+          "label": "Label Font (D/T)",
           "name": "fontDesktopCTA",
           "valueType": "string",
           "options": [
@@ -776,7 +776,7 @@
         },
         {
           "component": "select",
-          "label": "label font (M)",
+          "label": "Label Font (M)",
           "name": "fontMCTA",
           "valueType": "string",
           "options": [
@@ -796,19 +796,19 @@
         },
         {
           "component": "text",
-          "label": "font color default",
+          "label": "Font Color Default",
           "name": "fontColorDefaultCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "font color hover",
+          "label": "Font Color Hover",
           "name": "fontColorHoverCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "font color active",
+          "label": "Font Color Active",
           "name": "fontColorActiveCTA",
           "valueType": "string"
         }
@@ -816,50 +816,50 @@
     },
     {
       "component": "text",
-      "label": "bg-color default",
+      "label": "Container BG Color Default",
       "name": "containerBgColorDefaultCTA",
       "valueType": "string",
       "description": "Accepts only hex values, e.g., 00ffee (without #)"
     },
     {
       "component": "text",
-      "label": "bg-color hover",
+      "label": "Container BG Color Hover",
       "name": "containerBgColorHoverCTA",
       "valueType": "string"
     },
     {
       "component": "text",
-      "label": "bg-color active",
+      "label": "Container BG Color Active",
       "name": "containerBgColorActiveCTA",
       "valueType": "string"
     },
     {
       "component": "text",
-      "label": "radius TL",
+      "label": "Container Radius TL",
       "name": "containerRadiusTLCTA",
       "valueType": "string"
     },
     {
       "component": "text",
-      "label": "radius TR",
+      "label": "Container Radius TR",
       "name": "containerRadiusTRCTA",
       "valueType": "string"
     },
     {
       "component": "text",
-      "label": "radius BR",
+      "label": "Container Radius BR",
       "name": "containerRadiusBRCTA",
       "valueType": "string"
     },
     {
       "component": "text",
-      "label": "radius BL",
+      "label": "Container Radius BL",
       "name": "containerRadiusBLCTA",
       "valueType": "string"
     },
     {
       "component": "container",
-      "label": "container advanced",
+      "label": "Container Advanced",
       "name": "containerAdvancedCTA",
       "collapsible": true,
       "condition": {
@@ -877,23 +877,17 @@
       "fields": [
         {
           "component": "text",
-          "label": "border-width",
+          "label": "Container Border Width",
           "name": "borderWidthCTA",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "border-color",
+          "label": "Container Border Color",
           "name": "borderColorCTA",
           "valueType": "string"
         }
       ]
-    },
-    {
-      "component": "text",
-      "name": "L4TagNestedBlockCTA",
-      "value": "L4--nested-block--small-cards",
-      "hidden": true
     },
     {
       "component": "select",
