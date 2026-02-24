@@ -50,38 +50,6 @@
       ]
     },
     {
-      "component": "container",
-      "label": "CTA textLink style",
-      "name": "ctaAdvanced",
-      "collapsible": true,
-      "condition": {
-        "and": [
-          { "===": [{"var" : "ctaLinkType"}, "text-link"] }
-        ]
-      },
-      "fields": [
-        {
-          "...": "./_cta.json#/fields"
-        }
-      ]
-    },
-    {
-      "component": "container",
-      "label": "CTA button style",
-      "name": "cTAButtonStyle",
-      "collapsible": true,
-      "condition": {
-        "and": [
-          { "===": [{"var" : "ctaLinkType"}, "button"] }
-        ]
-      },
-      "fields": [
-        {
-          "...": "../../../components/button/_button.json#/fields"
-        }
-      ]
-    },
-    {
       "component": "select",
       "label": "Alignment",
       "name": "alignmentAdvanced",

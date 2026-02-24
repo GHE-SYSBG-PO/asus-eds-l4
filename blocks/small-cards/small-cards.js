@@ -154,27 +154,29 @@ const DEFAULT_CONFIG = {
   borderRadiusBottomLeft: 'rounded-tl-lg',
 
   // CTA Link
-  ctaFontDT: 'ro-md-20-md',
-  ctaFontM: 'ro-md-18',
-  ctaFontColor: '024791',
-  ctaHyperlink: '',
+  // ctaFontDT: 'ro-md-20-md',
+  // ctaFontM: 'ro-md-18',
+  // ctaFontColor: '024791',
+  // ctaHyperlink: '',
 
   // Button Style
-  gBtnLabel: 'Learn More',
-  gBtnFontDesktop: 'ro-md-16',
-  gBtnFontM: 'ro-md-16',
-  gBtnFontColorDefault: 'FFFFFF',
-  gBtnFontColorHover: 'FFFFFF',
-  gBtnFontColorActive: 'FFFFFF',
-  gBtnContainerBgColorDefault: '4379B1',
-  gBtnContainerBgColorHover: '0b5da799',
-  gBtnContainerBgColorActive: '0b5da799',
-  gBtnContainerRadiusTL: '32',
-  gBtnContainerRadiusTR: '32',
-  gBtnContainerRadiusBR: '32',
-  gBtnContainerRadiusBL: '32',
-  gBtnBorderWidth: '0',
-  gBtnBorderColor: 'transparent',
+  // gBtnLabel: 'Learn More',
+  // gBtnFontDesktop: 'ro-md-16',
+  // gBtnFontM: 'ro-md-16',
+  // gBtnFontColorDefault: 'FFFFFF',
+  // gBtnFontColorHover: 'FFFFFF',
+  // gBtnFontColorActive: 'FFFFFF',
+  // gBtnContainerBgColorDefault: '4379B1',
+  // gBtnContainerBgColorHover: '0b5da799',
+  // gBtnContainerBgColorActive: '0b5da799',
+  // gBtnContainerRadiusTL: '32',
+  // gBtnContainerRadiusTR: '32',
+  // gBtnContainerRadiusBR: '32',
+  // gBtnContainerRadiusBL: '32',
+  // gBtnBorderWidth: '0',
+  // gBtnBorderColor: 'transparent',
+
+
   alignmentAdvanced: 'left',
 
   // Anchor (Down arrow on cards)
