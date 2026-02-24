@@ -22,7 +22,8 @@
       "btn",
       "chart-advanced",
       "space",
-      "footnote"
+      "footnote",
+      "featureitem-block"
     ]
   },
   {
@@ -62,6 +63,7 @@
     "id": "container-col",
     "components": [
       "text-block",
+      "featureitem-block",
       "media-block",
       "btn"
     ]
