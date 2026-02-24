@@ -46,11 +46,23 @@ export default async function decorate(block) {
     }
 
     // 6. Construct Text Items HTML based on style
+    // eslint-disable-next-line no-console
+    console.log('styleLayout:', styleLayout);
+    // eslint-disable-next-line no-console
+    console.log('textItemsKey:', textItemsKey);
+    // eslint-disable-next-line no-console
+    console.log('textItems raw:', textItems);
+    // eslint-disable-next-line no-console
+    console.log('textItems length:', textItems.length);
+
     let textItemsHtml = '';
     if (textItems.length > 0) {
       textItemsHtml = textItems.map((item, index) => {
         // Parse item if it's a string (JSON encoded)
         let itemData = typeof item === 'string' ? JSON.parse(item) : item;
+
+        // eslint-disable-next-line no-console
+        console.log(`Item ${index} raw data:`, itemData);
 
         // Filter out hidden L4TagMulti fields to get clean data
         const cleanData = {};
@@ -61,16 +73,20 @@ export default async function decorate(block) {
         });
         itemData = cleanData;
 
-        // Create a getFieldValue function for this item to handle richtext properly
-        const itemFieldValue = getFieldValue(itemData);
+        // eslint-disable-next-line no-console
+        console.log(`Item ${index} cleaned data:`, itemData);
 
+        // Directly use itemData values (no need for getFieldValue)
         const xValue = itemData.xValue || '0';
         const yValue = itemData.yValue || '0';
-        const titleRichtext = itemFieldValue('titleRichtext', 'html') || '<p>Item Title</p>';
-        const infoRichtext = itemFieldValue('infoRichtext', 'html') || '<p>Description text here...</p>';
+        const titleRichtext = itemData.titleRichtext || '<p>Item Title</p>';
+        const infoRichtext = itemData.infoRichtext || '<p>Description text here...</p>';
         const textWidth = itemData.textWidth || 'auto';
         const alignment = itemData.alignment || 'left';
         const side = itemData.side || 'left';
+
+        // eslint-disable-next-line no-console
+        console.log(`Item ${index} values:`, { titleRichtext, infoRichtext, side, yValue });
 
         // Build style-specific HTML
         let itemHtml = '';
