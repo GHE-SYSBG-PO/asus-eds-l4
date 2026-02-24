@@ -652,7 +652,7 @@
         {
           "component": "select",
           "label": "radius",
-          "name": "radius",
+          "name": "dialogBoxRadius",
           "default": "tl",
           "options": [
             {
@@ -682,14 +682,14 @@
             {
               "component": "text",
               "label": "width",
-              "name": "borderWidth",
+              "name": "dialogBoxBorderWidth",
               "valueType": "string",
               "placeholder": "px"
             },
             {
               "component": "text",
               "label": "color",
-              "name": "borderColor",
+              "name": "dialogBoxBorderColor",
               "valueType": "string",
               "placeholder": "#000"
             }
@@ -698,41 +698,41 @@
         {
           "component": "text",
           "label": "bg color",
-          "name": "bgColor",
+          "name": "dialogBoxBgColor",
           "valueType": "string",
           "placeholder": "#000"
         },
         {
           "component": "container",
           "label": "padding",
-          "name": "paddingGroup",
+          "name": "dialogBoxPaddingGroup",
           "collapsible": true,
           "fields": [
             {
               "component": "text",
               "label": "padding left",
-              "name": "paddingLeft",
+              "name": "dialogBoxPaddingLeft",
               "valueType": "string",
               "placeholder": "px"
             },
             {
               "component": "text",
               "label": "padding top",
-              "name": "paddingTop",
+              "name": "dialogBoxPaddingTop",
               "valueType": "string",
               "placeholder": "px"
             },
             {
               "component": "text",
               "label": "padding right",
-              "name": "paddingRight",
+              "name": "dialogBoxPaddingRight",
               "valueType": "string",
               "placeholder": "px"
             },
             {
               "component": "text",
               "label": "padding bottom",
-              "name": "paddingBottom",
+              "name": "dialogBoxPaddingBottom",
               "valueType": "string",
               "placeholder": "px"
             }
@@ -741,7 +741,7 @@
         {
           "component": "select",
           "label": "content alignment (left/center)",
-          "name": "contentAlignment",
+          "name": "dialogBoxContentAlignment",
           "default": "left",
           "options": [
             {
