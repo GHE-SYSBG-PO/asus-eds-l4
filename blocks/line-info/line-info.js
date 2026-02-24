@@ -6,16 +6,16 @@ export default async function decorate(block) {
     // eslint-disable-next-line no-console
     console.log('=== BLOCK STRUCTURE DEBUG ===');
     // eslint-disable-next-line no-console
-    console.log('Block HTML:', block.outerHTML.substring(0, 500));
+    console.log('Full Block HTML:', block.outerHTML);
     // eslint-disable-next-line no-console
     console.log('Block children count:', block.children.length);
     // eslint-disable-next-line no-console
-    console.log('Block children:', [...block.children].map(child => ({
-      tagName: child.tagName,
-      className: child.className,
-      outerHTML: child.outerHTML.substring(0, 200),
-      hasL4TagMulti: child.outerHTML.includes('L4TagMulti-'),
-    })));
+    const childrenWithL4Tag = [...block.children].filter(child => child.outerHTML.includes('L4TagMulti-'));
+    console.log('Children with L4TagMulti-:', childrenWithL4Tag.length);
+    if (childrenWithL4Tag.length > 0) {
+      // eslint-disable-next-line no-console
+      console.log('L4TagMulti- children HTML:', childrenWithL4Tag.map(child => child.outerHTML));
+    }
 
     const config = await getBlockConfigs(block, {}, 'line-info');
     const v = getFieldValue(config);
