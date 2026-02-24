@@ -41,7 +41,7 @@ const curDevice = window.innerWidth >= 1280 ? 'D' : ((window.innerWidth >= 730 &
  * Prefix hex color values with #
  */
 const prefixHex = (color) => {
-  if (!color) return '';
+  if (!color || typeof color !== 'string') return '';
   return color.startsWith('#') ? color : `#${color}`;
 };
 
