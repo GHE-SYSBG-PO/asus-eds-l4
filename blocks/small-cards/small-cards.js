@@ -532,18 +532,18 @@ function getCardHTML(data) {
   if (isAnchorVisible === 'true') {
     let anchorStyleVars = '';
     if (anchorStyle === 'svg') {
-      if (anchorColorDefault) anchorStyleVars += `--anchor-color-default: #${anchorColorDefault};`;
-      if (anchorColorHover) anchorStyleVars += `--anchor-color-hover: #${anchorColorHover};`;
-      if (anchorColorPress) anchorStyleVars += `--anchor-color-press: #${anchorColorPress};`;
+      if (anchorColorDefault) anchorStyleVars += anchorColorDefault ? `--anchor-color-default: #${anchorColorDefault};` : '';
+      if (anchorColorHover) anchorStyleVars += anchorColorHover ? `--anchor-color-hover: #${anchorColorHover};` : '';
+      if (anchorColorPress) anchorStyleVars += anchorColorPress ? `--anchor-color-press: #${anchorColorPress};` : '';
       if (anchorBgColorDefault) anchorStyleVars += anchorBgColorDefault ? `--anchor-bg-default: #${anchorBgColorDefault};` : '';
       if (anchorBgColorHover) anchorStyleVars += anchorBgColorHover ? `--anchor-bg-hover: #${anchorBgColorHover};` : '';
       if (anchorBgColorPress) anchorStyleVars += anchorBgColorPress ? `--anchor-bg-press: #${anchorBgColorPress};` : '';
-      if (anchorBorderWidthDefault) anchorStyleVars += `--anchor-border-width-default: ${anchorBorderWidthDefault}px;`;
-      if (anchorBorderWidthHover) anchorStyleVars += `--anchor-border-width-hover: ${anchorBorderWidthHover}px;`;
-      if (anchorBorderWidthPress) anchorStyleVars += `--anchor-border-width-press: ${anchorBorderWidthPress}px;`;
-      if (anchorBorderColorDefault) anchorStyleVars += `--anchor-border-color-default: #${anchorBorderColorDefault};`;
-      if (anchorBorderColorHover) anchorStyleVars += `--anchor-border-color-hover: #${anchorBorderColorHover};`;
-      if (anchorBorderColorPress) anchorStyleVars += `--anchor-border-color-press: #${anchorBorderColorPress};`;
+      if (anchorBorderWidthDefault) anchorStyleVars += anchorBorderWidthDefault ? `--anchor-border-width-default: ${anchorBorderWidthDefault}px;` : '';
+      if (anchorBorderWidthHover) anchorStyleVars += anchorBorderWidthHover ? `--anchor-border-width-hover: ${anchorBorderWidthHover}px;` : '';
+      if (anchorBorderWidthPress) anchorStyleVars += anchorBorderWidthPress ? `--anchor-border-width-press: ${anchorBorderWidthPress}px;` : '';
+      if (anchorBorderColorDefault) anchorStyleVars += anchorBorderColorDefault ? `--anchor-border-color-default: #${anchorBorderColorDefault};` : '';
+      if (anchorBorderColorHover) anchorStyleVars += anchorBorderColorHover ? `--anchor-border-color-hover: #${anchorBorderColorHover};` : '';
+      if (anchorBorderColorPress) anchorStyleVars += anchorBorderColorPress ? `--anchor-border-color-press: #${anchorBorderColorPress};` : '';
 
       iconHTML = `
         <div class="card-icon-down anchor-svg" style="${anchorStyleVars}">
