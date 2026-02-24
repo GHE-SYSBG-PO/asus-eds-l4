@@ -535,7 +535,7 @@ function getCardHTML(data) {
       if (anchorColorDefault) anchorStyleVars += `--anchor-color-default: #${anchorColorDefault};`;
       if (anchorColorHover) anchorStyleVars += `--anchor-color-hover: #${anchorColorHover};`;
       if (anchorColorPress) anchorStyleVars += `--anchor-color-press: #${anchorColorPress};`;
-      if (anchorBgColorDefault) anchorStyleVars += `--anchor-bg-default: #${anchorBgColorDefault};`;
+      if (anchorBgColorDefault) anchorStyleVars += anchorBgColorDefault ? `--anchor-bg-default: #${anchorBgColorDefault};` : '';
       if (anchorBgColorHover) anchorStyleVars += `--anchor-bg-hover: #${anchorBgColorHover};`;
       if (anchorBgColorPress) anchorStyleVars += `--anchor-bg-press: #${anchorBgColorPress};`;
       if (anchorBorderWidthDefault) anchorStyleVars += `--anchor-border-width-default: ${anchorBorderWidthDefault}px;`;
