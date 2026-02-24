@@ -34,9 +34,10 @@ export function prefixHex(colors) {
  */
 export const buildCloseButtonHtml = (v) => {
   const label1 = v('gBtnLabel', 'text');
-  console.log('H1, buildCloseButtonHtml, button.js : ', label1, v);// eslint-disable-line no-console
-  loadCSS(`${window.hlx.codeBasePath}/components/button/button.css`);
   const gBtnStyle = v('gBtnStyle', 'text') || 'default';
+  console.log('H1, buildCloseButtonHtml, button.js : ', label1, gBtnStyle, v);// eslint-disable-line no-console
+  loadCSS(`${window.hlx.codeBasePath}/components/button/button.css`);
+  // const gBtnStyle = v('gBtnStyle', 'text') || 'default';
   // Default close button
   if (gBtnStyle !== 'customized') {
     return `
