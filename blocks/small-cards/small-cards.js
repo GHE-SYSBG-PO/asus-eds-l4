@@ -72,7 +72,7 @@ const DEFAULT_CONFIG = {
   anchorColorDefault: 'FFFFFF',
   anchorColorHover: 'FFFFFF',
   anchorColorPress: 'FFFFFF',
-  anchorBgColorDefault: '4379B1',
+  anchorBgColorDefault: '',
   anchorBgColorHover: '0b5da799',
   anchorBgColorPress: '0b5da799',
   anchorAssetDefault: '',
