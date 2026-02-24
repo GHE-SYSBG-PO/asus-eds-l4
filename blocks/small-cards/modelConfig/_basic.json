@@ -896,7 +896,7 @@
     },
     {
       "component": "container",
-      "label": "Container Advanced",
+      "label": "Button Container Advanced",
       "name": "containerAdvancedCTA",
       "collapsible": true,
       "condition": {
