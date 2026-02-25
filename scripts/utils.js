@@ -470,3 +470,15 @@ export const processInlineIdSyntax = (container) => {
     }
   });
 };
+
+/**
+ * Get current product line from DOM
+ * @returns {string} Product line (asus/proart/rog/tuf)
+ */
+export const getProductLine = () => document.querySelector('.l4-pdp')?.dataset.product || 'asus';
+
+/**
+ * Get current theme mode from DOM
+ * @returns {string} Theme mode (light/dark)
+ */
+export const getThemeMode = () => document.querySelector('.l4-pdp')?.dataset.mode || 'light';

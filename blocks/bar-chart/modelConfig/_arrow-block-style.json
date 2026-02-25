@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "component": "text",
+      "label": "Arrow Num Font Color",
+      "name": "arrowNumFontColor",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "select",
+      "label": "Arrow Text Font (D/T)",
+      "name": "arrowTextFontDT",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh" },
+        { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh" },
+        { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Arrow Text Font (M)",
+      "name": "arrowTextFontM",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-nr-14-sh", "value": "tt-nr-14-sh" },
+        { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Arrow Text Font Color",
+      "name": "arrowTextFontColor",
+      "valueType": "string",
+      "description": "Hex without #"
+    }
+  ]
+}
