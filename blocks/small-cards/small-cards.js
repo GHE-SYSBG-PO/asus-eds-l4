@@ -864,20 +864,20 @@ async function renderCard(block) {
 
   if (slideCount <= 3) {
     style.textContent += `
-      @media (min-width: 1025px) {
+      @media (width > 1024px) {
         .small-cards-containers .swiper-button-prev,
         .small-cards-containers .swiper-button-next {
-          display: none;
+          display: none !important;
         }
       }
     `;
   }
   if (slideCount <= 2) {
     style.textContent += `
-      @media (min-width: 768px) and (max-width: 1024px) {
+      @media (width >= 768px) and (width <= 1024px) {
         .small-cards-containers .swiper-button-prev,
         .small-cards-containers .swiper-button-next {
-          display: none;
+          display: none !important;
         }
       }
     `;
@@ -887,7 +887,7 @@ async function renderCard(block) {
       @media (max-width: 767px) {
         .small-cards-containers .swiper-button-prev,
         .small-cards-containers .swiper-button-next {
-          display: none;
+          display: none !important;
         }
       }
     `;
