@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "container-2cols"
+      "container-2cols",
+      "feature-accordion"
     ]
   },
   {
@@ -30,6 +31,10 @@
     "components": [
       "container-col"
     ]
+  },
+  {
+    "id": "feature-accordion",
+    "components": []
   },
   {
     "id": "cards",

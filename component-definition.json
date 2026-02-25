@@ -91,6 +91,22 @@
               }
             }
           }
+        },
+        {
+          "title": "Feature Accordion(ID:18)",
+          "id": "feature-accordion",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "name": "Feature Accordion",
+                  "model": "feature-accordion",
+                  "filter": "feature-accordion"
+                }
+              }
+            }
+          }
         }
       ]
     },

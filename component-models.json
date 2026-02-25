@@ -695,6 +695,72 @@
     ]
   },
   {
+    "id": "feature-accordion",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "CTA visiblity toggle",
+        "name": "ctaVisiblity",
+        "valueType": "string",
+        "placeholder": "The default value is show",
+        "options": [
+          {
+            "name": "show",
+            "value": "show"
+          },
+          {
+            "name": "hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "text",
+        "name": "ctaText",
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisiblity"
+            },
+            "show"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "hyperlink",
+        "name": "ctaHyperlink",
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisiblity"
+            },
+            "show"
+          ]
+        }
+      }
+    ]
+  },
+  {
     "id": "btn",
     "fields": [
       {
