@@ -500,12 +500,12 @@ function getCardHTML(data) {
   let ctaHTML = '';
   if (ctaVisible === 'show') {
     const fontClass = `${ctaFontDT} small_${ctaFontM}`;
-    const style = ctaFontColor ? `style="color: #${ctaFontColor}"` : '';
+    const style = ctaFontColor ? `style="background: none; -webkit-text-fill-color: initial; color: #${ctaFontColor}"` : '';
 
     if (ctaLinkType === 'button' && data.styleLayoutCTA) {
       ctaHTML = `<div class="btn-placeholder" data-card-index="${data.cardIndex || 0}"></div>`;
     } else {
-      ctaHTML = `<a class="${fontClass} asus-icon-chevronright" 
+      ctaHTML = `<a class="${fontClass} asus-icon-chevronright text-block-cta" 
                   aria-label="${ctaText} (opens in new window)" 
                   href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer" 
                   ${style}><span>${ctaText}</span></a>`;

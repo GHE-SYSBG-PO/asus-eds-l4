@@ -1,4 +1,4 @@
-/* stylelint-disable at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+/* stylelint-disable property-no-vendor-prefix, at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
 
 .l4-pdp {
   &[data-product="asus"] {
@@ -10,6 +10,8 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #0062CD;
       --text-block-cta-end: #004691;
+      --link-font-color-start: #0062CD;
+      --link-font-color-end: #004691;
       --anchor-color-default: #FFF;// Start
       --anchor-color-hover: #FFF;
       --anchor-color-press: #FFF;
@@ -49,6 +51,8 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #C3E0FF;
       --text-block-cta-end: #78BCFF;
+      --link-font-color-start: #C3E0FF;
+      --link-font-color-end: #78BCFF;
       --anchor-color-default: #181818;
       --anchor-color-hover: #181818;
       --anchor-color-press: #181818;
@@ -90,6 +94,8 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #6B4F35;
       --text-block-cta-end: #8D684E;
+      --link-font-color-start: #6B4F35;
+      --link-font-color-end: #8D684E;
       --anchor-color-default: #FFF;
       --anchor-color-hover: #FFF;
       --anchor-color-press: #FFF;
@@ -129,6 +135,8 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #9F7A56;
       --text-block-cta-end: #DFC9A9;
+      --link-font-color-start: #9F7A56;
+      --link-font-color-end: #DFC9A9;
       --anchor-color-default: #181818;
       --anchor-color-hover: #181818;
       --anchor-color-press: #181818;
@@ -170,6 +178,8 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #CC000E;
       --text-block-cta-end: #CC000E;
+      --link-font-color-start: #CC000E;
+      --link-font-color-end: #CC000E;
       --anchor-color-default: #FFF;
       --anchor-color-hover: #FFF;
       --anchor-color-press: #FFF;
@@ -209,6 +219,8 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #FF0F0F;
       --text-block-cta-end: #FF0F0F;
+      --link-font-color-start: #FF0F0F;
+      --link-font-color-end: #FF0F0F;
       --anchor-color-default: #181818;
       --anchor-color-hover: #181818;
       --anchor-color-press: #181818;
@@ -250,6 +262,8 @@
       --text-block-disclaimer-color: #666;
       --text-block-cta-start: #181818;
       --text-block-cta-end: #181818;
+      --link-font-color-start: #181818;
+      --link-font-color-end: #181818;
       --anchor-color-default: #FFF;
       --anchor-color-hover: #FFF;
       --anchor-color-press: #FFF;
@@ -289,6 +303,8 @@
       --text-block-disclaimer-color: #999;
       --text-block-cta-start: #FF9E1B;
       --text-block-cta-end: #FF9E1B;
+      --link-font-color-start: #FF9E1B;
+      --link-font-color-end: #FF9E1B;
       --anchor-color-default: #181818;
       --anchor-color-hover: #181818;
       --anchor-color-press: #181818;
@@ -599,6 +615,15 @@
       content: " >";
       font-weight: bold;
     }
+
+    a.text-block-cta {
+      background: linear-gradient(90deg, var(--link-font-color-start) 0%, var(--link-font-color-end) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      display: inline-block;
+    }
   }
 
   .rounded-tl-lg {
@@ -718,4 +743,4 @@
   }
 }
 
-/* stylelint-enable at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
+/* stylelint-enable property-no-vendor-prefix, at-rule-empty-line-before, selector-class-pattern, shorthand-property-no-redundant-values, media-feature-range-notation, rule-empty-line-before, length-zero-no-unit, color-function-alias-notation, color-function-notation, alpha-value-notation */
