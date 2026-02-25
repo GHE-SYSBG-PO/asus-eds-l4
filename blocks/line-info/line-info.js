@@ -102,7 +102,7 @@ export default async function decorate(block) {
         let itemClass = 'line-info-item';
 
         switch (styleLayout) {
-          case '1':
+          case 1:
             // Style 1: Text On Left & Right
             // side 值: "left" 或 "right"
             itemClass += ` side-${side}`;
@@ -114,7 +114,7 @@ export default async function decorate(block) {
             `;
             break;
 
-          case '2':
+          case 2:
             // Style 2: Text On Left / Right Sides
             // layoutStyle 值: "left" 或 "right"
             itemClass += ` layout-${layoutStyle}`;
@@ -126,9 +126,9 @@ export default async function decorate(block) {
             `;
             break;
 
-          case '3':
-          case '4':
-          case '5':
+          case 3:
+          case 4:
+          case 5:
             // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
             // alignment 值: "left" 或 "right"
             itemClass += ` align-${alignment}`;
