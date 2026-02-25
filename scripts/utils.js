@@ -469,47 +469,56 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
   // 動態獲取該容器的 select 字段及其有效值
   const selectFieldsMap = extractSelectFieldsMap(containerName);
 
-  // 首先，找出所有多字段項的容器（通常是第一层的 div 子元素）
+  // 策略 1：優先讀取所有 data-aue-prop 元素並按索引分組
+  const auePropElements = block.querySelectorAll('[data-aue-prop]');
+
+  auePropElements.forEach((element) => {
+    const aueProp = element.getAttribute('data-aue-prop');
+    const propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/(\\w+)$`));
+
+    if (propMatch) {
+      const [, itemIndex, fieldName] = propMatch;
+      const index = parseInt(itemIndex, 10);
+
+      // 初始化該項
+      if (!itemsMap[index]) {
+        itemsMap[index] = {};
+      }
+
+      const html = element.innerHTML.trim();
+      const text = element.textContent.trim();
+
+      itemsMap[index][fieldName] = {
+        html,
+        text,
+      };
+    }
+  });
+
+  // 策略 2：讀取沒有 data-aue-prop 的 select 字段
+  // 這些通常序列化為簡單的 <p> 標籤，位於各個 item 的 div 中
   const multiFieldItems = block.querySelectorAll(`:scope > div`);
 
   multiFieldItems.forEach((itemDiv) => {
-    const auePropElements = itemDiv.querySelectorAll('[data-aue-prop]');
+    // 檢查這個 div 是否屬於某個多字段項（透過其內的 data-aue-prop）
+    const divAuePropElements = itemDiv.querySelectorAll('[data-aue-prop]');
 
-    // 如果這個 div 包含任何 data-aue-prop 元素，就認為它是一個多字段項
-    if (auePropElements.length > 0) {
-      const firstAueProp = auePropElements[0].getAttribute('data-aue-prop');
-      const match = firstAueProp.match(new RegExp(`${containerName}/(\\d+)/`));
+    if (divAuePropElements.length > 0) {
+      // 從第一個 data-aue-prop 中提取 item 索引
+      const firstAueProp = divAuePropElements[0].getAttribute('data-aue-prop');
+      const indexMatch = firstAueProp.match(new RegExp(`${containerName}/(\\d+)/`));
 
-      if (match) {
-        const itemIndex = parseInt(match[1], 10);
+      if (indexMatch) {
+        const itemIndex = parseInt(indexMatch[1], 10);
 
         // 初始化該項
         if (!itemsMap[itemIndex]) {
           itemsMap[itemIndex] = {};
         }
 
-        // 讀取所有 data-aue-prop 元素
-        auePropElements.forEach((element) => {
-          const aueProp = element.getAttribute('data-aue-prop');
-          const propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/(\\w+)$`));
-
-          if (propMatch) {
-            const [, , fieldName] = propMatch;
-            const html = element.innerHTML.trim();
-            const text = element.textContent.trim();
-
-            itemsMap[itemIndex][fieldName] = {
-              html,
-              text,
-            };
-          }
-        });
-
-        // 讀取沒有 data-aue-prop 的 select 字段
-        // 這些通常序列化為簡單的 <p> 標籤
+        // 讀取沒有 data-aue-prop 的 select 字段 <p> 標籤
         const paragraphs = itemDiv.querySelectorAll(':scope > p');
         paragraphs.forEach((p) => {
-          // 如果這個 <p> 沒有 data-aue-prop，檢查它是否是 select 字段值
           if (!p.hasAttribute('data-aue-prop')) {
             const pText = p.textContent.trim();
 
