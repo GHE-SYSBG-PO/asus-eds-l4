@@ -4,12 +4,20 @@ import { getBlockConfigs, getFieldValue, getBlockRepeatConfigs, getBlockRepeatCo
  * 確保值有正確的單位，如果沒有則加上預設單位
  * @param {string} value - 要檢查的值
  * @param {string} defaultUnit - 預設單位（預設為 'px'）
- * @returns {string} - 帶有單位的值，如果值為空則返回空字符串
+ * @returns {string} - 帶有單位的值，如果值為空或無效的數字則返回空字符串
  */
 const ensureUnit = (value, defaultUnit = 'px') => {
   if (!value) return '';
-  const hasUnit = /(%|px|vh|vw|em|rem)$/.test(value);
-  return hasUnit ? value : `${value}${defaultUnit}`;
+
+  // 防呆：移除前後空格並檢查是否為有效的數字或數字+單位
+  const trimmedValue = String(value).trim();
+
+  // 檢查是否以數字開頭（必須是有效的數字）
+  if (!/^-?\d/.test(trimmedValue)) return '';
+
+  // 檢查是否已有單位
+  const hasUnit = /(%|px|vh|vw|em|rem)$/.test(trimmedValue);
+  return hasUnit ? trimmedValue : `${trimmedValue}${defaultUnit}`;
 };
 
 export default async function decorate(block) {
@@ -45,6 +53,7 @@ export default async function decorate(block) {
     const paddingBottom = v('paddingBottom');
     const imgWidth = v('imgWidth');
     const textWidthPercent = v('textWidthPercent');
+    const textMaxWidth = v('textMaxWidth');
 
     // 4. Get Multifield Data (L4TagMulti- rows or data-aue-prop format)
     // Try new format first (data-aue-prop), then fall back to L4TagMulti- format
@@ -89,9 +98,22 @@ export default async function decorate(block) {
 
     let textItemsHtml = '';
 
+    // 構建 line-info-items 的 style：包含 width 和 max-width
     // 處理 textWidthPercent 單位（如果沒有單位則加上 %）
     const textWidthValue = ensureUnit(textWidthPercent, '%');
-    const textItemsStyle = textWidthValue ? `style="width: ${textWidthValue};"` : '';
+
+    // 處理 textMaxWidth 單位（如果沒有單位則加上 px）
+    const textMaxWidthValue = ensureUnit(textMaxWidth);
+
+    // 組合 width 和 max-width
+    let styleProps = [];
+    if (textWidthValue) {
+      styleProps.push(`width: ${textWidthValue}`);
+    }
+    if (textMaxWidthValue) {
+      styleProps.push(`max-width: ${textMaxWidthValue}`);
+    }
+    const textItemsStyle = styleProps.length > 0 ? `style="${styleProps.join(';')};"` : '';
 
     if (textItems.length > 0) {
       textItemsHtml = textItems.map((item, index) => {
@@ -190,7 +212,6 @@ export default async function decorate(block) {
     if (paddingBottomValue) {
       containerStyle += `padding-bottom: ${paddingBottomValue};`;
     }
-
 
     // 8. Render with style class
     block.innerHTML = `
