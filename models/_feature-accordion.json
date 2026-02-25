@@ -1,6 +1,11 @@
 {
   "fields": [
     {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
       "component": "select",
       "valueType": "string",
       "name": "colorGroup",
@@ -15,18 +20,25 @@
           "value": "section-dark"
         }
       ]
-    },{
+    },
+    {
       "component": "select",
       "label": "CTA visiblity toggle",
       "name": "ctaVisiblity",
       "valueType": "string",
       "placeholder": "The default value is show",
       "options": [
-        { "name": "show", "value": "show" },
-        { "name": "hide", "value": "hide" }
+        {
+          "name": "show",
+          "value": "show"
+        },
+        {
+          "name": "hide",
+          "value": "hide"
+        }
       ]
     },
-     {
+    {
       "component": "text",
       "valueType": "string",
       "label": "text",
@@ -40,7 +52,7 @@
         ]
       }
     },
-     {
+    {
       "component": "text",
       "valueType": "string",
       "label": "hyperlink",
@@ -53,6 +65,17 @@
           "show"
         ]
       }
+    },
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "text",
+      "label": "CTA font color",
+      "name": "ctaFontColor",
+      "valueType": "string"
     }
-]
+  ]
 }

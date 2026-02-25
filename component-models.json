@@ -702,6 +702,11 @@
     "id": "feature-accordion",
     "fields": [
       {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
         "component": "select",
         "valueType": "string",
         "name": "colorGroup",
@@ -761,6 +766,17 @@
             "show"
           ]
         }
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "text",
+        "label": "CTA font color",
+        "name": "ctaFontColor",
+        "valueType": "string"
       }
     ]
   },
