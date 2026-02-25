@@ -20,6 +20,87 @@ const ensureUnit = (value, defaultUnit = 'px') => {
   return hasUnit ? trimmedValue : `${trimmedValue}${defaultUnit}`;
 };
 
+/**
+ * 生成 RWD 媒體查詢樣式
+ * @param {string} blockId - 元素的唯一 class ID
+ * @param {Object} paddings - Padding 配置物件
+ * @param {string} paddings.paddingTopDesktop - 桌機上邊距
+ * @param {string} paddings.paddingTopTablet - 平板上邊距
+ * @param {string} paddings.paddingTopMobile - 手機上邊距
+ * @param {string} paddings.paddingBottomDesktop - 桌機下邊距
+ * @param {string} paddings.paddingBottomTablet - 平板下邊距
+ * @param {string} paddings.paddingBottomMobile - 手機下邊距
+ * @returns {string} 媒體查詢樣式字符串
+ */
+const generateRwdMediaQueries = (blockId, {
+  paddingTopDesktop,
+  paddingTopTablet,
+  paddingTopMobile,
+  paddingBottomDesktop,
+  paddingBottomTablet,
+  paddingBottomMobile
+}) => {
+  let mediaQueryStyles = '';
+
+  // Process all values through ensureUnit
+  const paddingTopDesktopValue = ensureUnit(paddingTopDesktop);
+  const paddingTopTabletValue = ensureUnit(paddingTopTablet);
+  const paddingTopMobileValue = ensureUnit(paddingTopMobile);
+  const paddingBottomDesktopValue = ensureUnit(paddingBottomDesktop);
+  const paddingBottomTabletValue = ensureUnit(paddingBottomTablet);
+  const paddingBottomMobileValue = ensureUnit(paddingBottomMobile);
+
+  // Desktop styles (only if has values)
+  let desktopStyles = '';
+  if (paddingTopDesktopValue) {
+    desktopStyles += `padding-top: ${paddingTopDesktopValue};`;
+  }
+  if (paddingBottomDesktopValue) {
+    desktopStyles += `padding-bottom: ${paddingBottomDesktopValue};`;
+  }
+  if (desktopStyles) {
+    mediaQueryStyles += `
+        @media (min-width: 1025px) {
+          .${blockId} { ${desktopStyles} }
+        }
+      `;
+  }
+
+  // Tablet media query (only if has values)
+  let tabletStyles = '';
+  if (paddingTopTabletValue) {
+    tabletStyles += `padding-top: ${paddingTopTabletValue};`;
+  }
+  if (paddingBottomTabletValue) {
+    tabletStyles += `padding-bottom: ${paddingBottomTabletValue};`;
+  }
+  if (tabletStyles) {
+    mediaQueryStyles += `
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .${blockId} { ${tabletStyles} }
+        }
+      `;
+  }
+
+  // Mobile media query (only if has values)
+  let mobileStyles = '';
+  if (paddingTopMobileValue) {
+    mobileStyles += `padding-top: ${paddingTopMobileValue};`;
+  }
+  if (paddingBottomMobileValue) {
+    mobileStyles += `padding-bottom: ${paddingBottomMobileValue};`;
+  }
+  if (mobileStyles) {
+    mediaQueryStyles += `
+        @media (max-width: 767px) {
+          .${blockId} { ${mobileStyles} }
+        }
+      `;
+  }
+
+  return mediaQueryStyles;
+};
+
 export default async function decorate(block) {
   try {
     // DEBUG: Check block structure FIRST
@@ -204,66 +285,27 @@ export default async function decorate(block) {
       }).join('');
     }
 
-    // 7. Construct Container Style with RWD
-    let containerStyle = '';
-    let mediaQueryStyles = '';
-
-    // Build RWD media query styles
-    const paddingTopDesktopValue = ensureUnit(paddingTopDesktop);
-    const paddingTopTabletValue = ensureUnit(paddingTopTablet);
-    const paddingTopMobileValue = ensureUnit(paddingTopMobile);
-    const paddingBottomDesktopValue = ensureUnit(paddingBottomDesktop);
-    const paddingBottomTabletValue = ensureUnit(paddingBottomTablet);
-    const paddingBottomMobileValue = ensureUnit(paddingBottomMobile);
-
-    // Desktop styles (default)
-    if (paddingTopDesktopValue) {
-      containerStyle += `padding-top: ${paddingTopDesktopValue};`;
-    }
-    if (paddingBottomDesktopValue) {
-      containerStyle += `padding-bottom: ${paddingBottomDesktopValue};`;
-    }
-
-    // Tablet media query
-    let tabletStyles = '';
-    if (paddingTopTabletValue) {
-      tabletStyles += `padding-top: ${paddingTopTabletValue};`;
-    }
-    if (paddingBottomTabletValue) {
-      tabletStyles += `padding-bottom: ${paddingBottomTabletValue};`;
-    }
-    if (tabletStyles) {
-      mediaQueryStyles += `
-        @media (min-width: 768px) and (max-width: 1024px) {
-          .line-info-container { ${tabletStyles} }
-        }
-      `;
-    }
-
-    // Mobile media query
-    let mobileStyles = '';
-    if (paddingTopMobileValue) {
-      mobileStyles += `padding-top: ${paddingTopMobileValue};`;
-    }
-    if (paddingBottomMobileValue) {
-      mobileStyles += `padding-bottom: ${paddingBottomMobileValue};`;
-    }
-    if (mobileStyles) {
-      mediaQueryStyles += `
-        @media (max-width: 767px) {
-          .line-info-container { ${mobileStyles} }
-        }
-      `;
-    }
-
+    // 7. Generate RWD Media Queries
     // Generate unique class ID for this block instance to avoid style conflicts
     const blockId = `line-info-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-    const blockStyleClass = blockId;
+
+    const mediaQueryStyles = generateRwdMediaQueries(blockId, {
+      paddingTopDesktop,
+      paddingTopTablet,
+      paddingTopMobile,
+      paddingBottomDesktop,
+      paddingBottomTablet,
+      paddingBottomMobile
+    });
+
+    // Inline style should only contain non-padding properties
+    let containerStyle = '';
 
     // 8. Render with style class and media queries
+    // Padding is controlled via media queries, not inline-style
     block.innerHTML = `
       ${mediaQueryStyles ? `<style>${mediaQueryStyles}</style>` : ''}
-      <div class="line-info-container line-info--style${styleLayout} ${blockStyleClass}" style="${containerStyle}">
+      <div class="line-info-container line-info--style${styleLayout} ${blockId}" style="${containerStyle}">
         ${pictureHtml}
         <div class="line-info-items" ${textItemsStyle}>
           ${textItemsHtml}
