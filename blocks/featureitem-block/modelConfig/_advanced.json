@@ -49,6 +49,12 @@
           "label": "font Color",
           "name": "topTextColor",
           "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "width",
+          "name": "topTextWidth",
+          "valueType": "string"
         }
       ]
     },
@@ -95,6 +101,12 @@
           "component": "text",
           "label": "font Color",
           "name": "bottomTextColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "width",
+          "name": "bottomTextWidth",
           "valueType": "string"
         }
       ]
@@ -151,6 +163,12 @@
           "component": "text",
           "label": "font Color",
           "name": "highlightTextColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "width",
+          "name": "highlightTextWidth",
           "valueType": "string"
         }
       ]

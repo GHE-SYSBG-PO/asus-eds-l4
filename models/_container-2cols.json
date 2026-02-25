@@ -7,6 +7,10 @@
       "label": "Color Group",
       "options": [
         {
+          "name": "default",
+          "value": ""
+        },
+        {
           "name": "Light",
           "value": "section-light"
         },
