@@ -3295,22 +3295,28 @@
         "name": "customizeButtonIcon",
         "collapsible": true,
         "condition": {
-          "in": [
-            {
-              "var": "styleLayoutCTA"
-            },
-            [
-              "2",
-              "3",
-              "5",
-              "6"
-            ]
-          ],
           "and": [
             {
-              "var": "ctaVisible"
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
             },
-            "show"
+            {
+              "===": [
+                {
+                  "var": "ctaVisible"
+                },
+                "show"
+              ]
+            }
           ]
         },
         "fields": [
@@ -3711,21 +3717,27 @@
         "name": "containerAdvancedCTA",
         "collapsible": true,
         "condition": {
-          "in": [
-            {
-              "var": "styleLayoutCTA"
-            },
-            [
-              "3",
-              "4",
-              "6"
-            ]
-          ],
           "and": [
             {
-              "var": "ctaVisible"
+              "in": [
+                {
+                  "var": "styleLayoutCTA"
+                },
+                [
+                  "3",
+                  "4",
+                  "6"
+                ]
+              ]
             },
-            "show"
+            {
+              "===": [
+                {
+                  "var": "ctaVisible"
+                },
+                "show"
+              ]
+            }
           ]
         },
         "fields": [
