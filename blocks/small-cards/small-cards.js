@@ -1,4 +1,4 @@
-/* eslint-disable no-plusplus, max-len, no-unused-vars, quotes, no-multiple-empty-lines, no-use-before-define, no-console, padded-blocks */
+/* eslint-disable no-lonely-if, no-plusplus, max-len, no-unused-vars, quotes, no-multiple-empty-lines, no-use-before-define, no-console, padded-blocks */
 
 import {
   loadScript, loadCSS, loadBlock, buildBlock, decorateBlock,
@@ -417,12 +417,14 @@ function getMediaHTML(data) {
             ${!isLoop && isNavReplay ? `<button class="media-block-replay-btn absolute ${positionClass} z-10 rounded-full flex items-center justify-center transition-all" aria-label="Replay" style="display: none; border: 1px solid #${btnColor};"><svg viewBox="0 0 36 36" fill="#${btnColor}"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" transform="translate(6,6)"/></svg></button>` : ''}
           </div>`;
   } else {
-    content = `
-          <div class="block-img">
-            <img class="img img__bg"
-                src="${asset}"
-                alt="${imageAlt}">
-          </div>`;
+    if (asset) {
+      content = `
+        <div class="block-img">
+          <img class="img img__bg"
+              src="${asset}"
+              alt="${imageAlt}">
+        </div>`;
+    }
   }
 
   console.log("H1, Generated media HTML:", title, asset, data);
