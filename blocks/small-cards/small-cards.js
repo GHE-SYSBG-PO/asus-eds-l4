@@ -65,7 +65,7 @@ const DEFAULT_CONFIG = {
   assets: '',
 
   // Cards
-  bgColor: 'F5F5F5',
+  bgColor: '',
   title: '',
   info: '',
   ctaVisible: 'hide',
