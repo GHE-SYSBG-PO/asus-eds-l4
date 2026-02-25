@@ -145,14 +145,14 @@ const DEFAULT_CONFIG = {
   titleFontD: 'tt-bd-32',
   titleFontT: 'tt-bd-28',
   titleFontM: 'tt-bd-24',
-  titleFontColor: '181818',
+  titleFontColor: '',
 
   // Cards Info
-  infoFontColor: '4D4D4D',
+  infoFontColor: '',
 
   // Cards Border
-  borderColor: 'F5F5F5',
-  borderWidth: '1',
+  borderColor: '',
+  borderWidth: '',
 
   // Cards Border Radius
   borderRadiusTopLeft: 'rounded-tl-lg',
