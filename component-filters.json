@@ -41,6 +41,12 @@
     ]
   },
   {
+    "id": "feature-accordion-item",
+    "components": [
+      "feature-accordion-sub-item"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
