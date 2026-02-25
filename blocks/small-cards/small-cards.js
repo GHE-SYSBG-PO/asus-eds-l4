@@ -326,7 +326,7 @@ function getMediaHTML(data) {
     }
 
     content = `
-             <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style}">
+             <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style} background-color: var(--ai-noise-container-bg);">
               <div class="nav__replay">
                   <div class="wd__play__btn video__play__btn">
                     <button class="wd__play__btn-button is-hidden" aria-label="replay the ai noise animation" tabindex="-1" id="aiApplication_s4_noise_replay_btn" aria-hidden="true" data-eventname="undefined">
