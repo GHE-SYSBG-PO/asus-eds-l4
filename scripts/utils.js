@@ -514,74 +514,59 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
   });
 
   // 策略 2：讀取沒有 data-aue-prop 的字段（實際值在無屬性的 <p> 標籤中）
-  // 遍歷所有包含 textItems 相關 data-aue-prop 的多字段項
-  const containerItems = block.querySelectorAll(`[data-aue-prop^="${containerName}/"]`);
-
-  // 建立一個 map 記錄哪些 item index 已存在
-  const itemIndexSet = new Set(Object.keys(itemsMap).map(Number));
+  // 對每個有 L4TagMulti-* 標籤的占位符，查找其後面緊跟著的無屬性 <p> 標籤
+  const placeholderElements = block.querySelectorAll('[data-aue-prop*="L4TagMulti-"]');
 
   // eslint-disable-next-line no-console
-  console.log(`[getBlockRepeatConfigsByDataAueProps] Found item indices:`, itemIndexSet);
+  console.log(`[getBlockRepeatConfigsByDataAueProps] Found ${placeholderElements.length} L4TagMulti- placeholder elements`);
 
-  containerItems.forEach((element) => {
-    const aueProp = element.getAttribute('data-aue-prop');
-    const indexMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/`));
+  placeholderElements.forEach((placeholder) => {
+    const aueProp = placeholder.getAttribute('data-aue-prop');
 
-    if (indexMatch) {
-      const itemIndex = parseInt(indexMatch[1], 10);
-      itemIndexSet.add(itemIndex);
-    }
-  });
+    // 從 placeholder 的 data-aue-prop 解析出 item index 和字段名
+    // 例如：textItems1/1/L4TagMulti-side → itemIndex=1, fieldName=side
+    const match = aueProp.match(new RegExp(`${containerName}/(\\d+)/L4TagMulti-(\\w+)$`));
 
-  // 對每個 item index，找到其所在的容器並掃描無屬性的 <p>
-  itemIndexSet.forEach((itemIndex) => {
-    // 找到該 item 的最外層容器（通常是包含所有該 item 相關元素的祖先 div）
-    const itemElements = block.querySelectorAll(`[data-aue-prop^="${containerName}/${itemIndex}/"]`);
+    if (!match) return;
 
-    if (itemElements.length === 0) return;
+    const [, itemIndex, fieldName] = match;
+    const index = parseInt(itemIndex, 10);
 
-    // 找到共同的祖先容器
-    let commonContainer = itemElements[0].parentElement;
-    while (commonContainer && !commonContainer.classList.contains('line-info')) {
-      // 檢查所有 item 元素是否都在這個容器內
-      const allInside = [...itemElements].every(el => commonContainer.contains(el));
-      if (allInside) break;
-      commonContainer = commonContainer.parentElement;
+    // 初始化該項
+    if (!itemsMap[index]) {
+      itemsMap[index] = {};
     }
 
-    if (!commonContainer) return;
-
-    // 在這個容器內找無 data-aue-prop 的 <p> 標籤
-    const orphanParagraphs = commonContainer.querySelectorAll(':scope > p');
-
-    // eslint-disable-next-line no-console
-    console.log(`  Item ${itemIndex}: Found ${orphanParagraphs.length} orphan <p> tags`);
-
-    orphanParagraphs.forEach((p) => {
-      if (!p.hasAttribute('data-aue-prop')) {
-        const pText = p.textContent.trim();
+    // 查找這個 placeholder 後面緊跟著的下一個無屬性的 <p> 標籤
+    let nextElement = placeholder.nextElementSibling;
+    while (nextElement) {
+      // 如果是 <p> 標籤且沒有 data-aue-prop，就是實際值
+      if (nextElement.tagName === 'P' && !nextElement.hasAttribute('data-aue-prop')) {
+        const pText = nextElement.textContent.trim();
 
         // 跳過分隔符
-        if (pText === 'hr' || pText === '' || pText === '<hr>') return;
+        if (pText && pText !== 'hr' && pText !== '<hr>') {
+          itemsMap[index][fieldName] = {
+            html: nextElement.outerHTML,
+            text: pText,
+          };
+          // eslint-disable-next-line no-console
+          console.log(`  → Item ${index}.${fieldName} (from placeholder follow): "${pText}"`);
+        }
+        break;
+      }
 
-        // 遍歷 select 字段映射表，檢查這個值是否屬於某個 select 字段
-        for (const [fieldName, validValues] of selectFieldsMap.entries()) {
-          // 如果值匹配且該字段還未被賦值，就存儲
-          if (validValues.has(pText) && !itemsMap[itemIndex][fieldName]) {
-            if (!itemsMap[itemIndex]) {
-              itemsMap[itemIndex] = {};
-            }
-            itemsMap[itemIndex][fieldName] = {
-              html: p.outerHTML,
-              text: pText,
-            };
-            // eslint-disable-next-line no-console
-            console.log(`  → Item ${itemIndex}.${fieldName} (from orphan <p>): "${pText}"`);
-            break;
-          }
+      // 如果遇到有 data-aue-prop 的元素且屬於不同 item，停止查找
+      if (nextElement.hasAttribute('data-aue-prop')) {
+        const nextAueProp = nextElement.getAttribute('data-aue-prop');
+        const nextIndexMatch = nextAueProp.match(new RegExp(`${containerName}/(\\d+)/`));
+        if (nextIndexMatch && parseInt(nextIndexMatch[1], 10) !== index) {
+          break;
         }
       }
-    });
+
+      nextElement = nextElement.nextElementSibling;
+    }
   });
 
   // eslint-disable-next-line no-console
