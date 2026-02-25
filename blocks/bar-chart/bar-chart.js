@@ -58,8 +58,18 @@ const DEFAULT_CONFIG = {
   },
   arrowAsset: '',
   arrowNumFontColor: '',
-  arrowTextFontDT: 'tt-nr-18-sh',
-  arrowTextFontM: 'tt-nr-16-sh',
+  arrowNumFont: {
+    asus: { D: 'tt-bd-56', T: 'tt-bd-56', M: 'tt-bd-48' },
+    proart: { D: 'tt-bd-56', T: 'tt-bd-56', M: 'tt-bd-48' },
+    rog: { D: 'tg-bd-56', T: 'tg-bd-56', M: 'tg-bd-48' },
+    tuf: { D: 'dp-cb-56', T: 'dp-cb-56', M: 'dp-cb-48' },
+  },
+  arrowTextFont: {
+    asus: { D: 'tt-bd-18-sh', T: 'tt-bd-18-sh', M: 'tt-bd-14-sh' },
+    proart: { D: 'tt-bd-18-sh', T: 'tt-bd-18-sh', M: 'tt-bd-14-sh' },
+    rog: { D: 'tg-bd-18-sh', T: 'tg-bd-18-sh', M: 'tg-bd-14-sh' },
+    tuf: { D: 'dp-cb-18-sh', T: 'dp-cb-18-sh', M: 'dp-cb-14-sh' },
+  },
   arrowTextFontColor: '',
 };
 
@@ -164,6 +174,12 @@ const buildArrowBlock = (v, productLine, theme) => {
 
   if (!hasArrow) return '';
 
+  // Get arrow fonts with product+device-specific defaults
+  const defaultArrowNumFont = getProductDefault('arrowNumFont', productLine, curDevice, 'tt-bd-48');
+  const arrowNumFont = getThemeAwareValue(v, 'arrowNumFont', defaultArrowNumFont);
+  const defaultArrowTextFont = getProductDefault('arrowTextFont', productLine, curDevice, 'tt-bd-18-sh');
+  const arrowTextFont = getThemeAwareValue(v, 'arrowTextFont', defaultArrowTextFont);
+
   const arrowNumColor = v('arrowNumFontColor') ? `style="--arrow-num-color: ${prefixHex(v('arrowNumFontColor'))};"` : '';
   const arrowTextColor = v('arrowTextFontColor') ? `style="--arrow-text-color: ${prefixHex(v('arrowTextFontColor'))};"` : '';
 
@@ -186,10 +202,10 @@ const buildArrowBlock = (v, productLine, theme) => {
     <div class="bar-chart__arrow-block" ${curDevice !== 'M' ? `style="width:${v('arrowNumWidth')}%;"` : ''};">
       ${arrowIcon}
       <div class="bar-chart__arrow-content">
-        <div class="bar-chart__arrow-num tt-bd-48" ${arrowNumColor}>
+        <div class="bar-chart__arrow-num ${arrowNumFont}" ${arrowNumColor}>
           ${v('arrowNumRichtext', 'html')}
         </div>
-        <div class="bar-chart__arrow-text ${curDevice === 'M' ? v('arrowTextFontM') : v('arrowTextFontDT')}" ${arrowTextColor}>
+        <div class="bar-chart__arrow-text ${arrowTextFont}" ${arrowTextColor}>
           ${v('arrowTextRichtext', 'html')}
         </div>
       </div>
