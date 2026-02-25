@@ -163,7 +163,7 @@ const DEFAULT_CONFIG = {
   // CTA Link
   ctaFontDT: 'ro-md-20-md',
   ctaFontM: 'ro-md-18',
-  ctaFontColor: '024791',
+  ctaFontColor: '',
   ctaHyperlink: '',
 
   // Button Style
