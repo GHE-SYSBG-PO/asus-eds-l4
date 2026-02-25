@@ -2989,7 +2989,7 @@
       },
       {
         "component": "container",
-        "label": "Configure CTA Button",
+        "label": "Configure CTA Button Layout",
         "name": "configureButton",
         "collapsible": true,
         "fields": [
@@ -3073,7 +3073,7 @@
           },
           {
             "component": "select",
-            "label": "Close Button Style",
+            "label": "Button Style Option",
             "name": "gBtnStyleCTA",
             "valueType": "string",
             "options": [
@@ -3099,7 +3099,7 @@
       },
       {
         "component": "container",
-        "label": "Close Button Customize",
+        "label": "Customize Button Style",
         "name": "gBtnCustomizedCTA",
         "collapsible": true,
         "condition": {
@@ -3623,7 +3623,7 @@
       },
       {
         "component": "container",
-        "label": "Button Container Advanced",
+        "label": "Button Container Advanced Style",
         "name": "containerAdvancedCTA",
         "collapsible": true,
         "condition": {
