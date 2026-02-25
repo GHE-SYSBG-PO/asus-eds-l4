@@ -43,6 +43,8 @@ export default async function decorate(block) {
     // 3. Get Layout Styles
     const paddingTop = v('paddingTop');
     const paddingBottom = v('paddingBottom');
+    const imgWidth = v('imgWidth');
+    const textWidthPercent = v('textWidthPercent');
 
     // 4. Get Multifield Data (L4TagMulti- rows or data-aue-prop format)
     // Try new format first (data-aue-prop), then fall back to L4TagMulti- format
