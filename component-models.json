@@ -2431,6 +2431,13 @@
         "valueType": "string"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "label": "media block content",
+        "name": "mediaBlockContent",
+        "placeholder": ""
+      },
+      {
         "component": "tab",
         "label": "advanced",
         "name": "advanced"
@@ -2451,6 +2458,69 @@
         "component": "text",
         "label": "info font color",
         "name": "infoFontColor",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "feature-accordion-sub-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "RichText",
+        "label": "title",
+        "name": "titleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "RichText",
+        "label": "sub item title",
+        "name": "subItemTitleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "RichText",
+        "label": "sub item sub title",
+        "name": "subItemSubtitleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "RichText",
+        "label": "sub item info",
+        "name": "subItemInfoRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "text",
+        "label": "title font color",
+        "name": "titleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "sub item title font color",
+        "name": "subItemTitleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "sub item sub title font color",
+        "name": "subItemSubtitleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "sub item info font color",
+        "name": "subItemInfoFontColor",
         "valueType": "string"
       }
     ]

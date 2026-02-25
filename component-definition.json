@@ -252,6 +252,21 @@
           }
         },
         {
+          "title": "Feature Accordion Sub Item",
+          "id": "feature-accordion-sub-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Feature Accordion Sub Item",
+                  "model": "feature-accordion-sub-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Featureitem Block(ID:2)",
           "id": "featureitem-block",
           "plugins": {

@@ -15,6 +15,21 @@
           }
         }
       }
+    },
+    {
+      "title": "Feature Accordion Sub Item",
+      "id": "feature-accordion-sub-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Feature Accordion Sub Item",
+              "model": "feature-accordion-sub-item"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -28,12 +43,25 @@
           "...": "./modelConfig/_advanced.json#/fields"
         }
       ]
+    },
+    {
+      "id": "feature-accordion-sub-item",
+      "fields": [
+         {
+          "...": "./modelConfig/_basic-sub-item.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_advanced-sub-item.json#/fields"
+        }
+      ]
     }
   ],
   "filters": [
     {
       "id": "feature-accordion-item",
-      "components": []
+      "components": [
+        "feature-accordion-sub-item"
+      ]
     }
   ]
 }

@@ -1,0 +1,33 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "RichText",
+      "label": "title",
+      "name": "titleRichtext",
+      "valueType": "string"
+    },
+     {
+      "component": "RichText",
+      "label": "sub item title",
+      "name": "subItemTitleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "RichText",
+      "label": "sub item sub title",
+      "name": "subItemSubtitleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "RichText",
+      "label": "sub item info",
+      "name": "subItemInfoRichtext",
+      "valueType": "string"
+    }
+  ]
+}
