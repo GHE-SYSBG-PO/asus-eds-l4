@@ -388,8 +388,9 @@ export default async function decorate(block) {
     // Build arrow block if needed
     const arrowHtml = buildArrowBlock(v, productLine, theme);
 
-    // Get title font - try nested path first, then fallback to root
-    const titleFont = v('titleAdvanced.titleFont') || v('titleFont') || 'tt-bd-28';
+    // Get title font with product+device-specific defaults
+    const defaultTitleFont = getProductDefault('fonts', 'titleFont', productLine, curDevice, 'tt-bd-28');
+    const titleFont = getThemeAwareValue(v, 'titleFont', defaultTitleFont);
     const disclaimerFont = v('disclaimerAdvanced.disclaimerFont') || v('disclaimerFont') || 'ro-rg-14';
 
     // Assemble complete HTML
