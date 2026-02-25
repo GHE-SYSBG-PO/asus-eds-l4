@@ -500,7 +500,7 @@ function getCardHTML(data) {
   let ctaHTML = '';
   if (ctaVisible === 'show') {
     const fontClass = `${ctaFontDT} small_${ctaFontM}`;
-    const style = ctaFontColor ? `style="background: none; -webkit-text-fill-color: initial; color: #${ctaFontColor}"` : '';
+    const style = ctaFontColor ? `style="background: none; -webkit-text-fill-color: initial; color: #${ctaFontColor}"` : 'style="background: none; -webkit-text-fill-color: initial; color: var(--link-font-color-start)"';
 
     if (ctaLinkType === 'button' && data.styleLayoutCTA) {
       ctaHTML = `<div class="btn-placeholder" data-card-index="${data.cardIndex || 0}"></div>`;
@@ -516,9 +516,9 @@ function getCardHTML(data) {
           <div class="block-content">
             <div class="wd__content" style="text-align: ${alignmentAdvanced};">
                 <h3 class="${titleFont}">
-                  <span class="${titleFont}" style="color: #${titleFontColor}">${title}</span>
+                  <span class="${titleFont}" style="color: ${titleFontColor ? `#${titleFontColor}` : 'var(--swiper-slide-title-color)'}">${title}</span>
                 </h3>
-                <div style="color: #${infoFontColor};font-size:18px;">${info}</div>
+                <div style="color: ${infoFontColor ? `#${infoFontColor}` : 'var(--swiper-slide-info-color)'};font-size:18px;">${info}</div>
                 ${ctaHTML}
             </div>
           </div>`;
@@ -613,13 +613,14 @@ function getCardHTML(data) {
     }
   }
 
+  const borderStyle = borderWidth ? `${borderWidth}px solid #${borderColor}` : 'var(--swiper-slide-border-width) solid var(--swiper-slide-border-color)';
 
   return `
       <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft} ${cardBlockType}" 
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
-           border: ${borderWidth ? `${borderWidth}px solid #${borderColor}` : 'none'};
-           background-color: #${bgColor};" 
+           border: ${borderStyle};
+           background-color: ${bgColor ? `#${bgColor}` : 'var(--swiper-slide-bg-color)'};" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
