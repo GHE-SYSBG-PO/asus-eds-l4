@@ -2,6 +2,7 @@ import {
   getBlockConfigs,
   getFieldValue,
   handleDecide,
+  processInlineIdSyntax,
 } from '../../scripts/utils.js';
 
 // DEFAULT
@@ -227,4 +228,6 @@ export default async function decorate(block) {
     console.error('Error decorating text-block block:', error);
     block.innerHTML = '<div class="error-message">Failed to load text-block block</div>';
   }
+
+  processInlineIdSyntax(block);
 }

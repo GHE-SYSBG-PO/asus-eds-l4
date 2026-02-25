@@ -22,7 +22,8 @@
       "btn",
       "chart-advanced",
       "space",
-      "bar-chart"
+      "bar-chart",
+      "footnote"
     ]
   },
   {
@@ -64,6 +65,12 @@
       "text-block",
       "media-block",
       "btn"
+    ]
+  },
+  {
+    "id": "footnote",
+    "components": [
+      "footnoteitem"
     ]
   }
 ]

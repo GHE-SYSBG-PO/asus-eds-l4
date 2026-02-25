@@ -12,7 +12,7 @@ import {
   loadCSS,
   getMetadata,
 } from './aem.js';
-import { loadSectionBlockJs, isAuthorEnvironment } from './utils.js';
+import { loadSectionBlockJs, isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -125,6 +125,10 @@ async function loadLazy(doc) {
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
+
+  main.querySelectorAll('.default-content-wrapper').forEach((wrapper) => {
+    processInlineIdSyntax(wrapper);
+  });
 
   loadFooter(doc.querySelector('footer'));
 
