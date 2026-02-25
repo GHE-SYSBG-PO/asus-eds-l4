@@ -28,6 +28,13 @@
       "label": "sub item info",
       "name": "subItemInfoRichtext",
       "valueType": "string"
+    },
+     {
+      "component": "text",
+      "valueType": "string",
+      "label": "sub item media block content",
+      "name": "subItemMediaBlockContent",
+      "placeholder": ""
     }
   ]
 }

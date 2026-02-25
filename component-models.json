@@ -2495,6 +2495,13 @@
         "valueType": "string"
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "label": "sub item media block content",
+        "name": "subItemMediaBlockContent",
+        "placeholder": ""
+      },
+      {
         "component": "tab",
         "label": "advanced",
         "name": "advanced"
