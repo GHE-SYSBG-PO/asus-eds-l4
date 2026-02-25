@@ -50,7 +50,7 @@ const generateRwdMediaQueries = (blockId, {
   const paddingBottomTabletValue = ensureUnit(paddingBottomTablet);
   const paddingBottomMobileValue = ensureUnit(paddingBottomMobile);
 
-  // Desktop styles (only if has values)
+  // Desktop styles (1280px and above)
   let desktopStyles = '';
   if (paddingTopDesktopValue) {
     desktopStyles += `padding-top: ${paddingTopDesktopValue};`;
@@ -60,13 +60,13 @@ const generateRwdMediaQueries = (blockId, {
   }
   if (desktopStyles) {
     mediaQueryStyles += `
-        @media (min-width: 1025px) {
+        @media (min-width: 1280px) {
           .${blockId} { ${desktopStyles} }
         }
       `;
   }
 
-  // Tablet media query (only if has values)
+  // Tablet media query (731px - 1279px)
   let tabletStyles = '';
   if (paddingTopTabletValue) {
     tabletStyles += `padding-top: ${paddingTopTabletValue};`;
@@ -76,13 +76,13 @@ const generateRwdMediaQueries = (blockId, {
   }
   if (tabletStyles) {
     mediaQueryStyles += `
-        @media (min-width: 768px) and (max-width: 1024px) {
+        @media (min-width: 731px) and (max-width: 1279px) {
           .${blockId} { ${tabletStyles} }
         }
       `;
   }
 
-  // Mobile media query (only if has values)
+  // Mobile media query (730px and below)
   let mobileStyles = '';
   if (paddingTopMobileValue) {
     mobileStyles += `padding-top: ${paddingTopMobileValue};`;
@@ -92,7 +92,7 @@ const generateRwdMediaQueries = (blockId, {
   }
   if (mobileStyles) {
     mediaQueryStyles += `
-        @media (max-width: 767px) {
+        @media (max-width: 730px) {
           .${blockId} { ${mobileStyles} }
         }
       `;
@@ -162,8 +162,9 @@ export default async function decorate(block) {
     let pictureHtml = '';
 
     if (assetDesktop || assetTablet || assetMobile) {
-      const mobileSource = assetMobile ? `<source media="(max-width: 767px)" srcset="${assetMobile}">` : '';
-      const tabletSource = assetTablet ? `<source media="(min-width: 768px) and (max-width: 1024px)" srcset="${assetTablet}">` : '';
+      // RWD breakpoints: Mobile (≤730px), Tablet (731px-1279px), Desktop (≥1280px)
+      const mobileSource = assetMobile ? `<source media="(max-width: 730px)" srcset="${assetMobile}">` : '';
+      const tabletSource = assetTablet ? `<source media="(min-width: 731px) and (max-width: 1279px)" srcset="${assetTablet}">` : '';
       const defaultImgSrc = assetDesktop || assetTablet || assetMobile || '';
 
       // 處理 imgWidth 單位（如果沒有單位則加上 px）
