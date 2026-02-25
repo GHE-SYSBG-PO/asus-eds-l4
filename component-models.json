@@ -3149,17 +3149,23 @@
         "name": "gBtnCustomizedCTA",
         "collapsible": true,
         "condition": {
-          "===": [
-            {
-              "var": "gBtnStyleCTA"
-            },
-            "customized"
-          ],
           "and": [
             {
-              "var": "ctaVisible"
+              "===": [
+                {
+                  "var": "gBtnStyleCTA"
+                },
+                "customized"
+              ]
             },
-            "show"
+            {
+              "===": [
+                {
+                  "var": "ctaVisible"
+                },
+                "show"
+              ]
+            }
           ]
         },
         "fields": [
@@ -3562,17 +3568,23 @@
         "name": "customizeButtonContainer",
         "collapsible": true,
         "condition": {
-          "===": [
-            {
-              "var": "gBtnStyleCTA"
-            },
-            "customized"
-          ],
           "and": [
             {
-              "var": "ctaVisible"
+              "===": [
+                {
+                  "var": "gBtnStyleCTA"
+                },
+                "customized"
+              ]
             },
-            "show"
+            {
+              "===": [
+                {
+                  "var": "ctaVisible"
+                },
+                "show"
+              ]
+            }
           ]
         },
         "fields": [
