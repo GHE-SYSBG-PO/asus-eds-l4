@@ -34,7 +34,9 @@
   },
   {
     "id": "feature-accordion",
-    "components": []
+    "components": [
+      "feature-accordion-item"
+    ]
   },
   {
     "id": "cards",
@@ -70,6 +72,10 @@
       "media-block",
       "btn"
     ]
+  },
+  {
+    "id": "feature-accordion-item",
+    "components": []
   },
   {
     "id": "footnote",

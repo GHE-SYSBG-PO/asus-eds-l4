@@ -1888,6 +1888,57 @@
     ]
   },
   {
+    "id": "feature-accordion-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "title",
+        "name": "titleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "sub title",
+        "name": "subtitleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "info",
+        "name": "infoRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "text",
+        "label": "title font color",
+        "name": "titleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "sub title font color",
+        "name": "subtitleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "info font color",
+        "name": "infoFontColor",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "footnoteitem",
     "fields": [
       {
