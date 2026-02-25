@@ -37,6 +37,12 @@ const DEFAULT_CONFIG = {
     tuf: { D: 'dp-cb-16-sh', T: 'dp-cb-16-sh', M: 'dp-cb-16-sh' },
   },
   itemTextFontColor: '',
+  barTextFont: {
+    asus: { D: 'tt-md-14', T: 'tt-md-14', M: 'tt-md-14' },
+    proart: { D: 'tt-md-14', T: 'tt-md-14', M: 'tt-md-14' },
+    rog: { D: 'tg-bd-14', T: 'tg-bd-14', M: 'tg-bd-14' },
+    tuf: { D: 'dp-cb-14', T: 'dp-cb-14', M: 'dp-cb-14' },
+  },
   radiusTL: '',
   radiusTR: '',
   radiusBR: '',
@@ -199,9 +205,11 @@ const buildBarItem = (item, v, index, motionEnabled, productLine, calculatedBarW
   const isStacked = [3, 4, 5, 6].includes(variant);
   const isLarge = [5, 6].includes(variant);
 
-  // Get item text font with product+device-specific defaults
+  // Get fonts with product+device-specific defaults
   const defaultItemTextFont = getProductDefault('itemTextFont', productLine, curDevice, 'tt-nr-16-sh');
   const itemTextFont = getThemeAwareValue(v, 'itemTextFont', defaultItemTextFont);
+  const defaultBarTextFont = getProductDefault('barTextFont', productLine, curDevice, 'tt-md-14');
+  const barTextFont = getThemeAwareValue(v, 'barTextFont', defaultBarTextFont);
 
   // Parse bar color (supports gradient)
   // Handle both richtext object and plain string
@@ -251,7 +259,7 @@ const buildBarItem = (item, v, index, motionEnabled, productLine, calculatedBarW
                  data-length="${barLength}"
                  style="${barBgStyle} ${radiusStyle} width: ${initialWidth};">
             </div>
-            <span class="bar-chart__bar-text bar-chart__bar-text--external tt-md-14" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
+            <span class="bar-chart__bar-text bar-chart__bar-text--external ${barTextFont}" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
           </div>
         </div>
       `;
@@ -267,7 +275,7 @@ const buildBarItem = (item, v, index, motionEnabled, productLine, calculatedBarW
           <div class="bar-chart__bar-fill"
                data-length="${barLength}"
                style="${barBgStyle} ${radiusStyle} width: ${initialWidth};">
-            <span class="bar-chart__bar-text tt-md-14" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
+            <span class="bar-chart__bar-text ${barTextFont}" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
           </div>
         </div>
       </div>
@@ -288,7 +296,7 @@ const buildBarItem = (item, v, index, motionEnabled, productLine, calculatedBarW
         <div class="bar-chart__bar-fill"
              data-length="${barLength}"
              style="${barBgStyle} ${radiusStyle} width: ${initialWidth};">
-          <span class="bar-chart__bar-text tt-md-14" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
+          <span class="bar-chart__bar-text ${barTextFont}" style="${barTextColor}">${item.barRowBarText?.text || ''}</span>
         </div>
       </div>
     </div>
