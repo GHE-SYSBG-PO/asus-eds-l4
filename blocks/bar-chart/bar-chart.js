@@ -58,7 +58,7 @@ const DEFAULT_CONFIG = {
   barWidth: 60,
   arrowNumWidth: 10,
   itemBarWidth: 80,
-  titleFont: 'tt-bd-28',
+  titleFont: '',
   titleFontColor: '',
   disclaimerFont: 'ro-rg-14',
   disclaimerFontColor: '',
