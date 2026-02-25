@@ -88,10 +88,11 @@ export default async function decorate(block) {
 
         // eslint-disable-next-line no-console
         console.log(`Item ${index} extracted values:`, {
-          titleRichtext,
-          infoRichtext,
           side,
           yValue,
+          titleRichtext: titleRichtext.substring(0, 50),
+          infoRichtext: infoRichtext.substring(0, 50),
+          alignment,
           xValue,
           textWidth
         });
@@ -103,6 +104,7 @@ export default async function decorate(block) {
         switch (styleLayout) {
           case '1':
             // Style 1: Text On Left & Right
+            // side 值: "left" 或 "right"
             itemClass += ` line-info-item--side-${side}`;
             itemHtml = `
               <div class="${itemClass}" style="top: ${yValue}px;">
@@ -114,6 +116,7 @@ export default async function decorate(block) {
 
           case '2':
             // Style 2: Text On Left / Right Sides
+            // layoutStyle 值: "left" 或 "right"
             itemClass += ` line-info-item--layout-${layoutStyle}`;
             itemHtml = `
               <div class="${itemClass}" style="top: ${yValue}px;">
@@ -127,6 +130,7 @@ export default async function decorate(block) {
           case '4':
           case '5':
             // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
+            // alignment 值: "left" 或 "right"
             itemClass += ` line-info-item--align-${alignment}`;
             itemHtml = `
               <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px; width: ${textWidth}px;">

@@ -25,6 +25,47 @@ export const getAllFieldNames = (fields) => {
 let blockDef = null;
 
 /**
+ * 從 blockDef 中動態提取指定容器的 select 字段及其有效值
+ * @param {string} containerName - 容器名稱（如 'textItems1'）
+ * @returns {Map<string, Set>} - {fieldName: Set<validValues>} 映射表
+ */
+const extractSelectFieldsMap = (containerName) => {
+  const selectFieldsMap = new Map();
+
+  if (!blockDef || !blockDef.length) {
+    return selectFieldsMap;
+  }
+
+  // 找到 'line-info' 或其他相關 model
+  const model = blockDef.find((item) => {
+    if (!item.fields) return false;
+    // 搜索該 model 是否包含指定的容器
+    return item.fields.some((field) => field.name === containerName);
+  });
+
+  if (!model || !model.fields) {
+    return selectFieldsMap;
+  }
+
+  // 找到容器字段定義
+  const containerField = model.fields.find((field) => field.name === containerName);
+
+  if (!containerField || !containerField.fields) {
+    return selectFieldsMap;
+  }
+
+  // 遍歷容器內的所有字段，提取 select 字段的選項值
+  containerField.fields.forEach((field) => {
+    if (field.component === 'select' && field.options) {
+      const validValues = new Set(field.options.map((opt) => opt.value));
+      selectFieldsMap.set(field.name, validValues);
+    }
+  });
+
+  return selectFieldsMap;
+};
+
+/**
  * Loads block definition JSON and extracts field order
  * @param {string} modelId  - json中models的id
  * @returns {Promise<Array<string>>} - Array of field names in order
@@ -416,6 +457,7 @@ export function isAuthorEnvironment() {
 /**
  * 解析基於 data-aue-prop 屬性的多字段結構（新格式）
  * 例如：data-aue-prop="textItems1/0/titleRichtext" 表示 textItems1[0].titleRichtext
+ * 也支援讀取沒有 data-aue-prop 但位於多字段項中的 select 字段（動態從 blockDef 讀取選項）
  * @param {HTMLElement} block - 包含多個子元素的 block 元素
  * @param {string} containerName - 多字段容器的名稱（如 'textItems1'）
  * @returns {Array<Object>} - 返回解析後的多字段數據數組
@@ -424,39 +466,71 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
   // 存储多字段数据的对象，key 是索引，value 是该项的字段对象
   const itemsMap = {};
 
-  // 遍历所有包含 data-aue-prop 属性的元素
-  const elementsWithAueProp = block.querySelectorAll('[data-aue-prop]');
+  // 動態獲取該容器的 select 字段及其有效值
+  const selectFieldsMap = extractSelectFieldsMap(containerName);
 
-  elementsWithAueProp.forEach((element) => {
-    const aueProp = element.getAttribute('data-aue-prop');
+  // 首先，找出所有多字段項的容器（通常是第一层的 div 子元素）
+  const multiFieldItems = block.querySelectorAll(`:scope > div`);
 
-    // 只处理与指定容器相关的 prop
-    if (aueProp && aueProp.startsWith(`${containerName}/`)) {
-      // 解析 prop 路径：textItems1/0/titleRichtext -> ['textItems1', '0', 'titleRichtext']
-      const parts = aueProp.split('/');
-      if (parts.length === 3) {
-        const [, itemIndex, fieldName] = parts;
-        const index = parseInt(itemIndex, 10);
+  multiFieldItems.forEach((itemDiv) => {
+    const auePropElements = itemDiv.querySelectorAll('[data-aue-prop]');
 
-        // 初始化该项（如果不存在）
-        if (!itemsMap[index]) {
-          itemsMap[index] = {};
+    // 如果這個 div 包含任何 data-aue-prop 元素，就認為它是一個多字段項
+    if (auePropElements.length > 0) {
+      const firstAueProp = auePropElements[0].getAttribute('data-aue-prop');
+      const match = firstAueProp.match(new RegExp(`${containerName}/(\\d+)/`));
+
+      if (match) {
+        const itemIndex = parseInt(match[1], 10);
+
+        // 初始化該項
+        if (!itemsMap[itemIndex]) {
+          itemsMap[itemIndex] = {};
         }
 
-        // 获取 HTML 和文本内容
-        const html = element.innerHTML.trim();
-        const text = element.textContent.trim();
+        // 讀取所有 data-aue-prop 元素
+        auePropElements.forEach((element) => {
+          const aueProp = element.getAttribute('data-aue-prop');
+          const propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/(\\w+)$`));
 
-        // 储存字段数据
-        itemsMap[index][fieldName] = {
-          html,
-          text,
-        };
+          if (propMatch) {
+            const [, , fieldName] = propMatch;
+            const html = element.innerHTML.trim();
+            const text = element.textContent.trim();
+
+            itemsMap[itemIndex][fieldName] = {
+              html,
+              text,
+            };
+          }
+        });
+
+        // 讀取沒有 data-aue-prop 的 select 字段
+        // 這些通常序列化為簡單的 <p> 標籤
+        const paragraphs = itemDiv.querySelectorAll(':scope > p');
+        paragraphs.forEach((p) => {
+          // 如果這個 <p> 沒有 data-aue-prop，檢查它是否是 select 字段值
+          if (!p.hasAttribute('data-aue-prop')) {
+            const pText = p.textContent.trim();
+
+            // 遍歷 select 字段映射表，檢查這個值是否屬於某個 select 字段
+            for (const [fieldName, validValues] of selectFieldsMap.entries()) {
+              // 如果值匹配且該字段還未被賦值，就存儲
+              if (validValues.has(pText) && !itemsMap[itemIndex][fieldName]) {
+                itemsMap[itemIndex][fieldName] = {
+                  html: p.outerHTML,
+                  text: pText,
+                };
+                break; // 找到匹配後就停止，避免重複賦值
+              }
+            }
+          }
+        });
       }
     }
   });
 
-  // 将对象转换为数组（保留顺序）
+  // 將對象轉換為數組（保留順序）
   const sortedIndices = Object.keys(itemsMap).map(Number).sort((a, b) => a - b);
   return sortedIndices.map(index => itemsMap[index]);
 };
