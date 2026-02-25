@@ -306,7 +306,10 @@ export default function decorate(block) {
       col1.classList.add('col-[1/13]', 'order-2');
       col2.classList.add('col-[1/13]', 'order-1');
     }
-    block.classList.add('grid', 'grid-cols-12', config.colorgroup);
+    if (config.colorgroup) {
+      block.classList.add(config.colorgroup);
+    }
+    block.classList.add('grid', 'grid-cols-12');
     block.append(col1, col2);
   } catch (error) {
     // eslint-disable-next-line no-console
