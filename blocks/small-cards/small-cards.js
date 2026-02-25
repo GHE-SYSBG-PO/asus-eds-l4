@@ -42,6 +42,29 @@ const alignmentConfig = {
   arrowBorderColorDisable: '',
 };
 
+const PRODUCT_DEFAULTS = {
+  asus: {
+    titleFontD: 'tt-md-32',
+    titleFontT: 'tt-md-28',
+    titleFontM: 'tt-md-24',
+  },
+  proart: {
+    titleFontD: 'tt-md-32',
+    titleFontT: 'tt-md-28',
+    titleFontM: 'tt-md-24',
+  },
+  rog: {
+    titleFontD: 'tg-bd-32',
+    titleFontT: 'tg-bd-28',
+    titleFontM: 'tg-bd-24',
+  },
+  tuf: {
+    titleFontD: 'dp-cb-32',
+    titleFontT: 'dp-cb-28',
+    titleFontM: 'dp-cb-24',
+  },
+};
+
 const DEFAULT_CONFIG = {
 
   //  Base Tab
@@ -234,8 +257,10 @@ function extractValue(div) {
  * @returns {Promise<Array>} An array of configuration objects.
  */
 async function fillSequentialConfig(block) {
-  const cfg = { ...DEFAULT_CONFIG };
-
+  const product = block.closest('.l4-pdp')?.dataset.product || 'asus';
+  const productDefaults = PRODUCT_DEFAULTS[product] || PRODUCT_DEFAULTS.asus;
+  const finalDefaultConfig = { ...DEFAULT_CONFIG, ...productDefaults };
+  const cfg = { ...finalDefaultConfig };
   const flatValues = [];
   const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
   const alignmentKeys = Object.keys(alignmentConfig);
@@ -261,13 +286,13 @@ async function fillSequentialConfig(block) {
 
   for (let i = 0; i < flatValues.length; i += chunkSize) {
     const chunk = flatValues.slice(i, i + chunkSize);
-    const chunkCfg = { ...DEFAULT_CONFIG };
+    const chunkCfg = { ...finalDefaultConfig };
 
     console.log("Extracted chunk:", chunk);
 
     keys.forEach((key, index) => {
       if (chunk[index] !== undefined) {
-        chunkCfg[key] = chunk[index] || DEFAULT_CONFIG[key];
+        chunkCfg[key] = chunk[index] || finalDefaultConfig[key];
       }
     });
     configArray.push(chunkCfg);
@@ -515,7 +540,7 @@ function getCardHTML(data) {
   const blockContent = `
           <div class="block-content">
             <div class="wd__content" style="text-align: ${alignmentAdvanced};">
-                <h3 class="${titleFont}">
+                <h3>
                   <span class="${titleFont}" style="color: ${titleFontColor ? `#${titleFontColor}` : 'var(--swiper-slide-title-color)'}">${title}</span>
                 </h3>
                 <div style="color: ${infoFontColor ? `#${infoFontColor}` : 'var(--swiper-slide-info-color)'};font-size:18px;">${info}</div>
