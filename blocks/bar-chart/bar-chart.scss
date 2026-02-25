@@ -242,7 +242,7 @@
 
     &__arrow-text {
       color: var(--arrow-text-color, inherit);
-      word-break: break-word;
+      word-break: break-all;
     }
 
     // Variant-Specific Styles
