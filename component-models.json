@@ -3049,11 +3049,23 @@
         "name": "configureButton",
         "collapsible": true,
         "condition": {
-          "===": [
+          "and": [
             {
-              "var": "ctaVisible"
+              "===": [
+                {
+                  "var": "ctaVisible"
+                },
+                "show"
+              ]
             },
-            "show"
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "button"
+              ]
+            }
           ]
         },
         "fields": [
@@ -3182,6 +3194,14 @@
                   "var": "ctaVisible"
                 },
                 "show"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "button"
               ]
             }
           ]
@@ -3333,6 +3353,14 @@
                   "var": "ctaVisible"
                 },
                 "show"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "button"
               ]
             }
           ]
@@ -3608,6 +3636,14 @@
                 },
                 "show"
               ]
+            },
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "button"
+              ]
             }
           ]
         },
@@ -3754,6 +3790,14 @@
                   "var": "ctaVisible"
                 },
                 "show"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "button"
               ]
             }
           ]
