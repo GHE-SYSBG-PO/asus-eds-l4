@@ -15,6 +15,12 @@ const PRODUCT_DEFAULTS = {
       rog: { D: 'tg-bd-32', T: 'tg-bd-28', M: 'tg-bd-24' },
       tuf: { D: 'dp-cb-32', T: 'dp-cb-28', M: 'dp-cb-24' },
     },
+    disclaimerFont: {
+      asus: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
+      proart: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
+      rog: { D: 'rc-rg-13', T: 'rc-rg-13', M: 'rc-rg-13' },
+      tuf: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
+    },
   },
   colors: {
     arrowColor: {
@@ -60,7 +66,7 @@ const DEFAULT_CONFIG = {
   itemBarWidth: 80,
   titleFont: '',
   titleFontColor: '',
-  disclaimerFont: 'ro-rg-14',
+  disclaimerFont: '',
   disclaimerFontColor: '',
   itemTextFont: 'tt-nr-16-sh',
   itemTextFontColor: '',
@@ -388,10 +394,11 @@ export default async function decorate(block) {
     // Build arrow block if needed
     const arrowHtml = buildArrowBlock(v, productLine, theme);
 
-    // Get title font with product+device-specific defaults
+    // Get fonts with product+device-specific defaults
     const defaultTitleFont = getProductDefault('fonts', 'titleFont', productLine, curDevice, 'tt-bd-28');
     const titleFont = getThemeAwareValue(v, 'titleFont', defaultTitleFont);
-    const disclaimerFont = v('disclaimerAdvanced.disclaimerFont') || v('disclaimerFont') || 'ro-rg-14';
+    const defaultDisclaimerFont = getProductDefault('fonts', 'disclaimerFont', productLine, curDevice, 'ro-rg-14');
+    const disclaimerFont = getThemeAwareValue(v, 'disclaimerFont', defaultDisclaimerFont);
 
     // Assemble complete HTML
     const html = `
