@@ -486,15 +486,7 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
 
   auePropElements.forEach((element) => {
     const aueProp = element.getAttribute('data-aue-prop');
-
-    // 嘗試兩種模式：
-    // 模式 1: containerName/index/fieldName
-    let propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/(\\w+)$`));
-
-    // 模式 2: 處理包含 L4TagMulti 的舊格式，如 textItems1/0/L4TagMulti-side
-    if (!propMatch) {
-      propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/L4TagMulti-(\\w+)$`));
-    }
+    const propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/(\\w+)$`));
 
     if (propMatch) {
       const [, itemIndex, fieldName] = propMatch;
@@ -508,63 +500,88 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
       const html = element.innerHTML.trim();
       const text = element.textContent.trim();
 
-      itemsMap[index][fieldName] = {
-        html,
-        text,
-      };
+      // 跳過占位符值（L4TagMulti-*）
+      if (!text.startsWith('L4TagMulti-')) {
+        itemsMap[index][fieldName] = {
+          html,
+          text,
+        };
 
-      // eslint-disable-next-line no-console
-      console.log(`  → Item ${index}.${fieldName}: "${text.substring(0, 50)}"`);
+        // eslint-disable-next-line no-console
+        console.log(`  → Item ${index}.${fieldName}: "${text.substring(0, 50)}"`);
+      }
     }
   });
 
-  // 策略 2：讀取沒有 data-aue-prop 的 select 字段
-  // 這些通常序列化為簡單的 <p> 標籤，位於各個 item 的 div 中
-  const multiFieldItems = block.querySelectorAll(`:scope > div`);
+  // 策略 2：讀取沒有 data-aue-prop 的字段（實際值在無屬性的 <p> 標籤中）
+  // 遍歷所有包含 textItems 相關 data-aue-prop 的多字段項
+  const containerItems = block.querySelectorAll(`[data-aue-prop^="${containerName}/"]`);
+
+  // 建立一個 map 記錄哪些 item index 已存在
+  const itemIndexSet = new Set(Object.keys(itemsMap).map(Number));
 
   // eslint-disable-next-line no-console
-  console.log(`[getBlockRepeatConfigsByDataAueProps] Scanning ${multiFieldItems.length} direct child divs for select fields`);
+  console.log(`[getBlockRepeatConfigsByDataAueProps] Found item indices:`, itemIndexSet);
 
-  multiFieldItems.forEach((itemDiv) => {
-    // 檢查這個 div 是否屬於某個多字段項（透過其內的 data-aue-prop）
-    const divAuePropElements = itemDiv.querySelectorAll('[data-aue-prop]');
+  containerItems.forEach((element) => {
+    const aueProp = element.getAttribute('data-aue-prop');
+    const indexMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/`));
 
-    if (divAuePropElements.length > 0) {
-      // 從第一個 data-aue-prop 中提取 item 索引
-      const firstAueProp = divAuePropElements[0].getAttribute('data-aue-prop');
-      const indexMatch = firstAueProp.match(new RegExp(`${containerName}/(\\d+)/`));
-
-      if (indexMatch) {
-        const itemIndex = parseInt(indexMatch[1], 10);
-
-        // 初始化該項
-        if (!itemsMap[itemIndex]) {
-          itemsMap[itemIndex] = {};
-        }
-
-        // 讀取沒有 data-aue-prop 的 select 字段 <p> 標籤
-        const paragraphs = itemDiv.querySelectorAll(':scope > p');
-        paragraphs.forEach((p) => {
-          if (!p.hasAttribute('data-aue-prop')) {
-            const pText = p.textContent.trim();
-
-            // 遍歷 select 字段映射表，檢查這個值是否屬於某個 select 字段
-            for (const [fieldName, validValues] of selectFieldsMap.entries()) {
-              // 如果值匹配且該字段還未被賦值，就存儲
-              if (validValues.has(pText) && !itemsMap[itemIndex][fieldName]) {
-                itemsMap[itemIndex][fieldName] = {
-                  html: p.outerHTML,
-                  text: pText,
-                };
-                // eslint-disable-next-line no-console
-                console.log(`  → Item ${itemIndex}.${fieldName} (from untagged <p>): "${pText}"`);
-                break; // 找到匹配後就停止，避免重複賦值
-              }
-            }
-          }
-        });
-      }
+    if (indexMatch) {
+      const itemIndex = parseInt(indexMatch[1], 10);
+      itemIndexSet.add(itemIndex);
     }
+  });
+
+  // 對每個 item index，找到其所在的容器並掃描無屬性的 <p>
+  itemIndexSet.forEach((itemIndex) => {
+    // 找到該 item 的最外層容器（通常是包含所有該 item 相關元素的祖先 div）
+    const itemElements = block.querySelectorAll(`[data-aue-prop^="${containerName}/${itemIndex}/"]`);
+
+    if (itemElements.length === 0) return;
+
+    // 找到共同的祖先容器
+    let commonContainer = itemElements[0].parentElement;
+    while (commonContainer && !commonContainer.classList.contains('line-info')) {
+      // 檢查所有 item 元素是否都在這個容器內
+      const allInside = [...itemElements].every(el => commonContainer.contains(el));
+      if (allInside) break;
+      commonContainer = commonContainer.parentElement;
+    }
+
+    if (!commonContainer) return;
+
+    // 在這個容器內找無 data-aue-prop 的 <p> 標籤
+    const orphanParagraphs = commonContainer.querySelectorAll(':scope > p');
+
+    // eslint-disable-next-line no-console
+    console.log(`  Item ${itemIndex}: Found ${orphanParagraphs.length} orphan <p> tags`);
+
+    orphanParagraphs.forEach((p) => {
+      if (!p.hasAttribute('data-aue-prop')) {
+        const pText = p.textContent.trim();
+
+        // 跳過分隔符
+        if (pText === 'hr' || pText === '' || pText === '<hr>') return;
+
+        // 遍歷 select 字段映射表，檢查這個值是否屬於某個 select 字段
+        for (const [fieldName, validValues] of selectFieldsMap.entries()) {
+          // 如果值匹配且該字段還未被賦值，就存儲
+          if (validValues.has(pText) && !itemsMap[itemIndex][fieldName]) {
+            if (!itemsMap[itemIndex]) {
+              itemsMap[itemIndex] = {};
+            }
+            itemsMap[itemIndex][fieldName] = {
+              html: p.outerHTML,
+              text: pText,
+            };
+            // eslint-disable-next-line no-console
+            console.log(`  → Item ${itemIndex}.${fieldName} (from orphan <p>): "${pText}"`);
+            break;
+          }
+        }
+      }
+    });
   });
 
   // eslint-disable-next-line no-console
