@@ -23,7 +23,9 @@
       "btn",
       "chart-advanced",
       "space",
-      "footnote"
+      "bar-chart",
+      "footnote",
+      "featureitem-block"
     ]
   },
   {
@@ -69,6 +71,7 @@
     "id": "container-col",
     "components": [
       "text-block",
+      "featureitem-block",
       "media-block",
       "btn"
     ]
@@ -76,6 +79,12 @@
   {
     "id": "feature-accordion-item",
     "components": []
+  },
+  {
+    "id": "featureitem-block",
+    "components": [
+      "featureitem-block-item"
+    ]
   },
   {
     "id": "footnote",
