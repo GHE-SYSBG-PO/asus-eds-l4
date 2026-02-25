@@ -105,11 +105,11 @@ export default async function decorate(block) {
           case '1':
             // Style 1: Text On Left & Right
             // side 值: "left" 或 "right"
-            itemClass += ` line-info-item--side-${side}`;
+            itemClass += ` side-${side}`;
             itemHtml = `
               <div class="${itemClass}" style="top: ${yValue}px;">
-                <div class="line-info-item-title">${titleRichtext}</div>
-                <div class="line-info-item-info">${infoRichtext}</div>
+                <div class="title">${titleRichtext}</div>
+                <div class="info">${infoRichtext}</div>
               </div>
             `;
             break;
@@ -117,11 +117,11 @@ export default async function decorate(block) {
           case '2':
             // Style 2: Text On Left / Right Sides
             // layoutStyle 值: "left" 或 "right"
-            itemClass += ` line-info-item--layout-${layoutStyle}`;
+            itemClass += ` layout-${layoutStyle}`;
             itemHtml = `
               <div class="${itemClass}" style="top: ${yValue}px;">
-                <div class="line-info-item-title">${titleRichtext}</div>
-                <div class="line-info-item-info">${infoRichtext}</div>
+                <div class="title">${titleRichtext}</div>
+                <div class="info">${infoRichtext}</div>
               </div>
             `;
             break;
@@ -131,11 +131,11 @@ export default async function decorate(block) {
           case '5':
             // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
             // alignment 值: "left" 或 "right"
-            itemClass += ` line-info-item--align-${alignment}`;
+            itemClass += ` align-${alignment}`;
             itemHtml = `
               <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px; width: ${textWidth}px;">
-                <div class="line-info-item-title">${titleRichtext}</div>
-                <div class="line-info-item-info">${infoRichtext}</div>
+                <div class="title">${titleRichtext}</div>
+                <div class="info">${infoRichtext}</div>
               </div>
             `;
             break;
@@ -143,8 +143,8 @@ export default async function decorate(block) {
           default:
             itemHtml = `
               <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px;">
-                <div class="line-info-item-title">${titleRichtext}</div>
-                <div class="line-info-item-info">${infoRichtext}</div>
+                <div class="title">${titleRichtext}</div>
+                <div class="info">${infoRichtext}</div>
               </div>
             `;
         }

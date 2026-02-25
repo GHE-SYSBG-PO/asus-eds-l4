@@ -469,8 +469,15 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
   // 動態獲取該容器的 select 字段及其有效值
   const selectFieldsMap = extractSelectFieldsMap(containerName);
 
+  // DEBUG：打印 select field map
+  // eslint-disable-next-line no-console
+  console.log(`[getBlockRepeatConfigsByDataAueProps] Container: ${containerName}, selectFieldsMap:`, selectFieldsMap);
+
   // 策略 1：優先讀取所有 data-aue-prop 元素並按索引分組
   const auePropElements = block.querySelectorAll('[data-aue-prop]');
+
+  // eslint-disable-next-line no-console
+  console.log(`[getBlockRepeatConfigsByDataAueProps] Found ${auePropElements.length} data-aue-prop elements`);
 
   auePropElements.forEach((element) => {
     const aueProp = element.getAttribute('data-aue-prop');
@@ -492,12 +499,18 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
         html,
         text,
       };
+
+      // eslint-disable-next-line no-console
+      console.log(`  → Item ${index}.${fieldName}: "${text.substring(0, 50)}"`);
     }
   });
 
   // 策略 2：讀取沒有 data-aue-prop 的 select 字段
   // 這些通常序列化為簡單的 <p> 標籤，位於各個 item 的 div 中
   const multiFieldItems = block.querySelectorAll(`:scope > div`);
+
+  // eslint-disable-next-line no-console
+  console.log(`[getBlockRepeatConfigsByDataAueProps] Scanning ${multiFieldItems.length} direct child divs for select fields`);
 
   multiFieldItems.forEach((itemDiv) => {
     // 檢查這個 div 是否屬於某個多字段項（透過其內的 data-aue-prop）
@@ -530,6 +543,8 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
                   html: p.outerHTML,
                   text: pText,
                 };
+                // eslint-disable-next-line no-console
+                console.log(`  → Item ${itemIndex}.${fieldName} (from untagged <p>): "${pText}"`);
                 break; // 找到匹配後就停止，避免重複賦值
               }
             }
@@ -538,6 +553,9 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
       }
     }
   });
+
+  // eslint-disable-next-line no-console
+  console.log(`[getBlockRepeatConfigsByDataAueProps] Final itemsMap:`, itemsMap);
 
   // 將對象轉換為數組（保留順序）
   const sortedIndices = Object.keys(itemsMap).map(Number).sort((a, b) => a - b);
