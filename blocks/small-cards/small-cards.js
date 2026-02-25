@@ -68,9 +68,11 @@ const DEFAULT_CONFIG = {
   bgColor: 'F5F5F5',
   title: '',
   info: '',
+  ctaVisible: 'hide',
+  ctaText: 'Learn More',
+  ctaLinkType: 'button',
 
-
-  styleLayoutCTA: '',
+  styleLayoutCTA: '1',
   linkTypeCTA: '',
   externalLinkCTA: '',
   innerPageLinkCTA: '',
@@ -121,9 +123,7 @@ const DEFAULT_CONFIG = {
 
 
 
-  // ctaVisible: 'hide',
-  // ctaText: 'Learn More',
-  // ctaLinkType: 'button',
+
 
   // Anchor (Down arrow on cards)
   isAnchorVisible: 'false',
@@ -161,10 +161,10 @@ const DEFAULT_CONFIG = {
   borderRadiusBottomLeft: 'rounded-tl-lg',
 
   // CTA Link
-  // ctaFontDT: 'ro-md-20-md',
-  // ctaFontM: 'ro-md-18',
-  // ctaFontColor: '024791',
-  // ctaHyperlink: '',
+  ctaFontDT: 'ro-md-20-md',
+  ctaFontM: 'ro-md-18',
+  ctaFontColor: '024791',
+  ctaHyperlink: '',
 
   // Button Style
   // gBtnLabel: 'Learn More',
@@ -498,9 +498,20 @@ function getCardHTML(data) {
 
   const titleFont = getValueForDevice('titleFont', data);
   let ctaHTML = '';
-  if (data.styleLayoutCTA) {
-    ctaHTML = `<div class="btn-placeholder" data-card-index="${data.cardIndex || 0}"></div>`;
+  if (ctaVisible === 'show') {
+    const fontClass = `${ctaFontDT} small_${ctaFontM}`;
+    const style = ctaFontColor ? `style="color: #${ctaFontColor}"` : '';
+
+    if (ctaLinkType === 'button' && data.styleLayoutCTA) {
+      ctaHTML = `<div class="btn-placeholder" data-card-index="${data.cardIndex || 0}"></div>`;
+    } else {
+      ctaHTML = `<a class="${fontClass} asus-icon-chevronright" 
+                  aria-label="${ctaText} (opens in new window)" 
+                  href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer" 
+                  ${style}><span>${ctaText}</span></a>`;
+    }
   }
+
   const blockContent = `
           <div class="block-content">
             <div class="wd__content" style="text-align: ${alignmentAdvanced};">

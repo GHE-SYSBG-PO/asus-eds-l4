@@ -2988,10 +2988,56 @@
         "valueType": "string"
       },
       {
+        "component": "select",
+        "label": "CTA Visibility Toggle",
+        "name": "ctaVisible",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "show"
+          },
+          {
+            "name": "Hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "ctaText",
+        "label": "CTA text",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "CTA link type",
+        "name": "ctaLinkType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Text Link",
+            "value": "text-link"
+          },
+          {
+            "name": "Button",
+            "value": "button"
+          }
+        ]
+      },
+      {
         "component": "container",
         "label": "Configure CTA Button Layout",
         "name": "configureButton",
         "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisible"
+            },
+            "show"
+          ]
+        },
         "fields": [
           {
             "component": "select",
@@ -3108,6 +3154,12 @@
               "var": "gBtnStyleCTA"
             },
             "customized"
+          ],
+          "and": [
+            {
+              "var": "ctaVisible"
+            },
+            "show"
           ]
         },
         "fields": [
@@ -3247,6 +3299,12 @@
               "5",
               "6"
             ]
+          ],
+          "and": [
+            {
+              "var": "ctaVisible"
+            },
+            "show"
           ]
         },
         "fields": [
@@ -3503,6 +3561,20 @@
         "label": "Customize Button Container",
         "name": "customizeButtonContainer",
         "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "gBtnStyleCTA"
+            },
+            "customized"
+          ],
+          "and": [
+            {
+              "var": "ctaVisible"
+            },
+            "show"
+          ]
+        },
         "fields": [
           {
             "component": "text",
@@ -3636,6 +3708,12 @@
               "4",
               "6"
             ]
+          ],
+          "and": [
+            {
+              "var": "ctaVisible"
+            },
+            "show"
           ]
         },
         "fields": [
@@ -3991,6 +4069,71 @@
                 "value": "rounded-bl-sm"
               }
             ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "CTA textLink style",
+        "name": "ctaAdvanced",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "text-link"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D/T)",
+            "name": "ctaFontDT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "ctaFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-rg-20"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color",
+            "name": "ctaFontColor",
+            "valueType": "string"
+          },
+          {
+            "component": "aem-content",
+            "label": "hyperlink (external)",
+            "name": "ctaHyperlink",
+            "multi": false,
+            "valueType": "string"
           }
         ]
       },

@@ -50,6 +50,22 @@
       ]
     },
     {
+      "component": "container",
+      "label": "CTA textLink style",
+      "name": "ctaAdvanced",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{"var" : "ctaLinkType"}, "text-link"] }
+        ]
+      },
+      "fields": [
+        {
+          "...": "./_cta.json#/fields"
+        }
+      ]
+    },
+    {
       "component": "select",
       "label": "Alignment",
       "name": "alignmentAdvanced",

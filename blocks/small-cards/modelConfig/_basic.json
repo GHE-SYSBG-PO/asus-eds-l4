@@ -261,10 +261,44 @@
       "valueType": "string"
     },
     {
+      "component": "select",
+      "label": "CTA Visibility Toggle",
+      "name": "ctaVisible",
+      "valueType": "string",
+      "options": [
+        { "name": "Show", "value": "show" },
+        { "name": "Hide", "value": "hide" }
+      ]
+    },
+    {
+      "component": "text",
+      "name": "ctaText",
+      "label": "CTA text",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "CTA link type",
+      "name": "ctaLinkType",
+      "valueType": "string",
+      "options": [
+        { "name": "Text Link", "value": "text-link" },
+        { "name": "Button", "value": "button" }
+      ]
+    },
+    {
       "component": "container",
       "label": "Configure CTA Button Layout",
       "name": "configureButton",
       "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "ctaVisible"
+          },
+          "show"
+        ]
+      },
       "fields": [
         {
           "component": "select",
@@ -381,6 +415,12 @@
             "var": "gBtnStyleCTA"
           },
           "customized"
+        ],
+        "and": [
+          {
+            "var": "ctaVisible"
+          },
+          "show"
         ]
       },
       "fields": [
@@ -520,6 +560,12 @@
             "5",
             "6"
           ]
+        ],
+        "and": [
+          {
+            "var": "ctaVisible"
+          },
+          "show"
         ]
       },
       "fields": [
@@ -776,6 +822,20 @@
       "label": "Customize Button Container",
       "name": "customizeButtonContainer",
       "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "gBtnStyleCTA"
+          },
+          "customized"
+        ],
+        "and": [
+          {
+            "var": "ctaVisible"
+          },
+          "show"
+        ]
+      },
       "fields": [
         {
           "component": "text",
@@ -909,6 +969,12 @@
             "4",
             "6"
           ]
+        ],
+        "and": [
+          {
+            "var": "ctaVisible"
+          },
+          "show"
         ]
       },
       "fields": [
