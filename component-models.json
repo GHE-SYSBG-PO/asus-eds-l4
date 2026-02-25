@@ -1910,21 +1910,21 @@
             "label": "top padding",
             "name": "paddingTop",
             "valueType": "string",
-            "placeholder": "px"
+            "placeholder": "%|px|vh|vw|em|rem"
           },
           {
             "component": "text",
             "label": "bottom padding",
             "name": "paddingBottom",
             "valueType": "string",
-            "placeholder": "px"
+            "placeholder": "%|px|vh|vw|em|rem"
           },
           {
             "component": "text",
             "label": "img width",
             "name": "imgWidth",
             "valueType": "string",
-            "placeholder": "px",
+            "placeholder": "%|px|vh|vw|em|rem",
             "condition": {
               "in": [
                 {
@@ -2024,7 +2024,7 @@
             "label": "Y value (top)(DT)",
             "name": "yValue",
             "valueType": "string",
-            "placeholder": "px",
+            "placeholder": "%|px|vh|vw|em|rem",
             "description": "Vertical Y axis positioning. Can be negative if content is too long.",
             "multi": false
           },
@@ -2039,7 +2039,7 @@
             "label": "title richtext",
             "name": "titleRichtext",
             "valueType": "string",
-            "default": "<p>Item Title</p>",
+            "placeholder": "<p>Item Title</p>",
             "multi": false
           },
           {
@@ -2053,7 +2053,7 @@
             "label": "info richtext",
             "name": "infoRichtext",
             "valueType": "string",
-            "default": "<p>Description text here...</p>",
+            "placeholder": "<p>Description text here...</p>",
             "multi": false
           }
         ]
@@ -2107,7 +2107,7 @@
             "label": "Y value (top)(DT)",
             "name": "yValue",
             "valueType": "string",
-            "placeholder": "px",
+            "placeholder": "%|px|vh|vw|em|rem",
             "description": "Vertical Y axis positioning. Can be negative if content is too long.",
             "multi": false
           },
@@ -2122,7 +2122,7 @@
             "label": "title richtext",
             "name": "titleRichtext",
             "valueType": "string",
-            "default": "<p>Item Title</p>",
+            "placeholder": "<p>Item Title</p>",
             "multi": false
           },
           {
@@ -2136,7 +2136,7 @@
             "label": "info richtext",
             "name": "infoRichtext",
             "valueType": "string",
-            "default": "<p>Description text here...</p>",
+            "placeholder": "<p>Description text here...</p>",
             "multi": false
           }
         ]
@@ -2190,7 +2190,7 @@
             "label": "text width (px)(DT)",
             "name": "textWidth",
             "valueType": "string",
-            "placeholder": "px",
+            "placeholder": "%|px|vh|vw|em|rem",
             "multi": false
           },
           {
@@ -2204,7 +2204,7 @@
             "label": "X value (left)(DT)",
             "name": "xValue",
             "valueType": "string",
-            "placeholder": "px",
+            "placeholder": "%|px|vh|vw|em|rem",
             "multi": false
           },
           {
@@ -2218,7 +2218,7 @@
             "label": "Y value (top)(DT)",
             "name": "yValue",
             "valueType": "string",
-            "placeholder": "px",
+            "placeholder": "%|px|vh|vw|em|rem",
             "description": "Vertical Y axis positioning. Can be negative if content is too long.",
             "multi": false
           },
@@ -2233,7 +2233,7 @@
             "label": "title richtext",
             "name": "titleRichtext",
             "valueType": "string",
-            "default": "<p>Item Title</p>",
+            "placeholder": "<p>Item Title</p>",
             "multi": false
           },
           {
@@ -2247,7 +2247,7 @@
             "label": "info richtext",
             "name": "infoRichtext",
             "valueType": "string",
-            "default": "<p>Description text here...</p>",
+            "placeholder": "<p>Description text here...</p>",
             "multi": false
           }
         ]
@@ -2344,7 +2344,7 @@
             "label": "title richtext",
             "name": "titleRichtext",
             "valueType": "string",
-            "default": "<p>Item Title</p>",
+            "placeholder": "<p>Item Title</p>",
             "multi": false
           },
           {
@@ -2358,7 +2358,7 @@
             "label": "info richtext",
             "name": "infoRichtext",
             "valueType": "string",
-            "default": "<p>Description text here...</p>",
+            "placeholder": "<p>Description text here...</p>",
             "multi": false
           }
         ]
@@ -2455,7 +2455,7 @@
             "label": "title richtext",
             "name": "titleRichtext",
             "valueType": "string",
-            "default": "<p>Item Title</p>",
+            "placeholder": "<p>Item Title</p>",
             "multi": false
           },
           {
@@ -2469,7 +2469,7 @@
             "label": "info richtext",
             "name": "infoRichtext",
             "valueType": "string",
-            "default": "<p>Description text here...</p>",
+            "placeholder": "<p>Description text here...</p>",
             "multi": false
           }
         ]

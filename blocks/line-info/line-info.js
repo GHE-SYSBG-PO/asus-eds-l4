@@ -1,5 +1,17 @@
 import { getBlockConfigs, getFieldValue, getBlockRepeatConfigs, getBlockRepeatConfigsByDataAueProps } from '../../scripts/utils.js';
 
+/**
+ * 確保值有正確的單位，如果沒有則加上預設單位
+ * @param {string} value - 要檢查的值
+ * @param {string} defaultUnit - 預設單位（預設為 'px'）
+ * @returns {string} - 帶有單位的值，如果值為空則返回空字符串
+ */
+const ensureUnit = (value, defaultUnit = 'px') => {
+  if (!value) return '';
+  const hasUnit = /(%|px|vh|vw|em|rem)$/.test(value);
+  return hasUnit ? value : `${value}${defaultUnit}`;
+};
+
 export default async function decorate(block) {
   try {
     // DEBUG: Check block structure FIRST
@@ -56,12 +68,16 @@ export default async function decorate(block) {
       const tabletSource = assetTablet ? `<source media="(min-width: 768px) and (max-width: 1024px)" srcset="${assetTablet}">` : '';
       const defaultImgSrc = assetDesktop || assetTablet || assetMobile || '';
 
+      // 處理 imgWidth 單位（如果沒有單位則加上 px）
+      const imgWidthValue = ensureUnit(imgWidth);
+      const imgWidthAttribute = imgWidthValue ? `style="width: ${imgWidthValue};"` : '';
+
       pictureHtml = `
         <div class="line-info-image">
           <picture>
             ${mobileSource}
             ${tabletSource}
-            <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy">
+            <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy" ${imgWidthAttribute}>
           </picture>
         </div>
       `;
@@ -70,6 +86,11 @@ export default async function decorate(block) {
     // 6. Construct Text Items HTML based on style
 
     let textItemsHtml = '';
+
+    // 處理 textWidthPercent 單位（如果沒有單位則加上 %）
+    const textWidthValue = ensureUnit(textWidthPercent, '%');
+    const textItemsStyle = textWidthValue ? `style="width: ${textWidthValue};"` : '';
+
     if (textItems.length > 0) {
       textItemsHtml = textItems.map((item, index) => {
         // eslint-disable-next-line no-console
@@ -155,14 +176,25 @@ export default async function decorate(block) {
 
     // 7. Construct Container Style
     let containerStyle = '';
-    if (paddingTop) containerStyle += `padding-top: ${paddingTop};`;
-    if (paddingBottom) containerStyle += `padding-bottom: ${paddingBottom};`;
+
+    // 處理 paddingTop 單位（如果沒有單位則加上 px）
+    const paddingTopValue = ensureUnit(paddingTop);
+    if (paddingTopValue) {
+      containerStyle += `padding-top: ${paddingTopValue};`;
+    }
+
+    // 處理 paddingBottom 單位（如果沒有單位則加上 px）
+    const paddingBottomValue = ensureUnit(paddingBottom);
+    if (paddingBottomValue) {
+      containerStyle += `padding-bottom: ${paddingBottomValue};`;
+    }
+
 
     // 8. Render with style class
     block.innerHTML = `
       <div class="line-info-container line-info--style${styleLayout}" style="${containerStyle}">
         ${pictureHtml}
-        <div class="line-info-items">
+        <div class="line-info-items" ${textItemsStyle}>
           ${textItemsHtml}
         </div>
       </div>
