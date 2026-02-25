@@ -479,9 +479,22 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
   // eslint-disable-next-line no-console
   console.log(`[getBlockRepeatConfigsByDataAueProps] Found ${auePropElements.length} data-aue-prop elements`);
 
+  // DEBUG：打印所有 data-aue-prop 值的模式
+  const auePropValues = [...auePropElements].map(el => el.getAttribute('data-aue-prop'));
+  // eslint-disable-next-line no-console
+  console.log(`[getBlockRepeatConfigsByDataAueProps] Sample data-aue-prop values:`, auePropValues.slice(0, 10));
+
   auePropElements.forEach((element) => {
     const aueProp = element.getAttribute('data-aue-prop');
-    const propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/(\\w+)$`));
+
+    // 嘗試兩種模式：
+    // 模式 1: containerName/index/fieldName
+    let propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/(\\w+)$`));
+
+    // 模式 2: 處理包含 L4TagMulti 的舊格式，如 textItems1/0/L4TagMulti-side
+    if (!propMatch) {
+      propMatch = aueProp.match(new RegExp(`${containerName}/(\\d+)/L4TagMulti-(\\w+)$`));
+    }
 
     if (propMatch) {
       const [, itemIndex, fieldName] = propMatch;
