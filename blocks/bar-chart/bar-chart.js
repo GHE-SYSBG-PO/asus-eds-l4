@@ -71,9 +71,15 @@ const getProductDefault = (fieldName, product, deviceOrTheme, fallback) => DEFAU
  * @param {*} defaultValue - Final fallback value
  * @returns {*} The resolved value
  */
-const getThemeAwareValue = (v, fieldName, defaultValue) => v(`${fieldName}Advanced.${fieldName}`)
-  || v(fieldName)
-  || defaultValue;
+const getThemeAwareValue = (v, fieldName, defaultValue) => {
+  const advanced = v(`${fieldName}Advanced.${fieldName}`);
+  const root = v(fieldName);
+
+  // Only use authored values if they're strings (not nested config objects)
+  return (typeof advanced === 'string' ? advanced : null)
+    || (typeof root === 'string' ? root : null)
+    || defaultValue;
+};
 
 /**
  * Prefix hex color values with #
