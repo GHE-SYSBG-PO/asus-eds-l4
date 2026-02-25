@@ -68,15 +68,43 @@
       "fields": [
         {
           "component": "text",
-          "label": "top padding",
-          "name": "paddingTop",
+          "label": "top padding(D)",
+          "name": "paddingTopDesktop",
           "valueType": "string",
           "placeholder": "%|px|vh|vw|em|rem"
         },
         {
           "component": "text",
-          "label": "bottom padding",
-          "name": "paddingBottom",
+          "label": "top padding(T)",
+          "name": "paddingTopTablet",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem"
+        },
+        {
+          "component": "text",
+          "label": "top padding(M)",
+          "name": "paddingTopMobile",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem"
+        },
+        {
+          "component": "text",
+          "label": "bottom padding(D)",
+          "name": "paddingBottomDesktop",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem"
+        },
+        {
+          "component": "text",
+          "label": "bottom padding(T)",
+          "name": "paddingBottomTablet",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem"
+        },
+        {
+          "component": "text",
+          "label": "bottom padding(M)",
+          "name": "paddingBottomMobile",
           "valueType": "string",
           "placeholder": "%|px|vh|vw|em|rem"
         },

@@ -48,9 +48,15 @@ export default async function decorate(block) {
     const assetTablet = v('assetTablet');
     const assetMobile = v('assetMobile');
 
-    // 3. Get Layout Styles
-    const paddingTop = v('paddingTop');
-    const paddingBottom = v('paddingBottom');
+    // 3. Get Layout Styles (RWD breakpoints)
+    // Padding values for different breakpoints
+    const paddingTopDesktop = v('paddingTopDesktop');
+    const paddingTopTablet = v('paddingTopTablet');
+    const paddingTopMobile = v('paddingTopMobile');
+    const paddingBottomDesktop = v('paddingBottomDesktop');
+    const paddingBottomTablet = v('paddingBottomTablet');
+    const paddingBottomMobile = v('paddingBottomMobile');
+
     const imgWidth = v('imgWidth');
     const textWidthPercent = v('textWidthPercent');
     const textMaxWidth = v('textMaxWidth');
@@ -198,24 +204,66 @@ export default async function decorate(block) {
       }).join('');
     }
 
-    // 7. Construct Container Style
+    // 7. Construct Container Style with RWD
     let containerStyle = '';
+    let mediaQueryStyles = '';
 
-    // 處理 paddingTop 單位（如果沒有單位則加上 px）
-    const paddingTopValue = ensureUnit(paddingTop);
-    if (paddingTopValue) {
-      containerStyle += `padding-top: ${paddingTopValue};`;
+    // Build RWD media query styles
+    const paddingTopDesktopValue = ensureUnit(paddingTopDesktop);
+    const paddingTopTabletValue = ensureUnit(paddingTopTablet);
+    const paddingTopMobileValue = ensureUnit(paddingTopMobile);
+    const paddingBottomDesktopValue = ensureUnit(paddingBottomDesktop);
+    const paddingBottomTabletValue = ensureUnit(paddingBottomTablet);
+    const paddingBottomMobileValue = ensureUnit(paddingBottomMobile);
+
+    // Desktop styles (default)
+    if (paddingTopDesktopValue) {
+      containerStyle += `padding-top: ${paddingTopDesktopValue};`;
+    }
+    if (paddingBottomDesktopValue) {
+      containerStyle += `padding-bottom: ${paddingBottomDesktopValue};`;
     }
 
-    // 處理 paddingBottom 單位（如果沒有單位則加上 px）
-    const paddingBottomValue = ensureUnit(paddingBottom);
-    if (paddingBottomValue) {
-      containerStyle += `padding-bottom: ${paddingBottomValue};`;
+    // Tablet media query
+    let tabletStyles = '';
+    if (paddingTopTabletValue) {
+      tabletStyles += `padding-top: ${paddingTopTabletValue};`;
+    }
+    if (paddingBottomTabletValue) {
+      tabletStyles += `padding-bottom: ${paddingBottomTabletValue};`;
+    }
+    if (tabletStyles) {
+      mediaQueryStyles += `
+        @media (min-width: 768px) and (max-width: 1024px) {
+          .line-info-container { ${tabletStyles} }
+        }
+      `;
     }
 
-    // 8. Render with style class
+    // Mobile media query
+    let mobileStyles = '';
+    if (paddingTopMobileValue) {
+      mobileStyles += `padding-top: ${paddingTopMobileValue};`;
+    }
+    if (paddingBottomMobileValue) {
+      mobileStyles += `padding-bottom: ${paddingBottomMobileValue};`;
+    }
+    if (mobileStyles) {
+      mediaQueryStyles += `
+        @media (max-width: 767px) {
+          .line-info-container { ${mobileStyles} }
+        }
+      `;
+    }
+
+    // Generate unique class ID for this block instance to avoid style conflicts
+    const blockId = `line-info-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    const blockStyleClass = blockId;
+
+    // 8. Render with style class and media queries
     block.innerHTML = `
-      <div class="line-info-container line-info--style${styleLayout}" style="${containerStyle}">
+      ${mediaQueryStyles ? `<style>${mediaQueryStyles}</style>` : ''}
+      <div class="line-info-container line-info--style${styleLayout} ${blockStyleClass}" style="${containerStyle}">
         ${pictureHtml}
         <div class="line-info-items" ${textItemsStyle}>
           ${textItemsHtml}
