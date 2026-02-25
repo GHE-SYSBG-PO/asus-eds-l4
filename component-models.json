@@ -3007,7 +3007,16 @@
         "component": "text",
         "name": "ctaText",
         "label": "CTA text",
-        "valueType": "string"
+        "valueType": "string",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisible"
+            },
+            "show"
+          ]
+        }
       },
       {
         "component": "select",
@@ -3023,7 +3032,16 @@
             "name": "Button",
             "value": "button"
           }
-        ]
+        ],
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisible"
+            },
+            "show"
+          ]
+        }
       },
       {
         "component": "container",

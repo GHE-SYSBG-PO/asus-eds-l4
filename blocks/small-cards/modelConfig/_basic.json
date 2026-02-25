@@ -274,7 +274,16 @@
       "component": "text",
       "name": "ctaText",
       "label": "CTA text",
-      "valueType": "string"
+      "valueType": "string",
+      "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "ctaVisible"
+          },
+          "show"
+        ]
+      }
     },
     {
       "component": "select",
@@ -284,7 +293,16 @@
       "options": [
         { "name": "Text Link", "value": "text-link" },
         { "name": "Button", "value": "button" }
-      ]
+      ],
+      "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "ctaVisible"
+          },
+          "show"
+        ]
+      }
     },
     {
       "component": "container",
