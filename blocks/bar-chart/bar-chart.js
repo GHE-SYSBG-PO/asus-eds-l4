@@ -30,7 +30,12 @@ const DEFAULT_CONFIG = {
     tuf: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
   },
   disclaimerFontColor: '',
-  itemTextFont: 'tt-nr-16-sh',
+  itemTextFont: {
+    asus: { D: 'tt-nr-16-sh', T: 'tt-nr-16-sh', M: 'tt-nr-16-sh' },
+    proart: { D: 'tt-nr-16-sh', T: 'tt-nr-16-sh', M: 'tt-nr-16-sh' },
+    rog: { D: 'tg-bd-16-sh', T: 'tg-bd-16-sh', M: 'tg-bd-16-sh' },
+    tuf: { D: 'dp-cb-16-sh', T: 'dp-cb-16-sh', M: 'dp-cb-16-sh' },
+  },
   itemTextFontColor: '',
   radiusTL: '',
   radiusTR: '',
@@ -189,10 +194,14 @@ const buildArrowBlock = (v, productLine, theme) => {
 /**
  * Build individual bar item HTML
  */
-const buildBarItem = (item, v, index, motionEnabled, calculatedBarWidth = null) => {
+const buildBarItem = (item, v, index, motionEnabled, productLine, calculatedBarWidth = null) => {
   const variant = v('style');
   const isStacked = [3, 4, 5, 6].includes(variant);
   const isLarge = [5, 6].includes(variant);
+
+  // Get item text font with product+device-specific defaults
+  const defaultItemTextFont = getProductDefault('itemTextFont', productLine, curDevice, 'tt-nr-16-sh');
+  const itemTextFont = getThemeAwareValue(v, 'itemTextFont', defaultItemTextFont);
 
   // Parse bar color (supports gradient)
   // Handle both richtext object and plain string
@@ -234,7 +243,7 @@ const buildBarItem = (item, v, index, motionEnabled, calculatedBarWidth = null) 
       // Variants 5, 6 - text on top of bar, bar text OUTSIDE to the right
       return `
         <div class="bar-chart__bar-item bar-chart__bar-item--stacked bar-chart__bar-item--large bar-chart__bar-item--external-text" data-index="${index}">
-          <div class="bar-chart__item-text ${v('itemTextFont')}" ${itemTextColor}>
+          <div class="bar-chart__item-text ${itemTextFont}" ${itemTextColor}>
             ${item.barRowItemText.text || ''}
           </div>
           <div class="bar-chart__bar-container">
@@ -251,7 +260,7 @@ const buildBarItem = (item, v, index, motionEnabled, calculatedBarWidth = null) 
     // Variants 3, 4 - text inside bar
     return `
       <div class="bar-chart__bar-item bar-chart__bar-item--stacked" data-index="${index}">
-        <div class="bar-chart__item-text ${v('itemTextFont')}" ${itemTextColor}>
+        <div class="bar-chart__item-text ${itemTextFont}" ${itemTextColor}>
           ${item.barRowItemText.text || ''}
         </div>
         <div class="bar-chart__bar-container">
@@ -271,7 +280,7 @@ const buildBarItem = (item, v, index, motionEnabled, calculatedBarWidth = null) 
 
   return `
     <div class="bar-chart__bar-item bar-chart__bar-item--side-by-side" data-index="${index}">
-      <div class="bar-chart__item-text ${v('itemTextFont')}"
+      <div class="bar-chart__item-text ${itemTextFont}"
            style="${curDevice !== 'M' ? `width:${v('itemTextWidth')}%` : ''}; ${itemTextColor}">
         ${item.barRowItemText.text || ''}
       </div>
@@ -380,9 +389,9 @@ export default async function decorate(block) {
       // Override barWidth for side-by-side variants with calculated width
       if (!isStacked) {
         const itemClone = { ...item };
-        return buildBarItem(itemClone, v, index, motionEnabled, barContainerWidth);
+        return buildBarItem(itemClone, v, index, motionEnabled, productLine, barContainerWidth);
       }
-      return buildBarItem(item, v, index, motionEnabled);
+      return buildBarItem(item, v, index, motionEnabled, productLine);
     }).join('');
 
     // Build arrow block if needed
