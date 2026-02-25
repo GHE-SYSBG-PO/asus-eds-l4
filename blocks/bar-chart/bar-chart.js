@@ -6,42 +6,63 @@ import {
   getThemeMode,
 } from '../../scripts/utils.js';
 
-// Product and device/theme-specific defaults
-const PRODUCT_DEFAULTS = {
-  fonts: {
-    titleFont: {
-      asus: { D: 'tt-md-32', T: 'tt-md-28', M: 'tt-md-24' },
-      proart: { D: 'tt-md-32', T: 'tt-md-28', M: 'tt-md-24' },
-      rog: { D: 'tg-bd-32', T: 'tg-bd-28', M: 'tg-bd-24' },
-      tuf: { D: 'dp-cb-32', T: 'dp-cb-28', M: 'dp-cb-24' },
-    },
-    disclaimerFont: {
-      asus: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
-      proart: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
-      rog: { D: 'rc-rg-13', T: 'rc-rg-13', M: 'rc-rg-13' },
-      tuf: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
-    },
+// DEFAULT CONFIGURATION
+const DEFAULT_CONFIG = {
+  style: '5',
+  titleRichtext: '',
+  disclaimerRichtext: '',
+  motion: 'off',
+  itemTextWidth: 30,
+  barWidth: 60,
+  arrowNumWidth: 10,
+  itemBarWidth: 80,
+  titleFont: {
+    asus: { D: 'tt-md-32', T: 'tt-md-28', M: 'tt-md-24' },
+    proart: { D: 'tt-md-32', T: 'tt-md-28', M: 'tt-md-24' },
+    rog: { D: 'tg-bd-32', T: 'tg-bd-28', M: 'tg-bd-24' },
+    tuf: { D: 'dp-cb-32', T: 'dp-cb-28', M: 'dp-cb-24' },
   },
-  colors: {
-    arrowColor: {
-      asus: { light: '181818', dark: 'F5F5F5' },
-      proart: { light: '181818', dark: 'F5F5F5' },
-      rog: { light: '181818', dark: 'F5F5F5' },
-      tuf: { light: '181818', dark: 'F5F5F5' },
-    },
+  titleFontColor: '',
+  disclaimerFont: {
+    asus: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
+    proart: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
+    rog: { D: 'rc-rg-13', T: 'rc-rg-13', M: 'rc-rg-13' },
+    tuf: { D: 'ro-rg-13', T: 'ro-rg-13', M: 'ro-rg-13' },
   },
+  disclaimerFontColor: '',
+  itemTextFont: 'tt-nr-16-sh',
+  itemTextFontColor: '',
+  radiusTL: '',
+  radiusTR: '',
+  radiusBR: '',
+  radiusBL: '',
+  arrowNumRichtext: '',
+  arrowTextRichtext: '',
+  arrowStyle: 'svg',
+  arrowColor: {
+    asus: { light: '181818', dark: 'F5F5F5' },
+    proart: { light: '181818', dark: 'F5F5F5' },
+    rog: { light: '181818', dark: 'F5F5F5' },
+    tuf: { light: '181818', dark: 'F5F5F5' },
+  },
+  arrowAsset: '',
+  arrowNumFontColor: '',
+  arrowTextFontDT: 'tt-nr-18-sh',
+  arrowTextFontM: 'tt-nr-16-sh',
+  arrowTextFontColor: '',
 };
 
+const curDevice = window.innerWidth >= 1280 ? 'D' : ((window.innerWidth >= 730 && window.innerWidth < 1280) ? 'T' : 'M');
+
 /**
- * Get product-specific default value for device-based properties
- * @param {string} category - Category (fonts/colors)
- * @param {string} fieldName - Field name (e.g., 'titleFont')
+ * Get product-specific default value for device/theme-based properties
+ * @param {string} fieldName - Field name (e.g., 'titleFont', 'arrowColor')
  * @param {string} product - Product line (asus/proart/rog/tuf)
  * @param {string} deviceOrTheme - Device (D/T/M) or theme (light/dark)
  * @param {*} fallback - Fallback value if not found
  * @returns {*} Product-specific default or fallback
  */
-const getProductDefault = (category, fieldName, product, deviceOrTheme, fallback) => PRODUCT_DEFAULTS[category]?.[fieldName]?.[product]?.[deviceOrTheme] || fallback;
+const getProductDefault = (fieldName, product, deviceOrTheme, fallback) => DEFAULT_CONFIG[fieldName]?.[product]?.[deviceOrTheme] || fallback;
 
 /**
  * Get value with theme-aware fallbacks
@@ -53,39 +74,6 @@ const getProductDefault = (category, fieldName, product, deviceOrTheme, fallback
 const getThemeAwareValue = (v, fieldName, defaultValue) => v(`${fieldName}Advanced.${fieldName}`)
   || v(fieldName)
   || defaultValue;
-
-// DEFAULT CONFIGURATION
-const DEFAULT_CONFIG = {
-  style: '5',
-  titleRichtext: '',
-  disclaimerRichtext: '',
-  motion: 'off',
-  itemTextWidth: 30,
-  barWidth: 60,
-  arrowNumWidth: 10,
-  itemBarWidth: 80,
-  titleFont: '',
-  titleFontColor: '',
-  disclaimerFont: '',
-  disclaimerFontColor: '',
-  itemTextFont: 'tt-nr-16-sh',
-  itemTextFontColor: '',
-  radiusTL: '',
-  radiusTR: '',
-  radiusBR: '',
-  radiusBL: '',
-  arrowNumRichtext: '',
-  arrowTextRichtext: '',
-  arrowStyle: 'svg',
-  arrowColor: '',
-  arrowAsset: '',
-  arrowNumFontColor: '',
-  arrowTextFontDT: 'tt-nr-18-sh',
-  arrowTextFontM: 'tt-nr-16-sh',
-  arrowTextFontColor: '',
-};
-
-const curDevice = window.innerWidth >= 1280 ? 'D' : ((window.innerWidth >= 730 && window.innerWidth < 1280) ? 'T' : 'M');
 
 /**
  * Prefix hex color values with #
@@ -165,7 +153,7 @@ const buildArrowBlock = (v, productLine, theme) => {
   let arrowIcon = '';
   if (v('arrowStyle') === 'svg') {
     // Get arrow color with product+theme-specific defaults
-    const defaultArrowColor = getProductDefault('colors', 'arrowColor', productLine, theme, '');
+    const defaultArrowColor = getProductDefault('arrowColor', productLine, theme, '');
     const arrowColor = getThemeAwareValue(v, 'arrowColor', defaultArrowColor);
 
     const colorStr = typeof arrowColor === 'string' ? arrowColor : '';
@@ -395,9 +383,9 @@ export default async function decorate(block) {
     const arrowHtml = buildArrowBlock(v, productLine, theme);
 
     // Get fonts with product+device-specific defaults
-    const defaultTitleFont = getProductDefault('fonts', 'titleFont', productLine, curDevice, 'tt-bd-28');
+    const defaultTitleFont = getProductDefault('titleFont', productLine, curDevice, 'tt-bd-28');
     const titleFont = getThemeAwareValue(v, 'titleFont', defaultTitleFont);
-    const defaultDisclaimerFont = getProductDefault('fonts', 'disclaimerFont', productLine, curDevice, 'ro-rg-14');
+    const defaultDisclaimerFont = getProductDefault('disclaimerFont', productLine, curDevice, 'ro-rg-14');
     const disclaimerFont = getThemeAwareValue(v, 'disclaimerFont', defaultDisclaimerFont);
 
     // Assemble complete HTML
