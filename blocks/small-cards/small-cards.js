@@ -165,9 +165,9 @@ const DEFAULT_CONFIG = {
   // Advanced Tab
 
   // Cards Title
-  titleFontD: 'tt-bd-32',
-  titleFontT: 'tt-bd-28',
-  titleFontM: 'tt-bd-24',
+  titleFontD: '',
+  titleFontT: '',
+  titleFontM: '',
   titleFontColor: '',
 
   // Cards Info
@@ -189,24 +189,6 @@ const DEFAULT_CONFIG = {
   ctaFontColor: '',
   ctaHyperlink: '',
 
-  // Button Style
-  // gBtnLabel: 'Learn More',
-  // gBtnFontDesktop: 'ro-md-16',
-  // gBtnFontM: 'ro-md-16',
-  // gBtnFontColorDefault: 'FFFFFF',
-  // gBtnFontColorHover: 'FFFFFF',
-  // gBtnFontColorActive: 'FFFFFF',
-  // gBtnContainerBgColorDefault: '4379B1',
-  // gBtnContainerBgColorHover: '0b5da799',
-  // gBtnContainerBgColorActive: '0b5da799',
-  // gBtnContainerRadiusTL: '32',
-  // gBtnContainerRadiusTR: '32',
-  // gBtnContainerRadiusBR: '32',
-  // gBtnContainerRadiusBL: '32',
-  // gBtnBorderWidth: '0',
-  // gBtnBorderColor: 'transparent',
-
-
   alignmentAdvanced: 'left',
 
   // Anchor (Down arrow on cards)
@@ -216,7 +198,6 @@ const DEFAULT_CONFIG = {
   anchorBorderColorDefault: '4379B1',
   anchorBorderColorHover: '0b5da799',
   anchorBorderColorPress: '0b5da799',
-
 };
 
 /**
