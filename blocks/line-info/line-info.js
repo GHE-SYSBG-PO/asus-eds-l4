@@ -1,4 +1,6 @@
-import { getBlockConfigs, getFieldValue, getBlockRepeatConfigs, getBlockRepeatConfigsByDataAueProps } from '../../scripts/utils.js';
+import {
+  getBlockConfigs, getFieldValue, getBlockRepeatConfigs, getBlockRepeatConfigsByDataAueProps,
+} from '../../scripts/utils.js';
 
 /**
  * 確保值有正確的單位，如果沒有則加上預設單位
@@ -21,82 +23,57 @@ const ensureUnit = (value, defaultUnit = 'px') => {
 };
 
 /**
- * 生成 RWD 媒體查詢樣式
+ * 生成 RWD 媒體查詢樣式（可擴充）
  * @param {string} blockId - 元素的唯一 class ID
- * @param {Object} paddings - Padding 配置物件
- * @param {string} paddings.paddingTopDesktop - 桌機上邊距
- * @param {string} paddings.paddingTopTablet - 平板上邊距
- * @param {string} paddings.paddingTopMobile - 手機上邊距
- * @param {string} paddings.paddingBottomDesktop - 桌機下邊距
- * @param {string} paddings.paddingBottomTablet - 平板下邊距
- * @param {string} paddings.paddingBottomMobile - 手機下邊距
+ * @param {Object} properties - 屬性配置物件，可包含任意 CSS 屬性
+ * 例如: { padding: { Desktop: '20px', Tablet: '15px', Mobile: '10px' } }
+ * 或    { margin: { Desktop: '10px', Mobile: '5px' } } (可省略 Tablet)
  * @returns {string} 媒體查詢樣式字符串
  */
-const generateRwdMediaQueries = (blockId, {
-  paddingTopDesktop,
-  paddingTopTablet,
-  paddingTopMobile,
-  paddingBottomDesktop,
-  paddingBottomTablet,
-  paddingBottomMobile
-}) => {
+const generateRwdMediaQueries = (blockId, properties) => {
   let mediaQueryStyles = '';
 
-  // Process all values through ensureUnit
-  const paddingTopDesktopValue = ensureUnit(paddingTopDesktop);
-  const paddingTopTabletValue = ensureUnit(paddingTopTablet);
-  const paddingTopMobileValue = ensureUnit(paddingTopMobile);
-  const paddingBottomDesktopValue = ensureUnit(paddingBottomDesktop);
-  const paddingBottomTabletValue = ensureUnit(paddingBottomTablet);
-  const paddingBottomMobileValue = ensureUnit(paddingBottomMobile);
+  // 定義媒體查詢斷點
+  const breakpoints = {
+    Desktop: { condition: '(min-width: 1280px)', priority: 3 },
+    Tablet: { condition: '(min-width: 731px) and (max-width: 1279px)', priority: 2 },
+    Mobile: { condition: '(max-width: 730px)', priority: 1 },
+  };
 
-  // Desktop styles (1280px and above)
-  let desktopStyles = '';
-  if (paddingTopDesktopValue) {
-    desktopStyles += `padding-top: ${paddingTopDesktopValue};`;
-  }
-  if (paddingBottomDesktopValue) {
-    desktopStyles += `padding-bottom: ${paddingBottomDesktopValue};`;
-  }
-  if (desktopStyles) {
-    mediaQueryStyles += `
-        @media (min-width: 1280px) {
-          .${blockId} { ${desktopStyles} }
+  // 收集各斷點的樣式
+  const stylesByBreakpoint = {
+    Desktop: '',
+    Tablet: '',
+    Mobile: '',
+  };
+
+  // 遍歷所有屬性
+  Object.entries(properties).forEach(([propName, variants]) => {
+    if (typeof variants !== 'object' || variants === null) return;
+
+    // 遍歷每個斷點的值
+    Object.entries(variants).forEach(([breakpoint, value]) => {
+      if (!breakpoints[breakpoint]) return; // 略過無效的斷點
+
+      const processedValue = ensureUnit(value);
+      if (processedValue) {
+        stylesByBreakpoint[breakpoint] += `${propName}: ${processedValue};`;
+      }
+    });
+  });
+
+  // 按優先級生成媒體查詢（Desktop > Tablet > Mobile）
+  Object.entries(breakpoints)
+    .sort((a, b) => b[1].priority - a[1].priority)
+    .forEach(([breakpoint, { condition }]) => {
+      if (stylesByBreakpoint[breakpoint]) {
+        mediaQueryStyles += `
+        @media ${condition} {
+          .${blockId} { ${stylesByBreakpoint[breakpoint]} }
         }
       `;
-  }
-
-  // Tablet media query (731px - 1279px)
-  let tabletStyles = '';
-  if (paddingTopTabletValue) {
-    tabletStyles += `padding-top: ${paddingTopTabletValue};`;
-  }
-  if (paddingBottomTabletValue) {
-    tabletStyles += `padding-bottom: ${paddingBottomTabletValue};`;
-  }
-  if (tabletStyles) {
-    mediaQueryStyles += `
-        @media (min-width: 731px) and (max-width: 1279px) {
-          .${blockId} { ${tabletStyles} }
-        }
-      `;
-  }
-
-  // Mobile media query (730px and below)
-  let mobileStyles = '';
-  if (paddingTopMobileValue) {
-    mobileStyles += `padding-top: ${paddingTopMobileValue};`;
-  }
-  if (paddingBottomMobileValue) {
-    mobileStyles += `padding-bottom: ${paddingBottomMobileValue};`;
-  }
-  if (mobileStyles) {
-    mediaQueryStyles += `
-        @media (max-width: 730px) {
-          .${blockId} { ${mobileStyles} }
-        }
-      `;
-  }
+      }
+    });
 
   return mediaQueryStyles;
 };
@@ -111,11 +88,11 @@ export default async function decorate(block) {
     // eslint-disable-next-line no-console
     console.log('Block children count:', block.children.length);
     // eslint-disable-next-line no-console
-    const childrenWithL4Tag = [...block.children].filter(child => child.outerHTML.includes('L4TagMulti-'));
+    const childrenWithL4Tag = [...block.children].filter((child) => child.outerHTML.includes('L4TagMulti-'));
     console.log('Children with L4TagMulti-:', childrenWithL4Tag.length);
     if (childrenWithL4Tag.length > 0) {
       // eslint-disable-next-line no-console
-      console.log('L4TagMulti- children HTML:', childrenWithL4Tag.map(child => child.outerHTML));
+      console.log('L4TagMulti- children HTML:', childrenWithL4Tag.map((child) => child.outerHTML));
     }
 
     const config = await getBlockConfigs(block, {}, 'line-info');
@@ -182,9 +159,12 @@ export default async function decorate(block) {
       `;
     }
 
-    // 6. Construct Text Items HTML based on style
+    // Construct Text Items HTML based on style
 
     let textItemsHtml = '';
+
+    // Generate unique class ID for this block instance to avoid style conflicts
+    const blockId = `line-info-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
     // 構建 line-info-items 的 style：包含 width 和 max-width
     // 處理 textWidthPercent 單位（如果沒有單位則加上 %）
@@ -194,7 +174,7 @@ export default async function decorate(block) {
     const textMaxWidthValue = ensureUnit(textMaxWidth);
 
     // 組合 width 和 max-width
-    let styleProps = [];
+    const styleProps = [];
     if (textWidthValue) {
       styleProps.push(`width: ${textWidthValue}`);
     }
@@ -227,51 +207,76 @@ export default async function decorate(block) {
           infoRichtext: infoRichtext.substring(0, 50),
           alignment,
           xValue,
-          textWidth
+          textWidth,
         });
 
         // Build style-specific HTML
         let itemHtml = '';
         let itemClass = 'line-info-item';
+        // Generate unique ID for this item to apply RWD styles
+        const itemId = `line-info-item-${blockId}-${index}`;
 
         switch (styleLayout) {
           case 1:
-            // Style 1: Text On Left & Right
-            // side 值: "left" 或 "right"
-            itemClass += ` side-${side}`;
-            itemHtml = `
-              <div class="${itemClass}" style="top: ${yValue}px;">
-                <div class="title">${titleRichtext}</div>
-                <div class="info">${infoRichtext}</div>
-              </div>
-            `;
-            break;
+          case 2: {
+            // Style 1: Text On Left & Right (yValue is DT - Desktop/Tablet only)
+            // Style 2: Text On Left / Right Sides (yValue is DT)
+            // For Mobile, yValue is not applicable, so we use default 0
+            itemClass += styleLayout === 1 ? ` side-${side}` : ` layout-${layoutStyle}`;
 
-          case 2:
-            // Style 2: Text On Left / Right Sides
-            // layoutStyle 值: "left" 或 "right"
-            itemClass += ` layout-${layoutStyle}`;
+            // Build RWD styles for yValue
+            let itemMediaQueries = '';
+            const yValueProcessed = ensureUnit(yValue);
+            if (yValueProcessed) {
+              itemMediaQueries = generateRwdMediaQueries(itemId, {
+                top: {
+                  Desktop: yValue,
+                  Tablet: yValue,
+                  // Mobile: '0' (not specified, use default)
+                },
+              });
+            }
+
             itemHtml = `
-              <div class="${itemClass}" style="top: ${yValue}px;">
+              ${itemMediaQueries ? `<style>${itemMediaQueries}</style>` : ''}
+              <div class="${itemClass} ${itemId}" style="${itemMediaQueries ? '' : `top: ${yValueProcessed || '0'}px;`}">
                 <div class="title">${titleRichtext}</div>
                 <div class="info">${infoRichtext}</div>
               </div>
             `;
             break;
+          }
 
           case 3:
           case 4:
-          case 5:
+          case 5: {
             // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
-            // alignment 值: "left" 或 "right"
+            // xValue, yValue, textWidth are DT (Desktop/Tablet only)
             itemClass += ` align-${alignment}`;
+
+            // Build RWD styles for positioning
+            let itemMediaQueries2 = '';
+            const xValueProcessed = ensureUnit(xValue);
+            const yValueProcessed2 = ensureUnit(yValue);
+            const textWidthProcessed = ensureUnit(textWidth);
+
+            if (xValueProcessed || yValueProcessed2 || textWidthProcessed) {
+              itemMediaQueries2 = generateRwdMediaQueries(itemId, {
+                left: { Desktop: xValue, Tablet: xValue },
+                top: { Desktop: yValue, Tablet: yValue },
+                width: { Desktop: textWidth, Tablet: textWidth },
+              });
+            }
+
             itemHtml = `
-              <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px; width: ${textWidth}px;">
+              ${itemMediaQueries2 ? `<style>${itemMediaQueries2}</style>` : ''}
+              <div class="${itemClass} ${itemId}" style="${itemMediaQueries2 ? '' : `left: ${xValueProcessed || '0'}px; top: ${yValueProcessed2 || '0'}px; width: ${textWidthProcessed || 'auto'};`}">
                 <div class="title">${titleRichtext}</div>
                 <div class="info">${infoRichtext}</div>
               </div>
             `;
             break;
+          }
 
           default:
             itemHtml = `
@@ -286,21 +291,22 @@ export default async function decorate(block) {
       }).join('');
     }
 
-    // 7. Generate RWD Media Queries
-    // Generate unique class ID for this block instance to avoid style conflicts
-    const blockId = `line-info-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-
+    // 7. Generate RWD Media Queries for container padding
     const mediaQueryStyles = generateRwdMediaQueries(blockId, {
-      paddingTopDesktop,
-      paddingTopTablet,
-      paddingTopMobile,
-      paddingBottomDesktop,
-      paddingBottomTablet,
-      paddingBottomMobile
+      'padding-top': {
+        Desktop: paddingTopDesktop,
+        Tablet: paddingTopTablet,
+        Mobile: paddingTopMobile,
+      },
+      'padding-bottom': {
+        Desktop: paddingBottomDesktop,
+        Tablet: paddingBottomTablet,
+        Mobile: paddingBottomMobile,
+      },
     });
 
     // Inline style should only contain non-padding properties
-    let containerStyle = '';
+    const containerStyle = '';
 
     // 8. Render with style class and media queries
     // Padding is controlled via media queries, not inline-style

@@ -38,6 +38,7 @@
   "devDependencies": {
     "@adobe/aem-cli": "^16.16.21",
     "@babel/eslint-parser": "7.28.6",
+    "baseline-browser-mapping": "^2.10.0",
     "concurrently": "^9.2.1",
     "eslint": "8.57.1",
     "eslint-config-airbnb-base": "15.0.0",
