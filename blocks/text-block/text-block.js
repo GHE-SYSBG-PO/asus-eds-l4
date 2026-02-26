@@ -17,6 +17,15 @@ const FONTS = {
   categoryFontM: {
     asus: 'tt-md-16-sm', proart: 'tt-md-16-sm', rog: 'tt-nr-16-sh-sm', tuf: 'dp-cb-16-sm',
   },
+  titleFontD: {
+    asus: 'tt-md-40-lg', proart: 'tt-md-40-lg', rog: 'tg-bd-40-lg', tuf: 'dp-cb-40-lg',
+  },
+  titleFontT: {
+    asus: 'tt-md-40-md', proart: 'tt-md-40-md', rog: 'tg-bd-40-md', tuf: 'dp-cb-40-md',
+  },
+  titleFontM: {
+    asus: 'tt-md-40', proart: 'tt-md-40', rog: 'tg-bd-40', tuf: 'dp-cb-40',
+  },
 };
 
 const PRODUCT_LINE = getProductLine();
@@ -43,7 +52,9 @@ const DEFAULT_CONFIG = {
   categoryFontT: FONTS.categoryFontT[PRODUCT_LINE],
   categoryFontM: FONTS.categoryFontM[PRODUCT_LINE],
   categoryFontColor: '',
-  titleFont: 'tt-md-40',
+  titleFontD: FONTS.titleFontD[PRODUCT_LINE],
+  titleFontT: FONTS.titleFontT[PRODUCT_LINE],
+  titleFontM: FONTS.titleFontM[PRODUCT_LINE],
   titleFontColor: '',
   bodyFontDT: 'ro-rg-20-md',
   bodyFontM: 'ro-rg-20',
@@ -136,7 +147,7 @@ export default async function decorate(block) {
     `;
 
     const title = `
-      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFont')}' ${titleFontColor}>
+      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFontD')}' ${v('titleFontT')}' ${v('titleFontM')}' ${titleFontColor}>
         ${v('titleRichtext', 'html')}
       </div>
     `;
