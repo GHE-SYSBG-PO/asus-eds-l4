@@ -553,7 +553,7 @@ function getCardHTML(data) {
       break;
     case 'img_txt_separate_bottom':
       flexDirection = 'column-reverse';
-      contentStyle = 'background: transparent;';
+      // contentStyle = 'margin-top: 10px;';
       cardBlockType = 'img_txt_separate_bottom';
       break;
     case 'text_only':
