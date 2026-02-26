@@ -36,12 +36,6 @@
       ]
     },
     {
-      "component": "text",
-      "label": "Section Container BG Color",
-      "name": "sectionBgColor",
-      "valueType": "string"
-    },
-    {
       "component": "select",
       "label": "Arrow Style",
       "name": "arrowStyle",

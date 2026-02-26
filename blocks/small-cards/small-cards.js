@@ -16,7 +16,6 @@ const alignmentConfig = {
   desktopAlignment: 'center',
   tabletAlignment: 'center',
   mobileAlignment: 'center',
-  sectionBgColor: 'FFF',
 
   // Swiper Arrow (Previous / Next)
   arrowStyle: '',
@@ -669,7 +668,6 @@ async function renderCard(block) {
   console.log('Extracted chunk, Final Card Data:', data);
 
   const {
-    sectionBgColor,
     arrowStyle,
     arrowContainerBgColorDefault,
     arrowContainerBgColorHover,
@@ -735,7 +733,7 @@ async function renderCard(block) {
                   <div class="wdblockimg">
                       <div class="wdblockimg__container block__scroll">
                         <div class="swiper">
-                            <div class="swiper-wrapper" style="background-color: ${sectionBgColor ? `#${sectionBgColor}` : 'transparent'};">
+                            <div class="swiper-wrapper">
                               ${cardHTML}
                             </div>
                         </div>
