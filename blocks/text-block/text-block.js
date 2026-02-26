@@ -147,7 +147,7 @@ export default async function decorate(block) {
     `;
 
     const title = `
-      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFontD')}' ${v('titleFontT')}' ${v('titleFontM')}' ${titleFontColor}>
+      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFontD')} ${v('titleFontT')} ${v('titleFontM')}' ${titleFontColor}>
         ${v('titleRichtext', 'html')}
       </div>
     `;
