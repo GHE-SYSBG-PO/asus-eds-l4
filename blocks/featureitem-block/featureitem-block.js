@@ -87,7 +87,8 @@ export default async function decorate(block) {
     const wrapper = block.querySelectorAll(':scope > div');
     Array.from(wrapper).forEach(async (wrap) => {
       try {
-        if (wrapper.length < 2) return;
+        console.log('wrap', wrap.children);
+        if (wrap.children.length < 2) return;
         const itemConfig = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
         console.log('itemConfig', itemConfig);
       } catch (error) {

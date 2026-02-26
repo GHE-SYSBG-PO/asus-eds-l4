@@ -15,7 +15,7 @@ const FONTS = {
     asus: 'tt-nr-24-md', proart: 'tt-md-20-md', rog: 'tt-bd-18-sh-md', tuf: 'dp-cb-20-md',
   },
   categoryFontM: {
-    asus: 'tt-cd-52', proart: 'tt-md-16-sm', rog: 'tt-nr-16-sh-sm', tuf: 'dp-cb-16-sm',
+    asus: 'tt-cd-52-sm', proart: 'tt-md-16-sm', rog: 'tt-nr-16-sh-sm', tuf: 'dp-cb-16-sm',
   },
   titleFontD: {
     asus: 'tt-md-40-lg', proart: 'tt-md-40-lg', rog: 'tg-bd-40-lg', tuf: 'dp-cb-40-lg',
@@ -24,7 +24,7 @@ const FONTS = {
     asus: 'tt-md-40-md', proart: 'tt-md-40-md', rog: 'tg-bd-40-md', tuf: 'dp-cb-40-md',
   },
   titleFontM: {
-    asus: 'tt-md-40', proart: 'tt-md-40', rog: 'tg-bd-40', tuf: 'dp-cb-40',
+    asus: 'tt-md-40-sm', proart: 'tt-md-40-sm', rog: 'tg-bd-40-sm', tuf: 'dp-cb-40-sm',
   },
 };
 

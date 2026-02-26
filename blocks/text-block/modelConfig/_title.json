@@ -6,6 +6,7 @@
       "name": "titleFontD",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "tt-md-32", "value": "tt-md-32-lg" },
         { "name": "tt-md-36", "value": "tt-md-36-lg" },
         { "name": "tt-md-40", "value": "tt-md-40-lg" },
@@ -24,6 +25,7 @@
       "name": "titleFontT",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "tt-md-32", "value": "tt-md-32-md" },
         { "name": "tt-md-36", "value": "tt-md-36-md" },
         { "name": "tt-md-40", "value": "tt-md-40-md" },
@@ -42,16 +44,17 @@
       "name": "titleFontM",
       "valueType": "string",
       "options": [
-        { "name": "tt-md-32", "value": "tt-md-32" },
-        { "name": "tt-md-36", "value": "tt-md-36" },
-        { "name": "tt-md-40", "value": "tt-md-40" },
-        { "name": "tt-md-44", "value": "tt-md-44" },
-        { "name": "tt-md-48", "value": "tt-md-48" },
-        { "name": "tt-bd-32", "value": "tt-bd-16" },
-        { "name": "tt-bd-36", "value": "tt-bd-36" },
-        { "name": "tt-bd-40", "value": "tt-bd-40" },
-        { "name": "tt-bd-44", "value": "tt-bd-44" },
-        { "name": "tt-bd-48", "value": "tt-bd-48" }
+        { "name": "default", "value": "" },
+        { "name": "tt-md-32", "value": "tt-md-32-sm" },
+        { "name": "tt-md-36", "value": "tt-md-36-sm" },
+        { "name": "tt-md-40", "value": "tt-md-40-sm" },
+        { "name": "tt-md-44", "value": "tt-md-44-sm" },
+        { "name": "tt-md-48", "value": "tt-md-48-sm" },
+        { "name": "tt-bd-32", "value": "tt-bd-16-sm" },
+        { "name": "tt-bd-36", "value": "tt-bd-36-sm" },
+        { "name": "tt-bd-40", "value": "tt-bd-40-sm" },
+        { "name": "tt-bd-44", "value": "tt-bd-44-sm" },
+        { "name": "tt-bd-48", "value": "tt-bd-48-sm" }
       ]
     },
     {
