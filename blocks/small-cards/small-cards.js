@@ -543,7 +543,6 @@ function getCardHTML(data) {
 
   let flexDirection = '';
   let cardBlockType = 'img_txt_integrated_top';
-  let contentStyle = '';
   let showMedia = true;
 
   switch (cardType) {
@@ -553,7 +552,6 @@ function getCardHTML(data) {
       break;
     case 'img_txt_separate_bottom':
       flexDirection = 'column-reverse';
-      // contentStyle = 'margin-top: 10px;';
       cardBlockType = 'img_txt_separate_bottom';
       break;
     case 'text_only':
@@ -561,12 +559,10 @@ function getCardHTML(data) {
       cardBlockType = 'text_only';
       break;
     case 'txt_img_attached_top':
-      // contentStyle = 'margin-bottom: 10px;';
       cardBlockType = 'txt_img_attached_top';
       break;
     case 'txt_img_attached_bottom':
       flexDirection = 'column-reverse';
-      contentStyle = 'margin-top: 10px;';
       cardBlockType = 'txt_img_attached_bottom';
       break;
     case 'img_txt_integrated_top':
@@ -630,7 +626,6 @@ function getCardHTML(data) {
            border: ${borderStyle};
            background-color: ${bgColor ? `#${bgColor}` : (cardType === 'img_txt_separate_bottom' ? 'transparent' : 'var(--swiper-slide-bg-color)')};" 
            easing="easeOutExpo">
-          ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
           ${isAnchorVisible === 'true' ? iconHTML : ''}
       </div>`;
