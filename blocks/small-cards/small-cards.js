@@ -561,7 +561,7 @@ function getCardHTML(data) {
       cardBlockType = 'text_only';
       break;
     case 'txt_img_attached_top':
-      contentStyle = 'margin-bottom: 10px;';
+      // contentStyle = 'margin-bottom: 10px;';
       cardBlockType = 'txt_img_attached_top';
       break;
     case 'txt_img_attached_bottom':
