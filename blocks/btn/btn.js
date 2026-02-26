@@ -196,10 +196,10 @@ export default async function decorate(block) {
     // Container border variables
     if (filled) {
       if (containerBorderColor) {
-        inlineStyle += `--container-border-color: ${containerBorderColor};`;
+        inlineStyle += `--btn-container-border-color: ${containerBorderColor};`;
       }
       if (containerBorderWidth) {
-        inlineStyle += `--container-border-width: ${containerBorderWidth}px;`;
+        inlineStyle += `--btn-container-border-width: ${containerBorderWidth}px;`;
       }
     }
     // Build icon HTML
@@ -210,10 +210,10 @@ export default async function decorate(block) {
       const iconBgColorActive = prefixHex(v('iconBgColorActive', 'text') || '');
       const iconColor = prefixHex(v('iconColor', 'text') || '');
       let iconBgStyle = '';
-      if (iconBgColorDefault) iconBgStyle += `--icon-bg-default: ${iconBgColorDefault};`;
-      if (iconBgColorHover) iconBgStyle += `--icon-bg-hover: ${iconBgColorHover};`;
-      if (iconBgColorActive) iconBgStyle += `--icon-bg-active: ${iconBgColorActive};`;
-      if (iconColor) iconBgStyle += `--icon-color: ${iconColor};`;
+      if (iconBgColorDefault) iconBgStyle += `--btn-icon-bg-default: ${iconBgColorDefault};`;
+      if (iconBgColorHover) iconBgStyle += `--btn-icon-bg-hover: ${iconBgColorHover};`;
+      if (iconBgColorActive) iconBgStyle += `--btn-icon-bg-active: ${iconBgColorActive};`;
+      if (iconColor) iconBgStyle += `--btn-icon-color: ${iconColor};`;
       if (iconStyle === 'svg' || iconStyle === '') {
         // Determine icon type
         let iconPath = '';
@@ -238,13 +238,13 @@ export default async function decorate(block) {
                data-bg-active="${iconBgColorActive}">
             <svg viewBox="0 0 24 24" class="btn-icon-svg">
               <defs>
-                ${getSvgLinearHtml('icon-filled-default', 'var(--bg-d-start)', 'var(--bg-d-end)')}
-                ${getSvgLinearHtml('icon-filled-hover-active', 'var(--bg-h-a-start)', 'var(--bg-h-a-end)')}
-                ${getSvgLinearHtml('icon-outline-default', 'var(--icon-d)', 'var(--icon-d)')}
-                ${getSvgLinearHtml('icon-outline-hover', 'var(--bg-d-start)', 'var(--bg-d-end)')}
-                ${getSvgLinearHtml('icon-outline-active', 'var(--bg-h-a-start)', 'var(--bg-h-a-end)')}
+                ${getSvgLinearHtml('icon-filled-default', 'var(--btn-bg-d-start)', 'var(--btn-bg-d-end)')}
+                ${getSvgLinearHtml('icon-filled-hover-active', 'var(--btn-bg-h-a-start)', 'var(--btn-bg-h-a-end)')}
+                ${getSvgLinearHtml('icon-outline-default', 'var(--btn-icon-d)', 'var(--btn-icon-d)')}
+                ${getSvgLinearHtml('icon-outline-hover', 'var(--btn-bg-d-start)', 'var(--btn-bg-d-end)')}
+                ${getSvgLinearHtml('icon-outline-active', 'var(--btn-bg-h-a-start)', 'var(--btn-bg-h-a-end)')}
               </defs>
-              <path d="${iconPath}" ${iconColor ? 'fill="var(--icon-color) !important"' : ''}/>
+              <path d="${iconPath}" ${iconColor ? 'fill="var(--btn-icon-color) !important"' : ''}/>
             </svg>
           </div>
         `;
