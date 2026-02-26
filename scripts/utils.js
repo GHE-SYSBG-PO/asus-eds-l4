@@ -122,7 +122,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
               if (value !== '') {
                 // Try to parse as number if it looks like a number
                 const numValue = Number(value);
-                const isNumeric = !Number.isNaN(numValue) && value !== '';
+                const isNumeric = !Number.isNaN(numValue) && String(numValue) === value;
 
                 config[fieldName] = {
                   html,
