@@ -35,11 +35,13 @@
           "value": ""
         },
         {
-          "component": "richtext",
-          "name": "text",
-          "value": "",
-          "label": "Text",
-          "valueType": "string"
+          "...": "./modelConfig/_layout.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_basic.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_advanced.json#/fields"
         },
         {
           "component": "text",

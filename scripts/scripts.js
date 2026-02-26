@@ -61,6 +61,49 @@ async function loadFonts() {
 }
 
 /**
+ * Anime JS Dynamic Loader
+ * Loads Anime JS library on-demand to improve initial page load performance
+ */
+let animePromise = null;
+/**
+ * Dynamically loads Anime JS library from CDN
+ * @returns {Promise<Object>} Promise that resolves with anime object
+ */
+export async function loadAnime() {
+  // Return immediately if Anime is already loaded
+  if (window.anime) {
+    return window.anime;
+  }
+
+  // Return existing promise if load is in progress
+  if (!animePromise) {
+    console.log(`Anime: Starting dynamic load [Call ID: ${Date.now()}]`);
+
+    animePromise = (async () => {
+      try {
+        await loadScript(
+          'https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js',
+          {
+            crossorigin: 'anonymous',
+            referrerpolicy: 'no-referrer',
+          },
+        );
+        console.log('Anime JS loaded dynamically');
+        return window.anime;
+      } catch (error) {
+        console.error('Failed to load Anime JS library:', error);
+        animePromise = null; // Reset on error so retry is possible
+        throw error;
+      }
+    })(); // IIFE (Immediately Invoked Function Expression) creates promise synchronously
+  } else {
+    console.log('Anime: Reusing existing load promise');
+  }
+
+  return animePromise;
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -128,6 +171,7 @@ async function loadLazy(doc) {
 
   loadFooter(doc.querySelector('footer'));
 
+  loadAnime();
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
 }
