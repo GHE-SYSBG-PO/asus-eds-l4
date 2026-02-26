@@ -7,12 +7,12 @@
       "valueType": "string",
       "options": [
         { "name": "default", "value": "" },
-        { "name": "tt-md-24", "value": "tt-md-32" },
-        { "name": "tt-md-28", "value": "tt-md-36" },
-        { "name": "tt-md-32", "value": "tt-md-40" },
-        { "name": "tt-bd-24", "value": "tt-bd-32" },
-        { "name": "tt-bd-28", "value": "tt-bd-36" },
-        { "name": "tt-bd-32", "value": "tt-bd-40" }
+        { "name": "tt-md-24", "value": "tt-md-24" },
+        { "name": "tt-md-28", "value": "tt-md-28" },
+        { "name": "tt-md-32", "value": "tt-md-32" },
+        { "name": "tt-bd-24", "value": "tt-bd-24" },
+        { "name": "tt-bd-28", "value": "tt-bd-28" },
+        { "name": "tt-bd-32", "value": "tt-bd-32" }
       ]
     },
     {
