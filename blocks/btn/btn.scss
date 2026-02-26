@@ -12,120 +12,104 @@
   &[data-product="asus"] {
     &[data-mode="light"],
     .section-light {
-      .btn-component {
-        --bg-d-start: #4379b1;
-        --bg-d-end: #5977a1;
-        --bg-h-a-start: #566e91;
-        --bg-h-a-end: #0e447c;
-        --font-d-start: #00438a;
-        --font-d-end: #274568;
-        --icon-d: #fff;
-        --icon-radius: 50%;
-      }
+        --btn-bg-d-start: #4379b1;
+        --btn-bg-d-end: #5977a1;
+        --btn-bg-h-a-start: #566e91;
+        --btn-bg-h-a-end: #0e447c;
+        --btn-font-d-start: #00438a;
+        --btn-font-d-end: #274568;
+        --btn-icon-d: #fff;
+        --btn-icon-radius: 50%;
     }
 
     &[data-mode="dark"],
     .section-dark {
-      .btn-component {
-        --bg-d-start: #476991;
-        --bg-d-end: #5c6f80;
-        --bg-h-a-start: #98aaba;
-        --bg-h-a-end: #658dbc;
-        --font-d-start: #a2c2e2;
-        --font-d-end: #b2c0c7;
-        --icon-d: #181818;
-        --icon-radius: 50%;
-      }
+        --btn-bg-d-start: #476991;
+        --btn-bg-d-end: #5c6f80;
+        --btn-bg-h-a-start: #98aaba;
+        --btn-bg-h-a-end: #658dbc;
+        --btn-font-d-start: #a2c2e2;
+        --btn-font-d-end: #b2c0c7;
+        --btn-icon-d: #181818;
+        --btn-icon-radius: 50%;
     }
   }
 
   &[data-product="proart"] {
     &[data-mode="light"],
     .section-light {
-      .btn-component {
-        --bg-d-start: #806238;
-        --bg-d-end: #87715a;
-        --bg-h-a-start: #654313;
-        --bg-h-a-end: #665441;
-        --font-d-start: #663600;
-        --font-d-end: #613d00;
-        --icon-d: #fff;
-        --icon-radius: 50%;
-      }
+        --btn-bg-d-start: #806238;
+        --btn-bg-d-end: #87715a;
+        --btn-bg-h-a-start: #654313;
+        --btn-bg-h-a-end: #665441;
+        --btn-font-d-start: #663600;
+        --btn-font-d-end: #613d00;
+        --btn-icon-d: #fff;
+        --btn-icon-radius: 50%;
     }
 
     &[data-mode="dark"],
     .section-dark {
-      .btn-component {
-        --bg-d-start: #84643e;
-        --bg-d-end: #7e6746;
-        --bg-h-a-start: #8f6e4d;
-        --bg-h-a-end: #a49073;
-        --font-d-start: #dab983;
-        --font-d-end: #d8c5ac;
-        --icon-d: #181818;
-        --icon-radius: 50%;
-      }
+        --btn-bg-d-start: #84643e;
+        --btn-bg-d-end: #7e6746;
+        --btn-bg-h-a-start: #8f6e4d;
+        --btn-bg-h-a-end: #a49073;
+        --btn-font-d-start: #dab983;
+        --btn-font-d-end: #d8c5ac;
+        --btn-icon-d: #181818;
+        --btn-icon-radius: 50%;
     }
   }
 
   &[data-product="rog"] {
     &[data-mode="light"],
     .section-light {
-      .btn-component {
-        --bg-d-start: #db0004;
-        --bg-d-end: #db0004;
-        --bg-h-a-start: #a8000c;
-        --bg-h-a-end: #a8000c;
-        --font-d-start: #8f0002;
-        --font-d-end: #8f0002;
-        --icon-d: #fff;
-        --icon-radius: 0;
-      }
+        --btn-bg-d-start: #db0004;
+        --btn-bg-d-end: #db0004;
+        --btn-bg-h-a-start: #a8000c;
+        --btn-bg-h-a-end: #a8000c;
+        --btn-font-d-start: #8f0002;
+        --btn-font-d-end: #8f0002;
+        --btn-icon-d: #fff;
+        --btn-icon-radius: 0;
     }
 
     &[data-mode="dark"],
     .section-dark {
-      .btn-component {
-        --bg-d-start: #d1000e;
-        --bg-d-end: #d1000e;
-        --bg-h-a-start: #da1723;
-        --bg-h-a-end: #da1723;
-        --font-d-start: #ff230f;
-        --font-d-end: #ff230f;
-        --icon-d: #181818;
-        --icon-radius: 0;
-      }
+        --btn-bg-d-start: #d1000e;
+        --btn-bg-d-end: #d1000e;
+        --btn-bg-h-a-start: #da1723;
+        --btn-bg-h-a-end: #da1723;
+        --btn-font-d-start: #ff230f;
+        --btn-font-d-end: #ff230f;
+        --btn-icon-d: #181818;
+        --btn-icon-radius: 0;
     }
   }
 
   &[data-product="tuf"] {
     &[data-mode="light"],
     .section-light {
-      .btn-component {
-        --bg-d-start: #181818;
-        --bg-d-end: #181818;
-        --bg-h-a-start: #262626;
-        --bg-h-a-end: #262626;
-        --font-d-start: #181818;
-        --font-d-end: #181818;
-        --icon-d: #fff;
-        --icon-radius: 0;
-      }
+        --btn-bg-d-start: #181818;
+        --btn-bg-d-end: #181818;
+        --btn-bg-h-a-start: #262626;
+        --btn-bg-h-a-end: #262626;
+        --btn-font-d-start: #181818;
+        --btn-font-d-end: #181818;
+        --btn-icon-d: #fff;
+        --btn-icon-radius: 0;
     }
 
     &[data-mode="dark"],
     .section-dark {
-      .btn-component {
-        --bg-d-start: #ff9e1b;
-        --bg-d-end: #ff9e1b;
-        --bg-h-a-start: #d37b00;
-        --bg-h-a-end: #d37b00;
-        --font-d-start: #ffad42;
-        --font-d-end: #ffad42;
-        --icon-d: #181818;
-        --icon-radius: 0;
-      }
+        --btn-bg-d-start: #ff9e1b;
+        --btn-bg-d-end: #ff9e1b;
+        --btn-bg-h-a-start: #d37b00;
+        --btn-bg-h-a-end: #d37b00;
+        --btn-font-d-start: #ffad42;
+        --btn-font-d-end: #ffad42;
+        --btn-icon-d: #181818;
+        --btn-icon-radius: 0;
     }
   }
 
@@ -155,8 +139,8 @@
       position: absolute;
       inset: 0;
       border-radius: $height / 2;
-      padding: var(--container-border-width);
-      background: var(--container-border-color);
+      padding: var(--btn-container-border-width);
+      background: var(--btn-container-border-color);
       mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -245,27 +229,27 @@
     &[data-filled="true"] {
       --btn-bg-default-image: linear-gradient(
         270deg,
-        var(--bg-d-start) 0%,
-        var(--bg-d-end) 100%
+        var(--btn-bg-d-start) 0%,
+        var(--btn-bg-d-end) 100%
       );
       --btn-bg-default: transparent;
       --btn-bg-hover-image: linear-gradient(
         270deg,
-        var(--bg-h-a-start) 0%,
-        var(--bg-h-a-end) 100%
+        var(--btn-bg-h-a-start) 0%,
+        var(--btn-bg-h-a-end) 100%
       );
       --btn-bg-hover: transparent;
       --btn-bg-active-image: linear-gradient(
         270deg,
-        var(--bg-h-a-start) 0%,
-        var(--bg-h-a-end) 100%
+        var(--btn-bg-h-a-start) 0%,
+        var(--btn-bg-h-a-end) 100%
       );
       --btn-bg-active: transparent;
       --btn-color-default: #fff;
       --btn-color-hover: #fff;
       --btn-color-active: #fff;
-      --icon-color-start: var(--bg-d-start);
-      --icon-color-end: var(--bg-d-end);
+      --btn-icon-color-start: var(--btn-bg-d-start);
+      --btn-icon-color-end: var(--btn-bg-d-end);
     }
 
     /* Outlined style (4, 5, 6)  */
@@ -274,42 +258,42 @@
       --btn-bg-default: transparent;
       --btn-bg-hover-image: linear-gradient(
         270deg,
-        var(--bg-d-start) 0%,
-        var(--bg-d-end) 100%
+        var(--btn-bg-d-start) 0%,
+        var(--btn-bg-d-end) 100%
       );
       --btn-bg-hover: transparent;
       --btn-bg-active-image: linear-gradient(
         270deg,
-        var(--bg-h-a-start) 0%,
-        var(--bg-h-a-end) 100%
+        var(--btn-bg-h-a-start) 0%,
+        var(--btn-bg-h-a-end) 100%
       );
       --btn-bg-active: transparent;
       --btn-color-default: linear-gradient(
         270deg,
-        var(--font-d-start) 0%,
-        var(--font-d-end) 100%
+        var(--btn-font-d-start) 0%,
+        var(--btn-font-d-end) 100%
       );
       --btn-color-hover: #fff;
       --btn-color-active: #fff;
-      --container-border-color: linear-gradient(
+      --btn-container-border-color: linear-gradient(
         270deg,
-        var(--font-d-start) 0%,
-        var(--font-d-end) 100%
+        var(--btn-font-d-start) 0%,
+        var(--btn-font-d-end) 100%
       );
-      --container-border-width: 2px;
-      --icon-color-start: #fff;
-      --icon-color-end: #fff;
+      --btn-container-border-width: 2px;
+      --btn-icon-color-start: #fff;
+      --btn-icon-color-end: #fff;
     }
 
     /* style=2 and style=3 */
     &[data-style="2"],
     &[data-style="3"] {
       .btn-icon-wrapper {
-        --icon-bg-default: #fff;
-        --icon-bg-hover: #fff;
-        --icon-bg-active: #fff;
+        --btn-icon-bg-default: #fff;
+        --btn-icon-bg-hover: #fff;
+        --btn-icon-bg-active: #fff;
 
-        border-radius: var(--icon-radius);
+        border-radius: var(--btn-icon-radius);
       }
 
       svg path {
@@ -333,15 +317,15 @@
     &[data-style="5"],
     &[data-style="6"] {
       .btn-icon-wrapper {
-        --icon-bg-default: linear-gradient(
+        --btn-icon-bg-default: linear-gradient(
           270deg,
-          var(--font-d-start) 0%,
-          var(--font-d-end) 100%
+          var(--btn-font-d-start) 0%,
+          var(--btn-font-d-end) 100%
         );
-        --icon-bg-hover: #fff;
-        --icon-bg-active: #fff;
+        --btn-icon-bg-hover: #fff;
+        --btn-icon-bg-active: #fff;
 
-        border-radius: var(--icon-radius);
+        border-radius: var(--btn-icon-radius);
       }
 
       svg path {
@@ -390,7 +374,7 @@
       text-decoration: none;
 
       .btn-icon-wrapper {
-        background: var(--icon-bg-hover);
+        background: var(--btn-icon-bg-hover);
 
         &.btn-icon-png {
           background: transparent;
@@ -402,7 +386,7 @@
 
     &:active {
       .btn-icon-wrapper {
-        background: var(--icon-bg-active);
+        background: var(--btn-icon-bg-active);
 
         &.btn-icon-png {
           background: transparent;
@@ -419,7 +403,7 @@
       transition: background-color 0.3s ease;
       flex-shrink: 0;
       margin-left: 10px;
-      background: var(--icon-bg-default);
+      background: var(--btn-icon-bg-default);
 
       &.btn-icon-png {
         background: transparent;
@@ -541,7 +525,7 @@
     &[data-style="5"] {
       height: 56px;
       background-image: none;
-      color: linear-gradient(270deg, var(--font-d-start) 0%, red 100%);
+      color: linear-gradient(270deg, var(--btn-font-d-start) 0%, red 100%);
       border-radius: 28px;
       position: relative;
 

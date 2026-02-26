@@ -1271,7 +1271,7 @@
         "valueType": "string",
         "label": "inner page content",
         "name": "innerPageLink",
-        "placeholder": "/modals/page",
+        "placeholder": "modal",
         "condition": {
           "===": [
             {
@@ -1311,11 +1311,23 @@
         "name": "gBtnCustomized",
         "collapsible": true,
         "condition": {
-          "===": [
+          "and": [
             {
-              "var": "gBtnStyle"
+              "===": [
+                {
+                  "var": "linkType"
+                },
+                "inner"
+              ]
             },
-            "customized"
+            {
+              "===": [
+                {
+                  "var": "gBtnStyle"
+                },
+                "customized"
+              ]
+            }
           ]
         },
         "fields": [
