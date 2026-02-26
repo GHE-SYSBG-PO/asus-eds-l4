@@ -257,6 +257,7 @@
       "id": "container-col",
       "components": [
         "text-block",
+        "featureitem-block",
         "media-block",
         "btn"
       ]
