@@ -2,59 +2,17 @@
   "fields": [
     {
       "component": "select",
-      "label": "font (D)",
-      "name": "titleFontD",
+      "label": "font (DTM)",
+      "name": "titleFont",
       "valueType": "string",
       "options": [
         { "name": "default", "value": "" },
-        { "name": "tt-md-32", "value": "tt-md-32-lg" },
-        { "name": "tt-md-36", "value": "tt-md-36-lg" },
-        { "name": "tt-md-40", "value": "tt-md-40-lg" },
-        { "name": "tt-md-44", "value": "tt-md-44-lg" },
-        { "name": "tt-md-48", "value": "tt-md-48-lg" },
-        { "name": "tt-bd-32", "value": "tt-bd-32-lg" },
-        { "name": "tt-bd-36", "value": "tt-bd-36-lg" },
-        { "name": "tt-bd-40", "value": "tt-bd-40-lg" },
-        { "name": "tt-bd-44", "value": "tt-bd-44-lg" },
-        { "name": "tt-bd-48", "value": "tt-bd-48-lg" }
-      ]
-    },
-    {
-      "component": "select",
-      "label": "font (T)",
-      "name": "titleFontT",
-      "valueType": "string",
-      "options": [
-        { "name": "default", "value": "" },
-        { "name": "tt-md-32", "value": "tt-md-32-md" },
-        { "name": "tt-md-36", "value": "tt-md-36-md" },
-        { "name": "tt-md-40", "value": "tt-md-40-md" },
-        { "name": "tt-md-44", "value": "tt-md-44-md" },
-        { "name": "tt-md-48", "value": "tt-md-48-md" },
-        { "name": "tt-bd-32", "value": "tt-bd-32-md" },
-        { "name": "tt-bd-36", "value": "tt-bd-36-md" },
-        { "name": "tt-bd-40", "value": "tt-bd-40-md" },
-        { "name": "tt-bd-44", "value": "tt-bd-44-md" },
-        { "name": "tt-bd-48", "value": "tt-bd-48-md" }
-      ]
-    },
-    {
-      "component": "select",
-      "label": "font (M)",
-      "name": "titleFontM",
-      "valueType": "string",
-      "options": [
-        { "name": "default", "value": "" },
-        { "name": "tt-md-32", "value": "tt-md-32-sm" },
-        { "name": "tt-md-36", "value": "tt-md-36-sm" },
-        { "name": "tt-md-40", "value": "tt-md-40-sm" },
-        { "name": "tt-md-44", "value": "tt-md-44-sm" },
-        { "name": "tt-md-48", "value": "tt-md-48-sm" },
-        { "name": "tt-bd-32", "value": "tt-bd-32-sm" },
-        { "name": "tt-bd-36", "value": "tt-bd-36-sm" },
-        { "name": "tt-bd-40", "value": "tt-bd-40-sm" },
-        { "name": "tt-bd-44", "value": "tt-bd-44-sm" },
-        { "name": "tt-bd-48", "value": "tt-bd-48-sm" }
+        { "name": "tt-md-24", "value": "tt-md-32" },
+        { "name": "tt-md-28", "value": "tt-md-36" },
+        { "name": "tt-md-32", "value": "tt-md-40" },
+        { "name": "tt-bd-24", "value": "tt-bd-32" },
+        { "name": "tt-bd-28", "value": "tt-bd-36" },
+        { "name": "tt-bd-32", "value": "tt-bd-40" }
       ]
     },
     {

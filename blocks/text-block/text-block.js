@@ -17,14 +17,11 @@ const FONTS = {
   categoryFontM: {
     asus: 'tt-md-16-sm', proart: 'tt-md-16-sm', rog: 'tg-bd-16-sm', tuf: 'dp-cb-16-sm',
   },
-  titleFontD: {
-    asus: 'tt-md-32', proart: 'tt-md-40-lg', rog: 'tg-bd-40-lg', tuf: 'dp-cb-40-lg',
-  },
-  titleFontT: {
-    asus: 'tt-md-28', proart: 'tt-md-40-md', rog: 'tg-bd-40-md', tuf: 'dp-cb-40-md',
-  },
-  titleFontM: {
-    asus: 'tt-md-24', proart: 'tt-md-40-sm', rog: 'tg-bd-40-sm', tuf: 'dp-cb-40-sm',
+  titleFont: {
+    asus: 'tt-md-32-lg tt-md-28-md tt-md-24-sm',
+    proart: 'tt-md-32-lg tt-md-28-md tt-md-24-sm',
+    rog: 'tg-bd-32-lg tg-bd-28-md tg-bd-24-sm',
+    tuf: 'dp=cb-32-lg dp=cb-28-md dp=cb-24-sm',
   },
 };
 
@@ -52,9 +49,7 @@ const DEFAULT_CONFIG = {
   categoryFontT: FONTS.categoryFontT[PRODUCT_LINE],
   categoryFontM: FONTS.categoryFontM[PRODUCT_LINE],
   categoryFontColor: '',
-  titleFontD: FONTS.titleFontD[PRODUCT_LINE],
-  titleFontT: FONTS.titleFontT[PRODUCT_LINE],
-  titleFontM: FONTS.titleFontM[PRODUCT_LINE],
+  titleFont: FONTS.titleFont[PRODUCT_LINE],
   titleFontColor: '',
   bodyFontDT: 'ro-rg-20-md',
   bodyFontM: 'ro-rg-20',
@@ -147,7 +142,7 @@ export default async function decorate(block) {
     `;
 
     const title = `
-      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFontD')} ${v('titleFontT')} ${v('titleFontM')}' ${titleFontColor}>
+      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFont')}' ${titleFontColor}>
         ${v('titleRichtext', 'html')}
       </div>
     `;
