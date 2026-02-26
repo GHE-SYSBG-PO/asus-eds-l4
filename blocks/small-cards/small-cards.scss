@@ -770,8 +770,11 @@
     padding-top: 8px;
   }
 
-  
-  .img_txt_separate_bottom .block-content {// img_txt_separate_bottom
+  .img_txt_separate_bottom {// img_txt_separate_bottom
+    background: transparent;
+  }
+
+  .img_txt_separate_bottom .block-content {
     padding: 24px 15px 0 15px;
   }
 
