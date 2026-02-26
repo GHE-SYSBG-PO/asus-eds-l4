@@ -543,6 +543,7 @@ function getCardHTML(data) {
 
   let flexDirection = '';
   let cardBlockType = 'img_txt_integrated_top';
+  const contentStyle = '';
   let showMedia = true;
 
   switch (cardType) {
@@ -626,6 +627,7 @@ function getCardHTML(data) {
            border: ${borderStyle};
            background-color: ${bgColor ? `#${bgColor}` : (cardType === 'img_txt_separate_bottom' ? 'transparent' : 'var(--swiper-slide-bg-color)')};" 
            easing="easeOutExpo">
+          ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
           ${isAnchorVisible === 'true' ? iconHTML : ''}
       </div>`;
