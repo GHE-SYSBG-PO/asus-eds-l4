@@ -746,6 +746,7 @@
   .img_txt_integrated_top .block-content .btn-wrapper {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     gap: 12.4px 20px;
     padding-bottom: 24px;
   }
@@ -778,6 +779,7 @@
     .img_txt_integrated_top .block-content .btn-wrapper {
       display: flex;
       justify-content: space-between;
+      flex-direction: column;
       gap: 14.4px 24px;
       padding-bottom: 40px;
     }
@@ -811,6 +813,7 @@
     .img_txt_integrated_top .block-content .btn-wrapper {
       display: flex;
       justify-content: space-between;
+      flex-direction: column;
       gap: 14.4px 24px;
       padding-bottom: 40px;
     }
