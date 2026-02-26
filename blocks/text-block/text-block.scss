@@ -124,21 +124,5 @@
       background-clip: text;
     }
   }
-
-  .text-block-animation {
-    &>a,
-    &>div,
-    &>figure,
-    &>h1,
-    &>h2,
-    &>h3,
-    &>h4,
-    &>img,
-    &>span {
-      opacity: 0;
-      transform: translateZ(0) translateY(30px);
-      transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1);
-    }
-  }
 }
 
