@@ -720,7 +720,7 @@ async function renderCard(block) {
   }
 
   const cardHTML = Array.isArray(data)
-    ? data.map((item) => getCardHTML(item)).join('')
+    ? data.map((item, index) => getCardHTML({ ...item, cardIndex: index })).join('')
     : getCardHTML(data);
 
   const html = `<div class="cmd-content">
