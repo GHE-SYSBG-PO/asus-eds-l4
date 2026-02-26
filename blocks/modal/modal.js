@@ -149,6 +149,32 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
 }
 
 /**
+ * Gets the real base path of the current page, compatible with AEM author environment.
+ *
+ * - Normal (publish) environment: uses window.location.pathname directly
+ * - AEM author environment: pathname is just "/ui", the real page path
+ *   is embedded inside the URL hash instead
+ *
+ * @returns {string} The base path with .html stripped and a trailing slash appended,
+ *  e.g. "/content/asus-l4/.../light/"
+ */
+function getPageBasePath() {
+  let { pathname } = window.location;
+  // In AEM author (Universal Editor), the real page path is hidden in the hash.
+  // Hash format: #/@<tenant>/aem/universal-editor/canvas/<host>/content/.../<page>.html
+  const { hash } = window.location;
+  if (hash) {
+    // Extract the /content/... portion from the hash
+    const match = hash.match(/(\/content\/[^?#]*)/);
+    if (match) {
+      // eslint-disable-next-line prefer-destructuring
+      pathname = match[1];
+    }
+  }
+  return `${pathname.replace(/\.html$/, '')}/`;
+}
+
+/**
  * Open modal with the given content fragment URL.
  * @param {String} fragmentUrl content fragment URL
  * @param {Boolean} modal determines if it's a modal or regular dialog.
@@ -164,9 +190,14 @@ export async function openModal(fragmentUrl, modal = true, dialogId = 'dialog', 
   let path = fragmentUrl;
   if (!fragmentUrl.startsWith('http')) {
     if (!fragmentUrl.startsWith('/')) {
-      // relative path
-      const base = window.location.pathname.replace(/\.html$/, '');
-      path = `${base}/${fragmentUrl.replace(/^\.\//, '')}`;
+      const base = getPageBasePath();
+      path = new URL(fragmentUrl, window.location.origin + base).pathname;
+    } else {
+      const authorPrefix = '/content/asus-l4';
+      if (window.location.pathname.startsWith(authorPrefix)) {
+        // author
+        path = authorPrefix + fragmentUrl;
+      }
     }
   }
 

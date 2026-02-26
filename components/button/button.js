@@ -4,35 +4,6 @@ const DEFAULT_CONFIG = {
   // Basic configuration
   gBtnStyleLayout: '1',
   gBtnLabel: 'Button',
-  // Container configuration - defaults to empty, controlled by CSS
-  gBtnContainerBgColorDefault: '',
-  gBtnContainerBgColorDefault2: '',
-  gBtnContainerBgColorHover: '',
-  gBtnContainerBgColorHover2: '',
-  gBtnContainerBgColorActive: '',
-  gBtnContainerBgColorActive2: '',
-  gBtnContainerRadiusTL: '',
-  gBtnContainerRadiusTR: '',
-  gBtnContainerRadiusBR: '',
-  gBtnContainerRadiusBL: '',
-  gBtnBorderWidth: '',
-  gBtnBorderColor: '',
-  // Font configuration
-  gBtnFontDesktop: '',
-  gBtnFontMobile: '',
-  gBtnFontColorDefault: '',
-  gBtnFontColorHover: '',
-  gBtnFontColorActive: '',
-
-  // Icon configuration
-  gBtnIconStyle: '',
-  gBtnIconColor: '',
-  gBtnIconBgColorDefault: '',
-  gBtnIconBgColorHover: '',
-  gBtnIconBgColorActive: '',
-  gBtnIconAssetDefault: '',
-  gBtnIconAssetHover: '',
-  gBtnIconAssetActive: '',
 };
 
 export const getRadiusStyle = (tl, tr, br, bl) => {
@@ -76,30 +47,30 @@ export function buildCloseButtonHtml(v) {
   const label = v('gBtnLabel', 'text') || DEFAULT_CONFIG.gBtnLabel;
   // Get container configuration - only use if there is a value
 
-  const gBtnContainerBgColorDefaultArr = prefixHex((v('gBtnContainerBgColorDefault', 'text') || '').split(','));
-  const gBtnContainerBgColorDefault = gBtnContainerBgColorDefaultArr[0] || '';
-  const gBtnContainerBgColorDefault2 = gBtnContainerBgColorDefaultArr[1] || '';
+  const gBtnContainerBgColorDefaultArr = prefixHex((v('gBtnContainerBgColorDefault', 'text')).split(','));
+  const gBtnContainerBgColorDefault = gBtnContainerBgColorDefaultArr[0];
+  const gBtnContainerBgColorDefault2 = gBtnContainerBgColorDefaultArr[1];
 
-  const gBtnContainerBgColorHoverArr = prefixHex((v('gBtnContainerBgColorHover', 'text') || '').split(','));
-  const gBtnContainerBgColorHover = gBtnContainerBgColorHoverArr[0] || '';
-  const gBtnContainerBgColorHover2 = gBtnContainerBgColorHoverArr[1] || '';
+  const gBtnContainerBgColorHoverArr = prefixHex((v('gBtnContainerBgColorHover', 'text')).split(','));
+  const gBtnContainerBgColorHover = gBtnContainerBgColorHoverArr[0];
+  const gBtnContainerBgColorHover2 = gBtnContainerBgColorHoverArr[1];
 
-  const gBtnContainerBgColorActiveArr = prefixHex((v('gBtnContainerBgColorActive', 'text') || '').split(','));
-  const gBtnContainerBgColorActive = gBtnContainerBgColorActiveArr[0] || '';
-  const gBtnContainerBgColorActive2 = gBtnContainerBgColorActiveArr[1] || '';
+  const gBtnContainerBgColorActiveArr = prefixHex((v('gBtnContainerBgColorActive', 'text')).split(','));
+  const gBtnContainerBgColorActive = gBtnContainerBgColorActiveArr[0];
+  const gBtnContainerBgColorActive2 = gBtnContainerBgColorActiveArr[1];
 
-  const gBtnContainerRadiusTL = v('gBtnContainerRadiusTL', 'text') || '';
-  const gBtnContainerRadiusTR = v('gBtnContainerRadiusTR', 'text') || '';
-  const gBtnContainerRadiusBR = v('gBtnContainerRadiusBR', 'text') || '';
-  const gBtnContainerRadiusBL = v('gBtnContainerRadiusBL', 'text') || '';
-  const containerBorderWidth = v('gBtnBorderWidth', 'text') || '';
-  const containerBorderColor = prefixHex(v('gBtnBorderColor', 'text') || '');
+  const gBtnContainerRadiusTL = v('gBtnContainerRadiusTL', 'text');
+  const gBtnContainerRadiusTR = v('gBtnContainerRadiusTR', 'text');
+  const gBtnContainerRadiusBR = v('gBtnContainerRadiusBR', 'text');
+  const gBtnContainerRadiusBL = v('gBtnContainerRadiusBL', 'text');
+  const containerBorderWidth = v('gBtnBorderWidth', 'text');
+  const containerBorderColor = prefixHex(v('gBtnBorderColor', 'text'));
   // Get font configuration
   const gBtnFontDesktop = v('gBtnFontDesktop', 'text') || DEFAULT_CONFIG.gBtnFontDesktop;
   const gBtnFontMobile = v('gBtnFontMobile', 'text') || DEFAULT_CONFIG.gBtnFontMobile;
-  const gBtnFontColorDefault = prefixHex(v('gBtnFontColorDefault', 'text') || '');
-  const gBtnFontColorHover = prefixHex(v('gBtnFontColorHover', 'text') || '');
-  const gBtnFontColorActive = prefixHex(v('gBtnFontColorActive', 'text') || '');
+  const gBtnFontColorDefault = prefixHex(v('gBtnFontColorDefault', 'text'));
+  const gBtnFontColorHover = prefixHex(v('gBtnFontColorHover', 'text'));
+  const gBtnFontColorActive = prefixHex(v('gBtnFontColorActive', 'text'));
   // Get icon configuration
   const gBtnIconStyle = v('gBtnIconStyle', 'text') || DEFAULT_CONFIG.gBtnIconStyle;
   // Determine style characteristics
@@ -169,10 +140,10 @@ export function buildCloseButtonHtml(v) {
   // Build icon HTML
   let iconHtml = '';
   if (supportsIcon(style)) {
-    const gBtnIconBgColorDefault = prefixHex(v('gBtnIconBgColorDefault', 'text') || '');
-    const gBtnIconBgColorHover = prefixHex(v('gBtnIconBgColorHover', 'text') || '');
-    const gBtnIconBgColorActive = prefixHex(v('gBtnIconBgColorActive', 'text') || '');
-    const gBtnIconColor = prefixHex(v('gBtnIconColor', 'text') || '');
+    const gBtnIconBgColorDefault = prefixHex(v('gBtnIconBgColorDefault', 'text'));
+    const gBtnIconBgColorHover = prefixHex(v('gBtnIconBgColorHover', 'text'));
+    const gBtnIconBgColorActive = prefixHex(v('gBtnIconBgColorActive', 'text'));
+    const gBtnIconColor = prefixHex(v('gBtnIconColor', 'text'));
     let iconBgStyle = '';
     if (gBtnIconBgColorDefault) iconBgStyle += `--g-btn-icon-bg-default: ${gBtnIconBgColorDefault};`;
     if (gBtnIconBgColorHover) iconBgStyle += `--g-btn-icon-bg-hover: ${gBtnIconBgColorHover};`;
@@ -213,9 +184,9 @@ export function buildCloseButtonHtml(v) {
           </div>
         `;
     } else if (gBtnIconStyle === 'png') {
-      const gBtnIconAssetDefault = v('gBtnIconAssetDefault', 'text') || '';
-      const gBtnIconAssetHover = v('gBtnIconAssetHover', 'text') || '';
-      const gBtnIconAssetActive = v('gBtnIconAssetActive', 'text') || '';
+      const gBtnIconAssetDefault = v('gBtnIconAssetDefault', 'text');
+      const gBtnIconAssetHover = v('gBtnIconAssetHover', 'text');
+      const gBtnIconAssetActive = v('gBtnIconAssetActive', 'text');
       iconHtml = `
           <div class="btn-icon-wrapper btn-icon-png flex items-center justify-center transition-all" style="${iconBgStyle}">
             <img src="${gBtnIconAssetDefault}" alt="icon" class="btn-icon-default object-cover"/>
