@@ -628,7 +628,7 @@ function getCardHTML(data) {
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderStyle};
-           background-color: ${bgColor ? `#${bgColor}` : 'var(--swiper-slide-bg-color)'};" 
+           background-color: ${bgColor ? `#${bgColor}` : (cardType === 'img_txt_separate_bottom' ? 'transparent' : 'var(--swiper-slide-bg-color)')};" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
