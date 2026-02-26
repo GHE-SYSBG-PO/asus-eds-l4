@@ -162,11 +162,20 @@ export async function openModal(fragmentUrl, modal = true, dialogId = 'dialog', 
   // Load modal CSS first before loading fragment content
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
 
-  const path = fragmentUrl.startsWith('http')
-    ? new URL(fragmentUrl, window.location).pathname
-    : fragmentUrl;
+  let path = fragmentUrl;
+  if (!fragmentUrl.startsWith('http')) {
+    if (!fragmentUrl.startsWith('/')) {
+      // relative path
+      const base = window.location.pathname.replace(/\.html$/, '');
+      path = `${base}/${fragmentUrl.replace(/^\.\//, '')}`;
+    }
+  }
 
   const fragment = await loadFragment(path);
+  if (!fragment) {
+    console.error('fragment not found');
+    return false;
+  }
   const { showModal, closeModal } = await createModal(fragment.childNodes, modal, dialogId, dialogClasses, contentWrapperClass, closeButtonHtml);
   showModal();
   if (!window._closeModal) {
