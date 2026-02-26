@@ -5,9 +5,7 @@
       "label": "style",
       "name": "styleTab"
     },
-    {
-      "...": "./_icon.json#/fields"
-    },
+    
     {
       "component": "select",
       "label": "layout group",
@@ -85,6 +83,9 @@
           "inner"
         ]
       }
+    },
+    {
+      "...": "./_icon.json#/fields"
     },
     {
       "component": "select",
