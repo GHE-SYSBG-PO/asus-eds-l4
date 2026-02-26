@@ -54,14 +54,14 @@ const PRODUCT_DEFAULTS = {
     titleFontM: 'tt-md-24',
   },
   rog: {
-    titleFontD: 'tt-bd-32',
-    titleFontT: 'tt-bd-28',
-    titleFontM: 'tt-bd-24',
+    titleFontD: 'tt-md-32',
+    titleFontT: 'tt-md-28',
+    titleFontM: 'tt-md-24',
   },
   tuf: {
-    titleFontD: 'tt-cb-32',
-    titleFontT: 'tt-cb-28',
-    titleFontM: 'tt-cb-24',
+    titleFontD: 'tt-md-32',
+    titleFontT: 'tt-md-28',
+    titleFontM: 'tt-md-24',
   },
 };
 
