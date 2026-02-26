@@ -5,7 +5,7 @@
       "label": "bg-color default",
       "name": "gBtnContainerBgColorDefault",
       "valueType": "string",
-      "description":"Accepts only hex values, e.g., 00ffee (without #)"
+      "description": "Accepts only hex values, e.g., 00ffee (without #)"
     },
     {
       "component": "text",
@@ -44,36 +44,32 @@
       "valueType": "string"
     },
     {
-      "component": "container",
-      "label": "container advanced",
-      "name": "gBtnContainerAdvanced",
-      "collapsible": true,
+      "component": "text",
+      "label": "border-width",
+      "name": "gBtnBorderWidth",
+      "valueType": "string",
       "condition": {
         "in": [
           {
             "var": "gBtnStyleLayout"
           },
-          [
-            "3",
-            "4",
-            "6"
-          ]
+          ["3", "4", "6"]
         ]
-      },
-      "fields": [
-        {
-          "component": "text",
-          "label": "border-width",
-          "name": "gBtnBorderWidth",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "border-color",
-          "name": "gBtnBorderColor",
-          "valueType": "string"
-        }
-      ]
+      }
+    },
+    {
+      "component": "text",
+      "label": "border-color",
+      "name": "gBtnBorderColor",
+      "valueType": "string",
+      "condition": {
+        "in": [
+          {
+            "var": "gBtnStyleLayout"
+          },
+          ["3", "4", "6"]
+        ]
+      }
     }
   ]
 }
