@@ -10,6 +10,9 @@ const DEFAULT_CONFIG = {
   // Link configuration
   linkType: 'external',
   externalLink: '#',
+  // Close button configuration
+  gBtnStyleLayout: 'default',
+  gBtnLabel: 'Close',
 };
 
 /**
