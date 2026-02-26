@@ -3852,8 +3852,120 @@
           },
           {
             "component": "select",
-            "label": "font (D/T/M)",
-            "name": "categoryFont",
+            "label": "font (D)",
+            "name": "categoryFontD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md-16",
+                "value": "tt-md-16-lg"
+              },
+              {
+                "name": "tt-md-18",
+                "value": "tt-md-18-lg"
+              },
+              {
+                "name": "tt-md-20",
+                "value": "tt-md-20-lg"
+              },
+              {
+                "name": "tt-md-24",
+                "value": "tt-md-24-lg"
+              },
+              {
+                "name": "tt-nr-16",
+                "value": "tt-nr-16-lg"
+              },
+              {
+                "name": "tt-nr-18",
+                "value": "tt-nr-18-lg"
+              },
+              {
+                "name": "tt-nr-20",
+                "value": "tt-nr-20-lg"
+              },
+              {
+                "name": "tt-nr-24",
+                "value": "tt-nr-24-lg"
+              },
+              {
+                "name": "tt-bd-16",
+                "value": "tt-bd-16-lg"
+              },
+              {
+                "name": "tt-bd-18",
+                "value": "tt-bd-18-lg"
+              },
+              {
+                "name": "tt-bd-20",
+                "value": "tt-bd-20-lg"
+              },
+              {
+                "name": "tt-bd-24",
+                "value": "tt-bd-24-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "categoryFontT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md-16",
+                "value": "tt-md-16-md"
+              },
+              {
+                "name": "tt-md-18",
+                "value": "tt-md-18-md"
+              },
+              {
+                "name": "tt-md-20",
+                "value": "tt-md-20-md"
+              },
+              {
+                "name": "tt-md-24",
+                "value": "tt-md-24-md"
+              },
+              {
+                "name": "tt-nr-16",
+                "value": "tt-nr-16-md"
+              },
+              {
+                "name": "tt-nr-18",
+                "value": "tt-nr-18-md"
+              },
+              {
+                "name": "tt-nr-20",
+                "value": "tt-nr-20-md"
+              },
+              {
+                "name": "tt-nr-24",
+                "value": "tt-nr-24-md"
+              },
+              {
+                "name": "tt-bd-16",
+                "value": "tt-bd-16-md"
+              },
+              {
+                "name": "tt-bd-18",
+                "value": "tt-bd-18-md"
+              },
+              {
+                "name": "tt-bd-20",
+                "value": "tt-bd-20-md"
+              },
+              {
+                "name": "tt-bd-24",
+                "value": "tt-bd-24-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "categoryFontM",
             "valueType": "string",
             "options": [
               {

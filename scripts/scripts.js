@@ -79,6 +79,7 @@ export async function loadSwiper() {
 
   // Return existing promise if load is in progress
   if (!swiperPromise) {
+    // eslint-disable-next-line no-console
     console.log(`Swiper: Starting dynamic load (JS + CSS) [Call ID: ${Date.now()}]`);
 
     swiperPromise = (async () => {
@@ -87,6 +88,7 @@ export async function loadSwiper() {
           // Load CSS once
           !swiperCSSLoaded ? loadCSS('https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css').then(() => {
             swiperCSSLoaded = true;
+            // eslint-disable-next-line no-console
             console.log('Swiper CSS loaded');
           }) : Promise.resolve(),
           // Load JS
@@ -98,15 +100,18 @@ export async function loadSwiper() {
             },
           ),
         ]);
+        // eslint-disable-next-line no-console
         console.log('Swiper loaded dynamically (CSS + JS)');
         return window.Swiper;
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Failed to load Swiper library:', error);
         swiperPromise = null; // Reset on error so retry is possible
         throw error;
       }
     })(); // IIFE (Immediately Invoked Function Expression) creates promise synchronously
   } else {
+    // eslint-disable-next-line no-console
     console.log('Swiper: Reusing existing load promise');
   }
 

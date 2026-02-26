@@ -4,7 +4,22 @@ import {
   handleDecide,
   processInlineIdSyntax,
   handleMotion,
+  getProductLine,
 } from '../../scripts/utils.js';
+
+const FONTS = {
+  categoryFontD: {
+    asus: 'tt-md-20-lg', proart: 'tt-md-20-lg', rog: 'tg-bd-20-lg', tuf: 'dp-cb-20-lg',
+  },
+  categoryFontT: {
+    asus: 'tt-md-20-md', proart: 'tt-md-20-md', rog: 'tg-bd-20-md', tuf: 'dp-cb-20-md',
+  },
+  categoryFontM: {
+    asus: 'tt-md-16', proart: 'tt-md-16', rog: 'tg-bd-16', tuf: 'dp-cb-16',
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
 
 // DEFAULT
 const DEFAULT_CONFIG = {
@@ -24,7 +39,9 @@ const DEFAULT_CONFIG = {
   categoryIconPosition: '',
   categoryIcon1: '',
   categoryIcon2: '',
-  categoryFont: 'tt-md-20',
+  categoryFontD: FONTS.categoryFontD[PRODUCT_LINE],
+  categoryFontT: FONTS.categoryFontT[PRODUCT_LINE],
+  categoryFontM: FONTS.categoryFontM[PRODUCT_LINE],
   categoryFontColor: '',
   titleFont: 'tt-md-40',
   titleFontColor: '',
@@ -111,7 +128,9 @@ export default async function decorate(block) {
     const category = `
       <div class='flex ${categoryClass}'>
         ${icon1}
-        <div class='break-all flex-1 text-block-category ${v('categoryFont')}' ${categoryFontColor}>${v('categoryRichtext', 'html') || ''}</div>
+        <div class='break-all flex-1 text-block-category ${v('categoryFontD')}  ${v('categoryFontT')}  ${v('categoryFontM')}' ${categoryFontColor}>
+          ${v('categoryRichtext', 'html') || ''}
+        </div>
         ${icon2}
       </div>
     `;
