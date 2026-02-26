@@ -1,3 +1,7 @@
+import {
+  getBlockConfigs,
+} from '../../scripts/utils.js';
+
 // function debounce(fn, delay = 200) {
 //   let timer;
 //   return (...args) => {
@@ -73,30 +77,50 @@
 //   block.classList.add(mode);
 // }
 
-export default function decorate(block) {
-  // 给结构加 class（EDS 通常是 div 包一层）
-  const rows = [...block.children];
-  console.log('rows', rows);
+// default
+const DEFAULT_CONFIG = { };
 
-  // rows.forEach((row) => {
-  //   row.classList.add('feature-item');
+export default async function decorate(block) {
+  try {
+    const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'featureitem-block');
+    console.log('config', config);
+    const wrapper = block.querySelectorAll(':scope > div');
+    Array.from(wrapper).forEach(async (wrap) => {
+      try {
+        if (wrapper.length < 2) return;
+        const itemConfig = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+        console.log('itemConfig', itemConfig);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error decorating wrapper:', error);
+      }
+    });
+    // const rows = [...block.children];
 
-  //   const img = row.querySelector('img');
-  //   if (img) {
-  //     img.classList.add('icon');
-  //   }
+    // rows.forEach((row) => {
+    //   row.classList.add('feature-item');
 
-  //   const paragraphs = row.querySelectorAll('p');
-  //   if (paragraphs.length > 1) {
-  //     paragraphs[1].classList.add('subtext');
-  //   }
-  // });
+    //   const img = row.querySelector('img');
+    //   if (img) {
+    //     img.classList.add('icon');
+    //   }
 
-  // const update = debounce(() => updateLayout(block), 200);
+    //   const paragraphs = row.querySelectorAll('p');
+    //   if (paragraphs.length > 1) {
+    //     paragraphs[1].classList.add('subtext');
+    //   }
+    // });
 
-  // requestAnimationFrame(() => {
-  //   updateLayout(block);
-  // });
+    // const update = debounce(() => updateLayout(block), 200);
 
-  // window.addEventListener('resize', update);
+    // requestAnimationFrame(() => {
+    //   updateLayout(block);
+    // });
+
+    // window.addEventListener('resize', update);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error decorating featureitem-block block:', error);
+    block.innerHTML = '<div class="error-message">Failed to load featureitem-block block</div>';
+  }
 }
