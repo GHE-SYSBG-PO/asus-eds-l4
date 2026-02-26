@@ -128,7 +128,7 @@ export default async function decorate(block) {
     const category = `
       <div class='flex ${categoryClass}'>
         ${icon1}
-        <div class='break-all flex-1 text-block-category ${v('categoryFontD')}  ${v('categoryFontT')}  ${v('categoryFontM')}' ${categoryFontColor}>
+        <div class='break-all flex-1 text-block-category ${v('categoryFontD')} ${v('categoryFontT')} ${v('categoryFontM')}' ${categoryFontColor}>
           ${v('categoryRichtext', 'html') || ''}
         </div>
         ${icon2}
