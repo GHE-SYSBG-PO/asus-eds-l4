@@ -8,17 +8,17 @@ const DEFAULT_CONFIG = {
 
 export const getRadiusStyle = (tl, tr, br, bl) => {
   // If none are configured, return empty (use CSS default)
-  if (!tl && !tr && !br && !bl) return '';
+  if (tl === '' && tr === '' && br === '' && bl === '') return '';
   const radiuses = [];
-  if (tl) radiuses.push(`${tl}px 0 0 0`);
-  if (tr) radiuses.push(`0 ${tr}px 0 0`);
-  if (br) radiuses.push(`0 0 ${br}px 0`);
-  if (bl) radiuses.push(`0 0 0 ${bl}px`);
+  if (tl !== '') radiuses.push(`border-top-left-radius:${tl}px`);
+  if (tr !== '') radiuses.push(`border-top-right-radius:${tr}px`);
+  if (br !== '') radiuses.push(`border-bottom-right-radius:${br}px`);
+  if (bl !== '') radiuses.push(`border-bottom-left-radius:${bl}px`);
   if (radiuses.length === 4) {
     return `border-radius: ${tl}px ${tr}px ${br}px ${bl}px;`;
   }
   if (radiuses.length > 0) {
-    return `border-radius: ${radiuses.join(' / ')};`;
+    return `${radiuses.join(';')};`;
   }
   return '';
 };
