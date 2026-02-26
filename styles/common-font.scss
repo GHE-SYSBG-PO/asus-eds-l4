@@ -4,8 +4,9 @@ $font-tt-norms-pro: 'tt-norms-pro', sans-serif;
 $font-tt-norms-condensed: 'TT Norms Std Condensed', sans-serif;
 
 // Responsive breakpoints
-$breakpoint-sm: 320px;
+$breakpoint-sm: 729px;
 $breakpoint-md: 730px;
+$breakpoint-md-max: 1279px;
 $breakpoint-lg: 1280px;
 
 // Base mixin: generate font classes
@@ -16,7 +17,7 @@ $breakpoint-lg: 1280px;
   }
 
   // Responsive versions
-  @media (min-width: $breakpoint-sm) {
+  @media (max-width: $breakpoint-sm) {
     .#{$name} {
       font-size: #{$size}px;
       line-height: #{$line-height}px;
@@ -24,7 +25,7 @@ $breakpoint-lg: 1280px;
     }
   }
   
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-md-max) {
     .#{$name}-md {
       font-size: #{$size}px;
       line-height: #{$line-height}px;
@@ -42,13 +43,13 @@ $breakpoint-lg: 1280px;
 
   // If it's short line-height version
   @if $sh {
-    @media (min-width: $breakpoint-sm) {
+    @media (max-width: $breakpoint-sm) {
       .#{$name}-sh {
         line-height: #{($size * 1.3)}px;
       }
     }
 
-    @media (min-width: $breakpoint-md) {
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-md-max) {
       .#{$name}-sh-md {
         line-height: #{($size * 1.3)}px;
       }
