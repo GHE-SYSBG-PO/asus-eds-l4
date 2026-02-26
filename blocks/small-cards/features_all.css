@@ -50954,7 +50954,7 @@ body {
     }
 
     .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-].column-span-2 .block-content,.wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-].column-span-3 .block-content,.wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-].column-span-6 .block-content {
-        padding-bottom: 30px;
+        /* padding-bottom: 30px; */
         min-height: unset
     }
 
