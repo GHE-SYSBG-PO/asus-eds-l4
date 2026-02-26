@@ -12,10 +12,10 @@ const FONTS = {
     asus: 'tt-md-40-lg', proart: 'tt-md-20-lg', rog: 'ro-bd-20-sh-lg', tuf: 'dp-cb-20-lg',
   },
   categoryFontT: {
-    asus: 'tt-nr-24', proart: 'tt-md-20-md', rog: 'tt-bd-18-sh-md', tuf: 'dp-cb-20-md',
+    asus: 'tt-nr-24-md', proart: 'tt-md-20-md', rog: 'tt-bd-18-sh-md', tuf: 'dp-cb-20-md',
   },
   categoryFontM: {
-    asus: 'tt-md-16', proart: 'tt-md-16-sm', rog: 'tt-nr-16-sh-sm', tuf: 'dp-cb-16-sm',
+    asus: 'tt-cd-52', proart: 'tt-md-16-sm', rog: 'tt-nr-16-sh-sm', tuf: 'dp-cb-16-sm',
   },
   titleFontD: {
     asus: 'tt-md-40-lg', proart: 'tt-md-40-lg', rog: 'tg-bd-40-lg', tuf: 'dp-cb-40-lg',
