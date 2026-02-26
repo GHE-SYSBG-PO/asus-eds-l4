@@ -1237,52 +1237,6 @@
       },
       {
         "component": "select",
-        "label": "hyperlink style",
-        "name": "linkType",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "external link",
-            "value": "external"
-          },
-          {
-            "name": "inner page",
-            "value": "inner"
-          }
-        ]
-      },
-      {
-        "component": "text",
-        "label": "external link",
-        "name": "externalLink",
-        "valueType": "string",
-        "placeholder": "https://",
-        "condition": {
-          "===": [
-            {
-              "var": "linkType"
-            },
-            "external"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "label": "inner page content",
-        "name": "innerPageLink",
-        "placeholder": "modal",
-        "condition": {
-          "===": [
-            {
-              "var": "linkType"
-            },
-            "inner"
-          ]
-        }
-      },
-      {
-        "component": "select",
         "label": "icon style",
         "name": "iconStyle",
         "valueType": "string",
@@ -1524,6 +1478,52 @@
                 "png"
               ]
             }
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "hyperlink style",
+        "name": "linkType",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "external link",
+            "value": "external"
+          },
+          {
+            "name": "inner page",
+            "value": "inner"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "external link",
+        "name": "externalLink",
+        "valueType": "string",
+        "placeholder": "https://",
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "external"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "inner page content",
+        "name": "innerPageLink",
+        "placeholder": "modal",
+        "condition": {
+          "===": [
+            {
+              "var": "linkType"
+            },
+            "inner"
           ]
         }
       },

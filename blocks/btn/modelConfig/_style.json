@@ -39,6 +39,9 @@
       ]
     },
     {
+      "...": "./_icon.json#/fields"
+    },
+    {
       "component": "select",
       "label": "hyperlink style",
       "name": "linkType",
@@ -83,9 +86,6 @@
           "inner"
         ]
       }
-    },
-    {
-      "...": "./_icon.json#/fields"
     },
     {
       "component": "select",
