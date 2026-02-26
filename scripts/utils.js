@@ -155,7 +155,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
  */
 export const getFieldValue = (obj) => {
   const config = obj || {};
-  return (key, type = 'text') => config?.[key]?.[type] || '';
+  return (key, type = 'text') => (config?.[key]?.[type] === undefined ? '' : config?.[key]?.[type] || '');
 };
 
 /**
