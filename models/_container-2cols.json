@@ -220,6 +220,31 @@
         { "name": "yes", "value": "yes" },
         { "name": "no", "value": "no" }
       ]
+    },
+    {
+      "component": "tab",
+      "label": "Color",
+      "name": "color"
+    },
+    {
+      "component": "select",
+      "valueType": "string",
+      "name": "colorGroup",
+      "label": "Color Group",
+      "options": [
+        {
+          "name": "default",
+          "value": ""
+        },
+        {
+          "name": "Light",
+          "value": "section-light"
+        },
+        {
+          "name": "Dark",
+          "value": "section-dark"
+        }
+      ]
     }
   ]
 }

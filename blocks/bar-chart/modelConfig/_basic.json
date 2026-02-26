@@ -1,0 +1,155 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "richtext",
+      "label": "Title",
+      "name": "titleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "Disclaimer",
+      "name": "disclaimerRichtext",
+      "valueType": "string"
+    },
+      {
+        "component": "container",
+        "valueType": "string[]",
+        "name": "barRow",
+        "label": "Bar Row",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowItemText",
+            "value": "L4TagMulti-barRowItemText",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "Item Text",
+            "name": "barRowItemText",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowBarText",
+            "value": "L4TagMulti-barRowBarText",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Bar Text",
+            "name": "barRowBarText",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowTextColor",
+            "value": "L4TagMulti-barRowTextColor",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Bar Text Font Color",
+            "name": "barRowTextColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowLength",
+            "value": "L4TagMulti-barRowLength",
+            "hidden": true
+          },
+          {
+            "component": "number",
+            "label": "Bar Length (%)",
+            "name": "barRowLength",
+            "valueType": "number",
+            "min": 0,
+            "max": 100
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowColor",
+            "value": "L4TagMulti-barRowColor",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Bar Color",
+            "name": "barRowColor",
+            "valueType": "string",
+            "description": "Hex without #. For gradient use comma: 00ffee,ff00ee"
+          }
+        ]
+      },
+    {
+      "component": "select",
+      "label": "Motion",
+      "name": "motion",
+      "valueType": "string",
+      "options": [
+        { "name": "On", "value": "on" },
+        { "name": "Off", "value": "off" }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Arrow Block",
+      "name": "arrowBlock",
+      "condition": {
+        "in": [{ "var": "style" }, ["2", "4", "6"]]
+      },
+      "fields": [
+        {
+          "component": "richtext",
+          "label": "Arrow Num",
+          "name": "arrowNumRichtext",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "Arrow Text",
+          "name": "arrowTextRichtext",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "label": "Arrow Style",
+          "name": "arrowStyle",
+          "valueType": "string",
+          "options": [
+            { "name": "SVG", "value": "svg" },
+            { "name": "PNG", "value": "png" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "Arrow Color",
+          "name": "arrowColor",
+          "valueType": "string",
+          "description": "Hex without #. For gradient use comma: 00ffee,ff00ee",
+          "condition": {
+            "===": [{ "var": "arrowStyle" }, "svg"]
+          }
+        },
+        {
+          "component": "reference",
+          "label": "Arrow Asset",
+          "name": "arrowAsset",
+          "valueType": "string",
+          "condition": {
+            "===": [{ "var": "arrowStyle" }, "png"]
+          }
+        }
+      ]
+    }
+  ]
+}

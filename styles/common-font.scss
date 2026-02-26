@@ -1,13 +1,13 @@
-// 字体变量定义
+// Font variable definitions
 $font-roboto: 'roboto', sans-serif;
 $font-tt-norms-pro: 'tt-norms-pro', sans-serif;
 $font-tt-norms-condensed: 'TT Norms Std Condensed', sans-serif;
 
-// 响应式断点
+// Responsive breakpoints
 $breakpoint-md: 730px;
 $breakpoint-lg: 1280px;
 
-// 基础 mixin：生成字体类
+// Base mixin: generate font classes
 @mixin font-class($name, $size, $line-height, $weight, $sh: false, $family: $font-roboto) {
   .#{$name} {
     font-family: $family;
@@ -17,7 +17,7 @@ $breakpoint-lg: 1280px;
     letter-spacing: 0;
   }
 
-  // 响应式版本
+  // Responsive versions
   @media (min-width: $breakpoint-md) {
     .#{$name}-md {
       font-size: #{$size}px;
@@ -34,7 +34,7 @@ $breakpoint-lg: 1280px;
     }
   }
 
-  // 如果是 short line-height 版本
+  // If it's short line-height version
   @if $sh {
     .#{$name}-sh {
       line-height: #{($size * 1.3)}px;
@@ -54,7 +54,7 @@ $breakpoint-lg: 1280px;
   }
 }
 
-// 生成所有 Roboto 字体类
+// Generate all Roboto font classes
 // Regular (400)
 @include font-class(ro-rg-12, 12, 16, 400, false, $font-roboto);
 @include font-class(ro-rg-13, 13, 18, 400, false, $font-roboto);
@@ -97,7 +97,7 @@ $breakpoint-lg: 1280px;
 @include font-class(ro-it-20, 20, 28, 400, false, $font-roboto);
 @include font-class(ro-it-24, 24, 32, 400, false, $font-roboto);
 
-// 生成 TT Norms Pro 的所有字体类
+// Generate all TT Norms Pro font classes
 // Regular (400)
 @include font-class(tt-nr-13, 13, 18, 400, false, $font-tt-norms-pro);
 @include font-class(tt-nr-14, 14, 20, 400, false, $font-tt-norms-pro);
@@ -127,7 +127,7 @@ $breakpoint-lg: 1280px;
 @include font-class(tt-md-64, 64, 72, 500, false, $font-tt-norms-pro);
 @include font-class(tt-md-72, 72, 80, 500, false, $font-tt-norms-pro);
 
-// Regular (400) - 新增大字号 TT Norms Pro 样式
+// Regular (400) - New larger size TT Norms Pro styles
 @include font-class(tt-nr-28, 28, 36, 400, false, $font-tt-norms-pro);
 @include font-class(tt-nr-32, 32, 40, 400, false, $font-tt-norms-pro);
 @include font-class(tt-nr-36, 36, 44, 400, false, $font-tt-norms-pro);

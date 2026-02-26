@@ -50,7 +50,7 @@
         "component": "select",
         "valueType": "string",
         "name": "mode",
-        "label": "Mode",
+        "label": "Color Group",
         "value": "light",
         "options": [
           {
@@ -670,6 +670,528 @@
             "value": "no"
           }
         ]
+      },
+      {
+        "component": "tab",
+        "label": "Color",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bar-chart",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "layout",
+        "name": "layout"
+      },
+      {
+        "component": "select",
+        "label": "Layout Variant",
+        "name": "style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 - Small bar num, text next to bar",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 - Small bar num, text next to bar, with arrow",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 - Small bar num, text on top of bar",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 - Small bar num, text on top of bar, with arrow",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 - Large bar num (default)",
+            "value": "5"
+          },
+          {
+            "name": "Variant 6 - Large bar num, with arrow",
+            "value": "6"
+          }
+        ]
+      },
+      {
+        "component": "number",
+        "label": "Item Text Width (%) (D/T)",
+        "name": "itemTextWidth",
+        "valueType": "number",
+        "condition": {
+          "in": [
+            {
+              "var": "style"
+            },
+            [
+              "1",
+              "2"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "number",
+        "label": "Bar Width (%) (D/T)",
+        "name": "barWidth",
+        "valueType": "number",
+        "condition": {
+          "in": [
+            {
+              "var": "style"
+            },
+            [
+              "1",
+              "2"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "number",
+        "label": "Item Text & Bar Width (%) (D/T)",
+        "name": "itemBarWidth",
+        "valueType": "number",
+        "condition": {
+          "in": [
+            {
+              "var": "style"
+            },
+            [
+              "4",
+              "6"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "number",
+        "label": "Arrow & Num Width (%) (D/T)",
+        "name": "arrowNumWidth",
+        "valueType": "number",
+        "condition": {
+          "in": [
+            {
+              "var": "style"
+            },
+            [
+              "2",
+              "4",
+              "6"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "Title",
+        "name": "titleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "Disclaimer",
+        "name": "disclaimerRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "valueType": "string[]",
+        "name": "barRow",
+        "label": "Bar Row",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowItemText",
+            "value": "L4TagMulti-barRowItemText",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "Item Text",
+            "name": "barRowItemText",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowBarText",
+            "value": "L4TagMulti-barRowBarText",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Bar Text",
+            "name": "barRowBarText",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowTextColor",
+            "value": "L4TagMulti-barRowTextColor",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Bar Text Font Color",
+            "name": "barRowTextColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowLength",
+            "value": "L4TagMulti-barRowLength",
+            "hidden": true
+          },
+          {
+            "component": "number",
+            "label": "Bar Length (%)",
+            "name": "barRowLength",
+            "valueType": "number",
+            "min": 0,
+            "max": 100
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-barRowColor",
+            "value": "L4TagMulti-barRowColor",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Bar Color",
+            "name": "barRowColor",
+            "valueType": "string",
+            "description": "Hex without #. For gradient use comma: 00ffee,ff00ee"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "Motion",
+        "name": "motion",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Arrow Block",
+        "name": "arrowBlock",
+        "condition": {
+          "in": [
+            {
+              "var": "style"
+            },
+            [
+              "2",
+              "4",
+              "6"
+            ]
+          ]
+        },
+        "fields": [
+          {
+            "component": "richtext",
+            "label": "Arrow Num",
+            "name": "arrowNumRichtext",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "label": "Arrow Text",
+            "name": "arrowTextRichtext",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "Arrow Style",
+            "name": "arrowStyle",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "SVG",
+                "value": "svg"
+              },
+              {
+                "name": "PNG",
+                "value": "png"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Arrow Color",
+            "name": "arrowColor",
+            "valueType": "string",
+            "description": "Hex without #. For gradient use comma: 00ffee,ff00ee",
+            "condition": {
+              "===": [
+                {
+                  "var": "arrowStyle"
+                },
+                "svg"
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "Arrow Asset",
+            "name": "arrowAsset",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "arrowStyle"
+                },
+                "png"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "title",
+        "name": "titleAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font (DTM)",
+            "name": "titleFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md-24",
+                "value": "tt-md-24"
+              },
+              {
+                "name": "tt-bd-24",
+                "value": "tt-bd-24"
+              },
+              {
+                "name": "tt-md-28",
+                "value": "tt-md-28"
+              },
+              {
+                "name": "tt-bd-28",
+                "value": "tt-bd-28"
+              },
+              {
+                "name": "tt-md-32",
+                "value": "tt-md-32"
+              },
+              {
+                "name": "tt-bd-32",
+                "value": "tt-bd-32"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "titleFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "disclaimer",
+        "name": "disclaimerAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "Font",
+            "name": "disclaimerFont",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "disclaimerFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "bar row style",
+        "name": "barRowStyleAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font (DTM)",
+            "name": "itemTextFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "itemTextFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius TL (Top Left)",
+            "name": "radiusTL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius TR (Top Right)",
+            "name": "radiusTR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius BR (Bottom Right)",
+            "name": "radiusBR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bar Radius BL (Bottom Left)",
+            "name": "radiusBL",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "arrow block",
+        "name": "arrowBlockAdvanced",
+        "collapsible": true,
+        "condition": {
+          "in": [
+            {
+              "var": "style"
+            },
+            [
+              "2",
+              "4",
+              "6"
+            ]
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Arrow Num Font Color",
+            "name": "arrowNumFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "select",
+            "label": "Arrow Text Font (D/T)",
+            "name": "arrowTextFontDT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Arrow Text Font (M)",
+            "name": "arrowTextFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-14-sh",
+                "value": "tt-nr-14-sh"
+              },
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Arrow Text Font Color",
+            "name": "arrowTextFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--bar-chart",
+        "hidden": true
       }
     ]
   },
@@ -1797,6 +2319,571 @@
             "value": "off"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "featureitem-block",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "layout",
+        "name": "layout"
+      },
+      {
+        "component": "select",
+        "label": "desktop alignment",
+        "name": "desktopAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "tablet alignment",
+        "name": "tabletAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "mobile alignment",
+        "name": "mobileAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Left",
+            "value": "left"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "motion",
+        "name": "motion",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "featureitem-block-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "select",
+        "label": "type",
+        "name": "type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "text",
+            "value": "text"
+          },
+          {
+            "name": "icon",
+            "value": "icon"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "label": "highlight text",
+        "name": "highlightTextBasic",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "type"
+                },
+                "text"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "label": "icon source",
+        "name": "iconSource",
+        "multi": false,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "type"
+                },
+                "icon"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "top text",
+        "name": "topTextBasic",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "show/hide (space) (DTM)",
+            "name": "topTextToggle",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Show",
+                "value": "show"
+              },
+              {
+                "name": "Hide",
+                "value": "hide"
+              }
+            ]
+          },
+          {
+            "component": "richtext",
+            "label": "richtext",
+            "name": "topTextRichtext",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "bottom text",
+        "name": "bottomTextBasic",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "show/hide (space) (DTM)",
+            "name": "bottomTextToggle",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "Show",
+                "value": "show"
+              },
+              {
+                "name": "Hide",
+                "value": "hide"
+              }
+            ]
+          },
+          {
+            "component": "richtext",
+            "label": "richtext",
+            "name": "bottomTextRichtext",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "top text",
+        "name": "topTextAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D)",
+            "name": "topTextD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-lg"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-lg"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "topTextT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-md"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-md"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "topTextM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font Color",
+            "name": "topTextColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "width",
+            "name": "topTextWidth",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "bottom text",
+        "name": "bottomTextAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D)",
+            "name": "bottomTextD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-lg"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-lg"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "bottomTextT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-md"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-md"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "bottomTextM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font Color",
+            "name": "bottomTextColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "width",
+            "name": "bottomTextWidth",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "highlight text",
+        "name": "highlightTextAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D)",
+            "name": "highlightTextD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-40",
+                "value": "tt-nr-40-lg"
+              },
+              {
+                "name": "tt-nr-48",
+                "value": "tt-nr-48-lg"
+              },
+              {
+                "name": "tt-nr-52",
+                "value": "tt-nr-52-lg"
+              },
+              {
+                "name": "tt-md-40",
+                "value": "tt-md-40-lg"
+              },
+              {
+                "name": "tt-md-48",
+                "value": "tt-md-48-lg"
+              },
+              {
+                "name": "tt-md-52",
+                "value": "tt-md-52-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "highlightTextT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-40",
+                "value": "tt-nr-40-md"
+              },
+              {
+                "name": "tt-nr-48",
+                "value": "tt-nr-48-md"
+              },
+              {
+                "name": "tt-nr-52",
+                "value": "tt-nr-52-md"
+              },
+              {
+                "name": "tt-md-40",
+                "value": "tt-md-40-md"
+              },
+              {
+                "name": "tt-md-48",
+                "value": "tt-md-48-md"
+              },
+              {
+                "name": "tt-md-52",
+                "value": "tt-md-52-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "highlightTextM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-40",
+                "value": "tt-nr-40"
+              },
+              {
+                "name": "tt-nr-48",
+                "value": "tt-nr-48"
+              },
+              {
+                "name": "tt-nr-52",
+                "value": "tt-nr-52"
+              },
+              {
+                "name": "tt-md-40",
+                "value": "tt-md-40"
+              },
+              {
+                "name": "tt-md-48",
+                "value": "tt-md-48"
+              },
+              {
+                "name": "tt-md-52",
+                "value": "tt-md-52"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font Color",
+            "name": "highlightTextColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "width",
+            "name": "highlightTextWidth",
+            "valueType": "string"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "footnoteitem",
+    "fields": [
+      {
+        "component": "text",
+        "label": "id",
+        "name": "idText",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "text",
+        "name": "textRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "label": "arrow (on /off)",
+        "name": "arrowConfig",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "default",
+        "name": "arrowDefaultColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "hover",
+        "name": "arrowHoverColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "press",
+        "name": "arrowPressColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "arrowConfig"
+                },
+                "on"
+              ]
+            }
+          ]
+        }
       }
     ]
   },

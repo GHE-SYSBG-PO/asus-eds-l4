@@ -4,41 +4,43 @@ import {
   getBlockRepeatConfigs,
 } from '../../scripts/utils.js';
 
-// 统一高度，标题以最高为基准，设置其他容器的高度
+/**
+ * Unifies the height of title containers based on the tallest content.
+ * Sets a minimum height for all title containers to ensure consistent layout.
+ * @param {HTMLElement} block - The parent block element containing the title containers.
+ */
 const setUnifiedHeight = (block) => {
-  const containers = block.querySelectorAll('.chart-advanced .title>h4');
-  const parentContainers = block.querySelectorAll('.chart-advanced .title'); // 获取父容器
+  // Select all title headings and their parent containers
+  const titleHeadings = block.querySelectorAll('.chart-advanced .title > h4');
+  const titleContainers = block.querySelectorAll('.chart-advanced .title');
 
-  // 获取容器内最高的高度
-  let maxHeight = 0;
-  containers.forEach((container) => {
-    // 使用 scrollHeight 获取包含滚动内容在内的总高度
-    const containerContentHeight = container.scrollHeight;
-    if (containerContentHeight > maxHeight) {
-      maxHeight = containerContentHeight;
-    }
-  });
-  // console.log('最高容器内容的高度:', maxHeight);
+  /**
+   * Calculates the maximum height among all title headings.
+   * @returns {number} The maximum height in pixels.
+   */
+  const getMaxHeight = () => Array.from(titleHeadings).reduce((max, heading) => {
+    const contentHeight = heading.scrollHeight;
+    return contentHeight > max ? contentHeight : max;
+  }, 0);
 
-  // 给所有 .title 容器设置最小高度
-  const setMinHeight = () => {
-    if (window.innerWidth >= 730) {
-      parentContainers.forEach((parentContainer) => {
-        parentContainer.style.minHeight = `${maxHeight}px`;
-      });
-    } else {
-      // 屏幕宽度小于730时，移除所有 .title 的最小高度
-      parentContainers.forEach((parentContainer) => {
-        parentContainer.style.minHeight = '';
-      });
-    }
+  /**
+   * Applies or removes minimum height to title containers based on screen width.
+   * @param {number} height - The height to apply as minimum height.
+   */
+  const applyMinHeight = (height) => {
+    const shouldApply = window.innerWidth >= 730;
+    titleContainers.forEach((container) => {
+      container.style.minHeight = shouldApply ? `${height}px` : '';
+    });
   };
 
-  // 初始设置
-  setMinHeight();
-
-  // 节流函数
-  function throttle(func, delay) {
+  /**
+   * Throttles a function to limit its execution rate.
+   * @param {Function} func - The function to throttle.
+   * @param {number} delay - The delay in milliseconds.
+   * @returns {Function} The throttled function.
+   */
+  const throttle = (func, delay) => {
     let timeoutId;
     let lastExecTime = 0;
     return (...args) => {
@@ -48,48 +50,31 @@ const setUnifiedHeight = (block) => {
         lastExecTime = currentTime;
       } else {
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(
-          () => {
-            func.apply(this, args);
-            lastExecTime = Date.now();
-          },
-          delay - (currentTime - lastExecTime),
-        );
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+          lastExecTime = Date.now();
+        }, delay - (currentTime - lastExecTime));
       }
     };
-  }
-
-  // 窗口大小改变时的处理函数
-  const handleResize = () => {
-    // 检查屏幕宽度是否大于等于730px
-    if (window.innerWidth >= 730) {
-      let newMaxHeight = 0;
-      containers.forEach((container) => {
-        const containerContentHeight = container.scrollHeight;
-        if (containerContentHeight > newMaxHeight) {
-          newMaxHeight = containerContentHeight;
-        }
-      });
-      // console.log('窗口调整后最高容器内容的高度:', newMaxHeight);
-
-      maxHeight = newMaxHeight;
-      // 更新所有 .title 容器的最小高度
-      parentContainers.forEach((parentContainer) => {
-        parentContainer.style.minHeight = `${newMaxHeight}px`;
-      });
-    } else {
-      // 屏幕宽度小于730时，移除所有 .title 的最小高度
-      parentContainers.forEach((parentContainer) => {
-        parentContainer.style.minHeight = '';
-      });
-    }
   };
 
-  // 添加带节流的resize事件监听器
+  /**
+   * Handles window resize events to update title container heights dynamically.
+   */
+  const handleResize = () => {
+    const newMaxHeight = getMaxHeight();
+    applyMinHeight(newMaxHeight);
+  };
+
+  // Initial setup
+  const initialMaxHeight = getMaxHeight();
+  applyMinHeight(initialMaxHeight);
+
+  // Add throttled resize event listener
   window.addEventListener('resize', throttle(handleResize, 300));
 };
 
-// 默认值
+// DEFAULT
 const DEFAULT_CONFIG = {
   wrapLine: 'on',
   titleFont: 'tt-bd-28',
@@ -98,62 +83,56 @@ const DEFAULT_CONFIG = {
 };
 
 export default async function decorate(block) {
-  const wrapper = block.querySelectorAll(':scope > div');
-  // console.log('执行chart-advanced', block);
-  let config = {};
-  let v = '';
-  let itemHtml = '';
-  let lineColor = '';
-  let titleFontColor = '';
-  let infoFontColor = '';
-  // 创建所有异步操作的 Promise 数组
-  // 每个chat
-  Array.from(wrapper).forEach(async (wrap) => {
-    // console.log('wrap', wrap)
-    config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
-    v = getFieldValue(config);
-    // console.log('执行chart-advanced-config', config);
-
-    if (v('titleFontColor')) {
-      titleFontColor = `--chart-advanced-title-color: #${v('titleFontColor')}`;
-    }
-    if (v('infoFontColor')) {
-      infoFontColor = `--chart-advanced-info-color: #${v('infoFontColor')}`;
-    }
-    if (v('lineColor')) {
-      lineColor = `--chart-advanced-line-bg-color: #${v('lineColor')}`;
-    }
-    // 获取有重复项的数组
-    const [item = []] = getBlockRepeatConfigs(wrap);
-    // console.log('item', item);
-    itemHtml = '';
-    item.forEach((val) => {
+  try {
+    const wrapper = block.querySelectorAll(':scope > div');
+    // Process each wrapper asynchronously
+    Array.from(wrapper).forEach(async (wrap) => {
       try {
-        itemHtml += `
-          <div class="flex items-center gap-[20px]">
-            <div class="w-[46px] h-[46px] flex items-center justify-center shrink-0">${val.iconAssets.html}</div>
-            <span class="${v('infoFont')} chart-advanced-info" style="${infoFontColor}">${val.infoRichtext.text}</span> 
+        const config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+        const v = getFieldValue(config);
+
+        const titleFontColor = v('titleFontColor') ? `--chart-advanced-title-color: #${v('titleFontColor')}` : '';
+        const infoFontColor = v('infoFontColor') ? `--chart-advanced-info-color: #${v('infoFontColor')}` : '';
+        const lineColor = v('lineColor') ? `--chart-advanced-line-bg-color: #${v('lineColor')}` : '';
+        // Retrieve repeated item configurations
+        const [items = []] = getBlockRepeatConfigs(wrap);
+        const itemHtml = items.map((val) => {
+          try {
+            return `
+              <div class="flex items-center gap-[20px]">
+                <div class="w-[46px] h-[46px] flex items-center justify-center shrink-0">${val.iconAssets.html}</div>
+                <span class="${v('infoFont')} chart-advanced-info" style="${infoFontColor}">${val.infoRichtext.text}</span> 
+              </div>
+            `;
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error('Error:', error);
+            return '';
+          }
+        }).join('');
+
+        wrap.classList.add(`${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'}`, 'chat-column-width');
+        wrap.style.setProperty('--chart-advanced-chat-column-width', `${v('chartColumnWidth')}%`);
+        wrap.innerHTML = `
+          <div class="title"><h4 class="break-all ${v('titleFont')} chart-advanced-title" style="${titleFontColor}">${v('titleRichtext', 'html')}</h4></div>
+          <div class="h-[1px] mx-auto my-[16px] line-bg" style="width: ${v('lineWidth')}; ${lineColor}"></div>
+          <div class="break-all flex ${v('wrapLine') === 'on' ? 'flex-wrap' : 'flex-col'} content-start items-start gap-[16px]">
+            ${itemHtml}
           </div>
         `;
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.error('Error:', error);
+        console.error('Error decorating wrapper:', error);
       }
     });
 
-    wrap.classList.add(`${v('chartColumnWidth') ? 'md:flex-none' : 'md:flex-1'}`, 'chat-column-width');
-    wrap.style.setProperty('--chart-advanced-chat-column-width', `${v('chartColumnWidth')}%`);
-    wrap.innerHTML = `
-      <div class="title"><h4 class="break-all ${v('titleFont')} chart-advanced-title" style="${titleFontColor}">${v('titleRichtext', 'html')}</h4></div>
-      <div class="h-[1px] mx-auto my-[16px] line-bg" style="width: ${v('lineWidth')}; ${lineColor}"></div>
-      <div class="break-all flex ${v('wrapLine') === 'on' ? 'flex-wrap' : 'flex-col'} content-start items-start gap-[16px]">
-        ${itemHtml}
-      </div>
-    `;
-  });
-
-  block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced');
-  setTimeout(() => {
-    setUnifiedHeight(block);
-  }, 500);
+    block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced');
+    setTimeout(() => {
+      setUnifiedHeight(block);
+    }, 500);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error decorating chart-advanced block:', error);
+    block.innerHTML = '<div class="error-message">Failed to load chart-advanced block</div>';
+  }
 }

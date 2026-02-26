@@ -4,10 +4,10 @@ import { openModal } from '../modal/modal.js';
 import { getRadiusStyle, buildCloseButtonHtml, prefixHex } from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
-  // 基础配置
+  // Basic configuration
   styleLayout: '1',
   label: 'Button',
-  // 容器配置 - 默认为空，由 CSS 控制
+  // Container configuration - defaults to empty, controlled by CSS
   containerBgColorDefault: '',
   containerBgColorDefault2: '',
   containerBgColorHover: '',
@@ -20,18 +20,18 @@ const DEFAULT_CONFIG = {
   containerRadiusBL: '',
   borderWidth: '',
   borderColor: '',
-  // 字体配置
+  // Font configuration
   fontDesktop: '',
   fontMobile: '',
   fontColorDefault: '',
   fontColorHover: '',
   fontColorActive: '',
-  // 链接配置
+  // Link configuration
   linkType: 'external',
   externalLink: '#',
   innerPageLink: '',
 
-  // Close Btn 配置
+  // Close button configuration
   closeBtnStyle: 'default',
   closeBtnLabel: 'Close',
   closeBtnFontDesktop: '',
@@ -51,7 +51,7 @@ const DEFAULT_CONFIG = {
   closeBtnContainerRadiusBL: '',
   closeBtnBorderWidth: '',
   closeBtnBorderColor: '',
-  // 图标配置
+  // Icon configuration
   iconStyle: '',
   iconColor: '',
   iconBgColorDefault: '',
@@ -63,19 +63,19 @@ const DEFAULT_CONFIG = {
 };
 
 /**
- * 判断是否支持图标
+ * Determine whether icon is supported
  */
 const supportsIcon = (style) => ['2', '3', '5', '6'].includes(style);
 
 /**
- * 判断是否为填充样式（需要背景色）
+ * Determine if it is a filled style (requires background color)
  */
 const isFilledStyle = (style) => ['1', '2', '3'].includes(style);
 
 /**
- * 处理 Quick View 功能
- * @param {string} modalPath - Modal 页面路径
- * @param {string} closeButtonHtml - 关闭按钮 HTML
+ * Handle Quick View functionality
+ * @param {string} modalPath - Modal page path
+ * @param {string} closeButtonHtml - Close button HTML
  */
 async function handleQuickView(modalPath, closeButtonHtml) {
   // Open modal with the authored page, dialog ID, and classes
@@ -94,10 +94,10 @@ export default async function decorate(block) {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'btn');
     const v = getFieldValue(config);
 
-    // 获取基础配置
+    // Get basic configuration
     const style = String(v('styleLayout', 'text') || DEFAULT_CONFIG.styleLayout);
     const label = v('label', 'text') || DEFAULT_CONFIG.label;
-    // 获取容器配置 - 只有有值才使用
+    // Get container configuration - only use if there is a value
 
     const containerBgColorDefaultArr = prefixHex((v('containerBgColorDefault', 'text') || '').split(','));
     const containerBgColorDefault = containerBgColorDefaultArr[0] || '';
@@ -117,21 +117,21 @@ export default async function decorate(block) {
     const containerRadiusBL = v('containerRadiusBL', 'text') || '';
     const containerBorderWidth = v('borderWidth', 'text') || '';
     const containerBorderColor = prefixHex(v('borderColor', 'text') || '');
-    // 获取字体配置
+    // Get font configuration
     const fontDesktop = v('fontDesktop', 'text') || DEFAULT_CONFIG.fontDesktop;
     const fontMobile = v('fontMobile', 'text') || DEFAULT_CONFIG.fontMobile;
     const fontColorDefault = prefixHex(v('fontColorDefault', 'text') || '');
     const fontColorHover = prefixHex(v('fontColorHover', 'text') || '');
     const fontColorActive = prefixHex(v('fontColorActive', 'text') || '');
-    // 获取链接配置
+    // Get link configuration
     const linkType = v('linkType', 'text') || DEFAULT_CONFIG.linkType;
     const externalLink = v('externalLink', 'text') || DEFAULT_CONFIG.externalLink;
     const innerPageLink = v('innerPageLink', 'text') || DEFAULT_CONFIG.innerPageLink;
-    // 获取图标配置
+    // Get icon configuration
     const iconStyle = v('iconStyle', 'text') || DEFAULT_CONFIG.iconStyle;
-    // 判断样式特性
+    // Determine style characteristics
     const filled = isFilledStyle(style);
-    // 构建按钮链接
+    // Build button link
     let href = '';
     let isExternal = true;
     if (linkType === 'external' && externalLink) {
@@ -141,42 +141,42 @@ export default async function decorate(block) {
       href = '#';
       isExternal = false;
     }
-    // 构建内联样式 - 通过 CSS 变量配置所有颜色
+    // Build inline styles - configure all colors via CSS variables
     let inlineStyle = '';
-    // 默认背景色 CSS 变量
+    // Default background color CSS variables
     if (containerBgColorDefault) {
       if (containerBgColorDefault2) {
-        // 渐变 - 两个颜色都配置时
+        // Gradient - when two colors are configured
         inlineStyle += `--btn-bg-default-image: linear-gradient(270deg, ${containerBgColorDefault} 0%, ${containerBgColorDefault2} 100%);`;
       } else {
-        // 纯色 - 只配置一个颜色
+        // Solid - only one color configured
         inlineStyle += `--btn-bg-default: ${containerBgColorDefault};`;
         inlineStyle += '--btn-bg-default-image: none;';
       }
     }
-    // Hover 背景色 CSS 变量
+    // Hover background color CSS variables
     if (containerBgColorHover) {
       if (containerBgColorHover2) {
-        // 渐变 - 两个颜色都配置时
+        // Gradient - when two colors are configured
         inlineStyle += `--btn-bg-hover-image: linear-gradient(270deg, ${containerBgColorHover} 0%, ${containerBgColorHover2} 100%);`;
       } else {
-        // 纯色 - 只配置一个颜色
+        // Solid - only one color configured
         inlineStyle += `--btn-bg-hover: ${containerBgColorHover};`;
         inlineStyle += '--btn-bg-hover-image: none;';
       }
     }
-    // Active 背景色 CSS 变量
+    // Active background color CSS variables
     if (containerBgColorActive) {
       if (containerBgColorActive2) {
-        // 渐变 - 两个颜色都配置时
+        // Gradient - when two colors are configured
         inlineStyle += `--btn-bg-active-image: linear-gradient(270deg, ${containerBgColorActive} 0%, ${containerBgColorActive2} 100%);`;
       } else {
-        // 纯色 - 只配置一个颜色
+        // Solid - only one color configured
         inlineStyle += `--btn-bg-active: ${containerBgColorActive};`;
         inlineStyle += '--btn-bg-active-image: none;';
       }
     }
-    // 字体颜色 CSS 变量
+    // Font color CSS variables
     if (fontColorDefault) {
       inlineStyle += `--btn-color-default: ${fontColorDefault};`;
     }
@@ -186,14 +186,14 @@ export default async function decorate(block) {
     if (fontColorActive) {
       inlineStyle += `--btn-color-active: ${fontColorActive};`;
     }
-    // 圆角自定义
+    // Custom border radius
     // eslint-disable-next-line max-len
     const radiusStyle = getRadiusStyle(containerRadiusTL, containerRadiusTR, containerRadiusBR, containerRadiusBL);
     if (radiusStyle) {
       inlineStyle += radiusStyle;
     }
 
-    // container边框变量
+    // Container border variables
     if (filled) {
       if (containerBorderColor) {
         inlineStyle += `--container-border-color: ${containerBorderColor};`;
@@ -202,7 +202,7 @@ export default async function decorate(block) {
         inlineStyle += `--container-border-width: ${containerBorderWidth}px;`;
       }
     }
-    // 构建图标 HTML
+    // Build icon HTML
     let iconHtml = '';
     if (supportsIcon(style)) {
       const iconBgColorDefault = prefixHex(v('iconBgColorDefault', 'text') || '');
@@ -215,13 +215,13 @@ export default async function decorate(block) {
       if (iconBgColorActive) iconBgStyle += `--icon-bg-active: ${iconBgColorActive};`;
       if (iconColor) iconBgStyle += `--icon-color: ${iconColor};`;
       if (iconStyle === 'svg' || iconStyle === '') {
-        // 确定图标类型
+        // Determine icon type
         let iconPath = '';
         if (filled) {
-          // style=2 和 style=3：加号图标
+          // style=2 and style=3: plus icon
           iconPath = 'M11 19v-6h-6v-2h6V5h2v6h6v2h-6v6h-2z';
         } else {
-          // style=5 和 style=6：播放图标
+          // style=5 and style=6: play icon
           iconPath = 'M8 5v14l11-7z';
         }
 
@@ -261,7 +261,7 @@ export default async function decorate(block) {
         `;
       }
     }
-    // 构建按钮 HTML
+    // Build button HTML
     const buttonHtml = `
       <a href="${href}"
          class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${fontDesktop} ${fontMobile}"
@@ -275,7 +275,7 @@ export default async function decorate(block) {
       </a>
     `;
 
-    // 移动 AEM 编辑器 instrumentation 属性到按钮元素（必须在修改 innerHTML 之前）
+    // Move AEM editor instrumentation attributes to the button element (must be before innerHTML modification)
     const oldBtnElement = block.querySelector('.btn-component');
     if (oldBtnElement) {
       moveInstrumentation(block, oldBtnElement);
@@ -285,18 +285,18 @@ export default async function decorate(block) {
 
     const btnElement = block.querySelector('.btn-component');
     if (btnElement) {
-      // 外部链接处理
+      // External link handling
       if (isExternal && href) {
         btnElement.setAttribute('target', '_blank');
         btnElement.setAttribute('rel', 'noopener noreferrer');
       }
-      // Inner Page 处理 - 点击时调用 handleQuickView
+      // Inner Page handling - call handleQuickView on click
       if (!isExternal && linkType === 'inner' && innerPageLink) {
         btnElement.addEventListener('click', (e) => {
           e.preventDefault();
-          // 构建关闭按钮 HTML
+          // Build close button HTML
           const closeButtonHtml = buildCloseButtonHtml(v);
-          // 调用 handleQuickView 方法，传入 modal 路径和关闭按钮 HTML
+          // Call handleQuickView method, passing modal path and close button HTML
           handleQuickView(innerPageLink, closeButtonHtml);
         });
       }

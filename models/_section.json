@@ -80,7 +80,10 @@
         "btn",
         "chart-advanced",
         "space",
-        "line-info"
+        "line-info",
+        "bar-chart",
+        "footnote",
+        "featureitem-block"
       ]
     },
     {
