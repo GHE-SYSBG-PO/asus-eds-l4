@@ -21,50 +21,72 @@ $breakpoint-lg: 1280px;
 
   // Responsive versions
   @media (max-width: $breakpoint-sm) {
-    .#{$name} {
+    .#{$name}-sm {
+      font-family: $family;
       font-size: #{$size}px;
       line-height: #{$line-height}px;
       font-weight: $weight;
+      letter-spacing: 0;
     }
   }
   
   @media (min-width: $breakpoint-md) and (max-width: $breakpoint-md-max) {
     .#{$name}-md {
+      font-family: $family;
       font-size: #{$size}px;
       line-height: #{$line-height}px;
       font-weight: $weight;
+      letter-spacing: 0;
     }
   }
 
   @media (min-width: $breakpoint-lg) {
     .#{$name}-lg {
+      font-family: $family;
       font-size: #{$size}px;
       line-height: #{$line-height}px;
       font-weight: $weight;
+      letter-spacing: 0;
     }
   }
 
   // If it's short line-height version
   @if $sh {
     .#{$name}-sh {
+      font-family: $family;
+      font-size: #{$size}px;
       line-height: #{($size * 1.3)}px;
+      font-weight: $weight;
+      letter-spacing: 0;
     }
-    
+
     @media (max-width: $breakpoint-sm) {
-      .#{$name}-sh {
+      .#{$name}-sh-sm {
+        font-family: $family;
+        font-size: #{$size}px;
         line-height: #{($size * 1.3)}px;
+        font-weight: $weight;
+        letter-spacing: 0;
       }
     }
 
     @media (min-width: $breakpoint-md) and (max-width: $breakpoint-md-max) {
       .#{$name}-sh-md {
+        font-family: $family;
+        font-size: #{$size}px;
         line-height: #{($size * 1.3)}px;
+        font-weight: $weight;
+        letter-spacing: 0;
       }
     }
 
     @media (min-width: $breakpoint-lg) {
       .#{$name}-sh-lg {
+        font-family: $family;
+        font-size: #{$size}px;
         line-height: #{($size * 1.3)}px;
+        font-weight: $weight;
+        letter-spacing: 0;
       }
     }
   }

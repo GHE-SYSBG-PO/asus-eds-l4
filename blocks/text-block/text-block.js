@@ -9,13 +9,13 @@ import {
 
 const FONTS = {
   categoryFontD: {
-    asus: 'tt-md-20-lg', proart: 'tt-md-20-lg', rog: 'tg-bd-20-lg', tuf: 'dp-cb-20-lg',
+    asus: 'tt-md-20-lg', proart: 'tt-md-20-lg', rog: 'ro-rg-14-sh-lg', tuf: 'dp-cb-20-lg',
   },
   categoryFontT: {
-    asus: 'tt-md-20-md', proart: 'tt-md-20-md', rog: 'tg-bd-20-md', tuf: 'dp-cb-20-md',
+    asus: 'tt-md-20-md', proart: 'tt-md-20-md', rog: 'ro-rg-14-sh-md', tuf: 'dp-cb-20-md',
   },
   categoryFontM: {
-    asus: 'tt-md-16', proart: 'tt-md-16', rog: 'tg-bd-16', tuf: 'dp-cb-16',
+    asus: 'tt-md-16-sm', proart: 'tt-md-16-sm', rog: 'ro-rg-14-sh-sm', tuf: 'dp-cb-16-sm',
   },
 };
 
