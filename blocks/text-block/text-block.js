@@ -18,13 +18,13 @@ const FONTS = {
     asus: 'tt-md-16-sm', proart: 'tt-md-16-sm', rog: 'tg-bd-16-sm', tuf: 'dp-cb-16-sm',
   },
   titleFontD: {
-    asus: 'tt-md-40-lg', proart: 'tt-md-40-lg', rog: 'tg-bd-40-lg', tuf: 'dp-cb-40-lg',
+    asus: 'tt-md-32', proart: 'tt-md-40-lg', rog: 'tg-bd-40-lg', tuf: 'dp-cb-40-lg',
   },
   titleFontT: {
-    asus: 'tt-md-40-md', proart: 'tt-md-40-md', rog: 'tg-bd-40-md', tuf: 'dp-cb-40-md',
+    asus: 'tt-md-28', proart: 'tt-md-40-md', rog: 'tg-bd-40-md', tuf: 'dp-cb-40-md',
   },
   titleFontM: {
-    asus: 'tt-md-40-sm', proart: 'tt-md-40-sm', rog: 'tg-bd-40-sm', tuf: 'dp-cb-40-sm',
+    asus: 'tt-md-24', proart: 'tt-md-40-sm', rog: 'tg-bd-40-sm', tuf: 'dp-cb-40-sm',
   },
 };
 
