@@ -11,69 +11,17 @@
       "component": "text",
       "label": "bg-color hover",
       "name": "gBtnContainerBgColorHover",
-      "valueType": "string"
-    },
-    {
-      "component": "text",
-      "label": "bg-color active",
-      "name": "gBtnContainerBgColorActive",
-      "valueType": "string"
-    },
-    {
-      "component": "text",
-      "label": "radius TL",
-      "name": "gBtnContainerRadiusTL",
-      "valueType": "string"
-    },
-    {
-      "component": "text",
-      "label": "radius TR",
-      "name": "gBtnContainerRadiusTR",
-      "valueType": "string"
-    },
-    {
-      "component": "text",
-      "label": "radius BR",
-      "name": "gBtnContainerRadiusBR",
-      "valueType": "string"
-    },
-    {
-      "component": "text",
-      "label": "radius BL",
-      "name": "gBtnContainerRadiusBL",
-      "valueType": "string"
-    },
-    {
-      "component": "container",
-      "label": "container advanced",
-      "name": "gBtnContainerAdvanced",
-      "collapsible": true,
+      "valueType": "string",
       "condition": {
         "in": [
           {
             "var": "gBtnStyleLayout"
           },
           [
-            "3",
-            "4",
-            "6"
+            "3"
           ]
         ]
-      },
-      "fields": [
-        {
-          "component": "text",
-          "label": "border-width",
-          "name": "gBtnBorderWidth",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "border-color",
-          "name": "gBtnBorderColor",
-          "valueType": "string"
-        }
-      ]
+      }
     }
   ]
 }
