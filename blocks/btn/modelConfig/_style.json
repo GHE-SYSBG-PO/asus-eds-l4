@@ -6,6 +6,9 @@
       "name": "styleTab"
     },
     {
+      "...": "./_icon.json#/fields"
+    },
+    {
       "component": "select",
       "label": "layout group",
       "name": "styleLayout",
