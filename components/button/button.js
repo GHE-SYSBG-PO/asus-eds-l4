@@ -1,7 +1,9 @@
+import { loadCSS } from '../../scripts/aem.js';
+
 const DEFAULT_CONFIG = {
   // Basic configuration
   gBtnStyleLayout: '1',
-  label: 'Button',
+  gBtnLabel: 'Button',
   // Container configuration - defaults to empty, controlled by CSS
   gBtnContainerBgColorDefault: '',
   gBtnContainerBgColorDefault2: '',
@@ -16,41 +18,21 @@ const DEFAULT_CONFIG = {
   gBtnBorderWidth: '',
   gBtnBorderColor: '',
   // Font configuration
-  fontDesktop: '',
-  fontMobile: '',
-  fontColorDefault: '',
-  fontColorHover: '',
-  fontColorActive: '',
+  gBtnFontDesktop: '',
+  gBtnFontMobile: '',
+  gBtnFontColorDefault: '',
+  gBtnFontColorHover: '',
+  gBtnFontColorActive: '',
 
-  // Close button configuration
-  closeBtnStyle: 'default',
-  closeBtnLabel: 'Close',
-  closeBtnFontDesktop: '',
-  closeBtnFontM: '',
-  closeBtnFontColorDefault: '',
-  closeBtnFontColorHover: '',
-  closeBtnFontColorActive: '',
-  closeBtnContainerBgColorDefault: '',
-  closeBtnContainerBgColorDefault2: '',
-  closeBtnContainerBgColorHover: '',
-  closeBtnContainerBgColorHover2: '',
-  closeBtnContainerBgColorActive: '',
-  closeBtnContainerBgColorActive2: '',
-  closeBtnContainerRadiusTL: '',
-  closeBtnContainerRadiusTR: '',
-  closeBtnContainerRadiusBR: '',
-  closeBtnContainerRadiusBL: '',
-  closeBtnBorderWidth: '',
-  closeBtnBorderColor: '',
   // Icon configuration
-  iconStyle: '',
-  iconColor: '',
-  iconBgColorDefault: '',
-  iconBgColorHover: '',
-  iconBgColorActive: '',
-  iconAssetDefault: '',
-  iconAssetHover: '',
-  iconAssetActive: '',
+  gBtnIconStyle: '',
+  gBtnIconColor: '',
+  gBtnIconBgColorDefault: '',
+  gBtnIconBgColorHover: '',
+  gBtnIconBgColorActive: '',
+  gBtnIconAssetDefault: '',
+  gBtnIconAssetHover: '',
+  gBtnIconAssetActive: '',
 };
 
 export const getRadiusStyle = (tl, tr, br, bl) => {
@@ -88,9 +70,10 @@ const supportsIcon = (style) => ['2', '3', '5', '6'].includes(style);
 const isFilledStyle = (style) => ['1', '2', '3'].includes(style);
 
 export function buildCloseButtonHtml(v) {
+  loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
   // Get basic configuration
   const style = String(v('gBtnStyleLayout', 'text') || DEFAULT_CONFIG.gBtnStyleLayout);
-  const label = v('label', 'text') || DEFAULT_CONFIG.label;
+  const label = v('gBtnLabel', 'text') || DEFAULT_CONFIG.gBtnLabel;
   // Get container configuration - only use if there is a value
 
   const gBtnContainerBgColorDefaultArr = prefixHex((v('gBtnContainerBgColorDefault', 'text') || '').split(','));
@@ -112,29 +95,16 @@ export function buildCloseButtonHtml(v) {
   const containerBorderWidth = v('gBtnBorderWidth', 'text') || '';
   const containerBorderColor = prefixHex(v('gBtnBorderColor', 'text') || '');
   // Get font configuration
-  const fontDesktop = v('fontDesktop', 'text') || DEFAULT_CONFIG.fontDesktop;
-  const fontMobile = v('fontMobile', 'text') || DEFAULT_CONFIG.fontMobile;
-  const fontColorDefault = prefixHex(v('fontColorDefault', 'text') || '');
-  const fontColorHover = prefixHex(v('fontColorHover', 'text') || '');
-  const fontColorActive = prefixHex(v('fontColorActive', 'text') || '');
-  // Get link configuration
-  const linkType = v('linkType', 'text') || DEFAULT_CONFIG.linkType;
-  const externalLink = v('externalLink', 'text') || DEFAULT_CONFIG.externalLink;
-  const innerPageLink = v('innerPageLink', 'text') || DEFAULT_CONFIG.innerPageLink;
+  const gBtnFontDesktop = v('gBtnFontDesktop', 'text') || DEFAULT_CONFIG.gBtnFontDesktop;
+  const gBtnFontMobile = v('gBtnFontMobile', 'text') || DEFAULT_CONFIG.gBtnFontMobile;
+  const gBtnFontColorDefault = prefixHex(v('gBtnFontColorDefault', 'text') || '');
+  const gBtnFontColorHover = prefixHex(v('gBtnFontColorHover', 'text') || '');
+  const gBtnFontColorActive = prefixHex(v('gBtnFontColorActive', 'text') || '');
   // Get icon configuration
-  const iconStyle = v('iconStyle', 'text') || DEFAULT_CONFIG.iconStyle;
+  const gBtnIconStyle = v('gBtnIconStyle', 'text') || DEFAULT_CONFIG.gBtnIconStyle;
   // Determine style characteristics
   const filled = isFilledStyle(style);
-  // Build button link
-  let href = '';
-  let isExternal = true;
-  if (linkType === 'external' && externalLink) {
-    href = externalLink;
-    isExternal = true;
-  } else if (linkType === 'inner' && innerPageLink) {
-    href = '#';
-    isExternal = false;
-  }
+
   // Build inline styles - configure all colors via CSS variables
   let inlineStyle = '';
   // Default background color CSS variables
@@ -171,14 +141,14 @@ export function buildCloseButtonHtml(v) {
     }
   }
   // Font color CSS variables
-  if (fontColorDefault) {
-    inlineStyle += `--g-btn-color-default: ${fontColorDefault};`;
+  if (gBtnFontColorDefault) {
+    inlineStyle += `--g-btn-color-default: ${gBtnFontColorDefault};`;
   }
-  if (fontColorHover) {
-    inlineStyle += `--g-btn-color-hover: ${fontColorHover};`;
+  if (gBtnFontColorHover) {
+    inlineStyle += `--g-btn-color-hover: ${gBtnFontColorHover};`;
   }
-  if (fontColorActive) {
-    inlineStyle += `--g-btn-color-active: ${fontColorActive};`;
+  if (gBtnFontColorActive) {
+    inlineStyle += `--g-btn-color-active: ${gBtnFontColorActive};`;
   }
   // Custom border radius
   // eslint-disable-next-line max-len
@@ -199,16 +169,16 @@ export function buildCloseButtonHtml(v) {
   // Build icon HTML
   let iconHtml = '';
   if (supportsIcon(style)) {
-    const iconBgColorDefault = prefixHex(v('iconBgColorDefault', 'text') || '');
-    const iconBgColorHover = prefixHex(v('iconBgColorHover', 'text') || '');
-    const iconBgColorActive = prefixHex(v('iconBgColorActive', 'text') || '');
-    const iconColor = prefixHex(v('iconColor', 'text') || '');
+    const gBtnIconBgColorDefault = prefixHex(v('gBtnIconBgColorDefault', 'text') || '');
+    const gBtnIconBgColorHover = prefixHex(v('gBtnIconBgColorHover', 'text') || '');
+    const gBtnIconBgColorActive = prefixHex(v('gBtnIconBgColorActive', 'text') || '');
+    const gBtnIconColor = prefixHex(v('gBtnIconColor', 'text') || '');
     let iconBgStyle = '';
-    if (iconBgColorDefault) iconBgStyle += `--g-btn-icon-bg-default: ${iconBgColorDefault};`;
-    if (iconBgColorHover) iconBgStyle += `--g-btn-icon-bg-hover: ${iconBgColorHover};`;
-    if (iconBgColorActive) iconBgStyle += `--g-btn-icon-bg-active: ${iconBgColorActive};`;
-    if (iconColor) iconBgStyle += `--g-btn-icon-color: ${iconColor};`;
-    if (iconStyle === 'svg' || iconStyle === '') {
+    if (gBtnIconBgColorDefault) iconBgStyle += `--g-btn-icon-bg-default: ${gBtnIconBgColorDefault};`;
+    if (gBtnIconBgColorHover) iconBgStyle += `--g-btn-icon-bg-hover: ${gBtnIconBgColorHover};`;
+    if (gBtnIconBgColorActive) iconBgStyle += `--g-btn-icon-bg-active: ${gBtnIconBgColorActive};`;
+    if (gBtnIconColor) iconBgStyle += `--g-btn-icon-color: ${gBtnIconColor};`;
+    if (gBtnIconStyle === 'svg' || gBtnIconStyle === '') {
       // Determine icon type
       let iconPath = '';
       if (filled) {
@@ -227,9 +197,9 @@ export function buildCloseButtonHtml(v) {
       iconHtml = `
           <div class="btn-icon-wrapper flex items-center justify-center transition-all"
                style="${iconBgStyle}"
-               data-bg-default="${iconBgColorDefault}"
-               data-bg-hover="${iconBgColorHover}"
-               data-bg-active="${iconBgColorActive}">
+               data-bg-default="${gBtnIconBgColorDefault}"
+               data-bg-hover="${gBtnIconBgColorHover}"
+               data-bg-active="${gBtnIconBgColorActive}">
             <svg viewBox="0 0 24 24" class="btn-icon-svg">
               <defs>
                 ${getSvgLinearHtml('icon-filled-default', 'var(--g-btn-bg-d-start)', 'var(--g-btn-bg-d-end)')}
@@ -238,29 +208,27 @@ export function buildCloseButtonHtml(v) {
                 ${getSvgLinearHtml('icon-outline-hover', 'var(--g-btn-bg-d-start)', 'var(--g-btn-bg-d-end)')}
                 ${getSvgLinearHtml('icon-outline-active', 'var(--g-btn-bg-h-a-start)', 'var(--g-btn-bg-h-a-end)')}
               </defs>
-              <path d="${iconPath}" ${iconColor ? 'fill="var(--g-btn-icon-color) !important"' : ''}/>
+              <path d="${iconPath}" ${gBtnIconColor ? 'fill="var(--g-btn-icon-color) !important"' : ''}/>
             </svg>
           </div>
         `;
-    } else if (iconStyle === 'png') {
-      const iconAssetDefault = v('iconAssetDefault', 'text') || '';
-      const iconAssetHover = v('iconAssetHover', 'text') || '';
-      const iconAssetActive = v('iconAssetActive', 'text') || '';
+    } else if (gBtnIconStyle === 'png') {
+      const gBtnIconAssetDefault = v('gBtnIconAssetDefault', 'text') || '';
+      const gBtnIconAssetHover = v('gBtnIconAssetHover', 'text') || '';
+      const gBtnIconAssetActive = v('gBtnIconAssetActive', 'text') || '';
       iconHtml = `
           <div class="btn-icon-wrapper btn-icon-png flex items-center justify-center transition-all" style="${iconBgStyle}">
-            <img src="${iconAssetDefault}" alt="icon" class="btn-icon-default object-cover"/>
-            <img src="${iconAssetHover}" alt="icon hover" class="btn-icon-hover object-cover hidden"/>
-            <img src="${iconAssetActive}" alt="icon active" class="btn-icon-active object-cover hidden"/>
+            <img src="${gBtnIconAssetDefault}" alt="icon" class="btn-icon-default object-cover"/>
+            <img src="${gBtnIconAssetHover}" alt="icon hover" class="btn-icon-hover object-cover hidden"/>
+            <img src="${gBtnIconAssetActive}" alt="icon active" class="btn-icon-active object-cover hidden"/>
           </div>
         `;
     }
   }
   // Build button HTML
   const buttonHtml = `
-      <a href="${href}"
-         class="g-button inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${fontDesktop} ${fontMobile}"
-         data-link-type="${linkType}"
-         data-is-external="${isExternal}"
+      <a
+         class="g-button inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${gBtnFontDesktop} ${gBtnFontMobile}"
          data-style="${style}"
          ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
          data-filled="${filled}">

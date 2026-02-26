@@ -3,7 +3,7 @@
     {
       "component": "select",
       "label": "icon style",
-      "name": "iconStyle",
+      "name": "gBtnIconStyle",
       "valueType": "string",
       "options": [
         {
@@ -32,7 +32,7 @@
     {
       "component": "text",
       "label": "icon color",
-      "name": "iconColor",
+      "name": "gBtnIconColor",
       "valueType": "string",
       "condition": {
         "and": [
@@ -52,7 +52,7 @@
           {
             "===": [
               {
-                "var": "iconStyle"
+                "var": "gBtnIconStyle"
               },
               "svg"
             ]
@@ -63,7 +63,7 @@
     {
       "component": "text",
       "label": "icon-bg color default",
-      "name": "iconBgColorDefault",
+      "name": "gBtnIconBgColorDefault",
       "valueType": "string",
       "condition": {
         "and": [
@@ -83,7 +83,7 @@
           {
             "===": [
               {
-                "var": "iconStyle"
+                "var": "gBtnIconStyle"
               },
               "svg"
             ]
@@ -94,7 +94,7 @@
     {
       "component": "text",
       "label": "icon-bg color hover",
-      "name": "iconBgColorHover",
+      "name": "gBtnIconBgColorHover",
       "valueType": "string",
       "condition": {
         "and": [
@@ -114,7 +114,7 @@
           {
             "===": [
               {
-                "var": "iconStyle"
+                "var": "gBtnIconStyle"
               },
               "svg"
             ]
@@ -125,7 +125,7 @@
     {
       "component": "text",
       "label": "icon-bg color active",
-      "name": "iconBgColorActive",
+      "name": "gBtnIconBgColorActive",
       "valueType": "string",
       "condition": {
         "and": [
@@ -145,7 +145,7 @@
           {
             "===": [
               {
-                "var": "iconStyle"
+                "var": "gBtnIconStyle"
               },
               "svg"
             ]
@@ -156,7 +156,7 @@
     {
       "component": "reference",
       "label": "default asset",
-      "name": "iconAssetDefault",
+      "name": "gBtnIconAssetDefault",
       "multi": false,
       "condition": {
         "and": [
@@ -176,7 +176,7 @@
           {
             "===": [
               {
-                "var": "iconStyle"
+                "var": "gBtnIconStyle"
               },
               "png"
             ]
@@ -187,7 +187,7 @@
     {
       "component": "reference",
       "label": "hover asset",
-      "name": "iconAssetHover",
+      "name": "gBtnIconAssetHover",
       "multi": false,
       "condition": {
         "and": [
@@ -207,7 +207,7 @@
           {
             "===": [
               {
-                "var": "iconStyle"
+                "var": "gBtnIconStyle"
               },
               "png"
             ]
@@ -218,7 +218,7 @@
     {
       "component": "reference",
       "label": "active asset",
-      "name": "iconAssetActive",
+      "name": "gBtnIconAssetActive",
       "multi": false,
       "condition": {
         "and": [
@@ -238,7 +238,7 @@
           {
             "===": [
               {
-                "var": "iconStyle"
+                "var": "gBtnIconStyle"
               },
               "png"
             ]

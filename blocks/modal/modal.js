@@ -42,13 +42,12 @@ export async function createModal(contentNodes, modal = true, dialogId = 'dialog
   if (closeButtonHtml) {
     const container = document.createElement('div');
     container.innerHTML = closeButtonHtml;
-    closeButton = container.querySelector('button');
+    closeButton = container.querySelector('a');
   } else {
     closeButton.innerHTML = 'Close';
   }
 
   closeButton.classList.add('dialog-close');
-  closeButton.setAttribute('type', 'button');
   closeButton.setAttribute('data-a11y-dialog-hide', dialogId);
   closeButton.setAttribute('aria-label', 'Close dialog');
 

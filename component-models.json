@@ -1364,6 +1364,316 @@
             ]
           },
           {
+            "component": "select",
+            "label": "icon style",
+            "name": "gBtnIconStyle",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "SVG",
+                "value": "svg"
+              },
+              {
+                "name": "PNG",
+                "value": "png"
+              }
+            ],
+            "condition": {
+              "in": [
+                {
+                  "var": "gBtnStyleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon color",
+            "name": "gBtnIconColor",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon-bg color default",
+            "name": "gBtnIconBgColorDefault",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon-bg color hover",
+            "name": "gBtnIconBgColorHover",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon-bg color active",
+            "name": "gBtnIconBgColorActive",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "default asset",
+            "name": "gBtnIconAssetDefault",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "hover asset",
+            "name": "gBtnIconAssetHover",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "active asset",
+            "name": "gBtnIconAssetActive",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "label text",
+            "name": "gBtnLabel",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "label font (D/T)",
+            "name": "gBtnFontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "label font (M)",
+            "name": "gBtnFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "gBtnFontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "gBtnFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "gBtnFontColorActive",
+            "valueType": "string"
+          },
+          {
             "component": "text",
             "label": "bg-color default",
             "name": "gBtnContainerBgColorDefault",
@@ -1443,6 +1753,24 @@
             }
           }
         ]
+      },
+      {
+        "component": "tab",
+        "label": "icon",
+        "name": "iconTab",
+        "condition": {
+          "in": [
+            {
+              "var": "styleLayout"
+            },
+            [
+              "2",
+              "3",
+              "5",
+              "6"
+            ]
+          ]
+        }
       },
       {
         "component": "select",
@@ -4155,6 +4483,316 @@
                 "value": "6"
               }
             ]
+          },
+          {
+            "component": "select",
+            "label": "icon style",
+            "name": "gBtnIconStyle",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "SVG",
+                "value": "svg"
+              },
+              {
+                "name": "PNG",
+                "value": "png"
+              }
+            ],
+            "condition": {
+              "in": [
+                {
+                  "var": "gBtnStyleLayout"
+                },
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon color",
+            "name": "gBtnIconColor",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon-bg color default",
+            "name": "gBtnIconBgColorDefault",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon-bg color hover",
+            "name": "gBtnIconBgColorHover",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "icon-bg color active",
+            "name": "gBtnIconBgColorActive",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "svg"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "default asset",
+            "name": "gBtnIconAssetDefault",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "hover asset",
+            "name": "gBtnIconAssetHover",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "reference",
+            "label": "active asset",
+            "name": "gBtnIconAssetActive",
+            "multi": false,
+            "condition": {
+              "and": [
+                {
+                  "in": [
+                    {
+                      "var": "gBtnStyleLayout"
+                    },
+                    [
+                      "2",
+                      "3",
+                      "5",
+                      "6"
+                    ]
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "gBtnIconStyle"
+                    },
+                    "png"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "label text",
+            "name": "gBtnLabel",
+            "valueType": "string"
+          },
+          {
+            "component": "select",
+            "label": "label font (D/T)",
+            "name": "gBtnFontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "label font (M)",
+            "name": "gBtnFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color default",
+            "name": "gBtnFontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color hover",
+            "name": "gBtnFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font color active",
+            "name": "gBtnFontColorActive",
+            "valueType": "string"
           },
           {
             "component": "text",

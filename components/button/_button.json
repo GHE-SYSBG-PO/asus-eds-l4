@@ -4,6 +4,12 @@
       "...": "./modelConfig/_style.json#/fields"
     },
     {
+      "...": "./modelConfig/_icon.json#/fields"
+    },
+    {
+      "...": "./modelConfig/_label.json#/fields"
+    },
+    {
       "...": "./modelConfig/_container.json#/fields"
     }
   ]

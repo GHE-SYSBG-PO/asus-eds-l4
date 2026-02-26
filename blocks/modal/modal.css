@@ -88,8 +88,6 @@
     transform: translateX(-50%);
     cursor: pointer;
     margin: 0;
-    color:#fff;
-    background:#000;
 }
 
 .dialog-container.dialog--boxed {
