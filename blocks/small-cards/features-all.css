@@ -8981,10 +8981,10 @@ body .asus-large-12.asus-grid-wrap,body .children-asus-large-12>.asus-grid-wrap 
     border-bottom: 1px solid #999
 }
 
-.footnotes .footnote .footnote-item a:not(.footnote-back-to-content):hover {
+/* .footnotes .footnote .footnote-item a:not(.footnote-back-to-content):hover {
     color: #0b5da7;
     border-color: #0b5da7!important
-}
+} */
 
 #CMD.font__base section sup.footnote-num {
     border-bottom: none
@@ -27065,9 +27065,9 @@ html {
     background-color: #fff
 }
 
-#CMD section .wdblockimg .block.theme-white .modal-button-container .modal-button:hover::before {
+/* #CMD section .wdblockimg .block.theme-white .modal-button-container .modal-button:hover::before {
     background-color: #0b5da7
-}
+} */
 
 #CMD section .wdblockimg .block.theme-black .modal-button-container .modal-button {
     background: linear-gradient(to right,#0b5da7,#0b5da7)
@@ -27137,10 +27137,10 @@ html {
     background: 0 0
 }
 
-.cmd-content #CMD .modal-button-container.sticky-button-2024 .modal-button:hover {
+/* .cmd-content #CMD .modal-button-container.sticky-button-2024 .modal-button:hover {
     color: #0b5da7;
     background-color: #fff
-}
+} */
 
 .cmd-content #CMD .modal-button-container.sticky-button-2024 .modal-button:hover .modal-inner-icon svg {
     fill: #0b5da7
@@ -27375,10 +27375,10 @@ i {
     transition: fill linear .25s
 }
 
-.wd__swiper__card .swiper button.swiper-button-next,.wd__swiper__card .swiper button.swiper-button-prev {
+/* .wd__swiper__card .swiper button.swiper-button-next,.wd__swiper__card .swiper button.swiper-button-prev {
     overflow: hidden;
     background: linear-gradient(132deg,#0b5da7 16.21%,#0b5da7 89.61%)!important
-}
+} */
 
 .wd__swiper__card .swiper button.swiper-button-next::before,.wd__swiper__card .swiper button.swiper-button-prev::before {
     display: block;
