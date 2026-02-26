@@ -733,7 +733,7 @@ async function renderCard(block) {
                   <div class="wdblockimg">
                       <div class="wdblockimg__container block__scroll">
                         <div class="swiper">
-                            <div class="swiper-wrapper">
+                            <div class="swiper-wrapper" style="background-color: ${'var(--swiper-wrapper-bg-color)'};">
                               ${cardHTML}
                             </div>
                         </div>
