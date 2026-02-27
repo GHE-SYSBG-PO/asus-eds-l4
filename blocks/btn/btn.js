@@ -1,7 +1,32 @@
-import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue, getProductLine } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { openModal } from '../modal/modal.js';
 import { getRadiusStyle, buildCloseButtonHtml, prefixHex } from '../../components/button/button.js';
+
+const FONTS = {
+  asus: {
+    fontD: 'ro-md-18-sh-lg',
+    fontT: 'ro-md-18-sh-lg',
+    fontM: 'ro-md-16-sh-lg',
+  },
+  proart: {
+    fontD: 'ro-md-18-sh-lg',
+    fontT: 'ro-md-18-sh-lg',
+    fontM: 'ro-md-16-sh-lg',
+  },
+  rog: {
+    fontD: 'rc-bd-18-sh-lg',
+    fontT: 'rc-bd-18-sh-lg',
+    fontM: 'rc-bd-16-sh-lg',
+  },
+  tuf: {
+    fontD: 'ro-md-18-sh-lg',
+    fontT: 'ro-md-18-sh-lg',
+    fontM: 'ro-md-16-sh-lg',
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
 
 const DEFAULT_CONFIG = {
   // Basic configuration
@@ -13,6 +38,10 @@ const DEFAULT_CONFIG = {
   // Close button configuration
   gBtnStyleLayout: 'default',
   gBtnLabel: 'Close',
+  // Layout
+  fontD: FONTS[PRODUCT_LINE].fontD,
+  fontT: FONTS[PRODUCT_LINE].fontT,
+  fontM: FONTS[PRODUCT_LINE].fontM,
 };
 
 /**
@@ -71,8 +100,9 @@ export default async function decorate(block) {
     const containerBorderWidth = v('borderWidth', 'text');
     const containerBorderColor = prefixHex(v('borderColor', 'text'));
     // Get font configuration
-    const fontDesktop = v('fontDesktop', 'text') || DEFAULT_CONFIG.fontDesktop;
-    const fontMobile = v('fontMobile', 'text') || DEFAULT_CONFIG.fontMobile;
+    const fontD = v('fontD', 'text') || DEFAULT_CONFIG.fontD;
+    const fontT = v('fontT', 'text') || DEFAULT_CONFIG.fontT;
+    const fontM = v('fontM', 'text') || DEFAULT_CONFIG.fontM;
     const fontColorDefault = prefixHex(v('fontColorDefault', 'text'));
     const fontColorHover = prefixHex(v('fontColorHover', 'text'));
     const fontColorActive = prefixHex(v('fontColorActive', 'text'));
@@ -217,7 +247,7 @@ export default async function decorate(block) {
     // Build button HTML
     const buttonHtml = `
       <a href="${href}"
-         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${fontDesktop} ${fontMobile}"
+         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${fontD} ${fontT} ${fontM}"
          data-link-type="${linkType}"
          data-is-external="${isExternal}"
          data-style="${style}"
