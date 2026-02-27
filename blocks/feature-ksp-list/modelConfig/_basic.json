@@ -6,40 +6,33 @@
       "name": "basic"
     },
     {
-      "component": "container",
-      "label": "Line",
-      "name": "line",
-      "fields": [
+      "component": "select",
+      "label": "Visibility",
+      "name": "lineVisibility",
+      "valueType": "string",
+      "options": [
         {
-          "component": "select",
-          "label": "Visibility",
-          "name": "lineVisibility",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "Show",
-              "value": "show"
-            },
-            {
-              "name": "Hide",
-              "value": "hide"
-            }
-          ]
+          "name": "Show",
+          "value": "show"
         },
         {
-          "component": "text",
-          "label": "Color",
-          "name": "lineColor",
-          "valueType": "string",
-          "description": "Hex without #"
-        },
-        {
-          "component": "text",
-          "label": "Width (px)",
-          "name": "lineWidth",
-          "valueType": "string"
+          "name": "Hide",
+          "value": "hide"
         }
       ]
+    },
+    {
+      "component": "text",
+      "label": "Color",
+      "name": "lineColor",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "text",
+      "label": "Width (px)",
+      "name": "lineWidth",
+      "valueType": "string"
     },
     {
       "component": "container",
