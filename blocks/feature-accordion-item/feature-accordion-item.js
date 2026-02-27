@@ -4,7 +4,7 @@ export default async function decorate(block) {
   try {
     // eslint-disable-next-line no-console
     console.log('feature-accordion-item', block, block.children);
-    const fragmentUrl = '/language-master/en/components/id-18-feature-accordion/product-line/asus/media-block-fragment';
+    const fragmentUrl = './media-block-fragment';
     const path = fragmentUrl.startsWith('http')
       ? new URL(fragmentUrl, window.location).pathname
       : fragmentUrl;
