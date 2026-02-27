@@ -4,7 +4,9 @@ $font-tt-norms-pro: 'tt-norms-pro', sans-serif;
 $font-tt-norms-condensed: 'TT Norms Std Condensed', sans-serif;
 
 // Responsive breakpoints
+$breakpoint-sm: 729px;
 $breakpoint-md: 730px;
+$breakpoint-md-max: 1279px;
 $breakpoint-lg: 1280px;
 
 // Base mixin: generate font classes
@@ -18,37 +20,73 @@ $breakpoint-lg: 1280px;
   }
 
   // Responsive versions
-  @media (min-width: $breakpoint-md) {
-    .#{$name}-md {
+  @media (max-width: $breakpoint-sm) {
+    .#{$name}-sm {
+      font-family: $family;
       font-size: #{$size}px;
       line-height: #{$line-height}px;
       font-weight: $weight;
+      letter-spacing: 0;
+    }
+  }
+  
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-md-max) {
+    .#{$name}-md {
+      font-family: $family;
+      font-size: #{$size}px;
+      line-height: #{$line-height}px;
+      font-weight: $weight;
+      letter-spacing: 0;
     }
   }
 
   @media (min-width: $breakpoint-lg) {
     .#{$name}-lg {
+      font-family: $family;
       font-size: #{$size}px;
       line-height: #{$line-height}px;
       font-weight: $weight;
+      letter-spacing: 0;
     }
   }
 
   // If it's short line-height version
   @if $sh {
     .#{$name}-sh {
+      font-family: $family;
+      font-size: #{$size}px;
       line-height: #{($size * 1.3)}px;
+      font-weight: $weight;
+      letter-spacing: 0;
     }
 
-    @media (min-width: $breakpoint-md) {
-      .#{$name}-sh-md {
+    @media (max-width: $breakpoint-sm) {
+      .#{$name}-sh-sm {
+        font-family: $family;
+        font-size: #{$size}px;
         line-height: #{($size * 1.3)}px;
+        font-weight: $weight;
+        letter-spacing: 0;
+      }
+    }
+
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-md-max) {
+      .#{$name}-sh-md {
+        font-family: $family;
+        font-size: #{$size}px;
+        line-height: #{($size * 1.3)}px;
+        font-weight: $weight;
+        letter-spacing: 0;
       }
     }
 
     @media (min-width: $breakpoint-lg) {
       .#{$name}-sh-lg {
+        font-family: $family;
+        font-size: #{$size}px;
         line-height: #{($size * 1.3)}px;
+        font-weight: $weight;
+        letter-spacing: 0;
       }
     }
   }
