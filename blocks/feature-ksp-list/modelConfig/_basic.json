@@ -1,6 +1,11 @@
 {
   "fields": [
     {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
       "component": "container",
       "label": "Item Style",
       "name": "itemStyle",
