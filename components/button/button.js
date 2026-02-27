@@ -1,9 +1,50 @@
+import { getProductLine } from '../../scripts/utils.js';
 import { loadCSS } from '../../scripts/aem.js';
+
+const FONTS = {
+  asus: {
+    fontD: 'ro-md-18-sh-lg',
+    fontT: 'ro-md-18-sh-lg',
+    fontM: 'ro-md-16-sh-lg',
+  },
+  proart: {
+    fontD: 'ro-md-18-sh-lg',
+    fontT: 'ro-md-18-sh-lg',
+    fontM: 'ro-md-16-sh-lg',
+  },
+  rog: {
+    fontD: 'rc-bd-18-sh-lg',
+    fontT: 'rc-bd-18-sh-lg',
+    fontM: 'rc-bd-16-sh-lg',
+  },
+  tuf: {
+    fontD: 'ro-md-18-sh-lg',
+    fontT: 'ro-md-18-sh-lg',
+    fontM: 'ro-md-16-sh-lg',
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
 
 const DEFAULT_CONFIG = {
   // Basic configuration
   gBtnStyleLayout: '1',
   gBtnLabel: 'Button',
+};
+
+function decreaseFontSize(isSmaller, font, amount = 2) {
+  return isSmaller ? font.replace(/(\d+)/, (match) => Number(match) - amount) : font;
+}
+
+// When style is 3 or 6, the font size should be reduced by 2 sizes, handled with JS.
+export const getDefaultFont = (style, fontD, fontT, fontM) => {
+  const isSmaller = style === '3' || style === '6';
+  const f = FONTS[PRODUCT_LINE];
+  const d = decreaseFontSize(isSmaller, f.fontD);
+  const t = decreaseFontSize(isSmaller, f.fontT);
+  const m = decreaseFontSize(isSmaller, f.fontM);
+  const fonts = [fontD || d, fontT || t, fontM || m];
+  return fonts.join(' ');
 };
 
 export const getRadiusStyle = (tl, tr, br, bl) => {
@@ -66,8 +107,10 @@ export function buildCloseButtonHtml(v) {
   const containerBorderWidth = v('gBtnBorderWidth', 'text');
   const containerBorderColor = prefixHex(v('gBtnBorderColor', 'text'));
   // Get font configuration
-  const gBtnFontDesktop = v('gBtnFontDesktop', 'text') || DEFAULT_CONFIG.gBtnFontDesktop;
-  const gBtnFontMobile = v('gBtnFontMobile', 'text') || DEFAULT_CONFIG.gBtnFontMobile;
+  const gBtnFontD = v('gBtnFontD', 'text') || DEFAULT_CONFIG.gBtnFontD;
+  const gBtnFontT = v('gBtnFontT', 'text') || DEFAULT_CONFIG.gBtnFontT;
+  const gBtnFontM = v('gBtnFontM', 'text') || DEFAULT_CONFIG.gBtnFontM;
+  const gBtnTotalFonts = getDefaultFont(style, gBtnFontD, gBtnFontT, gBtnFontM);
   const gBtnFontColorDefault = prefixHex(v('gBtnFontColorDefault', 'text'));
   const gBtnFontColorHover = prefixHex(v('gBtnFontColorHover', 'text'));
   const gBtnFontColorActive = prefixHex(v('gBtnFontColorActive', 'text'));
@@ -199,7 +242,7 @@ export function buildCloseButtonHtml(v) {
   // Build button HTML
   const buttonHtml = `
       <a
-         class="g-button inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${gBtnFontDesktop} ${gBtnFontMobile}"
+         class="g-button inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${gBtnTotalFonts}"
          data-style="${style}"
          ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
          data-filled="${filled}">

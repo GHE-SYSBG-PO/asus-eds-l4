@@ -1863,21 +1863,41 @@
           },
           {
             "component": "select",
-            "label": "label font (D/T)",
-            "name": "gBtnFontDesktop",
+            "label": "label font (D)",
+            "name": "gBtnFontD",
             "valueType": "string",
             "options": [
               {
                 "name": "ro-md-16",
-                "value": "ro-md-16"
+                "value": "ro-md-16-lg"
               },
               {
                 "name": "ro-md-18",
-                "value": "ro-md-18"
+                "value": "ro-md-18-lg"
               },
               {
                 "name": "ro-md-20",
-                "value": "ro-md-20"
+                "value": "ro-md-20-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "label font (T)",
+            "name": "gBtnFontT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
               }
             ]
           },
@@ -1889,15 +1909,15 @@
             "options": [
               {
                 "name": "ro-md-14",
-                "value": "ro-md-14"
+                "value": "ro-md-14-sm"
               },
               {
                 "name": "ro-md-16",
-                "value": "ro-md-16"
+                "value": "ro-md-16-sm"
               },
               {
                 "name": "ro-md-18",
-                "value": "ro-md-18"
+                "value": "ro-md-18-sm"
               }
             ]
           },
@@ -5136,21 +5156,41 @@
           },
           {
             "component": "select",
-            "label": "label font (D/T)",
-            "name": "gBtnFontDesktop",
+            "label": "label font (D)",
+            "name": "gBtnFontD",
             "valueType": "string",
             "options": [
               {
                 "name": "ro-md-16",
-                "value": "ro-md-16"
+                "value": "ro-md-16-lg"
               },
               {
                 "name": "ro-md-18",
-                "value": "ro-md-18"
+                "value": "ro-md-18-lg"
               },
               {
                 "name": "ro-md-20",
-                "value": "ro-md-20"
+                "value": "ro-md-20-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "label font (T)",
+            "name": "gBtnFontT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
               }
             ]
           },
@@ -5162,15 +5202,15 @@
             "options": [
               {
                 "name": "ro-md-14",
-                "value": "ro-md-14"
+                "value": "ro-md-14-sm"
               },
               {
                 "name": "ro-md-16",
-                "value": "ro-md-16"
+                "value": "ro-md-16-sm"
               },
               {
                 "name": "ro-md-18",
-                "value": "ro-md-18"
+                "value": "ro-md-18-sm"
               }
             ]
           },

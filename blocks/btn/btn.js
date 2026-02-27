@@ -1,32 +1,9 @@
-import { getBlockConfigs, getFieldValue, getProductLine } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { openModal } from '../modal/modal.js';
-import { getRadiusStyle, buildCloseButtonHtml, prefixHex } from '../../components/button/button.js';
-
-const FONTS = {
-  asus: {
-    fontD: 'ro-md-18-sh-lg',
-    fontT: 'ro-md-18-sh-lg',
-    fontM: 'ro-md-16-sh-lg',
-  },
-  proart: {
-    fontD: 'ro-md-18-sh-lg',
-    fontT: 'ro-md-18-sh-lg',
-    fontM: 'ro-md-16-sh-lg',
-  },
-  rog: {
-    fontD: 'rc-bd-18-sh-lg',
-    fontT: 'rc-bd-18-sh-lg',
-    fontM: 'rc-bd-16-sh-lg',
-  },
-  tuf: {
-    fontD: 'ro-md-18-sh-lg',
-    fontT: 'ro-md-18-sh-lg',
-    fontM: 'ro-md-16-sh-lg',
-  },
-};
-
-const PRODUCT_LINE = getProductLine();
+import {
+  getRadiusStyle, buildCloseButtonHtml, prefixHex, getDefaultFont,
+} from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
   // Basic configuration
@@ -38,21 +15,6 @@ const DEFAULT_CONFIG = {
   // Close button configuration
   gBtnStyleLayout: 'default',
   gBtnLabel: 'Close',
-};
-
-function decreaseFontSize(isSmaller, font, amount = 2) {
-  return isSmaller ? font.replace(/(\d+)/, (match) => Number(match) - amount) : font;
-}
-
-// When style is 3 or 6, the font size should be reduced by 2 sizes, handled with JS.
-const getDefaultFont = (style, fontD, fontT, fontM) => {
-  const isSmaller = style === '3' || style === '6';
-  const f = FONTS[PRODUCT_LINE];
-  const d = decreaseFontSize(isSmaller, f.fontD);
-  const t = decreaseFontSize(isSmaller, f.fontT);
-  const m = decreaseFontSize(isSmaller, f.fontM);
-  const fonts = [fontD || d, fontT || t, fontM || m];
-  return fonts.join(' ');
 };
 
 /**
