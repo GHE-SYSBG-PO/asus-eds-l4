@@ -4172,6 +4172,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-md-16",
                 "value": "tt-md-16-lg"
               },
@@ -4240,6 +4244,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-md-16",
                 "value": "tt-md-16-md"
               },
@@ -4307,6 +4315,10 @@
             "name": "categoryFontM",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "tt-md-16",
                 "value": "tt-md-16-sm"
@@ -4632,6 +4644,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "ro-rg-20",
                 "value": "ro-rg-20-lg"
               },
@@ -4648,6 +4664,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "ro-rg-20",
                 "value": "ro-rg-20-md"
               },
@@ -4663,6 +4683,10 @@
             "name": "bodyFontM",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "ro-rg-18",
                 "value": "ro-rg-18-sm"
@@ -4720,6 +4744,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "ro-md-20",
                 "value": "ro-md-20-lg"
               },
@@ -4736,6 +4764,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "ro-md-20",
                 "value": "ro-md-20-md"
               },
@@ -4751,6 +4783,10 @@
             "name": "ctaFontM",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "ro-md-18",
                 "value": "ro-md-18-sm"

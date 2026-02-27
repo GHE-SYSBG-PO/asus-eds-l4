@@ -6,6 +6,7 @@
       "name": "ctaFontD",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "ro-md-20", "value": "ro-md-20-lg" },
         { "name": "ro-md-24", "value": "ro-md-24-lg" }
       ]
@@ -16,6 +17,7 @@
       "name": "ctaFontT",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "ro-md-20", "value": "ro-md-20-md" },
         { "name": "ro-md-24", "value": "ro-md-24-md" }
       ]
@@ -26,6 +28,7 @@
       "name": "ctaFontM",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "ro-md-18", "value": "ro-md-18-sm" },
         { "name": "ro-md-20", "value": "ro-rg-20-sm" }
       ]

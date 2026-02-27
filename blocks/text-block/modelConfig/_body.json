@@ -6,6 +6,7 @@
       "name": "bodyFontD",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "ro-rg-20", "value": "ro-rg-20-lg" },
         { "name": "ro-rg-24", "value": "ro-rg-24-lg" }
       ]
@@ -16,6 +17,7 @@
       "name": "bodyFontT",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "ro-rg-20", "value": "ro-rg-20-md" },
         { "name": "ro-rg-24", "value": "ro-rg-24-md" }
       ]
@@ -26,6 +28,7 @@
       "name": "bodyFontM",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "ro-rg-18", "value": "ro-rg-18-sm" },
         { "name": "ro-rg-20", "value": "ro-rg-20-sm" }
       ]

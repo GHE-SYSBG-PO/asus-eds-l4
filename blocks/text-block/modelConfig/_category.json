@@ -82,6 +82,7 @@
           "name": "categoryFontD",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-md-16", "value": "tt-md-16-lg" },
             { "name": "tt-md-18", "value": "tt-md-18-lg" },
             { "name": "tt-md-20", "value": "tt-md-20-lg" },
@@ -105,6 +106,7 @@
           "name": "categoryFontT",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-md-16", "value": "tt-md-16-md" },
             { "name": "tt-md-18", "value": "tt-md-18-md" },
             { "name": "tt-md-20", "value": "tt-md-20-md" },
@@ -128,6 +130,7 @@
           "name": "categoryFontM",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-md-16", "value": "tt-md-16-sm" },
             { "name": "tt-md-18", "value": "tt-md-18-sm" },
             { "name": "tt-md-20", "value": "tt-md-20-sm" },
