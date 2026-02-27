@@ -4,23 +4,23 @@ import { loadCSS } from '../../scripts/aem.js';
 const FONTS = {
   asus: {
     fontD: 'ro-md-18-sh-lg',
-    fontT: 'ro-md-18-sh-lg',
-    fontM: 'ro-md-16-sh-lg',
+    fontT: 'ro-md-18-sh-md',
+    fontM: 'ro-md-16-sh-sm',
   },
   proart: {
     fontD: 'ro-md-18-sh-lg',
-    fontT: 'ro-md-18-sh-lg',
-    fontM: 'ro-md-16-sh-lg',
+    fontT: 'ro-md-18-sh-md',
+    fontM: 'ro-md-16-sh-sm',
   },
   rog: {
     fontD: 'rc-bd-18-sh-lg',
-    fontT: 'rc-bd-18-sh-lg',
-    fontM: 'rc-bd-16-sh-lg',
+    fontT: 'rc-bd-18-sh-md',
+    fontM: 'rc-bd-16-sh-sm',
   },
   tuf: {
     fontD: 'ro-md-18-sh-lg',
-    fontT: 'ro-md-18-sh-lg',
-    fontM: 'ro-md-16-sh-lg',
+    fontT: 'ro-md-18-sh-md',
+    fontM: 'ro-md-16-sh-sm',
   },
 };
 
