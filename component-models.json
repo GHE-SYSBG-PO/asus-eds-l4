@@ -2266,6 +2266,10 @@
         "valueType": "string",
         "options": [
           {
+            "name": "default",
+            "value": ""
+          },
+          {
             "name": "tt-bd-24",
             "value": "tt-bd-24"
           },
@@ -2291,6 +2295,10 @@
         "name": "infoFont",
         "valueType": "string",
         "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
           {
             "name": "ro-rg-16-sh",
             "value": "ro-rg-16-sh"

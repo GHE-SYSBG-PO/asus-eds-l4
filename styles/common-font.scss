@@ -1,7 +1,11 @@
 // Font variable definitions
 $font-roboto: 'roboto', sans-serif;
 $font-tt-norms-pro: 'tt-norms-pro', sans-serif;
-$font-tt-norms-condensed: 'TT Norms Std Condensed', sans-serif;
+
+// $font-tt-norms-condensed: 'TT Norms Std Condensed', sans-serif;
+$font-roboto-condensed: 'Roboto Condensed', sans-serif;
+$font-trade-gothic: 'Trade Gothic LT Pro', sans-serif;
+$font-din-pro: 'DIN Pro', sans-serif;
 
 // Responsive breakpoints
 $breakpoint-sm: 729px;
@@ -198,12 +202,97 @@ $breakpoint-lg: 1280px;
 @include font-class(tt-bd-128, 128, 136, 700, false, $font-tt-norms-pro);
 
 // Condensed (700) - TT Norms Std Condensed
-@include font-class(tt-cd-24, 24, 32, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-28, 28, 36, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-32, 32, 40, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-36, 36, 44, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-40, 40, 48, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-44, 44, 52, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-48, 48, 56, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-52, 52, 60, 700, false, $font-tt-norms-condensed);
-@include font-class(tt-cd-56, 56, 64, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-24, 24, 32, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-28, 28, 36, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-32, 32, 40, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-36, 36, 44, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-40, 40, 48, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-44, 44, 52, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-48, 48, 56, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-52, 52, 60, 700, false, $font-tt-norms-condensed);
+// @include font-class(tt-cd-56, 56, 64, 700, false, $font-tt-norms-condensed);
+
+// Generate all Roboto Condensed font classes
+// Regular (400)
+@include font-class(rc-rg-12, 12, 16, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-13, 13, 18, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-14, 14, 20, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-14-sh, 14, 18, 400, true, $font-roboto-condensed);
+@include font-class(rc-rg-16, 16, 24, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-16-sh, 16, 22, 400, true, $font-roboto-condensed);
+@include font-class(rc-rg-18, 18, 26, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-18-sh, 18, 24, 400, true, $font-roboto-condensed);
+@include font-class(rc-rg-20, 20, 28, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-20-sh, 20, 26, 400, true, $font-roboto-condensed);
+@include font-class(rc-rg-24, 24, 32, 400, false, $font-roboto-condensed);
+
+// Generate larger Roboto Condensed Regular font classes
+@include font-class(rc-rg-28, 28, 36, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-32, 32, 40, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-36, 36, 44, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-40, 40, 48, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-48, 48, 56, 400, false, $font-roboto-condensed);
+@include font-class(rc-rg-52, 52, 60, 400, false, $font-roboto-condensed);
+
+// Bold (700)
+@include font-class(rc-bd-13, 13, 18, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-14, 14, 20, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-14-sh, 14, 18, 700, true, $font-roboto-condensed);
+@include font-class(rc-bd-16, 16, 24, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-16-sh, 16, 22, 700, true, $font-roboto-condensed);
+@include font-class(rc-bd-18, 18, 26, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-18-sh, 18, 24, 700, true, $font-roboto-condensed);
+@include font-class(rc-bd-20, 20, 28, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-20-sh, 20, 26, 700, true, $font-roboto-condensed);
+@include font-class(rc-bd-24, 24, 32, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-28, 28, 36, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-32, 32, 40, 700, false, $font-roboto-condensed);
+@include font-class(rc-bd-36, 36, 44, 700, false, $font-roboto-condensed);
+
+// Generate all Trade Gothic LT Pro Bold font classes
+@include font-class(tg-bd-14, 14, 20, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-14-sh, 14, 18, 700, true, $font-trade-gothic);
+@include font-class(tg-bd-16, 16, 24, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-16-sh, 16, 22, 700, true, $font-trade-gothic);
+@include font-class(tg-bd-18, 18, 26, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-18-sh, 18, 24, 700, true, $font-trade-gothic);
+@include font-class(tg-bd-20, 20, 28, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-20-sh, 20, 26, 700, true, $font-trade-gothic);
+@include font-class(tg-bd-24, 24, 32, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-28, 28, 36, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-32, 32, 40, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-36, 36, 44, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-40, 40, 48, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-44, 44, 52, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-48, 48, 56, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-52, 52, 60, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-56, 56, 64, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-64, 64, 72, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-72, 72, 80, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-96, 96, 104, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-120, 120, 128, 700, false, $font-trade-gothic);
+@include font-class(tg-bd-128, 128, 136, 700, false, $font-trade-gothic);
+
+// Generate all DIN Pro Bold font classes
+@include font-class(dp-cb-14, 14, 20, 700, false, $font-din-pro);
+@include font-class(dp-cb-14-sh, 14, 18, 700, true, $font-din-pro);
+@include font-class(dp-cb-16, 16, 24, 700, false, $font-din-pro);
+@include font-class(dp-cb-16-sh, 16, 22, 700, true, $font-din-pro);
+@include font-class(dp-cb-18, 18, 26, 700, false, $font-din-pro);
+@include font-class(dp-cb-18-sh, 18, 24, 700, true, $font-din-pro);
+@include font-class(dp-cb-20, 20, 28, 700, false, $font-din-pro);
+@include font-class(dp-cb-20-sh, 20, 26, 700, true, $font-din-pro);
+@include font-class(dp-cb-24, 24, 32, 700, false, $font-din-pro);
+@include font-class(dp-cb-28, 28, 36, 700, false, $font-din-pro);
+@include font-class(dp-cb-32, 32, 40, 700, false, $font-din-pro);
+@include font-class(dp-cb-36, 36, 44, 700, false, $font-din-pro);
+@include font-class(dp-cb-40, 40, 48, 700, false, $font-din-pro);
+@include font-class(dp-cb-44, 44, 52, 700, false, $font-din-pro);
+@include font-class(dp-cb-48, 48, 56, 700, false, $font-din-pro);
+@include font-class(dp-cb-52, 52, 60, 700, false, $font-din-pro);
+@include font-class(dp-cb-56, 56, 64, 700, false, $font-din-pro);
+@include font-class(dp-cb-64, 64, 72, 700, false, $font-din-pro);
+@include font-class(dp-cb-72, 72, 80, 700, false, $font-din-pro);
+@include font-class(dp-cb-96, 96, 104, 700, false, $font-din-pro);
+@include font-class(dp-cb-120, 120, 128, 700, false, $font-din-pro);
+@include font-class(dp-cb-128, 128, 136, 700, false, $font-din-pro);
