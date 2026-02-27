@@ -1,0 +1,68 @@
+{
+  "fields": [
+    {
+      "component": "text",
+      "label": "label text",
+      "name": "gBtnLabel",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "label font (D/T)",
+      "name": "gBtnFontDesktop",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "ro-md-16",
+          "value": "ro-md-16"
+        },
+        {
+          "name": "ro-md-18",
+          "value": "ro-md-18"
+        },
+        {
+          "name": "ro-md-20",
+          "value": "ro-md-20"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "label font (M)",
+      "name": "gBtnFontM",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "ro-md-14",
+          "value": "ro-md-14"
+        },
+        {
+          "name": "ro-md-16",
+          "value": "ro-md-16"
+        },
+        {
+          "name": "ro-md-18",
+          "value": "ro-md-18"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "font color default",
+      "name": "gBtnFontColorDefault",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "font color hover",
+      "name": "gBtnFontColorHover",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "font color active",
+      "name": "gBtnFontColorActive",
+      "valueType": "string"
+    }
+  ]
+}
