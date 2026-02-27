@@ -197,7 +197,7 @@ export default async function decorate(block) {
     `;
 
     const body = `
-      <div class='${v('bodyRichtext') && 'mt-[18px]'} break-all text-block-body ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('bodyFontT')} ${v('bodyFontT')} ${v('bodyFontM')}' ${bodyFontColor}>
+      <div class='${v('bodyRichtext') && 'mt-[18px]'} break-all text-block-body ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('bodyFontD')} ${v('bodyFontT')} ${v('bodyFontM')}' ${bodyFontColor}>
         ${v('bodyRichtext', 'html')}
       </div>
     `;
