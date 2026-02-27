@@ -1,0 +1,48 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "reference",
+      "label": "Asset",
+      "name": "asset",
+      "valueType": "string",
+      "description": "Shared across 3 devices",
+      "multi": false
+    },
+    {
+      "component": "richtext",
+      "label": "Title",
+      "name": "title",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "Info",
+      "name": "info",
+      "valueType": "string"
+    },
+    {
+      "component": "container",
+      "label": "CTA (anchor)",
+      "name": "cta",
+      "fields": [
+        {
+          "component": "text",
+          "label": "Text",
+          "name": "ctaText",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Section ID",
+          "name": "ctaSectionId",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

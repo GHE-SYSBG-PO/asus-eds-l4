@@ -1,0 +1,123 @@
+{
+  "fields": [
+    {
+      "component": "container",
+      "label": "Item Style",
+      "name": "itemStyle",
+      "fields": [
+        {
+          "component": "container",
+          "label": "Line",
+          "name": "line",
+          "fields": [
+            {
+              "component": "select",
+              "label": "Visibility",
+              "name": "lineVisibility",
+              "valueType": "string",
+              "options": [
+                {
+                  "name": "Show",
+                  "value": "show"
+                },
+                {
+                  "name": "Hide",
+                  "value": "hide"
+                }
+              ]
+            },
+            {
+              "component": "text",
+              "label": "Color",
+              "name": "lineColor",
+              "valueType": "string",
+              "description": "Hex without #"
+            },
+            {
+              "component": "text",
+              "label": "Width (px)",
+              "name": "lineWidth",
+              "valueType": "string"
+            }
+          ]
+        },
+        {
+          "component": "container",
+          "label": "BG Color",
+          "name": "bgColor",
+          "fields": [
+            {
+              "component": "text",
+              "label": "Default",
+              "name": "bgColorDefault",
+              "valueType": "string",
+              "description": "Hex without #"
+            },
+            {
+              "component": "text",
+              "label": "Hover",
+              "name": "bgColorHover",
+              "valueType": "string",
+              "description": "Hex without #"
+            },
+            {
+              "component": "text",
+              "label": "Pressed",
+              "name": "bgColorPressed",
+              "valueType": "string",
+              "description": "Hex without #"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "Card Alignment",
+          "name": "cardAlignment",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Left",
+              "value": "left"
+            },
+            {
+              "name": "Center",
+              "value": "center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "CTA (anchor) Visibility",
+      "name": "ctaVisibility",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Show",
+          "value": "show"
+        },
+        {
+          "name": "Hide",
+          "value": "hide"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Motion",
+      "name": "motion",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "On",
+          "value": "on"
+        },
+        {
+          "name": "Off",
+          "value": "off"
+        }
+      ]
+    }
+  ]
+}

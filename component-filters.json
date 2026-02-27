@@ -24,7 +24,8 @@
       "space",
       "bar-chart",
       "footnote",
-      "featureitem-block"
+      "featureitem-block",
+      "feature-ksp-list"
     ]
   },
   {
@@ -67,6 +68,12 @@
       "featureitem-block",
       "media-block",
       "btn"
+    ]
+  },
+  {
+    "id": "feature-ksp-list-filter",
+    "components": [
+      "feature-ksp-item"
     ]
   },
   {
