@@ -86,14 +86,17 @@
             { "name": "tt-md-18", "value": "tt-md-18-lg" },
             { "name": "tt-md-20", "value": "tt-md-20-lg" },
             { "name": "tt-md-24", "value": "tt-md-24-lg" },
+            { "name": "tt-md-28", "value": "tt-md-28-lg" },
             { "name": "tt-nr-16", "value": "tt-nr-16-lg" },
             { "name": "tt-nr-18", "value": "tt-nr-18-lg" },
             { "name": "tt-nr-20", "value": "tt-nr-20-lg" },
             { "name": "tt-nr-24", "value": "tt-nr-24-lg" },
+            { "name": "tt-nr-28", "value": "tt-nr-28-lg" },
             { "name": "tt-bd-16", "value": "tt-bd-16-lg" },
             { "name": "tt-bd-18", "value": "tt-bd-18-lg" },
             { "name": "tt-bd-20", "value": "tt-bd-20-lg" },
-            { "name": "tt-bd-24", "value": "tt-bd-24-lg" }
+            { "name": "tt-bd-24", "value": "tt-bd-24-lg" },
+            { "name": "tt-bd-28", "value": "tt-bd-28-lg" }
           ]
         },
         {
@@ -106,14 +109,17 @@
             { "name": "tt-md-18", "value": "tt-md-18-md" },
             { "name": "tt-md-20", "value": "tt-md-20-md" },
             { "name": "tt-md-24", "value": "tt-md-24-md" },
+            { "name": "tt-md-28", "value": "tt-md-28-md" },
             { "name": "tt-nr-16", "value": "tt-nr-16-md" },
             { "name": "tt-nr-18", "value": "tt-nr-18-md" },
             { "name": "tt-nr-20", "value": "tt-nr-20-md" },
             { "name": "tt-nr-24", "value": "tt-nr-24-md" },
+            { "name": "tt-nr-28", "value": "tt-nr-28-md" },
             { "name": "tt-bd-16", "value": "tt-bd-16-md" },
             { "name": "tt-bd-18", "value": "tt-bd-18-md" },
             { "name": "tt-bd-20", "value": "tt-bd-20-md" },
-            { "name": "tt-bd-24", "value": "tt-bd-24-md" }
+            { "name": "tt-bd-24", "value": "tt-bd-24-md" },
+            { "name": "tt-bd-28", "value": "tt-bd-28-md" }
           ]
         },
         {
@@ -126,14 +132,17 @@
             { "name": "tt-md-18", "value": "tt-md-18-sm" },
             { "name": "tt-md-20", "value": "tt-md-20-sm" },
             { "name": "tt-md-24", "value": "tt-md-24-sm" },
+            { "name": "tt-md-28", "value": "tt-md-28-sm" },
             { "name": "tt-nr-16", "value": "tt-nr-16-sm" },
             { "name": "tt-nr-18", "value": "tt-nr-18-sm" },
             { "name": "tt-nr-20", "value": "tt-nr-20-sm" },
             { "name": "tt-nr-24", "value": "tt-nr-24-sm" },
+            { "name": "tt-nr-28", "value": "tt-nr-28-sm" },
             { "name": "tt-bd-16", "value": "tt-bd-16-sm" },
             { "name": "tt-bd-18", "value": "tt-bd-18-sm" },
             { "name": "tt-bd-20", "value": "tt-bd-20-sm" },
-            { "name": "tt-bd-24", "value": "tt-bd-24-sm" }
+            { "name": "tt-bd-24", "value": "tt-bd-24-sm" },
+            { "name": "tt-bd-28", "value": "tt-bd-28-sm" }
           ]
         },
         {
