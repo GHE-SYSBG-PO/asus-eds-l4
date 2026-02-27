@@ -38,10 +38,21 @@ const DEFAULT_CONFIG = {
   // Close button configuration
   gBtnStyleLayout: 'default',
   gBtnLabel: 'Close',
-  // Layout
-  fontD: FONTS[PRODUCT_LINE].fontD,
-  fontT: FONTS[PRODUCT_LINE].fontT,
-  fontM: FONTS[PRODUCT_LINE].fontM,
+};
+
+function decreaseFontSize(isSmaller, font, amount = 2) {
+  return isSmaller ? font.replace(/(\d+)/, (match) => Number(match) - amount) : font;
+}
+
+// When style is 3 or 6, the font size should be reduced by 2 sizes, handled with JS.
+const getDefaultFont = (style, fontD, fontT, fontM) => {
+  const isSmaller = style === '3' || style === '6';
+  const f = FONTS[PRODUCT_LINE];
+  const d = decreaseFontSize(isSmaller, f.fontD);
+  const t = decreaseFontSize(isSmaller, f.fontT);
+  const m = decreaseFontSize(isSmaller, f.fontM);
+  const fonts = [fontD || d, fontT || t, fontM || m];
+  return fonts.join(' ');
 };
 
 /**
@@ -103,6 +114,7 @@ export default async function decorate(block) {
     const fontD = v('fontD', 'text') || DEFAULT_CONFIG.fontD;
     const fontT = v('fontT', 'text') || DEFAULT_CONFIG.fontT;
     const fontM = v('fontM', 'text') || DEFAULT_CONFIG.fontM;
+    const totalFonts = getDefaultFont(style, fontD, fontT, fontM);
     const fontColorDefault = prefixHex(v('fontColorDefault', 'text'));
     const fontColorHover = prefixHex(v('fontColorHover', 'text'));
     const fontColorActive = prefixHex(v('fontColorActive', 'text'));
@@ -247,7 +259,7 @@ export default async function decorate(block) {
     // Build button HTML
     const buttonHtml = `
       <a href="${href}"
-         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${fontD} ${fontT} ${fontM}"
+         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${totalFonts}"
          data-link-type="${linkType}"
          data-is-external="${isExternal}"
          data-style="${style}"
