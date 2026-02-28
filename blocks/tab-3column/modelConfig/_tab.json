@@ -1,41 +1,28 @@
 {
   "fields": [
     {
-      "component": "tab",
-      "label": "tab",
-      "name": "tabItemsTab"
+      "component": "text",
+      "label": "tab text",
+      "name": "tabText",
+      "valueType": "string"
     },
     {
-      "component": "multifield",
-      "label": "tabs",
-      "name": "tabs",
-      "valueType": "string",
-      "fields": [
-        {
-          "component": "text",
-          "label": "tab text",
-          "name": "tabText",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "label": "icon asset (if icon=yes)",
-          "name": "tabIconAsset",
-          "multi": false
-        },
-        {
-          "component": "text",
-          "label": "title",
-          "name": "tabTitle",
-          "valueType": "string"
-        },
-        {
-          "component": "richtext",
-          "label": "info",
-          "name": "tabInfo",
-          "valueType": "string"
-        }
-      ]
+      "component": "reference",
+      "label": "icon asset (if icon=yes)",
+      "name": "tabIconAsset",
+      "multi": false
+    },
+    {
+      "component": "text",
+      "label": "title",
+      "name": "tabTitle",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "info",
+      "name": "tabInfo",
+      "valueType": "string"
     }
   ]
 }

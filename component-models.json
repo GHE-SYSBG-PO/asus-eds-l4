@@ -4392,40 +4392,8 @@
       },
       {
         "component": "tab",
-        "label": "tab",
-        "name": "tabItemsTab"
-      },
-      {
-        "component": "multifield",
-        "label": "tabs",
-        "name": "tabs",
-        "valueType": "string",
-        "fields": [
-          {
-            "component": "text",
-            "label": "tab text",
-            "name": "tabText",
-            "valueType": "string"
-          },
-          {
-            "component": "reference",
-            "label": "icon asset (if icon=yes)",
-            "name": "tabIconAsset",
-            "multi": false
-          },
-          {
-            "component": "text",
-            "label": "title",
-            "name": "tabTitle",
-            "valueType": "string"
-          },
-          {
-            "component": "richtext",
-            "label": "info",
-            "name": "tabInfo",
-            "valueType": "string"
-          }
-        ]
+        "label": "Color Group",
+        "name": "color"
       },
       {
         "component": "select",
@@ -4452,6 +4420,35 @@
         "name": "L4TagNestedBlock",
         "value": "L4--nested-block--tab-3column",
         "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "tab-3column-item",
+    "fields": [
+      {
+        "component": "text",
+        "label": "tab text",
+        "name": "tabText",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "icon asset (if icon=yes)",
+        "name": "tabIconAsset",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "label": "title",
+        "name": "tabTitle",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "info",
+        "name": "tabInfo",
+        "valueType": "string"
       }
     ]
   },

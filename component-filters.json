@@ -85,6 +85,12 @@
   {
     "id": "tab-3column",
     "components": [
+      "tab-3column-item"
+    ]
+  },
+  {
+    "id": "tab-3column-item",
+    "components": [
       "media-block"
     ]
   }
