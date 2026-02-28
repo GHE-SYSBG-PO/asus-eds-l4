@@ -1032,7 +1032,7 @@ export default async function decorate(block) {
     await loadSwiper();
     await loadFeatureCSS();
     await loadAnimationFun();
-    await loadGsapFun();
+    // await loadGsapFun();
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
