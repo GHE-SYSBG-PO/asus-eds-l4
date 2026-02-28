@@ -2198,6 +2198,11 @@
         ]
       },
       {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
         "component": "select",
         "valueType": "string",
         "name": "colorGroup",
@@ -3902,6 +3907,11 @@
             "placeholder": "px, %, or vw"
           }
         ]
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
       },
       {
         "component": "select",
