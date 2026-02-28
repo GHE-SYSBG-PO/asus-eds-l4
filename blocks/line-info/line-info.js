@@ -121,7 +121,7 @@ export default async function decorate(block) {
 
     // 4. Get Multifield Data (L4TagMulti- rows or data-aue-prop format)
     // Try new format first (data-aue-prop), then fall back to L4TagMulti- format
-    const textItemsKey = 'textItems';
+    const textItemsKey = `textItems${styleLayout}`;
     let textItems = getBlockRepeatConfigsByDataAueProps(block, textItemsKey);
 
     // If new format returned empty, try old L4TagMulti- format
