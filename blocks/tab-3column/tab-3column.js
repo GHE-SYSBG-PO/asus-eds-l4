@@ -1,4 +1,4 @@
-import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue, nestBlockExecuteJs } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { prefixHex } from '../../components/button/button.js';
 
@@ -138,6 +138,9 @@ export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'tab-3column');
     const v = getFieldValue(config);
+
+    // Execute nested block JavaScript
+    nestBlockExecuteJs(block);
 
     // ── Config ──────────────────────────────────────────────────
     const motionEnabled = v('motionEnabled', 'boolean') || DEFAULT_CONFIG.motionEnabled;
