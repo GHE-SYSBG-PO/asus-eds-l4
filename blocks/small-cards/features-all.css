@@ -40802,15 +40802,15 @@ body {
     }
 
     .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-] .ai__noise__container {
-        --voice-iconSize: 240px
+        --voice-iconSize: 210px
     }
 
     .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-].column-span-2 .ai__noise__container {
-        --voice-iconSize: 150px
+        --voice-iconSize: 120px
     }
 
     .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-].column-span-3 .ai__noise__container {
-        --voice-iconSize: 180px
+        --voice-iconSize: 150px
     }
 
     .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-] .ai__noise__container .noise__voice__container {
