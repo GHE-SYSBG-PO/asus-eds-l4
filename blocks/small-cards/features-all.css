@@ -253,39 +253,6 @@ section .img {
     stroke: #fff
 }
 
-@keyframes videoCoverFadeOut {
-    0% {
-        opacity: 1
-    }
-
-    99% {
-        z-index: 1;
-        opacity: 0
-    }
-
-    100% {
-        display: none;
-        position: fixed;
-        z-index: -5;
-        opacity: 0
-    }
-}
-
-@keyframes hoverAnimation {
-    0% {
-        transform: scale(1,1) translateY(0)
-    }
-
-    35% {
-        transform: scale(1,.2) translateY(130px)
-    }
-
-    85% {
-        transform: scale(1,1) translateY(0)
-    }
-}
-
-
 .wdblockimg {
     position: relative;
     margin-right: auto;
@@ -307,12 +274,6 @@ section .img {
 }
 
 .wdblockimg .block[data-blocktype=aiNoise] {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between
-}
-
-.section__aiApplication2025-outer-s4 .wdblockimg .block.theme-white.small-cards-list {
     display: flex;
     flex-direction: column;
     justify-content: space-between
@@ -615,11 +576,6 @@ section .img {
     --img-icon-bg-color: #fff
 }
 
-.wdblockimg .ai__noise__container .img__icon .svg_button_play .svg-circle {
-    /* fill: var(--img-icon-bg-color)!important;
-    stroke: var(--img-icon-base-color)!important */
-}
-
 .wdblockimg .ai__noise__container .img__icon .svg_button_play .svg-line {
     fill: var(--img-icon-base-color)!important;
     stroke: transparent
@@ -819,33 +775,10 @@ section .img {
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .img__bg {
         position: relative;
-        /* padding-bottom: 100%; */
         width: 100%;
         height: 100%
     }
 
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .img__bg {
-        padding-bottom: 0;
-        height: 237px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .block-content {
-        padding: 278px 36px 47px;
-        min-height: 500px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop.column-span-2 .block-img,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop.column-span-3 .block-img {
-        overflow: hidden;
-        height: 237px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop.column-span-2 .block-img .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop.column-span-3 .block-img .img__bg {
-        top: 50%;
-        left: 50%;
-        width: 560px;
-        height: 560px;
-        transform: translate(-50%,-50%)
-    }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-2 .block-content,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-3 .block-content,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend[class*=column-span-] .block-content {
         padding-bottom: 340px
@@ -858,24 +791,6 @@ section .img {
     .wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-2 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-3 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend[class*=column-span-] .img__bg {
         width: 580px;
         height: 580px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-2.imageTop .block-img,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-3.imageTop .block-img,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend[class*=column-span-].imageTop .block-img {
-        height: 237px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-2.imageTop .block-content,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend.column-span-3.imageTop .block-content,.wdblockimg .wdblockimg__container .block.block-imgstyle-extend[class*=column-span-].imageTop .block-content {
-        padding: 278px 40px 40px;
-        min-height: 500px
-    }
-
-    .wdblockimg .wdblockimg__container .block.imageTop .block-video {
-        max-height: 237px
-    }
-
-    .wdblockimg .wdblockimg__container .block.imageTop.column-span-2 .block-video .video__container {
-        width: 366px;
-        height: 237px
     }
 
     .wdblockimg .block[data-blocktype=aiNoise] .ai__noise__container {
@@ -958,7 +873,6 @@ section .img {
     }
 
     .wdblockimg .block[data-blocktype=aiNoise].column-span-2 .ai__noise__container.js-active .noise__switcher {
-        /* top: -2px; */
         animation-delay: 0s;
         animation-duration: 3s
     }
@@ -985,19 +899,6 @@ section .img {
         padding: 26px 14px
     }
 
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .img__bg {
-        padding-bottom: 0;
-        height: 178px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .block-content {
-        padding: 203px 24px 30px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .block-video {
-        max-height: 178px
-    }
-
     .wdblockimg .wdblockimg__container .block.block-imgstyle-extend[class*=column-span-] .block-content {
         padding-bottom: 270px
     }
@@ -1018,33 +919,12 @@ section .img {
         height: 480px
     }
 
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-extend[class*=column-span-].imageTop .block-img {
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 237px;
-        transform: unset
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-extend[class*=column-span-].imageTop .block-content {
-        padding: 278px 14px 40px
-    }
-
     .wdblockimg .wdblockimg__container .block .block-video .video__container {
         bottom: 0;
         left: 50%;
         width: 414px;
         height: 414px;
         transform: translateX(-50%)
-    }
-
-    .wdblockimg .wdblockimg__container .block.imageTop .block-video {
-        max-height: 178px
-    }
-
-    .wdblockimg .wdblockimg__container .block.imageTop .block-video .video__container {
-        width: 414px;
-        height: 178px
     }
 
     .wdblockimg .block[data-blocktype=aiNoise][class*=block-imgstyle-] .ai__noise__container {
