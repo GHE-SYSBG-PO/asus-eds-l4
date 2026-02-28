@@ -88,11 +88,11 @@ section .img {
     }
 }
 
-/* @media all and (min-width: 731px) and (max-width:1279.5px) {
+@media all and (min-width: 731px) and (max-width:1279.5px) {
     #CMD::before {
-        content:"tablet"
+        content:"mobile"
     }
-} */
+}
 
 @media all and (max-width: 730.5px) {
     #CMD::before {
@@ -105,14 +105,14 @@ section .img {
     color: #fff
 }
 
-/* @media all and (min-width: 731px) and (max-width:1279.5px) {
+@media all and (min-width: 731px) and (max-width:1279.5px) {
     .wd__content {
         left:0;
         margin-right: auto;
         margin-left: auto;
         padding-left: 0
     }
-} */
+}
 
 @media all and (max-width: 730.5px) {
     .wd__content {
