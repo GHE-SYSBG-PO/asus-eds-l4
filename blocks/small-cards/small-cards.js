@@ -333,60 +333,75 @@ function getMediaHTML(data) {
     }
 
     content = `
-             <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style} background-color: var(--ai-noise-container-bg);">
-              <div class="nav__replay">
-                  <div class="wd__play__btn video__play__btn">
-                    <button class="wd__play__btn-button is-hidden" aria-label="replay the ai noise animation" tabindex="-1" id="aiApplication_s4_noise_replay_btn" aria-hidden="true" data-eventname="undefined">
-                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M18 1C27.3927 1 35 8.60729 35 18C35 27.3927 27.3927 35 18 35C8.60729 35 1 27.3927 1 18C1 8.60729 8.60729 1 18 1Z" fill="white" fill-opacity="0.75" stroke="#2F2F2F" stroke-width="2"/>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.1758 8.48584C18.3567 8.37745 18.5816 8.37174 18.7676 8.47119L23.042 10.7573C23.2369 10.8618 23.3584 11.0655 23.3584 11.2866C23.3582 11.5077 23.2369 11.7116 23.042 11.8159L18.7676 14.1011C18.5818 14.2004 18.3566 14.1956 18.1758 14.0874C17.9951 13.9791 17.8841 13.7833 17.8838 13.5728V12.5239C15.0283 12.8384 12.7833 15.3162 12.7832 18.3374C12.7835 22.1779 16.3986 25.1363 20.3145 23.9067C20.9766 23.6975 21.7315 23.2087 22.3965 22.5669C23.0609 21.9256 23.5831 21.1815 23.8271 20.5142C24.4052 18.936 24.3091 17.4555 23.7959 16.189L23.7949 16.187C23.5679 15.6223 23.7868 14.9662 24.3193 14.6694L24.4307 14.6147C24.9782 14.3775 25.5663 14.5994 25.873 15.0444L25.9307 15.1372L25.9619 15.1997C26.7287 17.0262 26.8693 19.1723 26.042 21.4038C25.1902 23.6897 23.3326 25.4777 21.0391 26.2026H21.0371C15.4901 27.9416 10.4007 23.7201 10.4004 18.3374C10.4005 14.0044 13.691 10.4303 17.8838 10.1021V9.00049C17.8838 8.78971 17.995 8.59427 18.1758 8.48584Z" fill="#2F2F2F" stroke-width="2"/>
-                          </svg>
-                        <div class="img__icon" aria-hidden="true"></div>
-                    </button>
+             <div class="wditems__content wditems__content__0 theme-white " role="tabpanel" id="SectionID-tab-1">
+        
+        <div class="item__media item__media--aiNoise">
+          <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
+            
+            <div class="nav__replay">
+              <div class="wd__play__btn video__play__btn">
+
+                <button class="wd__play__btn-button is-hidden" aria-label="replay the ai noise animation" tabindex="-1" id="aiApplication_s4_noise_replay_btn" aria-hidden="true" data-eventname="undefined">
+                  <svg class="svg-step svg_button_replay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.63 30.88" aria-hidden="true">
+                    <path class="cls-1" d="m15.44,28.37c-7.13,0-12.94-5.8-12.94-12.94S8.3,2.5,15.44,2.5c3.52,0,6.86,1.45,9.29,3.97l-2.73,2.29,8.63,3.25-1.71-9.06-2.27,1.91C23.73,1.77,19.7,0,15.44,0,6.92,0,0,6.92,0,15.44s6.92,15.44,15.44,15.44c7.3,0,13.66-5.18,15.12-12.33l-2.45-.5c-1.22,5.98-6.55,10.33-12.67,10.33h0Z">
+                      </path></svg><div class="img__icon" aria-hidden="true"></div>
+                </button>
+                                
+              </div>
+            </div>
+            <div class="nav__noise">
+              <div class="wdga nav__item nav__1" data-index="1" data-status="off" data-gaid="noiseCancelBtn1" role="button" tabindex="0" aria-label="Play the simulated home sounds without noise cancelation.">
+                <div class="nav__content">
+                  <div class="img__icon" aria-hidden="true">
+                    <svg class="svg_button_play" viewBox="0 0 85 85" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path class="svg-circle" d="M42.6,2.5c22.1,0,40,17.9,40,40s-17.9,40-40,40s-40-17.9-40-40S20.5,2.5,42.6,2.5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="undefined"></path>
+                      <g class="svg-step svg-pause-all">
+                        <path class="svg-line svg-pause" d="M50,28.2c1.1,0,2,0.9,2,2v24c0,1.1-0.9,2-2,2s-2-0.9-2-2v-24C48,29.1,48.9,28.2,50,28.2z" fill-rule="evenodd"></path>
+                        <path class="svg-line svg-pause" d="M35,28.2c1.1,0,2,0.9,2,2v24c0,1.1-0.9,2-2,2s-2-0.9-2-2v-24C33,29.1,33.9,28.2,35,28.2z" fill-rule="evenodd"></path>
+                      </g>
+                      <g class="svg-step svg-triangle svg-play">
+                        <path class="triangle" d="M55.7,41.5c0.3,0.4,0.3,1,0,1.5c-0.1,0.2-0.3,0.4-0.5,0.5L35.3,56.1c-0.2,0.1-0.5,0.2-0.7,0.2c-0.8,0-1.4-0.7-1.5-1.5v-25 c0-0.3,0.1-0.5,0.2-0.7c0.1-0.2,0.3-0.4,0.5-0.5c0.2-0.1,0.5-0.2,0.7-0.2c0.3,0,0.5,0.1,0.7,0.1L55.2,41 C55.4,41.2,55.6,41.4,55.7,41.5"></path>
+                      </g>
+                      <g class="svg-step svg-stop">
+                        <path class="st0" d="M45.8,42.1l10.4-10.4c0.8-0.8,0.8-2.2,0-3.2c-0.8-0.8-2.2-0.8-3.2,0L42.6,38.9L32.2,28.5 c-0.8-0.8-2.2-0.8-3.2,0c-0.8,0.8-0.8,2.2,0,3.2l10.4,10.4L29,52.5c-0.8,0.8-0.8,2.2,0,3.2c0.8,0.8,2.2,0.8,3.2,0l10.4-10.4 L53,55.7c0.8,0.8,2.2,0.8,3.2,0c0.8-0.8,0.8-2.2,0-3.2L45.8,42.1z"></path>
+                      </g>
+                    </svg>
                   </div>
+                </div>
               </div>
-              <div class="nav__noise">
-                  <div class="wdga nav__item nav__1" data-index="1" data-status="off" data-gaid="noiseCancelBtn1" role="button" tabindex="0"
-                    aria-label="Play the simulated home sounds without noise cancelation.">
-                    <div class="nav__content">
-                        <div class="img__icon" aria-hidden="true">
-                          <svg class="svg_button_play" viewBox="0 0 85 85" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                              <path class="svg-circle" d="M42.6,2.5c22.1,0,40,17.9,40,40s-17.9,40-40,40s-40-17.9-40-40S20.5,2.5,42.6,2.5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2px" stroke="#2f2f2f"></path>
-                              <g class="svg-step svg-pause-all">
-                                <path class="svg-line svg-pause" d="M50,28.2c1.1,0,2,0.9,2,2v24c0,1.1-0.9,2-2,2s-2-0.9-2-2v-24C48,29.1,48.9,28.2,50,28.2z" fill-rule="evenodd" stroke="#2f2f2f" stroke-width="2"></path>
-                                <path class="svg-line svg-pause" d="M35,28.2c1.1,0,2,0.9,2,2v24c0,1.1-0.9,2-2,2s-2-0.9-2-2v-24C33,29.1,33.9,28.2,35,28.2z" fill-rule="evenodd" stroke="#2f2f2f" stroke-width="2"></path>
-                              </g>
-                              <g class="svg-step svg-triangle svg-play">
-                                <path class="triangle" d="M55.7,41.5c0.3,0.4,0.3,1,0,1.5c-0.1,0.2-0.3,0.4-0.5,0.5L35.3,56.1c-0.2,0.1-0.5,0.2-0.7,0.2c-0.8,0-1.4-0.7-1.5-1.5v-25 c0-0.3,0.1-0.5,0.2-0.7c0.1-0.2,0.3-0.4,0.5-0.5c0.2-0.1,0.5-0.2,0.7-0.2c0.3,0,0.5,0.1,0.7,0.1L55.2,41 C55.4,41.2,55.6,41.4,55.7,41.5" stroke="#2f2f2f" stroke-width="2"></path>
-                              </g>
-                              <g class="svg-step svg-stop">
-                                <path class="st0" d="M45.8,42.1l10.4-10.4c0.8-0.8,0.8-2.2,0-3.2c-0.8-0.8-2.2-0.8-3.2,0L42.6,38.9L32.2,28.5 c-0.8-0.8-2.2-0.8-3.2,0c-0.8,0.8-0.8,2.2,0,3.2l10.4,10.4L29,52.5c-0.8,0.8-0.8,2.2,0,3.2c0.8,0.8,2.2,0.8,3.2,0l10.4-10.4 L53,55.7c0.8,0.8,2.2,0.8,3.2,0c0.8-0.8,0.8-2.2,0-3.2L45.8,42.1z" stroke="#2f2f2f" stroke-width="2"></path>
-                              </g>
-                          </svg>
-                        </div>
-                    </div>
-                  </div>
-              </div>
-              <div class="noise__voice__container" role="img"
-                  aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
-                  <figure class="img img__noise grace-show show animated" role="presentation" aria-hidden="true">
-                    <div class="img__voice">
-                        <img src="${noiseCancelingAsset}" alt="${imageAlt}">
-                    </div>
-                    <canvas class="noise__left" width="800" height="400"></canvas>
-                    <canvas class="noise__right" width="800" height="400"></canvas>
-                  </figure>
-              </div>
-              <div class="noise__switcher" aria-hidden="true">
-                  <p class="adaDesc noise_desc"></p>
-                  <button class="aiNoiseSwitcher_btn img__switcher switcher_button wdga" id="Item_21_conferenceS1span3_aiNoiseSwitcher" role="switch" data-status="false" data-on="AI noise cancelation, pressed, on" data-off="AI noise cancelation, pressed, off" aria-checked="false">
-                    <label class="hide" for="Item_21_conferenceS1span3_aiNoiseSwitcher">AI noise cancelation, pressed, off</label>
-                  </button>
-                  <audio class="noise__audio" aria-hidden="true">
-                    <source src="" type="audio/mpeg">
-                  </audio>
-              </div>
-            </div>`;
+            </div>
+            
+            <div class="noise__voice__container" role="img" aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
+              <figure class="img img__noise grace-show  show animated" role="presentation" aria-hidden="true">
+                <div class="img__voice">
+                  <svg viewBox="0 0 324 324" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true">
+                    <linearGradient gradientUnits="userSpaceOnUse" x1="50.33" x2="273.67" y1="50.33" y2="273.67" id="Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_a_1">
+                      <stop offset="0" stop-color="var(--voice-start)"></stop>
+                      <stop offset="1" stop-color="var(--voice-end)"></stop>
+                    </linearGradient>
+                    <linearGradient id="Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_b_1" x1="108.23" x2="215.77" href="#Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_a_1" y1="88.2" y2="195.75"></linearGradient>
+                    <linearGradient id="Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_c_1" x1="110.96" x2="213.04" href="#Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_a_1" y1="132.72" y2="234.79"></linearGradient>
+                    <path d="M162 320C74.88 320 4 249.12 4 162S74.88 4 162 4s158 70.88 158 158-70.88 158-158 158z" fill="var(--voice-bgcolor)"></path>
+                    <path d="M162 320C74.88 320 4 249.12 4 162S74.88 4 162 4s158 70.88 158 158-70.88 158-158 158zm0-307C79.82 13 13 79.82 13 162s66.82 149 149 149 149-66.86 149-149S244.18 13 162 13z" fill="url(#Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_a_1)"></path>
+                    <path d="M162 233.67a38.37 38.37 0 0 1-38.33-38.32V88.6a38.33 38.33 0 0 1 76.66 0v106.75A38.37 38.37 0 0 1 162 233.67zm0-174.43a29.39 29.39 0 0 0-29.36 29.36v106.75a29.36 29.36 0 1 0 58.72 0V88.6A29.39 29.39 0 0 0 162 59.24z" fill="url(#Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_b_1)"></path>
+                    <path d="M211.39 132.74a4 4 0 0 0-4 4v58.14a45.35 45.35 0 0 1-90.7 0v-58.11a4 4 0 0 0-8.07 0v58.14a53.48 53.48 0 0 0 48 53.14v32.4h10.76v-32.4a53.48 53.48 0 0 0 48-53.14v-58.14a4 4 0 0 0-3.99-4.03z" fill="url(#Item_1_conferenceS1span3_aiNoiseSwitcher_gradient_c_1)"></path>
+                    <path d="M0 0h324v324H0z" fill="none"></path>
+                  </svg>
+                </div>
+                <canvas class="noise__left" width="800" height="400"></canvas>
+                <canvas class="noise__right" width="800" height="400"></canvas>
+              </figure>
+            </div>
+            <div class="noise__switcher" aria-hidden="true">
+              <button class="aiNoiseSwitcher_btn img__switcher switcher_button wdga" id="Item_1_conferenceS1span3_aiNoiseSwitcher" role="switch" data-status="false" data-on="AI noise cancelation, pressed, on" data-off="AI noise cancelation, pressed, off" aria-checked="false" tabindex="0">
+                <label class="hide" for="Item_1_conferenceS1span3_aiNoiseSwitcher">AI noise cancelation, pressed, off</label>
+              </button>
+              <audio class="noise__audio" aria-hidden="true">
+              </audio>
+            </div>
+          </div>
+        </div>
+      </div>`;
   } else if (mediaType === 'video') {
     const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
     const isLoop = String(loop).toLowerCase() === 'true';
