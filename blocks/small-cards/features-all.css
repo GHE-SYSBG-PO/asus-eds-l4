@@ -1372,14 +1372,6 @@ html {
     transition-delay: .13s
 }
 
-.wdblockimg .block[data-blocktype=aiNoise].column-span-3 .ai__noise__container {
-    transition: margin-top 581ms linear 0s
-}
-
-.wdblockimg .block[data-blocktype=aiNoise].column-span-3 .ai__noise__container.js-active {
-    transition-duration: .492s
-}
-
 .wdblockimg .block.theme-white .ai__noise__container {
     --themecolor-main: 64,108,172;
     --themecolor-middle: 64,64,64;
@@ -1397,86 +1389,12 @@ html {
     --img-icon-bg-color: #fff
 }
 
-.wdblockimg .block.theme-white {
-    color: #404040
-}
-
-.wdblockimg .block.theme-black .ai__noise__container {
-    --themecolor-main: 154,122,89;
-    --themecolor-middle: 109,109,109;
-    --themecolor-filter: 223,201,169
-}
-
-
-.wdblockimg .block.theme-black .ai__noise__container .img__noise .img__voice {
-    --voice-start: #dfc9a9;
-    --voice-end: #9a7a59;
-    --voice-bgcolor: #000
-}
-
-.wdblockimg .block.theme-black .ai__noise__container .img__icon {
-    --img-icon-base-color: #fff;
-    --img-icon-bg-color: #000
-}
-
-.wdblockimg .block.theme-black {
-    color: #fff
-}
-
-.wdblockimg .block.theme-black {
-    background-color: #000
-}
-
-.wdblockimg .block.theme-black .block-content .content__title,.wdblockimg .block.theme-black .block-content .content__title * {
-    color: #fff;
-    background-image: linear-gradient(to right,#fff,#fff 80%,#fff 100%)
-}
-
-.wdblockimg .block.theme-black .block-content .content__info,.wdblockimg .block.theme-black .block-content .content__info * {
-    color: #fff
-}
-
-.wdblockimg .block.theme-black .modal-button-container .modal-button .modal-inner-text,.wdblockimg .block.theme-black .modal-button-container .modal-button .modal-inner-text * {
-    color: #fff
-}
-
-.wdblockimg .block.theme-white {
-    /* background-color: #fff */
-}
-
-.wdblockimg .block.theme-white .block-content .content__title,.wdblockimg .block.theme-white .block-content .content__title * {
-    color: #424242;
-    background-image: linear-gradient(to right,#424242,#424242 80%,#424242 100%)
-}
-
-.wdblockimg .block.theme-white .block-content .content__info,.wdblockimg .block.theme-white .block-content .content__info * {
-    color: #424242
-}
-
-.wdblockimg .block.theme-white .modal-button-container .modal-button .modal-inner-text,.wdblockimg .block.theme-white .modal-button-container .modal-button .modal-inner-text * {
-    color: #181818
-}
-
-.wdblockimg .block.imageTop .block-img {
-    top: 0
-}
 
 .outer-view {
     z-index: 0;
     transform-origin: 50vw 50vh;
     transition: none
 }
-
-
-body {
-    --swiperProgress-slideCreator: 0
-}
-
-:root {
-    --aiApplication2025-s1-1: 0%;
-    --aiApplication2025-s1-2: 80%
-}
-
 
 @keyframes slide {
     from {
@@ -1486,11 +1404,6 @@ body {
     to {
         max-height: 700px
     }
-}
-
-
-html {
-    --cmdvh: 1vh
 }
 
 .cmd-content {
@@ -1507,61 +1420,8 @@ html {
     background-image: none!important
 }
 
-.cmd-content .sectionnNavPosition {
-    transform: none!important;
-    transition: all 0s
-}
-
-.cmd-content .scrolltrigger-end {
-    position: relative
-}
-
 .cmd-content .row .col[class*=pull-],.cmd-content .row .col[class*=push-] {
     position: relative
-}
-
-.cmd-content .always__on__top {
-    position: relative;
-    z-index: 888
-}
-
-.cmd-content .no__wrap {
-    display: inline-block;
-    white-space: nowrap
-}
-
-.cmd-content .slick-dots li {
-    margin-right: 10px;
-    margin-left: 10px
-}
-
-.cmd-content .slick-dots li button::before {
-    color: #1c1b19;
-    font-size: 41px
-}
-
-.cmd-content .slick-dots li button:hover::before {
-    color: #1c1b19
-}
-
-.cmd-content .detect-point-out {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 1px;
-    height: 100%
-}
-
-.cmd-content .detect-point-enter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 1px
-}
-
-.cmd-content .large_use,.cmd-content .medium_use,.cmd-content .small_use {
-    display: none
 }
 
 .cmd-content .hide {
@@ -1569,58 +1429,6 @@ html {
     opacity: 0;
     height: 0
 }
-
-.cmd-content .ani_enter_detect {
-    position: absolute;
-    z-index: 99;
-    left: 50%;
-    width: 10px;
-    height: 10px
-}
-
-.wd__content .content__slogan {
-    color: #0b5da7
-}
-
-.wd__content .content__title {
-    color: #0b5da7;
-    background-image: linear-gradient(90deg,#0d77d3 27.8%,#095291 72.62%)
-}
-
-.wd__content .content__info {
-    color: #181818
-}
-
-.wd__content .content__title sup.footnote-num {
-    -webkit-text-fill-color: initial!important;
-    background-image: none!important;
-    background-color: rgba(0,0,0,0)
-}
-
-.wd__content .content__link span {
-    background-image: linear-gradient(90deg,#0d77d3 27.8%,#095291 72.62%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent
-}
-
-.wd__content .content__link:hover span {
-    border-bottom: 1px solid #0b5da7
-}
-
-.wd__content .wd__link__arrow::after {
-    color: #0b5da7
-}
-
-.sectionnNavPosition {
-    position: relative;
-    z-index: 1;
-    opacity: 1;
-    width: 0;
-    height: 0
-}
-
 
 .cmd-content .wd__play__btn .svg_button_play .svg-circle {
     stroke: #0b5da7;
@@ -1641,21 +1449,9 @@ html {
 }
 
 @media all and (min-width: 1280px) {
-    .wd__image__video {
-        min-height:680px
-    }
-
-    .wd__image__video {
-        margin-top: 56px
-    }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-content {
         min-height: 0;
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .block-content {
-        min-height: 0;
-        padding-bottom: 370px
     }
 
 
@@ -1669,15 +1465,6 @@ html {
         /* padding-bottom: 100%; */
         width: 100%;
         height: 100%
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-img {
-       
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .block-img {
-        position: absolute;
-        bottom: -1px
     }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .img__bg {
@@ -1731,11 +1518,6 @@ html {
 
     .wdblockimg .wdblockimg__container .block.imageTop.column-span-2 .block-video .video__container {
         width: 366px;
-        height: 237px
-    }
-
-    .wdblockimg .wdblockimg__container .block.imageTop.column-span-3 .block-video .video__container {
-        width: 560px;
         height: 237px
     }
 
@@ -1829,232 +1611,8 @@ html {
     }
 }
 
-@media all and (min-width: 1280px) {
-   
-    .cmd-content .large_use {
-        display: block!important
-    }
-
-    .cmd-content .large_unuse {
-        display: none
-    }
-
-    .cmd-content .small_use {
-        display: none
-    }
-
-    .cmd-content .colSpace {
-        height: 230px
-    }
-
-    .cmd-content .slick-tab-content .slick-info-item {
-        padding-top: 20px
-    }
-
-    .cmd-content .wd__content.wd__content-horz {
-        margin-top: 32px;
-        max-width: 100%
-    }
-
-    .cmd-content .wd__content.wd__content-horz .content-col-1 {
-        width: var(--asus-column-width-4)
-    }
-
-    .cmd-content .wd__content.wd__content-horz .content-col-2 {
-        padding-left: 30px;
-        flex: 1 0 auto
-    }
-
-    .cmd-content .wd__swiper__card {
-        margin-top: 56px
-    }
-
-    .cmd-content .wd__ksp__card__2025 {
-        margin-top: 56px
-    }
-
-    .cmd-content .section__aiCopilot-outer-s1 .wd__content.wd__content-horz .content-col-2 {
-        padding-top: 35px
-    }
-
-    .cmd-content .modal-button-container .modal-button:hover::before {
-        opacity: 0
-    }
-
-}
-
-@media all and (min-width: 731px) and (max-width:1279.5px) {
-    .section__noise {
-        margin-bottom:-96px;
-        padding-top: 120px!important
-    }
-
-    .section__noise .wd__content {
-        max-width: 800px
-    }
-
-}
-
-@media all and (min-width: 731px) and (max-width:1279.5px) {
-
-    .cmd-content .sectionnNavPosition {
-        top: -80px
-    }
-
-    .cmd-content .medium_use {
-        display: block!important
-    }
-
-    .cmd-content .medium_unuse {
-        display: none
-    }
-
-    .cmd-content .small_use {
-        display: none
-    }
-
-    .cmd-content .no__wrap {
-        display: inline-block;
-        white-space: nowrap
-    }
-
-    .cmd-content .wd__link__arrow::after {
-        padding-left: 5px
-    }
-
-    .cmd-content header.wd__content+.wd__feature__list {
-        margin-bottom: -32px
-    }
-
-    .section-media-top {
-        height: 80px
-    }
-
-    .cmd-sidenav .item-dot.enter {
-        background: #7c8e9e
-    }
-
-    .cmd-content .section__wdvideos {
-        padding-top: 0
-    }
-
-    .cmd-content .wd__ksp__card__2025 {
-        margin-top: 48px
-    }
-
-}
-
-
 @media all and (max-width: 730.5px) {
-    .wdtab {
-        margin-top:20px
-    }
-
-    .wdtab .wdtab__nav-btn {
-        padding: 16px 43px;
-        width: auto
-    }
-
-    .wdtab .wdtab__panel__item {
-        padding-top: 25px
-    }
-
-    .wdtab .wdtab__panel__item-info__text {
-        margin: 0 auto;
-        margin-top: 0;
-        padding-top: 0;
-        padding-bottom: 25px;
-        width: 90%
-    }
-
-    .wdtab .wdtab__panel__item-image {
-        position: relative;
-        overflow: hidden
-    }
-
-    .slick-tab-content {
-        margin: 45px auto 0;
-        width: 100%;
-        max-width: 720px
-    }
-
-    .slick-tab-content .slick-title {
-        position: relative;
-        text-align: center
-    }
-
-    .slick-tab-content .slick-title .title-nav .slick-nav-btn {
-        padding: 16px 43px;
-        scroll-snap-align: center
-    }
-
-    .slick-tab-content .slick-title .title-nav .slick-nav-btn.active,.slick-tab-content .slick-title .title-nav .slick-nav-btn:focus {
-        border-bottom: 2px solid #683aff
-    }
-
-    .slick-tab-content .slick-title .title-nav .sign-fnum {
-        top: -.6em
-    }
-
-    .slick-tab-content .slick-info-item {
-        padding-top: 25px
-    }
-
-    .slick-tab-content .slick-info {
-        margin: 0 auto;
-        padding-top: 0;
-        width: 90%;
-        max-width: 350px
-    }
-
-    .slick-tab-content .slick-info .slick-info-text .info__comment {
-        display: inline-block;
-        margin-top: 7px;
-        color: #6f6f6f
-    }
-
-    .slick-tab-content .slick-image {
-        position: relative;
-        left: 50%;
-        margin: 10px 0 0
-    }
-
-    .slick-tab-content .slick-image .img-slick {
-        left: 50%;
-        width: 414px;
-        height: 228px;
-        border-radius: 5px;
-        transform: translateX(-50%)
-    }
-
-    .slick-tab-content .slick-info+.slick-image {
-        margin-top: 25px
-    }
-
-    .wdtab .wdtab__autoPlay {
-        left: 90%;
-        margin-left: 0
-    }
-
-    .wd__image__video {
-        margin-right: auto;
-        margin-left: auto;
-        width: 100%
-    }
-
-    .wd__image__video .wd__image__video__group {
-        padding-bottom: 54%
-    }
-
-    .wd__image__video.small-full-width {
-        width: 100%
-    }
-
-    .wd__image__video {
-        margin-top: 40px
-    }
-
-
+  
     .wdblockimg .wdblockimg__container {
         margin-right: auto;
         margin-left: auto;
@@ -2068,25 +1626,6 @@ html {
 
     .wdblockimg .wdblockimg__container .block .block-content {
         padding: 26px 14px
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-content,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .block-content,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-6 .block-content {
-        /* min-height: 350px;
-        padding-bottom: 66% */
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-img,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .block-img,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-6 .block-img {
-        position: relative;
-        /* position: absolute;
-        bottom: -1px; */
-        width: 100%
-    }
-
-    .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-3 .img__bg,.wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-6 .img__bg {
-        /* position: relative;
-        padding-bottom: 100%;
-        width: 100%;
-        height: 0 */
     }
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.imageTop .img__bg {
