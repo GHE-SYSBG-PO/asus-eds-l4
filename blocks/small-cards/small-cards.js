@@ -925,7 +925,9 @@ export default async function decorate(block) {
     await initializeSwiperCarousel(block);
 
     setTimeout(async () => {
+      await loadGsapFun();
       await loadFeatureFun();
+
       setEqualHeight(block);
     }, 100);
 
@@ -941,7 +943,7 @@ export default async function decorate(block) {
 }
 
 let loadFeatureJS; let loadFeature; let
-  loadAnimation;
+  loadAnimation; let loadGsapJS;
 
 /**
  * Loads the noUiSlider jQuery plugin.
@@ -973,6 +975,22 @@ function loadFeatureFun() {
     });
   }
   return loadFeatureJS;
+}
+
+/**
+ * Loads the noUiSlider library.
+ * @returns {Promise} A promise that resolves when the script is loaded.
+ */
+function loadGsapFun() {
+  if (!loadGsapJS) {
+    loadGsapJS = loadScript(
+      'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+    ).catch((err) => {
+      console.error('Failed to load Feature JS:', err);
+      throw err;
+    });
+  }
+  return loadGsapJS;
 }
 
 /**
