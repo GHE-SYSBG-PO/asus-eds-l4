@@ -333,19 +333,8 @@ function getMediaHTML(data) {
     }
 
     content = `
-             <div class="container">
-    <div class="item__container swiper">
-      <div class="wditems__content wditems__content__0 theme-white " role="tabpanel" id="SectionID-tab-1">
-        <div class="padding__left"></div>
-        <div class="tabcontent__container">
-
-          <div class="wd__content   large__text-left medium__text-center small__text-left  item__wd__content wd__content__0">
-            <h2 class="content__title tt-md-32 small_tt-md-24 no-top-space"><span>Create boldly:<br>exclusive GoPro offer</span>
-            </h2>
-            <div class="content__info ro-rg-18 small_ro-rg-16 info--1">ASUS and GoPro have teamed up to bring creators an exclusive offer. Buy a selected ASUS laptop and get a free 12-month GoPro Premium+ subscription (a $99.99 value), plus a 15% discount coupon. Unlock the full GoPro experience – on us. </div><a class="content__link ro-md-18-sh small_ro-md-16-sh wdga link--1 wd__link__arrow asus-icon-chevronright  " aria-label="Learn more about gopro (opens in new window)" href="https://www.asus.com/content/gopro/" target="_blank" rel="noopener noreferrer" data-galabel="Learn more" data-eventname="gopro_learn_more_clicked" tabindex="0"><span>Learn more </span></a>
-          </div>
-        </div>
-        <div class="padding__right"></div>
+             <div class="wditems__content wditems__content__0 theme-white " role="tabpanel" id="SectionID-tab-1" style="padding-top: 300px;">
+        
         <div class="item__media item__media--aiNoise">
           <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
             <div class="nav__replay">
@@ -361,7 +350,6 @@ function getMediaHTML(data) {
             </div>
             <div class="nav__noise">
               <div class="wdga nav__item nav__1" data-index="1" data-status="off" data-gaid="noiseCancelBtn1" role="button" tabindex="0" aria-label="Play the simulated home sounds without noise cancelation.">
-                <div class="nav__aria_data hide" data-desc-start="Pause the simulated home sounds without noise cancelation." data-desc-stop="Play the simulated home sounds without noise cancelation." data-desc-ai="Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself."></div>
                 <div class="nav__content">
                   <div class="img__icon" aria-hidden="true">
                     <svg class="svg_button_play" viewBox="0 0 85 85" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -403,7 +391,6 @@ function getMediaHTML(data) {
               </figure>
             </div>
             <div class="noise__switcher" aria-hidden="true">
-              <p class="adaDesc noise_desc"></p>
               <button class="aiNoiseSwitcher_btn img__switcher switcher_button wdga" id="Item_1_conferenceS1span3_aiNoiseSwitcher" role="switch" data-status="false" data-on="AI noise cancelation, pressed, on" data-off="AI noise cancelation, pressed, off" aria-checked="false" tabindex="0">
                 <label class="hide" for="Item_1_conferenceS1span3_aiNoiseSwitcher">AI noise cancelation, pressed, off</label>
               </button>
@@ -412,11 +399,7 @@ function getMediaHTML(data) {
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class="wditems__content wditems__content__1"></div>
-    </div>
-  </div>`;
+      </div>`;
   } else if (mediaType === 'video') {
     const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
     const isLoop = String(loop).toLowerCase() === 'true';
