@@ -90,7 +90,7 @@ section .img {
 
 @media all and (min-width: 731px) and (max-width:1279.5px) {
     #CMD::before {
-        content:"mobile"
+        content:"tablet"
     }
 }
 
@@ -751,7 +751,7 @@ section .img {
     fill: #fff
 }
 
-@media all and (min-width: 1280px) {
+@media all and (min-width: 731px) {
 
     .wdblockimg .wdblockimg__container .block.block-imgstyle-scale.column-span-2 .block-content {
         min-height: 0;
