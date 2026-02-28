@@ -333,7 +333,10 @@ function getMediaHTML(data) {
     }
 
     content = `
-             <div class="wditems__content wditems__content__0 theme-white " role="tabpanel" id="SectionID-tab-1">
+             <div class="container">
+    <div class="item__container swiper">
+      <div class="wditems__content wditems__content__0 theme-white " role="tabpanel" id="SectionID-tab-1">
+        <div class="padding__left"></div>
         <div class="tabcontent__container">
 
           <div class="wd__content   large__text-left medium__text-center small__text-left  item__wd__content wd__content__0">
@@ -342,6 +345,7 @@ function getMediaHTML(data) {
             <div class="content__info ro-rg-18 small_ro-rg-16 info--1">ASUS and GoPro have teamed up to bring creators an exclusive offer. Buy a selected ASUS laptop and get a free 12-month GoPro Premium+ subscription (a $99.99 value), plus a 15% discount coupon. Unlock the full GoPro experience – on us. </div><a class="content__link ro-md-18-sh small_ro-md-16-sh wdga link--1 wd__link__arrow asus-icon-chevronright  " aria-label="Learn more about gopro (opens in new window)" href="https://www.asus.com/content/gopro/" target="_blank" rel="noopener noreferrer" data-galabel="Learn more" data-eventname="gopro_learn_more_clicked" tabindex="0"><span>Learn more </span></a>
           </div>
         </div>
+        <div class="padding__right"></div>
         <div class="item__media item__media--aiNoise">
           <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
             <div class="nav__replay">
@@ -408,7 +412,11 @@ function getMediaHTML(data) {
             </div>
           </div>
         </div>
-      </div>`;
+      </div>
+      
+      <div class="wditems__content wditems__content__1"></div>
+    </div>
+  </div>`;
   } else if (mediaType === 'video') {
     const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
     const isLoop = String(loop).toLowerCase() === 'true';
