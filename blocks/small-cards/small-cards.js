@@ -333,7 +333,8 @@ function getMediaHTML(data) {
     }
 
     content = `
-             <div class="item__container swiper">
+             <div class="container">
+    <div class="item__container swiper">
       <div class="wditems__content wditems__content__0 theme-white " role="tabpanel" id="SectionID-tab-1">
         <div class="padding__left"></div>
         <div class="tabcontent__container">
@@ -414,7 +415,8 @@ function getMediaHTML(data) {
       </div>
       
       <div class="wditems__content wditems__content__1"></div>
-    </div>`;
+    </div>
+  </div>`;
   } else if (mediaType === 'video') {
     const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
     const isLoop = String(loop).toLowerCase() === 'true';
