@@ -1029,6 +1029,7 @@ async function renderCard(block) {
 export default async function decorate(block) {
 
   try {
+    await loadSwiper();
     await loadFeatureCSS();
     await loadAnimationFun();
     await loadGsapFun();
@@ -1039,7 +1040,6 @@ export default async function decorate(block) {
     instance.init();
 
     setTimeout(async () => {
-      await loadSwiper();
       setEqualHeight(block);
     }, 100);
 
