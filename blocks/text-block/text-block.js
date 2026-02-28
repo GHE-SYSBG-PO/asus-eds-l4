@@ -77,37 +77,20 @@ const DEFAULT_CONFIG = {
   desktopAlignment: 'center',
   tabletAlignment: 'center',
   mobileAlignment: 'center',
-  categoryRichtext: '',
-  titleRichtext: '',
-  bodyRichtext: '',
-  disclaimerRichtext: '',
   motion: 'off',
-  ctaText: '',
   ctaVisible: 'show',
-  ctaLinkType: '',
-  categoryIcon: '',
-  categoryIconNum: '',
-  categoryIconPosition: '',
-  categoryIcon1: '',
-  categoryIcon2: '',
   categoryFontD: FONTS[PRODUCT_LINE].categoryFontD,
   categoryFontT: FONTS[PRODUCT_LINE].categoryFontT,
   categoryFontM: FONTS[PRODUCT_LINE].categoryFontM,
-  categoryFontColor: '',
   titleFontD: FONTS[PRODUCT_LINE].titleFontD,
   titleFontT: FONTS[PRODUCT_LINE].titleFontT,
   titleFontM: FONTS[PRODUCT_LINE].titleFontM,
-  titleFontColor: '',
   bodyFontD: FONTS[PRODUCT_LINE].bodyFontD,
   bodyFontT: FONTS[PRODUCT_LINE].bodyFontT,
   bodyFontM: FONTS[PRODUCT_LINE].bodyFontM,
-  bodyFontColor: '',
-  disclaimerFontColor: '',
   ctaFontD: FONTS[PRODUCT_LINE].ctaFontD,
   ctaFontT: FONTS[PRODUCT_LINE].ctaFontT,
   ctaFontM: FONTS[PRODUCT_LINE].ctaFontM,
-  ctaFontColor: '',
-  ctaHyperlink: '',
 };
 
 const handleCategoryClass = (num) => {
@@ -217,7 +200,7 @@ export default async function decorate(block) {
     `;
 
     const wrap = `
-      <div class='flex flex-col ${motion} ${dAlignment} ${tAlignment} ${mAlignment}'>
+      <div class='flex flex-col ${motion} ${dAlignment} ${tAlignment} ${mAlignment} ${v('colorGroup')}'>
         ${category}
         ${title}
         ${body}

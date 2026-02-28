@@ -2,7 +2,29 @@ import {
   getBlockConfigs,
   getFieldValue,
   getBlockRepeatConfigs,
+  getProductLine,
 } from '../../scripts/utils.js';
+
+const FONTS = {
+  asus: {
+    titleFont: 'tt-bd-28',
+    infoFont: 'ro-rg-18-sh',
+  },
+  proart: {
+    titleFont: 'tt-bd-28',
+    infoFont: 'ro-rg-18-sh',
+  },
+  rog: {
+    titleFont: 'tg-bd-28',
+    infoFont: 'rc-rg-18-sh',
+  },
+  tuf: {
+    titleFont: 'dp-cb-28',
+    infoFont: 'ro-rg-18-sh',
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
 
 /**
  * Unifies the height of title containers based on the tallest content.
@@ -77,8 +99,8 @@ const setUnifiedHeight = (block) => {
 // DEFAULT
 const DEFAULT_CONFIG = {
   wrapLine: 'on',
-  titleFont: 'tt-bd-28',
-  infoFont: 'ro-rg-18-sh',
+  titleFont: FONTS[PRODUCT_LINE].titleFont,
+  infoFont: FONTS[PRODUCT_LINE].infoFont,
   lineWidth: '100%',
 };
 
