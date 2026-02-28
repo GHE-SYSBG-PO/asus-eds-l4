@@ -40,6 +40,10 @@ function NoiseCancellation() {
   let alphaValue;
   let THEME_COLOR;
   let voiceStripe;
+  let gaLabelHeader;
+  let eventname;
+  let eventnameSwitch;
+  let eventnameReplay;
 
   let _config = {
     isInner: false,
