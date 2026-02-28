@@ -37,7 +37,7 @@
       "id": "chart-advanced",
       "fields": [
         {
-          "...": "../../commonModel/_ colorGroup.json#/fields"
+          "...": "../../commonModel/_colorGroup.json#/fields"
         }
       ]
     },
