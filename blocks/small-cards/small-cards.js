@@ -333,7 +333,7 @@ function getMediaHTML(data) {
     }
 
     content = `
-            <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style} background-color: var(--ai-noise-container-bg);">
+            <div class="wditems__content wditems__content__0 theme-white ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style} background-color: var(--ai-noise-container-bg);">
             
         
         <div class="item__media item__media--aiNoise">
