@@ -1093,25 +1093,6 @@ $background-color_2: #fff;
 		height: 0;
 	}
 }
-section {
-	position: relative;
-	margin-right: auto;
-	margin-left: auto;
-	width: 100%;
-	.img {
-		display: block;
-		position: relative;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-}
-.section__content {
-	margin-right: auto;
-	margin-left: auto;
-	width: 100%;
-	height: 100%;
-}
 .outer-view {
 	opacity: 1;
 	transition: opacity 0s linear;
