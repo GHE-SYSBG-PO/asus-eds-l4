@@ -43,6 +43,9 @@ const alignmentConfig = {
   arrowBorderColorDisable: '',
 };
 
+/**
+ * Default font sizes for different product lines.
+ */
 const PRODUCT_DEFAULTS = {
   asus: {
     titleFontD: 'tt-md-32',
@@ -66,6 +69,9 @@ const PRODUCT_DEFAULTS = {
   },
 };
 
+/**
+ * Default configuration for a card.
+ */
 const DEFAULT_CONFIG = {
 
   //  Base Tab
@@ -144,11 +150,6 @@ const DEFAULT_CONFIG = {
   borderWidthCTA: '',
   borderColorCTA: '',
 
-
-
-
-
-
   // Anchor (Down arrow on cards)
   isAnchorVisible: 'false',
   sectionID: '#',
@@ -162,8 +163,6 @@ const DEFAULT_CONFIG = {
   anchorAssetDefault: '',
   anchorAssetHover: '',
   anchorAssetPress: '',
-
-  // Advanced Tab
 
   // Cards Title
   titleFontD: '',
@@ -260,8 +259,6 @@ async function fillSequentialConfig(block) {
     });
   });
 
-  console.log('Extracted sequence:', fieldGroups, flatValues);
-
   const keys = Object.keys(cfg);
   const configArray = [];
   const chunkSize = keys.length;
@@ -308,36 +305,36 @@ const getButtonPositionClass = (position) => {
 };
 
 /**
- * Generates the HTML for the media content (image, video, or noise canceling animation).
- * @param {object} data The card data.
- * @returns {string} The HTML string for the media content.
+ * Generates the style string for noise canceling animation colors.
+ * @param {string} noiseWaveColor The hex color for noise wave.
+ * @param {string} voiceWaveColor The hex color for voice wave.
+ * @returns {string} The CSS style string.
  */
-function getMediaHTML(data) {
-  const {
-    mediaType, imageAlt, videoAutoPlay, loop, navReplay, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
-    pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition,
-  } = data;
-  let content = '';
+function getNoiseCancelingStyle(noiseWaveColor, voiceWaveColor) {
+  let style = '';
+  if (noiseWaveColor) {
+    const rgb = hexToRgb(noiseWaveColor);
+    if (rgb) style += `--themecolor-middle: ${rgb};`;
+  }
+  if (voiceWaveColor) {
+    const rgb = hexToRgb(voiceWaveColor);
+    if (rgb) style += `--themecolor-main: ${rgb}; --themecolor-filter: ${rgb};`;
+  }
+  return style;
+}
 
-  const asset = getValueForDevice('assets', data) || data.assets;
-
-  if (mediaType === 'noise_canceling') {
-    let style = '';
-    if (noiseWaveColor) {
-      const rgb = hexToRgb(noiseWaveColor);
-      if (rgb) style += `--themecolor-middle: ${rgb};`;
-    }
-    if (voiceWaveColor) {
-      const rgb = hexToRgb(voiceWaveColor);
-      if (rgb) style += `--themecolor-main: ${rgb}; --themecolor-filter: ${rgb};`;
-    }
-
-    content = `
-            <div class="wditems__content wditems__content__0 theme-white" id="SectionID-tab-1" style="${style} background-color: var(--ai-noise-container-bg);">
-        
+/**
+ * Generates the HTML for noise canceling animation.
+ * @param {string} style The CSS style string.
+ * @param {string} noiseCancelingAsset The asset URL for noise canceling.
+ * @param {string} imageAlt The alt text for the image.
+ * @returns {string} The HTML string.
+ */
+function getNoiseCancelingHTML(style, noiseCancelingAsset, imageAlt) {
+  return `
+      <div class="wditems__content wditems__content__0 theme-white" id="SectionID-tab-1" style="${style} background-color: var(--ai-noise-container-bg);">
         <div class="item__media item__media--aiNoise">
           <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
-            
             <div class="nav__replay">
                   <div class="wd__play__btn video__play__btn">
                     <button class="wd__play__btn-button is-hidden" aria-label="replay the ai noise animation" tabindex="-1" id="aiApplication_s4_noise_replay_btn" aria-hidden="true" data-eventname="undefined">
@@ -392,19 +389,32 @@ function getMediaHTML(data) {
           </div>
         </div>
       </div>`;
-  } else if (mediaType === 'video') {
-    const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
-    const isLoop = String(loop).toLowerCase() === 'true';
-    const isNavReplay = String(navReplay).toLowerCase() === 'true';
-    const isPauseAndPlayBtn = String(pauseAndPlayBtn).toLowerCase() === 'true';
+}
 
-    const initialPlayBtnDisplay = isVideoAutoPlay ? 'none' : 'flex';
-    const initialPauseBtnDisplay = isVideoAutoPlay ? 'flex' : 'none';
-    const btnColor = pausePlayBtnColor || 'ffffff';
-    const positionClass = getButtonPositionClass(pausePlayBtnPosition);
-    const controlsDisplay = isPauseAndPlayBtn ? 'flex' : 'none';
+/**
+ * Generates the HTML for video content.
+ * @param {string} asset The video asset URL.
+ * @param {boolean|string} videoAutoPlay Whether video should autoplay.
+ * @param {boolean|string} loop Whether video should loop.
+ * @param {boolean|string} navReplay Whether to show replay button.
+ * @param {boolean|string} pauseAndPlayBtn Whether to show pause/play buttons.
+ * @param {string} pausePlayBtnColor Color of the buttons.
+ * @param {string} pausePlayBtnPosition Position of the buttons.
+ * @returns {string} The HTML string.
+ */
+function getVideoHTML(asset, videoAutoPlay, loop, navReplay, pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition) {
+  const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
+  const isLoop = String(loop).toLowerCase() === 'true';
+  const isNavReplay = String(navReplay).toLowerCase() === 'true';
+  const isPauseAndPlayBtn = String(pauseAndPlayBtn).toLowerCase() === 'true';
 
-    content = `
+  const initialPlayBtnDisplay = isVideoAutoPlay ? 'none' : 'flex';
+  const initialPauseBtnDisplay = isVideoAutoPlay ? 'flex' : 'none';
+  const btnColor = pausePlayBtnColor || 'ffffff';
+  const positionClass = getButtonPositionClass(pausePlayBtnPosition);
+  const controlsDisplay = isPauseAndPlayBtn ? 'flex' : 'none';
+
+  return `
           <div class="block-img media-block-video-container relative" data-pause-and-play-btn="${isPauseAndPlayBtn}">
             <video class="img video__bg w-full h-full object-cover"
                 src="${asset}"
@@ -422,18 +432,52 @@ function getMediaHTML(data) {
             </div>
             ${!isLoop && isNavReplay ? `<button class="media-block-replay-btn absolute ${positionClass} z-10 rounded-full flex items-center justify-center transition-all" aria-label="Replay" style="display: none; border: 1px solid #${btnColor};"><svg viewBox="0 0 36 36" fill="#${btnColor}"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" transform="translate(6,6)"/></svg></button>` : ''}
           </div>`;
-  } else {
-    if (asset) {
-      content = `
+}
+
+/**
+ * Generates the HTML for image content.
+ * @param {string} asset The image asset URL.
+ * @param {string} imageAlt The alt text for the image.
+ * @returns {string} The HTML string.
+ */
+function getImageHTML(asset, imageAlt) {
+  return `
         <div class="block-img">
           <img class="img img__bg"
               src="${asset}"
               alt="${imageAlt}">
         </div>`;
+}
+
+/**
+ * Generates the HTML for the media content (image, video, or noise canceling animation).
+ * @param {object} data The card data.
+ * @returns {string} The HTML string for the media content.
+ */
+function getMediaHTML(data) {
+  const {
+    mediaType, imageAlt, videoAutoPlay, loop, navReplay, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
+    pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition,
+  } = data;
+  let content = '';
+
+  const asset = getValueForDevice('assets', data) || data.assets;
+
+  switch (mediaType) {
+    case 'noise_canceling': {
+      content = getNoiseCancelingHTML(getNoiseCancelingStyle(noiseWaveColor, voiceWaveColor), noiseCancelingAsset, imageAlt);
+      break;
     }
+    case 'video':
+      content = getVideoHTML(asset, videoAutoPlay, loop, navReplay, pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition);
+      break;
+    default:
+      if (asset) {
+        content = getImageHTML(asset, imageAlt);
+      }
+      break;
   }
 
-  console.log("H1, Generated media HTML:", title, asset, data);
   return content;
 }
 
@@ -493,21 +537,6 @@ function getCardHTML(data) {
     anchorBorderColorDefault,
     anchorBorderColorHover,
     anchorBorderColorPress,
-    gBtnLabel,
-    gBtnFontDesktop,
-    gBtnFontM,
-    gBtnFontColorDefault,
-    gBtnFontColorHover,
-    gBtnFontColorActive,
-    gBtnContainerBgColorDefault,
-    gBtnContainerBgColorHover,
-    gBtnContainerBgColorActive,
-    gBtnContainerRadiusTL,
-    gBtnContainerRadiusTR,
-    gBtnContainerRadiusBR,
-    gBtnContainerRadiusBL,
-    gBtnBorderWidth,
-    gBtnBorderColor,
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
@@ -683,9 +712,6 @@ async function renderCard(block) {
     arrowColorHover,
     arrowColorPress,
     arrowColorDisable,
-    arrowAssetDefault,
-    arrowAssetHover,
-    arrowAssetDisable,
     arrowBorderWidthDefault,
     arrowBorderWidthHover,
     arrowBorderWidthPress,
@@ -935,7 +961,6 @@ export default async function decorate(block) {
     instance.init();
 
     setTimeout(async () => {
-
       setEqualHeight(block);
     }, 100);
 
@@ -947,7 +972,6 @@ export default async function decorate(block) {
     console.error('Error decorating small cards block:', error);
     block.innerHTML = '<div class="error-message">Failed to load small cards block</div>';
   }
-
 }
 
 let loadFeature; let
@@ -970,7 +994,7 @@ function loadAnimationFun() {
 }
 
 /**
- * Loads the noUiSlider library.
+ * Loads the GSAP library.
  * @returns {Promise} A promise that resolves when the script is loaded.
  */
 function loadGsapFun() {
@@ -978,7 +1002,7 @@ function loadGsapFun() {
     loadGsapJS = loadScript(
       'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
     ).catch((err) => {
-      console.error('Failed to load Feature JS:', err);
+      console.error('Failed to load GSAP JS:', err);
       throw err;
     });
   }
@@ -986,7 +1010,7 @@ function loadGsapFun() {
 }
 
 /**
- * Loads the noUiSlider CSS.
+ * Loads the Features CSS.
  * @returns {Promise} A promise that resolves when the CSS is loaded.
  */
 function loadFeatureCSS() {
@@ -1067,25 +1091,6 @@ async function initializeSwiperCarousel(block) {
         },
       },
     },
-    // on: {
-    //   beforeDestroy: () => {
-    //     swiper.navigation.destroy();
-    //     swiper.pagination.destroy();
-    //   },
-    //   afterInit: function() {
-    //     const navContainer = this.navigation.nextEl?.parentNode;
-    //     if (navContainer && this.isBeginning && this.isEnd) {
-    //       navContainer.style.display = 'none';
-    //     }
-    //   },
-    //   resize: function() {
-    //     const navContainer = this.navigation.nextEl?.parentNode;
-    //     if (navContainer) {
-    //       // Show or hide based on whether both nav buttons are disabled
-    //       navContainer.style.display = (this.isBeginning && this.isEnd) ? 'none' : '';
-    //     }
-    //   },
-    // },
   });
 
   return swiper;
