@@ -795,7 +795,7 @@ function buildSmallCardsContainer(data, config) {
 
   const html = `<div class="cmd-content">
     <div class="outer-view" id="CMD">
-      <section class="wd__section wd__sections theme-white " id="section__aiApplication2025-outer-s4">
+      <section>
           <div class="section_content">
             <div class="row">
                 <div class="col l12 m12 s12">
