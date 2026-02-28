@@ -221,7 +221,7 @@ export default async function decorate(block) {
     // Build button HTML
     const buttonHtml = `
       <a href="${href}"
-         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${totalFonts}"
+         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${totalFonts} ${v('colorGroup')}"
          data-link-type="${linkType}"
          data-is-external="${isExternal}"
          data-style="${style}"
