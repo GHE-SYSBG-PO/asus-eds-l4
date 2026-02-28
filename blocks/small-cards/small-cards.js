@@ -1049,7 +1049,6 @@ export default async function decorate(block) {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating small cards block:', error);
-    block.innerHTML = '<div class="error-message">Failed to load small cards block</div>';
   }
 }
 
