@@ -1,6 +1,5 @@
-/* eslint-disable no-lonely-if, no-plusplus, max-len, no-unused-vars, quotes, no-multiple-empty-lines, no-use-before-define, no-console, padded-blocks */
+/* eslint-disable no-plusplus, max-len, no-unused-vars, quotes, no-multiple-empty-lines, no-use-before-define, no-console, padded-blocks */
 
-import MediaCarousel from './mediaCarousel.js';
 import {
   loadScript, loadCSS, loadBlock, buildBlock, decorateBlock,
 } from '../../scripts/aem.js';
@@ -20,14 +19,14 @@ const alignmentConfig = {
 
   // Swiper Arrow (Previous / Next)
   arrowStyle: '',
-  arrowContainerBgColorDefault: '',
-  arrowContainerBgColorHover: '',
-  arrowContainerBgColorPress: '',
-  arrowContainerBgColorDisable: '',
-  arrowColorDefault: '',
-  arrowColorHover: '',
-  arrowColorPress: '',
-  arrowColorDisable: '',
+  arrowContainerBgColorDefault: '4379B1',
+  arrowContainerBgColorHover: '0b5da799',
+  arrowContainerBgColorPress: '0b5da799',
+  arrowContainerBgColorDisable: 'CBCDD16B',
+  arrowColorDefault: 'FFFFFF',
+  arrowColorHover: 'FFFFFF',
+  arrowColorPress: 'FFFFFF',
+  arrowColorDisable: '0000006B',
   arrowAssetDefault: '',
   arrowAssetHover: '',
   arrowAssetDisable: '',
@@ -43,9 +42,6 @@ const alignmentConfig = {
   arrowBorderColorDisable: '',
 };
 
-/**
- * Default font sizes for different product lines.
- */
 const PRODUCT_DEFAULTS = {
   asus: {
     titleFontD: 'tt-md-32',
@@ -58,20 +54,17 @@ const PRODUCT_DEFAULTS = {
     titleFontM: 'tt-md-24',
   },
   rog: {
-    titleFontD: 'tt-md-32',
-    titleFontT: 'tt-md-28',
-    titleFontM: 'tt-md-24',
+    titleFontD: 'tg-bd-32',
+    titleFontT: 'tg-bd-28',
+    titleFontM: 'tg-bd-24',
   },
   tuf: {
-    titleFontD: 'tt-md-32',
-    titleFontT: 'tt-md-28',
-    titleFontM: 'tt-md-24',
+    titleFontD: 'dp-cb-32',
+    titleFontT: 'dp-cb-28',
+    titleFontM: 'dp-cb-24',
   },
 };
 
-/**
- * Default configuration for a card.
- */
 const DEFAULT_CONFIG = {
 
   //  Base Tab
@@ -150,24 +143,31 @@ const DEFAULT_CONFIG = {
   borderWidthCTA: '',
   borderColorCTA: '',
 
+
+
+
+
+
   // Anchor (Down arrow on cards)
   isAnchorVisible: 'false',
   sectionID: '#',
   anchorStyle: 'SVG',
-  anchorColorDefault: '',
-  anchorColorHover: '',
-  anchorColorPress: '',
+  anchorColorDefault: 'FFFFFF',
+  anchorColorHover: 'FFFFFF',
+  anchorColorPress: 'FFFFFF',
   anchorBgColorDefault: '',
-  anchorBgColorHover: '',
-  anchorBgColorPress: '',
+  anchorBgColorHover: '0b5da799',
+  anchorBgColorPress: '0b5da799',
   anchorAssetDefault: '',
   anchorAssetHover: '',
   anchorAssetPress: '',
 
+  // Advanced Tab
+
   // Cards Title
-  titleFontD: '',
-  titleFontT: '',
-  titleFontM: '',
+  titleFontD: 'tt-bd-32',
+  titleFontT: 'tt-bd-28',
+  titleFontM: 'tt-bd-24',
   titleFontColor: '',
 
   // Cards Info
@@ -189,15 +189,34 @@ const DEFAULT_CONFIG = {
   ctaFontColor: '',
   ctaHyperlink: '',
 
+  // Button Style
+  // gBtnLabel: 'Learn More',
+  // gBtnFontDesktop: 'ro-md-16',
+  // gBtnFontM: 'ro-md-16',
+  // gBtnFontColorDefault: 'FFFFFF',
+  // gBtnFontColorHover: 'FFFFFF',
+  // gBtnFontColorActive: 'FFFFFF',
+  // gBtnContainerBgColorDefault: '4379B1',
+  // gBtnContainerBgColorHover: '0b5da799',
+  // gBtnContainerBgColorActive: '0b5da799',
+  // gBtnContainerRadiusTL: '32',
+  // gBtnContainerRadiusTR: '32',
+  // gBtnContainerRadiusBR: '32',
+  // gBtnContainerRadiusBL: '32',
+  // gBtnBorderWidth: '0',
+  // gBtnBorderColor: 'transparent',
+
+
   alignmentAdvanced: 'left',
 
   // Anchor (Down arrow on cards)
   anchorBorderWidthDefault: '1',
   anchorBorderWidthHover: '1',
   anchorBorderWidthPress: '1',
-  anchorBorderColorDefault: '',
-  anchorBorderColorHover: '',
-  anchorBorderColorPress: '',
+  anchorBorderColorDefault: '4379B1',
+  anchorBorderColorHover: '0b5da799',
+  anchorBorderColorPress: '0b5da799',
+
 };
 
 /**
@@ -259,6 +278,8 @@ async function fillSequentialConfig(block) {
     });
   });
 
+  console.log('Extracted sequence:', fieldGroups, flatValues);
+
   const keys = Object.keys(cfg);
   const configArray = [];
   const chunkSize = keys.length;
@@ -305,37 +326,33 @@ const getButtonPositionClass = (position) => {
 };
 
 /**
- * Generates the style string for noise canceling animation colors.
- * @param {string} noiseWaveColor The hex color for noise wave.
- * @param {string} voiceWaveColor The hex color for voice wave.
- * @returns {string} The CSS style string.
+ * Generates the HTML for the media content (image, video, or noise canceling animation).
+ * @param {object} data The card data.
+ * @returns {string} The HTML string for the media content.
  */
-function getNoiseCancelingStyle(noiseWaveColor, voiceWaveColor) {
-  let style = '';
-  if (noiseWaveColor) {
-    const rgb = hexToRgb(noiseWaveColor);
-    if (rgb) style += `--themecolor-middle: ${rgb};`;
-  }
-  if (voiceWaveColor) {
-    const rgb = hexToRgb(voiceWaveColor);
-    if (rgb) style += `--themecolor-main: ${rgb}; --themecolor-filter: ${rgb};`;
-  }
-  return style;
-}
+function getMediaHTML(data) {
+  const {
+    mediaType, imageAlt, videoAutoPlay, loop, navReplay, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
+    pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition,
+  } = data;
+  let content = '';
 
-/**
- * Generates the HTML for noise canceling animation.
- * @param {string} style The CSS style string.
- * @param {string} noiseCancelingAsset The asset URL for noise canceling.
- * @param {string} imageAlt The alt text for the image.
- * @returns {string} The HTML string.
- */
-function getNoiseCancelingHTML(style, noiseCancelingAsset, imageAlt) {
-  return `
-      <div class="wditems__content wditems__content__0 theme-white" id="SectionID-tab-1" style="${style} background-color: var(--ai-noise-container-bg);">
-        <div class="item__media item__media--aiNoise">
-          <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
-            <div class="nav__replay">
+  const asset = getValueForDevice('assets', data) || data.assets;
+
+  if (mediaType === 'noise_canceling') {
+    let style = '';
+    if (noiseWaveColor) {
+      const rgb = hexToRgb(noiseWaveColor);
+      if (rgb) style += `--themecolor-middle: ${rgb};`;
+    }
+    if (voiceWaveColor) {
+      const rgb = hexToRgb(voiceWaveColor);
+      if (rgb) style += `--themecolor-main: ${rgb}; --themecolor-filter: ${rgb};`;
+    }
+
+    content = `
+             <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style} background-color: var(--ai-noise-container-bg);">
+              <div class="nav__replay">
                   <div class="wd__play__btn video__play__btn">
                     <button class="wd__play__btn-button is-hidden" aria-label="replay the ai noise animation" tabindex="-1" id="aiApplication_s4_noise_replay_btn" aria-hidden="true" data-eventname="undefined">
                         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -379,6 +396,7 @@ function getNoiseCancelingHTML(style, noiseCancelingAsset, imageAlt) {
                   </figure>
               </div>
               <div class="noise__switcher" aria-hidden="true">
+                  <p class="adaDesc noise_desc"></p>
                   <button class="aiNoiseSwitcher_btn img__switcher switcher_button wdga" id="Item_21_conferenceS1span3_aiNoiseSwitcher" role="switch" data-status="false" data-on="AI noise cancelation, pressed, on" data-off="AI noise cancelation, pressed, off" aria-checked="false">
                     <label class="hide" for="Item_21_conferenceS1span3_aiNoiseSwitcher">AI noise cancelation, pressed, off</label>
                   </button>
@@ -386,35 +404,20 @@ function getNoiseCancelingHTML(style, noiseCancelingAsset, imageAlt) {
                     <source src="" type="audio/mpeg">
                   </audio>
               </div>
-          </div>
-        </div>
-      </div>`;
-}
+            </div>`;
+  } else if (mediaType === 'video') {
+    const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
+    const isLoop = String(loop).toLowerCase() === 'true';
+    const isNavReplay = String(navReplay).toLowerCase() === 'true';
+    const isPauseAndPlayBtn = String(pauseAndPlayBtn).toLowerCase() === 'true';
 
-/**
- * Generates the HTML for video content.
- * @param {string} asset The video asset URL.
- * @param {boolean|string} videoAutoPlay Whether video should autoplay.
- * @param {boolean|string} loop Whether video should loop.
- * @param {boolean|string} navReplay Whether to show replay button.
- * @param {boolean|string} pauseAndPlayBtn Whether to show pause/play buttons.
- * @param {string} pausePlayBtnColor Color of the buttons.
- * @param {string} pausePlayBtnPosition Position of the buttons.
- * @returns {string} The HTML string.
- */
-function getVideoHTML(asset, videoAutoPlay, loop, navReplay, pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition) {
-  const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
-  const isLoop = String(loop).toLowerCase() === 'true';
-  const isNavReplay = String(navReplay).toLowerCase() === 'true';
-  const isPauseAndPlayBtn = String(pauseAndPlayBtn).toLowerCase() === 'true';
+    const initialPlayBtnDisplay = isVideoAutoPlay ? 'none' : 'flex';
+    const initialPauseBtnDisplay = isVideoAutoPlay ? 'flex' : 'none';
+    const btnColor = pausePlayBtnColor || 'ffffff';
+    const positionClass = getButtonPositionClass(pausePlayBtnPosition);
+    const controlsDisplay = isPauseAndPlayBtn ? 'flex' : 'none';
 
-  const initialPlayBtnDisplay = isVideoAutoPlay ? 'none' : 'flex';
-  const initialPauseBtnDisplay = isVideoAutoPlay ? 'flex' : 'none';
-  const btnColor = pausePlayBtnColor || 'ffffff';
-  const positionClass = getButtonPositionClass(pausePlayBtnPosition);
-  const controlsDisplay = isPauseAndPlayBtn ? 'flex' : 'none';
-
-  return `
+    content = `
           <div class="block-img media-block-video-container relative" data-pause-and-play-btn="${isPauseAndPlayBtn}">
             <video class="img video__bg w-full h-full object-cover"
                 src="${asset}"
@@ -432,52 +435,16 @@ function getVideoHTML(asset, videoAutoPlay, loop, navReplay, pauseAndPlayBtn, pa
             </div>
             ${!isLoop && isNavReplay ? `<button class="media-block-replay-btn absolute ${positionClass} z-10 rounded-full flex items-center justify-center transition-all" aria-label="Replay" style="display: none; border: 1px solid #${btnColor};"><svg viewBox="0 0 36 36" fill="#${btnColor}"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" transform="translate(6,6)"/></svg></button>` : ''}
           </div>`;
-}
-
-/**
- * Generates the HTML for image content.
- * @param {string} asset The image asset URL.
- * @param {string} imageAlt The alt text for the image.
- * @returns {string} The HTML string.
- */
-function getImageHTML(asset, imageAlt) {
-  return `
-        <div class="block-img">
-          <img class="img img__bg"
-              src="${asset}"
-              alt="${imageAlt}">
-        </div>`;
-}
-
-/**
- * Generates the HTML for the media content (image, video, or noise canceling animation).
- * @param {object} data The card data.
- * @returns {string} The HTML string for the media content.
- */
-function getMediaHTML(data) {
-  const {
-    mediaType, imageAlt, videoAutoPlay, loop, navReplay, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
-    pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition,
-  } = data;
-  let content = '';
-
-  const asset = getValueForDevice('assets', data) || data.assets;
-
-  switch (mediaType) {
-    case 'noise_canceling': {
-      content = getNoiseCancelingHTML(getNoiseCancelingStyle(noiseWaveColor, voiceWaveColor), noiseCancelingAsset, imageAlt);
-      break;
-    }
-    case 'video':
-      content = getVideoHTML(asset, videoAutoPlay, loop, navReplay, pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition);
-      break;
-    default:
-      if (asset) {
-        content = getImageHTML(asset, imageAlt);
-      }
-      break;
+  } else {
+    content = `
+          <div class="block-img">
+            <img class="img img__bg"
+                src="${asset}"
+                alt="${imageAlt}">
+          </div>`;
   }
 
+  console.log("H1, Generated media HTML:", title, asset, data);
   return content;
 }
 
@@ -493,36 +460,75 @@ function getValueForDevice(fieldName, data) {
 }
 
 /**
- * Generates the HTML for the card content (title, info, CTA).
+ * Generates the HTML for a single card.
  * @param {object} data The card data.
- * @param {string} titleFont The font class for the title.
- * @returns {string} The HTML string for the card content.
+ * @returns {string} The HTML string for the card.
  */
-function getCardContentHTML(data, titleFont) {
+function getCardHTML(data) {
   const {
+    cardType,
+    bgColor,
+    title,
+    info,
+    ctaText,
+    ctaHyperlink,
+    titleFontColor,
+    infoFontColor,
+    borderColor,
+    borderWidth,
     ctaVisible,
+    ctaLinkType,
+    isAnchorVisible,
+    sectionID,
+    anchorStyle,
+    anchorColorDefault,
+    anchorColorHover,
+    anchorColorPress,
+    anchorBgColorDefault,
+    anchorBgColorHover,
+    anchorBgColorPress,
+    anchorAssetDefault,
+    anchorAssetHover,
+    anchorAssetPress,
     ctaFontDT,
     ctaFontM,
     ctaFontColor,
-    ctaLinkType,
-    styleLayoutCTA,
-    cardIndex,
-    ctaText,
-    ctaHyperlink,
+    borderRadiusTopLeft,
+    borderRadiusTopRight,
+    borderRadiusBottomLeft,
+    borderRadiusBottomRight,
     alignmentAdvanced,
-    titleFontColor,
-    title,
-    infoFontColor,
-    info,
+    anchorBorderWidthDefault,
+    anchorBorderWidthHover,
+    anchorBorderWidthPress,
+    anchorBorderColorDefault,
+    anchorBorderColorHover,
+    anchorBorderColorPress,
+    gBtnLabel,
+    gBtnFontDesktop,
+    gBtnFontM,
+    gBtnFontColorDefault,
+    gBtnFontColorHover,
+    gBtnFontColorActive,
+    gBtnContainerBgColorDefault,
+    gBtnContainerBgColorHover,
+    gBtnContainerBgColorActive,
+    gBtnContainerRadiusTL,
+    gBtnContainerRadiusTR,
+    gBtnContainerRadiusBR,
+    gBtnContainerRadiusBL,
+    gBtnBorderWidth,
+    gBtnBorderColor,
   } = data;
 
+  const titleFont = getValueForDevice('titleFont', data);
   let ctaHTML = '';
   if (ctaVisible === 'show') {
     const fontClass = `${ctaFontDT} small_${ctaFontM}`;
     const style = ctaFontColor ? `style="background: none; -webkit-text-fill-color: initial; color: #${ctaFontColor}"` : 'style="background: none; -webkit-text-fill-color: initial; color: var(--link-font-color-start)"';
 
-    if (ctaLinkType === 'button' && styleLayoutCTA) {
-      ctaHTML = `<div class="btn-placeholder" data-card-index="${cardIndex || 0}"></div>`;
+    if (ctaLinkType === 'button' && data.styleLayoutCTA) {
+      ctaHTML = `<div class="btn-placeholder" data-card-index="${data.cardIndex || 0}"></div>`;
     } else {
       ctaHTML = `<a class="${fontClass} asus-icon-chevronright text-block-cta" 
                   aria-label="${ctaText} (opens in new window)" 
@@ -531,7 +537,7 @@ function getCardContentHTML(data, titleFont) {
     }
   }
 
-  return `
+  const blockContent = `
           <div class="block-content">
             <div class="wd__content" style="text-align: ${alignmentAdvanced};">
                 <h3>
@@ -541,33 +547,52 @@ function getCardContentHTML(data, titleFont) {
                 ${ctaHTML}
             </div>
           </div>`;
-}
 
-/**
- * Generates the HTML for the anchor icon.
- * @param {object} data The card data.
- * @returns {string} The HTML string for the anchor icon.
- */
-function getAnchorHTML(data) {
-  const {
-    isAnchorVisible,
-    anchorStyle,
-    anchorColorDefault,
-    anchorColorHover,
-    anchorColorPress,
-    anchorBgColorDefault,
-    anchorBgColorHover,
-    anchorBgColorPress,
-    anchorBorderWidthDefault,
-    anchorBorderWidthHover,
-    anchorBorderWidthPress,
-    anchorBorderColorDefault,
-    anchorBorderColorHover,
-    anchorBorderColorPress,
-    anchorAssetDefault,
-    anchorAssetHover,
-    anchorAssetPress,
-  } = data;
+  /**
+   * Generates the styled block content HTML.
+   * @param {string} style The inline style string.
+   * @returns {string} The HTML string for the block content.
+   */
+  const getStyledBlockContent = (style) => {
+    if (!style) return blockContent;
+    return blockContent.replace('class="block-content"', `class="block-content" style="${style}"`);
+  };
+
+  let flexDirection = '';
+  let cardBlockType = 'img_txt_integrated_top';
+  let contentStyle = '';
+  let showMedia = true;
+
+  switch (cardType) {
+    case 'img_txt_integrated_bottom':
+      flexDirection = 'column-reverse';
+      cardBlockType = 'img_txt_integrated_bottom';
+      break;
+    case 'img_txt_separate_bottom':
+      flexDirection = 'column-reverse';
+      contentStyle = 'margin-top: 10px;';
+      cardBlockType = 'img_txt_separate_bottom';
+      break;
+    case 'text_only':
+      showMedia = false;
+      cardBlockType = 'text_only';
+      break;
+    case 'txt_img_attached_top':
+      contentStyle = 'margin-bottom: 10px;';
+      cardBlockType = 'txt_img_attached_top';
+      break;
+    case 'txt_img_attached_bottom':
+      flexDirection = 'column-reverse';
+      contentStyle = 'margin-top: 10px;';
+      cardBlockType = 'txt_img_attached_bottom';
+      break;
+    case 'img_txt_integrated_top':
+    default:
+      break;
+  }
+
+  const mediaHTML = showMedia ? getMediaHTML(data) : '';
+  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative; overflow: hidden;`;
 
   let iconHTML = '';
   if (isAnchorVisible === 'true') {
@@ -612,87 +637,6 @@ function getAnchorHTML(data) {
       `;
     }
   }
-  return iconHTML;
-}
-
-/**
- * Generates the HTML for a single card.
- * @param {object} data The card data.
- * @returns {string} The HTML string for the card.
- */
-function getCardHTML(data) {
-  const {
-    cardType,
-    bgColor,
-    title,
-    info,
-    ctaText,
-    ctaHyperlink,
-    titleFontColor,
-    infoFontColor,
-    borderColor,
-    borderWidth,
-    ctaVisible,
-    ctaLinkType,
-    isAnchorVisible,
-    sectionID,
-    ctaFontDT,
-    ctaFontM,
-    ctaFontColor,
-    borderRadiusTopLeft,
-    borderRadiusTopRight,
-    borderRadiusBottomLeft,
-    borderRadiusBottomRight,
-    alignmentAdvanced,
-  } = data;
-
-  const titleFont = getValueForDevice('titleFont', data);
-  const blockContent = getCardContentHTML(data, titleFont);
-
-  /**
-   * Generates the styled block content HTML.
-   * @param {string} style The inline style string.
-   * @returns {string} The HTML string for the block content.
-   */
-  const getStyledBlockContent = (style) => {
-    if (!style) return blockContent;
-    return blockContent.replace('class="block-content"', `class="block-content" style="${style}"`);
-  };
-
-  let flexDirection = '';
-  let cardBlockType = 'img_txt_integrated_top';
-  const contentStyle = '';
-  let showMedia = true;
-
-  switch (cardType) {
-    case 'img_txt_integrated_bottom':
-      flexDirection = 'column-reverse';
-      cardBlockType = 'img_txt_integrated_bottom';
-      break;
-    case 'img_txt_separate_bottom':
-      flexDirection = 'column-reverse';
-      cardBlockType = 'img_txt_separate_bottom';
-      break;
-    case 'text_only':
-      showMedia = false;
-      cardBlockType = 'text_only';
-      break;
-    case 'txt_img_attached_top':
-      cardBlockType = 'txt_img_attached_top';
-      break;
-    case 'txt_img_attached_bottom':
-      flexDirection = 'column-reverse';
-      cardBlockType = 'txt_img_attached_bottom';
-      break;
-    case 'img_txt_integrated_top':
-    default:
-      break;
-  }
-
-  const mediaHTML = showMedia ? getMediaHTML(data) : '';
-  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative; overflow: hidden;`;
-
-  const iconHTML = getAnchorHTML(data);
 
   const borderStyle = borderWidth ? `${borderWidth}px solid #${borderColor}` : 'var(--swiper-slide-border-width) solid var(--swiper-slide-border-color)';
 
@@ -701,7 +645,7 @@ function getCardHTML(data) {
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderStyle};
-           background-color: ${bgColor ? `#${bgColor}` : (cardType === 'img_txt_separate_bottom' ? 'transparent' : 'var(--swiper-slide-bg-color)')};" 
+           background-color: ${bgColor ? `#${bgColor}` : 'var(--swiper-slide-bg-color)'};" 
            easing="easeOutExpo">
           ${getStyledBlockContent(contentStyle)}
           ${mediaHTML}
@@ -734,12 +678,15 @@ function setEqualHeight(block) {
 }
 
 /**
- * Builds the small cards container.
- * @param {object} data The card data.
- * @param {object} config The alignment configuration.
- * @returns {HTMLElement} The small cards container element.
+ * Renders the cards in the block.
+ * @param {HTMLElement} block The block element.
  */
-function buildSmallCardsContainer(data, config) {
+async function renderCard(block) {
+
+  const data = await fillSequentialConfig(block);
+
+  console.log('Extracted chunk, Final Card Data:', data);
+
   const {
     arrowStyle,
     arrowContainerBgColorDefault,
@@ -750,6 +697,9 @@ function buildSmallCardsContainer(data, config) {
     arrowColorHover,
     arrowColorPress,
     arrowColorDisable,
+    arrowAssetDefault,
+    arrowAssetHover,
+    arrowAssetDisable,
     arrowBorderWidthDefault,
     arrowBorderWidthHover,
     arrowBorderWidthPress,
@@ -758,7 +708,7 @@ function buildSmallCardsContainer(data, config) {
     arrowBorderColorHover,
     arrowBorderColorPress,
     arrowBorderColorDisable,
-  } = config;
+  } = alignmentConfig;
 
   let arrowStyleVars = '';
   if (arrowStyle === 'svg') {
@@ -790,7 +740,7 @@ function buildSmallCardsContainer(data, config) {
   }
 
   const cardHTML = Array.isArray(data)
-    ? data.map((item, index) => getCardHTML({ ...item, cardIndex: index })).join('')
+    ? data.map((item) => getCardHTML(item)).join('')
     : getCardHTML(data);
 
   const html = `<div class="cmd-content">
@@ -803,7 +753,7 @@ function buildSmallCardsContainer(data, config) {
                   <div class="wdblockimg">
                       <div class="wdblockimg__container block__scroll">
                         <div class="swiper">
-                            <div class="swiper-wrapper" style="background-color: ${'var(--swiper-wrapper-bg-color)'};">
+                            <div class="swiper-wrapper">
                               ${cardHTML}
                             </div>
                         </div>
@@ -820,16 +770,8 @@ function buildSmallCardsContainer(data, config) {
   </div>`;
 
   smallCardsContainer.innerHTML = html;
-  return smallCardsContainer;
-}
 
-/**
- * Processes button placeholders in the container.
- * @param {HTMLElement} container The container element.
- * @param {object|Array} data The card data.
- */
-async function processButtonPlaceholders(container, data) {
-  const placeholders = container.querySelectorAll('.btn-placeholder');
+  const placeholders = smallCardsContainer.querySelectorAll('.btn-placeholder');
   if (placeholders.length > 0) {
     const btnFieldOrder = await getBlockFieldOrder('btn');
 
@@ -854,21 +796,16 @@ async function processButtonPlaceholders(container, data) {
       }
     }
   }
-}
 
-/**
- * Adds event listeners for video controls.
- * @param {HTMLElement} container The container element.
- */
-function addVideoEventListeners(container) {
-  const videoContainers = container.querySelectorAll('.media-block-video-container');
-  videoContainers.forEach((videoContainer) => {
-    const video = videoContainer.querySelector('video');
-    const playBtn = videoContainer.querySelector('.media-block-play-btn');
-    const pauseBtn = videoContainer.querySelector('.media-block-pause-btn');
-    const replayBtn = videoContainer.querySelector('.media-block-replay-btn');
-    const controlsDiv = videoContainer.querySelector('.media-block-controls');
-    const pauseAndPlayBtn = videoContainer.getAttribute('data-pause-and-play-btn') === 'true';
+  // Add event listeners for video controls
+  const videoContainers = smallCardsContainer.querySelectorAll('.media-block-video-container');
+  videoContainers.forEach((container) => {
+    const video = container.querySelector('video');
+    const playBtn = container.querySelector('.media-block-play-btn');
+    const pauseBtn = container.querySelector('.media-block-pause-btn');
+    const replayBtn = container.querySelector('.media-block-replay-btn');
+    const controlsDiv = container.querySelector('.media-block-controls');
+    const pauseAndPlayBtn = container.getAttribute('data-pause-and-play-btn') === 'true';
 
     if (playBtn) {
       playBtn.addEventListener('click', (e) => {
@@ -934,28 +871,19 @@ function addVideoEventListeners(container) {
       addButtonsIfNeeded();
     }
   });
-}
 
-/**
- * Finalizes the block structure by adding styles and appending the container.
- * @param {HTMLElement} block The block element.
- * @param {HTMLElement} smallCardsContainer The container element.
- * @param {object|Array} data The card data.
- * @param {object} config The alignment configuration.
- */
-function finalizeBlockStructure(block, smallCardsContainer, data, config) {
   const slideCount = Array.isArray(data) ? data.length : 1;
 
   const style = document.createElement('style');
   style.textContent = `
     @media (min-width: 768px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${slideCount <= 2 && config.tabletAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount <= 2 && alignmentConfig.tabletAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     @media (min-width: 1025px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${slideCount <= 3 && config.desktopAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount <= 3 && alignmentConfig.desktopAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
   `;
@@ -1004,25 +932,6 @@ function finalizeBlockStructure(block, smallCardsContainer, data, config) {
 }
 
 /**
- * Renders the cards in the block.
- * @param {HTMLElement} block The block element.
- */
-async function renderCard(block) {
-
-  const data = await fillSequentialConfig(block);
-
-  console.log('Extracted chunk, Final Card Data:', data);
-
-  const smallCardsContainer = buildSmallCardsContainer(data, alignmentConfig);
-
-  await processButtonPlaceholders(smallCardsContainer, data);
-
-  addVideoEventListeners(smallCardsContainer);
-
-  finalizeBlockStructure(block, smallCardsContainer, data, alignmentConfig);
-}
-
-/**
  * Decorates the block.
  * @param {HTMLElement} block The block element.
  */
@@ -1032,14 +941,11 @@ export default async function decorate(block) {
     await loadSwiper();
     await loadFeatureCSS();
     await loadAnimationFun();
-    // await loadGsapFun();
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
-    const instance = new MediaCarousel();
-    instance.init();
-
     setTimeout(async () => {
+      await loadFeatureFun();
       setEqualHeight(block);
     }, 100);
 
@@ -1049,11 +955,13 @@ export default async function decorate(block) {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating small cards block:', error);
+    block.innerHTML = '<div class="error-message">Failed to load small cards block</div>';
   }
+
 }
 
-let loadFeature; let
-  loadAnimation; let loadGsapJS;
+let loadFeatureJS; let loadFeature; let
+  loadAnimation;
 
 /**
  * Loads the noUiSlider jQuery plugin.
@@ -1062,7 +970,7 @@ let loadFeature; let
 function loadAnimationFun() {
   if (!loadAnimation) {
     loadAnimation = loadScript(
-      'https://code.jquery.com/jquery-3.7.1.min.js',
+      '/blocks/small-cards/animation.js',
     ).catch((err) => {
       console.error('Failed to load animation:', err);
       throw err;
@@ -1072,29 +980,29 @@ function loadAnimationFun() {
 }
 
 /**
- * Loads the GSAP library.
+ * Loads the noUiSlider library.
  * @returns {Promise} A promise that resolves when the script is loaded.
  */
-function loadGsapFun() {
-  if (!loadGsapJS) {
-    loadGsapJS = loadScript(
-      'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+function loadFeatureFun() {
+  if (!loadFeatureJS) {
+    loadFeatureJS = loadScript(
+      '/blocks/small-cards/features_init.js',
     ).catch((err) => {
-      console.error('Failed to load GSAP JS:', err);
+      console.error('Failed to load Feature JS:', err);
       throw err;
     });
   }
-  return loadGsapJS;
+  return loadFeatureJS;
 }
 
 /**
- * Loads the Features CSS.
+ * Loads the noUiSlider CSS.
  * @returns {Promise} A promise that resolves when the CSS is loaded.
  */
 function loadFeatureCSS() {
   if (!loadFeature) {
     loadFeature = loadCSS(
-      'https://dlcdnwebimgs.asus.com/files/media/202509/21a5a2b2-f5d7-4de9-acda-0462d3c8e1c4/v1/features/css/features-all.css',
+      '/blocks/small-cards/features-all.css',
     ).catch((err) => {
       console.error('Failed to load Feature CSS:', err);
       throw err;
@@ -1169,6 +1077,25 @@ async function initializeSwiperCarousel(block) {
         },
       },
     },
+    // on: {
+    //   beforeDestroy: () => {
+    //     swiper.navigation.destroy();
+    //     swiper.pagination.destroy();
+    //   },
+    //   afterInit: function() {
+    //     const navContainer = this.navigation.nextEl?.parentNode;
+    //     if (navContainer && this.isBeginning && this.isEnd) {
+    //       navContainer.style.display = 'none';
+    //     }
+    //   },
+    //   resize: function() {
+    //     const navContainer = this.navigation.nextEl?.parentNode;
+    //     if (navContainer) {
+    //       // Show or hide based on whether both nav buttons are disabled
+    //       navContainer.style.display = (this.isBeginning && this.isEnd) ? 'none' : '';
+    //     }
+    //   },
+    // },
   });
 
   return swiper;
