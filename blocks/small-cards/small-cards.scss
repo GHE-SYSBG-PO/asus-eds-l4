@@ -437,7 +437,7 @@
   .small-cards-containers {
     width: 87.5vw;
     margin: 0 auto;
-    max-width: 320px;
+    max-width: 420px;
 
     .swiper-slide {
       width: 260px;
@@ -459,9 +459,7 @@
         width: 407px;
       }
     }
-    .img__bg {
-      // aspect-ratio: 1/1;
-    }
+
     .video__bg {
       aspect-ratio: auto;
     }
