@@ -2,7 +2,29 @@ import {
   getBlockConfigs,
   getFieldValue,
   getBlockRepeatConfigs,
+  getProductLine,
 } from '../../scripts/utils.js';
+
+const FONTS = {
+  asus: {
+    titleFont: 'tt-bd-28',
+    infoFont: 'ro-rg-18-sh',
+  },
+  proart: {
+    titleFont: 'tt-bd-28',
+    infoFont: 'ro-rg-18-sh',
+  },
+  rog: {
+    titleFont: 'tg-bd-28',
+    infoFont: 'rc-rg-18-sh',
+  },
+  tuf: {
+    titleFont: 'dp-cb-28',
+    infoFont: 'ro-rg-18-sh',
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
 
 /**
  * Unifies the height of title containers based on the tallest content.
@@ -77,19 +99,31 @@ const setUnifiedHeight = (block) => {
 // DEFAULT
 const DEFAULT_CONFIG = {
   wrapLine: 'on',
-  titleFont: 'tt-bd-28',
-  infoFont: 'ro-rg-18-sh',
+  titleFont: FONTS[PRODUCT_LINE].titleFont,
+  infoFont: FONTS[PRODUCT_LINE].infoFont,
   lineWidth: '100%',
 };
 
 export default async function decorate(block) {
   try {
+    const config = await getBlockConfigs(block, {}, 'chart-advanced');
+    const c = getFieldValue(config);
+    if (c('colorGroup')) {
+      block.classList.add(c('colorGroup'));
+    }
+    block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced');
+
     const wrapper = block.querySelectorAll(':scope > div');
+    // Remove the div of the configuration item
+    if (wrapper.length) {
+      wrapper[0].remove();
+    }
+
     // Process each wrapper asynchronously
     Array.from(wrapper).forEach(async (wrap) => {
       try {
-        const config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
-        const v = getFieldValue(config);
+        const itemConfig = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+        const v = getFieldValue(itemConfig);
 
         const titleFontColor = v('titleFontColor') ? `--chart-advanced-title-color: #${v('titleFontColor')}` : '';
         const infoFontColor = v('infoFontColor') ? `--chart-advanced-info-color: #${v('infoFontColor')}` : '';
@@ -126,7 +160,6 @@ export default async function decorate(block) {
       }
     });
 
-    block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced');
     setTimeout(() => {
       setUnifiedHeight(block);
     }, 500);

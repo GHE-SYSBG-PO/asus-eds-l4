@@ -88,6 +88,19 @@
 ### 3.2 DOM Decoration (裝飾模式)
 *   **Error Barrier**: `decorate` 函式內部應使用 `try-catch` 包覆，避免單一元件錯誤導致整頁白屏。
 
+### 3.3 Path & URL Mapping (路徑與 URL 對應關係)
+
+說明 AEM 頁面路徑如何映射到 EDS URL 以及本地開發環境。
+
+**範例情境：**
+當 AEM 頁面的路徑如下時：
+`/content/asus-l4/language-master/en/components/id-1-text-block/dev`
+
+*   **EDS URL**: 路徑要從 `en` 的下一層開始走，對應如下：
+    `https://{branch}--asus-eds-l4-dev--ghe-sysbg-po.aem.page/components/id-1-text-block/dev`
+*   **Local URL**: 因為 EDS 路徑跟 local 的路徑是一致的項目，對應如下：
+    `http://localhost:3000/components/id-1-text-block/dev`
+
 ---
 
 ## 🛠 4. Implementation Patterns (實作模式)

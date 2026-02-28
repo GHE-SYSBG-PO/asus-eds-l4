@@ -1,65 +1,22 @@
 import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { openModal } from '../modal/modal.js';
-import { getRadiusStyle, buildCloseButtonHtml, prefixHex } from '../../components/button/button.js';
+import {
+  getRadiusStyle, buildCloseButtonHtml, prefixHex, getDefaultFont,
+} from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
   // Basic configuration
   styleLayout: '1',
   label: 'Button',
-  // Container configuration - defaults to empty, controlled by CSS
-  containerBgColorDefault: '',
-  containerBgColorDefault2: '',
-  containerBgColorHover: '',
-  containerBgColorHover2: '',
-  containerBgColorActive: '',
-  containerBgColorActive2: '',
-  containerRadiusTL: '',
-  containerRadiusTR: '',
-  containerRadiusBR: '',
-  containerRadiusBL: '',
-  borderWidth: '',
-  borderColor: '',
-  // Font configuration
-  fontDesktop: '',
-  fontMobile: '',
-  fontColorDefault: '',
-  fontColorHover: '',
-  fontColorActive: '',
   // Link configuration
   linkType: 'external',
   externalLink: '#',
-  innerPageLink: '',
-
   // Close button configuration
-  closeBtnStyle: 'default',
-  closeBtnLabel: 'Close',
-  closeBtnFontDesktop: '',
-  closeBtnFontM: '',
-  closeBtnFontColorDefault: '',
-  closeBtnFontColorHover: '',
-  closeBtnFontColorActive: '',
-  closeBtnContainerBgColorDefault: '',
-  closeBtnContainerBgColorDefault2: '',
-  closeBtnContainerBgColorHover: '',
-  closeBtnContainerBgColorHover2: '',
-  closeBtnContainerBgColorActive: '',
-  closeBtnContainerBgColorActive2: '',
-  closeBtnContainerRadiusTL: '',
-  closeBtnContainerRadiusTR: '',
-  closeBtnContainerRadiusBR: '',
-  closeBtnContainerRadiusBL: '',
-  closeBtnBorderWidth: '',
-  closeBtnBorderColor: '',
-  // Icon configuration
-  iconStyle: '',
-  iconColor: '',
-  iconBgColorDefault: '',
-  iconBgColorHover: '',
-  iconBgColorActive: '',
-  iconAssetDefault: '',
-  iconAssetHover: '',
-  iconAssetActive: '',
+  gBtnStyleLayout: 'default',
+  gBtnLabel: 'Close',
+  // Icon
+  iconStyle: 'svg',
 };
 
 /**
@@ -99,30 +56,32 @@ export default async function decorate(block) {
     const label = v('label', 'text') || DEFAULT_CONFIG.label;
     // Get container configuration - only use if there is a value
 
-    const containerBgColorDefaultArr = prefixHex((v('containerBgColorDefault', 'text') || '').split(','));
-    const containerBgColorDefault = containerBgColorDefaultArr[0] || '';
-    const containerBgColorDefault2 = containerBgColorDefaultArr[1] || '';
+    const containerBgColorDefaultArr = prefixHex((v('containerBgColorDefault', 'text')).split(','));
+    const containerBgColorDefault = containerBgColorDefaultArr[0];
+    const containerBgColorDefault2 = containerBgColorDefaultArr[1];
 
-    const containerBgColorHoverArr = prefixHex((v('containerBgColorHover', 'text') || '').split(','));
-    const containerBgColorHover = containerBgColorHoverArr[0] || '';
-    const containerBgColorHover2 = containerBgColorHoverArr[1] || '';
+    const containerBgColorHoverArr = prefixHex((v('containerBgColorHover', 'text')).split(','));
+    const containerBgColorHover = containerBgColorHoverArr[0];
+    const containerBgColorHover2 = containerBgColorHoverArr[1];
 
-    const containerBgColorActiveArr = prefixHex((v('containerBgColorActive', 'text') || '').split(','));
-    const containerBgColorActive = containerBgColorActiveArr[0] || '';
-    const containerBgColorActive2 = containerBgColorActiveArr[1] || '';
+    const containerBgColorActiveArr = prefixHex((v('containerBgColorActive', 'text')).split(','));
+    const containerBgColorActive = containerBgColorActiveArr[0];
+    const containerBgColorActive2 = containerBgColorActiveArr[1];
 
-    const containerRadiusTL = v('containerRadiusTL', 'text') || '';
-    const containerRadiusTR = v('containerRadiusTR', 'text') || '';
-    const containerRadiusBR = v('containerRadiusBR', 'text') || '';
-    const containerRadiusBL = v('containerRadiusBL', 'text') || '';
-    const containerBorderWidth = v('borderWidth', 'text') || '';
-    const containerBorderColor = prefixHex(v('borderColor', 'text') || '');
+    const containerRadiusTL = v('containerRadiusTL', 'text');
+    const containerRadiusTR = v('containerRadiusTR', 'text');
+    const containerRadiusBR = v('containerRadiusBR', 'text');
+    const containerRadiusBL = v('containerRadiusBL', 'text');
+    const containerBorderWidth = v('borderWidth', 'text');
+    const containerBorderColor = prefixHex(v('borderColor', 'text'));
     // Get font configuration
-    const fontDesktop = v('fontDesktop', 'text') || DEFAULT_CONFIG.fontDesktop;
-    const fontMobile = v('fontMobile', 'text') || DEFAULT_CONFIG.fontMobile;
-    const fontColorDefault = prefixHex(v('fontColorDefault', 'text') || '');
-    const fontColorHover = prefixHex(v('fontColorHover', 'text') || '');
-    const fontColorActive = prefixHex(v('fontColorActive', 'text') || '');
+    const fontD = v('fontD', 'text') || DEFAULT_CONFIG.fontD;
+    const fontT = v('fontT', 'text') || DEFAULT_CONFIG.fontT;
+    const fontM = v('fontM', 'text') || DEFAULT_CONFIG.fontM;
+    const totalFonts = getDefaultFont(style, fontD, fontT, fontM);
+    const fontColorDefault = prefixHex(v('fontColorDefault', 'text'));
+    const fontColorHover = prefixHex(v('fontColorHover', 'text'));
+    const fontColorActive = prefixHex(v('fontColorActive', 'text'));
     // Get link configuration
     const linkType = v('linkType', 'text') || DEFAULT_CONFIG.linkType;
     const externalLink = v('externalLink', 'text') || DEFAULT_CONFIG.externalLink;
@@ -196,24 +155,24 @@ export default async function decorate(block) {
     // Container border variables
     if (filled) {
       if (containerBorderColor) {
-        inlineStyle += `--container-border-color: ${containerBorderColor};`;
+        inlineStyle += `--btn-container-border-color: ${containerBorderColor};`;
       }
       if (containerBorderWidth) {
-        inlineStyle += `--container-border-width: ${containerBorderWidth}px;`;
+        inlineStyle += `--btn-container-border-width: ${containerBorderWidth}px;`;
       }
     }
     // Build icon HTML
     let iconHtml = '';
     if (supportsIcon(style)) {
-      const iconBgColorDefault = prefixHex(v('iconBgColorDefault', 'text') || '');
-      const iconBgColorHover = prefixHex(v('iconBgColorHover', 'text') || '');
-      const iconBgColorActive = prefixHex(v('iconBgColorActive', 'text') || '');
-      const iconColor = prefixHex(v('iconColor', 'text') || '');
+      const iconBgColorDefault = prefixHex(v('iconBgColorDefault', 'text'));
+      const iconBgColorHover = prefixHex(v('iconBgColorHover', 'text'));
+      const iconBgColorActive = prefixHex(v('iconBgColorActive', 'text'));
+      const iconColor = prefixHex(v('iconColor', 'text'));
       let iconBgStyle = '';
-      if (iconBgColorDefault) iconBgStyle += `--icon-bg-default: ${iconBgColorDefault};`;
-      if (iconBgColorHover) iconBgStyle += `--icon-bg-hover: ${iconBgColorHover};`;
-      if (iconBgColorActive) iconBgStyle += `--icon-bg-active: ${iconBgColorActive};`;
-      if (iconColor) iconBgStyle += `--icon-color: ${iconColor};`;
+      if (iconBgColorDefault) iconBgStyle += `--btn-icon-bg-default: ${iconBgColorDefault};`;
+      if (iconBgColorHover) iconBgStyle += `--btn-icon-bg-hover: ${iconBgColorHover};`;
+      if (iconBgColorActive) iconBgStyle += `--btn-icon-bg-active: ${iconBgColorActive};`;
+      if (iconColor) iconBgStyle += `--btn-icon-color: ${iconColor};`;
       if (iconStyle === 'svg' || iconStyle === '') {
         // Determine icon type
         let iconPath = '';
@@ -238,20 +197,20 @@ export default async function decorate(block) {
                data-bg-active="${iconBgColorActive}">
             <svg viewBox="0 0 24 24" class="btn-icon-svg">
               <defs>
-                ${getSvgLinearHtml('icon-filled-default', 'var(--bg-d-start)', 'var(--bg-d-end)')}
-                ${getSvgLinearHtml('icon-filled-hover-active', 'var(--bg-h-a-start)', 'var(--bg-h-a-end)')}
-                ${getSvgLinearHtml('icon-outline-default', 'var(--icon-d)', 'var(--icon-d)')}
-                ${getSvgLinearHtml('icon-outline-hover', 'var(--bg-d-start)', 'var(--bg-d-end)')}
-                ${getSvgLinearHtml('icon-outline-active', 'var(--bg-h-a-start)', 'var(--bg-h-a-end)')}
+                ${getSvgLinearHtml('icon-filled-default', 'var(--btn-bg-d-start)', 'var(--btn-bg-d-end)')}
+                ${getSvgLinearHtml('icon-filled-hover-active', 'var(--btn-bg-h-a-start)', 'var(--btn-bg-h-a-end)')}
+                ${getSvgLinearHtml('icon-outline-default', 'var(--btn-icon-d)', 'var(--btn-icon-d)')}
+                ${getSvgLinearHtml('icon-outline-hover', 'var(--btn-bg-d-start)', 'var(--btn-bg-d-end)')}
+                ${getSvgLinearHtml('icon-outline-active', 'var(--btn-bg-h-a-start)', 'var(--btn-bg-h-a-end)')}
               </defs>
-              <path d="${iconPath}" ${iconColor ? 'fill="var(--icon-color) !important"' : ''}/>
+              <path d="${iconPath}" ${iconColor ? 'fill="var(--btn-icon-color) !important"' : ''}/>
             </svg>
           </div>
         `;
       } else if (iconStyle === 'png') {
-        const iconAssetDefault = v('iconAssetDefault', 'text') || '';
-        const iconAssetHover = v('iconAssetHover', 'text') || '';
-        const iconAssetActive = v('iconAssetActive', 'text') || '';
+        const iconAssetDefault = v('iconAssetDefault', 'text');
+        const iconAssetHover = v('iconAssetHover', 'text');
+        const iconAssetActive = v('iconAssetActive', 'text');
         iconHtml = `
           <div class="btn-icon-wrapper btn-icon-png flex items-center justify-center transition-all" style="${iconBgStyle}">
             <img src="${iconAssetDefault}" alt="icon" class="btn-icon-default object-cover"/>
@@ -264,7 +223,7 @@ export default async function decorate(block) {
     // Build button HTML
     const buttonHtml = `
       <a href="${href}"
-         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${fontDesktop} ${fontMobile}"
+         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${totalFonts} ${v('colorGroup')}"
          data-link-type="${linkType}"
          data-is-external="${isExternal}"
          data-style="${style}"

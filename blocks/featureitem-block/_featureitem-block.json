@@ -38,6 +38,9 @@
       "fields": [
         {
           "...": "./modelConfig/_layout.json#/fields"
+        },
+        {
+          "...": "../../commonModel/_colorGroup.json#/fields"
         }
       ]
     },

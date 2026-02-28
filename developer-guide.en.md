@@ -89,6 +89,19 @@ If you receive a Git deployment failure notification:
 *   All DOM modifications (adding Wrappers, Buttons, Icons) **must** be done inside the `decorate(block)` function.
 *   **Error Barrier**: The `decorate` function should be wrapped in `try-catch` to block single component errors from causing a white screen on the whole page.
 
+### 3.3 Path & URL Mapping
+
+Explains how AEM page paths map to EDS URLs and the local development environment.
+
+**Example Scenario:**
+When the AEM page path is:
+`/content/asus-l4/language-master/en/components/id-1-text-block/dev`
+
+*   **EDS URL**: The path starts from the level below `en`, mapping as follows:
+    `https://{branch}--asus-eds-l4-dev--ghe-sysbg-po.aem.page/components/id-1-text-block/dev`
+*   **Local URL**: Since EDS paths are identical to local paths, the mapping is:
+    `http://localhost:3000/components/id-1-text-block/dev`
+
 ---
 
 ## 🛠 4. Implementation Patterns
