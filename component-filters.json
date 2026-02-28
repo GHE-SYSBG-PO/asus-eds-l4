@@ -91,7 +91,9 @@
   {
     "id": "tab-3column-item",
     "components": [
-      "media-block"
+      "media-block",
+      "btn",
+      "text-block"
     ]
   }
 ]

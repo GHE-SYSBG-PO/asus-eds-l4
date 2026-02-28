@@ -255,8 +255,8 @@ export default async function decorate(block) {
       </div>`;
 
     // ── Move block-level instrumentation to component wrapper ────
-    const oldComponent = block.querySelector('.tab3col-component');
-    if (oldComponent) moveInstrumentation(block, oldComponent);
+    const newComponent = block.querySelector('.tab3col-component');
+    if (newComponent) moveInstrumentation(block, newComponent);
 
     block.innerHTML = componentHtml;
 
@@ -272,6 +272,7 @@ export default async function decorate(block) {
       panel.id = `tab3col-panel-${i}`;
       panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('data-tab-index', i);
+      itemEl.setAttribute('data-aue-type', 'container');
       if (!isActive) panel.setAttribute('hidden', '');
 
       // Critical: transfer UE instrumentation from original item el to panel
