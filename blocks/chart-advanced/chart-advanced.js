@@ -106,13 +106,24 @@ const DEFAULT_CONFIG = {
 
 export default async function decorate(block) {
   try {
+    const config = await getBlockConfigs(block, {}, 'chart-advanced');
+    const c = getFieldValue(config);
+    if (c('colorGroup')) {
+      block.classList.add(c('colorGroup'));
+    }
+    block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced');
+
     const wrapper = block.querySelectorAll(':scope > div');
-    console.log('wrapper', wrapper);
+    // Remove the div of the configuration item
+    if (wrapper.length) {
+      wrapper[0].remove();
+    }
+
     // Process each wrapper asynchronously
     Array.from(wrapper).forEach(async (wrap) => {
       try {
-        const config = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
-        const v = getFieldValue(config);
+        const itemConfig = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+        const v = getFieldValue(itemConfig);
 
         const titleFontColor = v('titleFontColor') ? `--chart-advanced-title-color: #${v('titleFontColor')}` : '';
         const infoFontColor = v('infoFontColor') ? `--chart-advanced-info-color: #${v('infoFontColor')}` : '';
@@ -149,7 +160,6 @@ export default async function decorate(block) {
       }
     });
 
-    block.classList.add('flex', 'flex-col', 'md:flex-row', 'md:flex-nowrap', 'gap-[40px]', 'w-full', 'chart-advanced');
     setTimeout(() => {
       setUnifiedHeight(block);
     }, 500);
