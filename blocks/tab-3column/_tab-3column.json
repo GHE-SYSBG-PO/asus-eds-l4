@@ -67,5 +67,12 @@
       ]
     }
   ],
-  "filters": []
+  "filters": [
+     {
+      "id": "tab-3column",
+      "components": [
+        "media-block"
+      ]
+    }
+  ]
 }

@@ -24,7 +24,8 @@
       "space",
       "bar-chart",
       "footnote",
-      "featureitem-block"
+      "featureitem-block",
+      "tab-3column"
     ]
   },
   {
@@ -79,6 +80,12 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
+    ]
+  },
+  {
+    "id": "tab-3column",
+    "components": [
+      "media-block"
     ]
   }
 ]
