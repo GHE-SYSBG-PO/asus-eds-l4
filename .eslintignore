@@ -1,3 +1,4 @@
 helix-importer-ui
 dompurify.min.js
 vendor/**
+component-models.json
