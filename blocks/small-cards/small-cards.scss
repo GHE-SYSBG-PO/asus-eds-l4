@@ -444,7 +444,7 @@
       border-radius: var(--swiper-slide-border-radius);
     }
 
-    @media (width >= 768px) {
+    @media (width > 768px) {
       max-width: 896px;
 
       .swiper-slide {
