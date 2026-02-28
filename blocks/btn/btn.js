@@ -1,7 +1,9 @@
 import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { openModal } from '../modal/modal.js';
-import { getRadiusStyle, buildCloseButtonHtml, prefixHex } from '../../components/button/button.js';
+import {
+  getRadiusStyle, buildCloseButtonHtml, prefixHex, getDefaultFont,
+} from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
   // Basic configuration
@@ -13,6 +15,8 @@ const DEFAULT_CONFIG = {
   // Close button configuration
   gBtnStyleLayout: 'default',
   gBtnLabel: 'Close',
+  // Icon
+  iconStyle: 'svg',
 };
 
 /**
@@ -71,8 +75,10 @@ export default async function decorate(block) {
     const containerBorderWidth = v('borderWidth', 'text');
     const containerBorderColor = prefixHex(v('borderColor', 'text'));
     // Get font configuration
-    const fontDesktop = v('fontDesktop', 'text') || DEFAULT_CONFIG.fontDesktop;
-    const fontMobile = v('fontMobile', 'text') || DEFAULT_CONFIG.fontMobile;
+    const fontD = v('fontD', 'text') || DEFAULT_CONFIG.fontD;
+    const fontT = v('fontT', 'text') || DEFAULT_CONFIG.fontT;
+    const fontM = v('fontM', 'text') || DEFAULT_CONFIG.fontM;
+    const totalFonts = getDefaultFont(style, fontD, fontT, fontM);
     const fontColorDefault = prefixHex(v('fontColorDefault', 'text'));
     const fontColorHover = prefixHex(v('fontColorHover', 'text'));
     const fontColorActive = prefixHex(v('fontColorActive', 'text'));
@@ -217,7 +223,7 @@ export default async function decorate(block) {
     // Build button HTML
     const buttonHtml = `
       <a href="${href}"
-         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${fontDesktop} ${fontMobile}"
+         class="btn-component inline-flex items-center justify-center transition-all duration-300 cursor-pointer ${totalFonts} ${v('colorGroup')}"
          data-link-type="${linkType}"
          data-is-external="${isExternal}"
          data-style="${style}"
