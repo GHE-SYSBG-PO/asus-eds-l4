@@ -107,6 +107,7 @@ const DEFAULT_CONFIG = {
 export default async function decorate(block) {
   try {
     const wrapper = block.querySelectorAll(':scope > div');
+    console.log('wrapper', wrapper);
     // Process each wrapper asynchronously
     Array.from(wrapper).forEach(async (wrap) => {
       try {
