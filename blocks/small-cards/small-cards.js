@@ -493,60 +493,36 @@ function getValueForDevice(fieldName, data) {
 }
 
 /**
- * Generates the HTML for a single card.
+ * Generates the HTML for the card content (title, info, CTA).
  * @param {object} data The card data.
- * @returns {string} The HTML string for the card.
+ * @param {string} titleFont The font class for the title.
+ * @returns {string} The HTML string for the card content.
  */
-function getCardHTML(data) {
+function getCardContentHTML(data, titleFont) {
   const {
-    cardType,
-    bgColor,
-    title,
-    info,
-    ctaText,
-    ctaHyperlink,
-    titleFontColor,
-    infoFontColor,
-    borderColor,
-    borderWidth,
     ctaVisible,
-    ctaLinkType,
-    isAnchorVisible,
-    sectionID,
-    anchorStyle,
-    anchorColorDefault,
-    anchorColorHover,
-    anchorColorPress,
-    anchorBgColorDefault,
-    anchorBgColorHover,
-    anchorBgColorPress,
-    anchorAssetDefault,
-    anchorAssetHover,
-    anchorAssetPress,
     ctaFontDT,
     ctaFontM,
     ctaFontColor,
-    borderRadiusTopLeft,
-    borderRadiusTopRight,
-    borderRadiusBottomLeft,
-    borderRadiusBottomRight,
+    ctaLinkType,
+    styleLayoutCTA,
+    cardIndex,
+    ctaText,
+    ctaHyperlink,
     alignmentAdvanced,
-    anchorBorderWidthDefault,
-    anchorBorderWidthHover,
-    anchorBorderWidthPress,
-    anchorBorderColorDefault,
-    anchorBorderColorHover,
-    anchorBorderColorPress,
+    titleFontColor,
+    title,
+    infoFontColor,
+    info,
   } = data;
 
-  const titleFont = getValueForDevice('titleFont', data);
   let ctaHTML = '';
   if (ctaVisible === 'show') {
     const fontClass = `${ctaFontDT} small_${ctaFontM}`;
     const style = ctaFontColor ? `style="background: none; -webkit-text-fill-color: initial; color: #${ctaFontColor}"` : 'style="background: none; -webkit-text-fill-color: initial; color: var(--link-font-color-start)"';
 
-    if (ctaLinkType === 'button' && data.styleLayoutCTA) {
-      ctaHTML = `<div class="btn-placeholder" data-card-index="${data.cardIndex || 0}"></div>`;
+    if (ctaLinkType === 'button' && styleLayoutCTA) {
+      ctaHTML = `<div class="btn-placeholder" data-card-index="${cardIndex || 0}"></div>`;
     } else {
       ctaHTML = `<a class="${fontClass} asus-icon-chevronright text-block-cta" 
                   aria-label="${ctaText} (opens in new window)" 
@@ -555,7 +531,7 @@ function getCardHTML(data) {
     }
   }
 
-  const blockContent = `
+  return `
           <div class="block-content">
             <div class="wd__content" style="text-align: ${alignmentAdvanced};">
                 <h3>
@@ -565,49 +541,33 @@ function getCardHTML(data) {
                 ${ctaHTML}
             </div>
           </div>`;
+}
 
-  /**
-   * Generates the styled block content HTML.
-   * @param {string} style The inline style string.
-   * @returns {string} The HTML string for the block content.
-   */
-  const getStyledBlockContent = (style) => {
-    if (!style) return blockContent;
-    return blockContent.replace('class="block-content"', `class="block-content" style="${style}"`);
-  };
-
-  let flexDirection = '';
-  let cardBlockType = 'img_txt_integrated_top';
-  const contentStyle = '';
-  let showMedia = true;
-
-  switch (cardType) {
-    case 'img_txt_integrated_bottom':
-      flexDirection = 'column-reverse';
-      cardBlockType = 'img_txt_integrated_bottom';
-      break;
-    case 'img_txt_separate_bottom':
-      flexDirection = 'column-reverse';
-      cardBlockType = 'img_txt_separate_bottom';
-      break;
-    case 'text_only':
-      showMedia = false;
-      cardBlockType = 'text_only';
-      break;
-    case 'txt_img_attached_top':
-      cardBlockType = 'txt_img_attached_top';
-      break;
-    case 'txt_img_attached_bottom':
-      flexDirection = 'column-reverse';
-      cardBlockType = 'txt_img_attached_bottom';
-      break;
-    case 'img_txt_integrated_top':
-    default:
-      break;
-  }
-
-  const mediaHTML = showMedia ? getMediaHTML(data) : '';
-  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative; overflow: hidden;`;
+/**
+ * Generates the HTML for the anchor icon.
+ * @param {object} data The card data.
+ * @returns {string} The HTML string for the anchor icon.
+ */
+function getAnchorHTML(data) {
+  const {
+    isAnchorVisible,
+    anchorStyle,
+    anchorColorDefault,
+    anchorColorHover,
+    anchorColorPress,
+    anchorBgColorDefault,
+    anchorBgColorHover,
+    anchorBgColorPress,
+    anchorBorderWidthDefault,
+    anchorBorderWidthHover,
+    anchorBorderWidthPress,
+    anchorBorderColorDefault,
+    anchorBorderColorHover,
+    anchorBorderColorPress,
+    anchorAssetDefault,
+    anchorAssetHover,
+    anchorAssetPress,
+  } = data;
 
   let iconHTML = '';
   if (isAnchorVisible === 'true') {
@@ -652,6 +612,87 @@ function getCardHTML(data) {
       `;
     }
   }
+  return iconHTML;
+}
+
+/**
+ * Generates the HTML for a single card.
+ * @param {object} data The card data.
+ * @returns {string} The HTML string for the card.
+ */
+function getCardHTML(data) {
+  const {
+    cardType,
+    bgColor,
+    title,
+    info,
+    ctaText,
+    ctaHyperlink,
+    titleFontColor,
+    infoFontColor,
+    borderColor,
+    borderWidth,
+    ctaVisible,
+    ctaLinkType,
+    isAnchorVisible,
+    sectionID,
+    ctaFontDT,
+    ctaFontM,
+    ctaFontColor,
+    borderRadiusTopLeft,
+    borderRadiusTopRight,
+    borderRadiusBottomLeft,
+    borderRadiusBottomRight,
+    alignmentAdvanced,
+  } = data;
+
+  const titleFont = getValueForDevice('titleFont', data);
+  const blockContent = getCardContentHTML(data, titleFont);
+
+  /**
+   * Generates the styled block content HTML.
+   * @param {string} style The inline style string.
+   * @returns {string} The HTML string for the block content.
+   */
+  const getStyledBlockContent = (style) => {
+    if (!style) return blockContent;
+    return blockContent.replace('class="block-content"', `class="block-content" style="${style}"`);
+  };
+
+  let flexDirection = '';
+  let cardBlockType = 'img_txt_integrated_top';
+  const contentStyle = '';
+  let showMedia = true;
+
+  switch (cardType) {
+    case 'img_txt_integrated_bottom':
+      flexDirection = 'column-reverse';
+      cardBlockType = 'img_txt_integrated_bottom';
+      break;
+    case 'img_txt_separate_bottom':
+      flexDirection = 'column-reverse';
+      cardBlockType = 'img_txt_separate_bottom';
+      break;
+    case 'text_only':
+      showMedia = false;
+      cardBlockType = 'text_only';
+      break;
+    case 'txt_img_attached_top':
+      cardBlockType = 'txt_img_attached_top';
+      break;
+    case 'txt_img_attached_bottom':
+      flexDirection = 'column-reverse';
+      cardBlockType = 'txt_img_attached_bottom';
+      break;
+    case 'img_txt_integrated_top':
+    default:
+      break;
+  }
+
+  const mediaHTML = showMedia ? getMediaHTML(data) : '';
+  const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative; overflow: hidden;`;
+
+  const iconHTML = getAnchorHTML(data);
 
   const borderStyle = borderWidth ? `${borderWidth}px solid #${borderColor}` : 'var(--swiper-slide-border-width) solid var(--swiper-slide-border-color)';
 
@@ -693,15 +734,12 @@ function setEqualHeight(block) {
 }
 
 /**
- * Renders the cards in the block.
- * @param {HTMLElement} block The block element.
+ * Builds the small cards container.
+ * @param {object} data The card data.
+ * @param {object} config The alignment configuration.
+ * @returns {HTMLElement} The small cards container element.
  */
-async function renderCard(block) {
-
-  const data = await fillSequentialConfig(block);
-
-  console.log('Extracted chunk, Final Card Data:', data);
-
+function buildSmallCardsContainer(data, config) {
   const {
     arrowStyle,
     arrowContainerBgColorDefault,
@@ -720,7 +758,7 @@ async function renderCard(block) {
     arrowBorderColorHover,
     arrowBorderColorPress,
     arrowBorderColorDisable,
-  } = alignmentConfig;
+  } = config;
 
   let arrowStyleVars = '';
   if (arrowStyle === 'svg') {
@@ -782,6 +820,20 @@ async function renderCard(block) {
   </div>`;
 
   smallCardsContainer.innerHTML = html;
+  return smallCardsContainer;
+}
+
+/**
+ * Renders the cards in the block.
+ * @param {HTMLElement} block The block element.
+ */
+async function renderCard(block) {
+
+  const data = await fillSequentialConfig(block);
+
+  console.log('Extracted chunk, Final Card Data:', data);
+
+  const smallCardsContainer = buildSmallCardsContainer(data, alignmentConfig);
 
   const placeholders = smallCardsContainer.querySelectorAll('.btn-placeholder');
   if (placeholders.length > 0) {
