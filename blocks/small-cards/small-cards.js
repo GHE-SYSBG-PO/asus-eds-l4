@@ -926,9 +926,11 @@ export default async function decorate(block) {
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
+    const instance = new MediaCarousel();
+    instance.init();
+
     setTimeout(async () => {
-      const instance = new MediaCarousel();
-      instance.init();
+
       setEqualHeight(block);
     }, 100);
 
