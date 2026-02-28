@@ -30910,7 +30910,7 @@ body {
     }
 
     .wdblockimg .block[data-blocktype=aiNoise].column-span-2 .ai__noise__container.js-active .noise__switcher {
-        top: -2px;
+        /* top: -2px; */
         animation-delay: 0s;
         animation-duration: 3s
     }
