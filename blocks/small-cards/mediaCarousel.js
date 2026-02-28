@@ -29,6 +29,7 @@ function NoiseCancellation() {
   let $adaDesc;
   let $outerModalBtn;
   let $innerModalBtn;
+  let navCurrentIndex;
   let saveCurrentAudioTime;
   let amplitude;
   let halfWidth;
