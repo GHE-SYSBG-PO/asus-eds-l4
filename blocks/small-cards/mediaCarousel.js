@@ -80,8 +80,8 @@ function NoiseCancellation() {
       isWeakWaveActive: false,
       phase: 0,
       audioTrack: [{
-        noise: './src/audio/cafe/scene-noise.mp3',
-        filter: './src/audio/cafe/scene.mp3'
+        noise: 'https://author-p165753-e1767020.adobeaemcloud.com/content/dam/asus-l4/dev/components/id-13-small-card-block/audio/scene-noise.mp3',
+        filter: 'https://author-p165753-e1767020.adobeaemcloud.com/content/dam/asus-l4/dev/components/id-13-small-card-block/audio/scene.mp3'
       }]
     }
   };
