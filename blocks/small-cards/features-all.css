@@ -29159,10 +29159,6 @@ i {
     }
 }
 
-.section__s6 .wd__feature__list-icon .wd__feature.feature-icon.icon-dolbyatmos {
-    filter: invert(1)
-}
-
 .section__audio {
     z-index: 1;
     margin-top: 0;
@@ -39480,30 +39476,6 @@ body {
 
     .section__display_immersive .tab__list .video__item {
         display: none
-    }
-
-    .section__s6 {
-        padding-bottom: 80px
-    }
-
-    .section__s6 .wd__feature__list {
-        margin-top: 0;
-        margin-bottom: -40px
-    }
-
-    .section__s6 .wd__feature__list .wd__feature.icon-blackdolbyvisionatmos .wd__feature__data {
-        top: 40px;
-        bottom: 0;
-        margin-bottom: 0
-    }
-
-    .section__s6 .wd__feature__list .wd__feature.icon-asusoled-luminapro .wd__feature__data {
-        top: -8px;
-        margin-bottom: 0
-    }
-
-    .section__s6 .wd__feature__list .wd__feature.icon-lowbluelighthardware .wd__feature__data {
-        top: 2px
     }
 
     .section__audio {
@@ -60014,37 +59986,6 @@ body {
         height: 97px
     }
 
-    .section__s6 {
-        padding-top: 40px;
-        padding-bottom: 48px
-    }
-
-    .section__s6 .wd__feature__list .wd__feature.icon-blackdolbyatmos .wd__feature__data,.section__s6 .wd__feature__list .wd__feature.icon-dolbyatmos .wd__feature__data {
-        top: 20px;
-        margin-bottom: 0
-    }
-
-    .section__s6 .wd__feature__list-icon {
-        margin-top: 8px;
-        margin-bottom: -24px
-    }
-
-    .section__s6 .wd__feature__list-icon .feature-1,.section__s6 .wd__feature__list-icon .feature-3 {
-        width: 141px
-    }
-
-    .section__s6 .wd__feature__list-icon .feature-2,.section__s6 .wd__feature__list-icon .feature-4 {
-        width: 135px
-    }
-
-    .section__s6 .wd__feature__list-icon .feature-5 .wd__feature__data {
-        margin-top: -42px
-    }
-
-    .section__s6 .wd__feature__list-icon .feature-5 .wd__feature__describe {
-        display: none
-    }
-
     .section__audio {
         overflow: clip;
         z-index: 10;
@@ -60644,24 +60585,6 @@ body {
     }
 }
 
-@media all and (max-width: 730.5px) and (min-width:1px) and (max-width:410px) {
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-validateddisplay-2025 {
-        margin-top:24px
-    }
-
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-certifieddisplay1000 {
-        margin-top: 12px
-    }
-
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-lowbluelighthardware {
-        margin-top: -16px
-    }
-
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-blackdolbyatmos {
-        margin-top: -17px
-    }
-}
-
 @media all and (width <= 480.5px) {
     .viewport-content.wd-media-text-carousel {
         width: 100%;
@@ -60677,24 +60600,3 @@ body {
         grid-template-columns: 1fr 87.5% 1fr
     }
 }
-
-@media all and (min-width: 1px) and (max-width:410px) {
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-validateddisplay-2025 {
-        margin-top:24px
-    }
-
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-certifieddisplay1000 {
-        margin-top: 12px
-    }
-
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-lowbluelighthardware {
-        margin-top: -16px
-    }
-
-    .section__s6 .wd__feature__list.wd__feature__list-icon .wd__feature.icon-blackdolbyatmos {
-        margin-top: -17px
-    }
-}
-
-
-
