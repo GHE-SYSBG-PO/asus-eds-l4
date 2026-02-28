@@ -335,6 +335,7 @@ function getMediaHTML(data) {
     content = `
             <div class="wditems__content wditems__content__0 theme-white" id="SectionID-tab-1" style="${style} background-color: var(--ai-noise-container-bg);">
         
+        <div class="item__media item__media--aiNoise">
           <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
             
             <div class="nav__replay">
@@ -399,6 +400,7 @@ function getMediaHTML(data) {
               </audio>
             </div>
           </div>
+        </div>
       </div>`;
   } else if (mediaType === 'video') {
     const isVideoAutoPlay = String(videoAutoPlay).toLowerCase() === 'true';
