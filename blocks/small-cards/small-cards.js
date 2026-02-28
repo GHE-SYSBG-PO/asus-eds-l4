@@ -382,7 +382,6 @@ function getMediaHTML(data) {
                   </figure>
               </div>
               <div class="noise__switcher" aria-hidden="true">
-                  <p class="adaDesc noise_desc"></p>
                   <button class="aiNoiseSwitcher_btn img__switcher switcher_button wdga" id="Item_21_conferenceS1span3_aiNoiseSwitcher" role="switch" data-status="false" data-on="AI noise cancelation, pressed, on" data-off="AI noise cancelation, pressed, off" aria-checked="false">
                     <label class="hide" for="Item_21_conferenceS1span3_aiNoiseSwitcher">AI noise cancelation, pressed, off</label>
                   </button>
