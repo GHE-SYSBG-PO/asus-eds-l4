@@ -272,7 +272,7 @@ export default async function decorate(block) {
       panel.id = `tab3col-panel-${i}`;
       panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('data-tab-index', i);
-      itemEl.setAttribute('data-aue-type', 'container');
+
       if (!isActive) panel.setAttribute('hidden', '');
 
       // Critical: transfer UE instrumentation from original item el to panel

@@ -76,9 +76,7 @@
     {
       "id": "tab-3column-item",
       "components": [
-        "media-block",
-        "btn",
-        "text-block"
+        "media-block"
       ]
     }
   ]
