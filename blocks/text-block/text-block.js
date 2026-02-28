@@ -4,38 +4,93 @@ import {
   handleDecide,
   processInlineIdSyntax,
   handleMotion,
+  getProductLine,
 } from '../../scripts/utils.js';
+
+const FONTS = {
+  asus: {
+    categoryFontD: 'tt-md-20-lg',
+    categoryFontT: 'tt-md-20-md',
+    categoryFontM: 'tt-md-16-sm',
+    titleFontD: 'tt-md-40-lg',
+    titleFontT: 'tt-md-40-md',
+    titleFontM: 'tt-md-40-sm',
+    bodyFontD: 'ro-rg-20-lg',
+    bodyFontT: 'ro-rg-20-md',
+    bodyFontM: 'ro-rg-18-sm',
+    disclaimerFont: 'ro-rg-13',
+    ctaFontD: 'ro-md-20-sh-lg',
+    ctaFontT: 'ro-md-20-sh-md',
+    ctaFontM: 'ro-md-18-sh-sm',
+  },
+  proart: {
+    categoryFontD: 'tt-md-20-lg',
+    categoryFontT: 'tt-md-20-md',
+    categoryFontM: 'tt-md-16-sm',
+    titleFontD: 'tt-md-40-lg',
+    titleFontT: 'tt-md-40-md',
+    titleFontM: 'tt-md-40-sm',
+    bodyFontD: 'ro-rg-20-lg',
+    bodyFontT: 'ro-rg-20-md',
+    bodyFontM: 'ro-rg-18-sm',
+    disclaimerFont: 'ro-rg-13',
+    ctaFontD: 'ro-md-20-sh-lg',
+    ctaFontT: 'ro-md-20-sh-md',
+    ctaFontM: 'ro-md-18-sh-sm',
+  },
+  rog: {
+    categoryFontD: 'tg-bd-20-lg',
+    categoryFontT: 'tg-bd-20-md',
+    categoryFontM: 'tg-bd-16-sm',
+    titleFontD: 'tg-bd-40-lg',
+    titleFontT: 'tg-bd-40-md',
+    titleFontM: 'tg-bd-40-sm',
+    bodyFontD: 'rc-rg-20-lg',
+    bodyFontT: 'rc-rg-20-md',
+    bodyFontM: 'rc-rg-18-sm',
+    disclaimerFont: 'rc-rg-13',
+    ctaFontD: 'rc-bd-20-sh-lg',
+    ctaFontT: 'rc-bd-20-sh-md',
+    ctaFontM: 'rc-bd-18-sh-sm',
+  },
+  tuf: {
+    categoryFontD: 'dp-cb-20-lg',
+    categoryFontT: 'dp-cb-20-md',
+    categoryFontM: 'dp-cb-16-sm',
+    titleFontD: 'dp-cb-40-lg',
+    titleFontT: 'dp-cb-40-md',
+    titleFontM: 'dp-cb-40-sm',
+    bodyFontD: 'ro-rg-20-lg',
+    bodyFontT: 'ro-rg-20-md',
+    bodyFontM: 'ro-rg-18-sm',
+    disclaimerFont: 'ro-rg-13',
+    ctaFontD: 'ro-md-20-sh-lg',
+    ctaFontT: 'ro-md-20-sh-md',
+    ctaFontM: 'ro-md-18-sh-sm',
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
 
 // DEFAULT
 const DEFAULT_CONFIG = {
   desktopAlignment: 'center',
   tabletAlignment: 'center',
   mobileAlignment: 'center',
-  categoryRichtext: '',
-  titleRichtext: '',
-  bodyRichtext: '',
-  disclaimerRichtext: '',
   motion: 'off',
-  ctaText: '',
   ctaVisible: 'show',
-  ctaLinkType: '',
-  categoryIcon: '',
-  categoryIconNum: '',
-  categoryIconPosition: '',
-  categoryIcon1: '',
-  categoryIcon2: '',
-  categoryFont: 'tt-md-20',
-  categoryFontColor: '',
-  titleFont: 'tt-md-40',
-  titleFontColor: '',
-  bodyFontDT: 'ro-rg-20-md',
-  bodyFontM: 'ro-rg-20',
-  bodyFontColor: '',
-  disclaimerFontColor: '',
-  ctaFontDT: 'ro-md-20-md',
-  ctaFontM: 'ro-md-20',
-  ctaFontColor: '',
-  ctaHyperlink: '',
+  categoryFontD: FONTS[PRODUCT_LINE].categoryFontD,
+  categoryFontT: FONTS[PRODUCT_LINE].categoryFontT,
+  categoryFontM: FONTS[PRODUCT_LINE].categoryFontM,
+  titleFontD: FONTS[PRODUCT_LINE].titleFontD,
+  titleFontT: FONTS[PRODUCT_LINE].titleFontT,
+  titleFontM: FONTS[PRODUCT_LINE].titleFontM,
+  bodyFontD: FONTS[PRODUCT_LINE].bodyFontD,
+  bodyFontT: FONTS[PRODUCT_LINE].bodyFontT,
+  bodyFontM: FONTS[PRODUCT_LINE].bodyFontM,
+  ctaFontD: FONTS[PRODUCT_LINE].ctaFontD,
+  ctaFontT: FONTS[PRODUCT_LINE].ctaFontT,
+  ctaFontM: FONTS[PRODUCT_LINE].ctaFontM,
 };
 
 const handleCategoryClass = (num) => {
@@ -75,12 +130,16 @@ export default async function decorate(block) {
     let icon2 = '';
     let categoryClass = '';
     let categoryFontColor = '';
-    const titleFontColor = v('titleFontColor') ? `style='--text-block-title-color: #${v('titleFontColor')};--text-block-title-gradient: '';'` : '';
+    let titleFontColor = '';
     const bodyFontColor = v('bodyFontColor') ? `style='--text-block-body-color: #${v('bodyFontColor')};'` : '';
     const disclaimerFontColor = v('disclaimerFontColor') ? `style='--text-block-disclaimer-color: #${v('disclaimerFontColor')};'` : '';
     let motion = '';
     let ctaFontColor = '';
 
+    if (v('titleFontColor')) {
+      const [start, end = start] = v('titleFontColor').split(',');
+      titleFontColor = `style='--text-block-title-start: #${start}; --text-block-title-end: #${end};'`;
+    }
     if (v('ctaLinkType') === 'text-link' && v('ctaFontColor')) {
       const [start, end = start] = v('ctaFontColor').split(',');
       ctaFontColor = `style='--text-block-cta-start: #${start}; --text-block-cta-end: #${end};'`;
@@ -111,39 +170,41 @@ export default async function decorate(block) {
     const category = `
       <div class='flex ${categoryClass}'>
         ${icon1}
-        <div class='break-all flex-1 text-block-category ${v('categoryFont')}' ${categoryFontColor}>${v('categoryRichtext', 'html') || ''}</div>
+        <div class='break-all flex-1 text-block-category ${v('categoryFontD')} ${v('categoryFontT')} ${v('categoryFontM')}' ${categoryFontColor}>
+          ${v('categoryRichtext', 'html') || ''}
+        </div>
         ${icon2}
       </div>
     `;
 
     const title = `
-      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFont')}' ${titleFontColor}>
+      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFontD')} ${v('titleFontT')} ${v('titleFontM')}' ${titleFontColor}>
         ${v('titleRichtext', 'html')}
       </div>
     `;
 
     const body = `
-      <div class='${v('bodyRichtext') && 'mt-[18px]'} break-all text-block-body ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('bodyFontDT')} ${v('bodyFontM')}' ${bodyFontColor}>
+      <div class='${v('bodyRichtext') && 'mt-[18px]'} break-all text-block-body ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('bodyFontD')} ${v('bodyFontT')} ${v('bodyFontM')}' ${bodyFontColor}>
         ${v('bodyRichtext', 'html')}
       </div>
     `;
 
     const disclaimer = `
-      <div class='${v('disclaimerRichtext') && 'mt-[16px]'} break-all text-block-disclaimer ro-rg-13 ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment}' ${disclaimerFontColor}>
+      <div class='${v('disclaimerRichtext') && 'mt-[16px]'} break-all text-block-disclaimer ${FONTS[PRODUCT_LINE].disclaimerFont} ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment}' ${disclaimerFontColor}>
         ${v('disclaimerRichtext', 'html')}
       </div>
     `;
 
     const cta = `
       <div class='${v('ctaVisible') === 'hide' ? '' : 'mt-[16px]'} break-all ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment}'>
-        <a href="${v('ctaHyperlink')}" class="text-block-cta ${v('ctaFontDT')} ${v('ctaFontM')}" ${ctaFontColor} target="_blank">
+        <a href="${v('ctaHyperlink')}" class="text-block-cta ${v('ctaFontD')} ${v('ctaFontT')} ${v('ctaFontM')}" ${ctaFontColor} target="_blank">
             ${v('ctaText')}
           </a>
       </div>
     `;
 
     const wrap = `
-      <div class='flex flex-col ${motion} ${dAlignment} ${tAlignment} ${mAlignment}'>
+      <div class='flex flex-col ${motion} ${dAlignment} ${tAlignment} ${mAlignment} ${v('colorGroup')}'>
         ${category}
         ${title}
         ${body}

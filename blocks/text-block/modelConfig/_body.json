@@ -2,10 +2,22 @@
   "fields": [
     {
       "component": "select",
-      "label": "font (D/T)",
-      "name": "bodyFontDT",
+      "label": "font (D)",
+      "name": "bodyFontD",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
+        { "name": "ro-rg-20", "value": "ro-rg-20-lg" },
+        { "name": "ro-rg-24", "value": "ro-rg-24-lg" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (T)",
+      "name": "bodyFontT",
+      "valueType": "string",
+      "options": [
+        { "name": "default", "value": "" },
         { "name": "ro-rg-20", "value": "ro-rg-20-md" },
         { "name": "ro-rg-24", "value": "ro-rg-24-md" }
       ]
@@ -16,8 +28,9 @@
       "name": "bodyFontM",
       "valueType": "string",
       "options": [
-        { "name": "ro-rg-18", "value": "ro-rg-18" },
-        { "name": "ro-rg-20", "value": "ro-rg-20" }
+        { "name": "default", "value": "" },
+        { "name": "ro-rg-18", "value": "ro-rg-18-sm" },
+        { "name": "ro-rg-20", "value": "ro-rg-20-sm" }
       ]
     },
     {

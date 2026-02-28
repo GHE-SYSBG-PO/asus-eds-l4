@@ -225,6 +225,10 @@
  * Apply theme variables area
  * ======================================== */
   .btn-component {
+    &.section-light,&.section-dark{
+      background-color: transparent;
+    }
+    
     /* Filled style (1, 2, 3) */
     &[data-filled="true"] {
       --btn-bg-default-image: linear-gradient(
