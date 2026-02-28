@@ -953,7 +953,7 @@ let loadFeature; let
 function loadAnimationFun() {
   if (!loadAnimation) {
     loadAnimation = loadScript(
-      '/blocks/small-cards/animation.js',
+      'https://code.jquery.com/jquery-3.7.1.min.js',
     ).catch((err) => {
       console.error('Failed to load animation:', err);
       throw err;
