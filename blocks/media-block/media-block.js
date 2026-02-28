@@ -372,7 +372,7 @@ export default async function decorate(block) {
 
     // Build final HTML
     block.innerHTML = `
-      <div class="media-block-container relative ${v('colorGroup')}">
+      <div class="media-block-container relative">
         ${mediaContent}
       </div>
     `;
