@@ -88,11 +88,11 @@ section .img {
     }
 }
 
-@media all and (min-width: 731px) and (max-width:1279.5px) {
+/* @media all and (min-width: 731px) and (max-width:1279.5px) {
     #CMD::before {
         content:"tablet"
     }
-}
+} */
 
 @media all and (max-width: 730.5px) {
     #CMD::before {
