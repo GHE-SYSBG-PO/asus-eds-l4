@@ -77,3 +77,62 @@
 .l4-pdp .feature-accordion-subitem__trigger[aria-expanded='true']::after {
   content: '-';
 }
+
+.l4-pdp .feature-accordion-media-group {
+  display: none;
+}
+
+.l4-pdp .feature-accordion-item__media,
+.l4-pdp .feature-accordion-subitem__media {
+  position: relative;
+}
+
+.l4-pdp .feature-accordion-item__media.is-media-loading,
+.l4-pdp .feature-accordion-subitem__media.is-media-loading {
+  overflow: hidden;
+}
+
+.l4-pdp .feature-accordion-item__media.is-media-loading::before,
+.l4-pdp .feature-accordion-subitem__media.is-media-loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 20%, rgba(0, 0, 0, 0.12) 50%, rgba(0, 0, 0, 0.06) 80%);
+  background-size: 200% 100%;
+  animation: feature-accordion-media-shimmer 1.2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes feature-accordion-media-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .l4-pdp .feature-accordion-item-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 48%);
+    gap: 32px;
+    align-items: start;
+  }
+
+  .l4-pdp .feature-accordion-item-container > .feature-accordion-group {
+    min-width: 0;
+  }
+
+  .l4-pdp .feature-accordion-media-group {
+    display: block;
+    position: sticky;
+    top: 24px;
+    min-height: 220px;
+  }
+
+  .l4-pdp .feature-accordion-item__media,
+  .l4-pdp .feature-accordion-subitem__media {
+    display: none;
+  }
+}

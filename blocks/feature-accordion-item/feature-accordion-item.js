@@ -55,6 +55,32 @@ const normalizeColor = (color) => {
   return /^[0-9a-fA-F]{3,8}$/.test(value) ? `#${value}` : value;
 };
 
+const mediaStateByCell = new WeakMap();
+
+const ensureAccordionGroupWrapper = (block) => {
+  const container = block.closest('.feature-accordion-item-container');
+  if (!container) return null;
+
+  let group = container.querySelector(':scope > .feature-accordion-list-group');
+  if (!group) {
+    const wrappers = [...container.querySelectorAll(':scope > .feature-accordion-item-wrapper')];
+    if (!wrappers.length) return null;
+    group = document.createElement('div');
+    group.classList.add('feature-accordion-list-group');
+    container.insertBefore(group, wrappers[0]);
+    group.append(...wrappers);
+  }
+
+  let mediaGroup = container.querySelector(':scope > .feature-accordion-media-group');
+  if (!mediaGroup) {
+    mediaGroup = document.createElement('div');
+    mediaGroup.classList.add('feature-accordion-media-group');
+    container.append(mediaGroup);
+  }
+
+  return { container, group, mediaGroup };
+};
+
 // Variant-2 compact markup: top-level model occupies first 7 rows.
 const detectSubItemRows = (block) => [...block.children].filter((row, index) => index >= 7 && row.children.length >= 5);
 
@@ -123,19 +149,83 @@ const setRowsOpenState = (rows, open) => {
   });
 };
 
-const loadMediaIntoCell = async (cell, path, fallbackHtml) => {
-  if (!cell || (!path && !fallbackHtml)) return;
-  if (path) {
-    const resolvedPath = resolveFragmentPath(path);
-    const fragment = await loadFragment(resolvedPath);
-    if (fragment?.childNodes?.length) {
-      cell.innerHTML = '';
-      cell.append(...fragment.childNodes);
-      return;
-    }
+const collapseEntry = (entry, triggerSelector, panelRowSelector) => {
+  if (!entry) return;
+  const trigger = entry.querySelector(triggerSelector);
+  if (trigger) {
+    trigger.setAttribute('aria-expanded', 'false');
   }
-  if (fallbackHtml) {
-    cell.innerHTML = fallbackHtml;
+  const panelRows = entry.querySelectorAll(panelRowSelector);
+  panelRows.forEach((row) => {
+    row.hidden = true;
+  });
+};
+
+const reserveMediaSpace = (cell) => {
+  if (!cell || cell.style.minHeight) return;
+  const width = cell.clientWidth || cell.parentElement?.clientWidth || 0;
+  const estimatedHeight = width > 0 ? Math.round(width * 0.5625) : 180;
+  cell.style.minHeight = `${Math.max(estimatedHeight, 160)}px`;
+};
+
+const renderMediaHtml = (target, html) => {
+  if (!target || !html) return;
+  target.innerHTML = html;
+};
+
+const createLazyMediaLoader = (cell, path, fallbackHtml, getRenderTarget = () => cell) => async () => {
+  if (!cell || (!path && !fallbackHtml)) return;
+
+  const state = mediaStateByCell.get(cell) || {};
+  mediaStateByCell.set(cell, state);
+
+  const target = getRenderTarget() || cell;
+  if (!target) return;
+
+  if (state.html) {
+    renderMediaHtml(target, state.html);
+    return;
+  }
+
+  if (state.loadingPromise) {
+    await state.loadingPromise;
+    if (state.html) renderMediaHtml(target, state.html);
+    return;
+  }
+
+  reserveMediaSpace(target);
+  target.classList.add('is-media-loading');
+  target.setAttribute('aria-busy', 'true');
+
+  try {
+    state.loadingPromise = (async () => {
+      if (path) {
+        const resolvedPath = resolveFragmentPath(path);
+        const fragment = await loadFragment(resolvedPath);
+        if (fragment?.childNodes?.length) {
+          const tmp = document.createElement('div');
+          tmp.append(...fragment.childNodes);
+          state.html = tmp.innerHTML;
+          return;
+        }
+      }
+
+      if (fallbackHtml) {
+        state.html = fallbackHtml;
+      }
+    })();
+
+    await state.loadingPromise;
+    if (state.html) {
+      renderMediaHtml(target, state.html);
+    }
+  } finally {
+    state.loadingPromise = null;
+    target.classList.remove('is-media-loading');
+    target.removeAttribute('aria-busy');
+    requestAnimationFrame(() => {
+      target.style.minHeight = '';
+    });
   }
 };
 
@@ -149,6 +239,8 @@ const expandFirstNested = (container) => {
 
 export default async function decorate(block) {
   try {
+    const scaffold = ensureAccordionGroupWrapper(block);
+
     const rows = [...block.children];
     if (!rows.length) return;
 
@@ -163,6 +255,7 @@ export default async function decorate(block) {
 
     block.classList.add('feature-accordion-item__entry');
     titleCell?.classList.add('feature-accordion-item__trigger');
+    mediaCell?.classList.add('feature-accordion-item__media');
 
     if (v('titleFontColor') && titleCell) titleCell.style.color = normalizeColor(v('titleFontColor'));
     if (v('subtitleFontColor') && subtitleCell) subtitleCell.style.color = normalizeColor(v('subtitleFontColor'));
@@ -170,8 +263,14 @@ export default async function decorate(block) {
 
     const subItemRows = detectSubItemRows(block);
     const isNestedVariant = subItemRows.length > 0;
+    const getMediaTarget = (fallbackCell) => scaffold?.mediaGroup || fallbackCell;
 
-    await loadMediaIntoCell(mediaCell, v('mediaBlockContent'), v('mediaBlockContent', 'html'));
+    const ensureTopMediaLoaded = createLazyMediaLoader(
+      mediaCell,
+      v('mediaBlockContent'),
+      v('mediaBlockContent', 'html'),
+      () => getMediaTarget(mediaCell),
+    );
 
     const topPanelRows = rows.slice(1);
     topPanelRows.forEach((row) => row.classList.add('feature-accordion-item__panel-row'));
@@ -199,15 +298,27 @@ export default async function decorate(block) {
       if (sv('subItemSubtitleFontColor') && nestedSubtitleCell) nestedSubtitleCell.style.color = normalizeColor(sv('subItemSubtitleFontColor'));
       if (sv('subItemInfoFontColor') && nestedInfoCell) nestedInfoCell.style.color = normalizeColor(sv('subItemInfoFontColor'));
 
-      await loadMediaIntoCell(
+      const ensureNestedMediaLoaded = createLazyMediaLoader(
         nestedMediaCell,
         sv('subItemMediaBlockContent'),
         sv('subItemMediaBlockContent', 'html'),
+        () => getMediaTarget(nestedMediaCell),
       );
 
       setRowsOpenState(nestedPanelCells, false);
       makeInteractiveTrigger(nestedHeaderCell, (isOpen) => {
         setRowsOpenState(nestedPanelCells, isOpen);
+        if (isOpen) {
+          ensureNestedMediaLoaded().catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Failed to load nested accordion media:', error);
+          });
+          const siblingNestedEntries = [...subRow.parentElement.children]
+            .filter((row) => row !== subRow && row.classList.contains('feature-accordion-subitem__entry'));
+          siblingNestedEntries.forEach((entry) => {
+            collapseEntry(entry, '.feature-accordion-subitem__trigger', '.feature-accordion-subitem__panel-row');
+          });
+        }
       }, false);
     }));
 
@@ -226,6 +337,17 @@ export default async function decorate(block) {
     setRowsOpenState(topPanelRows, isFirstAccordionItem);
     makeInteractiveTrigger(titleCell, (isOpen) => {
       setRowsOpenState(topPanelRows, isOpen);
+      if (isOpen) {
+        ensureTopMediaLoaded().catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Failed to load top accordion media:', error);
+        });
+        itemsInScope
+          .filter((item) => item !== block)
+          .forEach((item) => {
+            collapseEntry(item, '.feature-accordion-item__trigger', ':scope > .feature-accordion-item__panel-row');
+          });
+      }
       if (isOpen && isNestedVariant) {
         expandFirstNested(block);
       }
@@ -233,6 +355,12 @@ export default async function decorate(block) {
 
     if (isFirstAccordionItem && isNestedVariant) {
       expandFirstNested(block);
+    }
+    if (isFirstAccordionItem) {
+      ensureTopMediaLoaded().catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Failed to load initial top accordion media:', error);
+      });
     }
   } catch (error) {
     // eslint-disable-next-line no-console
