@@ -62,12 +62,6 @@
       "fields": [
         {
           "...": "./modelConfig/_tab.json#/fields"
-        },
-        {
-          "component": "text",
-          "name": "L4TagNestedBlock",
-          "value": "L4--nested-block--tab-3column-item",
-          "hidden": true
         }
       ]
     }

@@ -3985,7 +3985,7 @@
         "name": "styleTab"
       },
       {
-        "component": "checkbox",
+        "component": "boolean",
         "label": "motion (on/off)",
         "name": "motionEnabled",
         "valueType": "boolean"
@@ -4431,12 +4431,6 @@
         "label": "info",
         "name": "tabInfo",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--tab-3column-item",
-        "hidden": true
       }
     ]
   },

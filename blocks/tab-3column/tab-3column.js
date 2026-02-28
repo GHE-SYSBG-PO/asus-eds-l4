@@ -1,36 +1,10 @@
-import { getBlockConfigs, getFieldValue, nestBlockExecuteJs } from '../../scripts/utils.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
-import { prefixHex } from '../../components/button/button.js';
-
 /**
  * ID:15 TAB_3COLUMN
- *
- * AEM DOM before decorate (two-level block structure):
- *
- *  div.tab-3column          ← block (1st level, tab-3column model)
- *    div                    ← item wrapper (2nd level, tab-3column-item model)
- *      div                  ← item row
- *        div                  ← cell: tabText
- *        div                  ← cell: tabIconAsset
- *        div                  ← cell: tabTitle
- *        div                  ← cell: tabInfo
- *      [nested media-block] ← 3rd level, authored separately
- *
- * DOM Structure after decorate:
- *
- *  .tab3col-component
- *    ├── .tab3col-tab-bar
- *    │     ├── .tab3col-arrow--prev
- *    │     ├── .tab3col-tab-list [role=tablist]
- *    │     │     └── .tab3col-tab-btn × N
- *    │     └── .tab3col-arrow--next
- *    └── .tab3col-panels
- *          └── .tab3col-panel × N  ← instrumentation moved from original item wrapper
- *                ├── .tab3col-media-slot  ← original item wrapper's nested media-block moved here
- *                └── .tab3col-text-col
- *                      ├── .tab3col-title
- *                      └── .tab3col-info
  */
+
+import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
+import { prefixHex } from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
   motionEnabled: false,
@@ -65,6 +39,21 @@ const DEFAULT_CONFIG = {
   infoFontM: 'ro-rg-14',
   infoFontColor: '',
 };
+
+const ITEM_DEFAULT_CONFIG = {
+  tabText: '',
+  tabIconAsset: '',
+  tabTitle: '',
+  tabInfo: '',
+};
+
+/**
+ * An item div's first child contains multiple sibling cell divs (> 1).
+ * A config div's first child is the only div (=== 1).
+ */
+function isItemEl(el) {
+  return el.querySelectorAll(':scope > div > *').length > 1;
+}
 
 function buildRadiusValue(tl, tr, br, bl) {
   if ([tl, tr, br, bl].every((v) => !v)) return '';
@@ -136,18 +125,21 @@ function setupInteraction(componentEl, motionEnabled) {
 
 export default async function decorate(block) {
   try {
+    // ── Snapshot item elements BEFORE getBlockConfigs runs ───────
+    // getBlockConfigs only consumes 1st-level config rows (single-cell divs).
+    // Item divs have multiple cell siblings inside their first child div.
+    // We snapshot them here so references survive any DOM mutation.
+    const itemEls = [...block.querySelectorAll(':scope > div')].filter(isItemEl);
+
+    // ── 1st-level config ─────────────────────────────────────────
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'tab-3column');
     const v = getFieldValue(config);
 
-    // Execute nested block JavaScript
-    nestBlockExecuteJs(block);
-
-    // ── Config ──────────────────────────────────────────────────
-    const motionEnabled = v('motionEnabled', 'boolean') || DEFAULT_CONFIG.motionEnabled;
+    const motionEnabled = v('motionEnabled', 'text') || DEFAULT_CONFIG.motionEnabled;
     const colorGroup = v('colorGroup', 'text') || '';
     const widthTabArea = v('widthTabArea', 'text') || '';
     const widthTextArea = v('widthTextArea', 'text') || '';
-    const tabIconEnabled = v('tabIconEnabled', 'boolean') || DEFAULT_CONFIG.tabIconEnabled;
+    const tabIconEnabled = v('tabIconEnabled', 'text') || DEFAULT_CONFIG.tabIconEnabled;
     const tabBarBgColor = prefixHex(v('tabBarBgColorValue', 'text') || '');
     const tabFontDT = v('tabFontDT', 'text') || DEFAULT_CONFIG.tabFontDT;
     const tabFontM = v('tabFontM', 'text') || DEFAULT_CONFIG.tabFontM;
@@ -178,9 +170,21 @@ export default async function decorate(block) {
     const infoFontM = v('infoFontM', 'text') || DEFAULT_CONFIG.infoFontM;
     const infoFontColor = prefixHex(v('infoFontColor', 'text') || '');
 
-    // ── Collect item elements BEFORE mutating DOM ───────────────
-    // Each direct child div of block is a tab-3column-item wrapper
-    const itemEls = [...block.querySelectorAll(':scope > div')];
+    // ── 2nd-level item config ────────────────────────────────────
+    // Each itemEl is passed individually to getBlockConfigs using the
+    // tab-3column-item model, so field values are read correctly.
+    const tabs = await Promise.all(
+      itemEls.map(async (itemEl) => {
+        const itemConfig = await getBlockConfigs(itemEl, ITEM_DEFAULT_CONFIG, 'tab-3column-item');
+        const iv = getFieldValue(itemConfig);
+        return {
+          tabText: iv('tabText', 'text') || '',
+          tabIconAsset: iv('tabIconAsset', 'text') || '',
+          tabTitle: iv('tabTitle', 'text') || '',
+          tabInfo: iv('tabInfo', 'text') || '',
+        };
+      }),
+    );
 
     // ── Inline CSS variables ─────────────────────────────────────
     let inlineStyle = '';
@@ -221,24 +225,12 @@ export default async function decorate(block) {
       infoFontM ? `${infoFontM}-sm` : '',
     ].filter(Boolean).join(' ');
 
-    // ── Parse each item's field values from AEM DOM ──────────────
-    // AEM renders block/item fields as cells inside the item wrapper
-    const tabs = itemEls.map((itemEl) => {
-      const cells = [...itemEl.querySelectorAll(':scope > div > div')];
-      return {
-        tabText: cells[0]?.textContent?.trim() || '',
-        tabIconAsset: cells[1]?.querySelector('img')?.src || cells[1]?.textContent?.trim() || '',
-        tabTitle: cells[2]?.textContent?.trim() || '',
-        tabInfo: cells[3]?.innerHTML?.trim() || '',
-      };
-    });
-
     // ── Build tab buttons HTML ───────────────────────────────────
     const tabBtnsHtml = tabs
       .map((tab, i) => buildTabBtnHtml(tab.tabText, tab.tabIconAsset, i, i === 0, tabIconEnabled))
       .join('');
 
-    // ── Build component shell (without panels yet) ───────────────
+    // ── Build component shell ────────────────────────────────────
     const componentHtml = `
       <div
         class="tab3col-component ${colorGroup}"
@@ -268,12 +260,11 @@ export default async function decorate(block) {
 
     const panelsEl = block.querySelector('.tab3col-panels');
 
-    // ── Build each panel, move item instrumentation ──────────────
+    // ── Build each panel, move per-item instrumentation ──────────
     itemEls.forEach((itemEl, i) => {
       const isActive = i === 0;
       const tab = tabs[i];
 
-      // Create panel element
       const panel = document.createElement('div');
       panel.className = `tab3col-panel${isActive ? ' is-active' : ''}`;
       panel.id = `tab3col-panel-${i}`;
@@ -281,16 +272,13 @@ export default async function decorate(block) {
       panel.setAttribute('data-tab-index', i);
       if (!isActive) panel.setAttribute('hidden', '');
 
-      // Move item instrumentation (UE attributes) to panel
-      // This is critical for AEM author UE to track each item correctly
+      // Critical: transfer UE instrumentation from original item el to panel
       moveInstrumentation(itemEl, panel);
 
-      // Media slot — move any nested media-block child nodes into it
+      // Media slot — move nested blocks (non-field-row children) here
       const mediaSlot = document.createElement('div');
       mediaSlot.className = 'tab3col-media-slot';
-      // Any child of itemEl that is NOT the field row (i.e. nested blocks) goes here
       [...itemEl.children].forEach((child) => {
-        // The first child div is the field row; skip it, move the rest (nested blocks)
         if (child !== itemEl.firstElementChild) {
           mediaSlot.appendChild(child);
         }
