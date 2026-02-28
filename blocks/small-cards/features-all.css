@@ -17331,7 +17331,7 @@ html {
 .wdblockimg .ai__noise__container .noise__switcher .img__switcher {
     display: inline-block;
     cursor: pointer;
-    margin: 20px 0;
+    /* margin: 20px 0; */
     padding: 0;
     width: 90px;
     height: 42px;
