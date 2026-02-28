@@ -920,7 +920,7 @@ export default async function decorate(block) {
 
   try {
     await loadSwiper();
-    await loadFeatureCSS();
+    // await loadFeatureCSS();
     await loadAnimationFun();
     await loadGsapFun();
     await renderCard(block); // Html structure and content
@@ -943,7 +943,7 @@ export default async function decorate(block) {
 
 }
 
-let loadFeature; let
+let
   loadAnimation; let loadGsapJS;
 
 /**
@@ -982,17 +982,17 @@ function loadGsapFun() {
  * Loads the noUiSlider CSS.
  * @returns {Promise} A promise that resolves when the CSS is loaded.
  */
-function loadFeatureCSS() {
-  if (!loadFeature) {
-    loadFeature = loadCSS(
-      '/blocks/small-cards/features-all.css',
-    ).catch((err) => {
-      console.error('Failed to load Feature CSS:', err);
-      throw err;
-    });
-  }
-  return loadFeature;
-}
+// function loadFeatureCSS() {
+//   if (!loadFeature) {
+//     loadFeature = loadCSS(
+//       '/blocks/small-cards/features-all.css',
+//     ).catch((err) => {
+//       console.error('Failed to load Feature CSS:', err);
+//       throw err;
+//     });
+//   }
+//   return loadFeature;
+// }
 
 setTimeout(() => {
   window.SingleCss = true;
