@@ -2905,6 +2905,18 @@
         "label": "top text",
         "name": "topTextBasic",
         "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "type"
+                },
+                "text"
+              ]
+            }
+          ]
+        },
         "fields": [
           {
             "component": "select",
@@ -2964,166 +2976,6 @@
         "component": "tab",
         "label": "advanced",
         "name": "advanced"
-      },
-      {
-        "component": "container",
-        "label": "top text",
-        "name": "topTextAdvanced",
-        "collapsible": true,
-        "fields": [
-          {
-            "component": "select",
-            "label": "font (D)",
-            "name": "topTextD",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-nr-16-sh",
-                "value": "tt-nr-16-sh-lg"
-              },
-              {
-                "name": "tt-nr-18-sh",
-                "value": "tt-nr-18-sh-lg"
-              },
-              {
-                "name": "tt-nr-20-sh",
-                "value": "tt-nr-20-sh-lg"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "label": "font (T)",
-            "name": "topTextT",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-nr-16-sh",
-                "value": "tt-nr-16-sh-md"
-              },
-              {
-                "name": "tt-nr-18-sh",
-                "value": "tt-nr-18-sh-md"
-              },
-              {
-                "name": "tt-nr-20-sh",
-                "value": "tt-nr-20-sh-md"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "label": "font (M)",
-            "name": "topTextM",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-nr-16-sh",
-                "value": "tt-nr-16-sh"
-              },
-              {
-                "name": "tt-nr-18-sh",
-                "value": "tt-nr-18-sh"
-              },
-              {
-                "name": "tt-nr-20-sh",
-                "value": "tt-nr-20-sh"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "label": "font Color",
-            "name": "topTextColor",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "width",
-            "name": "topTextWidth",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "container",
-        "label": "bottom text",
-        "name": "bottomTextAdvanced",
-        "collapsible": true,
-        "fields": [
-          {
-            "component": "select",
-            "label": "font (D)",
-            "name": "bottomTextD",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-nr-16-sh",
-                "value": "tt-nr-16-sh-lg"
-              },
-              {
-                "name": "tt-nr-18-sh",
-                "value": "tt-nr-18-sh-lg"
-              },
-              {
-                "name": "tt-nr-20-sh",
-                "value": "tt-nr-20-sh-lg"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "label": "font (T)",
-            "name": "bottomTextT",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-nr-16-sh",
-                "value": "tt-nr-16-sh-md"
-              },
-              {
-                "name": "tt-nr-18-sh",
-                "value": "tt-nr-18-sh-md"
-              },
-              {
-                "name": "tt-nr-20-sh",
-                "value": "tt-nr-20-sh-md"
-              }
-            ]
-          },
-          {
-            "component": "select",
-            "label": "font (M)",
-            "name": "bottomTextM",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-nr-16-sh",
-                "value": "tt-nr-16-sh"
-              },
-              {
-                "name": "tt-nr-18-sh",
-                "value": "tt-nr-18-sh"
-              },
-              {
-                "name": "tt-nr-20-sh",
-                "value": "tt-nr-20-sh"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "label": "font Color",
-            "name": "bottomTextColor",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "width",
-            "name": "bottomTextWidth",
-            "valueType": "string"
-          }
-        ]
       },
       {
         "component": "container",
@@ -3203,27 +3055,27 @@
             "options": [
               {
                 "name": "tt-nr-40",
-                "value": "tt-nr-40"
+                "value": "tt-nr-40-sm"
               },
               {
                 "name": "tt-nr-48",
-                "value": "tt-nr-48"
+                "value": "tt-nr-48-sm"
               },
               {
                 "name": "tt-nr-52",
-                "value": "tt-nr-52"
+                "value": "tt-nr-52-sm"
               },
               {
                 "name": "tt-md-40",
-                "value": "tt-md-40"
+                "value": "tt-md-40-sm"
               },
               {
                 "name": "tt-md-48",
-                "value": "tt-md-48"
+                "value": "tt-md-48-sm"
               },
               {
                 "name": "tt-md-52",
-                "value": "tt-md-52"
+                "value": "tt-md-52-sm"
               }
             ]
           },
@@ -3237,6 +3089,178 @@
             "component": "text",
             "label": "width",
             "name": "highlightTextWidth",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "top text",
+        "name": "topTextAdvanced",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "type"
+                },
+                "text"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D)",
+            "name": "topTextD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-lg"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-lg"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "topTextT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-md"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-md"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "topTextM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-sm"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-sm"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-sm"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font Color",
+            "name": "topTextColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "width",
+            "name": "topTextWidth",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "bottom text",
+        "name": "bottomTextAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D)",
+            "name": "bottomTextD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-lg"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-lg"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "bottomTextT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-md"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-md"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "bottomTextM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-nr-16-sh",
+                "value": "tt-nr-16-sh-sm"
+              },
+              {
+                "name": "tt-nr-18-sh",
+                "value": "tt-nr-18-sh-sm"
+              },
+              {
+                "name": "tt-nr-20-sh",
+                "value": "tt-nr-20-sh-sm"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font Color",
+            "name": "bottomTextColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "width",
+            "name": "bottomTextWidth",
             "valueType": "string"
           }
         ]

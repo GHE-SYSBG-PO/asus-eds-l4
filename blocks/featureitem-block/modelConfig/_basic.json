@@ -43,6 +43,11 @@
       "label": "top text",
       "name": "topTextBasic",
       "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{ "var": "type" }, "text"] }
+        ]
+      },
       "fields": [
         {
           "component": "select",

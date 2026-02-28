@@ -7,9 +7,76 @@
     },
     {
       "component": "container",
+      "label": "highlight text",
+      "name": "highlightTextAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font (D)",
+          "name": "highlightTextD",
+          "valueType": "string",
+          "options": [
+            { "name": "tt-nr-40", "value": "tt-nr-40-lg" },
+            { "name": "tt-nr-48", "value": "tt-nr-48-lg" },
+            { "name": "tt-nr-52", "value": "tt-nr-52-lg" },
+            { "name": "tt-md-40", "value": "tt-md-40-lg" },
+            { "name": "tt-md-48", "value": "tt-md-48-lg" },
+            { "name": "tt-md-52", "value": "tt-md-52-lg" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (T)",
+          "name": "highlightTextT",
+          "valueType": "string",
+          "options": [
+            { "name": "tt-nr-40", "value": "tt-nr-40-md" },
+            { "name": "tt-nr-48", "value": "tt-nr-48-md" },
+            { "name": "tt-nr-52", "value": "tt-nr-52-md" },
+            { "name": "tt-md-40", "value": "tt-md-40-md" },
+            { "name": "tt-md-48", "value": "tt-md-48-md" },
+            { "name": "tt-md-52", "value": "tt-md-52-md" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "highlightTextM",
+          "valueType": "string",
+          "options": [
+            { "name": "tt-nr-40", "value": "tt-nr-40-sm" },
+            { "name": "tt-nr-48", "value": "tt-nr-48-sm" },
+            { "name": "tt-nr-52", "value": "tt-nr-52-sm" },
+            { "name": "tt-md-40", "value": "tt-md-40-sm" },
+            { "name": "tt-md-48", "value": "tt-md-48-sm" },
+            { "name": "tt-md-52", "value": "tt-md-52-sm" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font Color",
+          "name": "highlightTextColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "width",
+          "name": "highlightTextWidth",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
       "label": "top text",
       "name": "topTextAdvanced",
       "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{ "var": "type" }, "text"] }
+        ]
+      },
       "fields": [
         {
           "component": "select",
@@ -39,9 +106,9 @@
           "name": "topTextM",
           "valueType": "string",
           "options": [
-            { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh" },
-            { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh" },
-            { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh" }
+            { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-sm" },
+            { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-sm" },
+            { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-sm" }
           ]
         },
         {
@@ -92,9 +159,9 @@
           "name": "bottomTextM",
           "valueType": "string",
           "options": [
-            { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh" },
-            { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh" },
-            { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh" }
+            { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-sm" },
+            { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-sm" },
+            { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-sm" }
           ]
         },
         {
@@ -107,68 +174,6 @@
           "component": "text",
           "label": "width",
           "name": "bottomTextWidth",
-          "valueType": "string"
-        }
-      ]
-    },
-    {
-      "component": "container",
-      "label": "highlight text",
-      "name": "highlightTextAdvanced",
-      "collapsible": true,
-      "fields": [
-        {
-          "component": "select",
-          "label": "font (D)",
-          "name": "highlightTextD",
-          "valueType": "string",
-          "options": [
-            { "name": "tt-nr-40", "value": "tt-nr-40-lg" },
-            { "name": "tt-nr-48", "value": "tt-nr-48-lg" },
-            { "name": "tt-nr-52", "value": "tt-nr-52-lg" },
-            { "name": "tt-md-40", "value": "tt-md-40-lg" },
-            { "name": "tt-md-48", "value": "tt-md-48-lg" },
-            { "name": "tt-md-52", "value": "tt-md-52-lg" }
-          ]
-        },
-        {
-          "component": "select",
-          "label": "font (T)",
-          "name": "highlightTextT",
-          "valueType": "string",
-          "options": [
-            { "name": "tt-nr-40", "value": "tt-nr-40-md" },
-            { "name": "tt-nr-48", "value": "tt-nr-48-md" },
-            { "name": "tt-nr-52", "value": "tt-nr-52-md" },
-            { "name": "tt-md-40", "value": "tt-md-40-md" },
-            { "name": "tt-md-48", "value": "tt-md-48-md" },
-            { "name": "tt-md-52", "value": "tt-md-52-md" }
-          ]
-        },
-        {
-          "component": "select",
-          "label": "font (M)",
-          "name": "highlightTextM",
-          "valueType": "string",
-          "options": [
-            { "name": "tt-nr-40", "value": "tt-nr-40" },
-            { "name": "tt-nr-48", "value": "tt-nr-48" },
-            { "name": "tt-nr-52", "value": "tt-nr-52" },
-            { "name": "tt-md-40", "value": "tt-md-40" },
-            { "name": "tt-md-48", "value": "tt-md-48" },
-            { "name": "tt-md-52", "value": "tt-md-52" }
-          ]
-        },
-        {
-          "component": "text",
-          "label": "font Color",
-          "name": "highlightTextColor",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "width",
-          "name": "highlightTextWidth",
           "valueType": "string"
         }
       ]
