@@ -1094,7 +1094,7 @@ function loadGsapFun() {
 function loadFeatureCSS() {
   if (!loadFeature) {
     loadFeature = loadCSS(
-      '/blocks/small-cards/features-all.css',
+      'https://dlcdnwebimgs.asus.com/files/media/202509/21a5a2b2-f5d7-4de9-acda-0462d3c8e1c4/v1/features/css/features-all.css',
     ).catch((err) => {
       console.error('Failed to load Feature CSS:', err);
       throw err;
