@@ -1,0 +1,36 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "layout group",
+      "name": "gBtnStyleLayout",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Variant 1 - filled style",
+          "value": "1"
+        },
+        {
+          "name": "Variant 2 - filled style+icon",
+          "value": "2"
+        },
+        {
+          "name": "Variant 3 - filled style+icon(Size-Small)",
+          "value": "3"
+        },
+        {
+          "name": "Variant 4 - outline style",
+          "value": "4"
+        },
+        {
+          "name": "Variant 5 - outline style+icon",
+          "value": "5"
+        },
+        {
+          "name": "Variant 6 - outline style+icon(Size-Small)",
+          "value": "6"
+        }
+      ]
+    }
+  ]
+}

@@ -163,7 +163,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
               if (value !== '') {
                 // Try to parse as number if it looks like a number
                 const numValue = Number(value);
-                const isNumeric = !Number.isNaN(numValue) && value !== '';
+                const isNumeric = !Number.isNaN(numValue) && String(numValue) === value;
 
                 config[fieldName] = {
                   html,
@@ -196,7 +196,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
  */
 export const getFieldValue = (obj) => {
   const config = obj || {};
-  return (key, type = 'text') => config?.[key]?.[type] || '';
+  return (key, type = 'text') => (config?.[key]?.[type] === undefined ? '' : config?.[key]?.[type]);
 };
 
 /**
