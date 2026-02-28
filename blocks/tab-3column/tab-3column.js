@@ -10,7 +10,7 @@ const DEFAULT_CONFIG = {
   motionEnabled: false,
   widthTabArea: '',
   widthTextArea: '',
-  tabIconEnabled: false,
+  tabIconEnabled: true,
   tabBarBgColorValue: '',
   tabFontDT: 'ro-md-16',
   tabFontM: 'ro-md-14',
@@ -133,6 +133,7 @@ export default async function decorate(block) {
 
     // ── 1st-level config ─────────────────────────────────────────
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'tab-3column');
+    console.log('tab data', config);
     const v = getFieldValue(config);
 
     const motionEnabled = v('motionEnabled', 'text') || DEFAULT_CONFIG.motionEnabled;
@@ -177,6 +178,7 @@ export default async function decorate(block) {
       itemEls.map(async (itemEl) => {
         const itemConfig = await getBlockConfigs(itemEl, ITEM_DEFAULT_CONFIG, 'tab-3column-item');
         const iv = getFieldValue(itemConfig);
+        console.log('tab item data', itemConfig);
         return {
           tabText: iv('tabText', 'text') || '',
           tabIconAsset: iv('tabIconAsset', 'text') || '',
@@ -278,11 +280,11 @@ export default async function decorate(block) {
       // Media slot — move nested blocks (non-field-row children) here
       const mediaSlot = document.createElement('div');
       mediaSlot.className = 'tab3col-media-slot';
-      [...itemEl.children].forEach((child) => {
-        if (child !== itemEl.firstElementChild) {
-          mediaSlot.appendChild(child);
-        }
-      });
+      // [...itemEl.children].forEach((child) => {
+      //   if (child !== itemEl.firstElementChild) {
+      //     mediaSlot.appendChild(child);
+      //   }
+      // });
 
       // Text column
       const textCol = document.createElement('div');

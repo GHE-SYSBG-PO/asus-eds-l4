@@ -6,7 +6,7 @@
       "name": "tabStyleTab"
     },
     {
-      "component": "checkbox",
+      "component": "boolean",
       "label": "icon (yes/no)",
       "name": "tabIconEnabled",
       "valueType": "boolean"
