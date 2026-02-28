@@ -200,7 +200,7 @@ export default async function decorate(block) {
     `;
 
     const wrap = `
-      <div class='flex flex-col ${motion} ${dAlignment} ${tAlignment} ${mAlignment} ${v('colorgroup')}'>
+      <div class='flex flex-col ${motion} ${dAlignment} ${tAlignment} ${mAlignment} ${v('colorGroup')}'>
         ${category}
         ${title}
         ${body}

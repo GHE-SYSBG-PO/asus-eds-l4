@@ -1,8 +1,7 @@
 .l4-pdp {
   &[data-product="asus"] {
     &[data-mode="light"],
-    .section-light,
-    .block-light {
+    .section-light {
       --text-block-category-color: #666;
       --text-block-title-color: transparent;
       --text-block-title-gradient: linear-gradient(270deg, #0062CD 0%, #004691 100%);
@@ -13,8 +12,7 @@
     }
 
     &[data-mode="dark"],
-    .section-dark,
-    .block-dark {
+    .section-dark {
       --text-block-category-color: #999;
       --text-block-title-color: transparent;
       --text-block-title-gradient: linear-gradient(270deg, #C3E0FF 0%, #78BCFF 100%);
@@ -27,8 +25,7 @@
 
   &[data-product="proart"] {
     &[data-mode="light"],
-    .section-light,
-    .block-light {
+    .section-light {
       --text-block-category-color: #666;
       --text-block-title-color: transparent;
       --text-block-title-gradient: linear-gradient(270deg, #6B4F35 0%, #8D684E 100%);
@@ -39,8 +36,7 @@
     }
 
     &[data-mode="dark"],
-    .section-dark,
-    .block-dark {
+    .section-dark {
       --text-block-category-color: #999;
       --text-block-title-color: transparent;
       --text-block-title-gradient: linear-gradient(270deg, #9F7A56 0%, #DFC9A9 100%);
@@ -53,8 +49,7 @@
 
   &[data-product="rog"] {
     &[data-mode="light"],
-    .section-light,
-    .block-light {
+    .section-light {
       --text-block-category-color: #CC000E;
       --text-block-title-color: #181818;
       --text-block-title-gradient: '';
@@ -65,8 +60,7 @@
     }
 
     &[data-mode="dark"],
-    .section-dark,
-    .block-dark {
+    .section-dark {
       --text-block-category-color: #FF0F0F;
       --text-block-title-color: #FFF;
       --text-block-title-gradient: '';
@@ -79,8 +73,7 @@
 
   &[data-product="tuf"] {
     &[data-mode="light"],
-    .section-light,
-    .block-light {
+    .section-light {
       --text-block-category-color: #666;
       --text-block-title-color: #181818;
       --text-block-title-gradient: '';
@@ -91,8 +84,7 @@
     }
 
     &[data-mode="dark"],
-    .section-dark,
-    .block-dark {
+    .section-dark {
       --text-block-category-color: #FF9E1B;
       --text-block-title-color: #FFF;
       --text-block-title-gradient: '';
