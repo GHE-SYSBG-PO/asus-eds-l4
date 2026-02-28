@@ -1,5 +1,6 @@
 /* eslint-disable no-lonely-if, no-plusplus, max-len, no-unused-vars, quotes, no-multiple-empty-lines, no-use-before-define, no-console, padded-blocks */
 
+import MediaCarousel from './mediaCarousel.js';
 import {
   loadScript, loadCSS, loadBlock, buildBlock, decorateBlock,
 } from '../../scripts/aem.js';
@@ -920,13 +921,14 @@ export default async function decorate(block) {
   try {
     await loadSwiper();
     await loadFeatureCSS();
-    await loadGsapFun();
-    await loadFeatureFun();
     await loadAnimationFun();
+    await loadGsapFun();
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
     setTimeout(async () => {
+      const instance = new MediaCarousel();
+      instance.init();
       setEqualHeight(block);
     }, 100);
 
@@ -941,7 +943,7 @@ export default async function decorate(block) {
 
 }
 
-let loadFeatureJS; let loadFeature; let
+let loadFeature; let
   loadAnimation; let loadGsapJS;
 
 /**
@@ -958,22 +960,6 @@ function loadAnimationFun() {
     });
   }
   return loadAnimation;
-}
-
-/**
- * Loads the noUiSlider library.
- * @returns {Promise} A promise that resolves when the script is loaded.
- */
-function loadFeatureFun() {
-  if (!loadFeatureJS) {
-    loadFeatureJS = loadScript(
-      '/blocks/small-cards/features_init.js',
-    ).catch((err) => {
-      console.error('Failed to load Feature JS:', err);
-      throw err;
-    });
-  }
-  return loadFeatureJS;
 }
 
 /**

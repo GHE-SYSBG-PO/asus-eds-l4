@@ -634,7 +634,7 @@ function aiNoise() {
 }
 
 
-function wdMediaTextCarousel() {
+export default function MediaCarousel() {
   this.init = function() {
     const $swiperCarousels = $('.item__media--aiNoise').parent();
     if ($swiperCarousels.length === 0) return;
@@ -645,8 +645,3 @@ function wdMediaTextCarousel() {
     }, 100);
   }
 }
-
-$(document).ready(function() {
-  const instance = new wdMediaTextCarousel();
-  instance.init();
-});
