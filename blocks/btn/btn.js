@@ -15,6 +15,8 @@ const DEFAULT_CONFIG = {
   // Close button configuration
   gBtnStyleLayout: 'default',
   gBtnLabel: 'Close',
+  // Icon
+  iconStyle: 'svg',
 };
 
 /**
