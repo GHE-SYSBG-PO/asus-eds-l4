@@ -52,7 +52,7 @@ const ITEM_DEFAULT_CONFIG = {
  * A config div's first child is the only div (=== 1).
  */
 function isItemEl(el) {
-  return el.querySelectorAll(':scope > div > *').length > 1;
+  return el.querySelectorAll(':scope > div').length > 3;
 }
 
 function buildRadiusValue(tl, tr, br, bl) {
