@@ -488,7 +488,7 @@ function NoiseCancellation() {
     if (!_isExist($voiceContainer)) {
       return;
     }
-    gaLabelHeader = $voiceContainer.attr('data-galabelheader') || 'Ai Noise';
+    // gaLabelHeader = $voiceContainer.attr('data-galabelheader') || 'Ai Noise';
     eventname = $voiceContainer.attr('data-eventname');
     THEME_COLOR = _config.themeColor;
     _waveConfig = _config.waveConfig;
