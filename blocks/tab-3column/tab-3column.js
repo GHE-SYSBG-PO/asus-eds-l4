@@ -5,29 +5,37 @@ import { prefixHex } from '../../components/button/button.js';
 /**
  * ID:15 TAB_3COLUMN
  *
- * DOM Structure (after decorate):
+ * AEM DOM before decorate (two-level block structure):
+ *
+ *  div.tab-3column          ← block (1st level, tab-3column model)
+ *    div                    ← item wrapper (2nd level, tab-3column-item model)
+ *      div                  ← item row
+ *        div                  ← cell: tabText
+ *        div                  ← cell: tabIconAsset
+ *        div                  ← cell: tabTitle
+ *        div                  ← cell: tabInfo
+ *      [nested media-block] ← 3rd level, authored separately
+ *
+ * DOM Structure after decorate:
  *
  *  .tab3col-component
- *    ├── .tab3col-tab-bar                   ← sticky on tablet/mobile
- *    │     ├── .tab3col-arrow--prev          ← mobile only, shown/hidden by JS
+ *    ├── .tab3col-tab-bar
+ *    │     ├── .tab3col-arrow--prev
  *    │     ├── .tab3col-tab-list [role=tablist]
- *    │     │     └── .tab3col-tab-btn × N   ← [data-tab-index]
+ *    │     │     └── .tab3col-tab-btn × N
  *    │     └── .tab3col-arrow--next
  *    └── .tab3col-panels
- *          └── .tab3col-panel × N           ← [data-tab-index], hidden attr
- *                ├── .tab3col-media-slot     ← AEM injects nested media-block here
+ *          └── .tab3col-panel × N  ← instrumentation moved from original item wrapper
+ *                ├── .tab3col-media-slot  ← original item wrapper's nested media-block moved here
  *                └── .tab3col-text-col
  *                      ├── .tab3col-title
  *                      └── .tab3col-info
  */
 
 const DEFAULT_CONFIG = {
-  styleLayout: '1',
   motionEnabled: false,
-  // Width
   widthTabArea: '',
   widthTextArea: '',
-  // Tab style
   tabIconEnabled: false,
   tabBarBgColorValue: '',
   tabFontDT: 'ro-md-16',
@@ -35,7 +43,6 @@ const DEFAULT_CONFIG = {
   tabFontColorDefault: '',
   tabFontColorHover: '',
   tabFontColorSelect: '',
-  // Tab container
   tabContainerBorderWidthDefault: '',
   tabContainerBorderWidthHover: '',
   tabContainerBorderWidthSelect: '',
@@ -49,7 +56,6 @@ const DEFAULT_CONFIG = {
   tabContainerRadiusTR: '',
   tabContainerRadiusBR: '',
   tabContainerRadiusBL: '',
-  // Text style
   titleFontD: 'tt-md-28',
   titleFontT: 'tt-md-28',
   titleFontM: 'tt-md-24',
@@ -60,22 +66,15 @@ const DEFAULT_CONFIG = {
   infoFontColor: '',
 };
 
-/**
- * Build a CSS border-radius value string from four corners (px).
- * Returns empty string if all corners are empty.
- */
 function buildRadiusValue(tl, tr, br, bl) {
   if ([tl, tr, br, bl].every((v) => !v)) return '';
   const px = (v) => (v ? `${v}px` : '0');
   return `${px(tl)} ${px(tr)} ${px(br)} ${px(bl)}`;
 }
 
-/**
- * Render a single tab button.
- */
-function buildTabBtnHtml(tab, index, isActive, iconEnabled) {
-  const iconHtml = (iconEnabled && tab.tabIconAsset)
-    ? `<img class="tab3col-tab-icon" src="${tab.tabIconAsset}" alt="" aria-hidden="true" />`
+function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
+  const iconHtml = (iconEnabled && tabIconAsset)
+    ? `<img class="tab3col-tab-icon" src="${tabIconAsset}" alt="" aria-hidden="true" />`
     : '';
   return `
     <button
@@ -84,51 +83,9 @@ function buildTabBtnHtml(tab, index, isActive, iconEnabled) {
       role="tab"
       aria-selected="${isActive}"
       aria-controls="tab3col-panel-${index}"
-    >${iconHtml}<span class="tab3col-tab-text">${tab.tabText || ''}</span></button>`;
+    >${iconHtml}<span class="tab3col-tab-text">${tabText || ''}</span></button>`;
 }
 
-/**
- * Render a single content panel.
- * The .tab3col-media-slot div is intentionally left empty —
- * AEM will insert the authored nested media-block inside it at runtime.
- */
-function buildPanelHtml(tab, index, isActive, fontConfig) {
-  const {
-    titleFontD, titleFontT, titleFontM,
-    infoFontD, infoFontT, infoFontM,
-  } = fontConfig;
-
-  const titleClass = [
-    titleFontD ? `${titleFontD}-lg` : '',
-    titleFontT ? `${titleFontT}-md` : '',
-    titleFontM ? `${titleFontM}-sm` : '',
-  ].filter(Boolean).join(' ');
-
-  const infoClass = [
-    infoFontD ? `${infoFontD}-lg` : '',
-    infoFontT ? `${infoFontT}-md` : '',
-    infoFontM ? `${infoFontM}-sm` : '',
-  ].filter(Boolean).join(' ');
-
-  return `
-    <div
-      class="tab3col-panel${isActive ? ' is-active' : ''}"
-      id="tab3col-panel-${index}"
-      role="tabpanel"
-      data-tab-index="${index}"
-      ${!isActive ? 'hidden' : ''}
-    >
-      <div class="tab3col-media-slot"></div>
-      <div class="tab3col-text-col">
-        ${tab.tabTitle ? `<h3 class="tab3col-title ${titleClass}">${tab.tabTitle}</h3>` : ''}
-        ${tab.tabInfo ? `<div class="tab3col-info ${infoClass}">${tab.tabInfo}</div>` : ''}
-      </div>
-    </div>`;
-}
-
-/**
- * Activate a tab by index: update buttons, panels, scroll tab into view.
- */
 function activateTab(index, tabBtns, panels, tabList, motionEnabled) {
   tabBtns.forEach((btn, i) => {
     const active = i === index;
@@ -138,28 +95,18 @@ function activateTab(index, tabBtns, panels, tabList, motionEnabled) {
   panels.forEach((panel, i) => {
     const active = i === index;
     panel.classList.toggle('is-active', active);
-    if (active) {
-      panel.removeAttribute('hidden');
-    } else {
-      panel.setAttribute('hidden', '');
-    }
+    if (active) panel.removeAttribute('hidden');
+    else panel.setAttribute('hidden', '');
   });
 
-  // Scroll active tab button into horizontal center of the tab list
   const activeBtn = tabBtns[index];
   if (activeBtn && tabList) {
     const scrollTarget = activeBtn.offsetLeft - tabList.offsetWidth / 2 + activeBtn.offsetWidth / 2;
-    if (motionEnabled) {
-      tabList.scrollTo({ left: scrollTarget, behavior: 'smooth' });
-    } else {
-      tabList.scrollLeft = scrollTarget;
-    }
+    if (motionEnabled) tabList.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+    else tabList.scrollLeft = scrollTarget;
   }
 }
 
-/**
- * Update arrow button visibility based on scroll position.
- */
 function updateArrows(tabList, prevArrow, nextArrow) {
   if (!tabList || !prevArrow || !nextArrow) return;
   const { scrollLeft, scrollWidth, clientWidth } = tabList;
@@ -167,9 +114,6 @@ function updateArrows(tabList, prevArrow, nextArrow) {
   nextArrow.style.display = (scrollLeft + clientWidth < scrollWidth - 1) ? '' : 'none';
 }
 
-/**
- * Wire up all interactivity: tab click, arrow scroll.
- */
 function setupInteraction(componentEl, motionEnabled) {
   const tabBtns = [...componentEl.querySelectorAll('.tab3col-tab-btn')];
   const panels = [...componentEl.querySelectorAll('.tab3col-panel')];
@@ -183,16 +127,11 @@ function setupInteraction(componentEl, motionEnabled) {
 
   if (tabList) {
     tabList.addEventListener('scroll', () => updateArrows(tabList, prevArrow, nextArrow), { passive: true });
-    // Delay to let layout settle before measuring
     setTimeout(() => updateArrows(tabList, prevArrow, nextArrow), 150);
   }
 
-  if (prevArrow) {
-    prevArrow.addEventListener('click', () => tabList.scrollBy({ left: -160, behavior: 'smooth' }));
-  }
-  if (nextArrow) {
-    nextArrow.addEventListener('click', () => tabList.scrollBy({ left: 160, behavior: 'smooth' }));
-  }
+  if (prevArrow) prevArrow.addEventListener('click', () => tabList.scrollBy({ left: -160, behavior: 'smooth' }));
+  if (nextArrow) nextArrow.addEventListener('click', () => tabList.scrollBy({ left: 160, behavior: 'smooth' }));
 }
 
 export default async function decorate(block) {
@@ -200,16 +139,11 @@ export default async function decorate(block) {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'tab-3column');
     const v = getFieldValue(config);
 
-    // ── Style & motion ──────────────────────────────────────────
-    const styleLayout = v('styleLayout', 'text') || DEFAULT_CONFIG.styleLayout;
+    // ── Config ──────────────────────────────────────────────────
     const motionEnabled = v('motionEnabled', 'boolean') || DEFAULT_CONFIG.motionEnabled;
     const colorGroup = v('colorGroup', 'text') || '';
-
-    // ── Width ───────────────────────────────────────────────────
     const widthTabArea = v('widthTabArea', 'text') || '';
     const widthTextArea = v('widthTextArea', 'text') || '';
-
-    // ── Tab style ───────────────────────────────────────────────
     const tabIconEnabled = v('tabIconEnabled', 'boolean') || DEFAULT_CONFIG.tabIconEnabled;
     const tabBarBgColor = prefixHex(v('tabBarBgColorValue', 'text') || '');
     const tabFontDT = v('tabFontDT', 'text') || DEFAULT_CONFIG.tabFontDT;
@@ -217,8 +151,6 @@ export default async function decorate(block) {
     const tabFontColorDefault = prefixHex(v('tabFontColorDefault', 'text') || '');
     const tabFontColorHover = prefixHex(v('tabFontColorHover', 'text') || '');
     const tabFontColorSelect = prefixHex(v('tabFontColorSelect', 'text') || '');
-
-    // ── Tab container ───────────────────────────────────────────
     const tabBorderWidthDefault = v('tabContainerBorderWidthDefault', 'text') || '';
     const tabBorderWidthHover = v('tabContainerBorderWidthHover', 'text') || '';
     const tabBorderWidthSelect = v('tabContainerBorderWidthSelect', 'text') || '';
@@ -234,8 +166,6 @@ export default async function decorate(block) {
       v('tabContainerRadiusBR', 'text') || '',
       v('tabContainerRadiusBL', 'text') || '',
     );
-
-    // ── Text style ──────────────────────────────────────────────
     const titleFontD = v('titleFontD', 'text') || DEFAULT_CONFIG.titleFontD;
     const titleFontT = v('titleFontT', 'text') || DEFAULT_CONFIG.titleFontT;
     const titleFontM = v('titleFontM', 'text') || DEFAULT_CONFIG.titleFontM;
@@ -245,10 +175,11 @@ export default async function decorate(block) {
     const infoFontM = v('infoFontM', 'text') || DEFAULT_CONFIG.infoFontM;
     const infoFontColor = prefixHex(v('infoFontColor', 'text') || '');
 
-    // ── Tabs data (multifield) ──────────────────────────────────
-    const tabs = v('tabs', 'multifield') || [];
+    // ── Collect item elements BEFORE mutating DOM ───────────────
+    // Each direct child div of block is a tab-3column-item wrapper
+    const itemEls = [...block.querySelectorAll(':scope > div')];
 
-    // ── Build CSS custom property overrides ─────────────────────
+    // ── Inline CSS variables ─────────────────────────────────────
     let inlineStyle = '';
     if (widthTabArea) inlineStyle += `--tab3col-tab-area-width: ${widthTabArea}%;`;
     if (widthTextArea) inlineStyle += `--tab3col-text-area-width: ${widthTextArea}%;`;
@@ -269,22 +200,45 @@ export default async function decorate(block) {
     if (titleFontColor) inlineStyle += `--tab3col-title-color: ${titleFontColor};`;
     if (infoFontColor) inlineStyle += `--tab3col-info-color: ${infoFontColor};`;
 
-    // ── Tab font classes ────────────────────────────────────────
+    // ── Font classes ─────────────────────────────────────────────
     const tabFontClass = [
       tabFontDT ? `${tabFontDT}-lg ${tabFontDT}-md` : '',
       tabFontM ? `${tabFontM}-sm` : '',
     ].filter(Boolean).join(' ');
 
-    // ── Build HTML ──────────────────────────────────────────────
-    const tabBtnsHtml = tabs.map((tab, i) => buildTabBtnHtml(tab, i, i === 0, tabIconEnabled)).join('');
-    const panelsHtml = tabs.map((tab, i) => buildPanelHtml(tab, i, i === 0, {
-      titleFontD, titleFontT, titleFontM, infoFontD, infoFontT, infoFontM,
-    })).join('');
+    const titleClass = [
+      titleFontD ? `${titleFontD}-lg` : '',
+      titleFontT ? `${titleFontT}-md` : '',
+      titleFontM ? `${titleFontM}-sm` : '',
+    ].filter(Boolean).join(' ');
 
-    const html = `
+    const infoClass = [
+      infoFontD ? `${infoFontD}-lg` : '',
+      infoFontT ? `${infoFontT}-md` : '',
+      infoFontM ? `${infoFontM}-sm` : '',
+    ].filter(Boolean).join(' ');
+
+    // ── Parse each item's field values from AEM DOM ──────────────
+    // AEM renders block/item fields as cells inside the item wrapper
+    const tabs = itemEls.map((itemEl) => {
+      const cells = [...itemEl.querySelectorAll(':scope > div > div')];
+      return {
+        tabText: cells[0]?.textContent?.trim() || '',
+        tabIconAsset: cells[1]?.querySelector('img')?.src || cells[1]?.textContent?.trim() || '',
+        tabTitle: cells[2]?.textContent?.trim() || '',
+        tabInfo: cells[3]?.innerHTML?.trim() || '',
+      };
+    });
+
+    // ── Build tab buttons HTML ───────────────────────────────────
+    const tabBtnsHtml = tabs
+      .map((tab, i) => buildTabBtnHtml(tab.tabText, tab.tabIconAsset, i, i === 0, tabIconEnabled))
+      .join('');
+
+    // ── Build component shell (without panels yet) ───────────────
+    const componentHtml = `
       <div
         class="tab3col-component ${colorGroup}"
-        data-style="${styleLayout}"
         data-motion="${motionEnabled}"
         data-icon="${tabIconEnabled}"
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
@@ -300,16 +254,59 @@ export default async function decorate(block) {
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
           </button>
         </div>
-        <div class="tab3col-panels">
-          ${panelsHtml}
-        </div>
+        <div class="tab3col-panels"></div>
       </div>`;
 
-    // Move AEM editor instrumentation before replacing innerHTML
-    const oldEl = block.querySelector('.tab3col-component');
-    if (oldEl) moveInstrumentation(block, oldEl);
+    // ── Move block-level instrumentation to component wrapper ────
+    const oldComponent = block.querySelector('.tab3col-component');
+    if (oldComponent) moveInstrumentation(block, oldComponent);
 
-    block.innerHTML = html;
+    block.innerHTML = componentHtml;
+
+    const panelsEl = block.querySelector('.tab3col-panels');
+
+    // ── Build each panel, move item instrumentation ──────────────
+    itemEls.forEach((itemEl, i) => {
+      const isActive = i === 0;
+      const tab = tabs[i];
+
+      // Create panel element
+      const panel = document.createElement('div');
+      panel.className = `tab3col-panel${isActive ? ' is-active' : ''}`;
+      panel.id = `tab3col-panel-${i}`;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('data-tab-index', i);
+      if (!isActive) panel.setAttribute('hidden', '');
+
+      // Move item instrumentation (UE attributes) to panel
+      // This is critical for AEM author UE to track each item correctly
+      moveInstrumentation(itemEl, panel);
+
+      // Media slot — move any nested media-block child nodes into it
+      const mediaSlot = document.createElement('div');
+      mediaSlot.className = 'tab3col-media-slot';
+      // Any child of itemEl that is NOT the field row (i.e. nested blocks) goes here
+      [...itemEl.children].forEach((child) => {
+        // The first child div is the field row; skip it, move the rest (nested blocks)
+        if (child !== itemEl.firstElementChild) {
+          mediaSlot.appendChild(child);
+        }
+      });
+
+      // Text column
+      const textCol = document.createElement('div');
+      textCol.className = 'tab3col-text-col';
+      if (tab.tabTitle) {
+        textCol.innerHTML += `<h3 class="tab3col-title ${titleClass}">${tab.tabTitle}</h3>`;
+      }
+      if (tab.tabInfo) {
+        textCol.innerHTML += `<div class="tab3col-info ${infoClass}">${tab.tabInfo}</div>`;
+      }
+
+      panel.appendChild(mediaSlot);
+      panel.appendChild(textCol);
+      panelsEl.appendChild(panel);
+    });
 
     setupInteraction(block.querySelector('.tab3col-component'), motionEnabled);
   } catch (error) {
