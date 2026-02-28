@@ -25,6 +25,7 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Tab 3Column Item",
+              "filter": "tab-3column-item",
               "model": "tab-3column-item"
             }
           }
@@ -53,12 +54,6 @@
         },
         {
           "...": "../../commonModel/_ colorGroup.json#/fields"
-        },
-        {
-          "component": "text",
-          "name": "L4TagNestedBlock",
-          "value": "L4--nested-block--tab-3column",
-          "hidden": true
         }
       ]
     },

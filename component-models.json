@@ -3981,20 +3981,8 @@
     "fields": [
       {
         "component": "tab",
-        "label": "style",
+        "label": "layout",
         "name": "styleTab"
-      },
-      {
-        "component": "select",
-        "label": "layout group",
-        "name": "styleLayout",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Variant 1 - default",
-            "value": "1"
-          }
-        ]
       },
       {
         "component": "checkbox",
@@ -4414,12 +4402,6 @@
             "value": "section-dark"
           }
         ]
-      },
-      {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--tab-3column",
-        "hidden": true
       }
     ]
   },
