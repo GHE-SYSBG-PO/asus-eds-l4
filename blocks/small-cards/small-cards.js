@@ -824,18 +824,12 @@ function buildSmallCardsContainer(data, config) {
 }
 
 /**
- * Renders the cards in the block.
- * @param {HTMLElement} block The block element.
+ * Processes button placeholders in the container.
+ * @param {HTMLElement} container The container element.
+ * @param {object|Array} data The card data.
  */
-async function renderCard(block) {
-
-  const data = await fillSequentialConfig(block);
-
-  console.log('Extracted chunk, Final Card Data:', data);
-
-  const smallCardsContainer = buildSmallCardsContainer(data, alignmentConfig);
-
-  const placeholders = smallCardsContainer.querySelectorAll('.btn-placeholder');
+async function processButtonPlaceholders(container, data) {
+  const placeholders = container.querySelectorAll('.btn-placeholder');
   if (placeholders.length > 0) {
     const btnFieldOrder = await getBlockFieldOrder('btn');
 
@@ -860,16 +854,21 @@ async function renderCard(block) {
       }
     }
   }
+}
 
-  // Add event listeners for video controls
-  const videoContainers = smallCardsContainer.querySelectorAll('.media-block-video-container');
-  videoContainers.forEach((container) => {
-    const video = container.querySelector('video');
-    const playBtn = container.querySelector('.media-block-play-btn');
-    const pauseBtn = container.querySelector('.media-block-pause-btn');
-    const replayBtn = container.querySelector('.media-block-replay-btn');
-    const controlsDiv = container.querySelector('.media-block-controls');
-    const pauseAndPlayBtn = container.getAttribute('data-pause-and-play-btn') === 'true';
+/**
+ * Adds event listeners for video controls.
+ * @param {HTMLElement} container The container element.
+ */
+function addVideoEventListeners(container) {
+  const videoContainers = container.querySelectorAll('.media-block-video-container');
+  videoContainers.forEach((videoContainer) => {
+    const video = videoContainer.querySelector('video');
+    const playBtn = videoContainer.querySelector('.media-block-play-btn');
+    const pauseBtn = videoContainer.querySelector('.media-block-pause-btn');
+    const replayBtn = videoContainer.querySelector('.media-block-replay-btn');
+    const controlsDiv = videoContainer.querySelector('.media-block-controls');
+    const pauseAndPlayBtn = videoContainer.getAttribute('data-pause-and-play-btn') === 'true';
 
     if (playBtn) {
       playBtn.addEventListener('click', (e) => {
@@ -935,19 +934,28 @@ async function renderCard(block) {
       addButtonsIfNeeded();
     }
   });
+}
 
+/**
+ * Finalizes the block structure by adding styles and appending the container.
+ * @param {HTMLElement} block The block element.
+ * @param {HTMLElement} smallCardsContainer The container element.
+ * @param {object|Array} data The card data.
+ * @param {object} config The alignment configuration.
+ */
+function finalizeBlockStructure(block, smallCardsContainer, data, config) {
   const slideCount = Array.isArray(data) ? data.length : 1;
 
   const style = document.createElement('style');
   style.textContent = `
     @media (min-width: 768px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${slideCount <= 2 && alignmentConfig.tabletAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount <= 2 && config.tabletAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     @media (min-width: 1025px) {
       .small-cards-containers .swiper-wrapper {
-        justify-content: ${slideCount <= 3 && alignmentConfig.desktopAlignment === 'center' ? 'center' : 'flex-start'};
+        justify-content: ${slideCount <= 3 && config.desktopAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
   `;
@@ -993,6 +1001,25 @@ async function renderCard(block) {
       Array.from(child.children).forEach((grandchild) => grandchild.remove());
     }
   });
+}
+
+/**
+ * Renders the cards in the block.
+ * @param {HTMLElement} block The block element.
+ */
+async function renderCard(block) {
+
+  const data = await fillSequentialConfig(block);
+
+  console.log('Extracted chunk, Final Card Data:', data);
+
+  const smallCardsContainer = buildSmallCardsContainer(data, alignmentConfig);
+
+  await processButtonPlaceholders(smallCardsContainer, data);
+
+  addVideoEventListeners(smallCardsContainer);
+
+  finalizeBlockStructure(block, smallCardsContainer, data, alignmentConfig);
 }
 
 /**
