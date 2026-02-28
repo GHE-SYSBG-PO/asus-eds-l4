@@ -970,7 +970,7 @@ let loadFeatureJS; let loadFeature; let
 function loadAnimationFun() {
   if (!loadAnimation) {
     loadAnimation = loadScript(
-      '/blocks/small-cards/animation.js',
+      'https://www.asus.com/nuxtStatic/js/jquery.min.js',
     ).catch((err) => {
       console.error('Failed to load animation:', err);
       throw err;
