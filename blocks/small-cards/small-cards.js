@@ -333,7 +333,8 @@ function getMediaHTML(data) {
     }
 
     content = `
-             <div class="wditems__content wditems__content__0 theme-white " role="tabpanel" id="SectionID-tab-1">
+            <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer" style="${style} background-color: var(--ai-noise-container-bg);">
+            
         
         <div class="item__media item__media--aiNoise">
           <div class="ai__noise__container" id="conferenceS1span3__aiNoiseContainer">
@@ -370,7 +371,7 @@ function getMediaHTML(data) {
                 </div>
               </div>
             </div>
-            
+
             <div class="noise__voice__container" role="img" aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
               <figure class="img img__noise grace-show  show animated" role="presentation" aria-hidden="true">
                 <div class="img__voice">
