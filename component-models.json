@@ -673,7 +673,7 @@
       },
       {
         "component": "tab",
-        "label": "Color",
+        "label": "Color Group",
         "name": "color"
       },
       {
@@ -5258,6 +5258,31 @@
                 ]
               ]
             }
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
           }
         ]
       },

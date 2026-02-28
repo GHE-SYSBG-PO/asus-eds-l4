@@ -15,7 +15,7 @@ const FONTS = {
     infoFont: 'ro-rg-18-sh',
   },
   rog: {
-    titleFont: 'tt-bd-28',
+    titleFont: 'tg-bd-28',
     infoFont: 'rc-rg-18-sh',
   },
   tuf: {

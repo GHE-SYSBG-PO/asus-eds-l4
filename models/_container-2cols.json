@@ -223,7 +223,7 @@
     },
     {
       "component": "tab",
-      "label": "Color",
+      "label": "Color Group",
       "name": "color"
     },
     {
