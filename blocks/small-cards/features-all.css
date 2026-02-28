@@ -133,103 +133,6 @@
     color: #fff
 }
 
-.modal-button-container.bg-gray .modal-button-text {
-    color: #6f6f6f
-}
-
-.modal-button-container.bg-gray .modal-button .modal-button-end-cap,.modal-button-container.bg-gray .modal-button .modal-button-scaler,.modal-button-container.bg-gray .modal-button .modal-button-start-cap {
-    background: #6f6f6f
-}
-
-.modal-button-container.bg-white .modal-button.old__browser .modal-button-copy,.modal-button-container.bg-white .modal-button.old__browser .modal-button-end-cap,.modal-button-container.bg-white .modal-button.old__browser .modal-button-start-cap {
-    background: #fff
-}
-
-.modal-button-container.bg-white .modal-button.old__browser .modal-button-copy {
-    color: #333
-}
-
-.modal-button-container.bg-white .modal-button.old__browser .pluscircle-icon {
-    background-image: url(../images/large/1x/icon/icon_modalbtn_gray.png)!important
-}
-
-.modal-button-container.bg-white .modal-button .modal-button-copy {
-    color: #333
-}
-
-.modal-button-container.bg-white .modal-button .modal-button-end-cap,.modal-button-container.bg-white .modal-button .modal-button-scaler,.modal-button-container.bg-white .modal-button .modal-button-start-cap {
-    background: #fff
-}
-
-.modal-button-container.bg-white .modal-button .pluscircle-icon svg path {
-    fill: #333
-}
-
-.text-left {
-    text-align: left
-}
-
-.text-right {
-    text-align: right
-}
-
-.text-center {
-    text-align: center
-}
-
-.text-justify {
-    text-align: justify
-}
-
-.text-nowrap {
-    white-space: nowrap
-}
-
-.text-lowercase {
-    text-transform: lowercase
-}
-
-.text-uppercase {
-    text-transform: uppercase
-}
-
-.text-capitalize {
-    text-transform: capitalize
-}
-
-.d-none {
-    display: none;
-    position: absolute!important;
-    overflow: hidden;
-    padding: 0!important;
-    width: 1px!important;
-    height: 1px!important;
-    border: 0!important;
-    clip: rect(1px 1px 1px 1px);
-    clip: rect(1px,1px,1px,1px)
-}
-
-.screen-reader-only {
-    position: absolute;
-    overflow: hidden;
-    width: 1px;
-    white-space: nowrap;
-    clip: rect(0 0 0 0)
-}
-
-.visuallyhidden {
-    position: absolute;
-    overflow: hidden;
-    top: 50%;
-    padding: 0;
-    width: 1px;
-    height: 1px;
-    font-size: unset;
-    border: 0;
-    clip: rect(1px,1px,1px,1px);
-    clip-path: inset(0 0 99.9% 99.9%)
-}
-
 #CMD a[tabindex="0"] *,#CMD button[tabindex="0"] * {
     pointer-events: none
 }
@@ -242,32 +145,6 @@
     outline: 2px solid #248dff
 }
 
-.footnote-num a:focus-visible {
-    display: inline!important;
-    text-decoration: underline;
-    text-underline-offset: -.28em
-}
-
-.colorful-text .footnote-num a:focus-visible {
-    display: inline!important;
-    text-decoration: underline;
-    border-color: transparent!important;
-    text-underline-offset: -.28em;
-    -webkit-text-fill-color: #095291
-}
-
-.colorful-text .footnote-num:hover a {
-    -webkit-text-fill-color: #095291
-}
-
-.lity-iframe-container iframe:focus,.lity-iframe-container iframe:focus-visible {
-    border: 5px solid #248dff!important
-}
-
-.lity button:focus-visible,.lity-opened:focus-visible {
-    outline: 2px solid #248dff
-}
-
 html {
     overflow-x: clip;
     width: 100%;
@@ -276,18 +153,6 @@ html {
 
 html.stop-scrolling {
     overflow-y: hidden
-}
-
-html.stop-gesture body {
-    touch-action: pan-x pan-y
-}
-
-html.stop-smooth {
-    scroll-behavior: unset
-}
-
-.inline__block {
-    display: inline-block
 }
 
 html.event-official body,html.event-simple body,html.proart body {
