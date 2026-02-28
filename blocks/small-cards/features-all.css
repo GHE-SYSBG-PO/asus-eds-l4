@@ -874,13 +874,6 @@ section .img {
 
 @media all and (max-width: 730.5px) {
   
-    .wdblockimg .wdblockimg__container {
-        margin-right: auto;
-        margin-left: auto;
-        width: 89.2%;
-        max-width: 414px
-    }
-
     .wdblockimg .wdblockimg__container .block {
         grid-column-end: span 6!important
     }
