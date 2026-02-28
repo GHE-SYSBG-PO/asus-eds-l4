@@ -1,0 +1,10 @@
+{
+  "fields": [
+    {
+      "component": "text",
+      "label": "font Color",
+      "name": "infoFontColor",
+      "valueType": "string"
+    }
+  ]
+}
