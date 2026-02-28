@@ -1,0 +1,27 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "style",
+      "name": "styleTab"
+    },
+    {
+      "component": "select",
+      "label": "layout group",
+      "name": "styleLayout",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Variant 1 - default",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "component": "checkbox",
+      "label": "motion (on/off)",
+      "name": "motionEnabled",
+      "valueType": "boolean"
+    }
+  ]
+}

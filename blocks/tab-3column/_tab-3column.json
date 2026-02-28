@@ -1,0 +1,71 @@
+{
+  "definitions": [
+    {
+      "title": "Tab 3Column (ID:15)",
+      "id": "tab-3column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Tab 3Column",
+              "model": "tab-3column"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "tab-3column",
+      "fields": [
+        {
+          "...": "./modelConfig/_style.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_width-setting.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_tab-style.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_tab-container.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_text-style.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_tab.json#/fields"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "colorGroup",
+          "label": "Color Group",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "Light",
+              "value": "section-light"
+            },
+            {
+              "name": "Dark",
+              "value": "section-dark"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagNestedBlock",
+          "value": "L4--nested-block--tab-3column",
+          "hidden": true
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
