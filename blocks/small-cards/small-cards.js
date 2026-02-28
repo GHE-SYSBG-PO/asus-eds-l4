@@ -920,14 +920,13 @@ export default async function decorate(block) {
   try {
     await loadSwiper();
     await loadFeatureCSS();
+    await loadGsapFun();
+    await loadFeatureFun();
     await loadAnimationFun();
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
     setTimeout(async () => {
-      await loadGsapFun();
-      await loadFeatureFun();
-
       setEqualHeight(block);
     }, 100);
 
