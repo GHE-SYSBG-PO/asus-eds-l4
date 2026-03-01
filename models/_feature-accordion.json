@@ -6,20 +6,7 @@
       "name": "basic"
     },
     {
-      "component": "select",
-      "valueType": "string",
-      "name": "colorGroup",
-      "label": "Color Group",
-      "options": [
-        {
-          "name": "Light",
-          "value": "section-light"
-        },
-        {
-          "name": "Dark",
-          "value": "section-dark"
-        }
-      ]
+      "...": "../commonModel/_colorGroup.json#/fields"
     },
     {
       "component": "select",

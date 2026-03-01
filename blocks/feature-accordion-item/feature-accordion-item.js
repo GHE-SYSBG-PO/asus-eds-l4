@@ -56,6 +56,9 @@ const normalizeColor = (color) => {
 };
 
 const mediaStateByCell = new WeakMap();
+const rowAnimationState = new WeakMap();
+const ROW_ANIMATION_MS = 420;
+const ROW_STAGGER_MS = 26;
 
 const ensureAccordionGroupWrapper = (block) => {
   const container = block.closest('.feature-accordion-item-container');
@@ -121,6 +124,19 @@ const resolveFragmentPath = (fragmentUrl) => {
   return path;
 };
 
+const extractPathFromHtml = (html) => {
+  if (!html) return '';
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = html;
+  return wrapper.textContent?.trim() || '';
+};
+
+const isLikelyFragmentPath = (value) => {
+  if (!value || typeof value !== 'string') return false;
+  const path = value.trim();
+  return path.startsWith('./') || path.startsWith('/') || path.startsWith('http');
+};
+
 const makeInteractiveTrigger = (el, onToggle, initialOpen = false) => {
   if (!el) return;
   el.setAttribute('role', 'button');
@@ -143,9 +159,70 @@ const makeInteractiveTrigger = (el, onToggle, initialOpen = false) => {
   });
 };
 
-const setRowsOpenState = (rows, open) => {
-  rows.forEach((row) => {
+const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
+  if (!row) return;
+  const currentState = rowAnimationState.get(row);
+  if (currentState?.timer) {
+    clearTimeout(currentState.timer);
+  }
+
+  if (immediate) {
     row.hidden = !open;
+    row.style.maxHeight = '';
+    row.style.opacity = '';
+    row.style.transform = '';
+    rowAnimationState.set(row, {});
+    return;
+  }
+
+  row.style.overflow = 'hidden';
+  const openDelay = index * ROW_STAGGER_MS;
+  const closeDelay = (Math.max(total - index - 1, 0)) * Math.round(ROW_STAGGER_MS * 0.45);
+
+  if (open) {
+    row.hidden = false;
+    row.style.maxHeight = '0px';
+    row.style.opacity = '0';
+    row.style.transform = 'translateY(-8px)';
+    row.style.transitionDelay = `${openDelay}ms`;
+    requestAnimationFrame(() => {
+      row.style.maxHeight = `${row.scrollHeight}px`;
+      row.style.opacity = '1';
+      row.style.transform = 'translateY(0)';
+    });
+    const timer = setTimeout(() => {
+      row.style.maxHeight = '';
+      row.style.overflow = '';
+      row.style.transitionDelay = '';
+      rowAnimationState.set(row, {});
+    }, ROW_ANIMATION_MS + openDelay + 60);
+    rowAnimationState.set(row, { timer });
+  } else {
+    const currentHeight = row.scrollHeight;
+    row.style.maxHeight = `${currentHeight}px`;
+    row.style.opacity = '1';
+    row.style.transform = 'translateY(0)';
+    row.style.transitionDelay = `${closeDelay}ms`;
+    requestAnimationFrame(() => {
+      row.style.maxHeight = '0px';
+      row.style.opacity = '0';
+      row.style.transform = 'translateY(-8px)';
+    });
+    const timer = setTimeout(() => {
+      row.hidden = true;
+      row.style.maxHeight = '';
+      row.style.overflow = '';
+      row.style.transitionDelay = '';
+      rowAnimationState.set(row, {});
+    }, ROW_ANIMATION_MS + closeDelay + 60);
+    rowAnimationState.set(row, { timer });
+  }
+};
+
+const setRowsOpenState = (rows, open, immediate = false) => {
+  const total = rows.length;
+  rows.forEach((row, index) => {
+    animateRow(row, open, immediate, index, total);
   });
 };
 
@@ -156,9 +233,7 @@ const collapseEntry = (entry, triggerSelector, panelRowSelector) => {
     trigger.setAttribute('aria-expanded', 'false');
   }
   const panelRows = entry.querySelectorAll(panelRowSelector);
-  panelRows.forEach((row) => {
-    row.hidden = true;
-  });
+  setRowsOpenState([...panelRows], false);
 };
 
 const reserveMediaSpace = (cell) => {
@@ -168,65 +243,111 @@ const reserveMediaSpace = (cell) => {
   cell.style.minHeight = `${Math.max(estimatedHeight, 160)}px`;
 };
 
-const renderMediaHtml = (target, html) => {
-  if (!target || !html) return;
-  target.innerHTML = html;
+const renderIntoTarget = (target, fragment, fallbackHtml = '') => {
+  if (!target) return;
+  target.classList.remove('is-media-enter');
+  target.classList.add('is-media-switching');
+  target.innerHTML = '';
+  if (fragment?.childNodes?.length) {
+    target.append(...fragment.childNodes);
+  } else if (fallbackHtml) {
+    target.innerHTML = fallbackHtml;
+  }
+  // Force style recalc so transition class restarts reliably.
+  // eslint-disable-next-line no-unused-expressions
+  target.offsetHeight;
+  target.classList.add('is-media-enter');
+  target.classList.remove('is-media-switching');
 };
 
-const createLazyMediaLoader = (cell, path, fallbackHtml, getRenderTarget = () => cell) => async () => {
+const createLazyMediaLoader = (cell, path, fallbackHtml, getRenderTargets = () => [cell]) => async () => {
   if (!cell || (!path && !fallbackHtml)) return;
 
-  const state = mediaStateByCell.get(cell) || {};
+  const state = mediaStateByCell.get(cell) || {
+    fragmentPath: '',
+    fallback: '',
+    loadingTargets: new WeakMap(),
+    loadedTargets: new WeakSet(),
+    renderedTargets: new WeakSet(),
+    groupSlot: null,
+  };
   mediaStateByCell.set(cell, state);
 
-  const target = getRenderTarget() || cell;
-  if (!target) return;
+  const targets = [...new Set((getRenderTargets() || []).filter(Boolean))];
+  if (!targets.length) return;
 
-  if (state.html) {
-    renderMediaHtml(target, state.html);
-    return;
+  targets.forEach((target) => {
+    reserveMediaSpace(target);
+    target.classList.add('is-media-loading');
+    target.setAttribute('aria-busy', 'true');
+  });
+
+  if (!state.fragmentPath) {
+    const fallbackPath = extractPathFromHtml(fallbackHtml);
+    const inlinePath = cell.textContent?.trim() || '';
+    const fragmentPath = [path, inlinePath, fallbackPath].find(isLikelyFragmentPath) || '';
+    state.fragmentPath = fragmentPath ? resolveFragmentPath(fragmentPath) : '';
+    state.fallback = fallbackHtml || '';
   }
 
-  if (state.loadingPromise) {
-    await state.loadingPromise;
-    if (state.html) renderMediaHtml(target, state.html);
-    return;
-  }
+  const ensureLoadedInto = async (container) => {
+    if (!container) return;
+    if (state.loadedTargets.has(container)) return;
 
-  reserveMediaSpace(target);
-  target.classList.add('is-media-loading');
-  target.setAttribute('aria-busy', 'true');
+    const inFlight = state.loadingTargets.get(container);
+    if (inFlight) {
+      await inFlight;
+      return;
+    }
 
-  try {
-    state.loadingPromise = (async () => {
-      if (path) {
-        const resolvedPath = resolveFragmentPath(path);
-        const fragment = await loadFragment(resolvedPath);
+    const promise = (async () => {
+      if (state.fragmentPath) {
+        const fragment = await loadFragment(state.fragmentPath);
         if (fragment?.childNodes?.length) {
-          const tmp = document.createElement('div');
-          tmp.append(...fragment.childNodes);
-          state.html = tmp.innerHTML;
+          renderIntoTarget(container, fragment, state.fallback);
+          state.loadedTargets.add(container);
           return;
         }
       }
 
-      if (fallbackHtml) {
-        state.html = fallbackHtml;
+      if (state.fallback) {
+        renderIntoTarget(container, null, state.fallback);
+        state.loadedTargets.add(container);
       }
     })();
 
-    await state.loadingPromise;
-    if (state.html) {
-      renderMediaHtml(target, state.html);
+    state.loadingTargets.set(container, promise);
+    try {
+      await promise;
+    } finally {
+      state.loadingTargets.delete(container);
     }
-  } finally {
-    state.loadingPromise = null;
+  };
+
+  await Promise.all(targets.map(async (target) => {
+    if (target.classList.contains('feature-accordion-media-group')) {
+      const slots = [...target.querySelectorAll(':scope > .feature-accordion-media-slot')];
+      slots.forEach((slot) => { slot.hidden = true; });
+
+      if (!state.groupSlot) {
+        state.groupSlot = document.createElement('div');
+        state.groupSlot.classList.add('feature-accordion-media-slot');
+        target.append(state.groupSlot);
+      }
+
+      await ensureLoadedInto(state.groupSlot);
+      state.groupSlot.hidden = false;
+    } else if (!state.renderedTargets.has(target)) {
+      await ensureLoadedInto(target);
+      state.renderedTargets.add(target);
+    }
+
     target.classList.remove('is-media-loading');
     target.removeAttribute('aria-busy');
     requestAnimationFrame(() => {
       target.style.minHeight = '';
     });
-  }
+  }));
 };
 
 const expandFirstNested = (container) => {
@@ -249,12 +370,18 @@ export default async function decorate(block) {
 
     const titleRow = rows[0];
     const titleCell = titleRow?.children?.[0];
+    const subtitleRow = rows[1];
     const subtitleCell = rows[1]?.children?.[0];
+    const infoRow = rows[2];
     const infoCell = rows[2]?.children?.[0];
     const mediaCell = rows[3]?.children?.[0];
 
     block.classList.add('feature-accordion-item__entry');
     titleCell?.classList.add('feature-accordion-item__trigger');
+    subtitleRow?.classList.add('feature-accordion-item__subtitle');
+    subtitleCell?.classList.add('feature-accordion-item__subtitle');
+    infoRow?.classList.add('feature-accordion-item__info');
+    infoCell?.classList.add('feature-accordion-item__info');
     mediaCell?.classList.add('feature-accordion-item__media');
 
     if (v('titleFontColor') && titleCell) titleCell.style.color = normalizeColor(v('titleFontColor'));
@@ -263,17 +390,32 @@ export default async function decorate(block) {
 
     const subItemRows = detectSubItemRows(block);
     const isNestedVariant = subItemRows.length > 0;
-    const getMediaTarget = (fallbackCell) => scaffold?.mediaGroup || fallbackCell;
+    const getMediaTargets = (inlineCell) => {
+      const targets = [inlineCell];
+      if (scaffold?.mediaGroup) targets.push(scaffold.mediaGroup);
+      return targets;
+    };
 
     const ensureTopMediaLoaded = createLazyMediaLoader(
       mediaCell,
       v('mediaBlockContent'),
       v('mediaBlockContent', 'html'),
-      () => getMediaTarget(mediaCell),
+      () => getMediaTargets(mediaCell),
     );
 
     const topPanelRows = rows.slice(1);
-    topPanelRows.forEach((row) => row.classList.add('feature-accordion-item__panel-row'));
+    topPanelRows.forEach((row, index) => {
+      row.classList.add('feature-accordion-item__panel-row');
+      const cell = row?.children?.[0];
+      if (index === 0) {
+        row.classList.add('feature-accordion-item__subtitle');
+        cell?.classList.add('feature-accordion-item__subtitle');
+      }
+      if (index === 1) {
+        row.classList.add('feature-accordion-item__info');
+        cell?.classList.add('feature-accordion-item__info');
+      }
+    });
 
     await Promise.all(subItemRows.map(async (subRow) => {
       const subConfig = parseSubItemFromCompactRow(subRow);
@@ -302,10 +444,10 @@ export default async function decorate(block) {
         nestedMediaCell,
         sv('subItemMediaBlockContent'),
         sv('subItemMediaBlockContent', 'html'),
-        () => getMediaTarget(nestedMediaCell),
+        () => getMediaTargets(nestedMediaCell),
       );
 
-      setRowsOpenState(nestedPanelCells, false);
+      setRowsOpenState(nestedPanelCells, false, true);
       makeInteractiveTrigger(nestedHeaderCell, (isOpen) => {
         setRowsOpenState(nestedPanelCells, isOpen);
         if (isOpen) {
@@ -334,7 +476,7 @@ export default async function decorate(block) {
       || itemsInScope[0];
     const isFirstAccordionItem = firstItemBlock === block;
 
-    setRowsOpenState(topPanelRows, isFirstAccordionItem);
+    setRowsOpenState(topPanelRows, isFirstAccordionItem, true);
     makeInteractiveTrigger(titleCell, (isOpen) => {
       setRowsOpenState(topPanelRows, isOpen);
       if (isOpen) {
