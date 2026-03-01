@@ -25,7 +25,8 @@
       "space",
       "bar-chart",
       "footnote",
-      "featureitem-block"
+      "featureitem-block",
+      "small-cards"
     ]
   },
   {
@@ -98,6 +99,12 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
+    ]
+  },
+  {
+    "id": "small-cards",
+    "components": [
+      "small-card"
     ]
   }
 ]

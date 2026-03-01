@@ -238,6 +238,7 @@ const handlTColSpan = (scale) => {
 
 export default function decorate(block) {
   try {
+    console.log('container 2 cols', block, block.children);
     // Exit early if there are fewer than 2 children
     if (!block.children || block.children.length < 2) return;
     const [col1, col2] = [...block.children];

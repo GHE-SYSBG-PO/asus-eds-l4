@@ -146,13 +146,16 @@ const DEFAULT_CONFIG = { };
 export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'featureitem-block');
+    // eslint-disable-next-line no-console
     console.log('config', config);
     const wrapper = block.querySelectorAll(':scope > div');
     Array.from(wrapper).forEach(async (wrap) => {
       try {
+        // eslint-disable-next-line no-console
         console.log('wrap', wrap.children);
         if (wrap.children.length < 2) return;
         const itemConfig = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'chart-advanced-item');
+        // eslint-disable-next-line no-console
         console.log('itemConfig', itemConfig);
       } catch (error) {
         // eslint-disable-next-line no-console

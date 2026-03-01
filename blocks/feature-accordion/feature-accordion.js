@@ -2,7 +2,7 @@ export default function decorate(block) {
   try {
     console.log('feature accordion', block, block.children);
     // Exit early if there are fewer than 2 children
-    if (!block.children || block.children.length < 2) return;
+    // if (!block.children || block.children.length < 2) return;
     const [col1, col2] = [...block.children];
 
     const config = block.dataset;
