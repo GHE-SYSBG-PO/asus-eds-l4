@@ -1,4 +1,3 @@
-import { loadAnime } from '../../scripts/scripts.js';
 export default function decorate(block) {
   // Add effect-media class to the block
   block.classList.add('effect-media-container');

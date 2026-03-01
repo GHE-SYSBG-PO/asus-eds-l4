@@ -11,6 +11,7 @@ import {
   loadSections,
   loadCSS,
   getMetadata,
+  loadScript,
 } from './aem.js';
 import { loadSectionBlockJs, isAuthorEnvironment } from './utils.js';
 
@@ -77,6 +78,7 @@ export async function loadAnime() {
 
   // Return existing promise if load is in progress
   if (!animePromise) {
+    // eslint-disable-next-line no-console
     console.log(`Anime: Starting dynamic load [Call ID: ${Date.now()}]`);
 
     animePromise = (async () => {
@@ -88,15 +90,18 @@ export async function loadAnime() {
             referrerpolicy: 'no-referrer',
           },
         );
+        // eslint-disable-next-line no-console
         console.log('Anime JS loaded dynamically');
         return window.anime;
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Failed to load Anime JS library:', error);
         animePromise = null; // Reset on error so retry is possible
         throw error;
       }
     })(); // IIFE (Immediately Invoked Function Expression) creates promise synchronously
   } else {
+    // eslint-disable-next-line no-console
     console.log('Anime: Reusing existing load promise');
   }
 
