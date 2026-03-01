@@ -84,12 +84,6 @@
     ]
   },
   {
-    "id": "feature-accordion-item",
-    "components": [
-      "feature-accordion-sub-item"
-    ]
-  },
-  {
     "id": "featureitem-block",
     "components": [
       "featureitem-block-item"
