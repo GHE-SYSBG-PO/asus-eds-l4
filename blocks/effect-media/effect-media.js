@@ -6,7 +6,7 @@ import { loadAnime } from '../../scripts/scripts.js';
 
 // DEFAULT
 const DEFAULT_CONFIG = {
-  ImageSrc: '',
+  Image: '',
   imageAlt: '',
   widthD: '',
   heightD: '',
@@ -14,7 +14,6 @@ const DEFAULT_CONFIG = {
   fontTablet: '',
   fontMobile: '',
 };
-
 
 /**
  * Get configuration for the current device
@@ -35,8 +34,8 @@ const getFontSize = (device, v) => {
  * Build image size dict
  */
 const getImageStyle = (imgWidthD, imgHeightD) => {
-  const widthStyle = imgWidthD ? `lg:w-[${imgWidthD}]` : 'lg:w-full';
-  const heightStyle = imgHeightD ? `lg:h-[${imgHeightD}]` : 'lg:h-full';
+  const widthStyle = imgWidthD ? `lg:w-[${imgWidthD}]` : 'lg:w-[100vw]';
+  const heightStyle = imgHeightD ? `lg:h-[${imgHeightD}]` : 'lg:h-[100vh]';
 
   const imgStyle = `w-full h-full ${widthStyle} ${heightStyle}`;
 
@@ -46,11 +45,13 @@ const getImageStyle = (imgWidthD, imgHeightD) => {
 
 export default async function decorate(block) {
   try {
-    // console.log('执行text-block', block);
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'effect-media');
     const v = getFieldValue(config);
 
-    const ImageSrc = v('Image', 'reference');
+    const ImageSrc = v('image', 'html');
+    const imageAlt = v('imageAlt', 'text');
+
+    const text = v('text', 'html');
 
 
     const fontSizeD = getFontSize('D', v);
@@ -62,7 +63,7 @@ export default async function decorate(block) {
     const htmlImg = `
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
         <img
-          src="${assets}"
+          src="${ImageSrc}"
           alt="${imageAlt}"
           class="absolute left-0 top-0 w-full h-full object-cover"
         />
@@ -71,13 +72,22 @@ export default async function decorate(block) {
 
     const htmlText = `
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <p class="relative ${fontSizeD} ${fontSizeT} ${fontSizeM}">${config.text}</p>
+        <p class="relative ${fontSizeD} ${fontSizeT} ${fontSizeM}">${text}</p>
+      </div>
+    `;
+
+    block.innerHTML = `
+      <div class="effect-media scroll-container relative">
+        <div class="scene-1">
+          ${htmlImg}
+          ${htmlText}
+        </div>
       </div>
     `;
 
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error decorating text-block block:', error);
-    block.innerHTML = '<div class="error-message">Failed to load text-block block</div>';
+    console.error('Error decorating effet-media: ', error);
+    block.innerHTML = '<div class="error-message">Failed to load effet-media block</div>';
   }
 }

@@ -14,8 +14,8 @@
 
     {
       "component": "reference",
-      "label": "image",
-      "name": "Image",
+      "label": "Image",
+      "name": "image",
       "multi": false
     },
 
