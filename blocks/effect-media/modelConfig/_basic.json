@@ -22,8 +22,7 @@
       "component": "text",
       "name": "imageAlt",
       "label": "Image Alt",
-      "valueType": "string",
-      "placeholder": "A11y image ALT"
+      "valueType": "string"
     }
   ]
 }

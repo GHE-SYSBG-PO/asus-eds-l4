@@ -36,7 +36,10 @@ const getFontSize = (device, v) => {
 /**
  * Build image size dict
  */
-const getImageStyle = (imgWidthD, imgHeightD) => {
+const _getImageStyle = (imgWidthD, imgHeightD) => {
+  console.log('imgWidthD', imgWidthD);
+  console.log('imgHeightD', imgHeightD);
+
   const widthStyle = imgWidthD ? `lg:w-[${imgWidthD}]` : 'lg:w-[100vw]';
   const heightStyle = imgHeightD ? `lg:h-[${imgHeightD}]` : 'lg:h-[100vh]';
 
@@ -144,7 +147,8 @@ export default async function decorate(block) {
     block.innerHTML = '';
 
     const imageSrc = v('image', 'text');
-    const imageAlt = v('imageAlt', 'html');
+    const imageAlt = v('imageAlt', 'text');
+    console.log('imageAlt', imageAlt);
 
     const text = v('text', 'text');
 
@@ -156,7 +160,9 @@ export default async function decorate(block) {
 
     const animationType = getAnimationType(imageSrc);
 
-    const imageStyle = getImageStyle(v('imgWidthD', 'text'), v('imgHeightD', 'text'));
+    const imageStyle = _getImageStyle(v('imgWidthD', 'text'), v('imgHeightD', 'text'));
+
+    console.log('imageStyle', imageStyle);
 
     const textMaxWidthD = _getTextMaxWidth('D', v);
     const textMaxWidthT = _getTextMaxWidth('T', v);
