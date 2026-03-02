@@ -2811,12 +2811,6 @@
         "label": "info font color",
         "name": "infoFontColor",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--feature-accordion-item",
-        "hidden": true
       }
     ]
   },
