@@ -43,10 +43,10 @@ const getImageStyle = (imgWidthD, imgHeightD) => {
   return imgStyle;
 };
 
-const getAnimationType = (ImageSrc) => {
+const getAnimationType = (imageSrc) => {
   let animationType = 'type-1';
 
-  if (!ImageSrc) {
+  if (!imageSrc) {
     animationType = 'type-2';
   }
 
@@ -121,17 +121,34 @@ const _getAnimationMinHeight = (device) => {
   return `${baseLengthIndex * baseHeight[device]}px`;
 };
 
+
+const _getTextMaxWidth = (device, v) => {
+  const maxWidth = {
+    'D': 'textMaxWidthD',
+    'T': 'textMaxWidthT',
+    'M': 'textMaxWidthM'
+  };
+
+  const textMaxWidth = v(maxWidth[device], 'text') 
+
+  return textMaxWidth ? `${textMaxWidth}px` : '100%';
+};
+
 export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'effect-media');
     const v = getFieldValue(config);
 
+    // load anime
     const anime = await loadAnime();
 
+    // clear block
     block.innerHTML = '';
 
-    const ImageSrc = v('image', 'text');
-    const imageAlt = v('imageAlt', 'text');
+    const imageSrc = v('image', 'text');
+    const imageAlt = v('imageAlt', 'html');
+
+    console.log('imageAlt', imageAlt);
 
     const text = v('text', 'text');
 
@@ -141,14 +158,22 @@ export default async function decorate(block) {
 
     const textColor = v('textColor', 'text') || 'fff';
 
-    const animationType = getAnimationType(ImageSrc);
+    const animationType = getAnimationType(imageSrc);
 
     const imageStyle = getImageStyle(v('imgWidthD', 'text'), v('imgHeightD', 'text'));
 
-    const htmlImg = ImageSrc ? `
+    const textMaxWidthD = _getTextMaxWidth('D', v);
+    const textMaxWidthT = _getTextMaxWidth('T', v);
+    const textMaxWidthM = _getTextMaxWidth('M', v);
+
+    console.log('textMaxWidthD', textMaxWidthD);
+    console.log('textMaxWidthT', textMaxWidthT);
+    console.log('textMaxWidthM', textMaxWidthM);
+
+    const htmlImg = imageSrc ? `
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
         <img
-          src="${ImageSrc}"
+          src="${imageSrc}"
           alt="${imageAlt}"
           class="animation-img absolute left-0 top-0 w-full h-full object-cover"
         />
@@ -157,7 +182,7 @@ export default async function decorate(block) {
 
     const htmlText = `
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="color: #${textColor}">
-        <p class="relative text-center w-[100vw] pl-[10%] pr-[10%] ${fontSizeD} ${fontSizeT} ${fontSizeM}">${text}</p>
+        <p class="relative text-center w-[100vw] lg:max-w-[${textMaxWidthD}] md:max-w-[${textMaxWidthT}] sm:max-w-[${textMaxWidthM}] pl-[10%] pr-[10%] ${fontSizeD} ${fontSizeT} ${fontSizeM}">${text}</p>
       </div>
     `;
 

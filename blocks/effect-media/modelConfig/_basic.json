@@ -18,13 +18,12 @@
       "name": "image",
       "multi": false
     },
-
     {
       "component": "text",
-      "valueType": "string",
       "name": "imageAlt",
-      "label": "Alt",
-      "value": ""
+      "label": "Image Alt",
+      "valueType": "string",
+      "placeholder": "A11y image ALT"
     }
   ]
 }
