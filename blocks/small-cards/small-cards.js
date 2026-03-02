@@ -11,12 +11,13 @@ import {
   getBlockFieldOrder,
 } from '../../scripts/utils.js';
 
-const LAYOUT_CONFIG_COUNT = 22;
+const LAYOUT_CONFIG_COUNT = 23;
 
 const alignmentConfig = {
   desktopAlignment: 'center',
   tabletAlignment: 'center',
   mobileAlignment: 'center',
+  motion: 'true',
 
   // Swiper Arrow (Previous / Next)
   arrowStyle: '',
@@ -51,21 +52,33 @@ const PRODUCT_DEFAULTS = {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'ro-rg-18',
+    infoFontT: 'ro-rg-18',
+    infoFontM: 'ro-rg-16',
   },
   proart: {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'ro-rg-18',
+    infoFontT: 'ro-rg-18',
+    infoFontM: 'ro-rg-16',
   },
   rog: {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'rc-rg-18',
+    infoFontT: 'rc-rg-18',
+    infoFontM: 'rc-rg-16',
   },
   tuf: {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'ro-rg-18',
+    infoFontT: 'ro-rg-18',
+    infoFontM: 'ro-rg-16',
   },
 };
 
@@ -171,6 +184,9 @@ const DEFAULT_CONFIG = {
   titleFontColor: '',
 
   // Cards Info
+  infoFontD: '',
+  infoFontT: '',
+  infoFontM: '',
   infoFontColor: '',
 
   // Cards Border
@@ -498,7 +514,7 @@ function getValueForDevice(fieldName, data) {
  * @param {string} titleFont The font class for the title.
  * @returns {string} The HTML string for the card content.
  */
-function getCardContentHTML(data, titleFont) {
+function getCardContentHTML(data, titleFont, infoFont) {
   const {
     ctaVisible,
     ctaFontDT,
@@ -537,7 +553,7 @@ function getCardContentHTML(data, titleFont) {
                 <h3>
                   <span class="${titleFont}" style="color: ${titleFontColor ? `#${titleFontColor}` : 'var(--swiper-slide-title-color)'}">${title}</span>
                 </h3>
-                <div style="color: ${infoFontColor ? `#${infoFontColor}` : 'var(--swiper-slide-info-color)'};font-size:18px;">${info}</div>
+                <div class="${infoFont}" style="color: ${infoFontColor ? `#${infoFontColor}` : 'var(--swiper-slide-info-color)'};">${info}</div>
                 ${ctaHTML}
             </div>
           </div>`;
@@ -647,7 +663,8 @@ function getCardHTML(data) {
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
-  const blockContent = getCardContentHTML(data, titleFont);
+  const infoFont = getValueForDevice('infoFont', data);
+  const blockContent = getCardContentHTML(data, titleFont, infoFont);
 
   /**
    * Generates the styled block content HTML.
@@ -1031,6 +1048,10 @@ export default async function decorate(block) {
     await loadSwiper();
     await loadAnimationFun();
     await loadGsapFun();
+    await loadScrollTriggerFun();
+    if (window.gsap && window.ScrollTrigger) {
+      window.gsap.registerPlugin(window.ScrollTrigger);
+    }
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
@@ -1044,14 +1065,18 @@ export default async function decorate(block) {
     window.addEventListener('resize', () => {
       setEqualHeight(block);
     });
+
+    if (alignmentConfig.motion === 'true') {
+      initScrollAnimations(block);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating small cards block:', error);
   }
 }
 
-let loadFeature; let
-  loadAnimation; let loadGsapJS;
+let loadFeature; let loadAnimation;
+let loadGsapJS; let loadScrollTriggerJS;
 
 /**
  * Loads the noUiSlider jQuery plugin.
@@ -1083,6 +1108,22 @@ function loadGsapFun() {
     });
   }
   return loadGsapJS;
+}
+
+/**
+ * Loads the GSAP ScrollTrigger plugin.
+ * @returns {Promise} A promise that resolves when the script is loaded.
+ */
+function loadScrollTriggerFun() {
+  if (!loadScrollTriggerJS) {
+    loadScrollTriggerJS = loadScript(
+      'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
+    ).catch((err) => {
+      console.error('Failed to load GSAP ScrollTrigger JS:', err);
+      throw err;
+    });
+  }
+  return loadScrollTriggerJS;
 }
 
 setTimeout(() => {
@@ -1154,4 +1195,92 @@ async function initializeSwiperCarousel(block) {
   });
 
   return swiper;
+}
+
+/**
+ * Initializes transition for a single item.
+ * @param {number} index Index of the item.
+ * @param {HTMLElement} element The DOM element.
+ */
+function initItemTransition(index, element) {
+  // Initial state
+  window.gsap.set(element, { y: 50, opacity: 0 });
+
+  const tl = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: element,
+      start: 'top 85%',
+      end: '+=300',
+      scrub: 1,
+    },
+  });
+
+  tl.to(element, {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    ease: 'expo.out',
+  });
+}
+
+/**
+ * Handles overall scroll animation for a container.
+ * @param {jQuery} $container The container element.
+ */
+function handleOverallScroll($container) {
+  const items = $container.find('.block__scroll-item');
+
+  // Initial state
+  window.gsap.set(items, { y: 50, opacity: 0 });
+
+  const tl = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: $container[0],
+      start: 'top 90%',
+      end: 'center 50%',
+      toggleActions: 'play reverse play reverse',
+    },
+  });
+
+  tl.to(items, {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    ease: 'expo.out',
+  });
+}
+
+/**
+ * Handles individual scroll animation for a container.
+ * @param {jQuery} $container The container element.
+ */
+function handleIndividualScroll($container) {
+  const $items = $container.find('.block__scroll-item');
+
+  $items.each(function initItem(index) {
+    initItemTransition(index, this);
+  });
+}
+
+/**
+ * Initializes scroll animations for block items.
+ * @param {HTMLElement} block The block element.
+ */
+function initScrollAnimations(block) {
+  const $ = window.jQuery;
+  if (!$) return;
+
+  const $block = $(block);
+  const $scrollBlocks = $block.find('.outer-view .block__scroll');
+
+  $scrollBlocks.each(function initScrollBlock() {
+    const $container = $(this);
+    const scrollType = $container.attr('data-scrolltype') || 'eachone';
+
+    if (scrollType === 'overall') {
+      handleOverallScroll($container);
+    } else {
+      handleIndividualScroll($container);
+    }
+  });
 }

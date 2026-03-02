@@ -495,7 +495,7 @@ export const setupAnimation = (block) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         let delay = 100;
-        const spans = entry.target.querySelectorAll('span');
+        const spans = entry.target.querySelectorAll(':scope > span');
         spans.forEach((span) => {
           delay += 100;
           setTimeout(() => {
@@ -505,7 +505,7 @@ export const setupAnimation = (block) => {
             }
           }, delay);
         });
-        const imgs = entry.target.querySelectorAll('img');
+        const imgs = entry.target.querySelectorAll(':scope > img');
         imgs.forEach((img) => {
           delay += 100;
           setTimeout(() => {
@@ -515,7 +515,7 @@ export const setupAnimation = (block) => {
             }
           }, delay);
         });
-        const divs = entry.target.querySelectorAll('div');
+        const divs = entry.target.querySelectorAll(':scope > div');
         divs.forEach((div) => {
           delay += 100;
           setTimeout(() => {
