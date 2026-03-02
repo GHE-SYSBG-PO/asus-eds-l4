@@ -322,15 +322,13 @@ export default async function decorate(block) {
     // 确保在页面加载完成后执行
     if (document.readyState === 'complete') {
       setTimeout(() => {
-        console.log('执行1');
         adjustTopTextHeights(block);
-      }, 0);
+      }, 200);
     } else {
       window.addEventListener('load', () => {
         setTimeout(() => {
-          console.log('执行2');
           adjustTopTextHeights(block);
-        }, 0);
+        }, 200);
       });
     }
 
