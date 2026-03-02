@@ -86,6 +86,17 @@ const getDeviceConfig = (device, v) => {
   }
 };
 
+const getObjectPositionStyle = (objectPosition) => {
+  const positionMap = {
+    left: 'left',
+    right: 'right',
+    center: 'center',
+    top: 'top',
+    bottom: 'bottom',
+  };
+  return positionMap[objectPosition] || 'center';
+};
+
 
 export default async function decorate(block) {
   try {
