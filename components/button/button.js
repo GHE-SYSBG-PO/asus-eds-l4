@@ -81,7 +81,7 @@ const supportsIcon = (style) => ['2', '3', '5', '6'].includes(style);
  */
 const isFilledStyle = (style) => ['1', '2', '3'].includes(style);
 
-export function buildCloseButtonHtml(v) {
+export function buildButtonHtml(v) {
   loadCSS(`${window.hlx.codeBasePath}/components/button/button.css`);
   // Get basic configuration
   const style = String(v('gBtnStyleLayout', 'text') || DEFAULT_CONFIG.gBtnStyleLayout);
