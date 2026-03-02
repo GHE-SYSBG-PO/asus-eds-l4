@@ -1,92 +1,167 @@
-export default function decorate(block) {
-  // Add effect-media class to the block
-  block.classList.add('effect-media-container');
+import {
+  getBlockConfigs,
+  getFieldValue,
+} from '../../scripts/utils.js';
+import { loadAnime } from '../../scripts/scripts.js';
 
-  // Create wrapper div
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('effect-media-wrapper');
+// DEFAULT
+const DEFAULT_CONFIG = {
+  imageAlt: '',
+  assetsD: '',
+  widthD: '',
+  widthValueD: '',
+  heightD: '',
+  heightValueD: '',
+  objectPositionD: '',
+  maxD: '',
+  minD: '',
+  desktopAlignment: 'center',
+  tabletAlignment: 'center',
+  mobileAlignment: 'center',
+  titleRichtext: '',
+  titleFont: 'tt-md-40',
+  titleFontColor: '',
+};
 
-  // Create effect-media content div
-  const effectMedia = document.createElement('div');
-  effectMedia.classList.add('effect-media');
-
-  // Get image and text elements
-  const rows = block.querySelectorAll(':scope > div');
-  let imageElement = null;
-  let textElement = null;
-
-  rows.forEach((row, index) => {
-    if (index === 0) {
-      // First row is image
-      imageElement = row;
-      imageElement.classList.add('effect-media-image');
-    } else if (index === 1) {
-      // Second row is text
-      textElement = row;
-      textElement.classList.add('effect-media-text');
-    }
-  });
-
-  // Append elements to effect-media
-  if (imageElement) {
-    effectMedia.appendChild(imageElement);
+/**
+ * Build size style object
+ */
+const getSizeStyles = (config) => {
+  const styles = {};
+  // Width handling
+  if (config.widthUnit === 'px' && config.widthValue) {
+    styles.width = `${config.widthValue}px`;
+  } else if (config.widthUnit === '%' && config.widthValue) {
+    styles.width = `${config.widthValue}%`;
+  } else if (config.widthUnit === 'auto') {
+    styles.width = 'auto';
   }
-  if (textElement) {
-    effectMedia.appendChild(textElement);
+
+  // Height handling
+  if (config.heightUnit === 'px' && config.heightValue) {
+    styles.height = `${config.heightValue}px`;
+  } else if (config.heightUnit === '%' && config.heightValue) {
+    styles.height = `${config.heightValue}%`;
+  } else if (config.heightUnit === 'auto') {
+    styles.height = 'auto';
   }
 
-  wrapper.appendChild(effectMedia);
-  block.appendChild(wrapper);
+  return styles;
+};
 
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+/**
+ * Build max/min width style object
+ */
+const getMinMaxWidthStyles = (config) => {
+  const styles = {};
 
-  const updateAnimation = () => {
-    const rect = wrapper.getBoundingClientRect();
-    const viewportHeight = window.innerHeight || 1;
-    const scrollRange = Math.max(rect.height - viewportHeight, 1);
-    const progress = clamp((-rect.top) / scrollRange, 0, 1);
+  if (config.maxWidth) {
+    styles.maxWidth = config.maxWidth;
+  }
 
-    let bgOpacity = 0;
-    let textOpacity = 1;
-    let textScale = 1;
-    let textTranslate = 40;
+  if (config.minWidth) {
+    styles.minWidth = config.minWidth;
+  }
 
-    if (progress <= 0.4) {
-      const t = progress / 0.4;
-      textTranslate = 40 * (1 - t);
-      bgOpacity = 0;
-      textOpacity = 1;
-      textScale = 1;
-    } else if (progress <= 0.7) {
-      const t = (progress - 0.4) / 0.3;
-      textTranslate = 0;
-      bgOpacity = t;
-      textOpacity = 1;
-      textScale = 1;
-    } else {
-      const t = (progress - 0.7) / 0.3;
-      textTranslate = 0;
-      bgOpacity = 1;
-      textOpacity = 1 - t;
-      textScale = 1 + (0.5 * t);
-    }
+  return styles;
+};
 
-    effectMedia.style.setProperty('--em-bg-opacity', `${bgOpacity}`);
-    effectMedia.style.setProperty('--em-text-opacity', `${textOpacity}`);
-    effectMedia.style.setProperty('--em-text-scale', `${textScale}`);
-    effectMedia.style.setProperty('--em-text-translate', `${textTranslate}vh`);
-  };
+/**
+ * Get configuration for the current device
+ */
+const getDeviceConfig = (device, v) => {
+  if (device === 'D') {
+    return {
+      assets: v('assetsD', 'text') || '',
+      widthUnit: v('widthD', 'text') || 'auto',
+      widthValue: v('widthValueD', 'text') || '',
+      heightUnit: v('heightD', 'text') || 'auto',
+      heightValue: v('heightValueD', 'text') || '',
+      ratio: v('ratioD', 'text'),
+      ratioValueCustomized: v('ratioValueCustomizedD', 'text') || '',
+      objectPosition: v('objectPositionD', 'text') || 'center',
+      maxWidth: v('maxD', 'text') || '',
+      minWidth: v('minD', 'text') || '',
+    };
+  }
+};
 
-  let rafId = null;
-  const onScroll = () => {
-    if (rafId) return;
-    rafId = window.requestAnimationFrame(() => {
-      rafId = null;
-      updateAnimation();
-    });
-  };
 
-  updateAnimation();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
+export default async function decorate(block) {
+  try {
+    // console.log('执行text-block', block);
+    const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'text-block');
+    const v = getFieldValue(config);
+    // console.log('执行text-block-config', config);
+// Get basic configuration
+    const imageAlt = v('imageAlt', 'text') || '';
+    // Get configurations for each device
+    const configD = getDeviceConfig('D', v);
+
+    // Build object position styles
+    const objectPositionD = getObjectPositionStyle(configD.objectPosition);
+    const dAlignment = v('desktopAlignment') === 'left' ? 'lg:items-start' : 'lg:items-center';
+    const tAlignment = v('tabletAlignment') === 'left' ? 'md:items-start' : 'md:items-center';
+    const mAlignment = v('mobileAlignment') === 'left' ? 'items-start' : 'items-center';
+    const dBlockAlignment = v('desktopAlignment') === 'left' ? 'lg:text-left' : 'lg:text-center';
+    const tBlockAlignment = v('tabletAlignment') === 'left' ? 'md:text-left' : 'md:text-center';
+    const mBlockAlignment = v('mobileAlignment') === 'left' ? 'text-left' : 'text-center';
+
+    // Build style objects for each device
+    const stylesM = {
+      ...getSizeStyles(configM),
+      ...getMinMaxWidthStyles(configM),
+    };
+
+    // Create image element
+    const createImageElement = (device, configObj, styles, objectPosition) => {
+      const { assets } = configObj;
+      if (!assets) return '';
+
+      // Build base style
+      const baseStyle = `position: relative; overflow-hidden; ${containerRadiusStyle} ${stylesToInline(styles)}`;
+
+      let dClass = 'hidden lg:block';
+      if (device === 'M') {
+        dClass = 'md:hidden lg:hidden';
+      }
+      if (device === 'T') {
+        dClass = 'hidden md:block lg:hidden';
+      }
+      return `
+        <div class="device-${device} ${dClass}" style="${baseStyle}">
+          <img
+            src="${assets}"
+            alt="${imageAlt}"
+            class="w-full h-full object-cover"
+            style="object-position: ${objectPosition};"
+          />
+        </div>
+      `;
+    };
+
+    // Render content based on media type
+    let mediaContent = createImageElement('D', configD, stylesD, objectPositionD);
+    
+    const titleFontColor = v('titleFontColor') ? `style='--text-block-title-color: #${v('titleFontColor')};--text-block-title-gradient: '';'` : '';
+    
+    const title = `
+      <div class='${v('titleRichtext') && 'mt-[10px]'} break-all text-block-title ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment} ${v('titleFont')}' ${titleFontColor}>
+        ${v('titleRichtext', 'html')}
+      </div>
+    `;
+
+    const wrap = `
+      <div class='flex flex-col  ${dAlignment} ${tAlignment} ${mAlignment}'>
+        ${title}
+      </div>
+    `;
+
+    block.innerHTML = wrap;
+
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error decorating text-block block:', error);
+    block.innerHTML = '<div class="error-message">Failed to load text-block block</div>';
+  }
 }
