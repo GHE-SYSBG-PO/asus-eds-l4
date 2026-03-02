@@ -285,7 +285,7 @@ export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, {}, 'featureitem-block');
     const c = getFieldValue(config);
-    console.log('config', config);
+    // console.log('config', config);
     if (c('motion') === 'on') {
       block.classList.add('g-block-animation');
       handleMotion(block.parentNode);
@@ -304,7 +304,7 @@ export default async function decorate(block) {
 
     const wrapper = wrapperDiv.querySelectorAll(':scope > div');
     const mode = await handleMode(wrapper);
-    console.log('mode', mode);
+    // console.log('mode', mode);
 
     Array.from(wrapper).forEach(async (wrap) => {
       try {
@@ -314,16 +314,16 @@ export default async function decorate(block) {
         }
         const itemConfig = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'featureitem-block-item');
         const v = getFieldValue(itemConfig);
-        console.log('itemConfig', itemConfig);
+        // console.log('itemConfig', itemConfig);
         wrap.classList.add('featureitem-block-item');
         wrap.innerHTML = handleHtml(mode, c, v);
-        console.log('wrap', wrap);
+        // console.log('wrap', wrap);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error decorating wrapper:', error);
       }
     });
-    console.log('block', block);
+    // console.log('block', block);
 
     // 确保在页面加载完成后执行
     if (document.readyState === 'complete') {
