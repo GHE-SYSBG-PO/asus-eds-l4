@@ -167,7 +167,9 @@ export default async function decorate(block) {
     const infoFontM = tabData.infofontm || DEFAULT_CONFIG.infoFontM;
     const infoFontColor = prefixHex(tabData.infofontcolor || '');
 
-    const itemEls = [...tabContainer.querySelectorAll('.tab-3column-item-wrapper')];
+    const itemEls = [
+      ...tabContainer.querySelectorAll('.tab-3column-item-wrapper'),
+    ];
 
     // ── 2nd-level item config ────────────────────────────────────
     // Each itemEl is passed individually to getBlockConfigs using the
@@ -301,6 +303,11 @@ export default async function decorate(block) {
     block.append(componentHtml);
 
     setupInteraction(block.querySelector('.tab3col-component'), motionEnabled);
+
+    // update item dom data from block tab-3column-item
+    block.addEventListener('asus-l4--section-tab-3column', ({ detail }) => {
+      console.log('item dom', detail);
+    });
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating tab-3column block:', error);
