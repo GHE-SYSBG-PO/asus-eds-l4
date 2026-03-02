@@ -2881,12 +2881,6 @@
         "label": "sub item info font color",
         "name": "subItemInfoFontColor",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--feature-accordion-sub-item",
-        "hidden": true
       }
     ]
   },

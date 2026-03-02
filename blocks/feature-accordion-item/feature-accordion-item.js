@@ -682,6 +682,7 @@ const hasRenderableMediaSource = (cell, configText = '', configHtml = '') => {
 
 export default async function decorate(block) {
   try {
+    console.log('accordion item block', block);
     bindDelayedMediaListener();
     bindMediaControlDelegation();
     const scaffold = ensureAccordionGroupWrapper(block);

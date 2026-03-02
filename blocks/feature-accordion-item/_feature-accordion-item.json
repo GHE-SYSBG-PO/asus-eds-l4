@@ -58,12 +58,6 @@
         },
         {
           "...": "./modelConfig/_advanced-sub-item.json#/fields"
-        },
-        {
-          "component": "text",
-          "name": "L4TagNestedBlock",
-          "value": "L4--nested-block--feature-accordion-sub-item",
-          "hidden": true
         }
       ]
     }
