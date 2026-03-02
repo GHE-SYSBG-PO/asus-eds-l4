@@ -11,12 +11,13 @@ import {
   getBlockFieldOrder,
 } from '../../scripts/utils.js';
 
-const LAYOUT_CONFIG_COUNT = 22;
+const LAYOUT_CONFIG_COUNT = 23;
 
 const alignmentConfig = {
   desktopAlignment: 'center',
   tabletAlignment: 'center',
   mobileAlignment: 'center',
+  motion: 'true',
 
   // Swiper Arrow (Previous / Next)
   arrowStyle: '',
@@ -67,9 +68,9 @@ const PRODUCT_DEFAULTS = {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
-    infoFontD: 'ro-rg-18',
-    infoFontT: 'ro-rg-18',
-    infoFontM: 'ro-rg-16',
+    infoFontD: 'rc-rg-18',
+    infoFontT: 'rc-rg-18',
+    infoFontM: 'rc-rg-16',
   },
   tuf: {
     titleFontD: 'tt-md-32',
@@ -110,7 +111,6 @@ const DEFAULT_CONFIG = {
   bgColor: '',
   title: '',
   info: '',
-  motion: '',
   ctaVisible: 'hide',
   ctaText: 'Learn More',
   ctaLinkType: 'button',

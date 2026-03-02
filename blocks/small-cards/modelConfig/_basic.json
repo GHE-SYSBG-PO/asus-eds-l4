@@ -261,12 +261,6 @@
       "valueType": "string"
     },
     {
-      "component": "boolean",
-      "label": "motion",
-      "name": "Motion",
-      "valueType": "boolean"
-    },
-    {
       "component": "select",
       "label": "CTA Visibility Toggle",
       "name": "ctaVisible",
