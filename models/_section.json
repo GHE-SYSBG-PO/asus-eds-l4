@@ -82,7 +82,8 @@
       "id": "tab-3column",
       "fields": [
         {
-          "...": "../blocks/tab-3column/modelConfig/_tab-section.json#/fields"        }
+          "...": "../blocks/tab-3column/modelConfig/_tab-section.json#/fields"        
+        }
       ]
     }
   ],
