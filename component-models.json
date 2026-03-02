@@ -958,7 +958,12 @@
             {
               "var": "styleLayout"
             },
-            ["2", "3", "5", "6"]
+            [
+              "2",
+              "3",
+              "5",
+              "6"
+            ]
           ]
         }
       },
@@ -974,7 +979,12 @@
                 {
                   "var": "styleLayout"
                 },
-                ["2", "3", "5", "6"]
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
               ]
             },
             {
@@ -1000,7 +1010,12 @@
                 {
                   "var": "styleLayout"
                 },
-                ["2", "3", "5", "6"]
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
               ]
             },
             {
@@ -1026,7 +1041,12 @@
                 {
                   "var": "styleLayout"
                 },
-                ["2", "3", "5", "6"]
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
               ]
             },
             {
@@ -1052,7 +1072,12 @@
                 {
                   "var": "styleLayout"
                 },
-                ["2", "3", "5", "6"]
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
               ]
             },
             {
@@ -1078,7 +1103,12 @@
                 {
                   "var": "styleLayout"
                 },
-                ["2", "3", "5", "6"]
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
               ]
             },
             {
@@ -1104,7 +1134,12 @@
                 {
                   "var": "styleLayout"
                 },
-                ["2", "3", "5", "6"]
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
               ]
             },
             {
@@ -1130,7 +1165,12 @@
                 {
                   "var": "styleLayout"
                 },
-                ["2", "3", "5", "6"]
+                [
+                  "2",
+                  "3",
+                  "5",
+                  "6"
+                ]
               ]
             },
             {
@@ -1279,7 +1319,11 @@
             {
               "var": "styleLayout"
             },
-            ["3", "4", "6"]
+            [
+              "3",
+              "4",
+              "6"
+            ]
           ]
         },
         "fields": [
@@ -1781,6 +1825,12 @@
     "id": "effect-media",
     "fields": [
       {
+        "component": "richtext",
+        "label": "Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",
@@ -1795,130 +1845,108 @@
         "value": ""
       },
       {
-        "component": "tab",
-        "label": "layout",
-        "name": "layout"
-      },
-      {
         "component": "select",
-        "label": "desktop alignment",
-        "name": "desktopAlignment",
+        "label": "Text font (D)",
+        "name": "fontDesktop",
         "valueType": "string",
         "options": [
           {
-            "name": "Center",
-            "value": "center"
+            "name": "tt-bd-88",
+            "value": "tt-bd-88"
           },
           {
-            "name": "Left",
-            "value": "left"
+            "name": "tt-bd-92",
+            "value": "tt-bd-92"
+          },
+          {
+            "name": "tt-bd-96",
+            "value": "tt-bd-96"
+          },
+          {
+            "name": "tt-bd-100",
+            "value": "tt-bd-100"
+          },
+          {
+            "name": "tt-bd-104",
+            "value": "tt-bd-104"
           }
         ]
       },
       {
         "component": "select",
-        "label": "tablet alignment",
-        "name": "tabletAlignment",
+        "label": "Text font (T)",
+        "name": "fontDesktop",
         "valueType": "string",
         "options": [
           {
-            "name": "Center",
-            "value": "center"
+            "name": "tt-bd-56",
+            "value": "tt-bd-56"
           },
           {
-            "name": "Left",
-            "value": "left"
+            "name": "tt-bd-60",
+            "value": "tt-bd-60"
+          },
+          {
+            "name": "tt-bd-64",
+            "value": "tt-bd-64"
+          },
+          {
+            "name": "tt-bd-68",
+            "value": "tt-bd-68"
+          },
+          {
+            "name": "tt-bd-72",
+            "value": "tt-bd-72"
           }
         ]
       },
       {
         "component": "select",
-        "label": "mobile alignment",
-        "name": "mobileAlignment",
+        "label": "Text font (M)",
+        "name": "fontDesktop",
         "valueType": "string",
         "options": [
           {
-            "name": "Center",
-            "value": "center"
+            "name": "tt-bd-32",
+            "value": "tt-bd-32"
           },
           {
-            "name": "Left",
-            "value": "left"
+            "name": "tt-bd-36",
+            "value": "tt-bd-36"
+          },
+          {
+            "name": "tt-bd-40",
+            "value": "tt-bd-40"
+          },
+          {
+            "name": "tt-bd-44",
+            "value": "tt-bd-44"
+          },
+          {
+            "name": "tt-bd-48",
+            "value": "tt-bd-48"
           }
         ]
       },
       {
-        "component": "tab",
-        "label": "basic",
-        "name": "basic"
-      },
-      {
-        "component": "richtext",
-        "label": "title",
-        "name": "titleRichtext",
+        "component": "text",
+        "label": "font color (hex)",
+        "name": "fontColor",
         "valueType": "string"
       },
       {
-        "component": "container",
-        "label": "title",
-        "name": "titleAdvanced",
-        "collapsible": true,
-        "fields": [
-          {
-            "component": "select",
-            "label": "font (D/T/M)",
-            "name": "titleFont",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "tt-md-32",
-                "value": "tt-md-32"
-              },
-              {
-                "name": "tt-md-36",
-                "value": "tt-md-36"
-              },
-              {
-                "name": "tt-md-40",
-                "value": "tt-md-40"
-              },
-              {
-                "name": "tt-md-44",
-                "value": "tt-md-44"
-              },
-              {
-                "name": "tt-md-48",
-                "value": "tt-md-48"
-              },
-              {
-                "name": "tt-bd-32",
-                "value": "tt-bd-16"
-              },
-              {
-                "name": "tt-bd-36",
-                "value": "tt-bd-36"
-              },
-              {
-                "name": "tt-bd-40",
-                "value": "tt-bd-40"
-              },
-              {
-                "name": "tt-bd-44",
-                "value": "tt-bd-44"
-              },
-              {
-                "name": "tt-bd-48",
-                "value": "tt-bd-48"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "label": "font color (hex)",
-            "name": "titleFontColor",
-            "valueType": "string"
-          }
-        ]
+        "component": "text",
+        "valueType": "string",
+        "name": "width",
+        "label": "width (px)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "height",
+        "label": "height (px)",
+        "value": ""
       },
       {
         "component": "text",

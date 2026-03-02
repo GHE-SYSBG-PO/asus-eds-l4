@@ -21,6 +21,12 @@
       "id": "effect-media",
       "fields": [
         {
+          "component": "richtext",
+          "label": "Text",
+          "name": "text",
+          "valueType": "string"
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "image",
@@ -33,12 +39,6 @@
           "name": "imageAlt",
           "label": "Alt",
           "value": ""
-        },
-        {
-          "...": "./modelConfig/_layout.json#/fields"
-        },
-        {
-          "...": "./modelConfig/_basic.json#/fields"
         },
         {
           "...": "./modelConfig/_advanced.json#/fields"
