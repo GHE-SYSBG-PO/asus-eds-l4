@@ -793,7 +793,7 @@ function buildSmallCardsContainer(data, config) {
     ? data.map((item, index) => getCardHTML({ ...item, cardIndex: index })).join('')
     : getCardHTML(data);
 
-  const html = `<div class="cmd-content" style="padding-top:600px">
+  const html = `<div class="cmd-content">
     <div class="outer-view" id="CMD">
       <section>
           <div class="section_content">
