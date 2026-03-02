@@ -1,6 +1,11 @@
 {
   "fields": [
     {
+      "component": "hidden",
+      "name": "style",
+      "value": "tab-3column"
+    },
+    {
       "...": "./_style.json#/fields"
     },
     {

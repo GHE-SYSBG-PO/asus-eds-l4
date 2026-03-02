@@ -702,6 +702,11 @@
     "id": "tab-3column",
     "fields": [
       {
+        "component": "hidden",
+        "name": "style",
+        "value": "tab-3column"
+      },
+      {
         "component": "tab",
         "label": "layout",
         "name": "styleTab"
