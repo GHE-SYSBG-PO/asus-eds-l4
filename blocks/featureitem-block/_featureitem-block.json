@@ -41,6 +41,12 @@
         },
         {
           "...": "../../commonModel/_colorGroup.json#/fields"
+        },
+        {
+          "component": "text",
+          "name": "L4TagNestedBlock",
+          "value": "L4--nested-block--featureitem-block",
+          "hidden": true
         }
       ]
     },
