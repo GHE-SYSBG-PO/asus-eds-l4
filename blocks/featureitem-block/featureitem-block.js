@@ -221,6 +221,7 @@ const handleHtml = (mode, c, v) => {
   const desktopAlignment = c('desktopAlignment') === 'lg:justify-start' ? 'lg:text-left' : 'lg:text-center';
   const tabletAlignment = c('tabletAlignment') === 'md:justify-start' ? 'md:text-left' : 'md:text-center';
   const mobileAlignment = c('mobileAlignment') === 'sm:justify-start' ? 'sm:text-left' : 'sm:text-center';
+  const alignment = `${desktopAlignment} ${tabletAlignment} ${mobileAlignment}`;
   const topText = `${v('topTextD')} ${v('topTextT')} ${v('topTextM')}`;
   const topTextColor = v('topTextColor') ? `--featureitem-block-top-text-color: #${v('topTextColor')};` : '';
   const topTextWidth = `width: ${v('topTextWidth')};`;
@@ -234,13 +235,13 @@ const handleHtml = (mode, c, v) => {
   const iconWidthHeight = `${v('type') === 'icon' ? 'max-w-[168px] max-g-[136px]' : ''}`;
   if (mode === 1) {
     return `
-      <div class="w-max- featureitem-block-h featureitem-block-top-text break-all flex flex-col justify-end" ${topText} ${desktopAlignment}" style="${topTextWidth} ${topTextColor}" data-top-text-space="${v('topTextToggle')}">
+      <div class="w-max- featureitem-block-h featureitem-block-top-text break-all flex flex-col justify-end" ${topText} ${alignment}" style="${topTextWidth} ${topTextColor}" data-top-text-space="${v('topTextToggle')}">
         ${v('topTextRichtext', 'html')}
       </div>
-      <div class="break-all featureitem-block-highlight-text ${highlightText} ${tabletAlignment}" style="${highlightTextWidth} ${highlightTextColor}">
+      <div class="break-all featureitem-block-highlight-text ${highlightText} ${alignment}" style="${highlightTextWidth} ${highlightTextColor}">
         ${v('highlightText', 'html')}
       </div>
-      <div class="break-all featureitem-block-bottom-text-color ${bottomText} ${mobileAlignment}" style="${bottomTextWidth} ${bottomTextColor}" data-bottom-text-space="${bottomTextToggle}">
+      <div class="break-all featureitem-block-bottom-text-color ${bottomText} ${alignment}" style="${bottomTextWidth} ${bottomTextColor}" data-bottom-text-space="${bottomTextToggle}">
         ${v('bottomTextRichtext', 'html')}
       </div>
     `;
@@ -248,27 +249,27 @@ const handleHtml = (mode, c, v) => {
   if (mode === 2) {
     return `
       <div class="featureitem-block-h flex flex-col justify-end" data-top-text-space="${v('type') === 'icon' ? '' : v('topTextToggle')}">
-        <div class="break-all featureitem-block-top-text ${topText} ${desktopAlignment}" style="${topTextWidth} ${topTextColor}">
+        <div class="break-all featureitem-block-top-text ${topText} ${alignment}" style="${topTextWidth} ${topTextColor}">
           ${v('type') === 'icon' ? '' : v('topTextRichtext', 'html')}
         </div>
-        <div class="break-all featureitem-block-highlight-text ${highlightText} ${tabletAlignment} ${iconWidthHeight}" style="${highlightTextWidth} ${highlightTextColor}">
+        <div class="break-all featureitem-block-highlight-text ${highlightText} ${alignment} ${iconWidthHeight}" style="${highlightTextWidth} ${highlightTextColor}">
           ${v('type') === 'icon' ? v('iconSource', 'html') : v('highlightText', 'html')}
         </div>
       </div>
-      <div class="break-all featureitem-block-bottom-text-color ${bottomText} ${mobileAlignment}" style="${bottomTextWidth} ${bottomTextColor}" data-bottom-text-space="${bottomTextToggle}">
+      <div class="break-all featureitem-block-bottom-text-color ${bottomText} ${alignment}" style="${bottomTextWidth} ${bottomTextColor}" data-bottom-text-space="${bottomTextToggle}">
         ${v('bottomTextRichtext', 'html')}
       </div>
     `;
   }
   if (mode === 3) {
     return `
-      <div class="featureitem-block-h break-all featureitem-block-top-text ${topText} ${desktopAlignment}" style="${topTextWidth} ${topTextColor}" data-top-text-space="${v('type') === 'icon' ? '' : v('topTextToggle')}">
+      <div class="featureitem-block-h break-all featureitem-block-top-text ${topText} ${alignment}" style="${topTextWidth} ${topTextColor}" data-top-text-space="${v('type') === 'icon' ? '' : v('topTextToggle')}">
         ${v('type') === 'icon' ? '' : v('topTextRichtext', 'html')}
       </div>
-      <div class="featureitem-block-m break-all featureitem-block-highlight-text flex items-center ${highlightText} ${tabletAlignment} ${iconWidthHeight}" style="${highlightTextWidth} ${highlightTextColor}">
+      <div class="featureitem-block-m break-all featureitem-block-highlight-text flex items-center ${highlightText} ${alignment} ${iconWidthHeight}" style="${highlightTextWidth} ${highlightTextColor}">
         ${v('type') === 'icon' ? v('iconSource', 'html') : v('highlightText', 'html')}
       </div>
-      <div class="break-all featureitem-block-bottom-text-color ${bottomText} ${mobileAlignment}" style="${bottomTextWidth} ${bottomTextColor}" data-bottom-text-space="${bottomTextToggle}">
+      <div class="break-all featureitem-block-bottom-text-color ${bottomText} ${alignment}" style="${bottomTextWidth} ${bottomTextColor}" data-bottom-text-space="${bottomTextToggle}">
         ${v('bottomTextRichtext', 'html')}
       </div>
     `;
