@@ -12,6 +12,13 @@
       "collapsible": true,
       "fields": [
         {
+          "component": "text",
+          "name": "textMaxWidthD",
+          "label": "Text max width (D)",
+          "valueType": "string",
+          "placeholder": "Only px"
+        },
+        {
           "component": "select",
           "label": "Text font (D)",
           "name": "fontDesktop",
@@ -23,13 +30,6 @@
             { "name": "tt-bd-100", "value": "tt-bd-100-lg" },
             { "name": "tt-bd-104", "value": "tt-bd-104-lg" }
           ]
-        },
-        {
-          "component": "text",
-          "name": "textMaxWidthD",
-          "label": "Text max width (D)",
-          "valueType": "string",
-          "placeholder": "Only px"
         }
       ]
     },
@@ -40,6 +40,13 @@
       "name": "textContainerT",
       "collapsible": true,
       "fields": [
+        {
+          "component": "text",
+          "name": "textMaxWidthT",
+          "label": "Text max width (T)",
+          "valueType": "string",
+          "placeholder": "Only px"
+        },
         {
           "component": "select",
           "label": "Text font (T)",
@@ -52,13 +59,6 @@
             { "name": "tt-bd-68", "value": "tt-bd-68-md" },
             { "name": "tt-bd-72", "value": "tt-bd-72-md" }
           ]
-        },
-        {
-          "component": "text",
-          "name": "textMaxWidthT",
-          "label": "Text max width (T)",
-          "valueType": "string",
-          "placeholder": "Only px"
         }
       ]
     },
@@ -69,6 +69,13 @@
       "name": "textContainerM",
       "collapsible": true,
       "fields": [
+        {
+          "component": "text",
+          "name": "textMaxWidthM",
+          "label": "Text max width (M)",
+          "valueType": "string",
+          "placeholder": "Only px"
+        },
         {
           "component": "select",
           "label": "Text font (M)",
@@ -81,13 +88,6 @@
             { "name": "tt-bd-44", "value": "tt-bd-44-sm" },
             { "name": "tt-bd-48", "value": "tt-bd-48-sm" }
           ]
-        },
-        {
-          "component": "text",
-          "name": "textMaxWidthM",
-          "label": "Text max width (M)",
-          "valueType": "string",
-          "placeholder": "Only px"
         }
       ]
     },

@@ -13,7 +13,10 @@ const DEFAULT_CONFIG = {
   fontDesktop: '',
   fontTablet: '',
   fontMobile: '',
-  animationLength: '1.5'
+  textMaxWidthD: '',
+  textMaxWidthT: '',
+  textMaxWidthM: '',
+  animationLength: '1.5',
 };
 
 /**
@@ -21,7 +24,7 @@ const DEFAULT_CONFIG = {
  */
 const getFontSize = (device, v) => {
   if (device === 'D') {
-    return  v('fontDesktop', 'text') || 'tt-bd-96-lg';
+    return v('fontDesktop', 'text') || 'tt-bd-96-lg';
   } if (device === 'T') {
     return v('fontTablet', 'text') || 'tt-bd-64-md';
   }
@@ -29,7 +32,6 @@ const getFontSize = (device, v) => {
   // Mobile
   return v('fontMobile', 'text') || 'tt-bd-40-sm';
 };
-
 
 /**
  * Build image size dict
@@ -54,7 +56,7 @@ const getAnimationType = (imageSrc) => {
 };
 
 const _scrollTriggerAnimation = (block, AnimeJS) => {
-  const { animate, onScroll, createTimeline } = AnimeJS;
+  const { onScroll, createTimeline } = AnimeJS;
 
   const scrollContainer = block.querySelector('.scroll-container');
   const sceneImg = block.querySelector('.scene-1 .animation-img');
@@ -79,7 +81,6 @@ const _scrollTriggerAnimation = (block, AnimeJS) => {
   });
 
   if (animationType === 'type-1') {
-    console.log('Effet Media: type-1 - image with Text');
     // 圖片動畫：從 0ms 開始
     if (sceneImg) {
       tl.add(sceneImg, {
@@ -97,8 +98,6 @@ const _scrollTriggerAnimation = (block, AnimeJS) => {
       }, 250);
     }
   } else if (animationType === 'type-2') {
-    console.log('Effet Media: type-2 - only Text');
-
     if (sceneText) {
       tl.add(sceneText, {
         opacity: [1, 0],
@@ -111,9 +110,9 @@ const _scrollTriggerAnimation = (block, AnimeJS) => {
 
 const _getAnimationMinHeight = (device) => {
   const baseHeight = {
-    'D': 1024,
-    'T': 768,
-    'M': 736
+    D: 1024,
+    T: 768,
+    M: 736,
   };
 
   const baseLengthIndex = DEFAULT_CONFIG.animationLength;
@@ -121,15 +120,14 @@ const _getAnimationMinHeight = (device) => {
   return `${baseLengthIndex * baseHeight[device]}px`;
 };
 
-
 const _getTextMaxWidth = (device, v) => {
   const maxWidth = {
-    'D': 'textMaxWidthD',
-    'T': 'textMaxWidthT',
-    'M': 'textMaxWidthM'
+    D: 'textMaxWidthD',
+    T: 'textMaxWidthT',
+    M: 'textMaxWidthM',
   };
 
-  const textMaxWidth = v(maxWidth[device], 'text') 
+  const textMaxWidth = v(maxWidth[device], 'text');
 
   return textMaxWidth ? `${textMaxWidth}px` : '100%';
 };
@@ -148,8 +146,6 @@ export default async function decorate(block) {
     const imageSrc = v('image', 'text');
     const imageAlt = v('imageAlt', 'html');
 
-    console.log('imageAlt', imageAlt);
-
     const text = v('text', 'text');
 
     const fontSizeD = getFontSize('D', v);
@@ -165,10 +161,6 @@ export default async function decorate(block) {
     const textMaxWidthD = _getTextMaxWidth('D', v);
     const textMaxWidthT = _getTextMaxWidth('T', v);
     const textMaxWidthM = _getTextMaxWidth('M', v);
-
-    console.log('textMaxWidthD', textMaxWidthD);
-    console.log('textMaxWidthT', textMaxWidthT);
-    console.log('textMaxWidthM', textMaxWidthM);
 
     const htmlImg = imageSrc ? `
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
@@ -197,8 +189,6 @@ export default async function decorate(block) {
 
     // handle animation - 傳入 anime 實例
     _scrollTriggerAnimation(block, anime);
-
-
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating effet-media: ', error);

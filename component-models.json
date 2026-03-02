@@ -1860,6 +1860,13 @@
         "collapsible": true,
         "fields": [
           {
+            "component": "text",
+            "name": "textMaxWidthD",
+            "label": "Text max width (D)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
+          {
             "component": "select",
             "label": "Text font (D)",
             "name": "fontDesktop",
@@ -1886,13 +1893,6 @@
                 "value": "tt-bd-104-lg"
               }
             ]
-          },
-          {
-            "component": "text",
-            "name": "textMaxWidthD",
-            "label": "Text max width (D)",
-            "valueType": "string",
-            "placeholder": "Only px"
           }
         ]
       },
@@ -1902,6 +1902,13 @@
         "name": "textContainerT",
         "collapsible": true,
         "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthT",
+            "label": "Text max width (T)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
           {
             "component": "select",
             "label": "Text font (T)",
@@ -1929,13 +1936,6 @@
                 "value": "tt-bd-72-md"
               }
             ]
-          },
-          {
-            "component": "text",
-            "name": "textMaxWidthT",
-            "label": "Text max width (T)",
-            "valueType": "string",
-            "placeholder": "Only px"
           }
         ]
       },
@@ -1945,6 +1945,13 @@
         "name": "textContainerM",
         "collapsible": true,
         "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthM",
+            "label": "Text max width (M)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
           {
             "component": "select",
             "label": "Text font (M)",
@@ -1972,13 +1979,6 @@
                 "value": "tt-bd-48-sm"
               }
             ]
-          },
-          {
-            "component": "text",
-            "name": "textMaxWidthM",
-            "label": "Text max width (M)",
-            "valueType": "string",
-            "placeholder": "Only px"
           }
         ]
       },
