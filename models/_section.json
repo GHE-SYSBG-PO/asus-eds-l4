@@ -84,7 +84,8 @@
         "footnote",
         "featureitem-block",
         "small-cards",
-        "feature-accordion"
+        "feature-accordion",
+        "feature-accordion-item"
       ]
     },
     {
