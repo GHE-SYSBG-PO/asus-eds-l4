@@ -29,6 +29,22 @@
           }
         }
       }
+    },
+    {
+      "title": "Tab 3Column (ID:15)",
+      "id": "tab-3column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/section",
+            "template": {
+              "name": "Tab 3Column",
+              "filter": "tab-3column",
+              "model": "tab-3column"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -61,6 +77,14 @@
           "...": "./_container-2cols.json#/fields"
         }
       ]
+    },
+    {
+      "id": "tab-3column",
+      "fields": [
+        {
+          "...": "../blocks/tab-3column/modelConfig/_style.json#/fields"
+        }
+      ]
     }
   ],
   "filters": [
@@ -82,14 +106,19 @@
         "space",
         "bar-chart",
         "footnote",
-        "featureitem-block",
-        "tab-3column"
+        "featureitem-block"
       ]
     },
     {
       "id": "container-2cols",
       "components": [
         "container-col"
+      ]
+    },
+    {
+      "id": "tab-3column",
+      "components": [
+        "tab-3column-item"
       ]
     }
   ]

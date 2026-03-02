@@ -1,0 +1,22 @@
+{
+  "fields": [
+    {
+      "...": "./_style.json#/fields"
+    },
+    {
+      "...": "./_width-setting.json#/fields"
+    },
+    {
+      "...": "./_tab-style.json#/fields"
+    },
+    {
+      "...": "./_tab-container.json#/fields"
+    },
+    {
+      "...": "./_text-style.json#/fields"
+    },
+    {
+      "...": "../../commonModel/_ colorGroup.json#/fields"
+    }
+  ]
+}

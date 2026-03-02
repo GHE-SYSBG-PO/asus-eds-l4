@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "container-2cols"
+      "container-2cols",
+      "tab3-column"
     ]
   },
   {
@@ -24,14 +25,19 @@
       "space",
       "bar-chart",
       "footnote",
-      "featureitem-block",
-      "tab-3column"
+      "featureitem-block"
     ]
   },
   {
     "id": "container-2cols",
     "components": [
       "container-col"
+    ]
+  },
+  {
+    "id": "tab-3column",
+    "components": [
+      "tab-3column-item"
     ]
   },
   {
@@ -80,12 +86,6 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
-    ]
-  },
-  {
-    "id": "tab-3column",
-    "components": [
-      "tab-3column-item"
     ]
   },
   {
