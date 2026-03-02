@@ -2756,11 +2756,11 @@
         "options": [
           {
             "name": "Center",
-            "value": "center"
+            "value": "lg:justify-center"
           },
           {
             "name": "Left",
-            "value": "left"
+            "value": "lg:justify-start"
           }
         ]
       },
@@ -2772,11 +2772,11 @@
         "options": [
           {
             "name": "Center",
-            "value": "center"
+            "value": "md:justify-center"
           },
           {
             "name": "Left",
-            "value": "left"
+            "value": "md:justify-start"
           }
         ]
       },
@@ -2788,11 +2788,11 @@
         "options": [
           {
             "name": "Center",
-            "value": "center"
+            "value": "sm:justify-center"
           },
           {
             "name": "Left",
-            "value": "left"
+            "value": "sm:justify-start"
           }
         ]
       },
