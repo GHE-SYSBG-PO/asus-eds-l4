@@ -1036,8 +1036,6 @@ async function renderCard(block) {
   addVideoEventListeners(smallCardsContainer);
 
   finalizeBlockStructure(block, smallCardsContainer, data, alignmentConfig);
-
-  return data;
 }
 
 /**
@@ -1054,7 +1052,7 @@ export default async function decorate(block) {
     if (window.gsap && window.ScrollTrigger) {
       window.gsap.registerPlugin(window.ScrollTrigger);
     }
-    const data = await renderCard(block); // Html structure and content
+    await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
     const instance = new MediaCarousel();
@@ -1068,8 +1066,7 @@ export default async function decorate(block) {
       setEqualHeight(block);
     });
 
-    const motionEnabled = Array.isArray(data) && data.some((card) => card.motion === 'true');
-    if (motionEnabled) {
+    if (alignmentConfig.motion === 'true') {
       initScrollAnimations(block);
     }
   } catch (error) {
