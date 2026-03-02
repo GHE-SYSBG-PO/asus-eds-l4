@@ -1,8 +1,35 @@
 {
   "fields": [
     {
+      "component": "select",
+      "label": "Font (D)",
+      "name": "intoFontD",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-bd--32", "value": "tt-bd-32" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Font (T)",
+      "name": "infoFontT",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-bd--28", "value": "tt-bd-28" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Font (M)",
+      "name": "infoFontM",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-bd--24", "value": "tt-bd-24" }
+      ]
+    },
+    {
       "component": "text",
-      "label": "font Color",
+      "label": "Font Color (hex)",
       "name": "infoFontColor",
       "valueType": "string"
     }

@@ -51,21 +51,33 @@ const PRODUCT_DEFAULTS = {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'ro-rg-18',
+    infoFontT: 'ro-rg-18',
+    infoFontM: 'ro-rg-16',
   },
   proart: {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'ro-rg-18',
+    infoFontT: 'ro-rg-18',
+    infoFontM: 'ro-rg-16',
   },
   rog: {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'ro-rg-18',
+    infoFontT: 'ro-rg-18',
+    infoFontM: 'ro-rg-16',
   },
   tuf: {
     titleFontD: 'tt-md-32',
     titleFontT: 'tt-md-28',
     titleFontM: 'tt-md-24',
+    infoFontD: 'ro-rg-18',
+    infoFontT: 'ro-rg-18',
+    infoFontM: 'ro-rg-16',
   },
 };
 
@@ -98,6 +110,7 @@ const DEFAULT_CONFIG = {
   bgColor: '',
   title: '',
   info: '',
+  motion: '',
   ctaVisible: 'hide',
   ctaText: 'Learn More',
   ctaLinkType: 'button',
@@ -171,6 +184,9 @@ const DEFAULT_CONFIG = {
   titleFontColor: '',
 
   // Cards Info
+  infoFontD: '',
+  infoFontT: '',
+  infoFontM: '',
   infoFontColor: '',
 
   // Cards Border
@@ -498,7 +514,7 @@ function getValueForDevice(fieldName, data) {
  * @param {string} titleFont The font class for the title.
  * @returns {string} The HTML string for the card content.
  */
-function getCardContentHTML(data, titleFont) {
+function getCardContentHTML(data, titleFont, infoFont) {
   const {
     ctaVisible,
     ctaFontDT,
@@ -537,7 +553,7 @@ function getCardContentHTML(data, titleFont) {
                 <h3>
                   <span class="${titleFont}" style="color: ${titleFontColor ? `#${titleFontColor}` : 'var(--swiper-slide-title-color)'}">${title}</span>
                 </h3>
-                <div style="color: ${infoFontColor ? `#${infoFontColor}` : 'var(--swiper-slide-info-color)'};font-size:18px;">${info}</div>
+                <div class="${infoFont}" style="color: ${infoFontColor ? `#${infoFontColor}` : 'var(--swiper-slide-info-color)'};">${info}</div>
                 ${ctaHTML}
             </div>
           </div>`;
@@ -647,7 +663,8 @@ function getCardHTML(data) {
   } = data;
 
   const titleFont = getValueForDevice('titleFont', data);
-  const blockContent = getCardContentHTML(data, titleFont);
+  const infoFont = getValueForDevice('infoFont', data);
+  const blockContent = getCardContentHTML(data, titleFont, infoFont);
 
   /**
    * Generates the styled block content HTML.

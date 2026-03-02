@@ -4497,6 +4497,12 @@
         "valueType": "string"
       },
       {
+        "component": "boolean",
+        "label": "motion",
+        "name": "Motion",
+        "valueType": "boolean"
+      },
+      {
         "component": "select",
         "label": "CTA Visibility Toggle",
         "name": "ctaVisible",
@@ -5503,7 +5509,7 @@
         "fields": [
           {
             "component": "select",
-            "label": "font (D)",
+            "label": "Font (D)",
             "name": "titleFontD",
             "valueType": "string",
             "options": [
@@ -5515,7 +5521,7 @@
           },
           {
             "component": "select",
-            "label": "font (T)",
+            "label": "Font (T)",
             "name": "titleFontT",
             "valueType": "string",
             "options": [
@@ -5527,7 +5533,7 @@
           },
           {
             "component": "select",
-            "label": "font (M)",
+            "label": "Font (M)",
             "name": "titleFontM",
             "valueType": "string",
             "options": [
@@ -5539,7 +5545,7 @@
           },
           {
             "component": "text",
-            "label": "font color (hex)",
+            "label": "Font Color (hex)",
             "name": "titleFontColor",
             "valueType": "string"
           }
@@ -5552,8 +5558,44 @@
         "collapsible": true,
         "fields": [
           {
+            "component": "select",
+            "label": "Font (D)",
+            "name": "intoFontD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd--32",
+                "value": "tt-bd-32"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Font (T)",
+            "name": "infoFontT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd--28",
+                "value": "tt-bd-28"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "Font (M)",
+            "name": "infoFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd--24",
+                "value": "tt-bd-24"
+              }
+            ]
+          },
+          {
             "component": "text",
-            "label": "font Color",
+            "label": "Font Color (hex)",
             "name": "infoFontColor",
             "valueType": "string"
           }
