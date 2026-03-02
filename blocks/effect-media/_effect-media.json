@@ -18,7 +18,7 @@
   ],
   "models": [
     {
-      "id": "effect-media",
+      "id": "media-block",
       "fields": [
         {
           "component": "richtext",
@@ -46,7 +46,7 @@
         {
           "component": "text",
           "name": "L4TagNestedBlock",
-          "value": "L4--nested-block--effect-media",
+          "value": "L4--nested-block--media-block",
           "hidden": true
         }
       ]

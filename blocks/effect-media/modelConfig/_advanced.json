@@ -1,6 +1,11 @@
 {
   "fields": [
     {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
       "component": "container",
       "label": "Text (D)",
       "name": "mediaWidthM",
