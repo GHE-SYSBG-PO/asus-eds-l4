@@ -108,9 +108,9 @@ export default async function decorate(block) {
     const mBlockAlignment = v('mobileAlignment') === 'left' ? 'text-left' : 'text-center';
 
     // Build style objects for each device
-    const stylesM = {
-      ...getSizeStyles(configM),
-      ...getMinMaxWidthStyles(configM),
+    const stylesD = {
+      ...getSizeStyles(configD),
+      ...getMinMaxWidthStyles(configD),
     };
 
     // Create image element
