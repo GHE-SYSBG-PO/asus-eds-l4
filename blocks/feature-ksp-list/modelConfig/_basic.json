@@ -1,11 +1,6 @@
 {
   "fields": [
     {
-      "component": "tab",
-      "label": "basic",
-      "name": "basic"
-    },
-    {
       "component": "select",
       "label": "Visibility",
       "name": "lineVisibility",
