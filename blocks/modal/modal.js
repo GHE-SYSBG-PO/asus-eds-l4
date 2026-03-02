@@ -203,6 +203,7 @@ export async function openModal(fragmentUrl, modal = true, dialogId = 'dialog', 
 
   const fragment = await loadFragment(path);
   if (!fragment) {
+    // eslint-disable-next-line no-console
     console.error('fragment not found');
     return false;
   }
