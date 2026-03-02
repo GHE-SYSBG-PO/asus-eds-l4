@@ -56,9 +56,236 @@ const normalizeColor = (color) => {
 };
 
 const mediaStateByCell = new WeakMap();
+const fragmentTemplateByPath = new Map();
 const rowAnimationState = new WeakMap();
-const ROW_ANIMATION_MS = 420;
+const ROW_ANIMATION_MS = 800;
 const ROW_STAGGER_MS = 26;
+const PREFETCH_CONCURRENCY = 2;
+const IDLE_PREFETCH_CONCURRENCY = 1;
+const delayedMediaRegistry = new Map();
+let delayedMediaListenerBound = false;
+let delayedMediaEventFired = false;
+let delayedMediaPrefetchStarted = false;
+let mediaControlDelegationBound = false;
+
+const isElementNearViewport = (element, offset = 200) => {
+  if (!element || typeof element.getBoundingClientRect !== 'function') return false;
+  const rect = element.getBoundingClientRect();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+  return rect.bottom >= -offset && rect.top <= viewportHeight + offset;
+};
+
+const scheduleOnIdle = (callback) => {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => callback(), { timeout: 1200 });
+    return;
+  }
+  window.setTimeout(callback, 180);
+};
+
+const runLoadersWithConcurrency = async (loaders, concurrency = PREFETCH_CONCURRENCY) => {
+  if (!loaders.length) return;
+  let pointer = 0;
+
+  const worker = async () => {
+    if (pointer >= loaders.length) return;
+    const currentIndex = pointer;
+    pointer += 1;
+    await loaders[currentIndex]().catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('Failed to prefetch accordion media:', error);
+    });
+    return worker();
+  };
+
+  const workerCount = Math.min(concurrency, loaders.length);
+  await Promise.allSettled(Array.from({ length: workerCount }, () => worker()));
+};
+
+const runLoadersInIdle = (loaders, concurrency = IDLE_PREFETCH_CONCURRENCY) => {
+  if (!loaders.length) return;
+  let pointer = 0;
+  let inFlight = 0;
+
+  const pump = () => {
+    const available = Math.max(concurrency - inFlight, 0);
+    if (!available || pointer >= loaders.length) return;
+
+    const batch = loaders.slice(pointer, pointer + available);
+    pointer += batch.length;
+    inFlight += batch.length;
+
+    batch.forEach((loader) => {
+      loader().catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Failed to idle-prefetch accordion media:', error);
+      }).finally(() => {
+        inFlight -= 1;
+        if (pointer < loaders.length) {
+          scheduleOnIdle(pump);
+        }
+      });
+    });
+  };
+
+  scheduleOnIdle(pump);
+};
+
+const runDelayedMediaPrefetch = async () => {
+  if (delayedMediaPrefetchStarted) return;
+  delayedMediaPrefetchStarted = true;
+
+  const registryEntries = [...delayedMediaRegistry.entries()];
+  const prioritizedLoaders = [];
+  const idleLoaders = [];
+
+  registryEntries.forEach(([loader, isPriority]) => {
+    const shouldPrioritize = typeof isPriority === 'function' ? isPriority() : false;
+    if (shouldPrioritize) {
+      prioritizedLoaders.push(loader);
+    } else {
+      idleLoaders.push(loader);
+    }
+  });
+
+  await runLoadersWithConcurrency(prioritizedLoaders, PREFETCH_CONCURRENCY);
+  runLoadersInIdle(idleLoaders, IDLE_PREFETCH_CONCURRENCY);
+};
+
+const registerDelayedMediaLoader = (loader, isPriority = () => false) => {
+  if (typeof loader !== 'function') return;
+  delayedMediaRegistry.set(loader, isPriority);
+  if (delayedMediaEventFired) {
+    runDelayedMediaPrefetch().catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('Failed to trigger delayed media prefetch:', error);
+    });
+  }
+};
+
+const bindDelayedMediaListener = () => {
+  if (delayedMediaListenerBound) return;
+  delayedMediaListenerBound = true;
+  window.addEventListener('delayed-loaded', () => {
+    delayedMediaEventFired = true;
+    runDelayedMediaPrefetch().catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error('Failed to run delayed media prefetch:', error);
+    });
+  }, { once: true });
+};
+
+const syncVideoControls = (video) => {
+  if (!video) return;
+  const container = video.closest('.media-block-video-container');
+  if (!container) return;
+
+  const playBtn = container.querySelector('.media-block-play-btn');
+  const pauseBtn = container.querySelector('.media-block-pause-btn');
+  const replayBtn = container.querySelector('.media-block-replay-btn');
+
+  if (video.ended && replayBtn) {
+    replayBtn.style.display = 'flex';
+    if (playBtn) playBtn.style.display = 'none';
+    if (pauseBtn) pauseBtn.style.display = 'none';
+    return;
+  }
+
+  if (video.paused) {
+    if (playBtn) playBtn.style.display = 'flex';
+    if (pauseBtn) pauseBtn.style.display = 'none';
+  } else {
+    if (playBtn) playBtn.style.display = 'none';
+    if (pauseBtn) pauseBtn.style.display = 'flex';
+  }
+  if (replayBtn) replayBtn.style.display = 'none';
+};
+
+const syncAccordionVideoPlayback = (activeContainer) => {
+  if (!activeContainer) return;
+  const accordionContainer = activeContainer.closest('.feature-accordion-item-container');
+  if (!accordionContainer) return;
+
+  const allVideos = [...accordionContainer.querySelectorAll('video')];
+  allVideos.forEach((video) => {
+    if (!activeContainer.contains(video)) {
+      if (!video.paused) {
+        video.pause();
+      }
+      syncVideoControls(video);
+    }
+  });
+
+  const activeVideo = activeContainer.querySelector('video');
+  if (activeVideo) {
+    activeVideo.play().catch(() => {});
+    syncVideoControls(activeVideo);
+  }
+};
+
+const bindMediaControlDelegation = () => {
+  if (mediaControlDelegationBound) return;
+  mediaControlDelegationBound = true;
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+
+    const playBtn = target.closest('.media-block-play-btn');
+    if (playBtn) {
+      const container = playBtn.closest('.media-block-video-container');
+      const video = container?.querySelector('video');
+      if (video) {
+        event.preventDefault();
+        event.stopPropagation();
+        video.play().catch(() => {});
+        syncVideoControls(video);
+      }
+      return;
+    }
+
+    const pauseBtn = target.closest('.media-block-pause-btn');
+    if (pauseBtn) {
+      const container = pauseBtn.closest('.media-block-video-container');
+      const video = container?.querySelector('video');
+      if (video) {
+        event.preventDefault();
+        event.stopPropagation();
+        video.pause();
+        syncVideoControls(video);
+      }
+      return;
+    }
+
+    const replayBtn = target.closest('.media-block-replay-btn');
+    if (replayBtn) {
+      const container = replayBtn.closest('.media-block-video-container');
+      const video = container?.querySelector('video');
+      if (video) {
+        event.preventDefault();
+        event.stopPropagation();
+        video.currentTime = 0;
+        video.play().catch(() => {});
+        syncVideoControls(video);
+      }
+    }
+  }, true);
+
+  document.addEventListener('play', (event) => {
+    const video = event.target instanceof HTMLVideoElement ? event.target : null;
+    if (video) syncVideoControls(video);
+  }, true);
+
+  document.addEventListener('pause', (event) => {
+    const video = event.target instanceof HTMLVideoElement ? event.target : null;
+    if (video) syncVideoControls(video);
+  }, true);
+
+  document.addEventListener('ended', (event) => {
+    const video = event.target instanceof HTMLVideoElement ? event.target : null;
+    if (video) syncVideoControls(video);
+  }, true);
+};
 
 const ensureAccordionGroupWrapper = (block) => {
   const container = block.closest('.feature-accordion-item-container');
@@ -135,6 +362,23 @@ const isLikelyFragmentPath = (value) => {
   if (!value || typeof value !== 'string') return false;
   const path = value.trim();
   return path.startsWith('./') || path.startsWith('/') || path.startsWith('http');
+};
+
+const getLikelyPathFromCell = (cell) => {
+  const value = toFieldValue(cell);
+  return [value.text, extractPathFromHtml(value.html)].find(isLikelyFragmentPath) || '';
+};
+
+const resolveSubItemCellIndexes = (cells) => {
+  const mediaIndex = cells.findIndex((cell) => isLikelyFragmentPath(getLikelyPathFromCell(cell)));
+  const safeMediaIndex = mediaIndex >= 3 ? mediaIndex : Math.min(4, Math.max(cells.length - 1, 0));
+
+  return {
+    header: Math.max(0, safeMediaIndex - 3),
+    subtitle: Math.max(0, safeMediaIndex - 2),
+    info: Math.max(0, safeMediaIndex - 1),
+    media: safeMediaIndex,
+  };
 };
 
 const makeInteractiveTrigger = (el, onToggle, initialOpen = false) => {
@@ -248,7 +492,9 @@ const renderIntoTarget = (target, fragment, fallbackHtml = '') => {
   target.classList.remove('is-media-enter');
   target.classList.add('is-media-switching');
   target.innerHTML = '';
-  if (fragment?.childNodes?.length) {
+  if (fragment instanceof HTMLTemplateElement) {
+    target.append(fragment.content.cloneNode(true));
+  } else if (fragment?.childNodes?.length) {
     target.append(...fragment.childNodes);
   } else if (fallbackHtml) {
     target.innerHTML = fallbackHtml;
@@ -260,16 +506,48 @@ const renderIntoTarget = (target, fragment, fallbackHtml = '') => {
   target.classList.remove('is-media-switching');
 };
 
+const activateMediaGroupSlot = (slot) => {
+  if (!slot || !slot.parentElement) return;
+  const mediaGroup = slot.parentElement;
+  const slots = [...mediaGroup.querySelectorAll(':scope > .feature-accordion-media-slot')];
+  slots.forEach((candidate) => {
+    const isActive = candidate === slot;
+    candidate.hidden = !isActive;
+    candidate.style.display = isActive ? '' : 'none';
+  });
+  syncAccordionVideoPlayback(slot);
+};
+
+const createTemplateFromFragment = (fragment) => {
+  if (!fragment?.childNodes?.length) return null;
+  const template = document.createElement('template');
+  template.content.append(...[...fragment.childNodes].map((node) => node.cloneNode(true)));
+  return template;
+};
+
+const getCachedFragmentTemplate = async (resolvedPath) => {
+  if (!resolvedPath) return null;
+  if (!fragmentTemplateByPath.has(resolvedPath)) {
+    fragmentTemplateByPath.set(resolvedPath, (async () => {
+      const fragment = await loadFragment(resolvedPath);
+      return createTemplateFromFragment(fragment);
+    })());
+  }
+  return fragmentTemplateByPath.get(resolvedPath);
+};
+
 const createLazyMediaLoader = (cell, path, fallbackHtml, getRenderTargets = () => [cell]) => async () => {
   if (!cell || (!path && !fallbackHtml)) return;
 
   const state = mediaStateByCell.get(cell) || {
     fragmentPath: '',
+    fragmentTemplate: null,
     fallback: '',
     loadingTargets: new WeakMap(),
     loadedTargets: new WeakSet(),
     renderedTargets: new WeakSet(),
     groupSlot: null,
+    groupPreferred: false,
   };
   mediaStateByCell.set(cell, state);
 
@@ -302,9 +580,10 @@ const createLazyMediaLoader = (cell, path, fallbackHtml, getRenderTargets = () =
 
     const promise = (async () => {
       if (state.fragmentPath) {
-        const fragment = await loadFragment(state.fragmentPath);
-        if (fragment?.childNodes?.length) {
-          renderIntoTarget(container, fragment, state.fallback);
+        const template = state.fragmentTemplate || await getCachedFragmentTemplate(state.fragmentPath);
+        if (template) {
+          state.fragmentTemplate = template;
+          renderIntoTarget(container, template, state.fallback);
           state.loadedTargets.add(container);
           return;
         }
@@ -326,17 +605,15 @@ const createLazyMediaLoader = (cell, path, fallbackHtml, getRenderTargets = () =
 
   await Promise.all(targets.map(async (target) => {
     if (target.classList.contains('feature-accordion-media-group')) {
-      const slots = [...target.querySelectorAll(':scope > .feature-accordion-media-slot')];
-      slots.forEach((slot) => { slot.hidden = true; });
-
       if (!state.groupSlot) {
         state.groupSlot = document.createElement('div');
         state.groupSlot.classList.add('feature-accordion-media-slot');
+        state.groupSlot.hidden = true;
+        state.groupSlot.style.display = 'none';
         target.append(state.groupSlot);
       }
 
       await ensureLoadedInto(state.groupSlot);
-      state.groupSlot.hidden = false;
     } else if (!state.renderedTargets.has(target)) {
       await ensureLoadedInto(target);
       state.renderedTargets.add(target);
@@ -358,8 +635,55 @@ const expandFirstNested = (container) => {
   }
 };
 
+const isMediaCellCurrentlyActive = (cell) => {
+  if (!cell) return false;
+
+  const nestedEntry = cell.closest('.feature-accordion-subitem__entry');
+  if (nestedEntry) {
+    const nestedTrigger = nestedEntry.querySelector('.feature-accordion-subitem__trigger');
+    const topEntry = cell.closest('.feature-accordion-item__entry');
+    const topTrigger = topEntry?.querySelector('.feature-accordion-item__trigger');
+    return nestedTrigger?.getAttribute('aria-expanded') === 'true'
+      && topTrigger?.getAttribute('aria-expanded') === 'true';
+  }
+
+  const topEntry = cell.closest('.feature-accordion-item__entry');
+  const topTrigger = topEntry?.querySelector('.feature-accordion-item__trigger');
+  return topTrigger?.getAttribute('aria-expanded') === 'true';
+};
+
+const showMediaGroupSlotForCell = (cell) => {
+  if (!cell) return;
+  if (!isMediaCellCurrentlyActive(cell)) return;
+  const state = mediaStateByCell.get(cell);
+  if (!state) return;
+  state.groupPreferred = true;
+  const mediaGroup = state.groupSlot?.parentElement;
+  const useGroupSlot = !!(mediaGroup && window.getComputedStyle(mediaGroup).display !== 'none');
+
+  if (state.groupSlot && useGroupSlot) {
+    activateMediaGroupSlot(state.groupSlot);
+  } else {
+    syncAccordionVideoPlayback(cell);
+  }
+};
+
+const hasRenderableMediaSource = (cell, configText = '', configHtml = '') => {
+  const configPath = [configText, extractPathFromHtml(configHtml)].find(isLikelyFragmentPath);
+  if (configPath) return true;
+  if (!cell) return false;
+
+  const inlinePath = getLikelyPathFromCell(cell);
+  if (inlinePath) return true;
+
+  const hasMediaElement = !!cell.querySelector('img, picture, video, iframe, .media-block');
+  return hasMediaElement;
+};
+
 export default async function decorate(block) {
   try {
+    bindDelayedMediaListener();
+    bindMediaControlDelegation();
     const scaffold = ensureAccordionGroupWrapper(block);
 
     const rows = [...block.children];
@@ -370,17 +694,13 @@ export default async function decorate(block) {
 
     const titleRow = rows[0];
     const titleCell = titleRow?.children?.[0];
-    const subtitleRow = rows[1];
     const subtitleCell = rows[1]?.children?.[0];
-    const infoRow = rows[2];
     const infoCell = rows[2]?.children?.[0];
     const mediaCell = rows[3]?.children?.[0];
 
     block.classList.add('feature-accordion-item__entry');
     titleCell?.classList.add('feature-accordion-item__trigger');
-    subtitleRow?.classList.add('feature-accordion-item__subtitle');
     subtitleCell?.classList.add('feature-accordion-item__subtitle');
-    infoRow?.classList.add('feature-accordion-item__info');
     infoCell?.classList.add('feature-accordion-item__info');
     mediaCell?.classList.add('feature-accordion-item__media');
 
@@ -390,6 +710,17 @@ export default async function decorate(block) {
 
     const subItemRows = detectSubItemRows(block);
     const isNestedVariant = subItemRows.length > 0;
+    const hasTopMedia = hasRenderableMediaSource(
+      mediaCell,
+      v('mediaBlockContent'),
+      v('mediaBlockContent', 'html'),
+    );
+
+    if (isNestedVariant && !hasTopMedia) {
+      const mediaRow = rows[3];
+      if (mediaRow) mediaRow.remove();
+    }
+
     const getMediaTargets = (inlineCell) => {
       const targets = [inlineCell];
       if (scaffold?.mediaGroup) targets.push(scaffold.mediaGroup);
@@ -402,18 +733,24 @@ export default async function decorate(block) {
       v('mediaBlockContent', 'html'),
       () => getMediaTargets(mediaCell),
     );
+    if (hasTopMedia) {
+      registerDelayedMediaLoader(
+        ensureTopMediaLoaded,
+        () => titleCell?.getAttribute('aria-expanded') === 'true' || isElementNearViewport(titleCell),
+      );
+    }
 
-    const topPanelRows = rows.slice(1);
+    const topPanelRows = [...block.children].slice(1);
     topPanelRows.forEach((row, index) => {
       row.classList.add('feature-accordion-item__panel-row');
-      const cell = row?.children?.[0];
+      // const cell = row?.children?.[0];
       if (index === 0) {
         row.classList.add('feature-accordion-item__subtitle');
-        cell?.classList.add('feature-accordion-item__subtitle');
+        // cell?.classList.add('feature-accordion-item__subtitle');
       }
       if (index === 1) {
         row.classList.add('feature-accordion-item__info');
-        cell?.classList.add('feature-accordion-item__info');
+        // cell?.classList.add('feature-accordion-item__info');
       }
     });
 
@@ -423,11 +760,12 @@ export default async function decorate(block) {
       const sv = getFieldValue(subConfig);
       const cells = [...subRow.children];
 
-      const nestedHeaderCell = cells[1] || cells[0];
-      const nestedPanelCells = cells.filter((cell, idx) => idx !== 1);
-      const nestedSubtitleCell = cells[2];
-      const nestedInfoCell = cells[3];
-      const nestedMediaCell = cells[4];
+      const nestedIndexes = resolveSubItemCellIndexes(cells);
+      const nestedHeaderCell = cells[nestedIndexes.header];
+      const nestedPanelCells = cells.filter((cell, idx) => idx !== nestedIndexes.header);
+      const nestedSubtitleCell = cells[nestedIndexes.subtitle];
+      const nestedInfoCell = cells[nestedIndexes.info];
+      const nestedMediaCell = cells[nestedIndexes.media];
 
       subRow.classList.add('feature-accordion-subitem__entry');
       nestedHeaderCell?.classList.add('feature-accordion-subitem__trigger', 'feature-accordion-subitem__title');
@@ -442,19 +780,27 @@ export default async function decorate(block) {
 
       const ensureNestedMediaLoaded = createLazyMediaLoader(
         nestedMediaCell,
-        sv('subItemMediaBlockContent'),
-        sv('subItemMediaBlockContent', 'html'),
+        getLikelyPathFromCell(nestedMediaCell) || sv('subItemMediaBlockContent'),
+        toFieldValue(nestedMediaCell).html || sv('subItemMediaBlockContent', 'html'),
         () => getMediaTargets(nestedMediaCell),
+      );
+      registerDelayedMediaLoader(
+        ensureNestedMediaLoaded,
+        () => false,
       );
 
       setRowsOpenState(nestedPanelCells, false, true);
       makeInteractiveTrigger(nestedHeaderCell, (isOpen) => {
         setRowsOpenState(nestedPanelCells, isOpen);
         if (isOpen) {
-          ensureNestedMediaLoaded().catch((error) => {
-            // eslint-disable-next-line no-console
-            console.error('Failed to load nested accordion media:', error);
-          });
+          ensureNestedMediaLoaded()
+            .then(() => {
+              showMediaGroupSlotForCell(nestedMediaCell);
+            })
+            .catch((error) => {
+              // eslint-disable-next-line no-console
+              console.error('Failed to load nested media on open:', error);
+            });
           const siblingNestedEntries = [...subRow.parentElement.children]
             .filter((row) => row !== subRow && row.classList.contains('feature-accordion-subitem__entry'));
           siblingNestedEntries.forEach((entry) => {
@@ -480,10 +826,16 @@ export default async function decorate(block) {
     makeInteractiveTrigger(titleCell, (isOpen) => {
       setRowsOpenState(topPanelRows, isOpen);
       if (isOpen) {
-        ensureTopMediaLoaded().catch((error) => {
-          // eslint-disable-next-line no-console
-          console.error('Failed to load top accordion media:', error);
-        });
+        if (hasTopMedia) {
+          ensureTopMediaLoaded()
+            .then(() => {
+              showMediaGroupSlotForCell(mediaCell);
+            })
+            .catch((error) => {
+              // eslint-disable-next-line no-console
+              console.error('Failed to load top media on open:', error);
+            });
+        }
         itemsInScope
           .filter((item) => item !== block)
           .forEach((item) => {
@@ -496,13 +848,28 @@ export default async function decorate(block) {
     }, isFirstAccordionItem);
 
     if (isFirstAccordionItem && isNestedVariant) {
+      if (hasTopMedia) {
+        ensureTopMediaLoaded()
+          .then(() => {
+            showMediaGroupSlotForCell(mediaCell);
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Failed to load initial top media:', error);
+          });
+      }
       expandFirstNested(block);
-    }
-    if (isFirstAccordionItem) {
-      ensureTopMediaLoaded().catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Failed to load initial top accordion media:', error);
-      });
+    } else if (isFirstAccordionItem) {
+      if (hasTopMedia) {
+        ensureTopMediaLoaded()
+          .then(() => {
+            showMediaGroupSlotForCell(mediaCell);
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Failed to load initial top media:', error);
+          });
+      }
     }
   } catch (error) {
     // eslint-disable-next-line no-console
