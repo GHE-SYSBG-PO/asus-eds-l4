@@ -17,11 +17,11 @@
           "name": "fontDesktop",
           "valueType": "string",
           "options": [
-            { "name": "tt-bd-88", "value": "tt-bd-88" },
-            { "name": "tt-bd-92", "value": "tt-bd-92" },
-            { "name": "tt-bd-96", "value": "tt-bd-96" },
-            { "name": "tt-bd-100", "value": "tt-bd-100" },
-            { "name": "tt-bd-104", "value": "tt-bd-104" }
+            { "name": "tt-bd-88", "value": "tt-bd-88-lg" },
+            { "name": "tt-bd-92", "value": "tt-bd-92-lg" },
+            { "name": "tt-bd-96", "value": "tt-bd-96-lg" },
+            { "name": "tt-bd-100", "value": "tt-bd-100-lg" },
+            { "name": "tt-bd-104", "value": "tt-bd-104-lg" }
           ]
         }
       ]
@@ -39,11 +39,11 @@
           "name": "fontTablet",
           "valueType": "string",
           "options": [
-            { "name": "tt-bd-56", "value": "tt-bd-56" },
-            { "name": "tt-bd-60", "value": "tt-bd-60" },
-            { "name": "tt-bd-64", "value": "tt-bd-64" },
-            { "name": "tt-bd-68", "value": "tt-bd-68" },
-            { "name": "tt-bd-72", "value": "tt-bd-72" }
+            { "name": "tt-bd-56", "value": "tt-bd-56-md" },
+            { "name": "tt-bd-60", "value": "tt-bd-60-md" },
+            { "name": "tt-bd-64", "value": "tt-bd-64-md" },
+            { "name": "tt-bd-68", "value": "tt-bd-68-md" },
+            { "name": "tt-bd-72", "value": "tt-bd-72-md" }
           ]
         }
       ]
@@ -61,11 +61,11 @@
           "name": "fontMobile",
           "valueType": "string",
           "options": [
-            { "name": "tt-bd-32", "value": "tt-bd-32" },
-            { "name": "tt-bd-36", "value": "tt-bd-36" },
-            { "name": "tt-bd-40", "value": "tt-bd-40" },
-            { "name": "tt-bd-44", "value": "tt-bd-44" },
-            { "name": "tt-bd-48", "value": "tt-bd-48" }
+            { "name": "tt-bd-32", "value": "tt-bd-32-sm" },
+            { "name": "tt-bd-36", "value": "tt-bd-36-sm" },
+            { "name": "tt-bd-40", "value": "tt-bd-40-sm" },
+            { "name": "tt-bd-44", "value": "tt-bd-44-sm" },
+            { "name": "tt-bd-48", "value": "tt-bd-48-sm" }
           ]
         }
       ]
@@ -82,19 +82,19 @@
     {
       "component": "text",
       "valueType": "string",
-      "name": "width",
-      "label": "width (px)",
+      "name": "imgWidthD",
+      "label": "Image width (D)",
       "value": "",
-      "placeholder": "Only px"
+      "placeholder": "vw or px, default 100vw"
     },
 
     {
       "component": "text",
       "valueType": "string",
-      "name": "height",
-      "label": "height (px)",
+      "name": "imgHeightD",
+      "label": "Image height (D)",
       "value": "",
-      "placeholder": "Only px"
+      "placeholder": "vh or px, default 100vh"
     }
   ]
 }

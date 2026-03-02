@@ -11,13 +11,14 @@
       "name": "text",
       "valueType": "string"
     },
+
     {
       "component": "reference",
-      "valueType": "string",
-      "name": "image",
-      "label": "Image",
+      "label": "image",
+      "name": "Image",
       "multi": false
     },
+
     {
       "component": "text",
       "valueType": "string",
