@@ -699,6 +699,88 @@
     ]
   },
   {
+    "id": "feature-accordion",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "CTA visiblity toggle",
+        "name": "ctaVisiblity",
+        "valueType": "string",
+        "placeholder": "The default value is show",
+        "options": [
+          {
+            "name": "show",
+            "value": "show"
+          },
+          {
+            "name": "hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "text",
+        "name": "ctaText",
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisiblity"
+            },
+            "show"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "hyperlink",
+        "name": "ctaHyperlink",
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisiblity"
+            },
+            "show"
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "text",
+        "label": "CTA font color",
+        "name": "ctaFontColor",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "bar-chart",
     "fields": [
       {
@@ -2811,12 +2893,6 @@
         "label": "info font color",
         "name": "infoFontColor",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--media-block",
-        "hidden": true
       }
     ]
   },
@@ -2880,72 +2956,6 @@
         "component": "text",
         "label": "sub item info font color",
         "name": "subItemInfoFontColor",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "feature-accordion",
-    "fields": [
-      {
-        "component": "tab",
-        "label": "basic",
-        "name": "basic"
-      },
-      {
-        "component": "select",
-        "label": "CTA visiblity toggle",
-        "name": "ctaVisiblity",
-        "valueType": "string",
-        "placeholder": "The default value is show",
-        "options": [
-          {
-            "name": "show",
-            "value": "show"
-          },
-          {
-            "name": "hide",
-            "value": "hide"
-          }
-        ]
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "label": "text",
-        "name": "ctaText",
-        "condition": {
-          "===": [
-            {
-              "var": "ctaVisiblity"
-            },
-            "show"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "label": "hyperlink",
-        "name": "ctaHyperlink",
-        "condition": {
-          "===": [
-            {
-              "var": "ctaVisiblity"
-            },
-            "show"
-          ]
-        }
-      },
-      {
-        "component": "tab",
-        "label": "advanced",
-        "name": "advanced"
-      },
-      {
-        "component": "text",
-        "label": "CTA font color",
-        "name": "ctaFontColor",
         "valueType": "string"
       }
     ]
