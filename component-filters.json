@@ -25,7 +25,8 @@
       "bar-chart",
       "footnote",
       "featureitem-block",
-      "feature-ksp-list"
+      "feature-ksp-list",
+      "small-cards"
     ]
   },
   {
@@ -86,6 +87,12 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
+    ]
+  },
+  {
+    "id": "small-cards",
+    "components": [
+      "small-card"
     ]
   }
 ]
