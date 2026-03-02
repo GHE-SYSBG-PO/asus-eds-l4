@@ -8,7 +8,7 @@
     {
       "component": "container",
       "label": "Text (D)",
-      "name": "mediaFontD",
+      "name": "textContainerD",
       "collapsible": true,
       "fields": [
         {
@@ -30,7 +30,7 @@
     {
       "component": "container",
       "label": "Text (T)",
-      "name": "mediaFontM",
+      "name": "textContainerT",
       "collapsible": true,
       "fields": [
         {
@@ -52,7 +52,7 @@
     {
       "component": "container",
       "label": "Text (T)",
-      "name": "mediaFontT",
+      "name": "textContainerM",
       "collapsible": true,
       "fields": [
         {
@@ -76,23 +76,23 @@
       "label": "font color (hex)",
       "name": "fontColor",
       "valueType": "string",
-      "placeholder": "No need to add #"
+      "placeholder": "NO NEED #"
     },
 
     {
       "component": "text",
       "valueType": "string",
       "name": "width",
-      "label": "Image width (px)",
+      "label": "width (px)",
       "value": "",
       "placeholder": "Only px"
     },
 
-      {
+    {
       "component": "text",
       "valueType": "string",
       "name": "height",
-      "label": "Image height (px)",
+      "label": "height (px)",
       "value": "",
       "placeholder": "Only px"
     }
