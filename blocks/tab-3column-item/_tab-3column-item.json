@@ -22,7 +22,28 @@
       "id": "tab-3column-item",
       "fields": [
         {
-          "...": "./modelConfig/_tab.json#/fields"
+          "component": "text",
+          "label": "tab text",
+          "name": "tabText",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "icon asset (if icon=yes)",
+          "name": "tabIconAsset",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "label": "title",
+          "name": "tabTitle",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "info",
+          "name": "tabInfo",
+          "valueType": "string"
         }
       ]
     }
@@ -30,9 +51,7 @@
   "filters": [
     {
       "id": "tab-3column-item",
-      "components": [
-        "media-block"
-      ]
+      "components": ["media-block"]
     }
   ]
 }
