@@ -152,6 +152,9 @@ export default async function decorate(block) {
     `;
 
     const wrap = `
+      <div class="media-block-container relative">
+        ${mediaContent}
+      </div>
       <div class='flex flex-col  ${dAlignment} ${tAlignment} ${mAlignment}'>
         ${title}
       </div>
