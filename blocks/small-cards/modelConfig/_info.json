@@ -6,7 +6,7 @@
       "name": "intoFontD",
       "valueType": "string",
       "options": [
-        { "name": "tt-bd--32", "value": "tt-bd-32" }
+        { "name": "ro-rg-18", "value": "ro-rg-18" }
       ]
     },
     {
@@ -15,7 +15,7 @@
       "name": "infoFontT",
       "valueType": "string",
       "options": [
-        { "name": "tt-bd--28", "value": "tt-bd-28" }
+        { "name": "ro-rg-18", "value": "ro-rg-18" }
       ]
     },
     {
@@ -24,7 +24,7 @@
       "name": "infoFontM",
       "valueType": "string",
       "options": [
-        { "name": "tt-bd--24", "value": "tt-bd-24" }
+        { "name": "ro-rg-16", "value": "ro-rg-16" }
       ]
     },
     {
