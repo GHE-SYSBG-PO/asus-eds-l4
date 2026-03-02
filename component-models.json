@@ -2996,6 +2996,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-nr-40",
                 "value": "tt-nr-40-lg"
               },
@@ -3028,6 +3032,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-nr-40",
                 "value": "tt-nr-40-md"
               },
@@ -3059,6 +3067,10 @@
             "name": "highlightTextM",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "tt-nr-40",
                 "value": "tt-nr-40-sm"
@@ -3124,6 +3136,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-nr-16-sh",
                 "value": "tt-nr-16-sh-lg"
               },
@@ -3144,6 +3160,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-nr-16-sh",
                 "value": "tt-nr-16-sh-md"
               },
@@ -3163,6 +3183,10 @@
             "name": "topTextM",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "tt-nr-16-sh",
                 "value": "tt-nr-16-sh-sm"
@@ -3204,6 +3228,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-nr-16-sh",
                 "value": "tt-nr-16-sh-lg"
               },
@@ -3224,6 +3252,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-nr-16-sh",
                 "value": "tt-nr-16-sh-md"
               },
@@ -3243,6 +3275,10 @@
             "name": "bottomTextM",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "tt-nr-16-sh",
                 "value": "tt-nr-16-sh-sm"

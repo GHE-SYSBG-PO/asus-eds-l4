@@ -17,6 +17,7 @@
           "name": "highlightTextD",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-40", "value": "tt-nr-40-lg" },
             { "name": "tt-nr-48", "value": "tt-nr-48-lg" },
             { "name": "tt-nr-52", "value": "tt-nr-52-lg" },
@@ -31,6 +32,7 @@
           "name": "highlightTextT",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-40", "value": "tt-nr-40-md" },
             { "name": "tt-nr-48", "value": "tt-nr-48-md" },
             { "name": "tt-nr-52", "value": "tt-nr-52-md" },
@@ -45,6 +47,7 @@
           "name": "highlightTextM",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-40", "value": "tt-nr-40-sm" },
             { "name": "tt-nr-48", "value": "tt-nr-48-sm" },
             { "name": "tt-nr-52", "value": "tt-nr-52-sm" },
@@ -84,6 +87,7 @@
           "name": "topTextD",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-lg" },
             { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-lg" },
             { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-lg" }
@@ -95,6 +99,7 @@
           "name": "topTextT",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-md" },
             { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-md" },
             { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-md" }
@@ -106,6 +111,7 @@
           "name": "topTextM",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-sm" },
             { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-sm" },
             { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-sm" }
@@ -137,6 +143,7 @@
           "name": "bottomTextD",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-lg" },
             { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-lg" },
             { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-lg" }
@@ -148,6 +155,7 @@
           "name": "bottomTextT",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-md" },
             { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-md" },
             { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-md" }
@@ -159,6 +167,7 @@
           "name": "bottomTextM",
           "valueType": "string",
           "options": [
+            { "name": "default", "value": "" },
             { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh-sm" },
             { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh-sm" },
             { "name": "tt-nr-20-sh", "value": "tt-nr-20-sh-sm" }
