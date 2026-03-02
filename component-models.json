@@ -2744,6 +2744,11 @@
     "id": "feature-ksp-list",
     "fields": [
       {
+        "component": "tab",
+        "label": "basics",
+        "name": "basics"
+      },
+      {
         "component": "select",
         "label": "Visibility",
         "name": "lineVisibility",
