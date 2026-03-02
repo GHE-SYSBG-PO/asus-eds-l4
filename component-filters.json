@@ -3,8 +3,7 @@
     "id": "main",
     "components": [
       "section",
-      "container-2cols",
-      "feature-accordion"
+      "container-2cols"
     ]
   },
   {
@@ -26,25 +25,14 @@
       "bar-chart",
       "footnote",
       "featureitem-block",
-      "small-cards"
+      "small-cards",
+      "feature-accordion"
     ]
   },
   {
     "id": "container-2cols",
     "components": [
       "container-col"
-    ]
-  },
-  {
-    "id": "feature-accordion",
-    "components": [
-      "feature-accordion-item"
-    ]
-  },
-  {
-    "id": "feature-accordion-item",
-    "components": [
-      "feature-accordion-sub-item"
     ]
   },
   {
@@ -88,6 +76,12 @@
     "id": "feature-accordion-item",
     "components": [
       "feature-accordion-sub-item"
+    ]
+  },
+  {
+    "id": "feature-accordion",
+    "components": [
+      "feature-accordion-item"
     ]
   },
   {

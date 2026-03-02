@@ -3,8 +3,7 @@
     "id": "main",
     "components": [
       "section",
-      "container-2cols",
-      "feature-accordion"
+      "container-2cols"
     ]
   },
   {
