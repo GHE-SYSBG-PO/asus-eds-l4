@@ -229,7 +229,7 @@
                 "template": {
                   "name": "Feature KSP List",
                   "model": "feature-ksp-list",
-                  "filter": "feature-ksp-list-filter"
+                  "filter": "feature-ksp-list"
                 }
               }
             }

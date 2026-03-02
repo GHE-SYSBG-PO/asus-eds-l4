@@ -10,7 +10,7 @@
             "template": {
               "name": "Feature KSP List",
               "model": "feature-ksp-list",
-              "filter": "feature-ksp-list-filter"
+              "filter": "feature-ksp-list"
             }
           }
         }
@@ -55,7 +55,7 @@
   ],
   "filters": [
     {
-      "id": "feature-ksp-list-filter",
+      "id": "feature-ksp-list",
       "components": [
         "feature-ksp-item"
       ]

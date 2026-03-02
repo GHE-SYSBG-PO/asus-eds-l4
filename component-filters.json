@@ -71,7 +71,7 @@
     ]
   },
   {
-    "id": "feature-ksp-list-filter",
+    "id": "feature-ksp-list",
     "components": [
       "feature-ksp-item"
     ]
