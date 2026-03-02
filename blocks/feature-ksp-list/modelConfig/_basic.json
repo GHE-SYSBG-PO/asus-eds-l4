@@ -6,109 +6,37 @@
       "name": "basic"
     },
     {
-      "component": "select",
-      "label": "Visibility",
-      "name": "lineVisibility",
+      "component": "reference",
+      "label": "Asset",
+      "name": "asset",
       "valueType": "string",
-      "options": [
-        {
-          "name": "Show",
-          "value": "show"
-        },
-        {
-          "name": "Hide",
-          "value": "hide"
-        }
-      ]
+      "description": "Icon/Image for the item",
+      "multi": false
     },
     {
-      "component": "text",
-      "label": "Color",
-      "name": "lineColor",
-      "valueType": "string",
-      "description": "Hex without #"
-    },
-    {
-      "component": "text",
-      "label": "Width (px)",
-      "name": "lineWidth",
+      "component": "richtext",
+      "label": "Title",
+      "name": "title",
       "valueType": "string"
     },
     {
-      "component": "container",
-      "label": "BG Color",
-      "name": "bgColor",
-      "fields": [
-        {
-          "component": "text",
-          "label": "Default",
-          "name": "bgColorDefault",
-          "valueType": "string",
-          "description": "Hex without #"
-        },
-        {
-          "component": "text",
-          "label": "Hover",
-          "name": "bgColorHover",
-          "valueType": "string",
-          "description": "Hex without #"
-        },
-        {
-          "component": "text",
-          "label": "Pressed",
-          "name": "bgColorPressed",
-          "valueType": "string",
-          "description": "Hex without #"
-        }
-      ]
+      "component": "richtext",
+      "label": "Info",
+      "name": "info",
+      "valueType": "string"
     },
     {
-      "component": "select",
-      "label": "Card Alignment",
-      "name": "cardAlignment",
-      "valueType": "string",
-      "options": [
-        {
-          "name": "Left",
-          "value": "left"
-        },
-        {
-          "name": "Center",
-          "value": "center"
-        }
-      ]
+      "component": "text",
+      "label": "CTA Text",
+      "name": "ctaText",
+      "valueType": "string"
     },
     {
-      "component": "select",
-      "label": "CTA (anchor) Visibility",
-      "name": "ctaVisibility",
+      "component": "text",
+      "label": "CTA Section ID",
+      "name": "ctaSectionId",
       "valueType": "string",
-      "options": [
-        {
-          "name": "Show",
-          "value": "show"
-        },
-        {
-          "name": "Hide",
-          "value": "hide"
-        }
-      ]
-    },
-    {
-      "component": "select",
-      "label": "Motion",
-      "name": "motion",
-      "valueType": "string",
-      "options": [
-        {
-          "name": "On",
-          "value": "on"
-        },
-        {
-          "name": "Off",
-          "value": "off"
-        }
-      ]
+      "description": "ID of the section to scroll to"
     }
   ]
 }

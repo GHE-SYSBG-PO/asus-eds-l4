@@ -2750,7 +2750,7 @@
       },
       {
         "component": "select",
-        "label": "Visibility",
+        "label": "Line Visibility",
         "name": "lineVisibility",
         "valueType": "string",
         "options": [
@@ -2766,44 +2766,37 @@
       },
       {
         "component": "text",
-        "label": "Color",
+        "label": "Line Color",
         "name": "lineColor",
         "valueType": "string",
         "description": "Hex without #"
       },
       {
         "component": "text",
-        "label": "Width (px)",
+        "label": "Line Width (px)",
         "name": "lineWidth",
         "valueType": "string"
       },
       {
-        "component": "container",
-        "label": "BG Color",
-        "name": "bgColor",
-        "fields": [
-          {
-            "component": "text",
-            "label": "Default",
-            "name": "bgColorDefault",
-            "valueType": "string",
-            "description": "Hex without #"
-          },
-          {
-            "component": "text",
-            "label": "Hover",
-            "name": "bgColorHover",
-            "valueType": "string",
-            "description": "Hex without #"
-          },
-          {
-            "component": "text",
-            "label": "Pressed",
-            "name": "bgColorPressed",
-            "valueType": "string",
-            "description": "Hex without #"
-          }
-        ]
+        "component": "text",
+        "label": "BG Color Default",
+        "name": "bgColorDefault",
+        "valueType": "string",
+        "description": "Hex without #"
+      },
+      {
+        "component": "text",
+        "label": "BG Color Hover",
+        "name": "bgColorHover",
+        "valueType": "string",
+        "description": "Hex without #"
+      },
+      {
+        "component": "text",
+        "label": "BG Color Pressed",
+        "name": "bgColorPressed",
+        "valueType": "string",
+        "description": "Hex without #"
       },
       {
         "component": "select",
@@ -2823,7 +2816,7 @@
       },
       {
         "component": "select",
-        "label": "CTA (anchor) Visibility",
+        "label": "CTA Visibility",
         "name": "ctaVisibility",
         "valueType": "string",
         "options": [
@@ -2838,20 +2831,10 @@
         ]
       },
       {
-        "component": "select",
-        "label": "Motion",
+        "component": "boolean",
+        "label": "motion",
         "name": "motion",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "On",
-            "value": "on"
-          },
-          {
-            "name": "Off",
-            "value": "off"
-          }
-        ]
+        "valueType": "boolean"
       }
     ]
   },
@@ -2868,7 +2851,7 @@
         "label": "Asset",
         "name": "asset",
         "valueType": "string",
-        "description": "Shared across 3 devices",
+        "description": "Icon/Image for the item",
         "multi": false
       },
       {
@@ -2884,23 +2867,17 @@
         "valueType": "string"
       },
       {
-        "component": "container",
-        "label": "CTA (anchor)",
-        "name": "cta",
-        "fields": [
-          {
-            "component": "text",
-            "label": "Text",
-            "name": "ctaText",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "Section ID",
-            "name": "ctaSectionId",
-            "valueType": "string"
-          }
-        ]
+        "component": "text",
+        "label": "CTA Text",
+        "name": "ctaText",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA Section ID",
+        "name": "ctaSectionId",
+        "valueType": "string",
+        "description": "ID of the section to scroll to"
       },
       {
         "component": "tab",
@@ -2909,118 +2886,113 @@
       },
       {
         "component": "container",
-        "label": "Item Style",
-        "name": "itemStyleAdvanced",
+        "label": "Title Style",
+        "name": "titleStyle",
         "collapsible": true,
         "fields": [
           {
-            "component": "container",
-            "label": "Title",
-            "name": "titleStyle",
-            "fields": [
+            "component": "select",
+            "label": "Font",
+            "name": "titleFont",
+            "valueType": "string",
+            "options": [
               {
-                "component": "select",
-                "label": "Font",
-                "name": "titleFont",
-                "valueType": "string",
-                "options": [
-                  {
-                    "name": "ro-md-14",
-                    "value": "ro-md-14"
-                  },
-                  {
-                    "name": "ro-md-16",
-                    "value": "ro-md-16"
-                  },
-                  {
-                    "name": "ro-md-18",
-                    "value": "ro-md-18"
-                  }
-                ]
+                "name": "ro-md-14",
+                "value": "ro-md-14"
               },
               {
-                "component": "text",
-                "label": "Font Color",
-                "name": "titleFontColor",
-                "valueType": "string",
-                "description": "Hex without #"
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
               }
             ]
           },
           {
-            "component": "container",
-            "label": "Info",
-            "name": "infoStyle",
-            "fields": [
+            "component": "text",
+            "label": "Font Color",
+            "name": "titleFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Info Style",
+        "name": "infoStyle",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font",
+            "name": "infoFont",
+            "valueType": "string",
+            "options": [
               {
-                "component": "select",
-                "label": "Font",
-                "name": "infoFont",
-                "valueType": "string",
-                "options": [
-                  {
-                    "name": "ro-rg-10",
-                    "value": "ro-rg-10"
-                  },
-                  {
-                    "name": "ro-rg-12",
-                    "value": "ro-rg-12"
-                  },
-                  {
-                    "name": "ro-rg-14",
-                    "value": "ro-rg-14"
-                  }
-                ]
+                "name": "ro-rg-10",
+                "value": "ro-rg-10"
               },
               {
-                "component": "text",
-                "label": "Font Color",
-                "name": "infoFontColor",
-                "valueType": "string",
-                "description": "Hex without #"
+                "name": "ro-rg-12",
+                "value": "ro-rg-12"
+              },
+              {
+                "name": "ro-rg-14",
+                "value": "ro-rg-14"
               }
             ]
           },
           {
-            "component": "container",
-            "label": "CTA (anchor)",
-            "name": "ctaStyle",
-            "fields": [
+            "component": "text",
+            "label": "Font Color",
+            "name": "infoFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "CTA Style",
+        "name": "ctaStyle",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font",
+            "name": "ctaFont",
+            "valueType": "string",
+            "options": [
               {
-                "component": "select",
-                "label": "Font",
-                "name": "ctaFont",
-                "valueType": "string",
-                "options": [
-                  {
-                    "name": "ro-md-14",
-                    "value": "ro-md-14"
-                  },
-                  {
-                    "name": "ro-md-16",
-                    "value": "ro-md-16"
-                  },
-                  {
-                    "name": "ro-md-18",
-                    "value": "ro-md-18"
-                  }
-                ]
+                "name": "ro-md-14",
+                "value": "ro-md-14"
               },
               {
-                "component": "text",
-                "label": "Font Color",
-                "name": "ctaFontColor",
-                "valueType": "string",
-                "description": "Hex without #"
+                "name": "ro-md-16",
+                "value": "ro-md-16"
               },
               {
-                "component": "reference",
-                "label": "Icon Asset (optional)",
-                "name": "ctaIconAsset",
-                "valueType": "string",
-                "multi": false
+                "name": "ro-md-18",
+                "value": "ro-md-18"
               }
             ]
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "ctaFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "reference",
+            "label": "Icon Asset",
+            "name": "ctaIconAsset",
+            "valueType": "string",
+            "multi": false
           }
         ]
       }

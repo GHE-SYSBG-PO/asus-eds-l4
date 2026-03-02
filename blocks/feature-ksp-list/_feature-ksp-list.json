@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Feature KSP List(ID:33)",
+      "title": "Feature KSP List (ID:33)",
       "id": "feature-ksp-list",
       "plugins": {
         "xwalk": {
@@ -45,10 +45,10 @@
       "id": "feature-ksp-item",
       "fields": [
         {
-          "...": "./modelConfig/_item-basic.json#/fields"
+          "...": "./modelConfig/_basic.json#/fields"
         },
         {
-          "...": "./modelConfig/_item-advanced.json#/fields"
+          "...": "./modelConfig/_advanced.json#/fields"
         }
       ]
     }

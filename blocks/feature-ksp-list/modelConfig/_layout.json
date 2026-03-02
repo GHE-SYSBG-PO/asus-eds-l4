@@ -7,7 +7,7 @@
     },
     {
       "component": "select",
-      "label": "Visibility",
+      "label": "Line Visibility",
       "name": "lineVisibility",
       "valueType": "string",
       "options": [
@@ -23,44 +23,37 @@
     },
     {
       "component": "text",
-      "label": "Color",
+      "label": "Line Color",
       "name": "lineColor",
       "valueType": "string",
       "description": "Hex without #"
     },
     {
       "component": "text",
-      "label": "Width (px)",
+      "label": "Line Width (px)",
       "name": "lineWidth",
       "valueType": "string"
     },
     {
-      "component": "container",
-      "label": "BG Color",
-      "name": "bgColor",
-      "fields": [
-        {
-          "component": "text",
-          "label": "Default",
-          "name": "bgColorDefault",
-          "valueType": "string",
-          "description": "Hex without #"
-        },
-        {
-          "component": "text",
-          "label": "Hover",
-          "name": "bgColorHover",
-          "valueType": "string",
-          "description": "Hex without #"
-        },
-        {
-          "component": "text",
-          "label": "Pressed",
-          "name": "bgColorPressed",
-          "valueType": "string",
-          "description": "Hex without #"
-        }
-      ]
+      "component": "text",
+      "label": "BG Color Default",
+      "name": "bgColorDefault",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "text",
+      "label": "BG Color Hover",
+      "name": "bgColorHover",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "text",
+      "label": "BG Color Pressed",
+      "name": "bgColorPressed",
+      "valueType": "string",
+      "description": "Hex without #"
     },
     {
       "component": "select",
@@ -80,7 +73,7 @@
     },
     {
       "component": "select",
-      "label": "CTA (anchor) Visibility",
+      "label": "CTA Visibility",
       "name": "ctaVisibility",
       "valueType": "string",
       "options": [
@@ -95,20 +88,10 @@
       ]
     },
     {
-      "component": "select",
-      "label": "Motion",
+      "component": "boolean",
+      "label": "motion",
       "name": "motion",
-      "valueType": "string",
-      "options": [
-        {
-          "name": "On",
-          "value": "on"
-        },
-        {
-          "name": "Off",
-          "value": "off"
-        }
-      ]
+      "valueType": "boolean"
     }
   ]
 }

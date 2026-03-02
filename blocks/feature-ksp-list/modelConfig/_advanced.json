@@ -1,0 +1,121 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "label": "Title Style",
+      "name": "titleStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "Font",
+          "name": "titleFont",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-14",
+              "value": "ro-md-14"
+            },
+            {
+              "name": "ro-md-16",
+              "value": "ro-md-16"
+            },
+            {
+              "name": "ro-md-18",
+              "value": "ro-md-18"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "Font Color",
+          "name": "titleFontColor",
+          "valueType": "string",
+          "description": "Hex without #"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Info Style",
+      "name": "infoStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "Font",
+          "name": "infoFont",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-rg-10",
+              "value": "ro-rg-10"
+            },
+            {
+              "name": "ro-rg-12",
+              "value": "ro-rg-12"
+            },
+            {
+              "name": "ro-rg-14",
+              "value": "ro-rg-14"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "Font Color",
+          "name": "infoFontColor",
+          "valueType": "string",
+          "description": "Hex without #"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "CTA Style",
+      "name": "ctaStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "Font",
+          "name": "ctaFont",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-14",
+              "value": "ro-md-14"
+            },
+            {
+              "name": "ro-md-16",
+              "value": "ro-md-16"
+            },
+            {
+              "name": "ro-md-18",
+              "value": "ro-md-18"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "Font Color",
+          "name": "ctaFontColor",
+          "valueType": "string",
+          "description": "Hex without #"
+        },
+        {
+          "component": "reference",
+          "label": "Icon Asset",
+          "name": "ctaIconAsset",
+          "valueType": "string",
+          "multi": false
+        }
+      ]
+    }
+  ]
+}
