@@ -2,7 +2,7 @@ import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { openModal } from '../modal/modal.js';
 import {
-  getRadiusStyle, buildCloseButtonHtml, prefixHex, getDefaultFont,
+  getRadiusStyle, buildButtonHtml, prefixHex, getDefaultFont,
 } from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
@@ -254,7 +254,7 @@ export default async function decorate(block) {
         btnElement.addEventListener('click', (e) => {
           e.preventDefault();
           // Build close button HTML
-          const closeButtonHtml = buildCloseButtonHtml(v);
+          const closeButtonHtml = buildButtonHtml(v);
           // Call handleQuickView method, passing modal path and close button HTML
           handleQuickView(innerPageLink, closeButtonHtml);
         });

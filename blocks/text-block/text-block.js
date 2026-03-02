@@ -130,12 +130,16 @@ export default async function decorate(block) {
     let icon2 = '';
     let categoryClass = '';
     let categoryFontColor = '';
-    const titleFontColor = v('titleFontColor') ? `style='--text-block-title-color: #${v('titleFontColor')};--text-block-title-gradient: '';'` : '';
+    let titleFontColor = '';
     const bodyFontColor = v('bodyFontColor') ? `style='--text-block-body-color: #${v('bodyFontColor')};'` : '';
     const disclaimerFontColor = v('disclaimerFontColor') ? `style='--text-block-disclaimer-color: #${v('disclaimerFontColor')};'` : '';
     let motion = '';
     let ctaFontColor = '';
 
+    if (v('titleFontColor')) {
+      const [start, end = start] = v('titleFontColor').split(',');
+      titleFontColor = `style='--text-block-title-start: #${start}; --text-block-title-end: #${end};'`;
+    }
     if (v('ctaLinkType') === 'text-link' && v('ctaFontColor')) {
       const [start, end = start] = v('ctaFontColor').split(',');
       ctaFontColor = `style='--text-block-cta-start: #${start}; --text-block-cta-end: #${end};'`;

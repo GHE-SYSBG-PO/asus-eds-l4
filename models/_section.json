@@ -82,8 +82,7 @@
       "id": "tab-3column",
       "fields": [
         {
-          "...": "../blocks/tab-3column/modelConfig/_style.json#/fields"
-        }
+          "...": "../blocks/tab-3column/modelConfig/_tab-section.json#/fields"        }
       ]
     }
   ],
@@ -106,7 +105,8 @@
         "space",
         "bar-chart",
         "footnote",
-        "featureitem-block"
+        "featureitem-block",
+        "small-cards"
       ]
     },
     {
