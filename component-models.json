@@ -2745,8 +2745,8 @@
     "fields": [
       {
         "component": "tab",
-        "label": "basic",
-        "name": "basic"
+        "label": "layout",
+        "name": "layout"
       },
       {
         "component": "select",
