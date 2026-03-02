@@ -793,7 +793,7 @@ function buildSmallCardsContainer(data, config) {
     ? data.map((item, index) => getCardHTML({ ...item, cardIndex: index })).join('')
     : getCardHTML(data);
 
-  const html = `<div class="cmd-content">
+  const html = `<div class="cmd-content" style="padding-top:600px">
     <div class="outer-view" id="CMD">
       <section>
           <div class="section_content">
@@ -1031,6 +1031,10 @@ export default async function decorate(block) {
     await loadSwiper();
     await loadAnimationFun();
     await loadGsapFun();
+    await loadScrollTriggerFun();
+    if (window.gsap && window.ScrollTrigger) {
+      window.gsap.registerPlugin(window.ScrollTrigger);
+    }
     await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
@@ -1044,14 +1048,16 @@ export default async function decorate(block) {
     window.addEventListener('resize', () => {
       setEqualHeight(block);
     });
+
+    initScrollAnimations(block);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating small cards block:', error);
   }
 }
 
-let loadFeature; let
-  loadAnimation; let loadGsapJS;
+let loadFeature; let loadAnimation;
+let loadGsapJS; let loadScrollTriggerJS;
 
 /**
  * Loads the noUiSlider jQuery plugin.
@@ -1083,6 +1089,22 @@ function loadGsapFun() {
     });
   }
   return loadGsapJS;
+}
+
+/**
+ * Loads the GSAP ScrollTrigger plugin.
+ * @returns {Promise} A promise that resolves when the script is loaded.
+ */
+function loadScrollTriggerFun() {
+  if (!loadScrollTriggerJS) {
+    loadScrollTriggerJS = loadScript(
+      'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
+    ).catch((err) => {
+      console.error('Failed to load GSAP ScrollTrigger JS:', err);
+      throw err;
+    });
+  }
+  return loadScrollTriggerJS;
 }
 
 setTimeout(() => {
@@ -1154,4 +1176,92 @@ async function initializeSwiperCarousel(block) {
   });
 
   return swiper;
+}
+
+/**
+ * Initializes transition for a single item.
+ * @param {number} index Index of the item.
+ * @param {HTMLElement} element The DOM element.
+ */
+function initItemTransition(index, element) {
+  // Initial state
+  window.gsap.set(element, { y: 50, opacity: 0 });
+
+  const tl = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: element,
+      start: 'top 85%',
+      end: '+=300',
+      scrub: 1,
+    },
+  });
+
+  tl.to(element, {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    ease: 'expo.out',
+  });
+}
+
+/**
+ * Handles overall scroll animation for a container.
+ * @param {jQuery} $container The container element.
+ */
+function handleOverallScroll($container) {
+  const items = $container.find('.block__scroll-item');
+
+  // Initial state
+  window.gsap.set(items, { y: 50, opacity: 0 });
+
+  const tl = window.gsap.timeline({
+    scrollTrigger: {
+      trigger: $container[0],
+      start: 'top 90%',
+      end: 'center 50%',
+      toggleActions: 'play reverse play reverse',
+    },
+  });
+
+  tl.to(items, {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    ease: 'expo.out',
+  });
+}
+
+/**
+ * Handles individual scroll animation for a container.
+ * @param {jQuery} $container The container element.
+ */
+function handleIndividualScroll($container) {
+  const $items = $container.find('.block__scroll-item');
+
+  $items.each(function initItem(index) {
+    initItemTransition(index, this);
+  });
+}
+
+/**
+ * Initializes scroll animations for block items.
+ * @param {HTMLElement} block The block element.
+ */
+function initScrollAnimations(block) {
+  const $ = window.jQuery;
+  if (!$) return;
+
+  const $block = $(block);
+  const $scrollBlocks = $block.find('.outer-view .block__scroll');
+
+  $scrollBlocks.each(function () {
+    const $container = $(this);
+    const scrollType = $container.attr('data-scrolltype') || 'eachone';
+
+    if (scrollType === 'overall') {
+      handleOverallScroll($container);
+    } else {
+      handleIndividualScroll($container);
+    }
+  });
 }
