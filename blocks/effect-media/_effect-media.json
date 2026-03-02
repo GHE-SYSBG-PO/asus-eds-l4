@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Effect Media(ID:80)",
+      "title": "Effect Media (ID:80)",
       "id": "effect-media",
       "plugins": {
         "xwalk": {
@@ -20,7 +20,7 @@
     {
       "id": "media-block",
       "fields": [
-       {
+        {
           "...": "./modelConfig/_basic.json#/fields"
         },
         {

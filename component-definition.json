@@ -205,7 +205,7 @@
           }
         },
         {
-          "title": "Effect Media(ID:80)",
+          "title": "Effect Media (ID:80)",
           "id": "effect-media",
           "plugins": {
             "xwalk": {

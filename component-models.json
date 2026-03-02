@@ -1857,7 +1857,7 @@
       {
         "component": "container",
         "label": "Text (D)",
-        "name": "mediaWidthM",
+        "name": "mediaFontD",
         "collapsible": true,
         "fields": [
           {
@@ -1893,13 +1893,13 @@
       {
         "component": "container",
         "label": "Text (T)",
-        "name": "mediaWidthM",
+        "name": "mediaFontM",
         "collapsible": true,
         "fields": [
           {
             "component": "select",
             "label": "Text font (T)",
-            "name": "fontDesktop",
+            "name": "fontTablet",
             "valueType": "string",
             "options": [
               {
@@ -1929,13 +1929,13 @@
       {
         "component": "container",
         "label": "Text (T)",
-        "name": "mediaWidthM",
+        "name": "mediaFontT",
         "collapsible": true,
         "fields": [
           {
             "component": "select",
             "label": "Text font (M)",
-            "name": "fontDesktop",
+            "name": "fontMobile",
             "valueType": "string",
             "options": [
               {
@@ -1967,13 +1967,13 @@
         "label": "font color (hex)",
         "name": "fontColor",
         "valueType": "string",
-        "placeholder": "NO NEED #"
+        "placeholder": "No need to add #"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "width",
-        "label": "width (px)",
+        "label": "Image width (px)",
         "value": "",
         "placeholder": "Only px"
       },
@@ -1981,7 +1981,7 @@
         "component": "text",
         "valueType": "string",
         "name": "height",
-        "label": "height (px)",
+        "label": "Image height (px)",
         "value": "",
         "placeholder": "Only px"
       },
