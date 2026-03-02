@@ -1845,86 +1845,110 @@
         "value": ""
       },
       {
-        "component": "select",
-        "label": "Text font (D)",
-        "name": "fontDesktop",
-        "valueType": "string",
-        "options": [
+        "component": "container",
+        "label": "Text (D)",
+        "name": "mediaWidthM",
+        "collapsible": true,
+        "fields": [
           {
-            "name": "tt-bd-88",
-            "value": "tt-bd-88"
-          },
-          {
-            "name": "tt-bd-92",
-            "value": "tt-bd-92"
-          },
-          {
-            "name": "tt-bd-96",
-            "value": "tt-bd-96"
-          },
-          {
-            "name": "tt-bd-100",
-            "value": "tt-bd-100"
-          },
-          {
-            "name": "tt-bd-104",
-            "value": "tt-bd-104"
+            "component": "select",
+            "label": "Text font (D)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-88",
+                "value": "tt-bd-88"
+              },
+              {
+                "name": "tt-bd-92",
+                "value": "tt-bd-92"
+              },
+              {
+                "name": "tt-bd-96",
+                "value": "tt-bd-96"
+              },
+              {
+                "name": "tt-bd-100",
+                "value": "tt-bd-100"
+              },
+              {
+                "name": "tt-bd-104",
+                "value": "tt-bd-104"
+              }
+            ]
           }
         ]
       },
       {
-        "component": "select",
-        "label": "Text font (T)",
-        "name": "fontDesktop",
-        "valueType": "string",
-        "options": [
+        "component": "container",
+        "label": "Text (T)",
+        "name": "mediaWidthM",
+        "collapsible": true,
+        "fields": [
           {
-            "name": "tt-bd-56",
-            "value": "tt-bd-56"
-          },
-          {
-            "name": "tt-bd-60",
-            "value": "tt-bd-60"
-          },
-          {
-            "name": "tt-bd-64",
-            "value": "tt-bd-64"
-          },
-          {
-            "name": "tt-bd-68",
-            "value": "tt-bd-68"
-          },
-          {
-            "name": "tt-bd-72",
-            "value": "tt-bd-72"
+            "component": "select",
+            "label": "Text font (T)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-56",
+                "value": "tt-bd-56"
+              },
+              {
+                "name": "tt-bd-60",
+                "value": "tt-bd-60"
+              },
+              {
+                "name": "tt-bd-64",
+                "value": "tt-bd-64"
+              },
+              {
+                "name": "tt-bd-68",
+                "value": "tt-bd-68"
+              },
+              {
+                "name": "tt-bd-72",
+                "value": "tt-bd-72"
+              }
+            ]
           }
         ]
       },
       {
-        "component": "select",
-        "label": "Text font (M)",
-        "name": "fontDesktop",
-        "valueType": "string",
-        "options": [
+        "component": "container",
+        "label": "Text (T)",
+        "name": "mediaWidthM",
+        "collapsible": true,
+        "fields": [
           {
-            "name": "tt-bd-32",
-            "value": "tt-bd-32"
-          },
-          {
-            "name": "tt-bd-36",
-            "value": "tt-bd-36"
-          },
-          {
-            "name": "tt-bd-40",
-            "value": "tt-bd-40"
-          },
-          {
-            "name": "tt-bd-44",
-            "value": "tt-bd-44"
-          },
-          {
-            "name": "tt-bd-48",
-            "value": "tt-bd-48"
+            "component": "select",
+            "label": "Text font (M)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-32",
+                "value": "tt-bd-32"
+              },
+              {
+                "name": "tt-bd-36",
+                "value": "tt-bd-36"
+              },
+              {
+                "name": "tt-bd-40",
+                "value": "tt-bd-40"
+              },
+              {
+                "name": "tt-bd-44",
+                "value": "tt-bd-44"
+              },
+              {
+                "name": "tt-bd-48",
+                "value": "tt-bd-48"
+              }
+            ]
           }
         ]
       },
@@ -1932,21 +1956,24 @@
         "component": "text",
         "label": "font color (hex)",
         "name": "fontColor",
-        "valueType": "string"
+        "valueType": "string",
+        "placeholder": "NO NEED #"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "width",
         "label": "width (px)",
-        "value": ""
+        "value": "",
+        "placeholder": "Only px"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "height",
         "label": "height (px)",
-        "value": ""
+        "value": "",
+        "placeholder": "Only px"
       },
       {
         "component": "text",
