@@ -1822,8 +1822,13 @@
     ]
   },
   {
-    "id": "effect-media",
+    "id": "media-block",
     "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
       {
         "component": "richtext",
         "label": "Text",
@@ -1843,6 +1848,11 @@
         "name": "imageAlt",
         "label": "Alt",
         "value": ""
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
       },
       {
         "component": "container",
@@ -1978,7 +1988,7 @@
       {
         "component": "text",
         "name": "L4TagNestedBlock",
-        "value": "L4--nested-block--effect-media",
+        "value": "L4--nested-block--media-block",
         "hidden": true
       }
     ]
