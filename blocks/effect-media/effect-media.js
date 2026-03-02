@@ -6,7 +6,7 @@ import { loadAnime } from '../../scripts/scripts.js';
 
 // DEFAULT
 const DEFAULT_CONFIG = {
-  Image: '',
+  image: '',
   imageAlt: '',
   widthD: '',
   heightD: '',
@@ -42,25 +42,38 @@ const getImageStyle = (imgWidthD, imgHeightD) => {
   return imgStyle;
 };
 
+const getAnimationType = (ImageSrc) => {
+  let animationType = 'type-2';
+
+  if (ImageSrc) {
+    animationType = 'type-1';
+  }
+
+  return animationType;
+};
+
 
 export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'effect-media');
     const v = getFieldValue(config);
 
-    const ImageSrc = v('image', 'html');
+    const ImageSrc = v('image', 'text');
     const imageAlt = v('imageAlt', 'text');
 
-    const text = v('text', 'html');
-
+    const text = v('text', 'text');
 
     const fontSizeD = getFontSize('D', v);
     const fontSizeT = getFontSize('T', v);
     const fontSizeM = getFontSize('M', v);
 
+    const textColor = v('textColor', 'text') || 'fff';
+
+    const animationType = getAnimationType(ImageSrc);
+
     const imageStyle = getImageStyle(v('imgWidthD', 'text'), v('imgHeightD', 'text'));
 
-    const htmlImg = `
+    const htmlImg = ImageSrc ? `
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
         <img
           src="${ImageSrc}"
@@ -68,16 +81,16 @@ export default async function decorate(block) {
           class="absolute left-0 top-0 w-full h-full object-cover"
         />
       </div>
-    `;
+    ` : '';
 
     const htmlText = `
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <p class="relative ${fontSizeD} ${fontSizeT} ${fontSizeM}">${text}</p>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="color: #${textColor}">
+        <p class="relative text-center w-[100vw] pl-[10%] pr-[10%] ${fontSizeD} ${fontSizeT} ${fontSizeM}">${text}</p>
       </div>
     `;
 
     block.innerHTML = `
-      <div class="effect-media scroll-container relative">
+      <div class="effect-media relative ${animationType} scroll-container">
         <div class="scene-1">
           ${htmlImg}
           ${htmlText}
