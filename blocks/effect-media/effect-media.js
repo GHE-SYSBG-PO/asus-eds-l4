@@ -137,6 +137,10 @@ const _getTextMaxWidth = (device, v) => {
 
 export default async function decorate(block) {
   try {
+    // DEBUG: 印出實際的 HTML rows 順序
+    // eslint-disable-next-line no-console
+    console.log('effect-media rows:', [...block.children].map((r, i) => `[${i}] ${r.textContent.trim().substring(0, 60)}`));
+
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'effect-media');
     const v = getFieldValue(config);
 
