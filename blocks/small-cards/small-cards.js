@@ -1276,7 +1276,7 @@ function initScrollAnimations(block) {
   const $block = $(block);
   const $scrollBlocks = $block.find('.outer-view .block__scroll');
 
-  $scrollBlocks.each(function () {
+  $scrollBlocks.each(function initScrollBlock() {
     const $container = $(this);
     const scrollType = $container.attr('data-scrolltype') || 'eachone';
 
