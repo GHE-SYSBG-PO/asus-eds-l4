@@ -1036,6 +1036,8 @@ async function renderCard(block) {
   addVideoEventListeners(smallCardsContainer);
 
   finalizeBlockStructure(block, smallCardsContainer, data, alignmentConfig);
+
+  return data;
 }
 
 /**
@@ -1052,7 +1054,7 @@ export default async function decorate(block) {
     if (window.gsap && window.ScrollTrigger) {
       window.gsap.registerPlugin(window.ScrollTrigger);
     }
-    await renderCard(block); // Html structure and content
+    const data = await renderCard(block); // Html structure and content
     await initializeSwiperCarousel(block);
 
     const instance = new MediaCarousel();
@@ -1066,7 +1068,10 @@ export default async function decorate(block) {
       setEqualHeight(block);
     });
 
-    initScrollAnimations(block);
+    const motionEnabled = Array.isArray(data) && data.some((card) => card.motion === 'true');
+    if (motionEnabled) {
+      initScrollAnimations(block);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating small cards block:', error);
