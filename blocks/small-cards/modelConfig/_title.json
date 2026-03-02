@@ -2,7 +2,7 @@
   "fields": [
     {
       "component": "select",
-      "label": "font (D)",
+      "label": "Font (D)",
       "name": "titleFontD",
       "valueType": "string",
       "options": [
@@ -11,7 +11,7 @@
     },
     {
       "component": "select",
-      "label": "font (T)",
+      "label": "Font (T)",
       "name": "titleFontT",
       "valueType": "string",
       "options": [
@@ -20,7 +20,7 @@
     },
     {
       "component": "select",
-      "label": "font (M)",
+      "label": "Font (M)",
       "name": "titleFontM",
       "valueType": "string",
       "options": [
@@ -29,7 +29,7 @@
     },
     {
       "component": "text",
-      "label": "font color (hex)",
+      "label": "Font Color (hex)",
       "name": "titleFontColor",
       "valueType": "string"
     }

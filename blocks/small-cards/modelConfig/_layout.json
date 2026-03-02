@@ -36,6 +36,12 @@
       ]
     },
     {
+      "component": "boolean",
+      "label": "motion",
+      "name": "Motion",
+      "valueType": "boolean"
+    },
+    {
       "component": "select",
       "label": "Arrow Style",
       "name": "arrowStyle",

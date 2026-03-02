@@ -13,6 +13,10 @@
       "valueType": "string",
       "options": [
         {
+          "name": "default",
+          "value": ""
+        },
+        {
           "name": "ro-md-16",
           "value": "ro-md-16-lg"
         },
@@ -32,6 +36,10 @@
       "name": "gBtnFontT",
       "valueType": "string",
       "options": [
+        {
+          "name": "default",
+          "value": ""
+        },
         {
           "name": "ro-md-16",
           "value": "ro-md-16-md"

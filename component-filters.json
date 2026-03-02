@@ -80,7 +80,8 @@
       "text-block",
       "featureitem-block",
       "media-block",
-      "btn"
+      "btn",
+      "fragment"
     ]
   },
   {
