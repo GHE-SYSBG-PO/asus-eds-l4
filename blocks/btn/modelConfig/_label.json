@@ -19,21 +19,45 @@
       "fields": [
         {
           "component": "select",
-          "label": "label font (D/T)",
-          "name": "fontDesktop",
+          "label": "label font (D)",
+          "name": "fontD",
           "valueType": "string",
           "options": [
             {
               "name": "ro-md-16",
-              "value": "ro-md-16"
+              "value": "ro-md-16-lg"
             },
             {
               "name": "ro-md-18",
-              "value": "ro-md-18"
+              "value": "ro-md-18-lg"
             },
             {
               "name": "ro-md-20",
-              "value": "ro-md-20"
+              "value": "ro-md-20-lg"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "label font (T)",
+          "name": "fontT",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "ro-md-16",
+              "value": "ro-md-16-md"
+            },
+            {
+              "name": "ro-md-18",
+              "value": "ro-md-18-md"
+            },
+            {
+              "name": "ro-md-20",
+              "value": "ro-md-20-md"
             }
           ]
         },
@@ -44,16 +68,20 @@
           "valueType": "string",
           "options": [
             {
+              "name": "default",
+              "value": ""
+            },
+            {
               "name": "ro-md-14",
-              "value": "ro-md-14"
+              "value": "ro-md-14-sm"
             },
             {
               "name": "ro-md-16",
-              "value": "ro-md-16"
+              "value": "ro-md-16-sm"
             },
             {
               "name": "ro-md-18",
-              "value": "ro-md-18"
+              "value": "ro-md-18-sm"
             }
           ]
         },
