@@ -64,7 +64,7 @@
   }
 }
 
-// handle is-ue
+// handle UE layout
 .l4-pdp {
   .effect-media {
     .effect-media-container {
@@ -73,6 +73,11 @@
 
         .scene-1 {
           height: 100%;
+
+          > div {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }
