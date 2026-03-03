@@ -1,4 +1,60 @@
 .l4-pdp {
+  &[data-product="asus"] {
+    &[data-mode="light"],
+    .section-light .effect-media {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"],
+    .section-dark .effect-media {
+      --text-block-body-color: #FFF;
+    }
+  }
+
+  &[data-product="proart"] {
+    &[data-mode="light"],
+    .section-light .effect-media {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"],
+    .section-dark .effect-media {
+      --text-block-body-color: #FFF;
+    }
+  }
+
+  &[data-product="rog"] {
+    &[data-mode="light"],
+    .section-light .effect-media {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"],
+    .section-dark .effect-media {
+      --text-block-body-color: #FFF;
+    }
+  }
+
+  &[data-product="tuf"] {
+    &[data-mode="light"],
+    .section-light .effect-media {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"],
+    .section-dark .effect-media {
+      --text-block-body-color: #FFF;
+    }
+  }
+
+  .effect-media {
+    .ani-text {
+      color: var(--text-block-body-color);
+    }
+  }
+}
+
+.l4-pdp {
   .effect-media {
    .animation-img {
       position: absolute;
