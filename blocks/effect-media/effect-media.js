@@ -137,11 +137,11 @@ const _renderMediaHTML = (props) => {
   } = props;
 
   const htmlImg = imageSrc ? `
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
+    <div class="absolute w-[100%] h-[100%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
       <img
         src="${imageSrc}"
         alt="${imgAlt}"
-        class="animation-img absolute left-0 top-0 w-full h-full object-cover"
+        class="animation-img absolute left-0 top-0 w-[100%] h-[100%] object-cover"
       />
     </div>
   ` : '';
