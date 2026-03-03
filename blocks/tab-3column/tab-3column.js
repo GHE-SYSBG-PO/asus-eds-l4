@@ -278,7 +278,7 @@ export default async function decorate(block) {
 
       const lastDom = itemEl.children[itemEl.children.length - 1];
       let mediaBlockHtml = '';
-      if (lastDom.children.length > 2) {
+      if (lastDom.children.length > 2 || (lastDom.querySelector('.block'))) {
         mediaBlockHtml = lastDom.outerHTML;
       }
       const newItem = document.createRange().createContextualFragment(`
