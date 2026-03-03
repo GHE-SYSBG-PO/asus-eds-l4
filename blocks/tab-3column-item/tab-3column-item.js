@@ -1,4 +1,10 @@
+import {
+  nestBlockExecuteJs,
+} from '../../scripts/utils.js';
+
 export default async function decorate(block) {
+  // Execute nested block JavaScript
+  nestBlockExecuteJs(block);
   const tabParentDom = block.parentNode.parentNode;
   if (tabParentDom.dataset.sectionStatus === 'loading') return block;
   tabParentDom.parentNode.dispatchEvent(
