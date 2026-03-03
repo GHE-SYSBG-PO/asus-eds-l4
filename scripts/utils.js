@@ -246,11 +246,13 @@ export const loadSectionBlockJs = async (main) => {
  * - Adds appropriate CSS classes to nested blocks and executes initialization.
  * - Preserves the original structure of non-nested rows.
  */
-export const nestBlockExecuteJs = (block) => {
+export const nestBlockExecuteJs = (block, clear = true) => {
   if (!block?.children?.length) return;
   const rows = [...block.children];
   // Clear all child elements to rebuild the structure
-  block.innerHTML = '';
+  if (clear) {
+    block.innerHTML = '';
+  }
   // Define the prefix used to identify nested block markers
   const NESTED_BLOCK_PREFIX = 'L4--nested-block--';
   rows.forEach((row) => {
