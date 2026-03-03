@@ -4,7 +4,7 @@ import {
 
 export default async function decorate(block) {
   // Execute nested block JavaScript
-  nestBlockExecuteJs(block, false);
+  await nestBlockExecuteJs(block, false);
   const tabParentDom = block.parentNode.parentNode;
   if (tabParentDom.dataset.sectionStatus === 'loading') return block;
   tabParentDom.parentNode.dispatchEvent(

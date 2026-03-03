@@ -246,7 +246,7 @@ export const loadSectionBlockJs = async (main) => {
  * - Adds appropriate CSS classes to nested blocks and executes initialization.
  * - Preserves the original structure of non-nested rows.
  */
-export const nestBlockExecuteJs = (block, clear = true) => {
+export const nestBlockExecuteJs = async (block, clear = true) => {
   if (!block?.children?.length) return;
   const rows = [...block.children];
   // Clear all child elements to rebuild the structure
@@ -255,7 +255,8 @@ export const nestBlockExecuteJs = (block, clear = true) => {
   }
   // Define the prefix used to identify nested block markers
   const NESTED_BLOCK_PREFIX = 'L4--nested-block--';
-  rows.forEach((row) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const row of rows) {
     // Only process rows with two or more child elements (potential nested blocks)
     if (row.children.length >= 2) {
       const childElements = [...row.children];
@@ -279,13 +280,14 @@ export const nestBlockExecuteJs = (block, clear = true) => {
         decorateBlock(row);
         block.appendChild(wrapperDiv);
         // Load and execute the nested block's JavaScript
-        loadBlock(row);
+        // eslint-disable-next-line no-await-in-loop
+        await loadBlock(row);
       } else {
         // If not a nested block, simply append the row back to the block
         block.appendChild(row);
       }
     }
-  });
+  }
 };
 
 /**
