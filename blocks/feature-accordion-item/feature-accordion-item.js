@@ -736,7 +736,6 @@ const hasMeaningfulCellContent = (cell) => {
 
 export default async function decorate(block) {
   try {
-    console.log('accordion item block', block);
     bindDelayedMediaListener();
     bindMediaControlDelegation();
     const scaffold = ensureAccordionGroupWrapper(block);
@@ -787,7 +786,7 @@ export default async function decorate(block) {
     rows.slice(4, 7).forEach((row) => {
       if (row?.isConnected) row.remove();
     });
-    const topContentWrapper = ensureTopContentWrapper(block, [titleRow, subtitleRow, infoRow]);
+    const topContentWrapper = ensureTopContentWrapper(block, [titleRow, subtitleRow, infoRow, mediaRow]);
 
     const getMediaTargets = (inlineCell) => {
       const targets = [inlineCell];

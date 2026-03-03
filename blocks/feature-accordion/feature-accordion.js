@@ -1,7 +1,6 @@
 export default function decorate(block) {
   try {
     const [col1, col2] = [...block.children];
-
     const config = block.dataset;
     if (col1) {
       Object.entries(config).forEach(([key, value]) => {
