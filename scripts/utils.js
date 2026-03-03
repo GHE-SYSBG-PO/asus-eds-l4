@@ -228,10 +228,10 @@ export const loadSectionBlockJs = async (main) => {
   const sectionSelectors = '.section.feature-accordion-item-container, .section.container-2cols';
   const columnsSections = main.querySelectorAll(sectionSelectors);
   await Promise.all([...columnsSections].map(async (section) => {
-    if (section.classList.contains('feature-accordion-item-container')) {
-      await loadSectionBlock(section, 'feature-accordion');
-      return;
-    }
+    // if (section.classList.contains('feature-accordion-item-container')) {
+    //   await loadSectionBlock(section, 'feature-accordion');
+    //   return;
+    // }
     if (section.classList.contains('container-2cols')) {
       await loadSectionBlock(section, 'container-2cols');
     }
