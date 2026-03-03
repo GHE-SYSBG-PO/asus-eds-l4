@@ -58,30 +58,14 @@ const normalizeColor = (color) => {
 const mediaStateByCell = new WeakMap();
 const fragmentTemplateByPath = new Map();
 const rowAnimationState = new WeakMap();
-const ROW_ANIMATION_MS = 800;
-const ROW_STAGGER_MS = 26;
+const ROW_ANIMATION_MS = 420;
+const ROW_STAGGER_MS = 0;
 const PREFETCH_CONCURRENCY = 2;
-const IDLE_PREFETCH_CONCURRENCY = 1;
-const delayedMediaRegistry = new Map();
+const delayedMediaRegistry = new Set();
 let delayedMediaListenerBound = false;
 let delayedMediaEventFired = false;
 let delayedMediaPrefetchStarted = false;
 let mediaControlDelegationBound = false;
-
-const isElementNearViewport = (element, offset = 200) => {
-  if (!element || typeof element.getBoundingClientRect !== 'function') return false;
-  const rect = element.getBoundingClientRect();
-  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
-  return rect.bottom >= -offset && rect.top <= viewportHeight + offset;
-};
-
-const scheduleOnIdle = (callback) => {
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(() => callback(), { timeout: 1200 });
-    return;
-  }
-  window.setTimeout(callback, 180);
-};
 
 const runLoadersWithConcurrency = async (loaders, concurrency = PREFETCH_CONCURRENCY) => {
   if (!loaders.length) return;
@@ -102,59 +86,17 @@ const runLoadersWithConcurrency = async (loaders, concurrency = PREFETCH_CONCURR
   await Promise.allSettled(Array.from({ length: workerCount }, () => worker()));
 };
 
-const runLoadersInIdle = (loaders, concurrency = IDLE_PREFETCH_CONCURRENCY) => {
-  if (!loaders.length) return;
-  let pointer = 0;
-  let inFlight = 0;
-
-  const pump = () => {
-    const available = Math.max(concurrency - inFlight, 0);
-    if (!available || pointer >= loaders.length) return;
-
-    const batch = loaders.slice(pointer, pointer + available);
-    pointer += batch.length;
-    inFlight += batch.length;
-
-    batch.forEach((loader) => {
-      loader().catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Failed to idle-prefetch accordion media:', error);
-      }).finally(() => {
-        inFlight -= 1;
-        if (pointer < loaders.length) {
-          scheduleOnIdle(pump);
-        }
-      });
-    });
-  };
-
-  scheduleOnIdle(pump);
-};
-
 const runDelayedMediaPrefetch = async () => {
   if (delayedMediaPrefetchStarted) return;
   delayedMediaPrefetchStarted = true;
 
-  const registryEntries = [...delayedMediaRegistry.entries()];
-  const prioritizedLoaders = [];
-  const idleLoaders = [];
-
-  registryEntries.forEach(([loader, isPriority]) => {
-    const shouldPrioritize = typeof isPriority === 'function' ? isPriority() : false;
-    if (shouldPrioritize) {
-      prioritizedLoaders.push(loader);
-    } else {
-      idleLoaders.push(loader);
-    }
-  });
-
-  await runLoadersWithConcurrency(prioritizedLoaders, PREFETCH_CONCURRENCY);
-  runLoadersInIdle(idleLoaders, IDLE_PREFETCH_CONCURRENCY);
+  const loaders = [...delayedMediaRegistry];
+  await runLoadersWithConcurrency(loaders, PREFETCH_CONCURRENCY);
 };
 
-const registerDelayedMediaLoader = (loader, isPriority = () => false) => {
+const registerDelayedMediaLoader = (loader) => {
   if (typeof loader !== 'function') return;
-  delayedMediaRegistry.set(loader, isPriority);
+  delayedMediaRegistry.add(loader);
   if (delayedMediaEventFired) {
     runDelayedMediaPrefetch().catch((error) => {
       // eslint-disable-next-line no-console
@@ -314,6 +256,43 @@ const ensureAccordionGroupWrapper = (block) => {
 // Variant-2 compact markup: top-level model occupies first 7 rows.
 const detectSubItemRows = (block) => [...block.children].filter((row, index) => index >= 7 && row.children.length >= 5);
 
+const ensureNestedWrapper = (block, subItemRows) => {
+  if (!block || !subItemRows.length) return null;
+
+  let nestedWrapper = block.querySelector(':scope > .feature-accordion-item__nested');
+  if (!nestedWrapper) {
+    nestedWrapper = document.createElement('div');
+    nestedWrapper.classList.add('feature-accordion-item__nested');
+  }
+
+  const [firstSubItemRow] = subItemRows;
+  if (firstSubItemRow && firstSubItemRow.parentElement === block) {
+    block.insertBefore(nestedWrapper, firstSubItemRow);
+  }
+  nestedWrapper.append(...subItemRows);
+  return nestedWrapper;
+};
+
+const ensureTopContentWrapper = (block, rows) => {
+  if (!block || !rows.length) return null;
+
+  let contentWrapper = block.querySelector(':scope > .feature-accordion-item__content');
+  if (!contentWrapper) {
+    contentWrapper = document.createElement('div');
+    contentWrapper.classList.add('feature-accordion-item__content');
+  }
+
+  const rowsToWrap = rows.filter((row) => row && row.isConnected);
+  if (!rowsToWrap.length) return contentWrapper;
+
+  const [firstRow] = rowsToWrap;
+  if (firstRow && firstRow.parentElement === block) {
+    block.insertBefore(contentWrapper, firstRow);
+  }
+  contentWrapper.append(...rowsToWrap);
+  return contentWrapper;
+};
+
 const toFieldValue = (cell) => {
   if (!cell) return { html: '', text: '' };
   return {
@@ -414,7 +393,6 @@ const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
     row.hidden = !open;
     row.style.maxHeight = '';
     row.style.opacity = '';
-    row.style.transform = '';
     rowAnimationState.set(row, {});
     return;
   }
@@ -427,12 +405,10 @@ const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
     row.hidden = false;
     row.style.maxHeight = '0px';
     row.style.opacity = '0';
-    row.style.transform = 'translateY(-8px)';
     row.style.transitionDelay = `${openDelay}ms`;
     requestAnimationFrame(() => {
       row.style.maxHeight = `${row.scrollHeight}px`;
       row.style.opacity = '1';
-      row.style.transform = 'translateY(0)';
     });
     const timer = setTimeout(() => {
       row.style.maxHeight = '';
@@ -445,12 +421,10 @@ const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
     const currentHeight = row.scrollHeight;
     row.style.maxHeight = `${currentHeight}px`;
     row.style.opacity = '1';
-    row.style.transform = 'translateY(0)';
     row.style.transitionDelay = `${closeDelay}ms`;
     requestAnimationFrame(() => {
       row.style.maxHeight = '0px';
       row.style.opacity = '0';
-      row.style.transform = 'translateY(-8px)';
     });
     const timer = setTimeout(() => {
       row.hidden = true;
@@ -476,6 +450,9 @@ const collapseEntry = (entry, triggerSelector, panelRowSelector) => {
   if (trigger) {
     trigger.setAttribute('aria-expanded', 'false');
   }
+  entry.classList.remove('is-expanded');
+  entry.querySelector('.feature-accordion-item__content')?.classList.remove('is-expanded');
+  entry.querySelector('.feature-accordion-item__nested')?.classList.remove('is-expanded');
   const panelRows = entry.querySelectorAll(panelRowSelector);
   setRowsOpenState([...panelRows], false);
 };
@@ -680,6 +657,13 @@ const hasRenderableMediaSource = (cell, configText = '', configHtml = '') => {
   return hasMediaElement;
 };
 
+const hasMeaningfulCellContent = (cell) => {
+  if (!cell) return false;
+  if (cell.querySelector('img, picture, video, iframe, .media-block')) return true;
+  const text = cell.textContent?.replace(/\u00A0/g, ' ').trim() || '';
+  return text.length > 0;
+};
+
 export default async function decorate(block) {
   try {
     console.log('accordion item block', block);
@@ -694,23 +678,25 @@ export default async function decorate(block) {
     const v = getFieldValue(config);
 
     const titleRow = rows[0];
+    const subtitleRow = rows[1];
+    const infoRow = rows[2];
+    const mediaRow = rows[3];
     const titleCell = titleRow?.children?.[0];
-    const subtitleCell = rows[1]?.children?.[0];
-    const infoCell = rows[2]?.children?.[0];
-    const mediaCell = rows[3]?.children?.[0];
+    const subtitleCell = subtitleRow?.children?.[0];
+    const infoCell = infoRow?.children?.[0];
+    const mediaCell = mediaRow?.children?.[0];
 
     block.classList.add('feature-accordion-item__entry');
     titleCell?.classList.add('feature-accordion-item__trigger');
-    subtitleCell?.classList.add('feature-accordion-item__subtitle');
-    infoCell?.classList.add('feature-accordion-item__info');
     mediaCell?.classList.add('feature-accordion-item__media');
 
-    if (v('titleFontColor') && titleCell) titleCell.style.color = normalizeColor(v('titleFontColor'));
-    if (v('subtitleFontColor') && subtitleCell) subtitleCell.style.color = normalizeColor(v('subtitleFontColor'));
-    if (v('infoFontColor') && infoCell) infoCell.style.color = normalizeColor(v('infoFontColor'));
+    if (v('titleFontColor')) block.style.setProperty('--feature-accordion-item-title-color', normalizeColor(v('titleFontColor')));
+    if (v('subtitleFontColor')) block.style.setProperty('--feature-accordion-item-subtitle-color', normalizeColor(v('subtitleFontColor')));
+    if (v('infoFontColor')) block.style.setProperty('--feature-accordion-item-info-color', normalizeColor(v('infoFontColor')));
 
     const subItemRows = detectSubItemRows(block);
     const isNestedVariant = subItemRows.length > 0;
+    const nestedWrapper = isNestedVariant ? ensureNestedWrapper(block, subItemRows) : null;
     const hasTopMedia = hasRenderableMediaSource(
       mediaCell,
       v('mediaBlockContent'),
@@ -718,9 +704,20 @@ export default async function decorate(block) {
     );
 
     if (isNestedVariant && !hasTopMedia) {
-      const mediaRow = rows[3];
       if (mediaRow) mediaRow.remove();
     }
+
+    if (subtitleRow && !hasMeaningfulCellContent(subtitleCell)) {
+      subtitleRow.remove();
+    }
+    if (infoRow && !hasMeaningfulCellContent(infoCell)) {
+      infoRow.remove();
+    }
+    // Compact model rows 4-6 are config-only (font color fields), never visual content.
+    rows.slice(4, 7).forEach((row) => {
+      if (row?.isConnected) row.remove();
+    });
+    const topContentWrapper = ensureTopContentWrapper(block, [titleRow, subtitleRow, infoRow]);
 
     const getMediaTargets = (inlineCell) => {
       const targets = [inlineCell];
@@ -735,25 +732,22 @@ export default async function decorate(block) {
       () => getMediaTargets(mediaCell),
     );
     if (hasTopMedia) {
-      registerDelayedMediaLoader(
-        ensureTopMediaLoaded,
-        () => titleCell?.getAttribute('aria-expanded') === 'true' || isElementNearViewport(titleCell),
-      );
+      registerDelayedMediaLoader(ensureTopMediaLoaded);
     }
 
-    const topPanelRows = [...block.children].slice(1);
-    topPanelRows.forEach((row, index) => {
+    const topPanelRows = [subtitleRow, infoRow, mediaRow, nestedWrapper].filter((row) => row?.isConnected);
+    topPanelRows.forEach((row) => {
       row.classList.add('feature-accordion-item__panel-row');
-      // const cell = row?.children?.[0];
-      if (index === 0) {
+      if (row === subtitleRow) {
         row.classList.add('feature-accordion-item__subtitle');
-        // cell?.classList.add('feature-accordion-item__subtitle');
       }
-      if (index === 1) {
+      if (row === infoRow) {
         row.classList.add('feature-accordion-item__info');
-        // cell?.classList.add('feature-accordion-item__info');
       }
     });
+    const hasFirstLevelPanelContent = [subtitleRow, infoRow, mediaRow].some((row) => row?.isConnected);
+    const hasOnlyNestedContent = isNestedVariant && !hasFirstLevelPanelContent;
+    topContentWrapper?.classList.toggle('has-only-nested-accordion', hasOnlyNestedContent);
 
     await Promise.all(subItemRows.map(async (subRow) => {
       const subConfig = parseSubItemFromCompactRow(subRow);
@@ -763,10 +757,22 @@ export default async function decorate(block) {
 
       const nestedIndexes = resolveSubItemCellIndexes(cells);
       const nestedHeaderCell = cells[nestedIndexes.header];
-      const nestedPanelCells = cells.filter((cell, idx) => idx !== nestedIndexes.header);
       const nestedSubtitleCell = cells[nestedIndexes.subtitle];
       const nestedInfoCell = cells[nestedIndexes.info];
       const nestedMediaCell = cells[nestedIndexes.media];
+      const contentIndexes = new Set([
+        nestedIndexes.header,
+        nestedIndexes.subtitle,
+        nestedIndexes.info,
+        nestedIndexes.media,
+      ]);
+      cells.forEach((cell, idx) => {
+        if (!contentIndexes.has(idx)) {
+          cell.remove();
+        }
+      });
+      const nestedPanelCells = [...new Set([nestedSubtitleCell, nestedInfoCell, nestedMediaCell])]
+        .filter((cell) => cell && cell !== nestedHeaderCell);
 
       subRow.classList.add('feature-accordion-subitem__entry');
       nestedHeaderCell?.classList.add('feature-accordion-subitem__trigger', 'feature-accordion-subitem__title');
@@ -775,9 +781,9 @@ export default async function decorate(block) {
       nestedInfoCell?.classList.add('feature-accordion-subitem__info');
       nestedMediaCell?.classList.add('feature-accordion-subitem__media');
 
-      if (sv('subItemTitleFontColor') && nestedHeaderCell) nestedHeaderCell.style.color = normalizeColor(sv('subItemTitleFontColor'));
-      if (sv('subItemSubtitleFontColor') && nestedSubtitleCell) nestedSubtitleCell.style.color = normalizeColor(sv('subItemSubtitleFontColor'));
-      if (sv('subItemInfoFontColor') && nestedInfoCell) nestedInfoCell.style.color = normalizeColor(sv('subItemInfoFontColor'));
+      if (sv('subItemTitleFontColor')) subRow.style.setProperty('--feature-accordion-subitem-title-color', normalizeColor(sv('subItemTitleFontColor')));
+      if (sv('subItemSubtitleFontColor')) subRow.style.setProperty('--feature-accordion-subitem-subtitle-color', normalizeColor(sv('subItemSubtitleFontColor')));
+      if (sv('subItemInfoFontColor')) subRow.style.setProperty('--feature-accordion-subitem-info-color', normalizeColor(sv('subItemInfoFontColor')));
 
       const ensureNestedMediaLoaded = createLazyMediaLoader(
         nestedMediaCell,
@@ -785,10 +791,7 @@ export default async function decorate(block) {
         toFieldValue(nestedMediaCell).html || sv('subItemMediaBlockContent', 'html'),
         () => getMediaTargets(nestedMediaCell),
       );
-      registerDelayedMediaLoader(
-        ensureNestedMediaLoaded,
-        () => false,
-      );
+      registerDelayedMediaLoader(ensureNestedMediaLoaded);
 
       setRowsOpenState(nestedPanelCells, false, true);
       makeInteractiveTrigger(nestedHeaderCell, (isOpen) => {
@@ -823,9 +826,17 @@ export default async function decorate(block) {
       || itemsInScope[0];
     const isFirstAccordionItem = firstItemBlock === block;
 
+    const setTopWrapperExpandedState = (isOpen) => {
+      block.classList.toggle('is-expanded', isOpen);
+      topContentWrapper?.classList.toggle('is-expanded', isOpen);
+      nestedWrapper?.classList.toggle('is-expanded', isOpen);
+    };
+
     setRowsOpenState(topPanelRows, isFirstAccordionItem, true);
+    setTopWrapperExpandedState(isFirstAccordionItem);
     makeInteractiveTrigger(titleCell, (isOpen) => {
       setRowsOpenState(topPanelRows, isOpen);
+      setTopWrapperExpandedState(isOpen);
       if (isOpen) {
         if (hasTopMedia) {
           ensureTopMediaLoaded()
@@ -840,7 +851,7 @@ export default async function decorate(block) {
         itemsInScope
           .filter((item) => item !== block)
           .forEach((item) => {
-            collapseEntry(item, '.feature-accordion-item__trigger', ':scope > .feature-accordion-item__panel-row');
+            collapseEntry(item, '.feature-accordion-item__trigger', '.feature-accordion-item__panel-row');
           });
       }
       if (isOpen && isNestedVariant) {

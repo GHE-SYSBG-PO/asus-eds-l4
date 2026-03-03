@@ -1,6 +1,6 @@
 export default function decorate(block) {
   try {
-    console.log('feature accordion', block, block.children);
+    console.log('first block', block, block.children);
     // Exit early if there are fewer than 2 children
     // if (!block.children || block.children.length < 2) return;
     const [col1, col2] = [...block.children];

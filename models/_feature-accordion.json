@@ -7,22 +7,6 @@
     },
     {
       "component": "select",
-      "valueType": "string",
-      "name": "colorGroup",
-      "label": "Color Group",
-      "options": [
-        {
-          "name": "Light",
-          "value": "section-light"
-        },
-        {
-          "name": "Dark",
-          "value": "section-dark"
-        }
-      ]
-    },
-    {
-      "component": "select",
       "label": "CTA visiblity toggle",
       "name": "ctaVisiblity",
       "valueType": "string",

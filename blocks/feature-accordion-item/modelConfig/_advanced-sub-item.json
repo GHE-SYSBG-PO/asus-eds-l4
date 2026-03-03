@@ -5,12 +5,6 @@
       "label": "advanced",
       "name": "advanced"
     },
-    {
-      "component": "text",
-      "label": "title font color",
-      "name": "titleFontColor",
-      "valueType": "string"
-    },
      {
       "component": "text",
       "label": "sub item title font color",
