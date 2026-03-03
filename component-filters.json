@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "container-2cols"
+      "container-2cols",
+      "tab-3column"
     ]
   },
   {
@@ -25,13 +26,20 @@
       "line-info",
       "bar-chart",
       "footnote",
-      "featureitem-block"
+      "featureitem-block",
+      "small-cards"
     ]
   },
   {
     "id": "container-2cols",
     "components": [
       "container-col"
+    ]
+  },
+  {
+    "id": "tab-3column",
+    "components": [
+      "tab-3column-item"
     ]
   },
   {
@@ -67,7 +75,8 @@
       "text-block",
       "featureitem-block",
       "media-block",
-      "btn"
+      "btn",
+      "fragment"
     ]
   },
   {
@@ -80,6 +89,18 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
+    ]
+  },
+  {
+    "id": "small-cards",
+    "components": [
+      "small-card"
+    ]
+  },
+  {
+    "id": "tab-3column-item",
+    "components": [
+      "media-block"
     ]
   }
 ]

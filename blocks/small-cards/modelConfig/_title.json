@@ -1,0 +1,37 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "Font (D)",
+      "name": "titleFontD",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-bd--32", "value": "tt-bd-32" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Font (T)",
+      "name": "titleFontT",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-bd--28", "value": "tt-bd-28" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "Font (M)",
+      "name": "titleFontM",
+      "valueType": "string",
+      "options": [
+        { "name": "tt-bd--24", "value": "tt-bd-24" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Font Color (hex)",
+      "name": "titleFontColor",
+      "valueType": "string"
+    }
+  ]
+}

@@ -18,7 +18,7 @@
 
   .media-block-container {
     position: relative;
-    overflow: hidden;
+    overflow: clip;
     transition: all 0.3s ease;
 
     img,
