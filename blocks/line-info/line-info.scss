@@ -1,13 +1,16 @@
 .line-info-container {
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
   box-sizing: border-box;
 
-  .line-info-image {
-    width: 100%;
-    
+  .line-info-image { 
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;  
+
     img {
       display: block;
       width: 100%;
@@ -16,83 +19,78 @@
     }
   }
 
-  .line-info-items {
+  .text-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     pointer-events: none;
+
+    .text-item {
+      position: absolute;
+      pointer-events: auto;
+      display: flex;
+      flex-direction: column; 
+      width: 16.6%;
+      max-width: 276px;
+      background-color: red;
+
+      .title { 
+        margin-bottom: 8px; 
+        width: 100%; 
+      }
+
+      .info { 
+        width: 100%; 
+      }
+
+      /* Style 1: Text On Left & Right */
+      &.side-left {
+        left: -20px;
+        align-items: flex-start;
+        text-align: right;
+        width: 45%;
+        max-width: 300px;
+        transform: translateX(-100%); 
+      }
+
+      &.side-right {
+        right: -20px;
+        align-items: flex-end;
+        text-align: left;
+        width: 45%;
+        max-width: 300px;
+        transform: translateX(100%);
+      }
+
+      /* Style 2: Text On Left / Right Sides */
+      &.layout-left {
+        left: 20px;
+        align-items: flex-start;
+        text-align: left;
+        width: 45%;
+        max-width: 300px;
+      }
+
+      &.layout-right {
+        right: 20px;
+        align-items: flex-end;
+        text-align: right;
+        width: 45%;
+        max-width: 300px;
+      }
+
+      /* Style 3, 4, 5: Alignment modifiers */
+      &.align-left {
+        text-align: left;
+      }
+
+      &.align-right {
+        text-align: right;
+      }
+    } 
   }
 
-  .line-info-item {
-    position: absolute;
-    pointer-events: auto;
-    display: flex;
-    flex-direction: column;
-
-    .title {
-      font-weight: 600;
-      margin-bottom: 8px;
-      line-height: 1.4;
-
-      p {
-        margin: 0;
-      }
-    }
-
-    .info {
-      font-size: 0.875rem;
-      line-height: 1.5;
-      opacity: 0.8;
-
-      p {
-        margin: 0;
-      }
-    }
-
-    /* Style 1: Text On Left & Right */
-    &.side-left {
-      left: 20px;
-      align-items: flex-start;
-      text-align: left;
-      width: 45%;
-      max-width: 300px;
-    }
-
-    &.side-right {
-      right: 20px;
-      align-items: flex-end;
-      text-align: right;
-      width: 45%;
-      max-width: 300px;
-    }
-
-    /* Style 2: Text On Left / Right Sides */
-    &.layout-left {
-      left: 20px;
-      align-items: flex-start;
-      text-align: left;
-      width: 45%;
-      max-width: 300px;
-    }
-
-    &.layout-right {
-      right: 20px;
-      align-items: flex-end;
-      text-align: right;
-      width: 45%;
-      max-width: 300px;
-    }
-
-    /* Style 3, 4, 5: Alignment modifiers */
-    &.align-left {
-      text-align: left;
-    }
-
-    &.align-right {
-      text-align: right;
-    }
-  }   
+    
 }
 

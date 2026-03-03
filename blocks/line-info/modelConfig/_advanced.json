@@ -38,15 +38,15 @@
           "options": [
             {
               "name": "ro-md-13",
-              "value": "ro-md-13"
+              "value": "small_ro-md-13"
             },
             {
               "name": "ro-md-14-sh",
-              "value": "ro-md-14-sh"
+              "value": "small_ro-md-14-sh"
             },
             {
               "name": "ro-md-16-sh",
-              "value": "ro-md-16-sh"
+              "value": "small_ro-md-16-sh"
             }
           ]
         },
@@ -92,15 +92,15 @@
           "options": [
             {
               "name": "ro-rg-12",
-              "value": "ro-rg-12"
+              "value": "small_ro-rg-12"
             },
             {
               "name": "ro-rg-13",
-              "value": "ro-rg-13"
+              "value": "small_ro-rg-13"
             },
             {
               "name": "ro-rg-14-sh",
-              "value": "ro-rg-14-sh"
+              "value": "small_ro-rg-14-sh"
             }
           ]
         },

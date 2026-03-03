@@ -78,6 +78,230 @@ const generateRwdMediaQueries = (blockId, properties) => {
   return mediaQueryStyles;
 };
 
+/**
+ * 生成圖片 HTML 結構
+ * @param {Object} params - 參數物件
+ * @param {string} params.assetDesktop - 桌面版圖片路徑
+ * @param {string} params.assetTablet - 平板版圖片路徑
+ * @param {string} params.assetMobile - 手機版圖片路徑
+ * @param {string} params.imgWidth - 圖片寬度
+ * @param {string} params.textItemsHtml - 文字項目 HTML
+ * @param {string} params.textItemsStyle - 文字項目樣式
+ * @returns {string} 圖片區塊 HTML
+ */
+const generatePictureHtml = ({
+  assetDesktop,
+  assetTablet,
+  assetMobile,
+  imgWidth,
+  textItemsHtml,
+  textItemsStyle,
+}) => {
+  if (!assetDesktop && !assetTablet && !assetMobile) {
+    // 即使沒有圖片，也要輸出 line-info-image 容器包含 textItems
+    return `
+      <div class="line-info-image">
+        <div class="text-container" ${textItemsStyle}>
+          ${textItemsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  // RWD breakpoints: Mobile (≤730px), Tablet (731px-1279px), Desktop (≥1280px)
+  const mobileSource = assetMobile ? `<source media="(max-width: 730px)" srcset="${assetMobile}">` : '';
+  const tabletSource = assetTablet ? `<source media="(min-width: 731px) and (max-width: 1279px)" srcset="${assetTablet}">` : '';
+  const defaultImgSrc = assetDesktop || assetTablet || assetMobile || '';
+
+  // 處理 imgWidth 單位（如果沒有單位則加上 px）
+  const imgWidthValue = ensureUnit(imgWidth);
+  const imgWidthAttribute = imgWidthValue ? `style="width: ${imgWidthValue};"` : '';
+
+  return `
+    <div class="line-info-image" ${imgWidthAttribute}>
+      <picture>
+        ${mobileSource}
+        ${tabletSource}
+        <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy">
+      </picture>
+      <div class="text-container" ${textItemsStyle}>
+        ${textItemsHtml}
+      </div>
+    </div>
+  `;
+};
+
+/**
+ * 生成 Advanced 樣式設置
+ * @param {Object} config - 區塊配置物件
+ * @returns {Object} Advanced 樣式物件
+ */
+const generateAdvancedStyles = (config) => {
+  const v = getFieldValue(config);
+
+  // 預設值（根據 _advanced.json 第一個選項）
+  const defaults = {
+    titleFontDT: 'ro-md-14-sh',
+    titleFontM: 'small_ro-md-13',
+    infoFontDT: 'ro-rg-13',
+    infoFontM: 'small_ro-rg-12',
+  };
+
+  // 取得設置值，若無則使用預設值
+  const titleFontDT = v('titleFontDTselect') || defaults.titleFontDT;
+  const titleFontM = v('titleFontMselect') || defaults.titleFontM;
+  const titleFontColor = v('titleFontColor');
+
+  const infoFontDT = v('infoFontDTselect') || defaults.infoFontDT;
+  const infoFontM = v('infoFontMselect') || defaults.infoFontM;
+  const infoFontColor = v('infoFontColor');
+
+  const circleNameColorM = v('circleNameColorM');
+
+  // 組合字體 class（DT 在前，M 在後）
+  const titleFontClasses = [titleFontDT, titleFontM].filter(Boolean).join(' ');
+  const infoFontClasses = [infoFontDT, infoFontM].filter(Boolean).join(' ');
+
+  // 組合 style
+  const titleStyle = titleFontColor ? `color: ${titleFontColor};` : '';
+  const infoStyle = infoFontColor ? `color: ${infoFontColor};` : '';
+
+  return {
+    title: {
+      classes: titleFontClasses,
+      style: titleStyle,
+    },
+    info: {
+      classes: infoFontClasses,
+      style: infoStyle,
+    },
+    circleColorM: circleNameColorM,
+  };
+};
+
+/**
+ * 生成文字項目 HTML 結構
+ * @param {Object} params - 參數物件
+ * @param {Array} params.textItems - 文字項目陣列
+ * @param {string|number} params.styleLayout - 樣式佈局
+ * @param {string} params.blockId - 區塊唯一識別碼
+ * @param {Object} params.advancedStyles - Advanced 樣式設置
+ * @returns {string} 文字項目 HTML
+ */
+const generateTextItemsHtml = ({
+  textItems, styleLayout, blockId, advancedStyles,
+}) => {
+  if (textItems.length === 0) {
+    return '';
+  }
+
+  return textItems.map((item, index) => {
+    // eslint-disable-next-line no-console
+    console.log(`\n=== Item ${index} ===`, item);
+
+    // Extract values from {html, text} format
+    // item contains fields like: { side: {html, text}, yValue: {html, text}, ... }
+    const xValue = item.xValue?.text || '0';
+    const yValue = item.yValue?.text || '0';
+    const titleRichtext = item.titleRichtext?.html || '<p>Item Title</p>';
+    const infoRichtext = item.infoRichtext?.html || '<p>Description text here...</p>';
+    const textWidth = item.textWidth?.text || 'auto';
+    const alignment = item.alignment?.text || 'left';
+    const side = item.side?.text || 'left';
+    const layoutStyle = item.layoutStyle?.text || 'left';
+
+    // eslint-disable-next-line no-console
+    console.log(`Item ${index} extracted values:`, {
+      side,
+      yValue,
+      titleRichtext: titleRichtext.substring(0, 50),
+      infoRichtext: infoRichtext.substring(0, 50),
+      alignment,
+      xValue,
+      textWidth,
+    });
+
+    // Build style-specific HTML
+    let itemHtml = '';
+    let itemClass = 'text-item';
+    // Generate unique ID for this item to apply RWD styles
+    const itemId = `text-item-${blockId}-${index}`;
+
+    switch (styleLayout) {
+      case 1:
+      case 2: {
+        // Style 1: Text On Left & Right (yValue is DT - Desktop/Tablet only)
+        // Style 2: Text On Left / Right Sides (yValue is DT)
+        // For Mobile, yValue is not applicable, so we use default 0
+        itemClass += styleLayout === 1 ? ` side-${side}` : ` layout-${layoutStyle}`;
+
+        // Build RWD styles for yValue
+        let itemMediaQueries = '';
+        const yValueProcessed = ensureUnit(yValue);
+        if (yValueProcessed) {
+          itemMediaQueries = generateRwdMediaQueries(itemId, {
+            top: {
+              Desktop: yValue,
+              Tablet: yValue,
+              // Mobile: '0' (not specified, use default)
+            },
+          });
+        }
+
+        itemHtml = `
+          ${itemMediaQueries ? `<style>${itemMediaQueries}</style>` : ''}
+          <div class="${itemClass} ${itemId}" style="${itemMediaQueries ? '' : `top: ${yValueProcessed || '0'}px;`}">
+            <div class="title ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
+            <div class="info ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
+          </div>
+        `;
+        break;
+      }
+
+      case 3:
+      case 4:
+      case 5: {
+        // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
+        // xValue, yValue, textWidth are DT (Desktop/Tablet only)
+        itemClass += ` align-${alignment}`;
+
+        // Build RWD styles for positioning
+        let itemMediaQueries2 = '';
+        const xValueProcessed = ensureUnit(xValue);
+        const yValueProcessed2 = ensureUnit(yValue);
+        const textWidthProcessed = ensureUnit(textWidth);
+
+        if (xValueProcessed || yValueProcessed2 || textWidthProcessed) {
+          itemMediaQueries2 = generateRwdMediaQueries(itemId, {
+            left: { Desktop: xValue, Tablet: xValue },
+            top: { Desktop: yValue, Tablet: yValue },
+            width: { Desktop: textWidth, Tablet: textWidth },
+          });
+        }
+
+        itemHtml = `
+          ${itemMediaQueries2 ? `<style>${itemMediaQueries2}</style>` : ''}
+          <div class="${itemClass} ${itemId}" style="${itemMediaQueries2 ? '' : `left: ${xValueProcessed || '0'}px; top: ${yValueProcessed2 || '0'}px; width: ${textWidthProcessed || 'auto'};`}">
+            <div class="title ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
+            <div class="info ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
+          </div>
+        `;
+        break;
+      }
+
+      default:
+        itemHtml = `
+          <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px;">
+            <div class="title ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
+            <div class="info ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
+          </div>
+        `;
+    }
+
+    return itemHtml;
+  }).join('');
+};
+
 export default async function decorate(block) {
   try {
     // DEBUG: Check block structure FIRST
@@ -135,43 +359,18 @@ export default async function decorate(block) {
     // eslint-disable-next-line no-console
     console.log('Parsed textItems:', textItems);
 
-    // 5. Construct HTML Structure for RWD Image
-    let pictureHtml = '';
-
-    if (assetDesktop || assetTablet || assetMobile) {
-      // RWD breakpoints: Mobile (≤730px), Tablet (731px-1279px), Desktop (≥1280px)
-      const mobileSource = assetMobile ? `<source media="(max-width: 730px)" srcset="${assetMobile}">` : '';
-      const tabletSource = assetTablet ? `<source media="(min-width: 731px) and (max-width: 1279px)" srcset="${assetTablet}">` : '';
-      const defaultImgSrc = assetDesktop || assetTablet || assetMobile || '';
-
-      // 處理 imgWidth 單位（如果沒有單位則加上 px）
-      const imgWidthValue = ensureUnit(imgWidth);
-      const imgWidthAttribute = imgWidthValue ? `style="width: ${imgWidthValue};"` : '';
-
-      pictureHtml = `
-        <div class="line-info-image">
-          <picture>
-            ${mobileSource}
-            ${tabletSource}
-            <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy" ${imgWidthAttribute}>
-          </picture>
-        </div>
-      `;
-    }
-
-    // Construct Text Items HTML based on style
-
-    let textItemsHtml = '';
-
     // Generate unique class ID for this block instance to avoid style conflicts
     const blockId = `line-info-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
-    // 構建 line-info-items 的 style：包含 width 和 max-width
+    // 構建 text-container 的 style：包含 width 和 max-width
     // 處理 textWidthPercent 單位（如果沒有單位則加上 %）
     const textWidthValue = ensureUnit(textWidthPercent, '%');
 
     // 處理 textMaxWidth 單位（如果沒有單位則加上 px）
     const textMaxWidthValue = ensureUnit(textMaxWidth);
+
+    // 4.5. Get Advanced Styles
+    const advancedStyles = generateAdvancedStyles(config);
 
     // 組合 width 和 max-width
     const styleProps = [];
@@ -183,113 +382,20 @@ export default async function decorate(block) {
     }
     const textItemsStyle = styleProps.length > 0 ? `style="${styleProps.join(';')};"` : '';
 
-    if (textItems.length > 0) {
-      textItemsHtml = textItems.map((item, index) => {
-        // eslint-disable-next-line no-console
-        console.log(`\n=== Item ${index} ===`, item);
+    // 5. Generate Text Items HTML using function
+    const textItemsHtml = generateTextItemsHtml({
+      textItems, styleLayout, blockId, advancedStyles,
+    });
 
-        // Extract values from {html, text} format
-        // item contains fields like: { side: {html, text}, yValue: {html, text}, ... }
-        const xValue = item.xValue?.text || '0';
-        const yValue = item.yValue?.text || '0';
-        const titleRichtext = item.titleRichtext?.html || '<p>Item Title</p>';
-        const infoRichtext = item.infoRichtext?.html || '<p>Description text here...</p>';
-        const textWidth = item.textWidth?.text || 'auto';
-        const alignment = item.alignment?.text || 'left';
-        const side = item.side?.text || 'left';
-        const layoutStyle = item.layoutStyle?.text || 'left';
-
-        // eslint-disable-next-line no-console
-        console.log(`Item ${index} extracted values:`, {
-          side,
-          yValue,
-          titleRichtext: titleRichtext.substring(0, 50),
-          infoRichtext: infoRichtext.substring(0, 50),
-          alignment,
-          xValue,
-          textWidth,
-        });
-
-        // Build style-specific HTML
-        let itemHtml = '';
-        let itemClass = 'line-info-item';
-        // Generate unique ID for this item to apply RWD styles
-        const itemId = `line-info-item-${blockId}-${index}`;
-
-        switch (styleLayout) {
-          case 1:
-          case 2: {
-            // Style 1: Text On Left & Right (yValue is DT - Desktop/Tablet only)
-            // Style 2: Text On Left / Right Sides (yValue is DT)
-            // For Mobile, yValue is not applicable, so we use default 0
-            itemClass += styleLayout === 1 ? ` side-${side}` : ` layout-${layoutStyle}`;
-
-            // Build RWD styles for yValue
-            let itemMediaQueries = '';
-            const yValueProcessed = ensureUnit(yValue);
-            if (yValueProcessed) {
-              itemMediaQueries = generateRwdMediaQueries(itemId, {
-                top: {
-                  Desktop: yValue,
-                  Tablet: yValue,
-                  // Mobile: '0' (not specified, use default)
-                },
-              });
-            }
-
-            itemHtml = `
-              ${itemMediaQueries ? `<style>${itemMediaQueries}</style>` : ''}
-              <div class="${itemClass} ${itemId}" style="${itemMediaQueries ? '' : `top: ${yValueProcessed || '0'}px;`}">
-                <div class="title">${titleRichtext}</div>
-                <div class="info">${infoRichtext}</div>
-              </div>
-            `;
-            break;
-          }
-
-          case 3:
-          case 4:
-          case 5: {
-            // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
-            // xValue, yValue, textWidth are DT (Desktop/Tablet only)
-            itemClass += ` align-${alignment}`;
-
-            // Build RWD styles for positioning
-            let itemMediaQueries2 = '';
-            const xValueProcessed = ensureUnit(xValue);
-            const yValueProcessed2 = ensureUnit(yValue);
-            const textWidthProcessed = ensureUnit(textWidth);
-
-            if (xValueProcessed || yValueProcessed2 || textWidthProcessed) {
-              itemMediaQueries2 = generateRwdMediaQueries(itemId, {
-                left: { Desktop: xValue, Tablet: xValue },
-                top: { Desktop: yValue, Tablet: yValue },
-                width: { Desktop: textWidth, Tablet: textWidth },
-              });
-            }
-
-            itemHtml = `
-              ${itemMediaQueries2 ? `<style>${itemMediaQueries2}</style>` : ''}
-              <div class="${itemClass} ${itemId}" style="${itemMediaQueries2 ? '' : `left: ${xValueProcessed || '0'}px; top: ${yValueProcessed2 || '0'}px; width: ${textWidthProcessed || 'auto'};`}">
-                <div class="title">${titleRichtext}</div>
-                <div class="info">${infoRichtext}</div>
-              </div>
-            `;
-            break;
-          }
-
-          default:
-            itemHtml = `
-              <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px;">
-                <div class="title">${titleRichtext}</div>
-                <div class="info">${infoRichtext}</div>
-              </div>
-            `;
-        }
-
-        return itemHtml;
-      }).join('');
-    }
+    // 6. Generate Picture HTML (includes textItems inside line-info-image)
+    const pictureHtml = generatePictureHtml({
+      assetDesktop,
+      assetTablet,
+      assetMobile,
+      imgWidth,
+      textItemsHtml,
+      textItemsStyle,
+    });
 
     // 7. Generate RWD Media Queries for container padding
     const mediaQueryStyles = generateRwdMediaQueries(blockId, {
@@ -310,13 +416,11 @@ export default async function decorate(block) {
 
     // 8. Render with style class and media queries
     // Padding is controlled via media queries, not inline-style
+    // Note: text-container is now inside line-info-image (via pictureHtml)
     block.innerHTML = `
       ${mediaQueryStyles ? `<style>${mediaQueryStyles}</style>` : ''}
       <div class="line-info-container line-info--style${styleLayout} ${blockId}" style="${containerStyle}">
         ${pictureHtml}
-        <div class="line-info-items" ${textItemsStyle}>
-          ${textItemsHtml}
-        </div>
       </div>
     `;
   } catch (error) {
