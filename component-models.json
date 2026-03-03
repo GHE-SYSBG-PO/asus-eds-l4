@@ -6107,7 +6107,19 @@
         "component": "text",
         "label": "CTA text",
         "name": "ctaText",
-        "valueType": "string"
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "ctaLinkType"
+                },
+                "text-link"
+              ]
+            }
+          ]
+        }
       },
       {
         "component": "select",
