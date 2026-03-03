@@ -2783,6 +2783,12 @@
         "valueType": "string"
       },
       {
+        "component": "text",
+        "name": "bgColor",
+        "label": "Background Color",
+        "valueType": "string"
+      },
+      {
         "component": "tab",
         "label": "advanced",
         "name": "advanced"

@@ -23,6 +23,12 @@
       "name": "imgAlt",
       "label": "Image Alt",
       "valueType": "string"
+    },
+    {
+      "component": "text",
+      "name": "bgColor",
+      "label": "Background Color",
+      "valueType": "string"
     }
   ]
 }

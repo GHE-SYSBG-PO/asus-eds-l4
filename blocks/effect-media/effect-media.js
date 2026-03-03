@@ -9,6 +9,7 @@ import { loadAnime } from '../../scripts/scripts.js';
 const DEFAULT_CONFIG = {
   image: '',
   imgAlt: '',
+  bgColor: '',
   widthD: '',
   heightD: '',
   fontDesktop: '',
@@ -179,6 +180,8 @@ export default async function decorate(block) {
     const imgAlt = v('imgAlt', 'text');
     const text = v('text', 'text');
     const textColor = v('textColor', 'text') || 'fff';
+    const bgColor = v('bgColor', 'text') || '';
+    const bgColotrStyle = bgColor ? `background-color: #${bgColor};` : '';
 
     const fonts = {
       D: getFontSize('D', v),
@@ -219,7 +222,7 @@ export default async function decorate(block) {
     }
 
     block.innerHTML = `
-      <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]">
+      <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]" style="${bgColotrStyle}">
         <div class="${animationPosition} w-[100vw] h-[100vh] scene-1">
           ${sceneContent}
         </div>
