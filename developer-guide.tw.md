@@ -177,6 +177,19 @@ export default function decorate(block) {
 *   **Text Block**: 允許行銷人員在長篇文章中設定錨點 (Anchor Points)。
 *   **Heading**: 設定特定的 ID 以供外部連結跳轉。
 
+### 4.6 Figma DTM 標記規範 (Figma Marking Conventions)
+
+在 Figma 設計稿中（包含三份核心設計），針對不同裝置的配置標記需遵循以下邏輯定義：
+
+1.  **沒有斜線時 (No Slashes)**: 表示列出的裝置「**共用相同設定欄位**」。
+    *   **範例: `DTM`**: 表示 Desktop, Tablet, Mobile 三個裝置都使用完全一樣的設定，這時候三個裝置只需要做一個共用的 field 即可。
+    *   **範例: `DT`**: 表示 Desktop, Tablet 裝置使用一樣的配置，這時候兩個裝置只需要做一個共用的 field 。若 M 另外寫，則是因為 Mobile 會有不同的獨立設定。
+
+2.  **有斜線時 (With Slashes)**: 表示列出的裝置「**不共用相同設定欄位**」。
+    *   **範例: `D/T/M`**: 表示 Desktop, Tablet, Mobile 三個裝置都使用不一樣且獨立的配置，這時候需要為三個裝置做各自獨立的三個 field。
+    *   **範例: `D/T`**: 表示 Desktop, Tablet 裝置使用不一樣的配置，這時候兩個裝置都需要做獨立的 field。
+    *   **備註**: 在 `D/T` 的情況下，M 理論上不需要另外寫（若設計稿已涵蓋）。如果加了/，開發時還是會做出 D, T 兩個裝置有各自獨立的配置，但兩者的選項是一樣的。
+
 ---
 
 ## 🎨 5. Theming Engine & CSS Architecture 開發指南
