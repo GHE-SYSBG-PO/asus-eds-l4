@@ -66,6 +66,7 @@ let delayedMediaListenerBound = false;
 let delayedMediaEventFired = false;
 let delayedMediaPrefetchStarted = false;
 let mediaControlDelegationBound = false;
+const nestedExpandTimerByBlock = new WeakMap();
 const CTA_DATA_KEYS = ['ctavisiblity', 'ctatext', 'ctahyperlink', 'ctafontcolor'];
 
 const runLoadersWithConcurrency = async (loaders, concurrency = PREFETCH_CONCURRENCY) => {
@@ -516,6 +517,11 @@ const setRowsOpenState = (rows, open, immediate = false) => {
 
 const collapseEntry = (entry, triggerSelector, panelRowSelector) => {
   if (!entry) return;
+  const pendingTimer = nestedExpandTimerByBlock.get(entry);
+  if (pendingTimer) {
+    window.clearTimeout(pendingTimer);
+    nestedExpandTimerByBlock.delete(entry);
+  }
   const trigger = entry.querySelector(triggerSelector);
   if (trigger) {
     trigger.setAttribute('aria-expanded', 'false');
@@ -559,8 +565,10 @@ const activateMediaGroupSlot = (slot) => {
   const slots = [...mediaGroup.querySelectorAll(':scope > .feature-accordion-media-slot')];
   slots.forEach((candidate) => {
     const isActive = candidate === slot;
-    candidate.hidden = !isActive;
-    candidate.style.display = isActive ? '' : 'none';
+    candidate.hidden = false;
+    candidate.style.display = '';
+    candidate.classList.toggle('is-active', isActive);
+    candidate.setAttribute('aria-hidden', isActive ? 'false' : 'true');
   });
   syncAccordionVideoPlayback(slot);
 };
@@ -655,8 +663,7 @@ const createLazyMediaLoader = (cell, path, fallbackHtml, getRenderTargets = () =
       if (!state.groupSlot) {
         state.groupSlot = document.createElement('div');
         state.groupSlot.classList.add('feature-accordion-media-slot');
-        state.groupSlot.hidden = true;
-        state.groupSlot.style.display = 'none';
+        state.groupSlot.setAttribute('aria-hidden', 'true');
         target.append(state.groupSlot);
       }
 
@@ -680,6 +687,25 @@ const expandFirstNested = (container) => {
   if (firstTrigger.getAttribute('aria-expanded') === 'false') {
     firstTrigger.click();
   }
+};
+
+const clearScheduledNestedExpand = (block) => {
+  const timer = nestedExpandTimerByBlock.get(block);
+  if (!timer) return;
+  window.clearTimeout(timer);
+  nestedExpandTimerByBlock.delete(block);
+};
+
+const scheduleExpandFirstNested = (block) => {
+  if (!block) return;
+  clearScheduledNestedExpand(block);
+  const timer = window.setTimeout(() => {
+    nestedExpandTimerByBlock.delete(block);
+    const topTrigger = block.querySelector('.feature-accordion-item__trigger');
+    if (topTrigger?.getAttribute('aria-expanded') !== 'true') return;
+    expandFirstNested(block);
+  }, ROW_ANIMATION_MS + 80);
+  nestedExpandTimerByBlock.set(block, timer);
 };
 
 const isMediaCellCurrentlyActive = (cell) => {
@@ -906,6 +932,9 @@ export default async function decorate(block) {
     makeInteractiveTrigger(titleCell, (isOpen) => {
       setRowsOpenState(topPanelRows, isOpen);
       setTopWrapperExpandedState(isOpen);
+      if (!isOpen) {
+        clearScheduledNestedExpand(block);
+      }
       if (isOpen) {
         if (hasTopMedia) {
           ensureTopMediaLoaded()
@@ -924,7 +953,7 @@ export default async function decorate(block) {
           });
       }
       if (isOpen && isNestedVariant) {
-        expandFirstNested(block);
+        scheduleExpandFirstNested(block);
       }
     }, isFirstAccordionItem);
 

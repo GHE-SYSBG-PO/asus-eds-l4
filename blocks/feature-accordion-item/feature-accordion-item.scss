@@ -309,12 +309,19 @@
 
 
   .feature-accordion {
-    // review
     &-list-group {
       padding: 0;
 
       .feature-accordion-cta {
-        padding: 12px 0 0;
+        padding:  16px 20px 0;
+
+        @media(width >=768px) {
+          padding:  16px 16px 0;
+        }
+
+        @media(width >=1024px) {
+          padding:  16px 0 0;
+        }
 
         &__link {
           display: inline-flex;
@@ -403,12 +410,27 @@
       padding: 0 0 16px;
     }
 
+     &__content {
+      background: transparent;
+      border-top: 0;
+      border-bottom: 0;
+      padding: 18px 0;
+
+        @media (width >=768px) {
+          padding: 24px 0;
+        }
+
+        @media(width >=1024px) {
+          padding: 0;
+      }
+    }
+
 
     &__trigger {
       width: 100%;
       color: var(--feature-accordion-item-title-color);
       cursor: pointer;
-      padding: 18px 20px;
+      padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -416,7 +438,11 @@
 
       @media (width >=768px) {
         // review
-        padding: 16px 20px;
+         padding: 0 16px;
+      }
+
+      @media(width >=1024px) {
+        padding: 16px 16px 8px 0;
       }
 
       &::after {
@@ -429,7 +455,7 @@
         transform: rotate(45deg);
         flex: 0 0 auto;
         transform-origin: center;
-        transition: transform 0.2s ease;
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
       &[aria-expanded='true']::after {
@@ -438,23 +464,36 @@
     }
 
     &__subtitle {
-      padding: 2px 20px 8px;
+      padding: 4px 20px 8px;
       background: var(--feature-accordion-item-subtitle-color);
       -webkit-text-fill-color: transparent;
       background-clip: text;
+
+       @media (width >=768px) {
+        // review
+         padding: 4px 16px 8px;
+      }
+
+      @media(width >=1024px) {
+        padding: 4px 16px 8px 0;
+      }
     }
 
     &__info {
       color: var(--feature-accordion-item-info-color);
-      padding: 0 20px 8px;
+      padding: 0 20px;
+
+       @media (width >=768px) {
+        // review
+         padding: 0 16px;
+      }
+
+       @media(width >=1024px) {
+        padding: 0 8px 8px 0;
+      }
     }
 
-    &__content {
-      background: transparent;
-      border-top: 0;
-      border-bottom: 0;
-    }
-
+  
     &__content.is-expanded {
       background: var(--feature-accordion-nested-accordion-background);
       border-top: 0.5px solid var(--feature-accordion-accordion-border);
@@ -468,10 +507,18 @@
     }
 
     &__nested {
-      // padding: 18px 0;
+      padding: 18px 0;
       background: transparent;
       border-top: 0;
       border-bottom: 0;
+
+      @media (width >=768px) {
+        padding: 24px 0;
+      }
+
+      @media(width >=1024px) {
+        padding: 8px 0;
+      }
     }
 
     &__nested.is-expanded {
@@ -481,7 +528,12 @@
     }
 
     &__media {
-      padding: 16px 20px 18px;
+      padding: 24px 20px 8px;
+
+      @media (width >=768px) {
+        // review
+         padding: 24px 16px 8px;
+      }
     }
 
 
@@ -489,9 +541,9 @@
 
   .feature-accordion-subitem {
     &__entry {
-      @media (width >=1280px) {
-        padding: 0 8px;
-      }
+      // @media (width >=1280px) {
+      //   padding: 0 8px;
+      // }
     }
 
     &__trigger {
@@ -509,8 +561,7 @@
       position: relative;
 
       @media (width >=768px) {
-        // review
-        padding: 8px 20px;
+        padding: 8px 16px;
       }
 
       &::before,
@@ -525,10 +576,13 @@
         background: currentcolor;
         transform: translateY(-50%);
         transform-origin: center;
+        transition:
+          transform 0.9s ease;
       }
 
       &::before {
-        transform: translateY(-50%) rotate(90deg);
+        transform: translateY(-50%) rotate(90deg) scaleX(1);
+        opacity: 1;
       }
 
       &[aria-expanded='true']::after {
@@ -537,25 +591,41 @@
 
       &[aria-expanded='true']::before {
         transform: translateY(-50%) rotate(90deg) scaleX(0);
+        opacity: 0;
       }
     }
 
     &__subtitle {
-      padding: 2px 20px 8px;
+      padding: 2px 20px 4px;
       background: var(--feature-accordion-subitem-subtitle-color);
       -webkit-text-fill-color: transparent;
       background-clip: text;
+
+        @media (width >=768px) {
+          padding: 4px 16px 8px;
+        }
+
+        @media(width >=1024px) {
+         padding: 4px 16px 8px;
+       }
     }
 
     &__info {
       padding: 0 20px 8px;
       color: var(--feature-accordion-subitem-info-color);
+
+       @media (width >=768px) {
+          padding:  0 16px 8px;
+        }
+
+        @media (width >=1024px) {
+          padding:  0 16px 8px;
+        }
     }
 
-    // &__panel {
-    //   padding: 0 0 12px;
-    // }
-
+    &__media{
+      padding: 16px;
+    }
 
   }
 
@@ -578,6 +648,30 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+  }
+
+  .feature-accordion-media-group {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .feature-accordion-media-slot {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+    pointer-events: none;
+    transition:
+      opacity 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .feature-accordion-media-slot.is-active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    z-index: 1;
   }
 
   .feature-accordion-item__media>*,
@@ -606,16 +700,15 @@
 
   .feature-accordion-item__panel-row,
   .feature-accordion-subitem__panel-row {
-    will-change: max-height, opacity, transform;
+    will-change: max-height, opacity;
     transition:
       max-height 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
-      opacity 0.34s ease,
-      transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+      opacity 0.8s ease;
   }
 
   .feature-accordion-item__media,
   .feature-accordion-subitem__media {
-    transition: opacity 0.36s ease, transform 0.36s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   .feature-accordion-item__media>*,
@@ -638,8 +731,8 @@
   }
 
   .feature-accordion-media-group>* {
-    opacity: 1;
-    transform: none;
+    width: 100%;
+    height: 100%;
   }
 }
 
