@@ -20,8 +20,8 @@
     },
     {
       "component": "text",
+      "label": "Image Alt",
       "name": "imageAlt",
-      "label": "Image Alt text",
       "valueType": "string"
     }
   ]
