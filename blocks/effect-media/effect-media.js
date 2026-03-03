@@ -18,7 +18,7 @@ const DEFAULT_CONFIG = {
   textMaxWidthD: '',
   textMaxWidthT: '',
   textMaxWidthM: '',
-  animationLength: '1.5',
+  animationLength: 1.5,
 };
 
 /**
@@ -47,26 +47,17 @@ const _getImageStyle = (imgWidthD, imgHeightD) => {
   return imgStyle;
 };
 
-const getAnimationType = (imageSrc) => {
-  let animationType = 'type-1';
-
-  if (!imageSrc) {
-    animationType = 'type-2';
-  }
-
-  return animationType;
-};
+const getAnimationType = (imageSrc) => (imageSrc ? 'type-1' : 'type-2');
 
 const _scrollTriggerAnimation = (block, AnimeJS) => {
   const { onScroll, createTimeline } = AnimeJS;
 
   const scrollContainer = block.querySelector('.scroll-container');
+  if (!scrollContainer) return;
+
   const sceneImg = block.querySelector('.scene-1 .animation-img');
   const sceneText = block.querySelector('.scene-1 > div:last-child');
-
   const animationType = scrollContainer.classList.contains('type-1') ? 'type-1' : 'type-2';
-
-  if (!scrollContainer) return;
 
   // 用 onScroll 綁定 scroll-container 作為觀察目標（sync: true = 滾動同步）
   const scrollObserver = onScroll({
@@ -180,8 +171,9 @@ export default async function decorate(block) {
     const imgAlt = v('imgAlt', 'text');
     const text = v('text', 'text');
     const textColor = v('textColor', 'text') || 'fff';
+
     const bgColor = v('bgColor', 'text') || '';
-    const bgColotrStyle = bgColor ? `background-color: #${bgColor};` : '';
+    const bgColorStyle = bgColor ? `background-color: #${bgColor};` : '';
 
     const fonts = {
       D: getFontSize('D', v),
@@ -208,28 +200,27 @@ export default async function decorate(block) {
       maxW,
     };
 
-    // eslint-disable-next-line no-console
-    console.log('prop: ', prop);
-
     const sceneContent = _renderMediaHTML(prop);
 
-    // handle animation
+    // configure animation layout
     let animationHeight = `${DEFAULT_CONFIG.animationLength * 100}vh`;
     let animationPosition = 'sticky top-0';
+    const isAeType = isAE ? 'is-ae' : '';
+
     if (isAE) {
       animationHeight = '100vh';
       animationPosition = 'relative';
     }
 
     block.innerHTML = `
-      <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]" style="${bgColotrStyle}">
+      <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}] ${isAeType}" style="${bgColorStyle}">
         <div class="${animationPosition} w-[100vw] h-[100vh] scene-1">
           ${sceneContent}
         </div>
       </div>
     `;
 
-    // handle animation
+    // trigger scroll animation
     if (!isAE) {
       _scrollTriggerAnimation(block, anime);
     }
