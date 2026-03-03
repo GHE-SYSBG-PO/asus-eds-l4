@@ -1,9 +1,13 @@
-.line-info-container {
+.line-info-wrapper {
   position: relative;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  box-sizing: border-box;
+
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
 
   .line-info-image { 
     display: block;

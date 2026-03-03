@@ -145,7 +145,21 @@ const generateAdvancedStyles = (config) => {
     titleFontM: 'small_ro-md-13',
     infoFontDT: 'ro-rg-13',
     infoFontM: 'small_ro-rg-12',
+    infoFontColor: '#000000',
+    circleNameColorM: '#000000',
   };
+
+  // DEBUG: Log all relevant advanced style values
+  // eslint-disable-next-line no-console
+  console.log('Advanced Style Values:', {
+    titleFontDT: v('titleFontDTselect'),
+    titleFontM: v('titleFontMselect'),
+    titleFontColor: v('titleFontColor'),
+    infoFontDT: v('infoFontDTselect'),
+    infoFontM: v('infoFontMselect'),
+    infoFontColor: v('infoFontColor'),
+    circleNameColorM: v('circleNameColorM'),
+  });
 
   // 取得設置值，若無則使用預設值
   const titleFontDT = v('titleFontDTselect') || defaults.titleFontDT;
@@ -154,9 +168,9 @@ const generateAdvancedStyles = (config) => {
 
   const infoFontDT = v('infoFontDTselect') || defaults.infoFontDT;
   const infoFontM = v('infoFontMselect') || defaults.infoFontM;
-  const infoFontColor = v('infoFontColor');
+  const infoFontColor = v('infoFontColor') || defaults.infoFontColor;
 
-  const circleNameColorM = v('circleNameColorM');
+  const circleNameColorM = v('circleNameColorM') || defaults.circleNameColorM;
 
   // 組合字體 class（DT 在前，M 在後）
   const titleFontClasses = [titleFontDT, titleFontM].filter(Boolean).join(' ');
@@ -419,7 +433,7 @@ export default async function decorate(block) {
     // Note: text-container is now inside line-info-image (via pictureHtml)
     block.innerHTML = `
       ${mediaQueryStyles ? `<style>${mediaQueryStyles}</style>` : ''}
-      <div class="line-info-container line-info--style${styleLayout} ${blockId}" style="${containerStyle}">
+      <div class="container line-info--style${styleLayout} ${blockId}" style="${containerStyle}">
         ${pictureHtml}
       </div>
     `;
