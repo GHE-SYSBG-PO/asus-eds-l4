@@ -1,0 +1,28 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "richtext",
+      "label": "Text",
+      "name": "text",
+      "valueType": "string"
+    },
+
+    {
+      "component": "reference",
+      "label": "Image",
+      "name": "image",
+      "multi": false
+    },
+    {
+      "component": "text",
+      "name": "imageAlt",
+      "label": "Image Alt",
+      "valueType": "string"
+    }
+  ]
+}
