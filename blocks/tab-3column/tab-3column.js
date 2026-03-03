@@ -276,8 +276,13 @@ export default async function decorate(block) {
         itemEl.classList.add('is-active');
       }
 
+      const lastDom = itemEl.children[itemEl.children.length - 1];
+      let mediaBlockHtml = '';
+      if (lastDom.children.length > 2) {
+        mediaBlockHtml = lastDom.outerHTML;
+      }
       const newItem = document.createRange().createContextualFragment(`
-        <div class="tab3col-media-slot"></div>
+        <div class="tab3col-media-slot">${mediaBlockHtml}</div>
         <div class="tab3col-text-col">
           <h3 class="tab3col-title ${titleClass}">${tab.tabTitle.html || ''}</h3>
           <div class="tab3col-info ${infoClass}">${tab.tabInfo.html || ''}</div>
