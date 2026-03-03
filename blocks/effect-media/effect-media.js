@@ -37,9 +37,6 @@ const getFontSize = (device, v) => {
  * Build image size dict
  */
 const _getImageStyle = (imgWidthD, imgHeightD) => {
-  console.log('imgWidthD', imgWidthD);
-  console.log('imgHeightD', imgHeightD);
-
   const widthStyle = imgWidthD ? `lg:w-[${imgWidthD}]` : 'lg:w-[100vw]';
   const heightStyle = imgHeightD ? `lg:h-[${imgHeightD}]` : 'lg:h-[100vh]';
 
@@ -135,6 +132,36 @@ const _getTextMaxWidth = (device, v) => {
   return textMaxWidth ? `${textMaxWidth}px` : '100%';
 };
 
+const _renderMediaHTML = (props) => {
+  const {
+    imageSrc,
+    imageAlt,
+    imageStyle,
+    text,
+    textColor,
+    fonts,
+    maxW,
+  } = props;
+
+  const htmlImg = imageSrc ? `
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
+      <img
+        src="${imageSrc}"
+        alt="${imageAlt}"
+        class="animation-img absolute left-0 top-0 w-full h-full object-cover"
+      />
+    </div>
+  ` : '';
+
+  const htmlText = text ? `
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="color: #${textColor}">
+      <p class="relative text-center w-[100vw] lg:max-w-[${maxW.D}] md:max-w-[${maxW.T}] sm:max-w-[${maxW.M}] pl-[10%] pr-[10%] ${fonts.D} ${fonts.T} ${fonts.M}">${text}</p>
+    </div>
+  ` : '';
+
+  return htmlImg + htmlText;
+};
+
 export default async function decorate(block) {
   try {
     // DEBUG: 印出實際的 HTML rows 順序
@@ -152,52 +179,48 @@ export default async function decorate(block) {
 
     const imageSrc = v('image', 'text');
     const imageAlt = v('imageAlt', 'text');
-    console.log('imageAlt', imageAlt);
-
     const text = v('text', 'text');
-
-    const fontSizeD = getFontSize('D', v);
-    const fontSizeT = getFontSize('T', v);
-    const fontSizeM = getFontSize('M', v);
-
     const textColor = v('textColor', 'text') || 'fff';
 
-    const animationType = getAnimationType(imageSrc);
+    const fonts = {
+      D: getFontSize('D', v),
+      T: getFontSize('T', v),
+      M: getFontSize('M', v),
+    };
+
+    const maxW = {
+      D: _getTextMaxWidth('D', v),
+      T: _getTextMaxWidth('T', v),
+      M: _getTextMaxWidth('M', v),
+    };
 
     const imageStyle = _getImageStyle(v('imgWidthD', 'text'), v('imgHeightD', 'text'));
+    const animationType = getAnimationType(imageSrc);
 
-    console.log('imageStyle', imageStyle);
+    const prop = {
+      imageSrc,
+      imageAlt,
+      imageStyle,
+      text,
+      textColor,
+      fonts,
+      maxW,
+    };
 
-    const textMaxWidthD = _getTextMaxWidth('D', v);
-    const textMaxWidthT = _getTextMaxWidth('T', v);
-    const textMaxWidthM = _getTextMaxWidth('M', v);
+    // eslint-disable-next-line no-console
+    console.log('prop: ', prop);
 
-    const htmlImg = imageSrc ? `
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
-        <img
-          src="${imageSrc}"
-          alt="${imageAlt}"
-          class="animation-img absolute left-0 top-0 w-full h-full object-cover"
-        />
-      </div>
-    ` : '';
-
-    const htmlText = `
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="color: #${textColor}">
-        <p class="relative text-center w-[100vw] lg:max-w-[${textMaxWidthD}] md:max-w-[${textMaxWidthT}] sm:max-w-[${textMaxWidthM}] pl-[10%] pr-[10%] ${fontSizeD} ${fontSizeT} ${fontSizeM}">${text}</p>
-      </div>
-    `;
+    const sceneContent = _renderMediaHTML(prop);
 
     block.innerHTML = `
       <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[250vh] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]">
         <div class="sticky top-0 w-[100vw] h-[100vh] scene-1">
-          ${htmlImg}
-          ${htmlText}
+          ${sceneContent}
         </div>
       </div>
     `;
 
-    // handle animation - 傳入 anime 實例
+    // handle animation
     _scrollTriggerAnimation(block, anime);
   } catch (error) {
     // eslint-disable-next-line no-console
