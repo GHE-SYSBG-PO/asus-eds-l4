@@ -178,6 +178,19 @@ export default function decorate(block) {
 *   **Text Block**: Allows marketers to set Anchor Points in long articles.
 *   **Heading**: Set specific IDs for external link jumps.
 
+### 4.6 Figma DTM Marking Conventions
+
+In Figma designs (across all core design documents), configuration markings for different devices follow these logical definitions:
+
+1.  **No Slashes (e.g., `DTM`)**: Indicates that the listed devices "**share the same configuration field**".
+    *   **Example: `DTM`**: Desktop, Tablet, and Mobile all use the exact same settings. In this case, only **one shared field** needs to be created for all three devices.
+    *   **Example: `DT`**: Desktop and Tablet use the same configuration. In this case, only **one shared field** needs to be created for these two devices. If Mobile is listed separately, it’s because it has its own independent configuration.
+
+2.  **With Slashes (e.g., `D/T/M`)**: Indicates that the listed devices "**do NOT share the same configuration field**".
+    *   **Example: `D/T/M`**: Desktop, Tablet, and Mobile each have unique and independent configurations. In this case, **three independent fields** must be created, one for each device.
+    *   **Example: `D/T`**: Desktop and Tablet use different configurations. In this case, **two independent fields** must be created.
+    *   **Note**: In the case of `D/T`, Mobile (M) theoretically does not need a separate listing if already covered. If a slash is added, two independent configurations will be created for D and T during development, even if the available options/values are identical.
+
 ---
 
 ## 🎨 5. Theming Engine & CSS Architecture Guideline

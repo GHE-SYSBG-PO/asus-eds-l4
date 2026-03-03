@@ -30,7 +30,7 @@
           "...": "./modelConfig/_container.json#/fields"
         },
         {
-          "...": "../../commonModel/_colorGroup.json#/fields"
+          "...": "../../components/colorGroup/_colorGroup.json#/fields"
         },
         {
           "component": "text",
