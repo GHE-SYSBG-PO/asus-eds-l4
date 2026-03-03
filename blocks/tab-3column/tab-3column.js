@@ -277,17 +277,17 @@ export default async function decorate(block) {
       }
 
       const lastDom = itemEl.children[itemEl.children.length - 1];
-      let mediaBlockHtml = '';
-      if (lastDom.children.length > 2 || (lastDom.querySelector('.block'))) {
-        mediaBlockHtml = lastDom.outerHTML;
-      }
+
       const newItem = document.createRange().createContextualFragment(`
-        <div class="tab3col-media-slot">${mediaBlockHtml}</div>
+        <div class="tab3col-media-slot"></div>
         <div class="tab3col-text-col">
           <h3 class="tab3col-title ${titleClass}">${tab.tabTitle.html || ''}</h3>
           <div class="tab3col-info ${infoClass}">${tab.tabInfo.html || ''}</div>
         </div>
       `);
+      if (lastDom.children.length > 2 || (lastDom.querySelector('.block'))) {
+        newItem.querySelector('.tab3col-media-slot').append(lastDom);
+      }
       itemEl.innerHTML = '';
       itemEl.append(newItem);
       if (!oldEl) {
