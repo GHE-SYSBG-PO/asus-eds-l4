@@ -2940,6 +2940,31 @@
         "placeholder": "vh or px, default 100vh"
       },
       {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      },
+      {
         "component": "text",
         "name": "L4TagNestedBlock",
         "value": "L4--nested-block--effect-media",
