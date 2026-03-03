@@ -138,7 +138,7 @@ const _renderMediaHTML = (props) => {
   } = props;
 
   const htmlImg = imageSrc ? `
-    <div class="absolute w-[100%] h-[100%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
+    <div class="absolute w-[100%] h-[100%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container">
       <img
         src="${imageSrc}"
         alt="${imgAlt}"
@@ -148,7 +148,7 @@ const _renderMediaHTML = (props) => {
   ` : '';
 
   const htmlText = text ? `
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" >
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" text-container>
       <p class="ani-text relative text-center w-[100vw] lg:max-w-[${maxW.D}] md:max-w-[${maxW.T}] sm:max-w-[${maxW.M}] pl-[10%] pr-[10%] ${fonts.D} ${fonts.T} ${fonts.M}" style="${fontColorStyle}">${text}</p>
     </div>
   ` : '';
