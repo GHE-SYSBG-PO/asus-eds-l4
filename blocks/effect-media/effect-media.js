@@ -1,6 +1,7 @@
 import {
   getBlockConfigs,
   getFieldValue,
+  isAuthorEnvironment,
 } from '../../scripts/utils.js';
 import { loadAnime } from '../../scripts/scripts.js';
 
@@ -221,7 +222,10 @@ export default async function decorate(block) {
     `;
 
     // handle animation
-    _scrollTriggerAnimation(block, anime);
+    if (!isAuthorEnvironment()) {
+      _scrollTriggerAnimation(block, anime);
+    }
+
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating effet-media: ', error);
