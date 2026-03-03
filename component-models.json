@@ -2797,7 +2797,7 @@
         "component": "container",
         "label": "Text (D)",
         "name": "textContainerD",
-        "collapsible": false,
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
@@ -2840,7 +2840,7 @@
         "component": "container",
         "label": "Text (T)",
         "name": "textContainerT",
-        "collapsible": false,
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
@@ -2883,7 +2883,7 @@
         "component": "container",
         "label": "Text (T)",
         "name": "textContainerM",
-        "collapsible": false,
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
