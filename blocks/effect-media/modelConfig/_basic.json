@@ -21,7 +21,7 @@
     {
       "component": "text",
       "label": "image alt text",
-      "name": "imageAlt",
+      "name": "imageAltaaa",
       "valueType": "string"
     }
   ]
