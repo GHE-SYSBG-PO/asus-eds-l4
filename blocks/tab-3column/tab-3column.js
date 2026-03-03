@@ -3,7 +3,6 @@
  */
 
 import { getBlockConfigs } from '../../scripts/utils.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
 import { prefixHex } from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
@@ -269,45 +268,61 @@ export default async function decorate(block) {
     const panelsEl = componentHtml.querySelector('.tab3col-panels');
 
     // ── Build each panel, move per-item instrumentation ──────────
+    // eslint-disable-next-line no-inner-declarations
+    async function renderTabItemHtml(itemEl, tab, oldEl) {
+      itemEl.classList.add('tab3col-panel');
+      const isActive = oldEl ? oldEl.classList.contains('is-active') : false;
+      if (isActive) {
+        itemEl.classList.add('is-active');
+      }
+
+      const newItem = document.createRange().createContextualFragment(`
+        <div class="tab3col-media-slot"></div>
+        <div class="tab3col-text-col">
+          <h3 class="tab3col-title ${titleClass}">${tab.tabTitle.html || ''}</h3>
+          <div class="tab3col-info ${infoClass}">${tab.tabInfo.html || ''}</div>
+        </div>
+      `);
+      itemEl.innerHTML = '';
+      itemEl.append(newItem);
+      if (!oldEl) {
+        panelsEl.appendChild(itemEl);
+      }
+    }
+
     itemEls.forEach((itemEl, i) => {
-      const isActive = i === 0;
-      const tab = tabs[i];
-
-      const panel = document.createElement('div');
-      panel.className = `tab-3column-item block tab3col-panel${isActive ? ' is-active' : ''}`;
-      panel.id = `tab3col-panel-${i}`;
-      panel.setAttribute('role', 'tabpanel');
-      panel.setAttribute('data-tab-index', i);
-
-      if (!isActive) panel.setAttribute('hidden', '');
-
-      // Critical: transfer UE instrumentation from original item el to panel
-      moveInstrumentation(itemEl.querySelector('.tab-3column-item'), panel);
-
-      // Media slot — move nested blocks (non-field-row children) here
-      const mediaSlot = document.createElement('div');
-      mediaSlot.className = 'tab3col-media-slot';
-
-      // Text column
-      const textCol = document.createElement('div');
-      textCol.className = 'tab3col-text-col';
-      textCol.innerHTML += `<h3 class="tab3col-title ${titleClass}">${tab.tabTitle.html}</h3>`;
-      textCol.innerHTML += `<div class="tab3col-info ${infoClass}">${tab.tabInfo.html}</div>`;
-
-      panel.appendChild(mediaSlot);
-      panel.appendChild(textCol);
-      panelsEl.appendChild(panel);
+      renderTabItemHtml(itemEl.querySelector('.tab-3column-item'), tabs[i]);
     });
 
     block.innerHTML = '';
     block.append(componentHtml);
 
+    // default show
+    block.querySelector('.tab-3column-item').classList.add('is-active');
+
     setupInteraction(block.querySelector('.tab3col-component'), motionEnabled);
 
     // update item dom data from block tab-3column-item
-    block.addEventListener('asus-l4--section-tab-3column', ({ detail }) => {
-      console.log('item dom', detail);
-    });
+    block.addEventListener(
+      'asus-l4--section-tab-3column',
+      async ({ detail }) => {
+        const tab = await getBlockConfigs(
+          detail,
+          ITEM_DEFAULT_CONFIG,
+          'tab-3column-item',
+        );
+
+        // update menu text
+        const doms = [...block.querySelectorAll('.tab-3column-item')];
+        const index = doms.findIndex((r) => r.dataset.aueResource === detail.dataset.aueResource);
+        const menuDom = block.querySelectorAll('.tab3col-tab-text')[index];
+        if (menuDom) {
+          menuDom.innerHTML = tab.tabText.text;
+        }
+
+        renderTabItemHtml(detail, tab, doms[index]);
+      },
+    );
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating tab-3column block:', error);

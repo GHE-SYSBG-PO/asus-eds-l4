@@ -222,8 +222,14 @@ const loadSectionBlock = async (section, name) => {
  */
 export const loadSectionBlockJs = async (main) => {
   // Load section blocks (sections with their own JS/CSS)
-  const columnsSections = main.querySelectorAll('.section.container-2cols');
-  await Promise.all([...columnsSections].map((section) => loadSectionBlock(section, 'container-2cols')));
+  const columnsSections = main.querySelectorAll('.section.container-2cols,.section.tab-3column');
+  await Promise.all([...columnsSections].map((section) => {
+    let sectionName = 'container-2cols';
+    if (!section.classList.contains(sectionName)) {
+      sectionName = 'tab-3column';
+    }
+    return loadSectionBlock(section, sectionName);
+  }));
 };
 
 /**
