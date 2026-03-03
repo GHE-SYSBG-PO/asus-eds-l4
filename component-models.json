@@ -2778,7 +2778,7 @@
       },
       {
         "component": "text",
-        "name": "imageAlt",
+        "name": "imageAltaa",
         "label": "Image Alt",
         "valueType": "string"
       },
