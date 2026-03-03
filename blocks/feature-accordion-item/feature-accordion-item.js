@@ -36,7 +36,23 @@ const DEFAULT_CONFIG = {
 };
 
 const SUBITEM_FIELD_ORDER = [
+  'subItemTitleRichtext',
+  'subItemSubtitleRichtext',
+  'subItemInfoRichtext',
+  'subItemMediaBlockContent',
+  'subItemTitleFontColor',
+  'subItemSubtitleFontColor',
+  'subItemInfoFontColor',
+];
+
+// Legacy compact rows may include an extra leading title field.
+const SUBITEM_FIELD_ORDER_LEGACY = [
   'titleRichtext',
+  ...SUBITEM_FIELD_ORDER,
+];
+
+// Some authored compact rows include parent (first-level) title color before nested colors.
+const SUBITEM_FIELD_ORDER_WITH_PARENT_COLOR = [
   'subItemTitleRichtext',
   'subItemSubtitleRichtext',
   'subItemInfoRichtext',
@@ -53,6 +69,16 @@ const normalizeColor = (color) => {
   if (!value) return '';
   if (value.startsWith('#') || value.startsWith('rgb') || value.startsWith('hsl')) return value;
   return /^[0-9a-fA-F]{3,8}$/.test(value) ? `#${value}` : value;
+};
+
+const isLikelyColorToken = (value) => {
+  if (!value || typeof value !== 'string') return false;
+  const token = value.trim();
+  if (!token) return false;
+  if (token.startsWith('#') || token.startsWith('rgb') || token.startsWith('hsl')) return true;
+  if (/^[0-9a-fA-F]{3,8}$/.test(token)) return true;
+  if (token.startsWith('var(')) return true;
+  return false;
 };
 
 const mediaStateByCell = new WeakMap();
@@ -375,14 +401,45 @@ const toFieldValue = (cell) => {
 const parseSubItemFromCompactRow = (row) => {
   const cells = [...row.children];
   if (cells.length < 5) return null;
-  const config = {};
-  SUBITEM_FIELD_ORDER.forEach((field, index) => {
-    const value = toFieldValue(cells[index]);
-    if (value.html || value.text) {
-      config[field] = value;
+  const buildConfigByOrder = (fieldOrder) => {
+    const config = {};
+    fieldOrder.forEach((field, index) => {
+      const value = toFieldValue(cells[index]);
+      if (value.html || value.text) {
+        config[field] = value;
+      }
+    });
+    return config;
+  };
+
+  const scoreConfig = (config) => [
+    'subItemTitleRichtext',
+    'subItemSubtitleRichtext',
+    'subItemInfoRichtext',
+    'subItemMediaBlockContent',
+    'subItemTitleFontColor',
+    'subItemSubtitleFontColor',
+    'subItemInfoFontColor',
+  ].filter((field) => config[field]?.html || config[field]?.text).length;
+
+  const primaryConfig = buildConfigByOrder(SUBITEM_FIELD_ORDER);
+  const legacyConfig = buildConfigByOrder(SUBITEM_FIELD_ORDER_LEGACY);
+  const withParentColorConfig = buildConfigByOrder(SUBITEM_FIELD_ORDER_WITH_PARENT_COLOR);
+
+  // Deterministic mapping for authored compact rows:
+  // 0..3: nested content, 4: parent color, 5..7: nested colors.
+  if (cells.length >= 8) {
+    const fifthCellValue = toFieldValue(cells[4]);
+    const candidate = fifthCellValue.text;
+    if (isLikelyColorToken(candidate)) {
+      return withParentColorConfig;
     }
-  });
-  return config;
+  }
+
+  const configs = [primaryConfig, withParentColorConfig, legacyConfig];
+  return configs.reduce((best, candidate) => (
+    scoreConfig(candidate) > scoreConfig(best) ? candidate : best
+  ), configs[0]);
 };
 
 const resolveFragmentPath = (fragmentUrl) => {
