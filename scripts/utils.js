@@ -786,3 +786,133 @@ export const getBlockRepeatConfigsByDataAueProps = (block, containerName) => {
   const sortedIndices = Object.keys(itemsMap).map(Number).sort((a, b) => a - b);
   return sortedIndices.map((index) => itemsMap[index]);
 };
+
+/**
+ * 從 block 中手動解析 Advanced 設置值（沒有 data-aue-prop 的欄位）
+ * @param {HTMLElement} block - 區塊元素
+ * @param {Map} selectFieldsMap - Advanced 容器的 select 欄位映射表
+ * @param {Array} colorFieldOrder - 顏色欄位的優先順序
+ * @returns {Object} 解析後的 Advanced 值
+ */
+export const parseAdvancedFieldsFromBlock = (block, selectFieldsMap, colorFieldOrder = []) => {
+  const children = [...block.children];
+  const advancedFields = {};
+
+  // DEBUG: Log available select fields
+  // eslint-disable-next-line no-console
+  console.log('Available select fields from blockDef:', Array.from(selectFieldsMap.keys()));
+
+  // 找出沒有 data-aue-prop 但內容不為空的 div
+  const candidateElements = children.filter((child) => {
+    const hasDataAue = child.querySelector('[data-aue-prop]');
+    const hasContent = child.textContent.trim();
+    const isEmptyDiv = !hasContent || hasContent === '';
+    return hasContent && !hasDataAue && !isEmptyDiv;
+  });
+
+  // DEBUG: Log found candidates
+  // eslint-disable-next-line no-console
+  console.log('Advanced Fields Candidates:', candidateElements.map((el) => el.textContent.trim()));
+
+  // 先處理 select 欄位，再處理顏色欄位
+  const selectValues = [];
+  const colorValues = [];
+
+  candidateElements.forEach((element) => {
+    let value = element.textContent.trim();
+
+    // 特殊處理：如果是 button 連結（顏色欄位），提取 href 的值
+    const buttonLink = element.querySelector('a.button');
+    if (buttonLink) {
+      value = buttonLink.getAttribute('href') || buttonLink.getAttribute('title') || value;
+      // 移除 # 符號如果存在
+      if (value.startsWith('#')) {
+        value = value.substring(1);
+      }
+    }
+
+    // 檢查是否為 select 欄位的值
+    let isSelectValue = false;
+    selectFieldsMap.forEach((validValues) => {
+      if (validValues.has(value)) {
+        isSelectValue = true;
+      }
+    });
+
+    if (isSelectValue) {
+      selectValues.push({
+        value,
+        element,
+      });
+    } else {
+      // 檢查是否為顏色格式（hex, rgb, 或顏色名稱）
+      const isColorValue = /^#?[0-9a-fA-F]{3,6}$|^rgb|^hsl|^[a-z]+$/i.test(value) || buttonLink;
+      if (isColorValue) {
+        colorValues.push({
+          value,
+          element,
+        });
+      }
+    }
+  });
+
+  // 按照 selectFieldsMap 的順序處理 select 欄位
+  const selectFieldNames = Array.from(selectFieldsMap.keys());
+  let selectIndex = 0;
+
+  selectValues.forEach(({ value, element }) => {
+    // 找到對應的欄位名稱
+    let matchedFieldName = null;
+
+    // 從當前索引開始尋找匹配的欄位
+    for (let i = selectIndex; i < selectFieldNames.length; i += 1) {
+      const fieldName = selectFieldNames[i];
+      if (selectFieldsMap.get(fieldName).has(value) && !advancedFields[fieldName]) {
+        matchedFieldName = fieldName;
+        selectIndex = i + 1; // 更新索引到下一個欄位
+        break;
+      }
+    }
+
+    // 如果沒找到，從頭再找一遍
+    if (!matchedFieldName) {
+      for (let i = 0; i < selectIndex; i += 1) {
+        const fieldName = selectFieldNames[i];
+        if (selectFieldsMap.get(fieldName).has(value) && !advancedFields[fieldName]) {
+          matchedFieldName = fieldName;
+          break;
+        }
+      }
+    }
+
+    if (matchedFieldName) {
+      advancedFields[matchedFieldName] = {
+        text: value,
+        html: element.innerHTML.trim(),
+      };
+
+      // DEBUG: Log matched values
+      // eslint-disable-next-line no-console
+      console.log(`Matched ${matchedFieldName}: ${value}`);
+    }
+  });
+
+  // 按照 colorFieldOrder 順序處理顏色欄位
+  colorValues.forEach(({ value, element }, index) => {
+    if (index < colorFieldOrder.length) {
+      const colorFieldName = colorFieldOrder[index];
+      if (!advancedFields[colorFieldName]) {
+        advancedFields[colorFieldName] = {
+          text: value,
+          html: element.innerHTML.trim(),
+        };
+
+        // DEBUG: Log color values
+        // eslint-disable-next-line no-console
+        console.log(`Assigned color ${colorFieldName}: ${value}`);
+      }
+    }
+  });
+
+  return advancedFields;
+};

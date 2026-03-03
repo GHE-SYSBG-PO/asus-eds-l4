@@ -186,6 +186,7 @@
           "hidden": true
         },
         {
+          "valueType": "string",
           "component": "select",
           "label": "side (left/right)(DT)",
           "name": "side",
@@ -269,6 +270,7 @@
           "hidden": true
         },
         {
+          "valueType": "string",
           "component": "select",
           "label": "layout style (left/right)",
           "name": "layoutStyle",
@@ -352,6 +354,7 @@
           "hidden": true
         },
         {
+          "valueType": "string",
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
@@ -463,6 +466,7 @@
           "hidden": true
         },
         {
+          "valueType": "string",
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
@@ -574,6 +578,7 @@
           "hidden": true
         },
         {
+          "valueType": "string",
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
@@ -678,6 +683,7 @@
       },
       "fields": [
         {
+          "valueType": "string",
           "component": "select",
           "label": "radius",
           "name": "dialogBoxRadius",
@@ -767,6 +773,7 @@
           ]
         },
         {
+          "valueType": "string",
           "component": "select",
           "label": "content alignment (left/center)",
           "name": "dialogBoxContentAlignment",

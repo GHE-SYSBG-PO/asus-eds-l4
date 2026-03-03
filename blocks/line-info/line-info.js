@@ -2,6 +2,17 @@ import {
   getBlockConfigs, getFieldValue, getBlockRepeatConfigs, getBlockRepeatConfigsByDataAueProps,
 } from '../../scripts/utils.js';
 
+// Advanced 字段的預設配置
+const ADVANCED_DEFAULTS = {
+  titleFontDTselect: 'ro-md-14-sh',
+  titleFontMselect: 'small_ro-md-13',
+  infoFontDTselect: 'ro-rg-13',
+  infoFontMselect: 'small_ro-rg-12',
+  titleFontColor: '',
+  infoFontColor: '',
+  circleNameColorM: '',
+};
+
 /**
  * 確保值有正確的單位，如果沒有則加上預設單位
  * @param {string} value - 要檢查的值
@@ -134,49 +145,33 @@ const generatePictureHtml = ({
 /**
  * 生成 Advanced 樣式設置
  * @param {Object} config - 區塊配置物件
+ * @param {HTMLElement} block - 區塊元素（用於手動解析）
  * @returns {Object} Advanced 樣式物件
  */
 const generateAdvancedStyles = (config) => {
   const v = getFieldValue(config);
 
-  // 預設值（根據 _advanced.json 第一個選項）
-  const defaults = {
-    titleFontDT: 'ro-md-14-sh',
-    titleFontM: 'small_ro-md-13',
-    infoFontDT: 'ro-rg-13',
-    infoFontM: 'small_ro-rg-12',
-    infoFontColor: '#000000',
-    circleNameColorM: '#000000',
-  };
+  const titleFontDT = v('titleFontDTselect') || ADVANCED_DEFAULTS.titleFontDTselect;
+  const titleFontM = v('titleFontMselect') || ADVANCED_DEFAULTS.titleFontMselect;
+  const titleFontColor = v('titleFontColor') || ADVANCED_DEFAULTS.titleFontColor;
+  const infoFontDT = v('infoFontDTselect') || ADVANCED_DEFAULTS.infoFontDTselect;
+  const infoFontM = v('infoFontMselect') || ADVANCED_DEFAULTS.infoFontMselect;
+  const infoFontColor = v('infoFontColor') || ADVANCED_DEFAULTS.infoFontColor;
+  const circleNameColorM = v('circleNameColorM') || ADVANCED_DEFAULTS.circleNameColorM;
 
-  // DEBUG: Log all relevant advanced style values
-  // eslint-disable-next-line no-console
   console.log('Advanced Style Values:', {
-    titleFontDT: v('titleFontDTselect'),
-    titleFontM: v('titleFontMselect'),
-    titleFontColor: v('titleFontColor'),
-    infoFontDT: v('infoFontDTselect'),
-    infoFontM: v('infoFontMselect'),
-    infoFontColor: v('infoFontColor'),
-    circleNameColorM: v('circleNameColorM'),
+    titleFontDT,
+    titleFontM,
+    titleFontColor,
+    infoFontDT,
+    infoFontM,
+    infoFontColor,
+    circleNameColorM,
   });
 
-  // 取得設置值，若無則使用預設值
-  const titleFontDT = v('titleFontDTselect') || defaults.titleFontDT;
-  const titleFontM = v('titleFontMselect') || defaults.titleFontM;
-  const titleFontColor = v('titleFontColor');
-
-  const infoFontDT = v('infoFontDTselect') || defaults.infoFontDT;
-  const infoFontM = v('infoFontMselect') || defaults.infoFontM;
-  const infoFontColor = v('infoFontColor') || defaults.infoFontColor;
-
-  const circleNameColorM = v('circleNameColorM') || defaults.circleNameColorM;
-
-  // 組合字體 class（DT 在前，M 在後）
   const titleFontClasses = [titleFontDT, titleFontM].filter(Boolean).join(' ');
   const infoFontClasses = [infoFontDT, infoFontM].filter(Boolean).join(' ');
 
-  // 組合 style
   const titleStyle = titleFontColor ? `color: ${titleFontColor};` : '';
   const infoStyle = infoFontColor ? `color: ${infoFontColor};` : '';
 
@@ -333,6 +328,7 @@ export default async function decorate(block) {
       console.log('L4TagMulti- children HTML:', childrenWithL4Tag.map((child) => child.outerHTML));
     }
 
+    const advancedConfig = await getBlockConfigs(block, ADVANCED_DEFAULTS, 'line-info');
     const config = await getBlockConfigs(block, {}, 'line-info');
     const v = getFieldValue(config);
 
@@ -383,8 +379,8 @@ export default async function decorate(block) {
     // 處理 textMaxWidth 單位（如果沒有單位則加上 px）
     const textMaxWidthValue = ensureUnit(textMaxWidth);
 
-    // 4.5. Get Advanced Styles
-    const advancedStyles = generateAdvancedStyles(config);
+    // 4.5. Get Advanced Styles (pass block for manual parsing)
+    const advancedStyles = generateAdvancedStyles(advancedConfig, block);
 
     // 組合 width 和 max-width
     const styleProps = [];

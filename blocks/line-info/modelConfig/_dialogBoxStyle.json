@@ -15,6 +15,7 @@
       },
       "fields": [
         {
+          "valueType": "string",
           "component": "select",
           "label": "radius",
           "name": "dialogBoxRadius",
@@ -104,6 +105,7 @@
           ]
         },
         {
+          "valueType": "string",
           "component": "select",
           "label": "content alignment (left/center)",
           "name": "dialogBoxContentAlignment",

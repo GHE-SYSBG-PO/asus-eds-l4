@@ -14,6 +14,7 @@
           "component": "select",
           "label": "font(DT)",
           "name": "titleFontDTselect",
+          "valueType": "string",
           "default": "ro-md-14-sh",
           "options": [
             {
@@ -34,6 +35,7 @@
           "component": "select",
           "label": "font(M)",
           "name": "titleFontMselect",
+          "valueType": "string",
           "default": "ro-md-13",
           "options": [
             {
@@ -68,6 +70,7 @@
           "component": "select",
           "label": "font(DT)",
           "name": "infoFontDTselect",
+          "valueType": "string",
           "default": "ro-rg-13",
           "options": [
             {
@@ -88,6 +91,7 @@
           "component": "select",
           "label": "font(M)",
           "name": "infoFontMselect",
+          "valueType": "string",
           "default": "ro-rg-12",
           "options": [
             {
