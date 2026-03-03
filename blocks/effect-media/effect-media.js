@@ -165,12 +165,9 @@ const _renderMediaHTML = (props) => {
 
 export default async function decorate(block) {
   try {
-    // DEBUG: 印出實際的 HTML rows 順序
-    // eslint-disable-next-line no-console
-    console.log('effect-media rows:', [...block.children].map((r, i) => `[${i}] ${r.textContent.trim().substring(0, 60)}`));
-
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'effect-media');
     const v = getFieldValue(config);
+    const isAE = isAuthorEnvironment();
 
     // load anime
     const anime = await loadAnime();
@@ -213,19 +210,26 @@ export default async function decorate(block) {
 
     const sceneContent = _renderMediaHTML(prop);
 
+    // handle animation
+    let animationHeight = `${DEFAULT_CONFIG.animationLength * 100}vh`;
+    let animationPosition = 'sticky top-0';
+    if (isAE) {
+      animationHeight = '100vh';
+      animationPosition = 'relative';
+    }
+
     block.innerHTML = `
-      <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[250vh] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]">
-        <div class="sticky top-0 w-[100vw] h-[100vh] scene-1">
+      <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]">
+        <div class="${animationPosition} w-[100vw] h-[100vh] scene-1">
           ${sceneContent}
         </div>
       </div>
     `;
 
     // handle animation
-    if (!isAuthorEnvironment()) {
+    if (!isAE) {
       _scrollTriggerAnimation(block, anime);
     }
-
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating effet-media: ', error);
