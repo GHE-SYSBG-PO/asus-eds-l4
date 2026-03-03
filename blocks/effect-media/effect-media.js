@@ -15,6 +15,7 @@ const DEFAULT_CONFIG = {
   fontDesktop: '',
   fontTablet: '',
   fontMobile: '',
+  fontColor: '',
   textMaxWidthD: '',
   textMaxWidthT: '',
   textMaxWidthM: '',
@@ -131,7 +132,7 @@ const _renderMediaHTML = (props) => {
     imgAlt,
     imageStyle,
     text,
-    textColor,
+    fontColorStyle,
     fonts,
     maxW,
   } = props;
@@ -147,8 +148,8 @@ const _renderMediaHTML = (props) => {
   ` : '';
 
   const htmlText = text ? `
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style="color: #${textColor}">
-      <p class="relative text-center w-[100vw] lg:max-w-[${maxW.D}] md:max-w-[${maxW.T}] sm:max-w-[${maxW.M}] pl-[10%] pr-[10%] ${fonts.D} ${fonts.T} ${fonts.M}">${text}</p>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" >
+      <p class="ani-text relative text-center w-[100vw] lg:max-w-[${maxW.D}] md:max-w-[${maxW.T}] sm:max-w-[${maxW.M}] pl-[10%] pr-[10%] ${fonts.D} ${fonts.T} ${fonts.M}" style="${fontColorStyle}">${text}</p>
     </div>
   ` : '';
 
@@ -159,7 +160,7 @@ export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'effect-media');
     const v = getFieldValue(config);
-    const isAE = isAuthorEnvironment();
+    const isUE = isAuthorEnvironment();
 
     // load anime
     const anime = await loadAnime();
@@ -170,7 +171,11 @@ export default async function decorate(block) {
     const imageSrc = v('image', 'text');
     const imgAlt = v('imgAlt', 'text');
     const text = v('text', 'text');
-    const textColor = v('textColor', 'text') || 'fff';
+    const fontColor = v('fontColor', 'text');
+    const fontColorStyle = fontColor ? `--text-block-body-color: #${fontColor};` : '';
+
+    // eslint-disable-next-line no-console
+    console.log('fontColor: ', fontColor);
 
     const bgColor = v('bgColor', 'text') || '';
     const bgColorStyle = bgColor ? `background-color: #${bgColor};` : '';
@@ -195,7 +200,7 @@ export default async function decorate(block) {
       imgAlt,
       imageStyle,
       text,
-      textColor,
+      fontColorStyle,
       fonts,
       maxW,
     };
@@ -205,15 +210,18 @@ export default async function decorate(block) {
     // configure animation layout
     let animationHeight = `${DEFAULT_CONFIG.animationLength * 100}vh`;
     let animationPosition = 'sticky top-0';
-    const isAeType = isAE ? 'is-ae' : '';
+    const isUeType = isUE ? 'is-ue' : '';
 
-    if (isAE) {
+    if (isUE) {
       animationHeight = '100vh';
       animationPosition = 'relative';
     }
 
+    const minH = `lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]`;
+    const containerClass = `effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 ${minH} ${isUeType}`;
+
     block.innerHTML = `
-      <div class="effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}] ${isAeType}" style="${bgColorStyle}">
+      <div class="${containerClass}" style="${bgColorStyle}">
         <div class="${animationPosition} w-[100vw] h-[100vh] scene-1">
           ${sceneContent}
         </div>
@@ -221,7 +229,7 @@ export default async function decorate(block) {
     `;
 
     // trigger scroll animation
-    if (!isAE) {
+    if (!isUE) {
       _scrollTriggerAnimation(block, anime);
     }
   } catch (error) {
