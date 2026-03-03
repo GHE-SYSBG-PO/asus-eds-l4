@@ -201,7 +201,13 @@ export default async function decorate(block) {
         ${v('ctaText')}
       </a>
     `;
-    const catButton = buildButtonHtml(v);
+    let catButton = buildButtonHtml(v);
+    if (v('ctaLinkType') === 'button' && v('ctaHyperlink')) {
+      catButton = catButton.replace(
+        /<a/g,
+        `<a onclick="window.open('${v('ctaHyperlink')}', '_blank')"`,
+      );
+    }
     const cta = `
       <div class='${v('ctaVisible') === 'hide' ? '' : 'mt-[16px]'} break-all ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment}'>
         ${v('ctaLinkType') === 'text-link' ? ctaLink : v('ctaLinkType') === 'button' ? catButton : ''}

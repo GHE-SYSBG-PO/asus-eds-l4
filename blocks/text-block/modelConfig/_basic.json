@@ -50,15 +50,11 @@
       ]
     },
     {
-      "component": "text",
-      "label": "CTA text",
-      "name": "ctaText",
-      "valueType": "string",
-      "condition": {
-        "and": [
-          { "===": [{"var" : "ctaLinkType"}, "text-link"] }
-        ]
-      }
+      "component": "aem-content",
+      "label": "CTA hyperlink (external)",
+      "name": "ctaHyperlink",
+      "multi": false,
+      "valueType": "string"
     },
     {
       "component": "select",
