@@ -10,7 +10,7 @@
       "label": "CTA visiblity toggle",
       "name": "ctaVisiblity",
       "valueType": "string",
-      "placeholder": "The default value is show",
+      "placeholder": "The default value is hide",
       "options": [
         {
           "name": "show",
@@ -59,6 +59,12 @@
       "component": "text",
       "label": "CTA font color",
       "name": "ctaFontColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "CTA arrow color",
+      "name": "ctaArrowColor",
       "valueType": "string"
     }
   ]

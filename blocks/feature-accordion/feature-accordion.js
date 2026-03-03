@@ -1,14 +1,13 @@
 export default function decorate(block) {
   try {
-    console.log('first block', block, block.children);
-    // Exit early if there are fewer than 2 children
-    // if (!block.children || block.children.length < 2) return;
     const [col1, col2] = [...block.children];
 
     const config = block.dataset;
-    // eslint-disable-next-line no-console
-    console.log('config', config);
-    // Set default values for layout variations
+    if (col1) {
+      Object.entries(config).forEach(([key, value]) => {
+        col1.dataset[key] = value;
+      });
+    }
     block.append(col1, col2);
   } catch (error) {
     // eslint-disable-next-line no-console

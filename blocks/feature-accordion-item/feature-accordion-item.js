@@ -66,6 +66,7 @@ let delayedMediaListenerBound = false;
 let delayedMediaEventFired = false;
 let delayedMediaPrefetchStarted = false;
 let mediaControlDelegationBound = false;
+const CTA_DATA_KEYS = ['ctavisiblity', 'ctatext', 'ctahyperlink', 'ctafontcolor'];
 
 const runLoadersWithConcurrency = async (loaders, concurrency = PREFETCH_CONCURRENCY) => {
   if (!loaders.length) return;
@@ -229,6 +230,73 @@ const bindMediaControlDelegation = () => {
   }, true);
 };
 
+const syncContainerCtaDatasetToGroup = (container, group) => {
+  if (!container || !group) return;
+  CTA_DATA_KEYS.forEach((key) => {
+    if (container.dataset[key]) {
+      group.dataset[key] = container.dataset[key];
+    }
+  });
+};
+
+const createAccordionCta = (dataset) => {
+  if (!dataset || dataset.ctavisiblity !== 'show') return null;
+  const text = dataset.ctatext?.trim();
+  const href = dataset.ctahyperlink?.trim();
+  if (!text || !href) return null;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'feature-accordion-cta';
+
+  const link = document.createElement('a');
+  link.className = 'feature-accordion-cta__link';
+  link.href = href;
+  link.setAttribute('aria-label', text);
+
+  const textNode = document.createElement('span');
+  textNode.className = 'feature-accordion-cta__text';
+  textNode.textContent = text;
+
+  const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  icon.classList.add('feature-accordion-cta__icon');
+  icon.setAttribute('viewBox', '0 0 24 24');
+  icon.setAttribute('aria-hidden', 'true');
+  icon.setAttribute('focusable', 'false');
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', 'M9 6l6 6-6 6');
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke', 'currentColor');
+  path.setAttribute('stroke-width', '2');
+  path.setAttribute('stroke-linecap', 'round');
+  path.setAttribute('stroke-linejoin', 'round');
+  icon.append(path);
+
+  const color = normalizeColor(dataset.ctafontcolor);
+  if (color) {
+    wrapper.style.setProperty('--feature-accordion-cta-color', color);
+  }
+
+  link.append(textNode, icon);
+  wrapper.append(link);
+  return wrapper;
+};
+
+const ensureAccordionListCta = (container, group) => {
+  if (!container || !group) return;
+  syncContainerCtaDatasetToGroup(container, group);
+
+  const existing = group.querySelector(':scope > .feature-accordion-cta');
+  const cta = createAccordionCta(group.dataset);
+  if (!cta) {
+    if (existing) existing.remove();
+    return;
+  }
+
+  if (existing) existing.remove();
+  group.append(cta);
+};
+
 const ensureAccordionGroupWrapper = (block) => {
   const container = block.closest('.feature-accordion-item-container');
   if (!container) return null;
@@ -249,6 +317,8 @@ const ensureAccordionGroupWrapper = (block) => {
     mediaGroup.classList.add('feature-accordion-media-group');
     container.append(mediaGroup);
   }
+
+  ensureAccordionListCta(container, group);
 
   return { container, group, mediaGroup };
 };
