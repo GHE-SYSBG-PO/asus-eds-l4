@@ -702,6 +702,11 @@
     "id": "feature-accordion",
     "fields": [
       {
+        "component": "hidden",
+        "name": "style",
+        "value": "feature-accordion"
+      },
+      {
         "component": "tab",
         "label": "basic",
         "name": "basic"
