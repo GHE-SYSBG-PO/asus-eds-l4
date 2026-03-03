@@ -7,7 +7,7 @@ import { loadAnime } from '../../scripts/scripts.js';
 // DEFAULT
 const DEFAULT_CONFIG = {
   image: '',
-  imageAlt: '',
+  imgAlt: '',
   widthD: '',
   heightD: '',
   fontDesktop: '',
@@ -135,7 +135,7 @@ const _getTextMaxWidth = (device, v) => {
 const _renderMediaHTML = (props) => {
   const {
     imageSrc,
-    imageAlt,
+    imgAlt,
     imageStyle,
     text,
     textColor,
@@ -147,7 +147,7 @@ const _renderMediaHTML = (props) => {
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle}">
       <img
         src="${imageSrc}"
-        alt="${imageAlt}"
+        alt="${imgAlt}"
         class="animation-img absolute left-0 top-0 w-full h-full object-cover"
       />
     </div>
@@ -178,7 +178,7 @@ export default async function decorate(block) {
     block.innerHTML = '';
 
     const imageSrc = v('image', 'text');
-    const imageAlt = v('imageAlt', 'text');
+    const imgAlt = v('imgAlt', 'text');
     const text = v('text', 'text');
     const textColor = v('textColor', 'text') || 'fff';
 
@@ -199,7 +199,7 @@ export default async function decorate(block) {
 
     const prop = {
       imageSrc,
-      imageAlt,
+      imgAlt,
       imageStyle,
       text,
       textColor,
