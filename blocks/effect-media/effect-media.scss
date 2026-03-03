@@ -7,3 +7,19 @@
     }
   }
 }
+
+// handle is-ue
+.l4-pdp {
+  .effect-media {
+    .effect-media-container {
+      &.is-ue {
+        max-height: 1024px;
+
+        .scene-1 {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
