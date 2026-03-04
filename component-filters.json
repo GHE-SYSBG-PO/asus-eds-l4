@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "container-2cols"
+      "container-2cols",
+      "tab-3column"
     ]
   },
   {
@@ -33,6 +34,12 @@
     "id": "container-2cols",
     "components": [
       "container-col"
+    ]
+  },
+  {
+    "id": "tab-3column",
+    "components": [
+      "tab-3column-item"
     ]
   },
   {
@@ -88,6 +95,12 @@
     "id": "small-cards",
     "components": [
       "small-card"
+    ]
+  },
+  {
+    "id": "tab-3column-item",
+    "components": [
+      "media-block"
     ]
   }
 ]

@@ -674,6 +674,39 @@ async function waitForFirstImage(section) {
 }
 
 /**
+ * Loads and decorates a section block (e.g., container-2cols).
+ * @param {Element} section The section element
+ * @param {string} name The section block name
+ */
+const loadSectionBlock = async (section, name) => {
+  try {
+    loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
+    const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
+    if (mod.default) {
+      await mod.default(section);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(`Failed to load section block ${name}`, error);
+  }
+};
+
+/**
+ * Loads and decorates all column section blocks within the main element.
+ * @param {Element} section Current section
+ * @returns {Promise<void>} A promise that resolves when all column sections are loaded
+ */
+export const loadSectionBlockJs = async (section) => {
+  let sectionName = ([...section.classList].find((name) => name.startsWith('l4customsection-') || name.endsWith('item-container')) || '').replace('l4customsection-', '').replace('-item-container', '');
+  if (!sectionName && section.dataset) {
+    sectionName = section.dataset.aueComponent;
+  }
+  if (sectionName) {
+    // Load section blocks (sections with their own JS/CSS)
+    loadSectionBlock(section, sectionName);
+  }
+};
+/**
  * Loads all blocks in a section.
  * @param {Element} section The section element
  */
@@ -687,6 +720,7 @@ async function loadSection(section, loadCallback) {
       // eslint-disable-next-line no-await-in-loop
       await loadBlock(blocks[i]);
     }
+    await loadSectionBlockJs(section);
     if (loadCallback) await loadCallback(section);
     section.dataset.sectionStatus = 'loaded';
     section.style.display = null;
