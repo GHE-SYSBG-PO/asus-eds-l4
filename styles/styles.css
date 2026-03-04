@@ -146,9 +146,9 @@ pre {
   white-space: pre;
 }
 
-main > div {
+/* main > div {
   margin: 40px 16px;
-}
+} */
 
 input,
 textarea,
@@ -214,11 +214,11 @@ button.secondary {
   color: var(--text-color);
 }
 
-main img {
+/* main img {
   max-width: 100%;
   width: auto;
   height: auto;
-}
+} */
 
 .icon {
   display: inline-block;
@@ -226,13 +226,13 @@ main img {
   width: 24px;
 }
 
-.icon img {
+/* .icon img {
   height: 100%;
   width: 100%;
-}
+} */
 
 /* sections */
-main > .section {
+/* main > .section {
   margin: 40px 0;
 }
 
@@ -250,11 +250,11 @@ main > .section:first-of-type {
   main > .section > div {
     padding: 0 32px;
   }
-}
+} */
 
 /* section metadata */
-main .section.light,
+/* main .section.light,
 main .section.highlight {
   margin: 0;
   padding: 40px 0;
-}
+} */
