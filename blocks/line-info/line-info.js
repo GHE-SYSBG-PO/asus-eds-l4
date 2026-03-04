@@ -201,7 +201,7 @@ const generatePictureHtml = ({
         ${tabletSource}
         <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy" class="${imgClasses}">
       </picture>
-      <div class="absolute top-0 -left-5 w-full ${textContainerClasses}" ${textContainerStyles ? `style="${textContainerStyles}"` : ''}>
+      <div class="absolute top-0 left-0 w-full ${textContainerClasses}" ${textContainerStyles ? `style="${textContainerStyles}"` : ''}>
         ${textItemsHtml}
       </div>
     </div>
@@ -300,7 +300,7 @@ const generateTextItemsHtml = ({
     });
 
     // 基礎類名
-    let itemClasses = 'absolute pointer-events-auto flex flex-col';
+    let itemClasses = 'absolute flex flex-col bg-[#F23711] pointer-events-auto';
     let customStyles = '';
 
     // Generate unique ID for this item
@@ -315,29 +315,30 @@ const generateTextItemsHtml = ({
         if (styleLayout === '1') {
           // Style 1: side-based positioning
           if (side === 'right') {
-            itemClasses += ' right-0 lg:-right-5 items-end text-right';
+            itemClasses += ' lg:-right-5 items-end text-right';
           } else {
-            itemClasses += ' left-0 lg:-left-5 items-start text-left';
+            itemClasses += ' lg:-left-5 items-start text-left';
           }
         } else if (layoutStyle === 'right') {
           // Style 2: layout-based positioning
-          itemClasses += ' right-0 lg:-right-5 items-end text-right';
+          itemClasses += ' lg:-right-5 items-end text-right';
         } else {
-          itemClasses += ' left-0 lg:-left-5 items-start text-left';
+          itemClasses += ' lg:-left-5 items-start text-left';
         }
 
         // 處理 yValue 的響應式定位
         if (yValue && yValue !== '0') {
           const { className, customStyle } = convertToTailwindSpacing(yValue);
           if (className) {
+            // Mobile: 不特別定位，Tablet/Desktop: 使用指定值
             itemClasses += ` md:top-${className} lg:top-${className}`;
           } else if (customStyle) {
-            customStyles += `--top-md: ${customStyle}; --top-lg: ${customStyle}; top: var(--top-md);`;
+            customStyles += `--top-md: ${customStyle}; --top-lg: ${customStyle};`;
           }
         }
 
         // 預設寬度設定
-        itemClasses += ' w-2/5 max-w-xs lg:max-w-sm';
+        itemClasses += ' w-[16.6%] max-w-[276px] -translate-x-full';
         break;
       }
 
@@ -357,9 +358,10 @@ const generateTextItemsHtml = ({
         if (xValue && xValue !== '0') {
           const { className, customStyle } = convertToTailwindSpacing(xValue);
           if (className) {
+            // Mobile: 不特別定位，Tablet/Desktop: 使用指定值
             itemClasses += ` md:left-${className} lg:left-${className}`;
           } else if (customStyle) {
-            customStyles += `--left-md: ${customStyle}; --left-lg: ${customStyle}; left: var(--left-md);`;
+            customStyles += `--left-md: ${customStyle}; --left-lg: ${customStyle};`;
           }
         }
 
@@ -367,9 +369,10 @@ const generateTextItemsHtml = ({
         if (yValue && yValue !== '0') {
           const { className, customStyle } = convertToTailwindSpacing(yValue);
           if (className) {
+            // Mobile: 不特別定位，Tablet/Desktop: 使用指定值
             itemClasses += ` md:top-${className} lg:top-${className}`;
           } else if (customStyle) {
-            customStyles += `--top-md: ${customStyle}; --top-lg: ${customStyle}; top: var(--top-md);`;
+            customStyles += `--top-md: ${customStyle}; --top-lg: ${customStyle};`;
           }
         }
 
@@ -377,9 +380,10 @@ const generateTextItemsHtml = ({
         if (textWidth && textWidth !== 'auto') {
           const { className, customStyle } = convertToTailwindSpacing(textWidth);
           if (className) {
+            // Mobile: 使用預設，Tablet/Desktop: 使用指定值
             itemClasses += ` md:w-${className} lg:w-${className}`;
           } else if (customStyle) {
-            customStyles += `--width-md: ${customStyle}; --width-lg: ${customStyle}; width: var(--width-md);`;
+            customStyles += `--width-md: ${customStyle}; --width-lg: ${customStyle};`;
           }
         } else {
           // 預設寬度
@@ -406,26 +410,22 @@ const generateTextItemsHtml = ({
     if (customStyles.includes('--')) {
       responsiveStyle = `
         <style>
-          .${itemId} {
-            ${customStyles}
-          }
           @media (min-width: 768px) {
             .${itemId} {
-              top: var(--top-md, auto);
-              left: var(--left-md, auto);
-              width: var(--width-md, auto);
+              top: var(--top-md, auto) !important;
+              left: var(--left-md, auto) !important;
+              width: var(--width-md, auto) !important;
             }
           }
           @media (min-width: 1280px) {
             .${itemId} {
-              top: var(--top-lg, auto);
-              left: var(--left-lg, auto);
-              width: var(--width-lg, auto);
+              top: var(--top-lg, auto) !important;
+              left: var(--left-lg, auto) !important;
+              width: var(--width-lg, auto) !important;
             }
           }
         </style>
       `;
-      customStyles = ''; // 清空，因為已經放在 style 標籤中
     }
 
     const styleAttribute = customStyles ? `style="${customStyles}"` : '';
