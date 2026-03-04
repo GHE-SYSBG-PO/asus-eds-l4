@@ -104,7 +104,6 @@
   .text-block-title {
     color: var(--text-block-title-color, inherit);
     background: var(--text-block-title-gradient, none);
-    -webkit-background-clip: text;
     background-clip: text;
     will-change: transform, opacity;
   }
@@ -135,8 +134,8 @@
   .l4-pdp {
     .text-block-2-col {
       .main-title {
-        width: min(var(--text-block-col1-width), 50%) ;
-        padding-right: max(var(--text-block-col1-padding-right), 0px);
+        width: var(--text-block-col1-width, 50%);
+        padding-right: var(--text-block-col1-padding-right, 0);
       }
     }
   }

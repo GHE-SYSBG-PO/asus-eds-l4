@@ -85,7 +85,6 @@ export default async function decorate(block) {
       motion = 'g-block-animation';
       handleMotion(block);
     }
-    
     try {
       if (v('categoryFontColor')) {
         categoryFontColor = `style='--text-block-category-color: #${v('categoryFontColor')};'`;
@@ -117,7 +116,8 @@ export default async function decorate(block) {
       col1Style = [col1Width, col1PaddingRight].filter(Boolean).join(';');
       col1Style = col1Style ? `style='${col1Style};'` : '';
 
-      console.log('col1Style', col1Style);  
+      // eslint-disable-next-line no-console
+      console.log('col1Style', col1Style);
     } catch (error) {
       // console.warn('Error:', error);
     }
