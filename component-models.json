@@ -4808,6 +4808,7 @@
         "component": "container",
         "label": "title richtext",
         "name": "advancedTitleGroup",
+        "collapsible": true,
         "fields": [
           {
             "component": "select",
@@ -4864,6 +4865,7 @@
         "component": "container",
         "label": "info richtext",
         "name": "advancedInfoGroup",
+        "collapsible": true,
         "fields": [
           {
             "component": "select",
