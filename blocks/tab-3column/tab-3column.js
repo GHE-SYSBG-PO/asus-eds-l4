@@ -3,7 +3,6 @@
  */
 
 import { getBlockConfigs } from '../../scripts/utils.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
 import { prefixHex } from '../../components/button/button.js';
 
 const DEFAULT_CONFIG = {
@@ -55,11 +54,11 @@ function buildRadiusValue(tl, tr, br, bl) {
 
 function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
   const iconHtml = iconEnabled && tabIconAsset
-    ? `<img class="tab3col-tab-icon" src="${tabIconAsset}" alt="" aria-hidden="true" />`
+    ? `<img class="tab3col-tab-icon h-[36px] mr-[12px]" src="${tabIconAsset}" alt="" aria-hidden="true" />`
     : '';
   return `
     <button
-      class="tab3col-tab-btn${isActive ? ' is-active' : ''}"
+      class="tab3col-tab-btn h-[56px] ${isActive ? ' is-active' : ''}"
       data-tab-index="${index}"
       role="tab"
       aria-selected="${isActive}"
@@ -167,7 +166,9 @@ export default async function decorate(block) {
     const infoFontM = tabData.infofontm || DEFAULT_CONFIG.infoFontM;
     const infoFontColor = prefixHex(tabData.infofontcolor || '');
 
-    const itemEls = [...tabContainer.querySelectorAll('.tab-3column-item-wrapper')];
+    const itemEls = [
+      ...tabContainer.querySelectorAll('.tab-3column-item-wrapper'),
+    ];
 
     // ── 2nd-level item config ────────────────────────────────────
     // Each itemEl is passed individually to getBlockConfigs using the
@@ -243,12 +244,12 @@ export default async function decorate(block) {
     // ── Build component shell ────────────────────────────────────
     const componentHtml = document.createRange().createContextualFragment(`
       <div
-        class="tab3col-component ${colorGroup}"
+        class="tab3col-component max-w-full md:max-w-[896px] lg:max-w-[1260px] ${colorGroup}"
         data-motion="${motionEnabled}"
         data-icon="${tabIconEnabled}"
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
       >
-        <div class="tab3col-tab-bar">
+        <div class="tab3col-tab-bar w-auto sm:max-w-[172px] md:max-w-none md:h-[56px lg:w-[185px] ]">
           <button class="tab3col-arrow tab3col-arrow--prev" aria-label="Scroll tabs left" style="display:none">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
           </button>
@@ -267,40 +268,68 @@ export default async function decorate(block) {
     const panelsEl = componentHtml.querySelector('.tab3col-panels');
 
     // ── Build each panel, move per-item instrumentation ──────────
+    // eslint-disable-next-line no-inner-declarations
+    async function renderTabItemHtml(itemEl, tab, oldEl) {
+      itemEl.classList.add('tab3col-panel');
+      const isActive = oldEl ? oldEl.classList.contains('is-active') : false;
+      if (isActive) {
+        itemEl.classList.add('is-active');
+      }
+
+      const lastDom = itemEl.children[itemEl.children.length - 1];
+
+      const newItem = document.createRange().createContextualFragment(`
+        <div class="tab3col-media-slot"></div>
+        <div class="tab3col-text-col">
+          <h3 class="tab3col-title ${titleClass}">${tab.tabTitle.html || ''}</h3>
+          <div class="tab3col-info ${infoClass}">${tab.tabInfo.html || ''}</div>
+        </div>
+      `);
+      if (lastDom.children.length > 2 || (lastDom.querySelector('.block'))) {
+        newItem.querySelector('.tab3col-media-slot').append(lastDom);
+      }
+      itemEl.innerHTML = '';
+      itemEl.append(newItem);
+      if (!oldEl) {
+        panelsEl.appendChild(itemEl);
+      }
+    }
+
     itemEls.forEach((itemEl, i) => {
-      const isActive = i === 0;
-      const tab = tabs[i];
-
-      const panel = document.createElement('div');
-      panel.className = `tab-3column-item block tab3col-panel${isActive ? ' is-active' : ''}`;
-      panel.id = `tab3col-panel-${i}`;
-      panel.setAttribute('role', 'tabpanel');
-      panel.setAttribute('data-tab-index', i);
-
-      if (!isActive) panel.setAttribute('hidden', '');
-
-      // Critical: transfer UE instrumentation from original item el to panel
-      moveInstrumentation(itemEl.querySelector('.tab-3column-item'), panel);
-
-      // Media slot — move nested blocks (non-field-row children) here
-      const mediaSlot = document.createElement('div');
-      mediaSlot.className = 'tab3col-media-slot';
-
-      // Text column
-      const textCol = document.createElement('div');
-      textCol.className = 'tab3col-text-col';
-      textCol.innerHTML += `<h3 class="tab3col-title ${titleClass}">${tab.tabTitle.html}</h3>`;
-      textCol.innerHTML += `<div class="tab3col-info ${infoClass}">${tab.tabInfo.html}</div>`;
-
-      panel.appendChild(mediaSlot);
-      panel.appendChild(textCol);
-      panelsEl.appendChild(panel);
+      renderTabItemHtml(itemEl.querySelector('.tab-3column-item'), tabs[i]);
     });
 
     block.innerHTML = '';
     block.append(componentHtml);
 
+    // default show
+    if (block.querySelector('.tab-3column-item')) {
+      block.querySelector('.tab-3column-item').classList.add('is-active');
+    }
+
     setupInteraction(block.querySelector('.tab3col-component'), motionEnabled);
+
+    // update item dom data from block tab-3column-item
+    block.addEventListener(
+      'asus-l4--section-tab-3column',
+      async ({ detail }) => {
+        const tab = await getBlockConfigs(
+          detail,
+          ITEM_DEFAULT_CONFIG,
+          'tab-3column-item',
+        );
+
+        // update menu text
+        const doms = [...block.querySelectorAll('.tab-3column-item')];
+        const index = doms.findIndex((r) => r.dataset.aueResource === detail.dataset.aueResource);
+        const menuDom = block.querySelectorAll('.tab3col-tab-text')[index];
+        if (menuDom) {
+          menuDom.innerHTML = tab.tabText.text;
+        }
+
+        renderTabItemHtml(detail, tab, doms[index]);
+      },
+    );
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating tab-3column block:', error);

@@ -13,7 +13,7 @@ import {
   getMetadata,
   loadScript,
 } from './aem.js';
-import { loadSectionBlockJs, isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
+import { isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -59,6 +59,53 @@ async function loadFonts() {
   } catch (e) {
     // do nothing
   }
+}
+
+/**
+ * Anime JS Dynamic Loader
+ * Loads Anime JS library on-demand to improve initial page load performance
+ */
+let animePromise = null;
+/**
+ * Dynamically loads Anime JS library from CDN
+ * @returns {Promise<Object>} Promise that resolves with anime object
+ */
+export async function loadAnime() {
+  // Return immediately if Anime is already loaded
+  if (window.anime) {
+    return window.anime;
+  }
+
+  // Return existing promise if load is in progress
+  if (!animePromise) {
+    // eslint-disable-next-line no-console
+    console.log(`Anime: Starting dynamic load [Call ID: ${Date.now()}]`);
+
+    animePromise = (async () => {
+      try {
+        await loadScript(
+          'https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js',
+          {
+            crossorigin: 'anonymous',
+            referrerpolicy: 'no-referrer',
+          },
+        );
+        // eslint-disable-next-line no-console
+        console.log('Anime JS loaded dynamically');
+        return window.anime;
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to load Anime JS library:', error);
+        animePromise = null; // Reset on error so retry is possible
+        throw error;
+      }
+    })(); // IIFE (Immediately Invoked Function Expression) creates promise synchronously
+  } else {
+    // eslint-disable-next-line no-console
+    console.log('Anime: Reusing existing load promise');
+  }
+
+  return animePromise;
 }
 
 /**
@@ -168,7 +215,6 @@ async function loadLazy(doc) {
   loadHeader(doc.querySelector('header'));
 
   const main = doc.querySelector('main');
-  await loadSectionBlockJs(main);
   await loadSections(main);
 
   const { hash } = window.location;

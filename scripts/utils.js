@@ -1,4 +1,4 @@
-import { loadCSS, decorateBlock, loadBlock } from './aem.js';
+import { decorateBlock, loadBlock } from './aem.js';
 
 export function isAuthorEnvironment() {
   if (window?.location?.origin?.includes('author')) {
@@ -13,9 +13,9 @@ export const getAllFieldNames = (fields) => {
   function traverseFields(fieldArray, arr) {
     fieldArray.forEach((field) => {
       // Skip container components with multi=true (multi-row components need special handling)
-      if (field.component === 'container' && field.multi) return;
-
-      if (field.component === 'container' && Array.isArray(field.fields)) {
+      if (field.component === 'container' && field.multi) {
+        arr.push(field.name);
+      } else if (field.component === 'container' && Array.isArray(field.fields)) {
         // Recursively process container fields but exclude the container's own name
         traverseFields(field.fields, arr);
       } else if (field.component !== 'tab' && field.name) {
@@ -123,7 +123,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
     return config;
   }
 
-  let rows = [...block.children];
+  const rows = [...block.children];
 
   if (blockName) {
     try {
@@ -134,8 +134,6 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
       const finalFieldOrder = fieldOrder.length > 0 ? fieldOrder : Object.keys(defaults);
 
       if (finalFieldOrder.length > 0) {
-        // Filter out multi-row data marked with L4TagMulti-
-        rows = rows.filter((row) => !row?.innerHTML?.includes('L4TagMulti-'));
         rows.forEach((row, index) => {
           if (index < finalFieldOrder.length) {
             const cell = row.children[0];
@@ -239,38 +237,6 @@ export const handleDecide = (
 });
 
 /**
- * Loads and decorates a section block (e.g., container-2cols).
- * @param {Element} section The section element
- * @param {string} name The section block name
- */
-const loadSectionBlock = async (section, name) => {
-  const status = section.dataset.sectionStatus;
-  if (!status || status === 'initialized') {
-    try {
-      loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
-      const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
-      if (mod.default) {
-        await mod.default(section);
-      }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(`Failed to load section block ${name}`, error);
-    }
-  }
-};
-
-/**
- * Loads and decorates all column section blocks within the main element.
- * @param {Element} main The main container element containing section blocks
- * @returns {Promise<void>} A promise that resolves when all column sections are loaded
- */
-export const loadSectionBlockJs = async (main) => {
-  // Load section blocks (sections with their own JS/CSS)
-  const columnsSections = main.querySelectorAll('.section.container-2cols');
-  await Promise.all([...columnsSections].map((section) => loadSectionBlock(section, 'container-2cols')));
-};
-
-/**
  * Handles nested block execution for 'block'.js files.
  * @param {HTMLElement} block - The parent block element containing nested blocks.
  * @returns {void}
@@ -284,14 +250,17 @@ export const loadSectionBlockJs = async (main) => {
  * - Adds appropriate CSS classes to nested blocks and executes initialization.
  * - Preserves the original structure of non-nested rows.
  */
-export const nestBlockExecuteJs = (block) => {
+export const nestBlockExecuteJs = async (block, clear = true) => {
   if (!block?.children?.length) return;
   const rows = [...block.children];
   // Clear all child elements to rebuild the structure
-  block.innerHTML = '';
+  if (clear) {
+    block.innerHTML = '';
+  }
   // Define the prefix used to identify nested block markers
   const NESTED_BLOCK_PREFIX = 'L4--nested-block--';
-  rows.forEach((row) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const row of rows) {
     // Only process rows with two or more child elements (potential nested blocks)
     if (row.children.length >= 2) {
       const childElements = [...row.children];
@@ -315,13 +284,14 @@ export const nestBlockExecuteJs = (block) => {
         decorateBlock(row);
         block.appendChild(wrapperDiv);
         // Load and execute the nested block's JavaScript
-        loadBlock(row);
+        // eslint-disable-next-line no-await-in-loop
+        await loadBlock(row);
       } else {
         // If not a nested block, simply append the row back to the block
         block.appendChild(row);
       }
     }
-  });
+  }
 };
 
 /**
