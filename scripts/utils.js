@@ -203,33 +203,34 @@ export const handleDecide = (
  * @param {string} name The section block name
  */
 const loadSectionBlock = async (section, name) => {
-  try {
-    loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
-    const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
-    if (mod.default) {
-      await mod.default(section);
+  const status = section.dataset.sectionStatus;
+  if (!status || status === 'initialized') {
+    try {
+      loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
+      const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
+      if (mod.default) {
+        await mod.default(section);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`Failed to load section block ${name}`, error);
     }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(`Failed to load section block ${name}`, error);
   }
 };
 
 /**
  * Loads and decorates all column section blocks within the main element.
- * @param {Element} main The main container element containing section blocks
+ * @param {Element} section Current section
  * @returns {Promise<void>} A promise that resolves when all column sections are loaded
  */
-export const loadSectionBlockJs = async (main) => {
-  // Load section blocks (sections with their own JS/CSS)
-  const columnsSections = main.querySelectorAll('.section.container-2cols,.section.tab-3column');
-  await Promise.all([...columnsSections].map((section) => {
-    let sectionName = 'container-2cols';
-    if (!section.classList.contains(sectionName)) {
-      sectionName = 'tab-3column';
+export const loadSectionBlockJs = async (section) => {
+  section.classList.forEach((className) => {
+    if (className.startsWith('L4CustomSection-')) {
+      const sectionName = className.replace('L4CustomSection-', '');
+      // Load section blocks (sections with their own JS/CSS)
+      loadSectionBlock(section, sectionName);
     }
-    return loadSectionBlock(section, sectionName);
-  }));
+  });
 };
 
 /**

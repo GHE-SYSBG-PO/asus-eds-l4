@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import { loadSectionBlockJs } from './utils.js';
+
 /* eslint-env browser */
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
@@ -687,6 +689,7 @@ async function loadSection(section, loadCallback) {
       // eslint-disable-next-line no-await-in-loop
       await loadBlock(blocks[i]);
     }
+    await loadSectionBlockJs(section);
     if (loadCallback) await loadCallback(section);
     section.dataset.sectionStatus = 'loaded';
     section.style.display = null;
