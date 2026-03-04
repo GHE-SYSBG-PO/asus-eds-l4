@@ -21,7 +21,7 @@
       "...": "../blocks/tab-3column/modelConfig/_text-style.json#/fields"
     },
     {
-      "...": "../commonModel/_colorGroup.json#/fields"
+      "...": "../components/colorGroup/_colorGroup.json#/fields"
     }
   ]
 }
