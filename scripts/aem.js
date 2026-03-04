@@ -679,18 +679,15 @@ async function waitForFirstImage(section) {
  * @param {string} name The section block name
  */
 const loadSectionBlock = async (section, name) => {
-  const status = section.dataset.sectionStatus;
-  if (!status || status === 'initialized') {
-    try {
-      loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
-      const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
-      if (mod.default) {
-        await mod.default(section);
-      }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(`Failed to load section block ${name}`, error);
+  try {
+    loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
+    const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
+    if (mod.default) {
+      await mod.default(section);
     }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(`Failed to load section block ${name}`, error);
   }
 };
 
@@ -701,8 +698,8 @@ const loadSectionBlock = async (section, name) => {
  */
 export const loadSectionBlockJs = async (section) => {
   section.classList.forEach((className) => {
-    if (className.startsWith('L4CustomSection-')) {
-      const sectionName = className.replace('L4CustomSection-', '');
+    if (className.startsWith('l4customsection-')) {
+      const sectionName = className.replace('l4customsection-', '');
       // Load section blocks (sections with their own JS/CSS)
       loadSectionBlock(section, sectionName);
     }
