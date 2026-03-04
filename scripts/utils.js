@@ -1,4 +1,4 @@
-import { loadCSS, decorateBlock, loadBlock } from './aem.js';
+import { decorateBlock, loadBlock } from './aem.js';
 
 export function isAuthorEnvironment() {
   if (window?.location?.origin?.includes('author')) {
@@ -196,41 +196,6 @@ export const handleDecide = (
     reject(failureValue ?? condition);
   }
 });
-
-/**
- * Loads and decorates a section block (e.g., container-2cols).
- * @param {Element} section The section element
- * @param {string} name The section block name
- */
-const loadSectionBlock = async (section, name) => {
-  try {
-    loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
-    const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
-    if (mod.default) {
-      await mod.default(section);
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(`Failed to load section block ${name}`, error);
-  }
-};
-
-/**
- * Loads and decorates all column section blocks within the main element.
- * @param {Element} main The main container element containing section blocks
- * @returns {Promise<void>} A promise that resolves when all column sections are loaded
- */
-export const loadSectionBlockJs = async (main) => {
-  // Load section blocks (sections with their own JS/CSS)
-  const columnsSections = main.querySelectorAll('.section.container-2cols,.section.tab-3column');
-  await Promise.all([...columnsSections].map((section) => {
-    let sectionName = 'container-2cols';
-    if (!section.classList.contains(sectionName)) {
-      sectionName = 'tab-3column';
-    }
-    return loadSectionBlock(section, sectionName);
-  }));
-};
 
 /**
  * Handles nested block execution for 'block'.js files.
