@@ -7618,9 +7618,10 @@
         ]
       },
       {
-        "component": "text",
-        "label": "CTA text",
-        "name": "ctaText",
+        "component": "aem-content",
+        "label": "CTA hyperlink (external)",
+        "name": "ctaHyperlink",
+        "multi": false,
         "valueType": "string"
       },
       {
@@ -8365,6 +8366,24 @@
         },
         "fields": [
           {
+            "component": "text",
+            "label": "text",
+            "name": "ctaText",
+            "valueType": "string",
+            "condition": {
+              "and": [
+                {
+                  "===": [
+                    {
+                      "var": "ctaLinkType"
+                    },
+                    "text-link"
+                  ]
+                }
+              ]
+            }
+          },
+          {
             "component": "select",
             "label": "font (D)",
             "name": "ctaFontD",
@@ -8428,13 +8447,6 @@
             "component": "text",
             "label": "font color",
             "name": "ctaFontColor",
-            "valueType": "string"
-          },
-          {
-            "component": "aem-content",
-            "label": "hyperlink (external)",
-            "name": "ctaHyperlink",
-            "multi": false,
             "valueType": "string"
           }
         ]
