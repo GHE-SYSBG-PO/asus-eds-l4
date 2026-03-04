@@ -178,7 +178,6 @@ export default async function decorate(block) {
     const fontColor = v('fontColor', 'text');
     const fontColorStyle = fontColor ? `--text-block-body-color: #${fontColor};` : '';
 
-
     const bgColor = v('bgColor', 'text') || '';
     const bgColorStyle = bgColor ? `background-color: #${bgColor};` : '';
 
