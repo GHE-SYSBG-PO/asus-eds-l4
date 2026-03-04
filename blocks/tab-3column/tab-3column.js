@@ -1,42 +1,52 @@
+/* eslint-disable max-len */
 /**
  * ID:15 TAB_3COLUMN
  */
 
-import { getBlockConfigs } from '../../scripts/utils.js';
+import { getBlockConfigs, getProductLine } from '../../scripts/utils.js';
 import { prefixHex } from '../../components/button/button.js';
+
+const FONTS = {
+  asus: {
+    tabText: 'ro-md-18-sh-lg ro-md-18-sh-md ro-md-16-sh-sm',
+    tabTitle: 'tt-md-24',
+    tabInfo: {
+      fontDT: 'ro-rg-18-lg ro-rg-18-md',
+      fontM: 'ro-rg-16-sm',
+    },
+  },
+  proart: {
+    tabText: 'ro-md-18-sh-lg ro-md-18-sh-md ro-md-16-sh-sm',
+    tabTitle: 'tt-md-24',
+    tabInfo: {
+      fontDT: 'ro-rg-18-lg ro-rg-18-md',
+      fontM: 'ro-rg-16-sm',
+    },
+  },
+  rog: {
+    tabText: 'rc-bd-18-sh-lg rc-bd-18-sh-md rc-bd-16-sh-sm',
+    tabTitle: 'tg-bd-24',
+    tabInfo: {
+      fontDT: 'rc-rg-18-lg rc-rg-18-md',
+      fontM: 'rc-rg-16-sm',
+    },
+  },
+  tuf: {
+    tabText: 'ro-md-18-sh-lg ro-md-18-sh-md ro-md-16-sh-sm',
+    tabTitle: 'dp-cb-24',
+    tabInfo: {
+      fontDT: 'ro-rg-18-lg ro-rg-18-md',
+      fontM: 'ro-rg-16-sm',
+    },
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
+const productFonts = FONTS[PRODUCT_LINE];
 
 const DEFAULT_CONFIG = {
   motionEnabled: false,
-  widthTabArea: '',
-  widthTextArea: '',
   tabIconEnabled: true,
-  tabBarBgColorValue: '',
-  tabFontDT: 'ro-md-16',
-  tabFontM: 'ro-md-14',
-  tabFontColorDefault: '',
-  tabFontColorHover: '',
-  tabFontColorSelect: '',
-  tabContainerBorderWidthDefault: '',
-  tabContainerBorderWidthHover: '',
-  tabContainerBorderWidthSelect: '',
-  tabContainerBorderColorDefault: '',
-  tabContainerBorderColorHover: '',
-  tabContainerBorderColorSelect: '',
-  tabContainerBgColorDefault: '',
-  tabContainerBgColorHover: '',
-  tabContainerBgColorSelect: '',
-  tabContainerRadiusTL: '',
-  tabContainerRadiusTR: '',
-  tabContainerRadiusBR: '',
-  tabContainerRadiusBL: '',
-  titleFontD: 'tt-md-28',
-  titleFontT: 'tt-md-28',
-  titleFontM: 'tt-md-24',
-  titleFontColor: '',
-  infoFontD: 'ro-rg-16',
-  infoFontT: 'ro-rg-16',
-  infoFontM: 'ro-rg-14',
-  infoFontColor: '',
 };
 
 const ITEM_DEFAULT_CONFIG = {
@@ -54,11 +64,11 @@ function buildRadiusValue(tl, tr, br, bl) {
 
 function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
   const iconHtml = iconEnabled && tabIconAsset
-    ? `<img class="tab3col-tab-icon h-[36px] mr-[12px]" src="${tabIconAsset}" alt="" aria-hidden="true" />`
+    ? `<img class="tab3col-tab-icon object-contain shrink-0 h-[36px] mr-[12px] sm:mr-0 md:mr-0" src="${tabIconAsset}" alt="" aria-hidden="true" />`
     : '';
   return `
     <button
-      class="tab3col-tab-btn h-[56px] ${isActive ? ' is-active' : ''}"
+      class="tab3col-tab-btn flex items-center m-0 mb-[20px] border border-solid rounded-[28px] cursor-pointer whitespace-nowrap font-[inherit] transition-[background] duration-250 ease h-[56px] px-[16px] justify-start text-left lg:w-full md:flex-col md:items-center md:gap-[6px] px-[10px] py-[6px] sm:flex-col md:flex-row sm:items-center sm:gap-[4px] sm:shrink-0${isActive ? ' is-active' : ''} ${productFonts.tabText}"
       data-tab-index="${index}"
       role="tab"
       aria-selected="${isActive}"
@@ -131,8 +141,6 @@ export default async function decorate(block) {
     const widthTextArea = tabData.widthtextarea || '';
     const tabIconEnabled = tabData.tabiconenabled || DEFAULT_CONFIG.tabIconEnabled;
     const tabBarBgColor = prefixHex(tabData.tabbarbgcolorvalue || '');
-    const tabFontDT = tabData.tabfontdt || DEFAULT_CONFIG.tabFontDT;
-    const tabFontM = tabData.tabfontm || DEFAULT_CONFIG.tabFontM;
     const tabFontColorDefault = prefixHex(tabData.tabfontcolordefault || '');
     const tabFontColorHover = prefixHex(tabData.tabfontcolorhover || '');
     const tabFontColorSelect = prefixHex(tabData.tabfontcolorselect || '');
@@ -157,13 +165,8 @@ export default async function decorate(block) {
       tabData.tabcontainerradiusbr || '',
       tabData.tabcontainerradiusbl || '',
     );
-    const titleFontD = tabData.titlefontd || DEFAULT_CONFIG.titleFontD;
-    const titleFontT = tabData.titlefontt || DEFAULT_CONFIG.titleFontT;
-    const titleFontM = tabData.titlefontm || DEFAULT_CONFIG.titleFontM;
+    const titleFontDTM = tabData.titleFontDTM || DEFAULT_CONFIG.titleFontDTM;
     const titleFontColor = prefixHex(tabData.titlefontcolor || '');
-    const infoFontD = tabData.infofontd || DEFAULT_CONFIG.infoFontD;
-    const infoFontT = tabData.infofontt || DEFAULT_CONFIG.infoFontT;
-    const infoFontM = tabData.infofontm || DEFAULT_CONFIG.infoFontM;
     const infoFontColor = prefixHex(tabData.infofontcolor || '');
 
     const itemEls = [
@@ -206,30 +209,6 @@ export default async function decorate(block) {
     if (titleFontColor) inlineStyle += `--tab3col-title-color: ${titleFontColor};`;
     if (infoFontColor) inlineStyle += `--tab3col-info-color: ${infoFontColor};`;
 
-    // ── Font classes ─────────────────────────────────────────────
-    const tabFontClass = [
-      tabFontDT ? `${tabFontDT}-lg ${tabFontDT}-md` : '',
-      tabFontM ? `${tabFontM}-sm` : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
-
-    const titleClass = [
-      titleFontD ? `${titleFontD}-lg` : '',
-      titleFontT ? `${titleFontT}-md` : '',
-      titleFontM ? `${titleFontM}-sm` : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
-
-    const infoClass = [
-      infoFontD ? `${infoFontD}-lg` : '',
-      infoFontT ? `${infoFontT}-md` : '',
-      infoFontM ? `${infoFontM}-sm` : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
-
     // ── Build tab buttons HTML ───────────────────────────────────
     const tabBtnsHtml = tabs
       .map((tab, i) => buildTabBtnHtml(
@@ -244,23 +223,23 @@ export default async function decorate(block) {
     // ── Build component shell ────────────────────────────────────
     const componentHtml = document.createRange().createContextualFragment(`
       <div
-        class="tab3col-component max-w-full md:max-w-[896px] lg:max-w-[1260px] ${colorGroup}"
+        class="tab3col-component box-border container-inline w-[87.5%] gap-[40px] lg:flex lg:flex-row lg:items-start md:block sm:block ${colorGroup}"
         data-motion="${motionEnabled}"
         data-icon="${tabIconEnabled}"
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
       >
-        <div class="tab3col-tab-bar w-auto sm:max-w-[172px] md:max-w-none md:h-[56px lg:w-[185px] ]">
-          <button class="tab3col-arrow tab3col-arrow--prev" aria-label="Scroll tabs left" style="display:none">
+        <div class="tab3col-tab-bar flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] md:flex-row md:w-full md:sticky md:top-0 md:z-10 sm:flex-row sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10">
+          <button class="tab3col-arrow tab3col-arrow--prev hidden shrink-0 items-center justify-center w-[32px] h-[32px] bg-transparent border-none cursor-pointer sm:flex" aria-label="Scroll tabs left" style="display:none">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
           </button>
-          <div class="tab3col-tab-list ${tabFontClass}" role="tablist">
+          <div class="tab3col-tab-list flex items-center grow overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] lg:flex-col lg:overflow-y-auto lg:overflow-x-visible md:flex-row  sm:flex-row sm:grow" role="tablist">
             ${tabBtnsHtml}
           </div>
-          <button class="tab3col-arrow tab3col-arrow--next" aria-label="Scroll tabs right" style="display:none">
+          <button class="tab3col-arrow tab3col-arrow--next hidden shrink-0 items-center justify-center w-[32px] h-[32px] bg-transparent border-none cursor-pointer sm:flex" aria-label="Scroll tabs right" style="display:none">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
           </button>
         </div>
-        <div class="tab3col-panels"></div>
+        <div class="tab3col-panels w-full lg:grow"></div>
       </div>`);
 
     // ── Move block-level instrumentation to component wrapper ────
@@ -270,7 +249,7 @@ export default async function decorate(block) {
     // ── Build each panel, move per-item instrumentation ──────────
     // eslint-disable-next-line no-inner-declarations
     async function renderTabItemHtml(itemEl, tab, oldEl) {
-      itemEl.classList.add('tab3col-panel');
+      itemEl.classList.add('tab3col-panel', 'gap-[40px]');
       const isActive = oldEl ? oldEl.classList.contains('is-active') : false;
       if (isActive) {
         itemEl.classList.add('is-active');
@@ -279,13 +258,13 @@ export default async function decorate(block) {
       const lastDom = itemEl.children[itemEl.children.length - 1];
 
       const newItem = document.createRange().createContextualFragment(`
-        <div class="tab3col-media-slot"></div>
-        <div class="tab3col-text-col">
-          <h3 class="tab3col-title ${titleClass}">${tab.tabTitle.html || ''}</h3>
-          <div class="tab3col-info ${infoClass}">${tab.tabInfo.html || ''}</div>
+        <div class="tab3col-media-slot grow min-w-0 md:w-full sm:w-full"></div>
+        <div class="tab3col-text-col shrink-0 box-border sm:w-full md:w-[12.5cqw] sm:w-full">
+          <h3 class="tab3col-title ${productFonts.tabTitle} m-0 mb-[12px] ${titleFontDTM}">${tab.tabTitle.html || ''}</h3>
+          <div class="tab3col-info m-0 ${productFonts.tabInfo.fontDT} ${productFonts.tabInfo.fontM}">${tab.tabInfo.html || ''}</div>
         </div>
       `);
-      if (lastDom.children.length > 2 || (lastDom.querySelector('.block'))) {
+      if (lastDom.children.length > 2 || lastDom.querySelector('.block')) {
         newItem.querySelector('.tab3col-media-slot').append(lastDom);
       }
       itemEl.innerHTML = '';
@@ -321,7 +300,9 @@ export default async function decorate(block) {
 
         // update menu text
         const doms = [...block.querySelectorAll('.tab-3column-item')];
-        const index = doms.findIndex((r) => r.dataset.aueResource === detail.dataset.aueResource);
+        const index = doms.findIndex(
+          (r) => r.dataset.aueResource === detail.dataset.aueResource,
+        );
         const menuDom = block.querySelectorAll('.tab3col-tab-text')[index];
         if (menuDom) {
           menuDom.innerHTML = tab.tabText.text;
