@@ -249,7 +249,7 @@ export default async function decorate(block) {
         data-icon="${tabIconEnabled}"
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
       >
-        <div class="tab3col-tab-bar">
+        <div class="tab3col-tab-bar w-auto sm:max-w-[172px] md:max-w-none md:h-[56px lg:w-[185px] ]">
           <button class="tab3col-arrow tab3col-arrow--prev" aria-label="Scroll tabs left" style="display:none">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
           </button>
