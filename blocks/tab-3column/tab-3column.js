@@ -68,7 +68,7 @@ function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
     : '';
   return `
     <button
-      class="tab3col-tab-btn flex items-center m-0 mb-[20px] border border-solid rounded-[28px] cursor-pointer whitespace-nowrap font-[inherit] transition-[background] duration-250 ease h-[56px] px-[16px] justify-start text-left lg:w-full md:flex-col md:items-center md:gap-[6px] px-[10px] py-[6px] sm:flex-col md:flex-row sm:items-center sm:gap-[4px] sm:shrink-0${isActive ? ' is-active' : ''} ${productFonts.tabText}"
+      class="tab3col-tab-btn flex items-center m-0 border border-solid rounded-[28px] sm:max-w-[172px] md:max-w-none cursor-pointer whitespace-nowrap font-[inherit] transition-[background] duration-250 ease sm:h-auto md:h-[56px] px-[16px] justify-start text-left lg:w-full md:flex-col md:items-center md:gap-[6px] px-[10px] py-[6px] sm:flex-col md:flex-row sm:items-center sm:gap-[4px] sm:shrink-0${isActive ? ' is-active' : ''} ${productFonts.tabText}"
       data-tab-index="${index}"
       role="tab"
       aria-selected="${isActive}"
@@ -147,18 +147,21 @@ export default async function decorate(block) {
     const tabBorderWidthDefault = tabData.tabcontainerborderwidthdefault || '';
     const tabBorderWidthHover = tabData.tabcontainerborderwidthhover || '';
     const tabBorderWidthSelect = tabData.tabcontainerborderwidthselect || '';
-    const tabBorderColorDefault = prefixHex(
-      tabData.tabcontainerbordercolordefault || '',
-    );
-    const tabBorderColorHover = prefixHex(
-      tabData.tabcontainerbordercolorhover || '',
-    );
-    const tabBorderColorSelect = prefixHex(
-      tabData.tabcontainerbordercolorselect || '',
-    );
+    // Parse gradient/solid color values from dialog (no # prefix).
+    // "4379B1"        → { from: "#4379b1", to: "#4379b1" }  solid
+    // "4379B1,5977A1" → { from: "#4379b1", to: "#5977a1" }  gradient
+    const parseGradient = (raw) => {
+      if (!raw) return null;
+      const parts = raw.split(',').map((s) => `#${s.trim().toLowerCase()}`);
+      return { from: parts[0], to: parts[1] || parts[0] };
+    };
+
+    const tabBorderGradientDefault = parseGradient(tabData.tabcontainerbordercolordefault || '');
+    const tabBorderGradientHover = parseGradient(tabData.tabcontainerbordercolorhover || '');
+    const tabBorderGradientSelect = parseGradient(tabData.tabcontainerbordercolorselect || '');
     const tabBgDefault = prefixHex(tabData.tabcontainerbgcolordefault || '');
-    const tabBgHover = prefixHex(tabData.tabcontainerbgcolorhover || '');
-    const tabBgSelect = prefixHex(tabData.tabcontainerbgcolorselect || '');
+    const tabBgGradientHover = parseGradient(tabData.tabcontainerbgcolorhover || '');
+    const tabBgGradientSelect = parseGradient(tabData.tabcontainerbgcolorselect || '');
     const tabRadiusValue = buildRadiusValue(
       tabData.tabcontainerradiustl || '',
       tabData.tabcontainerradiustr || '',
@@ -199,12 +202,29 @@ export default async function decorate(block) {
     if (tabBorderWidthDefault) inlineStyle += `--tab3col-tab-border-width-default: ${tabBorderWidthDefault}px;`;
     if (tabBorderWidthHover) inlineStyle += `--tab3col-tab-border-width-hover: ${tabBorderWidthHover}px;`;
     if (tabBorderWidthSelect) inlineStyle += `--tab3col-tab-border-width-select: ${tabBorderWidthSelect}px;`;
-    if (tabBorderColorDefault) inlineStyle += `--tab3col-tab-border-color-default: ${tabBorderColorDefault};`;
-    if (tabBorderColorHover) inlineStyle += `--tab3col-tab-border-color-hover: ${tabBorderColorHover};`;
-    if (tabBorderColorSelect) inlineStyle += `--tab3col-tab-border-color-select: ${tabBorderColorSelect};`;
+    // Border gradient stops per state
+    if (tabBorderGradientDefault) {
+      inlineStyle += `--tab3col-tab-border-from-default: ${tabBorderGradientDefault.from};`;
+      inlineStyle += `--tab3col-tab-border-to-default: ${tabBorderGradientDefault.to};`;
+    }
+    if (tabBorderGradientHover) {
+      inlineStyle += `--tab3col-tab-border-from-hover: ${tabBorderGradientHover.from};`;
+      inlineStyle += `--tab3col-tab-border-to-hover: ${tabBorderGradientHover.to};`;
+    }
+    if (tabBorderGradientSelect) {
+      inlineStyle += `--tab3col-tab-border-from-select: ${tabBorderGradientSelect.from};`;
+      inlineStyle += `--tab3col-tab-border-to-select: ${tabBorderGradientSelect.to};`;
+    }
+    // Bg: default solid, hover/select gradient stops
     if (tabBgDefault) inlineStyle += `--tab3col-tab-bg-default: ${tabBgDefault};`;
-    if (tabBgHover) inlineStyle += `--tab3col-tab-bg-hover: ${tabBgHover};`;
-    if (tabBgSelect) inlineStyle += `--tab3col-tab-bg-select: ${tabBgSelect};`;
+    if (tabBgGradientHover) {
+      inlineStyle += `--tab3col-tab-bg-from-hover: ${tabBgGradientHover.from};`;
+      inlineStyle += `--tab3col-tab-bg-to-hover: ${tabBgGradientHover.to};`;
+    }
+    if (tabBgGradientSelect) {
+      inlineStyle += `--tab3col-tab-bg-from-select: ${tabBgGradientSelect.from};`;
+      inlineStyle += `--tab3col-tab-bg-to-select: ${tabBgGradientSelect.to};`;
+    }
     if (tabRadiusValue) inlineStyle += `--tab3col-tab-radius: ${tabRadiusValue};`;
     if (titleFontColor) inlineStyle += `--tab3col-title-color: ${titleFontColor};`;
     if (infoFontColor) inlineStyle += `--tab3col-info-color: ${infoFontColor};`;
@@ -223,16 +243,16 @@ export default async function decorate(block) {
     // ── Build component shell ────────────────────────────────────
     const componentHtml = document.createRange().createContextualFragment(`
       <div
-        class="tab3col-component box-border container-inline w-[87.5%] gap-[40px] lg:flex lg:flex-row lg:items-start md:block sm:block ${colorGroup}"
+        class="tab3col-component box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full md:max-w-[896px] lg:max-w-[1260px] sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid ${colorGroup}"
         data-motion="${motionEnabled}"
         data-icon="${tabIconEnabled}"
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
       >
-        <div class="tab3col-tab-bar flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] md:flex-row md:w-full md:sticky md:top-0 md:z-10 sm:flex-row sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10">
+        <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] md:flex-row md:w-full md:sticky md:top-0 md:z-10 sm:flex-row sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10">
           <button class="tab3col-arrow tab3col-arrow--prev hidden shrink-0 items-center justify-center w-[32px] h-[32px] bg-transparent border-none cursor-pointer sm:flex" aria-label="Scroll tabs left" style="display:none">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
           </button>
-          <div class="tab3col-tab-list flex items-center grow overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] lg:flex-col lg:overflow-y-auto lg:overflow-x-visible md:flex-row  sm:flex-row sm:grow" role="tablist">
+          <div class="tab3col-tab-list sm:w-[87.5%] sm:max-w-[480px] md:w-auto md:max-w-none flex md:gap-[20px] items-center sm:justify-center lg:justify-start grow overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] lg:flex-col lg:overflow-y-auto lg:overflow-x-visible md:flex-row  sm:flex-row sm:grow" role="tablist">
             ${tabBtnsHtml}
           </div>
           <button class="tab3col-arrow tab3col-arrow--next hidden shrink-0 items-center justify-center w-[32px] h-[32px] bg-transparent border-none cursor-pointer sm:flex" aria-label="Scroll tabs right" style="display:none">
@@ -249,7 +269,7 @@ export default async function decorate(block) {
     // ── Build each panel, move per-item instrumentation ──────────
     // eslint-disable-next-line no-inner-declarations
     async function renderTabItemHtml(itemEl, tab, oldEl) {
-      itemEl.classList.add('tab3col-panel', 'gap-[40px]');
+      itemEl.classList.add('tab3col-panel', 'lg:gap-[40px]', 'md:gap-[32px]', 'sm:gap-[24px]', 'lg:flex-row', 'sm:flex-col');
       const isActive = oldEl ? oldEl.classList.contains('is-active') : false;
       if (isActive) {
         itemEl.classList.add('is-active');
@@ -258,9 +278,9 @@ export default async function decorate(block) {
       const lastDom = itemEl.children[itemEl.children.length - 1];
 
       const newItem = document.createRange().createContextualFragment(`
-        <div class="tab3col-media-slot grow min-w-0 md:w-full sm:w-full"></div>
-        <div class="tab3col-text-col shrink-0 box-border sm:w-full md:w-[12.5cqw] sm:w-full">
-          <h3 class="tab3col-title ${productFonts.tabTitle} m-0 mb-[12px] ${titleFontDTM}">${tab.tabTitle.html || ''}</h3>
+        <div class="tab3col-media-slot sm:order-2 lg:order-1 grow min-w-0 md:w-full sm:w-full"></div>
+        <div class="tab3col-text-col sm:order-1 lg:order-2 sm:text-center lg:text-left shrink-0 box-border sm:w-full lg:w-[12.5cqw]">
+          <h3 class="tab3col-title ${productFonts.tabTitle} sm:mb-[8px] md:mb-[12px] ${titleFontDTM || ''}">${tab.tabTitle.html || ''}</h3>
           <div class="tab3col-info m-0 ${productFonts.tabInfo.fontDT} ${productFonts.tabInfo.fontM}">${tab.tabInfo.html || ''}</div>
         </div>
       `);

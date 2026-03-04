@@ -170,7 +170,7 @@ const getDeviceConfig = (device, v) => {
     };
   } if (device === 'T') {
     return {
-      assets: v('assetsT', 'text') || '',
+      assets: v('assetsT', 'text') || v('assetsD', 'text') || '',
       widthUnit: v('widthT', 'text') || 'auto',
       widthValue: v('widthValueT', 'text') || '',
       heightUnit: v('heightT', 'text') || 'auto',
@@ -184,7 +184,7 @@ const getDeviceConfig = (device, v) => {
   }
   // Mobile
   return {
-    assets: v('assets', 'text') || '',
+    assets: v('assets', 'text') || v('assetsT', 'text') || v('assetsD', 'text') || '',
     widthUnit: v('widthM', 'text') || 'auto',
     widthValue: v('widthValueM', 'text') || '',
     heightUnit: v('heightM', 'text') || 'auto',

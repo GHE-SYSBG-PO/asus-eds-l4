@@ -7,7 +7,18 @@
 // ============================================================
 // .l4-pdp[data-product="asus"][data-mode="light"],
 // .l4-pdp[data-product="asus"] .section-light {
-
+//   .tab3col-component {
+//     --tab3col-tab-bg-from-hover: #4379b1;
+//     --tab3col-tab-bg-to-hover: #5977a1;
+//     --tab3col-tab-bg-from-select: #4379b1;
+//     --tab3col-tab-bg-to-select: #5977a1;
+//     --tab3col-tab-border-from-default: #00438a;
+//     --tab3col-tab-border-to-default: #00438a;
+//     --tab3col-tab-border-from-hover: #4379b1;
+//     --tab3col-tab-border-to-hover: #5977a1;
+//     --tab3col-tab-border-from-select: #4379b1;
+//     --tab3col-tab-border-to-select: #5977a1;
+//   }
 // }
 
 // ============================================================
@@ -15,27 +26,46 @@
 // ============================================================
 // .l4-pdp[data-product="asus"][data-mode="dark"],
 // .l4-pdp[data-product="asus"] .section-dark {
-
+//   .tab3col-component {
+//     --tab3col-tab-bg-from-hover: #4379b1;
+//     --tab3col-tab-bg-to-hover: #5977a1;
+//     --tab3col-tab-bg-from-select: #4379b1;
+//     --tab3col-tab-bg-to-select: #5977a1;
+//     --tab3col-tab-border-from-default: #00438a;
+//     --tab3col-tab-border-to-default: #00438a;
+//     --tab3col-tab-border-from-hover: #4379b1;
+//     --tab3col-tab-border-to-hover: #5977a1;
+//     --tab3col-tab-border-from-select: #4379b1;
+//     --tab3col-tab-border-to-select: #5977a1;
+//   }
 // }
 
 // ProArt / ROG / TUF — reserved, fill later
+// (same variable structure as ASUS above)
 // .l4-pdp[data-product="proart"][data-mode="light"],
-// .l4-pdp[data-product="proart"] .section-light {}
-
+// .l4-pdp[data-product="proart"] .section-light {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="proart"][data-mode="dark"],
-// .l4-pdp[data-product="proart"] .section-dark {}
-
+// .l4-pdp[data-product="proart"] .section-dark {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="rog"][data-mode="light"],
-// .l4-pdp[data-product="rog"] .section-light {}
-
+// .l4-pdp[data-product="rog"] .section-light {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="rog"][data-mode="dark"],
-// .l4-pdp[data-product="rog"] .section-dark {}
-
+// .l4-pdp[data-product="rog"] .section-dark {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="tuf"][data-mode="light"],
-// .l4-pdp[data-product="tuf"] .section-light {}
-
+// .l4-pdp[data-product="tuf"] .section-light {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="tuf"][data-mode="dark"],
-// .l4-pdp[data-product="tuf"] .section-dark {}
+// .l4-pdp[data-product="tuf"] .section-dark {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 
 // ============================================================
 // Component
@@ -60,6 +90,24 @@
     --tab3col-title-color: #181818;
     --tab3col-info-color: #4a4a4a;
     --tab3col-arrow-color: #00438a;
+
+    // bg gradient stops — hover & select independent
+    --tab3col-tab-bg-from-hover: #4379b1;
+    --tab3col-tab-bg-to-hover: #4379b1;
+    --tab3col-tab-bg-from-select: #4379b1;
+    --tab3col-tab-bg-to-select: #4379b1;
+
+    // border gradient stops per state
+    --tab3col-tab-border-from-default: #00438a;
+    --tab3col-tab-border-to-default: #00438a;
+    --tab3col-tab-border-from-hover: #00438a;
+    --tab3col-tab-border-to-hover: #00438a;
+    --tab3col-tab-border-from-select: #00438a;
+    --tab3col-tab-border-to-select: #00438a;
+
+    @media (480px <= width <= 730px) {
+      width: 420px;
+    }
   }
 
   // ── Tab list: hide scrollbar (not expressible in Tailwind) ──
@@ -69,23 +117,65 @@
     }
   }
 
-  // ── Tab button: var-based colors & states ───────────────────
+  // ── Tab button: gradient bg + gradient border via ::before ────
+  // Gradient border technique:
+  //   - button itself: border:none, position:relative
+  //   - ::before: absolute inset, gradient background = border visual
+  //     -webkit-mask + mask-composite: exclude → only border area shows
   .tab3col-tab-btn {
-    background: var(--tab3col-tab-bg-default, transparent);
+    position: relative;
+    z-index: 0;
+    border: none;
     color: var(--tab3col-tab-color-default, inherit);
-    border-color: var(--tab3col-tab-border-color-default, transparent);
+    background: var(--tab3col-tab-bg-default, transparent);
+
+    // Gradient border layer
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      padding: var(--tab3col-tab-border-width-default, 1px);
+      background: linear-gradient(270deg, var(--tab3col-tab-border-from-default) 0%, var(--tab3col-tab-border-to-default) 100%);
+mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+mask-composite: exclude;
+    }
 
     &:hover {
-      background: var(--tab3col-tab-bg-hover, transparent);
       color: var(--tab3col-tab-color-hover, inherit);
-      border-width: var(--tab3col-tab-border-width-hover, 0);
-      border-color: var(--tab3col-tab-border-color-hover, transparent);
+      background: linear-gradient(
+        270deg,
+        var(--tab3col-tab-bg-from-hover) 0%,
+        var(--tab3col-tab-bg-to-hover) 100%
+      );
+
+      &::before {
+        padding: var(--tab3col-tab-border-width-hover, 1px);
+        background: linear-gradient(
+          270deg,
+          var(--tab3col-tab-border-from-hover) 0%,
+          var(--tab3col-tab-border-to-hover) 100%
+        );
+      }
     }
 
     &.is-active {
-      background: var(--tab3col-tab-bg-select, transparent);
       color: var(--tab3col-tab-color-select, inherit);
-      border-color: var(--tab3col-tab-border-color-select, transparent);
+      background: linear-gradient(
+        270deg,
+        var(--tab3col-tab-bg-from-select) 0%,
+        var(--tab3col-tab-bg-to-select) 100%
+      );
+
+      &::before {
+        padding: var(--tab3col-tab-border-width-select, 1px);
+        background: linear-gradient(
+          270deg,
+          var(--tab3col-tab-border-from-select) 0%,
+          var(--tab3col-tab-border-to-select) 100%
+        );
+      }
     }
   }
 
