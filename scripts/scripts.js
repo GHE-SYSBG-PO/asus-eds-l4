@@ -11,8 +11,9 @@ import {
   loadSections,
   loadCSS,
   getMetadata,
+  loadScript,
 } from './aem.js';
-import { loadSectionBlockJs, isAuthorEnvironment } from './utils.js';
+import { loadSectionBlockJs, isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -58,6 +59,101 @@ async function loadFonts() {
   } catch (e) {
     // do nothing
   }
+}
+
+/**
+ * Anime JS Dynamic Loader
+ * Loads Anime JS library on-demand to improve initial page load performance
+ */
+let animePromise = null;
+/**
+ * Dynamically loads Anime JS library from CDN
+ * @returns {Promise<Object>} Promise that resolves with anime object
+ */
+export async function loadAnime() {
+  // Return immediately if Anime is already loaded
+  if (window.anime) {
+    return window.anime;
+  }
+
+  // Return existing promise if load is in progress
+  if (!animePromise) {
+    // eslint-disable-next-line no-console
+    console.log(`Anime: Starting dynamic load [Call ID: ${Date.now()}]`);
+
+    animePromise = (async () => {
+      try {
+        await loadScript(
+          'https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js',
+          {
+            crossorigin: 'anonymous',
+            referrerpolicy: 'no-referrer',
+          },
+        );
+        // eslint-disable-next-line no-console
+        console.log('Anime JS loaded dynamically');
+        return window.anime;
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to load Anime JS library:', error);
+        animePromise = null; // Reset on error so retry is possible
+        throw error;
+      }
+    })(); // IIFE (Immediately Invoked Function Expression) creates promise synchronously
+  } else {
+    // eslint-disable-next-line no-console
+    console.log('Anime: Reusing existing load promise');
+  }
+
+  return animePromise;
+}
+
+/**
+ * Swiper Dynamic Loader
+ * Loads Swiper library on-demand to improve initial page load performance
+ */
+let swiperPromise = null;
+let swiperCSSLoaded = false;
+/**
+ * Dynamically loads Swiper library from CDN
+ * @returns {Promise<Object>} Promise that resolves with Swiper constructor
+ */
+export async function loadSwiper() {
+  // Return immediately if Swiper is already loaded
+  if (window.Swiper) {
+    return window.Swiper;
+  }
+
+  // Return existing promise if load is in progress
+  if (!swiperPromise) {
+    swiperPromise = (async () => {
+      try {
+        await Promise.all([
+          // Load CSS once
+          !swiperCSSLoaded ? loadCSS('https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css').then(() => {
+            swiperCSSLoaded = true;
+          }) : Promise.resolve(),
+          // Load JS
+          loadScript(
+            'https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js',
+            {
+              crossorigin: 'anonymous',
+              referrerpolicy: 'no-referrer',
+            },
+          ),
+        ]);
+        return window.Swiper;
+      } catch (error) {
+        swiperPromise = null; // Reset on error so retry is possible
+        throw error;
+      }
+    })(); // IIFE (Immediately Invoked Function Expression) creates promise synchronously
+  } else {
+    // eslint-disable-next-line no-console
+    console.log('Swiper: Reusing existing load promise');
+  }
+
+  return swiperPromise;
 }
 
 /**
@@ -125,6 +221,10 @@ async function loadLazy(doc) {
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
+
+  main.querySelectorAll('.default-content-wrapper').forEach((wrapper) => {
+    processInlineIdSyntax(wrapper);
+  });
 
   loadFooter(doc.querySelector('footer'));
 

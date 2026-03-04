@@ -1,45 +1,545 @@
-.l4-pdp .g-button {
-  --btn-bg-default-image: none;
-  --btn-bg-default: #000;
-  --btn-bg-hover-image: none;
-  --btn-bg-hover: #000;
-  --btn-bg-active-image: none;
-  --btn-bg-active: #000;
-  --btn-color-default: #fff;
-  --btn-color-hover: #fff;
-  --btn-color-active: #fff;
-  --container-border-color: transparent;
-  --container-border-width: 0;
+/**
+ * Button Component Styles - 6 Style Variants
+ * Based on Figma design specifications
+ * Supports custom background and font colors via CSS custom properties
+ * Default color variables
+ */
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease;
-  cursor: pointer;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  gap: 8px;
-  padding-left: 18px;
-  padding-right: 18px;
-  height: 44px;
-  background-image: var(--btn-bg-default-image);
-  background-color: var(--btn-bg-default);
-  color: var(--btn-color-default);
-  border-radius: 24px;
-  border: var(--container-border-width) solid var(--container-border-color);
-  &:hover {
-    background-image: var(--btn-bg-hover-image);
-    background-color: var(--btn-bg-hover);
-    color: var(--btn-color-hover);
+/* ========================================
+ * Theme Base Variables (product/mode)
+ * ======================================== */
+.l4-pdp {
+  &[data-product="asus"] {
+    &[data-mode="light"],
+    .section-light {
+        --g-btn-bg-d-start: #4379b1;
+        --g-btn-bg-d-end: #5977a1;
+        --g-btn-bg-h-a-start: #566e91;
+        --g-btn-bg-h-a-end: #0e447c;
+        --g-btn-font-d-start: #00438a;
+        --g-btn-font-d-end: #274568;
+        --g-btn-icon-d: #fff;
+        --g-btn-icon-radius: 50%;
+    }
+
+    &[data-mode="dark"],
+    .section-dark {
+        --g-btn-bg-d-start: #476991;
+        --g-btn-bg-d-end: #5c6f80;
+        --g-btn-bg-h-a-start: #98aaba;
+        --g-btn-bg-h-a-end: #658dbc;
+        --g-btn-font-d-start: #a2c2e2;
+        --g-btn-font-d-end: #b2c0c7;
+        --g-btn-icon-d: #181818;
+        --g-btn-icon-radius: 50%;
+    }
   }
-  &:active {
-    background-image: var(--btn-bg-active-image);
-    background-color: var(--btn-bg-active);
-    color: var(--btn-color-active);
+
+  &[data-product="proart"] {
+    &[data-mode="light"],
+    .section-light {
+        --g-btn-bg-d-start: #806238;
+        --g-btn-bg-d-end: #87715a;
+        --g-btn-bg-h-a-start: #654313;
+        --g-btn-bg-h-a-end: #665441;
+        --g-btn-font-d-start: #663600;
+        --g-btn-font-d-end: #613d00;
+        --g-btn-icon-d: #fff;
+        --g-btn-icon-radius: 50%;
+    }
+
+    &[data-mode="dark"],
+    .section-dark {
+        --g-btn-bg-d-start: #84643e;
+        --g-btn-bg-d-end: #7e6746;
+        --g-btn-bg-h-a-start: #8f6e4d;
+        --g-btn-bg-h-a-end: #a49073;
+        --g-btn-font-d-start: #dab983;
+        --g-btn-font-d-end: #d8c5ac;
+        --g-btn-icon-d: #181818;
+        --g-btn-icon-radius: 50%;
+    }
+  }
+
+  &[data-product="rog"] {
+    &[data-mode="light"],
+    .section-light {
+        --g-btn-bg-d-start: #db0004;
+        --g-btn-bg-d-end: #db0004;
+        --g-btn-bg-h-a-start: #a8000c;
+        --g-btn-bg-h-a-end: #a8000c;
+        --g-btn-font-d-start: #8f0002;
+        --g-btn-font-d-end: #8f0002;
+        --g-btn-icon-d: #fff;
+        --g-btn-icon-radius: 0;
+    }
+
+    &[data-mode="dark"],
+    .section-dark {
+        --g-btn-bg-d-start: #d1000e;
+        --g-btn-bg-d-end: #d1000e;
+        --g-btn-bg-h-a-start: #da1723;
+        --g-btn-bg-h-a-end: #da1723;
+        --g-btn-font-d-start: #ff230f;
+        --g-btn-font-d-end: #ff230f;
+        --g-btn-icon-d: #181818;
+        --g-btn-icon-radius: 0;
+    }
+  }
+
+  &[data-product="tuf"] {
+    &[data-mode="light"],
+    .section-light {
+        --g-btn-bg-d-start: #181818;
+        --g-btn-bg-d-end: #181818;
+        --g-btn-bg-h-a-start: #262626;
+        --g-btn-bg-h-a-end: #262626;
+        --g-btn-font-d-start: #181818;
+        --g-btn-font-d-end: #181818;
+        --g-btn-icon-d: #fff;
+        --g-btn-icon-radius: 0;
+    }
+
+    &[data-mode="dark"],
+    .section-dark {
+        --g-btn-bg-d-start: #ff9e1b;
+        --g-btn-bg-d-end: #ff9e1b;
+        --g-btn-bg-h-a-start: #d37b00;
+        --g-btn-bg-h-a-end: #d37b00;
+        --g-btn-font-d-start: #ffad42;
+        --g-btn-font-d-end: #ffad42;
+        --g-btn-icon-d: #181818;
+        --g-btn-icon-radius: 0;
+    }
+  }
+
+  /* ========================================
+ * Mixins
+ * ======================================== */
+
+  // Hover/active logic for Filled style
+  @mixin btn-filled-state {
+    &:hover {
+      background-image: var(--g-btn-bg-hover-image);
+      background-color: var(--g-btn-bg-hover);
+      color: var(--g-btn-color-hover);
+    }
+
+    &:active {
+      background-image: var(--g-btn-bg-active-image);
+      background-color: var(--g-btn-bg-active);
+      color: var(--g-btn-color-active);
+    }
+  }
+
+  // Hover/active logic for Outlined style (includes ::before and .btn-label hiding)
+  @mixin btn-outlined-state($height) {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: $height / 2;
+      padding: var(--g-btn-container-border-width);
+      background: var(--g-btn-container-border-color);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
+    }
+
+    .btn-label {
+      background: var(--g-btn-color-default);
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    &:hover {
+      background-image: var(--g-btn-bg-hover-image);
+      background-color: var(--g-btn-bg-hover);
+      border: none;
+      height: $height;
+      color: var(--g-btn-color-hover);
+      -webkit-text-fill-color: var(--g-btn-color-hover);
+
+      &::before {
+        display: none;
+      }
+
+      .btn-label {
+        background: var(--g-btn-color-hover);
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+
+    &:active {
+      background-image: var(--g-btn-bg-active-image);
+      background-color: var(--g-btn-bg-active);
+      border: none;
+      height: $height;
+      color: var(--g-btn-color-active);
+      -webkit-text-fill-color: var(--g-btn-color-active);
+
+      &::before {
+        display: none;
+      }
+
+      .btn-label {
+        background: var(--g-btn-color-active);
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+  }
+
+  // PNG icon switching logic
+  @mixin png-icon-state($state: "hover") {
+    .btn-icon-wrapper.btn-icon-png {
+      .btn-icon-default {
+        display: none;
+      }
+
+      .btn-icon-active {
+        display: none;
+      }
+
+      .btn-icon-hover {
+        display: block;
+      }
+
+      @if $state == "active" {
+        .btn-icon-hover {
+          display: none;
+        }
+
+        .btn-icon-active {
+          display: block;
+        }
+      }
+    }
+  }
+
+  /* ========================================
+ * Apply theme variables area
+ * ======================================== */
+  .g-button {
+    /* Filled style (1, 2, 3) */
+    &[data-filled="true"] {
+      --g-btn-bg-default-image: linear-gradient(
+        270deg,
+        var(--g-btn-bg-d-start) 0%,
+        var(--g-btn-bg-d-end) 100%
+      );
+      --g-btn-bg-default: transparent;
+      --g-btn-bg-hover-image: linear-gradient(
+        270deg,
+        var(--g-btn-bg-h-a-start) 0%,
+        var(--g-btn-bg-h-a-end) 100%
+      );
+      --g-btn-bg-hover: transparent;
+      --g-btn-bg-active-image: linear-gradient(
+        270deg,
+        var(--g-btn-bg-h-a-start) 0%,
+        var(--g-btn-bg-h-a-end) 100%
+      );
+      --g-btn-bg-active: transparent;
+      --g-btn-color-default: #fff;
+      --g-btn-color-hover: #fff;
+      --g-btn-color-active: #fff;
+      --g-btn-icon-color-start: var(--g-btn-bg-d-start);
+      --g-btn-icon-color-end: var(--g-btn-bg-d-end);
+    }
+
+    /* Outlined style (4, 5, 6)  */
+    &[data-filled="false"] {
+      --g-btn-bg-default-image: none;
+      --g-btn-bg-default: transparent;
+      --g-btn-bg-hover-image: linear-gradient(
+        270deg,
+        var(--g-btn-bg-d-start) 0%,
+        var(--g-btn-bg-d-end) 100%
+      );
+      --g-btn-bg-hover: transparent;
+      --g-btn-bg-active-image: linear-gradient(
+        270deg,
+        var(--g-btn-bg-h-a-start) 0%,
+        var(--g-btn-bg-h-a-end) 100%
+      );
+      --g-btn-bg-active: transparent;
+      --g-btn-color-default: linear-gradient(
+        270deg,
+        var(--g-btn-font-d-start) 0%,
+        var(--g-btn-font-d-end) 100%
+      );
+      --g-btn-color-hover: #fff;
+      --g-btn-color-active: #fff;
+      --g-btn-container-border-color: linear-gradient(
+        270deg,
+        var(--g-btn-font-d-start) 0%,
+        var(--g-btn-font-d-end) 100%
+      );
+      --g-btn-container-border-width: 2px;
+      --g-btn-icon-color-start: #fff;
+      --g-btn-icon-color-end: #fff;
+    }
+
+    /* style=2 and style=3 */
+    &[data-style="2"],
+    &[data-style="3"] {
+      .btn-icon-wrapper {
+        --g-btn-icon-bg-default: #fff;
+        --g-btn-icon-bg-hover: #fff;
+        --g-btn-icon-bg-active: #fff;
+
+        border-radius: var(--g-btn-icon-radius);
+      }
+
+      svg path {
+        fill: url("#icon-filled-default");
+      }
+
+      &:hover {
+        svg path {
+          fill: url("#icon-filled-hover-active");
+        }
+      }
+
+      &:active {
+        svg path {
+          fill: url("#icon-filled-hover-active");
+        }
+      }
+    }
+
+    /* style=5 and style=6 */
+    &[data-style="5"],
+    &[data-style="6"] {
+      .btn-icon-wrapper {
+        --g-btn-icon-bg-default: linear-gradient(
+          270deg,
+          var(--g-btn-font-d-start) 0%,
+          var(--g-btn-font-d-end) 100%
+        );
+        --g-btn-icon-bg-hover: #fff;
+        --g-btn-icon-bg-active: #fff;
+
+        border-radius: var(--g-btn-icon-radius);
+      }
+
+      svg path {
+        fill: url("#icon-outline-default");
+      }
+
+      &:hover {
+        svg path {
+          fill: url("#icon-outline-hover");
+        }
+      }
+
+      &:active {
+        svg path {
+          fill: url("#icon-outline-active");
+        }
+      }
+    }
+
+    /* ========================================
+   * Style
+   * ======================================== */
+
+    /* Base button style */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition:
+      background 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border: none;
+    white-space: nowrap;
+    gap: 8px;
+    font-family: inherit;
+    border-radius: 24px;
+    padding-left: 18px;
+    padding-right: 18px;
+
+    &:hover {
+      text-decoration: none;
+
+      .btn-icon-wrapper {
+        background: var(--g-btn-icon-bg-hover);
+
+        &.btn-icon-png {
+          background: transparent;
+        }
+      }
+
+      @include png-icon-state("hover");
+    }
+
+    &:active {
+      .btn-icon-wrapper {
+        background: var(--g-btn-icon-bg-active);
+
+        &.btn-icon-png {
+          background: transparent;
+        }
+      }
+
+      @include png-icon-state("active");
+    }
+
+    .btn-icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 10px;
+      background: var(--g-btn-icon-bg-default);
+
+      &.btn-icon-png {
+        background: transparent;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 100%;
+        }
+      }
+    }
+
+    /* Icon container sizes for different styles */
+    &[data-style="2"],
+    &[data-style="5"] {
+      .btn-icon-wrapper {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    &[data-style="3"],
+    &[data-style="6"] {
+      .btn-icon-wrapper {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    /* SVG icon sizes for different styles */
+    &[data-style="2"],
+    &[data-style="5"] {
+      .btn-icon-wrapper svg.btn-icon-svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &[data-style="3"],
+    &[data-style="6"] {
+      .btn-icon-wrapper svg.btn-icon-svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    /* Base SVG icon style */
+    .btn-icon-wrapper svg.btn-icon-svg {
+      display: block;
+      transition: fill 0.3s ease;
+    }
+
+    /* Icon SVG and images (common) */
+    .btn-icon-wrapper svg,
+    .btn-icon-wrapper img {
+      object-fit: cover;
+    }
+
+    /* ========================================
+   * Style 1: Filled - Default
+   * height: 44px, radius: 24px
+   * ======================================== */
+    &[data-style="1"] {
+      height: 44px;
+      background-image: var(--g-btn-bg-default-image);
+      background-color: var(--g-btn-bg-default);
+      color: var(--g-btn-color-default);
+      border-radius: 24px;
+
+      @include btn-filled-state;
+    }
+
+    /* ========================================
+   * Style 2: Filled + Icon - Medium size
+   * height: 56px, radius: 28px, icon: 36px
+   * ======================================== */
+    &[data-style="2"] {
+      height: 56px;
+      background-image: var(--g-btn-bg-default-image);
+      background-color: var(--g-btn-bg-default);
+      color: var(--g-btn-color-default);
+      border-radius: 28px;
+
+      @include btn-filled-state;
+    }
+
+    /* ========================================
+   * Style 3: Filled + Icon - Small size
+   * height: 44px, radius: 28px, icon: 24px
+   * ======================================== */
+    &[data-style="3"] {
+      height: 44px;
+      background-image: var(--g-btn-bg-default-image);
+      background-color: var(--g-btn-bg-default);
+      color: var(--g-btn-color-default);
+      border-radius: 28px;
+
+      @include btn-filled-state;
+    }
+
+    /* ========================================
+   * Style 4: Outlined (with gradient text) - Default
+   * height: 44px, radius: 24px
+   * ======================================== */
+    &[data-style="4"] {
+      height: 44px;
+      background-image: none;
+      color: var(--g-btn-color-default);
+      border-radius: 24px;
+
+      @include btn-outlined-state(44px);
+    }
+
+    /* ========================================
+   * Style 5: Outlined + Icon (with gradient text) - Medium size
+   * height: 56px, radius: 28px, icon: 36px
+   * ======================================== */
+    &[data-style="5"] {
+      height: 56px;
+      background-image: none;
+      color: linear-gradient(270deg, var(--g-btn-font-d-start) 0%, red 100%);
+      border-radius: 28px;
+
+      @include btn-outlined-state(56px);
+    }
+
+    /* ========================================
+   * Style 6: Outlined + Icon (with gradient text) - Small size
+   * height: 44px, radius: 28px, icon: 24px
+   * ======================================== */
+    &[data-style="6"] {
+      height: 44px;
+      background-image: none;
+      color: var(--g-btn-color-default);
+      border-radius: 28px;
+
+      @include btn-outlined-state(44px);
+    }
   }
 }

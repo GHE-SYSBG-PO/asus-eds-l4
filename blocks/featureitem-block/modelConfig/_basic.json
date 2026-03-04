@@ -1,0 +1,95 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "select",
+      "label": "type",
+      "name": "type",
+      "valueType": "string",
+      "options": [
+        { "name": "text", "value": "text" },
+        { "name": "icon", "value": "icon" }
+      ]
+    },
+    {
+      "component": "richtext",
+      "label": "highlight text",
+      "name": "highlightText",
+      "valueType": "string",
+      "condition": {
+        "and": [
+          { "===": [{ "var": "type" }, "text"] }
+        ]
+      }
+    },
+    {
+      "component": "reference",
+      "valueType": "string",
+      "label": "icon source",
+      "name": "iconSource",
+      "multi": false,
+      "condition": {
+        "and": [
+          { "===": [{ "var": "type" }, "icon"] }
+        ]
+      }
+    },
+    {
+      "component": "container",
+      "label": "top text",
+      "name": "topTextBasic",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{ "var": "type" }, "text"] }
+        ]
+      },
+      "fields": [
+        {
+          "component": "select",
+          "label": "show/hide (space) (DTM)",
+          "name": "topTextToggle",
+          "valueType": "string",
+          "options": [
+            { "name": "Show", "value": "show" },
+            { "name": "Hide", "value": "hide" }
+          ]
+        },
+        {
+          "component": "richtext",
+          "label": "richtext",
+          "name": "topTextRichtext",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "bottom text",
+      "name": "bottomTextBasic",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "show/hide (space) (DTM)",
+          "name": "bottomTextToggle",
+          "valueType": "string",
+          "options": [
+            { "name": "Show", "value": "show" },
+            { "name": "Hide", "value": "hide" }
+          ]
+        },
+        {
+          "component": "richtext",
+          "label": "richtext",
+          "name": "bottomTextRichtext",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

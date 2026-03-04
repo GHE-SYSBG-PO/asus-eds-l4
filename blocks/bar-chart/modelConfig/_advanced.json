@@ -1,0 +1,48 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "label": "title",
+      "name": "titleAdvanced",
+      "collapsible": true,
+      "fields": [
+        { "...": "./_title.json#/fields" }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "disclaimer",
+      "name": "disclaimerAdvanced",
+      "collapsible": true,
+      "fields": [
+        { "...": "./_disclaimer.json#/fields" }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "bar row style",
+      "name": "barRowStyleAdvanced",
+      "collapsible": true,
+      "fields": [
+        { "...": "./_bar-row-style.json#/fields" }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "arrow block",
+      "name": "arrowBlockAdvanced",
+      "collapsible": true,
+      "condition": {
+        "in": [{ "var": "style" }, ["2", "4", "6"]]
+      },
+      "fields": [
+        { "...": "./_arrow-block-style.json#/fields" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "layout",
+      "name": "layout"
+    },
+    {
+      "component": "select",
+      "label": "desktop alignment",
+      "name": "desktopAlignment",
+      "valueType": "string",
+      "options": [
+        { "name": "Center", "value": "lg:justify-center" },
+        { "name": "Left", "value": "lg:justify-start" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "tablet alignment",
+      "name": "tabletAlignment",
+      "valueType": "string",
+      "options": [
+        { "name": "Center", "value": "md:justify-center" },
+        { "name": "Left", "value": "md:justify-start" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "mobile alignment",
+      "name": "mobileAlignment",
+      "valueType": "string",
+      "options": [
+        { "name": "Center", "value": "sm:justify-center" },
+        { "name": "Left", "value": "sm:justify-start" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "motion",
+      "name": "motion",
+      "valueType": "string",
+      "options": [
+        { "name": "On", "value": "on" },
+        { "name": "Off", "value": "off" }
+      ]
+    }
+  ]
+}

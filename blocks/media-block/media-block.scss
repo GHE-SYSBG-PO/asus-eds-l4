@@ -18,8 +18,7 @@
 
   .media-block-container {
     position: relative;
-    background-color: #f5f5f5;
-    overflow: hidden;
+    overflow: clip;
     transition: all 0.3s ease;
 
     img,
@@ -45,7 +44,6 @@
 
     /* Loading State */
     &.loading {
-      background-color: #e0e0e0;
       min-height: 200px;
 
       &::after {

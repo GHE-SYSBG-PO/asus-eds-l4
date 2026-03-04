@@ -122,7 +122,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
               if (value !== '') {
                 // Try to parse as number if it looks like a number
                 const numValue = Number(value);
-                const isNumeric = !Number.isNaN(numValue) && value !== '';
+                const isNumeric = !Number.isNaN(numValue) && String(numValue) === value;
 
                 config[fieldName] = {
                   html,
@@ -155,7 +155,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
  */
 export const getFieldValue = (obj) => {
   const config = obj || {};
-  return (key, type = 'text') => config?.[key]?.[type] || '';
+  return (key, type = 'text') => (config?.[key]?.[type] === undefined ? '' : config?.[key]?.[type]);
 };
 
 /**
@@ -417,4 +417,139 @@ export const getBlockRepeatConfigs = (block) => {
   });
 
   return arr;
+};
+
+/**
+ * Processes inline //[id=VALUE]content// marker syntax within an HTML container.
+ *
+ * Syntax:
+ *   //[id=VALUE]content//
+ *   - Delimited by opening and closing //
+ *   - [id=VALUE] sets the id attribute on the parent element
+ *   - content is the text that remains after processing
+ *
+ * Example:
+ *   <sup>//[id=100]some link//</sup>  →  <sup id="100">some link</sup>
+ *
+ * @param {HTMLElement} container - The container element to process
+ */
+export const processInlineIdSyntax = (container) => {
+  if (!container) return;
+
+  const DETECT = /\/\/\[id=/;
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  let node = walker.nextNode();
+
+  while (node) {
+    if (DETECT.test(node.textContent)) {
+      textNodes.push(node);
+    }
+    node = walker.nextNode();
+  }
+
+  const pattern = /\/\/\[id=([^\]]+)\]([\s\S]*?)\/\//g;
+
+  textNodes.forEach((textNode) => {
+    const parent = textNode.parentElement;
+    const originalText = textNode.textContent;
+    let newText = originalText;
+
+    pattern.lastIndex = 0;
+    let match = pattern.exec(originalText);
+    while (match !== null) {
+      const [fullMatch, id, content] = match;
+      parent.id = id;
+      // Use a function to avoid $ being interpreted as a replacement pattern
+      newText = newText.replace(fullMatch, () => content);
+      match = pattern.exec(originalText);
+    }
+
+    if (newText !== originalText) {
+      textNode.textContent = newText;
+    }
+  });
+};
+
+/**
+ * Get current product line from DOM
+ * @returns {string} Product line (asus/proart/rog/tuf)
+ */
+export const getProductLine = () => document.querySelector('.l4-pdp')?.dataset.product || 'asus';
+
+/**
+ * Get current theme mode from DOM
+ * @returns {string} Theme mode (light/dark)
+ */
+export const getThemeMode = () => document.querySelector('.l4-pdp')?.dataset.mode || 'light';
+
+/**
+ * Sets up animation logic for elements with the class `.g-block-animation`.
+ * Observes when these elements enter the viewport and applies animations to their child elements.
+ * @param {HTMLElement} block - The parent block element containing animated elements.
+ */
+export const setupAnimation = (block) => {
+  const containers = block.querySelectorAll('.g-block-animation');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let delay = 100;
+        const spans = entry.target.querySelectorAll(':scope > span');
+        spans.forEach((span) => {
+          delay += 100;
+          setTimeout(() => {
+            if (span?.style) {
+              span.style.opacity = 1;
+              span.style.transform = 'translateZ(0px) translateY(0px)';
+            }
+          }, delay);
+        });
+        const imgs = entry.target.querySelectorAll(':scope > img');
+        imgs.forEach((img) => {
+          delay += 100;
+          setTimeout(() => {
+            if (img?.style) {
+              img.style.opacity = 1;
+              img.style.transform = 'translateZ(0px) translateY(0px)';
+            }
+          }, delay);
+        });
+        const divs = entry.target.querySelectorAll(':scope > div');
+        divs.forEach((div) => {
+          delay += 100;
+          setTimeout(() => {
+            if (div?.style) {
+              div.style.opacity = 1;
+              div.style.transform = 'translateZ(0px) translateY(0px)';
+            }
+          }, delay);
+        });
+      }
+    });
+  });
+
+  containers.forEach((item) => {
+    observer.observe(item);
+  });
+};
+
+/**
+ * Handles the execution of animations based on document readiness.
+ * Ensures animations are triggered only after the document is fully loaded.
+ * @param {HTMLElement} block - The parent block element containing animated elements.
+ */
+export const handleMotion = (block) => {
+  // Check if the document is still loading
+  if (document.readyState === 'loading') {
+    // If still loading, wait for the DOMContentLoaded event
+    block.addEventListener('DOMContentLoaded', () => {
+      setupAnimation(block);
+    });
+  } else {
+    // If already loaded, execute the animation setup immediately
+    setTimeout(() => {
+      setupAnimation(block);
+    }, 0);
+  }
 };

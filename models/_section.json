@@ -42,18 +42,13 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "component": "select",
-          "valueType": "string",
+          "component": "multiselect",
           "name": "style",
-          "label": "Color Group",
+          "label": "Style",
           "options": [
             {
-              "name": "Light",
-              "value": "section-light"
-            },
-            {
-              "name": "Dark",
-              "value": "section-dark"
+              "name": "Highlight",
+              "value": "highlight"
             }
           ]
         }
@@ -84,7 +79,12 @@
         "media-block",
         "btn",
         "chart-advanced",
-        "space"
+        "space",
+        "bar-chart",
+        "footnote",
+        "featureitem-block",
+        "small-cards",
+        "effect-media"
       ]
     },
     {

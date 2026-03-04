@@ -1,0 +1,33 @@
+.l4-pdp {
+  &[data-product="asus"],
+  &[data-product="proart"],
+  &[data-product="rog"],
+  &[data-product="tuf"] {
+    &[data-mode="light"],
+    .section-light {
+      --featureitem-block-top-text-color: #4D4D4D;
+      --featureitem-block-highlight-text-color: #181818;
+      --featureitem-block-bottom-text-color: #4D4D4D;
+    }
+
+    &[data-mode="dark"],
+    .section-dark {
+      --featureitem-block-top-text-color: #DCDCDC;
+      --featureitem-block-highlight-text-color: #FFF;
+      --featureitem-block-bottom-text-color: #DCDCDC;
+    }
+  }
+
+  .featureitem-block-top-text {
+    color: var(--featureitem-block-top-text-color);
+  }
+
+  .featureitem-block-highlight-text {
+    color: var(--featureitem-block-highlight-text-color);
+  }
+
+  .featureitem-block-bottom-text {
+    color: var(--featureitem-block-bottom-text-color);
+  }
+}
+
