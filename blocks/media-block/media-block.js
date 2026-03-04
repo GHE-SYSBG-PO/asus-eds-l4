@@ -1,4 +1,4 @@
-import { getBlockConfigs, getFieldValue, isAuthorEnvironment } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue, isAuthorUe } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const DEFAULT_CONFIG = {
@@ -557,7 +557,7 @@ export default async function decorate(block) {
 
         // Listen for window resize
         let resizeTimer;
-        if (!isAuthorEnvironment()) {
+        if (!isAuthorUe()) {
           window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(updateVideoSource, 200);

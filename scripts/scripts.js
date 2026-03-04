@@ -13,7 +13,7 @@ import {
   getMetadata,
   loadScript,
 } from './aem.js';
-import { isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
+import { isAuthorUe, processInlineIdSyntax } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -245,7 +245,7 @@ function getPageMetadata() {
   document.addEventListener('DOMContentLoaded', () => {
     const productLine = getMetadata('productline') || 'asus';
     const mode = getMetadata('mode') || 'light';
-    const main = isAuthorEnvironment() ? document.body : document.body.querySelector('main');
+    const main = isAuthorUe() ? document.body : document.body.querySelector('main');
     main.dataset.product = productLine;
     main.dataset.mode = mode;
     main.classList.add('l4-pdp');
