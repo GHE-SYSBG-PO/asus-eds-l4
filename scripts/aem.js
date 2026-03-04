@@ -697,15 +697,15 @@ const loadSectionBlock = async (section, name) => {
  * @returns {Promise<void>} A promise that resolves when all column sections are loaded
  */
 export const loadSectionBlockJs = async (section) => {
-  section.classList.forEach((className) => {
-    if (className.startsWith('l4customsection-')) {
-      const sectionName = className.replace('l4customsection-', '');
-      // Load section blocks (sections with their own JS/CSS)
-      loadSectionBlock(section, sectionName);
-    }
-  });
+  let sectionName = ([...section.classList].find((name) => name.startsWith('l4customsection-') || name.endsWith('item-container')) || '').replace('l4customsection-', '').replace('-item-container', '');
+  if (!sectionName && section.dataset) {
+    sectionName = section.dataset.aueComponent;
+  }
+  if (sectionName) {
+    // Load section blocks (sections with their own JS/CSS)
+    loadSectionBlock(section, sectionName);
+  }
 };
-
 /**
  * Loads all blocks in a section.
  * @param {Element} section The section element

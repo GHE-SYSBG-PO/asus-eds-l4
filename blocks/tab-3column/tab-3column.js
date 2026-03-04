@@ -54,11 +54,11 @@ function buildRadiusValue(tl, tr, br, bl) {
 
 function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
   const iconHtml = iconEnabled && tabIconAsset
-    ? `<img class="tab3col-tab-icon" src="${tabIconAsset}" alt="" aria-hidden="true" />`
+    ? `<img class="tab3col-tab-icon h-[36px] mr-[12px]" src="${tabIconAsset}" alt="" aria-hidden="true" />`
     : '';
   return `
     <button
-      class="tab3col-tab-btn${isActive ? ' is-active' : ''}"
+      class="tab3col-tab-btn h-[56px] ${isActive ? ' is-active' : ''}"
       data-tab-index="${index}"
       role="tab"
       aria-selected="${isActive}"
@@ -244,12 +244,12 @@ export default async function decorate(block) {
     // ── Build component shell ────────────────────────────────────
     const componentHtml = document.createRange().createContextualFragment(`
       <div
-        class="tab3col-component ${colorGroup}"
+        class="tab3col-component max-w-full md:max-w-[896px] lg:max-w-[1260px] ${colorGroup}"
         data-motion="${motionEnabled}"
         data-icon="${tabIconEnabled}"
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
       >
-        <div class="tab3col-tab-bar">
+        <div class="tab3col-tab-bar w-auto sm:max-w-[172px] md:max-w-none md:h-[56px lg:w-[185px] ]">
           <button class="tab3col-arrow tab3col-arrow--prev" aria-label="Scroll tabs left" style="display:none">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
           </button>

@@ -5,42 +5,18 @@
 // ============================================================
 // Brand Tokens — ASUS Light
 // ============================================================
-.l4-pdp[data-product="asus"][data-mode="light"],
-.l4-pdp[data-product="asus"] .section-light {
-  --tab3col-tab-color-default: #4a4a4a;
-  --tab3col-tab-color-hover: #00438a;
-  --tab3col-tab-color-select: #00438a;
-  --tab3col-tab-border-color-default: transparent;
-  --tab3col-tab-border-color-hover: #00438a;
-  --tab3col-tab-border-color-select: #00438a;
-  --tab3col-tab-bg-default: transparent;
-  --tab3col-tab-bg-hover: rgb(0 67 138 / 6%);
-  --tab3col-tab-bg-select: rgb(0 67 138 / 10%);
-  --tab3col-tab-bar-bg: #fff;
-  --tab3col-title-color: #181818;
-  --tab3col-info-color: #4a4a4a;
-  --tab3col-arrow-color: #00438a;
-}
+// .l4-pdp[data-product="asus"][data-mode="light"],
+// .l4-pdp[data-product="asus"] .section-light {
+  
+// }
 
 // ============================================================
 // Brand Tokens — ASUS Dark
 // ============================================================
-.l4-pdp[data-product="asus"][data-mode="dark"],
-.l4-pdp[data-product="asus"] .section-dark {
-  --tab3col-tab-color-default: #a0b4c8;
-  --tab3col-tab-color-hover: #a2c2e2;
-  --tab3col-tab-color-select: #a2c2e2;
-  --tab3col-tab-border-color-default: transparent;
-  --tab3col-tab-border-color-hover: #a2c2e2;
-  --tab3col-tab-border-color-select: #a2c2e2;
-  --tab3col-tab-bg-default: transparent;
-  --tab3col-tab-bg-hover: rgb(162 194 226 / 8%);
-  --tab3col-tab-bg-select: rgb(162 194 226 / 15%);
-  --tab3col-tab-bar-bg: #1e1e1e;
-  --tab3col-title-color: #fff;
-  --tab3col-info-color: #b0b0b0;
-  --tab3col-arrow-color: #a2c2e2;
-}
+// .l4-pdp[data-product="asus"][data-mode="dark"],
+// .l4-pdp[data-product="asus"] .section-dark {
+
+// }
 
 // ProArt / ROG / TUF — reserved, fill later
 // .l4-pdp[data-product="proart"][data-mode="light"],
@@ -66,11 +42,28 @@
 // ============================================================
 .l4-pdp .tab3col-component {
   box-sizing: border-box;
+  container-type: inline-size;
   width:87.5%;
+  gap:var(--tab3col-gap);
   
-  --tab3col-tab-border-width-default: 0px;
-  --tab3col-tab-border-width-hover: 2px;
-  --tab3col-tab-border-width-select: 2px;
+  --tab3col-tab-border-width-default: 1px;
+  --tab3col-tab-border-width-hover: 1px;
+  --tab3col-tab-border-width-select: 1px;
+  --tab3col-gap: 40px;
+  --tab3col-tab-color-default: #4a4a4a;
+  --tab3col-tab-color-hover: #fff;
+  --tab3col-tab-color-select: #fff;
+  --tab3col-tab-border-color-default: #00438a;
+  --tab3col-tab-border-color-hover: #00438a;
+  --tab3col-tab-border-color-select: #00438a;
+  --tab3col-tab-bg-default: transparent;
+  --tab3col-tab-bg-hover: #4379B1;
+  --tab3col-tab-bg-select: #4379B1;
+  --tab3col-tab-bar-bg: #fff;
+  --tab3col-title-color: #181818;
+  --tab3col-info-color: #4a4a4a;
+  --tab3col-arrow-color: #00438a;
+  
 }
 
 // ============================================================
@@ -100,21 +93,18 @@
 .l4-pdp .tab3col-tab-btn {
   display: inline-flex;
   align-items: center;
-  padding-bottom: 20px;
   margin: 0;
   background: var(--tab3col-tab-bg-default, transparent);
   color: var(--tab3col-tab-color-default, inherit);
-  border-width: var(--tab3col-tab-border-width-default, 0);
+  border-width: 1px;
   border-style: solid;
   border-color: var(--tab3col-tab-border-color-default, transparent);
-  border-radius: var(--tab3col-tab-radius, 8px);
+  margin-bottom:20px;
+  border-radius: 28px;
   cursor: pointer;
   white-space: nowrap;
   font-family: inherit;
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease;
+  transition: background 0.25s ease;
 
   &:hover {
     background: var(--tab3col-tab-bg-hover, transparent);
@@ -126,7 +116,7 @@
   &.is-active {
     background: var(--tab3col-tab-bg-select, transparent);
     color: var(--tab3col-tab-color-select, inherit);
-    border-width: var(--tab3col-tab-border-width-select, 0);
+    border-width: 1px;
     border-color: var(--tab3col-tab-border-color-select, transparent);
   }
 }
@@ -177,12 +167,15 @@
   min-width: 0;
 }
 
+.l4-pdp .tab-3column-item{
+  gap:var(--tab3col-gap);
+}
+
 // Text column
 .l4-pdp .tab3col-text-col {
-  width: var(--tab3col-text-area-width, 25%);
   flex-shrink: 0;
-  padding: 24px;
   box-sizing: border-box;
+  width: 12.5cqw;
 }
 
 .l4-pdp .tab3col-title {
@@ -204,7 +197,6 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    max-width: 1260px;
   }
 
   .l4-pdp .tab3col-tab-bar {
