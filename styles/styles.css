@@ -145,8 +145,8 @@ pre {
   overflow-x: auto;
   white-space: pre;
 }
-
-/* main > div {
+/* 
+main > div {
   margin: 40px 16px;
 } */
 
@@ -170,7 +170,7 @@ a:hover {
 }
 
 /* buttons */
-a.button:any-link,
+/* a.button:any-link,
 button {
   box-sizing: border-box;
   display: inline-block;
@@ -212,7 +212,7 @@ button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color);
-}
+} */
 
 /* main img {
   max-width: 100%;
@@ -234,18 +234,16 @@ button.secondary {
 /* sections */
 /* main > .section {
   margin: 40px 0;
-}
+} */
 
 main > .section > div {
-  max-width: 1200px;
   margin: auto;
-  padding: 0 24px;
-}
+} 
 
-main > .section:first-of-type {
+/* main > .section:first-of-type {
   margin-top: 0;
-}
-
+} */
+/* 
 @media (width >= 900px) {
   main > .section > div {
     padding: 0 32px;
