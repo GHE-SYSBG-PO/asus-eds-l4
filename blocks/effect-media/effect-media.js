@@ -10,8 +10,8 @@ const DEFAULT_CONFIG = {
   image: '',
   imgAlt: '',
   bgColor: '',
-  widthD: '',
-  heightD: '',
+  imgWidthD: '',
+  imgHeightD: '',
   fontDesktop: '',
   fontTablet: '',
   fontMobile: '',
@@ -123,7 +123,7 @@ const _getTextMaxWidth = (device, v) => {
 
   const textMaxWidth = v(maxWidth[device], 'text');
 
-  return textMaxWidth ? `${textMaxWidth}px` : '100%';
+  return textMaxWidth ? `${textMaxWidth}px` : '';
 };
 
 const _renderMediaHTML = (props) => {
@@ -137,19 +137,23 @@ const _renderMediaHTML = (props) => {
     maxW,
   } = props;
 
+  const maxWidthDesktop = maxW.D ? `--max-w-desktop: ${maxW.D};` : '';
+  const maxWidthTablet = maxW.T ? `--max-w-tablet: ${maxW.T};` : '';
+  const maxWidthMobile = maxW.M ? `--max-w-mobile: ${maxW.M};` : '';
+
   const htmlImg = imageSrc ? `
-    <div class="absolute w-[100%] h-[100%] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container">
+    <div class="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container">
       <img
         src="${imageSrc}"
         alt="${imgAlt}"
-        class="animation-img absolute left-0 top-0 w-[100%] h-[100%] object-cover"
+        class="animation-img absolute left-0 top-0 w-full h-full object-cover"
       />
     </div>
   ` : '';
 
   const htmlText = text ? `
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" text-container>
-      <p class="ani-text relative text-center w-[100vw] lg:max-w-[${maxW.D}] md:max-w-[${maxW.T}] sm:max-w-[${maxW.M}] pl-[10%] pr-[10%] ${fonts.D} ${fonts.T} ${fonts.M}" style="${fontColorStyle}">${text}</p>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-container">
+      <p class="ani-text relative text-center ml-auto mr-auto w-[87.5%] ${fonts.D} ${fonts.T} ${fonts.M}" style="${fontColorStyle}${maxWidthDesktop}${maxWidthTablet}${maxWidthMobile}">${text}</p>
     </div>
   ` : '';
 
@@ -173,9 +177,6 @@ export default async function decorate(block) {
     const text = v('text', 'text');
     const fontColor = v('fontColor', 'text');
     const fontColorStyle = fontColor ? `--text-block-body-color: #${fontColor};` : '';
-
-    // eslint-disable-next-line no-console
-    console.log('fontColor: ', fontColor);
 
     const bgColor = v('bgColor', 'text') || '';
     const bgColorStyle = bgColor ? `background-color: #${bgColor};` : '';
@@ -208,21 +209,21 @@ export default async function decorate(block) {
     const sceneContent = _renderMediaHTML(prop);
 
     // configure animation layout
-    let animationHeight = `${DEFAULT_CONFIG.animationLength * 100}vh`;
+    let containerHeight = `--container-height: ${DEFAULT_CONFIG.animationLength * 100}vh;`;
     let animationPosition = 'sticky top-0';
     const isUeType = isUE ? 'is-ue' : '';
 
     if (isUE) {
-      animationHeight = '100vh';
+      containerHeight = '--container-height: 100vh;';
       animationPosition = 'relative';
     }
 
     const minH = `lg:min-h-[${_getAnimationMinHeight('D')}] md:min-h-[${_getAnimationMinHeight('T')}] sm:min-h-[${_getAnimationMinHeight('M')}]`;
-    const containerClass = `effect-media-container relative ${animationType} scroll-container w-[100vw] h-[${animationHeight}] left-1/2 -translate-x-1/2 ${minH} ${isUeType}`;
+    const containerClass = `effect-media-container relative ${animationType} scroll-container left-1/2 -translate-x-1/2 ${minH} ${isUeType}`;
 
     block.innerHTML = `
-      <div class="${containerClass}" style="${bgColorStyle}">
-        <div class="${animationPosition} w-[100vw] h-[100vh] scene-1">
+      <div class="${containerClass}" style="${bgColorStyle}${containerHeight}">
+        <div class="${animationPosition} w-full h-[100vh] scene-1">
           ${sceneContent}
         </div>
       </div>
@@ -234,7 +235,7 @@ export default async function decorate(block) {
     }
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error decorating effet-media: ', error);
-    block.innerHTML = '<div class="error-message">Failed to load effet-media block</div>';
+    console.error('Error decorating effect-media: ', error);
+    block.innerHTML = '<div class="error-message">Failed to load effect-media block</div>';
   }
 }
