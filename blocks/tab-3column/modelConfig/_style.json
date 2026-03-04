@@ -1,0 +1,15 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "layout",
+      "name": "styleTab"
+    },
+    {
+      "component": "boolean",
+      "label": "motion (on/off)",
+      "name": "motionEnabled",
+      "valueType": "boolean"
+    }
+  ]
+}

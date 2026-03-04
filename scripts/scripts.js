@@ -13,7 +13,7 @@ import {
   getMetadata,
   loadScript,
 } from './aem.js';
-import { loadSectionBlockJs, isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
+import { isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -216,7 +216,6 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
-  await loadSectionBlockJs(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

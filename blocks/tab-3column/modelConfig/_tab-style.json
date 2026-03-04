@@ -1,0 +1,95 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "tab style",
+      "name": "tabStyleTab"
+    },
+    {
+      "component": "boolean",
+      "label": "icon (yes/no)",
+      "name": "tabIconEnabled",
+      "valueType": "boolean"
+    },
+    {
+      "component": "container",
+      "label": "tab bar bg-color",
+      "name": "tabBarBgColor",
+      "fields": [
+        {
+          "component": "text",
+          "label": "bg-color",
+          "name": "tabBarBgColorValue",
+          "valueType": "string",
+          "description": "Hex value without #, e.g. ffffff"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "tab text (Advanced)",
+      "name": "tabTextAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font (D/T)",
+          "name": "tabFontDT",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-14",
+              "value": "ro-md-14"
+            },
+            {
+              "name": "ro-md-16",
+              "value": "ro-md-16"
+            },
+            {
+              "name": "ro-md-18",
+              "value": "ro-md-18"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "tabFontM",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-12",
+              "value": "ro-md-12"
+            },
+            {
+              "name": "ro-md-14",
+              "value": "ro-md-14"
+            },
+            {
+              "name": "ro-md-16",
+              "value": "ro-md-16"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font-color default",
+          "name": "tabFontColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "font-color hover",
+          "name": "tabFontColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "font-color select",
+          "name": "tabFontColorSelect",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "definitions": [
+    {
+      "title": "Tab 3Column Item",
+      "id": "tab-3column-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Tab 3Column Item",
+              "filter": "tab-3column-item",
+              "model": "tab-3column-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "tab-3column-item",
+      "fields": [
+        {
+          "component": "text",
+          "label": "tab text",
+          "name": "tabText",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "icon asset (if icon=yes)",
+          "name": "tabIconAsset",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "label": "title",
+          "name": "tabTitle",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "info",
+          "name": "tabInfo",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "tab-3column-item",
+      "components": ["media-block"]
+    }
+  ]
+}

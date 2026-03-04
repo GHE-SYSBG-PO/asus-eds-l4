@@ -1,0 +1,80 @@
+{
+  "JSON Text Component": {
+    "scope": "json",
+    "prefix": "dialog-text",
+    "body": [
+      "{",
+      "  \"component\": \"text\",",
+      "  \"label\": \"${1}\",",
+      "  \"name\": \"${2}\",",
+      "  \"valueType\": \"string\",",
+      "  \"placeholder\": \"${3}\",",
+      "  \"description\": \"${4}\"",
+      "},$0"
+    ],
+    "description": "產生一個 UI Text 元件的 JSON 配置"
+  },
+  "JSON RichText Component": {
+    "scope": "json",
+    "prefix": "dialog-richtext",
+    "body": [
+      "{",
+      "  \"component\": \"richtext\",",
+      "  \"label\": \"${1}\",",
+      "  \"name\": \"${2}\",",
+      "  \"valueType\": \"string\",",
+      "  \"placeholder\": \"${3}\",",
+      "  \"description\": \"${4}\"",
+      "},$0"
+    ],
+    "description": "產生一個 RichText 元件的 JSON 配置"
+  },
+  "JSON Reference Component": {
+    "scope": "json",
+    "prefix": "dialog-image",
+    "body": [
+      "{",
+      "  \"component\": \"reference\",",
+      "  \"label\": \"${1:Image}\",",
+      "  \"name\": \"${2:image}\",",
+      "  \"multi\": ${3|false,true|},",
+      "  \"description\": \"${4}\"",
+      "},$0"
+    ],
+    "description": "產生一個 Reference (Image) 元件的 JSON 配置"
+  },
+  "JSON Select Component": {
+    "scope": "json",
+    "prefix": "dialog-select",
+    "body": [
+      "{",
+      "  \"component\": \"select\",",
+      "  \"label\": \"${1:Text font (M)}\",",
+      "  \"name\": \"${2:fontMobile}\",",
+      "  \"valueType\": \"${3:string}\",",
+      "  \"options\": [",
+      "    { \"name\": \"${4:tt-bd-32}\", \"value\": \"${5:tt-bd-32-sm}\" },",
+      "  ],",
+      "  \"description\": \"${6}\"",
+      "},$0"
+    ],
+    "description": "產生一個帶有預設字體選項的 Select 元件"
+  },
+  "JSON Container Component": {
+    "scope": "json",
+    "prefix": "dialog-collapsible-container",
+    "body": [
+      "{",
+      "  \"component\": \"container\",",
+      "  \"label\": \"${1:Text (T)}\",",
+      "  \"name\": \"${2:textContainer}\",",
+      "  \"collapsible\": ${3|true,false|},",
+      "  \"fields\": [",
+      "    $4",
+      "  ],",
+      "  \"description\": \"${5}\"",
+      "},$0"
+    ],
+    "description": "產生一個 Container 元件 (包含 fields 陣列) 的 JSON 配置"
+  }
+}
