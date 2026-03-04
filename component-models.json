@@ -2757,6 +2757,203 @@
     ]
   },
   {
+    "id": "effect-media",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Image",
+        "name": "image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imgAlt",
+        "label": "Image Alt",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "bgColor",
+        "label": "Background Color",
+        "valueType": "string"
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "Text (D)",
+        "name": "textContainerD",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthD",
+            "label": "Text max width (D)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
+          {
+            "component": "select",
+            "label": "Text font (D)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-88",
+                "value": "tt-bd-88-lg"
+              },
+              {
+                "name": "tt-bd-92",
+                "value": "tt-bd-92-lg"
+              },
+              {
+                "name": "tt-bd-96",
+                "value": "tt-bd-96-lg"
+              },
+              {
+                "name": "tt-bd-100",
+                "value": "tt-bd-100-lg"
+              },
+              {
+                "name": "tt-bd-104",
+                "value": "tt-bd-104-lg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text (T)",
+        "name": "textContainerT",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthT",
+            "label": "Text max width (T)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
+          {
+            "component": "select",
+            "label": "Text font (T)",
+            "name": "fontTablet",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-56",
+                "value": "tt-bd-56-md"
+              },
+              {
+                "name": "tt-bd-60",
+                "value": "tt-bd-60-md"
+              },
+              {
+                "name": "tt-bd-64",
+                "value": "tt-bd-64-md"
+              },
+              {
+                "name": "tt-bd-68",
+                "value": "tt-bd-68-md"
+              },
+              {
+                "name": "tt-bd-72",
+                "value": "tt-bd-72-md"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text (T)",
+        "name": "textContainerM",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthM",
+            "label": "Text max width (M)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
+          {
+            "component": "select",
+            "label": "Text font (M)",
+            "name": "fontMobile",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-32",
+                "value": "tt-bd-32-sm"
+              },
+              {
+                "name": "tt-bd-36",
+                "value": "tt-bd-36-sm"
+              },
+              {
+                "name": "tt-bd-40",
+                "value": "tt-bd-40-sm"
+              },
+              {
+                "name": "tt-bd-44",
+                "value": "tt-bd-44-sm"
+              },
+              {
+                "name": "tt-bd-48",
+                "value": "tt-bd-48-sm"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "font color (hex)",
+        "name": "fontColor",
+        "valueType": "string",
+        "placeholder": "NO NEED #"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imgWidthD",
+        "label": "Image width (D)",
+        "value": "",
+        "placeholder": "vw or px, default 100vw"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imgHeightD",
+        "label": "Image height (D)",
+        "value": "",
+        "placeholder": "vh or px, default 100vh"
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--effect-media",
+        "hidden": true
+      }
+    ]
+  },
+  {
     "id": "featureitem-block",
     "fields": [
       {
