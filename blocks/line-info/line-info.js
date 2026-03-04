@@ -14,79 +14,143 @@ const ADVANCED_DEFAULTS = {
 };
 
 /**
- * 確保值有正確的單位，如果沒有則加上預設單位
- * @param {string} value - 要檢查的值
- * @param {string} defaultUnit - 預設單位（預設為 'px'）
- * @returns {string} - 帶有單位的值，如果值為空或無效的數字則返回空字符串
+ * 將數值轉換為 Tailwind 間距類名或自定義樣式
+ * @param {string} value - 要轉換的值
+ * @returns {Object} - 包含 className 和 customStyle 的物件
  */
-const ensureUnit = (value, defaultUnit = 'px') => {
-  if (!value) return '';
+const convertToTailwindSpacing = (value) => {
+  if (!value) return { className: '', customStyle: '' };
 
-  // 防呆：移除前後空格並檢查是否為有效的數字或數字+單位
   const trimmedValue = String(value).trim();
+  if (!/^-?\d/.test(trimmedValue)) return { className: '', customStyle: '' };
 
-  // 檢查是否以數字開頭（必須是有效的數字）
-  if (!/^-?\d/.test(trimmedValue)) return '';
-
-  // 檢查是否已有單位
+  // 檢查是否有單位
   const hasUnit = /(%|px|vh|vw|em|rem)$/.test(trimmedValue);
-  return hasUnit ? trimmedValue : `${trimmedValue}${defaultUnit}`;
+  const finalValue = hasUnit ? trimmedValue : `${trimmedValue}px`;
+
+  // 對於常見的 px 值，嘗試轉換為 Tailwind 類名
+  if (finalValue.endsWith('px')) {
+    const pxValue = parseInt(finalValue, 10);
+    const tailwindSpacingMap = {
+      0: '0',
+      4: '1',
+      8: '2',
+      12: '3',
+      16: '4',
+      20: '5',
+      24: '6',
+      28: '7',
+      32: '8',
+      36: '9',
+      40: '10',
+      44: '11',
+      48: '12',
+      56: '14',
+      64: '16',
+      80: '20',
+      96: '24',
+      112: '28',
+      128: '32',
+    };
+    if (tailwindSpacingMap[pxValue] !== undefined) {
+      return { className: tailwindSpacingMap[pxValue], customStyle: '' };
+    }
+  }
+
+  // 如果無法對應 Tailwind 類名，返回自定義樣式
+  return {
+    className: '',
+    customStyle: finalValue,
+  };
 };
 
 /**
- * 生成 RWD 媒體查詢樣式（可擴充）
- * @param {string} blockId - 元素的唯一 class ID
- * @param {Object} properties - 屬性配置物件，可包含任意 CSS 屬性
- * 例如: { padding: { Desktop: '20px', Tablet: '15px', Mobile: '10px' } }
- * 或    { margin: { Desktop: '10px', Mobile: '5px' } } (可省略 Tablet)
- * @returns {string} 媒體查詢樣式字符串
+ * 生成響應式 Tailwind 類名
+ * @param {Object} properties - 屬性配置物件，包含 Desktop、Tablet、Mobile 的值
+ * @param {string} propertyType - 屬性類型 ('padding-top', 'padding-bottom', 'width', 'top', 'left')
+ * @returns {string} Tailwind 響應式類名字符串
  */
-const generateRwdMediaQueries = (blockId, properties) => {
-  let mediaQueryStyles = '';
+const generateResponsiveClasses = (properties, propertyType) => {
+  const {
+    Desktop,
+    Tablet,
+    Mobile,
+  } = properties;
+  const classes = [];
 
-  // 定義媒體查詢斷點
-  const breakpoints = {
-    Desktop: { condition: '(min-width: 1280px)', priority: 3 },
-    Tablet: { condition: '(min-width: 731px) and (max-width: 1279px)', priority: 2 },
-    Mobile: { condition: '(max-width: 730px)', priority: 1 },
+  // 處理不同的屬性類型
+  const getClassPrefix = (type) => {
+    switch (type) {
+      case 'padding-top': return 'pt';
+      case 'padding-bottom': return 'pb';
+      case 'width': return 'w';
+      case 'top': return 'top';
+      case 'left': return 'left';
+      default: return type;
+    }
   };
 
-  // 收集各斷點的樣式
-  const stylesByBreakpoint = {
-    Desktop: '',
-    Tablet: '',
-    Mobile: '',
-  };
+  const prefix = getClassPrefix(propertyType);
 
-  // 遍歷所有屬性
-  Object.entries(properties).forEach(([propName, variants]) => {
-    if (typeof variants !== 'object' || variants === null) return;
+  // Mobile first (基礎類名)
+  if (Mobile) {
+    const { className } = convertToTailwindSpacing(Mobile);
+    if (className) classes.push(`${prefix}-${className}`);
+  }
 
-    // 遍歷每個斷點的值
-    Object.entries(variants).forEach(([breakpoint, value]) => {
-      if (!breakpoints[breakpoint]) return; // 略過無效的斷點
+  // Tablet (md:)
+  if (Tablet) {
+    const { className } = convertToTailwindSpacing(Tablet);
+    if (className) classes.push(`md:${prefix}-${className}`);
+  }
 
-      const processedValue = ensureUnit(value);
-      if (processedValue) {
-        stylesByBreakpoint[breakpoint] += `${propName}: ${processedValue};`;
+  // Desktop (lg:)
+  if (Desktop) {
+    const { className } = convertToTailwindSpacing(Desktop);
+    if (className) classes.push(`lg:${prefix}-${className}`);
+  }
+
+  return classes.join(' ');
+};
+
+/**
+ * 生成自定義 CSS 變數和樣式（當無法使用 Tailwind 類名時）
+ * @param {Object} properties - 屬性配置物件
+ * @param {string} propertyType - CSS 屬性名稱
+ * @returns {string} CSS 變數樣式字符串
+ */
+const generateCustomStyles = (properties, propertyType) => {
+  const {
+    Desktop,
+    Tablet,
+    Mobile,
+  } = properties;
+  let customStyles = '';
+
+  if (Mobile) {
+    const { customStyle } = convertToTailwindSpacing(Mobile);
+    if (customStyle) {
+      customStyles += `${propertyType}: ${customStyle}; `;
+    }
+  }
+
+  // 如果有 Tablet 或 Desktop 的自定義值，使用 CSS 自定義屬性
+  if (Tablet || Desktop) {
+    if (Tablet) {
+      const { customStyle } = convertToTailwindSpacing(Tablet);
+      if (customStyle) {
+        customStyles += `--${propertyType}-md: ${customStyle}; `;
       }
-    });
-  });
-
-  // 按優先級生成媒體查詢（Desktop > Tablet > Mobile）
-  Object.entries(breakpoints)
-    .sort((a, b) => b[1].priority - a[1].priority)
-    .forEach(([breakpoint, { condition }]) => {
-      if (stylesByBreakpoint[breakpoint]) {
-        mediaQueryStyles += `
-        @media ${condition} {
-          .${blockId} { ${stylesByBreakpoint[breakpoint]} }
-        }
-      `;
+    }
+    if (Desktop) {
+      const { customStyle } = convertToTailwindSpacing(Desktop);
+      if (customStyle) {
+        customStyles += `--${propertyType}-lg: ${customStyle}; `;
       }
-    });
+    }
+  }
 
-  return mediaQueryStyles;
+  return customStyles;
 };
 
 /**
@@ -97,7 +161,8 @@ const generateRwdMediaQueries = (blockId, properties) => {
  * @param {string} params.assetMobile - 手機版圖片路徑
  * @param {string} params.imgWidth - 圖片寬度
  * @param {string} params.textItemsHtml - 文字項目 HTML
- * @param {string} params.textItemsStyle - 文字項目樣式
+ * @param {string} params.textContainerClasses - 文字容器 Tailwind 類名
+ * @param {string} params.textContainerStyles - 文字容器自定義樣式
  * @returns {string} 圖片區塊 HTML
  */
 const generatePictureHtml = ({
@@ -106,36 +171,37 @@ const generatePictureHtml = ({
   assetMobile,
   imgWidth,
   textItemsHtml,
-  textItemsStyle,
+  textContainerClasses,
+  textContainerStyles,
 }) => {
-  if (!assetDesktop && !assetTablet && !assetMobile) {
-    // 即使沒有圖片，也要輸出 line-info-image 容器包含 textItems
-    return `
-      <div class="line-info-image">
-        <div class="text-container" ${textItemsStyle}>
-          ${textItemsHtml}
-        </div>
-      </div>
-    `;
-  }
-
   // RWD breakpoints: Mobile (≤730px), Tablet (731px-1279px), Desktop (≥1280px)
   const mobileSource = assetMobile ? `<source media="(max-width: 730px)" srcset="${assetMobile}">` : '';
   const tabletSource = assetTablet ? `<source media="(min-width: 731px) and (max-width: 1279px)" srcset="${assetTablet}">` : '';
   const defaultImgSrc = assetDesktop || assetTablet || assetMobile || '';
 
-  // 處理 imgWidth 單位（如果沒有單位則加上 px）
-  const imgWidthValue = ensureUnit(imgWidth);
-  const imgWidthAttribute = imgWidthValue ? `style="width: ${imgWidthValue};"` : '';
+  // 處理圖片寬度 - 轉換為 Tailwind 或自定義樣式
+  let imgWidthClass = '';
+  let imgWidthStyle = '';
+
+  if (imgWidth) {
+    const { className, customStyle } = convertToTailwindSpacing(imgWidth);
+    if (className) {
+      imgWidthClass = `w-${className}`;
+    } else if (customStyle) {
+      imgWidthStyle = `width: ${customStyle};`;
+    }
+  }
+
+  const imgClasses = `block w-full h-auto mx-auto ${imgWidthClass}`.trim();
 
   return `
-    <div class="line-info-image" ${imgWidthAttribute}>
+    <div class="block relative left-1/2 transform -translate-x-1/2" ${imgWidthStyle ? `style="${imgWidthStyle}"` : ''}>
       <picture>
         ${mobileSource}
         ${tabletSource}
-        <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy">
+        <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy" class="${imgClasses}">
       </picture>
-      <div class="text-container" ${textItemsStyle}>
+      <div class="absolute top-0 -left-5 w-full ${textContainerClasses}" ${textContainerStyles ? `style="${textContainerStyles}"` : ''}>
         ${textItemsHtml}
       </div>
     </div>
@@ -209,7 +275,6 @@ const generateTextItemsHtml = ({
     console.log(`\n=== Item ${index} ===`, item);
 
     // Extract values from {html, text} format
-    // item contains fields like: { side: {html, text}, yValue: {html, text}, ... }
     const xValue = item.xValue?.text || '0';
     const yValue = item.yValue?.text || '0';
     const titleRichtext = item.titleRichtext?.html || '<p>Item Title</p>';
@@ -230,40 +295,45 @@ const generateTextItemsHtml = ({
       textWidth,
     });
 
-    // Build style-specific HTML
-    let itemHtml = '';
-    let itemClass = 'text-item';
-    // Generate unique ID for this item to apply RWD styles
+    // 基礎類名
+    let itemClasses = 'absolute pointer-events-auto flex flex-col';
+    let customStyles = '';
+
+    // Generate unique ID for this item
     const itemId = `text-item-${blockId}-${index}`;
 
-    switch (styleLayout) {
+    switch (parseInt(styleLayout, 10)) {
       case 1:
       case 2: {
         // Style 1: Text On Left & Right (yValue is DT - Desktop/Tablet only)
         // Style 2: Text On Left / Right Sides (yValue is DT)
-        // For Mobile, yValue is not applicable, so we use default 0
-        itemClass += styleLayout === 1 ? ` side-${side}` : ` layout-${layoutStyle}`;
 
-        // Build RWD styles for yValue
-        let itemMediaQueries = '';
-        const yValueProcessed = ensureUnit(yValue);
-        if (yValueProcessed) {
-          itemMediaQueries = generateRwdMediaQueries(itemId, {
-            top: {
-              Desktop: yValue,
-              Tablet: yValue,
-              // Mobile: '0' (not specified, use default)
-            },
-          });
+        if (styleLayout === '1') {
+          // Style 1: side-based positioning
+          if (side === 'right') {
+            itemClasses += ' right-0 lg:-right-5 items-end text-right';
+          } else {
+            itemClasses += ' left-0 lg:-left-5 items-start text-left';
+          }
+        } else if (layoutStyle === 'right') {
+          // Style 2: layout-based positioning
+          itemClasses += ' right-0 lg:-right-5 items-end text-right';
+        } else {
+          itemClasses += ' left-0 lg:-left-5 items-start text-left';
         }
 
-        itemHtml = `
-          ${itemMediaQueries ? `<style>${itemMediaQueries}</style>` : ''}
-          <div class="${itemClass} ${itemId}" style="${itemMediaQueries ? '' : `top: ${yValueProcessed || '0'}px;`}">
-            <div class="title ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
-            <div class="info ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
-          </div>
-        `;
+        // 處理 yValue 的響應式定位
+        if (yValue && yValue !== '0') {
+          const { className, customStyle } = convertToTailwindSpacing(yValue);
+          if (className) {
+            itemClasses += ` md:top-${className} lg:top-${className}`;
+          } else if (customStyle) {
+            customStyles += `--top-md: ${customStyle}; --top-lg: ${customStyle}; top: var(--top-md);`;
+          }
+        }
+
+        // 預設寬度設定
+        itemClasses += ' w-2/5 max-w-xs lg:max-w-sm';
         break;
       }
 
@@ -271,43 +341,98 @@ const generateTextItemsHtml = ({
       case 4:
       case 5: {
         // Style 3, 4, 5: Text below / Freeform / Freeform-dialog box
-        // xValue, yValue, textWidth are DT (Desktop/Tablet only)
-        itemClass += ` align-${alignment}`;
 
-        // Build RWD styles for positioning
-        let itemMediaQueries2 = '';
-        const xValueProcessed = ensureUnit(xValue);
-        const yValueProcessed2 = ensureUnit(yValue);
-        const textWidthProcessed = ensureUnit(textWidth);
-
-        if (xValueProcessed || yValueProcessed2 || textWidthProcessed) {
-          itemMediaQueries2 = generateRwdMediaQueries(itemId, {
-            left: { Desktop: xValue, Tablet: xValue },
-            top: { Desktop: yValue, Tablet: yValue },
-            width: { Desktop: textWidth, Tablet: textWidth },
-          });
+        // 處理對齊方式
+        if (alignment === 'right') {
+          itemClasses += ' items-end text-right';
+        } else {
+          itemClasses += ' items-start text-left';
         }
 
-        itemHtml = `
-          ${itemMediaQueries2 ? `<style>${itemMediaQueries2}</style>` : ''}
-          <div class="${itemClass} ${itemId}" style="${itemMediaQueries2 ? '' : `left: ${xValueProcessed || '0'}px; top: ${yValueProcessed2 || '0'}px; width: ${textWidthProcessed || 'auto'};`}">
-            <div class="title ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
-            <div class="info ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
-          </div>
-        `;
+        // 處理 xValue
+        if (xValue && xValue !== '0') {
+          const { className, customStyle } = convertToTailwindSpacing(xValue);
+          if (className) {
+            itemClasses += ` md:left-${className} lg:left-${className}`;
+          } else if (customStyle) {
+            customStyles += `--left-md: ${customStyle}; --left-lg: ${customStyle}; left: var(--left-md);`;
+          }
+        }
+
+        // 處理 yValue
+        if (yValue && yValue !== '0') {
+          const { className, customStyle } = convertToTailwindSpacing(yValue);
+          if (className) {
+            itemClasses += ` md:top-${className} lg:top-${className}`;
+          } else if (customStyle) {
+            customStyles += `--top-md: ${customStyle}; --top-lg: ${customStyle}; top: var(--top-md);`;
+          }
+        }
+
+        // 處理 textWidth
+        if (textWidth && textWidth !== 'auto') {
+          const { className, customStyle } = convertToTailwindSpacing(textWidth);
+          if (className) {
+            itemClasses += ` md:w-${className} lg:w-${className}`;
+          } else if (customStyle) {
+            customStyles += `--width-md: ${customStyle}; --width-lg: ${customStyle}; width: var(--width-md);`;
+          }
+        } else {
+          // 預設寬度
+          itemClasses += ' w-1/6 max-w-xs';
+        }
         break;
       }
 
       default:
-        itemHtml = `
-          <div class="${itemClass}" style="left: ${xValue}px; top: ${yValue}px;">
-            <div class="title ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
-            <div class="info ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
-          </div>
-        `;
+        // 預設情況
+        itemClasses += ' w-1/6 max-w-xs';
+        if (xValue && xValue !== '0') {
+          const { customStyle } = convertToTailwindSpacing(xValue);
+          if (customStyle) customStyles += `left: ${customStyle}; `;
+        }
+        if (yValue && yValue !== '0') {
+          const { customStyle } = convertToTailwindSpacing(yValue);
+          if (customStyle) customStyles += `top: ${customStyle}; `;
+        }
     }
 
-    return itemHtml;
+    // 處理 CSS 自定義屬性的響應式樣式
+    let responsiveStyle = '';
+    if (customStyles.includes('--')) {
+      responsiveStyle = `
+        <style>
+          .${itemId} {
+            ${customStyles}
+          }
+          @media (min-width: 768px) {
+            .${itemId} {
+              top: var(--top-md, auto);
+              left: var(--left-md, auto);
+              width: var(--width-md, auto);
+            }
+          }
+          @media (min-width: 1280px) {
+            .${itemId} {
+              top: var(--top-lg, auto);
+              left: var(--left-lg, auto);
+              width: var(--width-lg, auto);
+            }
+          }
+        </style>
+      `;
+      customStyles = ''; // 清空，因為已經放在 style 標籤中
+    }
+
+    const styleAttribute = customStyles ? `style="${customStyles}"` : '';
+
+    return `
+      ${responsiveStyle}
+      <div class="${itemClasses} ${itemId}" ${styleAttribute}>
+        <div class="title mb-2 w-full ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
+        <div class="info w-full ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
+      </div>
+    `;
   }).join('');
 };
 
@@ -372,25 +497,28 @@ export default async function decorate(block) {
     // Generate unique class ID for this block instance to avoid style conflicts
     const blockId = `line-info-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
-    // 構建 text-container 的 style：包含 width 和 max-width
-    // 處理 textWidthPercent 單位（如果沒有單位則加上 %）
-    const textWidthValue = ensureUnit(textWidthPercent, '%');
+    // 處理文字容器的寬度和最大寬度
+    let textContainerClasses = '';
+    let textContainerStyles = '';
 
-    // 處理 textMaxWidth 單位（如果沒有單位則加上 px）
-    const textMaxWidthValue = ensureUnit(textMaxWidth);
+    if (textWidthPercent) {
+      const { customStyle } = convertToTailwindSpacing(textWidthPercent);
+      if (customStyle && customStyle.includes('%')) {
+        textContainerStyles += `width: ${customStyle}; `;
+      }
+    }
+
+    if (textMaxWidth) {
+      const { className, customStyle } = convertToTailwindSpacing(textMaxWidth);
+      if (className && !customStyle) {
+        textContainerClasses += ` max-w-${className}`;
+      } else if (customStyle) {
+        textContainerStyles += `max-width: ${customStyle}; `;
+      }
+    }
 
     // 4.5. Get Advanced Styles (pass block for manual parsing)
     const advancedStyles = generateAdvancedStyles(advancedConfig, block);
-
-    // 組合 width 和 max-width
-    const styleProps = [];
-    if (textWidthValue) {
-      styleProps.push(`width: ${textWidthValue}`);
-    }
-    if (textMaxWidthValue) {
-      styleProps.push(`max-width: ${textMaxWidthValue}`);
-    }
-    const textItemsStyle = styleProps.length > 0 ? `style="${styleProps.join(';')};"` : '';
 
     // 5. Generate Text Items HTML using function
     const textItemsHtml = generateTextItemsHtml({
@@ -404,32 +532,75 @@ export default async function decorate(block) {
       assetMobile,
       imgWidth,
       textItemsHtml,
-      textItemsStyle,
+      textContainerClasses,
+      textContainerStyles: textContainerStyles.trim(),
     });
 
-    // 7. Generate RWD Media Queries for container padding
-    const mediaQueryStyles = generateRwdMediaQueries(blockId, {
-      'padding-top': {
-        Desktop: paddingTopDesktop,
-        Tablet: paddingTopTablet,
-        Mobile: paddingTopMobile,
-      },
-      'padding-bottom': {
-        Desktop: paddingBottomDesktop,
-        Tablet: paddingBottomTablet,
-        Mobile: paddingBottomMobile,
-      },
-    });
+    // 7. 生成容器的 Tailwind 響應式類名
+    let containerClasses = `relative w-full max-w-screen-xl mx-auto box-border line-info--style${styleLayout} ${blockId}`;
+    let containerStyles = '';
 
-    // Inline style should only contain non-padding properties
-    const containerStyle = '';
+    // 處理 padding-top
+    const paddingTopClasses = generateResponsiveClasses({
+      Mobile: paddingTopMobile,
+      Tablet: paddingTopTablet,
+      Desktop: paddingTopDesktop,
+    }, 'padding-top');
 
-    // 8. Render with style class and media queries
-    // Padding is controlled via media queries, not inline-style
-    // Note: text-container is now inside line-info-image (via pictureHtml)
+    const paddingTopCustom = generateCustomStyles({
+      Mobile: paddingTopMobile,
+      Tablet: paddingTopTablet,
+      Desktop: paddingTopDesktop,
+    }, 'padding-top');
+
+    // 處理 padding-bottom
+    const paddingBottomClasses = generateResponsiveClasses({
+      Mobile: paddingBottomMobile,
+      Tablet: paddingBottomTablet,
+      Desktop: paddingBottomDesktop,
+    }, 'padding-bottom');
+
+    const paddingBottomCustom = generateCustomStyles({
+      Mobile: paddingBottomMobile,
+      Tablet: paddingBottomTablet,
+      Desktop: paddingBottomDesktop,
+    }, 'padding-bottom');
+
+    // 組合類名
+    if (paddingTopClasses) containerClasses += ` ${paddingTopClasses}`;
+    if (paddingBottomClasses) containerClasses += ` ${paddingBottomClasses}`;
+
+    // 組合自定義樣式
+    containerStyles = `${paddingTopCustom}${paddingBottomCustom}`.trim();
+
+    // 生成響應式 CSS 變數樣式
+    let responsiveContainerStyle = '';
+    if (containerStyles) {
+      responsiveContainerStyle = `
+        <style>
+          .${blockId} {
+            ${containerStyles}
+          }
+          @media (min-width: 768px) {
+            .${blockId} {
+              padding-top: var(--padding-top-md, auto);
+              padding-bottom: var(--padding-bottom-md, auto);
+            }
+          }
+          @media (min-width: 1280px) {
+            .${blockId} {
+              padding-top: var(--padding-top-lg, auto);
+              padding-bottom: var(--padding-bottom-lg, auto);
+            }
+          }
+        </style>
+      `;
+    }
+
+    // 8. Render with Tailwind classes
     block.innerHTML = `
-      ${mediaQueryStyles ? `<style>${mediaQueryStyles}</style>` : ''}
-      <div class="container line-info--style${styleLayout} ${blockId}" style="${containerStyle}">
+      ${responsiveContainerStyle}
+      <div class="${containerClasses}">
         ${pictureHtml}
       </div>
     `;

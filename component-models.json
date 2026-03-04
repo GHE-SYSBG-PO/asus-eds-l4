@@ -4586,26 +4586,18 @@
             ]
           },
           {
-            "component": "container",
-            "label": "border",
-            "name": "borderGroup",
-            "collapsible": true,
-            "fields": [
-              {
-                "component": "text",
-                "label": "width",
-                "name": "dialogBoxBorderWidth",
-                "valueType": "string",
-                "placeholder": "px"
-              },
-              {
-                "component": "text",
-                "label": "color",
-                "name": "dialogBoxBorderColor",
-                "valueType": "string",
-                "placeholder": "#000"
-              }
-            ]
+            "component": "text",
+            "label": "width",
+            "name": "dialogBoxBorderWidth",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "color",
+            "name": "dialogBoxBorderColor",
+            "valueType": "string",
+            "placeholder": "#000"
           },
           {
             "component": "text",
@@ -4615,40 +4607,32 @@
             "placeholder": "#000"
           },
           {
-            "component": "container",
-            "label": "padding",
-            "name": "dialogBoxPaddingGroup",
-            "collapsible": true,
-            "fields": [
-              {
-                "component": "text",
-                "label": "padding left",
-                "name": "dialogBoxPaddingLeft",
-                "valueType": "string",
-                "placeholder": "px"
-              },
-              {
-                "component": "text",
-                "label": "padding top",
-                "name": "dialogBoxPaddingTop",
-                "valueType": "string",
-                "placeholder": "px"
-              },
-              {
-                "component": "text",
-                "label": "padding right",
-                "name": "dialogBoxPaddingRight",
-                "valueType": "string",
-                "placeholder": "px"
-              },
-              {
-                "component": "text",
-                "label": "padding bottom",
-                "name": "dialogBoxPaddingBottom",
-                "valueType": "string",
-                "placeholder": "px"
-              }
-            ]
+            "component": "text",
+            "label": "padding left",
+            "name": "dialogBoxPaddingLeft",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "padding top",
+            "name": "dialogBoxPaddingTop",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "padding right",
+            "name": "dialogBoxPaddingRight",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "padding bottom",
+            "name": "dialogBoxPaddingBottom",
+            "valueType": "string",
+            "placeholder": "px"
           },
           {
             "valueType": "string",
