@@ -1,0 +1,19 @@
+/// Device Large width下限
+/// @group 01-variable
+/// @type Pixel
+$large-lower-bound: 1280px;
+
+/// Device small width上限
+/// @group 01-variable
+/// @type Pixel
+$medium-upper-bound: 1279.5px;
+
+/// Device Medium width下限
+/// @group 01-variable
+/// @type Pixel
+$medium-lower-bound: 731px;
+
+/// Device Small width上限
+/// @group 01-variable
+/// @type Pixel
+$small-upper-bound: 730.5px;
