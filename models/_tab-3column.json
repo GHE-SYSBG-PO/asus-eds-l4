@@ -3,7 +3,7 @@
     {
       "component": "hidden",
       "name": "style",
-      "value": "L4CustomSection-section-tab-3column"
+      "value": "L4CustomSection-tab-3column"
     },
     {
       "...": "../blocks/tab-3column/modelConfig/_style.json#/fields"

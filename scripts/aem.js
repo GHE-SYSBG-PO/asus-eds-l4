@@ -10,8 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-import { loadSectionBlockJs } from './utils.js';
-
 /* eslint-env browser */
 function sampleRUM(checkpoint, data) {
   // eslint-disable-next-line max-len
@@ -674,6 +672,42 @@ async function waitForFirstImage(section) {
     }
   });
 }
+
+/**
+ * Loads and decorates a section block (e.g., container-2cols).
+ * @param {Element} section The section element
+ * @param {string} name The section block name
+ */
+const loadSectionBlock = async (section, name) => {
+  const status = section.dataset.sectionStatus;
+  if (!status || status === 'initialized') {
+    try {
+      loadCSS(`${window.hlx.codeBasePath}/blocks/${name}/${name}.css`);
+      const mod = await import(`${window.hlx.codeBasePath}/blocks/${name}/${name}.js`);
+      if (mod.default) {
+        await mod.default(section);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(`Failed to load section block ${name}`, error);
+    }
+  }
+};
+
+/**
+ * Loads and decorates all column section blocks within the main element.
+ * @param {Element} section Current section
+ * @returns {Promise<void>} A promise that resolves when all column sections are loaded
+ */
+export const loadSectionBlockJs = async (section) => {
+  section.classList.forEach((className) => {
+    if (className.startsWith('L4CustomSection-')) {
+      const sectionName = className.replace('L4CustomSection-', '');
+      // Load section blocks (sections with their own JS/CSS)
+      loadSectionBlock(section, sectionName);
+    }
+  });
+};
 
 /**
  * Loads all blocks in a section.
