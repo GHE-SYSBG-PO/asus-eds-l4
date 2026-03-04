@@ -19,7 +19,6 @@
           "component": "select",
           "label": "radius",
           "name": "dialogBoxRadius",
-          "default": "tl",
           "options": [
             {
               "name": "TL",
@@ -109,7 +108,6 @@
           "component": "select",
           "label": "content alignment (left/center)",
           "name": "dialogBoxContentAlignment",
-          "default": "left",
           "options": [
             {
               "name": "left",

@@ -10,7 +10,6 @@
       "label": "style (layout variant)",
       "name": "styleLayout",
       "valueType": "string",
-      "default": "1",
       "options": [
         {
           "name": "Variant 1 - Text On Left & Right",
@@ -190,7 +189,6 @@
           "component": "select",
           "label": "side (left/right)(DT)",
           "name": "side",
-          "default": "left",
           "multi": false,
           "options": [
             {
@@ -274,7 +272,6 @@
           "component": "select",
           "label": "layout style (left/right)",
           "name": "layoutStyle",
-          "default": "left",
           "multi": false,
           "options": [
             {
@@ -358,7 +355,6 @@
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
-          "default": "left",
           "multi": false,
           "options": [
             {
@@ -470,7 +466,6 @@
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
-          "default": "left",
           "multi": false,
           "options": [
             {
@@ -582,7 +577,6 @@
           "component": "select",
           "label": "alignment (left/right)(DT)",
           "name": "alignment",
-          "default": "left",
           "multi": false,
           "options": [
             {

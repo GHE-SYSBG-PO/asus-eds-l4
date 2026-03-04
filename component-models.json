@@ -3895,7 +3895,6 @@
         "label": "style (layout variant)",
         "name": "styleLayout",
         "valueType": "string",
-        "default": "1",
         "options": [
           {
             "name": "Variant 1 - Text On Left & Right",
@@ -4075,7 +4074,6 @@
             "component": "select",
             "label": "side (left/right)(DT)",
             "name": "side",
-            "default": "left",
             "multi": false,
             "options": [
               {
@@ -4159,7 +4157,6 @@
             "component": "select",
             "label": "layout style (left/right)",
             "name": "layoutStyle",
-            "default": "left",
             "multi": false,
             "options": [
               {
@@ -4243,7 +4240,6 @@
             "component": "select",
             "label": "alignment (left/right)(DT)",
             "name": "alignment",
-            "default": "left",
             "multi": false,
             "options": [
               {
@@ -4355,7 +4351,6 @@
             "component": "select",
             "label": "alignment (left/right)(DT)",
             "name": "alignment",
-            "default": "left",
             "multi": false,
             "options": [
               {
@@ -4467,7 +4462,6 @@
             "component": "select",
             "label": "alignment (left/right)(DT)",
             "name": "alignment",
-            "default": "left",
             "multi": false,
             "options": [
               {
@@ -4572,7 +4566,6 @@
             "component": "select",
             "label": "radius",
             "name": "dialogBoxRadius",
-            "default": "tl",
             "options": [
               {
                 "name": "TL",
@@ -4662,7 +4655,6 @@
             "component": "select",
             "label": "content alignment (left/center)",
             "name": "dialogBoxContentAlignment",
-            "default": "left",
             "options": [
               {
                 "name": "left",
@@ -4692,7 +4684,6 @@
             "label": "font(DT)",
             "name": "titleFontDTselect",
             "valueType": "string",
-            "default": "ro-md-14-sh",
             "options": [
               {
                 "name": "ro-md-14-sh",
@@ -4713,7 +4704,6 @@
             "label": "font(M)",
             "name": "titleFontMselect",
             "valueType": "string",
-            "default": "ro-md-13",
             "options": [
               {
                 "name": "ro-md-13",
@@ -4749,7 +4739,6 @@
             "label": "font(DT)",
             "name": "infoFontDTselect",
             "valueType": "string",
-            "default": "ro-rg-13",
             "options": [
               {
                 "name": "ro-rg-13",
@@ -4770,7 +4759,6 @@
             "label": "font(M)",
             "name": "infoFontMselect",
             "valueType": "string",
-            "default": "ro-rg-12",
             "options": [
               {
                 "name": "ro-rg-12",
