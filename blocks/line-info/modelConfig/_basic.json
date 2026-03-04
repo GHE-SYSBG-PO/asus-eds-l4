@@ -667,6 +667,9 @@
           "multi": false
         }
       ]
+    },
+    {
+      "...": "./_dialogBoxStyle.json#/fields"
     }
   ]
 }
