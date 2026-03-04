@@ -1,7 +1,7 @@
 import {
   getBlockConfigs,
   getFieldValue,
-  isAuthorEnvironment,
+  isAuthorUe,
 } from '../../scripts/utils.js';
 import { loadAnime } from '../../scripts/scripts.js';
 
@@ -164,7 +164,7 @@ export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'effect-media');
     const v = getFieldValue(config);
-    const isUE = isAuthorEnvironment();
+    const isUE = isAuthorUe();
 
     // load anime
     const anime = await loadAnime();

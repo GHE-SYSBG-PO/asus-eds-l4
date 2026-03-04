@@ -1,4 +1,4 @@
-import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue, isAuthorUe } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const DEFAULT_CONFIG = {
@@ -557,10 +557,12 @@ export default async function decorate(block) {
 
         // Listen for window resize
         let resizeTimer;
-        window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(updateVideoSource, 200);
-        });
+        if (!isAuthorUe()) {
+          window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateVideoSource, 200);
+          });
+        }
 
         // Requirements:
         // 1. When pauseAndPlayBtn is configured as true: all videos show play/pause buttons
