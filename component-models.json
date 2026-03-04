@@ -3892,7 +3892,7 @@
       {
         "component": "text",
         "name": "L4TagNestedBlock",
-        "value": "L4--nested-fragment",
+        "value": "L4--nested-block--fragment",
         "hidden": true
       }
     ]
