@@ -82,7 +82,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
     return config;
   }
 
-  let rows = [...block.children];
+  const rows = [...block.children];
 
   if (blockName) {
     try {
