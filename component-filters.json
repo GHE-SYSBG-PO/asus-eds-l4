@@ -33,7 +33,7 @@
   {
     "id": "container-2cols",
     "components": [
-      "container-col"
+      "container-2cols-item"
     ]
   },
   {
@@ -70,7 +70,7 @@
     ]
   },
   {
-    "id": "container-col",
+    "id": "container-2cols-item",
     "components": [
       "text-block",
       "featureitem-block",

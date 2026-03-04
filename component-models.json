@@ -2898,7 +2898,7 @@
     ]
   },
   {
-    "id": "container-col",
+    "id": "container-2cols-item",
     "fields": [
       {
         "component": "container",
