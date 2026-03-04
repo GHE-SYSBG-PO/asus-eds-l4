@@ -30,6 +30,7 @@ const DEFAULT_CONFIG = {
 };
 export default async function decorate(block) {
   try {
+    console.log('block', block)
     // Fetch configuration settings
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'container-2cols-item');
     // Simplify value retrieval
