@@ -24,9 +24,6 @@
           "...": "./modelConfig/_basic.json#/fields"
         },
         {
-          "...": "./modelConfig/_dialogBoxStyle.json#/fields"
-        },
-        {
           "...": "./modelConfig/_advanced.json#/fields"
         },
         {
