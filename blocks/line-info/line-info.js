@@ -278,7 +278,11 @@ const generateTextItemsHtml = ({
     const xValue = item.xValue?.text || '0';
     const yValue = item.yValue?.text || '0';
     const titleRichtext = item.titleRichtext?.html || '<p>Item Title</p>';
-    const infoRichtext = item.infoRichtext?.html || '<p>Description text here...</p>';
+
+    // 根據 styleLayout 讀取對應的 infoRichtext 欄位
+    const infoRichtextFieldName = `infoRichtext${styleLayout}`;
+    const infoRichtext = item[infoRichtextFieldName]?.html || item.infoRichtext?.html || '<p>Description text here...</p>';
+
     const textWidth = item.textWidth?.text || 'auto';
     const alignment = item.alignment?.text || 'left';
     const side = item.side?.text || 'left';

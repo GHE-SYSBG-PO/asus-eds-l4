@@ -232,14 +232,14 @@
         },
         {
           "component": "text",
-          "name": "L4TagMulti-infoRichtext",
-          "value": "L4TagMulti-infoRichtext",
+          "name": "L4TagMulti-infoRichtext1",
+          "value": "L4TagMulti-infoRichtext1",
           "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
-          "name": "infoRichtext",
+          "name": "infoRichtext1",
           "valueType": "string",
           "placeholder": "<p>Description text here...</p>",
           "multi": false
@@ -315,14 +315,14 @@
         },
         {
           "component": "text",
-          "name": "L4TagMulti-infoRichtext",
-          "value": "L4TagMulti-infoRichtext",
+          "name": "L4TagMulti-infoRichtext2",
+          "value": "L4TagMulti-infoRichtext2",
           "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
-          "name": "infoRichtext",
+          "name": "infoRichtext2",
           "valueType": "string",
           "placeholder": "<p>Description text here...</p>",
           "multi": false
@@ -426,14 +426,14 @@
         },
         {
           "component": "text",
-          "name": "L4TagMulti-infoRichtext",
-          "value": "L4TagMulti-infoRichtext",
+          "name": "L4TagMulti-infoRichtext3",
+          "value": "L4TagMulti-infoRichtext3",
           "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
-          "name": "infoRichtext",
+          "name": "infoRichtext3",
           "valueType": "string",
           "placeholder": "<p>Description text here...</p>",
           "multi": false
@@ -537,14 +537,14 @@
         },
         {
           "component": "text",
-          "name": "L4TagMulti-infoRichtext",
-          "value": "L4TagMulti-infoRichtext",
+          "name": "L4TagMulti-infoRichtext4",
+          "value": "L4TagMulti-infoRichtext4",
           "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
-          "name": "infoRichtext",
+          "name": "infoRichtext4",
           "valueType": "string",
           "placeholder": "<p>Description text here...</p>",
           "multi": false
@@ -648,14 +648,14 @@
         },
         {
           "component": "text",
-          "name": "L4TagMulti-infoRichtext",
-          "value": "L4TagMulti-infoRichtext",
+          "name": "L4TagMulti-infoRichtext5",
+          "value": "L4TagMulti-infoRichtext5",
           "hidden": true
         },
         {
           "component": "richtext",
           "label": "info richtext",
-          "name": "infoRichtext",
+          "name": "infoRichtext5",
           "valueType": "string",
           "placeholder": "<p>Description text here...</p>",
           "multi": false
