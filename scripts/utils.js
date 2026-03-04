@@ -13,9 +13,9 @@ export const getAllFieldNames = (fields) => {
   function traverseFields(fieldArray, arr) {
     fieldArray.forEach((field) => {
       // Skip container components with multi=true (multi-row components need special handling)
-      if (field.component === 'container' && field.multi) return;
-
-      if (field.component === 'container' && Array.isArray(field.fields)) {
+      if (field.component === 'container' && field.multi) {
+        arr.push(field.name);
+      } else if (field.component === 'container' && Array.isArray(field.fields)) {
         // Recursively process container fields but exclude the container's own name
         traverseFields(field.fields, arr);
       } else if (field.component !== 'tab' && field.name) {
@@ -93,8 +93,6 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
       const finalFieldOrder = fieldOrder.length > 0 ? fieldOrder : Object.keys(defaults);
 
       if (finalFieldOrder.length > 0) {
-        // Filter out multi-row data marked with L4TagMulti-
-        rows = rows.filter((row) => !row?.innerHTML?.includes('L4TagMulti-'));
         rows.forEach((row, index) => {
           if (index < finalFieldOrder.length) {
             const cell = row.children[0];
