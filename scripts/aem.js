@@ -701,8 +701,8 @@ const loadSectionBlock = async (section, name) => {
  */
 export const loadSectionBlockJs = async (section) => {
   section.classList.forEach((className) => {
-    if (className.startsWith('L4CustomSection-')) {
-      const sectionName = className.replace('L4CustomSection-', '');
+    if (className.startsWith('l4customsection-')) {
+      const sectionName = className.replace('l4customsection-', '');
       // Load section blocks (sections with their own JS/CSS)
       loadSectionBlock(section, sectionName);
     }
