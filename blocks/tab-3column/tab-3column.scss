@@ -263,12 +263,31 @@
     transform: rotate(180deg) translateX(-50px);
   }
 
-  // ── Panel visibility toggle ──────────────────────────────────
   .tab3col-panel {
-    display: none;
+    display: none;     
 
     &.is-active {
       display: flex;
+      opacity: 1;
+    }
+
+    // Keep in layout while fading out (opacity 0 via transition)
+    &.tab3col-panel-fade-out {
+      display: flex;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    // Step 1 of fade-in: in layout but invisible (no transition yet)
+    &.tab3col-panel-fade-in {
+      display: flex;
+      opacity: 0;
+    }
+
+    // Step 2 of fade-in: trigger opacity transition to 1
+    &.tab3col-panel-fade-in.tab3col-panel-visible {
+      opacity: 1;
+      transition: opacity 0.25s ease;
     }
   }
 

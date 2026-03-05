@@ -74,17 +74,51 @@ function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
     >${iconHtml}<span class="tab3col-tab-text block truncate">${tabText || ''}</span></button>`;
 }
 
-function activateTab(index, tabBtns, panels) {
+function activateTab(index, tabBtns, panels, motionEnabled) {
   tabBtns.forEach((btn, i) => {
-    const active = i === index;
-    btn.classList.toggle('is-active', active);
+    btn.classList.toggle('is-active', i === index);
   });
-  panels.forEach((panel, i) => {
-    const active = i === index;
-    panel.classList.toggle('is-active', active);
-    if (active) panel.removeAttribute('hidden');
-    else panel.setAttribute('hidden', '');
-  });
+
+  const current = panels.find((p) => p.classList.contains('is-active'));
+  const next = panels[index];
+  if (current === next) return;
+
+  if (!motionEnabled) {
+    // No animation: display:none keeps non-active panels unloaded
+    if (current) current.classList.remove('is-active');
+    next.classList.add('is-active');
+    return;
+  }
+
+  // With motion:
+  // 1. Fade out current (keep display:flex during animation)
+  // 2. After fade-out done → display:none on current, show next at opacity:0
+  // 3. Fade in next → opacity:1
+  // Non-active panels stay display:none until they are needed → no media preload
+  const doFadeIn = () => {
+    // Step 2: make next visible but transparent (display:flex, opacity:0)
+    next.classList.add('is-active', 'tab3col-panel-fade-in');
+    // Force reflow so browser registers opacity:0 before transitioning
+    // eslint-disable-next-line no-unused-expressions
+    next.offsetHeight;
+    // Step 3: trigger fade-in transition
+    next.classList.add('tab3col-panel-visible');
+    next.addEventListener('transitionend', () => {
+      next.classList.remove('tab3col-panel-fade-in', 'tab3col-panel-visible');
+    }, { once: true });
+  };
+
+  if (current) {
+    // Step 1: fade out — add class that keeps display:flex while animating opacity→0
+    current.classList.add('tab3col-panel-fade-out');
+    current.addEventListener('transitionend', () => {
+      // Back to display:none after fade-out so media inside is no longer rendered
+      current.classList.remove('is-active', 'tab3col-panel-fade-out');
+      doFadeIn();
+    }, { once: true });
+  } else {
+    doFadeIn();
+  }
 }
 
 function isMobile() {
@@ -107,7 +141,7 @@ function createSwiperArrows() {
   return { prev, next };
 }
 
-function setupInteraction(componentEl) {
+function setupInteraction(componentEl, motionEnabled) {
   const tabBtns = [...componentEl.querySelectorAll('.tab3col-tab-btn')];
   const panels = [...componentEl.querySelectorAll('.tab3col-panel')];
   const tabList = componentEl.querySelector('.tab3col-tab-list');
@@ -153,7 +187,7 @@ function setupInteraction(componentEl) {
         },
         on: {
           slideChange(s) {
-            activateTab(s.activeIndex, tabBtns, panels);
+            activateTab(s.activeIndex, tabBtns, panels, motionEnabled);
           },
         },
       });
@@ -166,7 +200,7 @@ function setupInteraction(componentEl) {
   // (lg: has no swiper, tabs are in a vertical list)
   if (window.innerWidth >= 1280) {
     tabBtns.forEach((btn, i) => {
-      btn.addEventListener('click', () => activateTab(i, tabBtns, panels));
+      btn.addEventListener('click', () => activateTab(i, tabBtns, panels, motionEnabled));
     });
     return;
   }
@@ -213,7 +247,7 @@ function setupInteraction(componentEl) {
           if (btn) {
             const idx = tabBtns.indexOf(btn);
             if (idx !== -1) {
-              activateTab(idx, tabBtns, panels);
+              activateTab(idx, tabBtns, panels, motionEnabled);
               s.slideTo(idx, 300);
             }
           }
@@ -343,7 +377,7 @@ async function decoratePage(block) {
             ${tabBtnsHtml}
           </div>
         </div>
-        <div class="tab3col-panels ${motionEnabled ? 'transition-all' : ''} w-full lg:grow"></div>
+        <div class="tab3col-panels w-full lg:grow"></div>
       </div>`);
 
   // ── Move block-level instrumentation to component wrapper ────
@@ -390,7 +424,7 @@ async function decoratePage(block) {
     block.querySelector('.tab-3column-item').classList.add('is-active');
   }
 
-  setupInteraction(block.querySelector('.tab3col-component'));
+  setupInteraction(block.querySelector('.tab3col-component'), motionEnabled);
 
   // update item dom data from block tab-3column-item
   block.addEventListener(
