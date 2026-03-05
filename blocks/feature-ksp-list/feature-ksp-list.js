@@ -107,6 +107,16 @@ function extractValue(div) {
  */
 export default async function decorate(block) {
   try {
+    // Check if we're in Universal Editor authoring mode
+    const isAuthorMode = document.body.classList.contains('adobe-ue-edit') 
+      || window.location.pathname.includes('.html');
+
+    // In author mode, just add CSS classes to existing DOM structure
+    if (isAuthorMode) {
+      block.classList.add('feature-ksp-list', 'feature-ksp-list--author-mode');
+      return;
+    }
+
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'feature-ksp-list');
     const v = getFieldValue(config);
 
@@ -153,7 +163,7 @@ export default async function decorate(block) {
       });
     });
 
-    // Item field count (12 fields per item)
+    // Item field count (12 fields per item based on basic + advanced fields)
     const ITEM_FIELD_COUNT = 12;
     const items = [];
 
