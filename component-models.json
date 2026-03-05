@@ -768,6 +768,7 @@
         "component": "container",
         "label": "tab container",
         "name": "tabContainer",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
