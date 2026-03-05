@@ -86,11 +86,6 @@ const handleMotion = (block) => {
  */
 export default async function decorate(block) {
   try {
-    // Skip decoration in Universal Editor authoring mode
-    if (window.location.pathname.includes('.html')) {
-      return;
-    }
-
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'feature-ksp-list');
     const v = getFieldValue(config);
 
