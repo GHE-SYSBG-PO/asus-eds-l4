@@ -139,7 +139,6 @@
       align-items: flex-start;
       gap: 10px;
       padding: 20px 24px;
-      cursor: pointer;
       transition: background-color 0.3s ease;
       background-color: var(--ksp-bg-default, transparent);
 
@@ -153,11 +152,12 @@
         width: 33.33%;
       }
 
-      &:hover {
+      // Background changes only when CTA is hovered
+      &:has(.feature-ksp-list__cta:hover) {
         background-color: var(--ksp-bg-hover, transparent);
       }
 
-      &:active {
+      &:has(.feature-ksp-list__cta:active) {
         background-color: var(--ksp-bg-pressed, transparent);
       }
     }
@@ -211,6 +211,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      cursor: pointer;
       /* stylelint-disable-next-line property-no-vendor-prefix */
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
