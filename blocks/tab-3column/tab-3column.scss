@@ -7,7 +7,18 @@
 // ============================================================
 // .l4-pdp[data-product="asus"][data-mode="light"],
 // .l4-pdp[data-product="asus"] .section-light {
-  
+//   .tab3col-component {
+//     --tab3col-tab-bg-from-hover: #4379b1;
+//     --tab3col-tab-bg-to-hover: #5977a1;
+//     --tab3col-tab-bg-from-select: #4379b1;
+//     --tab3col-tab-bg-to-select: #5977a1;
+//     --tab3col-tab-border-from-default: #00438a;
+//     --tab3col-tab-border-to-default: #00438a;
+//     --tab3col-tab-border-from-hover: #4379b1;
+//     --tab3col-tab-border-to-hover: #5977a1;
+//     --tab3col-tab-border-from-select: #4379b1;
+//     --tab3col-tab-border-to-select: #5977a1;
+//   }
 // }
 
 // ============================================================
@@ -15,329 +26,183 @@
 // ============================================================
 // .l4-pdp[data-product="asus"][data-mode="dark"],
 // .l4-pdp[data-product="asus"] .section-dark {
-
+//   .tab3col-component {
+//     --tab3col-tab-bg-from-hover: #4379b1;
+//     --tab3col-tab-bg-to-hover: #5977a1;
+//     --tab3col-tab-bg-from-select: #4379b1;
+//     --tab3col-tab-bg-to-select: #5977a1;
+//     --tab3col-tab-border-from-default: #00438a;
+//     --tab3col-tab-border-to-default: #00438a;
+//     --tab3col-tab-border-from-hover: #4379b1;
+//     --tab3col-tab-border-to-hover: #5977a1;
+//     --tab3col-tab-border-from-select: #4379b1;
+//     --tab3col-tab-border-to-select: #5977a1;
+//   }
 // }
 
 // ProArt / ROG / TUF — reserved, fill later
+// (same variable structure as ASUS above)
 // .l4-pdp[data-product="proart"][data-mode="light"],
-// .l4-pdp[data-product="proart"] .section-light {}
-
+// .l4-pdp[data-product="proart"] .section-light {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="proart"][data-mode="dark"],
-// .l4-pdp[data-product="proart"] .section-dark {}
-
+// .l4-pdp[data-product="proart"] .section-dark {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="rog"][data-mode="light"],
-// .l4-pdp[data-product="rog"] .section-light {}
-
+// .l4-pdp[data-product="rog"] .section-light {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="rog"][data-mode="dark"],
-// .l4-pdp[data-product="rog"] .section-dark {}
-
+// .l4-pdp[data-product="rog"] .section-dark {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="tuf"][data-mode="light"],
-// .l4-pdp[data-product="tuf"] .section-light {}
-
+// .l4-pdp[data-product="tuf"] .section-light {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 // .l4-pdp[data-product="tuf"][data-mode="dark"],
-// .l4-pdp[data-product="tuf"] .section-dark {}
+// .l4-pdp[data-product="tuf"] .section-dark {
+//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
+// }
 
 // ============================================================
-// Component wrapper
+// Component
 // ============================================================
-.l4-pdp .tab3col-component {
-  box-sizing: border-box;
-  container-type: inline-size;
-  width:87.5%;
-  gap:var(--tab3col-gap);
-  
-  --tab3col-tab-border-width-default: 1px;
-  --tab3col-tab-border-width-hover: 1px;
-  --tab3col-tab-border-width-select: 1px;
-  --tab3col-gap: 40px;
-  --tab3col-tab-color-default: #4a4a4a;
-  --tab3col-tab-color-hover: #fff;
-  --tab3col-tab-color-select: #fff;
-  --tab3col-tab-border-color-default: #00438a;
-  --tab3col-tab-border-color-hover: #00438a;
-  --tab3col-tab-border-color-select: #00438a;
-  --tab3col-tab-bg-default: transparent;
-  --tab3col-tab-bg-hover: #4379B1;
-  --tab3col-tab-bg-select: #4379B1;
-  --tab3col-tab-bar-bg: #fff;
-  --tab3col-title-color: #181818;
-  --tab3col-info-color: #4a4a4a;
-  --tab3col-arrow-color: #00438a;
-  
-}
+.l4-pdp {
+  // ── CSS variables (not expressible in Tailwind) ─────────────
+  .tab3col-component {
+    --tab3col-gap: 40px;
+    --tab3col-tab-border-width-default: 1px;
+    --tab3col-tab-border-width-hover: 1px;
+    --tab3col-tab-border-width-select: 1px;
+    --tab3col-tab-color-default: #4a4a4a;
+    --tab3col-tab-color-hover: #fff;
+    --tab3col-tab-color-select: #fff;
+    --tab3col-tab-border-color-default: #00438a;
+    --tab3col-tab-border-color-hover: #00438a;
+    --tab3col-tab-border-color-select: #00438a;
+    --tab3col-tab-bg-default: transparent;
+    --tab3col-tab-bg-hover: #4379b1;
+    --tab3col-tab-bg-select: #4379b1;
+    --tab3col-tab-bar-bg: #fff;
+    --tab3col-title-color: #181818;
+    --tab3col-info-color: #4a4a4a;
+    --tab3col-arrow-color: #00438a;
 
-// ============================================================
-// Tab Bar
-// ============================================================
-.l4-pdp .tab3col-tab-bar {
-  display: flex;
-  align-items: center;
-  background: var(--tab3col-tab-bar-bg, transparent);
-}
+    // bg gradient stops — hover & select independent
+    --tab3col-tab-bg-from-hover: #4379b1;
+    --tab3col-tab-bg-to-hover: #4379b1;
+    --tab3col-tab-bg-from-select: #4379b1;
+    --tab3col-tab-bg-to-select: #4379b1;
 
-.l4-pdp .tab3col-tab-list {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+    // border gradient stops per state
+    --tab3col-tab-border-from-default: #00438a;
+    --tab3col-tab-border-to-default: #00438a;
+    --tab3col-tab-border-from-hover: #00438a;
+    --tab3col-tab-border-to-hover: #00438a;
+    --tab3col-tab-border-from-select: #00438a;
+    --tab3col-tab-border-to-select: #00438a;
 
-  &::-webkit-scrollbar {
+    @media (480px <= width <= 730px) {
+      width: 420px;
+    }
+  }
+
+  // ── Tab list: hide scrollbar (not expressible in Tailwind) ──
+  .tab3col-tab-list {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  // ── Tab button: gradient bg + gradient border via ::before ────
+  // Gradient border technique:
+  //   - button itself: border:none, position:relative
+  //   - ::before: absolute inset, gradient background = border visual
+  //     -webkit-mask + mask-composite: exclude → only border area shows
+  .tab3col-tab-btn {
+    position: relative;
+    z-index: 0;
+    border: none;
+    color: var(--tab3col-tab-color-default, inherit);
+    background: var(--tab3col-tab-bg-default, transparent);
+
+    // Gradient border layer
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      padding: var(--tab3col-tab-border-width-default, 1px);
+      background: linear-gradient(270deg, var(--tab3col-tab-border-from-default) 0%, var(--tab3col-tab-border-to-default) 100%);
+mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+mask-composite: exclude;
+    }
+
+    &:hover {
+      color: var(--tab3col-tab-color-hover, inherit);
+      background: linear-gradient(
+        270deg,
+        var(--tab3col-tab-bg-from-hover) 0%,
+        var(--tab3col-tab-bg-to-hover) 100%
+      );
+
+      &::before {
+        padding: var(--tab3col-tab-border-width-hover, 1px);
+        background: linear-gradient(
+          270deg,
+          var(--tab3col-tab-border-from-hover) 0%,
+          var(--tab3col-tab-border-to-hover) 100%
+        );
+      }
+    }
+
+    &.is-active {
+      color: var(--tab3col-tab-color-select, inherit);
+      background: linear-gradient(
+        270deg,
+        var(--tab3col-tab-bg-from-select) 0%,
+        var(--tab3col-tab-bg-to-select) 100%
+      );
+
+      &::before {
+        padding: var(--tab3col-tab-border-width-select, 1px);
+        background: linear-gradient(
+          270deg,
+          var(--tab3col-tab-border-from-select) 0%,
+          var(--tab3col-tab-border-to-select) 100%
+        );
+      }
+    }
+  }
+
+  // ── Arrow button: svg fill ───────────────────────────────────
+  .tab3col-arrow {
+    color: var(--tab3col-arrow-color, inherit);
+
+    svg {
+      fill: currentcolor;
+    }
+  }
+
+  // ── Panel visibility toggle ──────────────────────────────────
+  .tab3col-panel {
     display: none;
-  }
-}
 
-// Tab button
-.l4-pdp .tab3col-tab-btn {
-  display: inline-flex;
-  align-items: center;
-  margin: 0;
-  background: var(--tab3col-tab-bg-default, transparent);
-  color: var(--tab3col-tab-color-default, inherit);
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--tab3col-tab-border-color-default, transparent);
-  margin-bottom:20px;
-  border-radius: 28px;
-  cursor: pointer;
-  white-space: nowrap;
-  font-family: inherit;
-  transition: background 0.25s ease;
-
-  &:hover {
-    background: var(--tab3col-tab-bg-hover, transparent);
-    color: var(--tab3col-tab-color-hover, inherit);
-    border-width: var(--tab3col-tab-border-width-hover, 0);
-    border-color: var(--tab3col-tab-border-color-hover, transparent);
+    &.is-active {
+      display: flex;
+    }
   }
 
-  &.is-active {
-    background: var(--tab3col-tab-bg-select, transparent);
-    color: var(--tab3col-tab-color-select, inherit);
-    border-width: 1px;
-    border-color: var(--tab3col-tab-border-color-select, transparent);
-  }
-}
-
-.l4-pdp .tab3col-tab-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-// Arrow buttons (shown by JS when tab list overflows on mobile)
-.l4-pdp .tab3col-arrow {
-  display: none;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--tab3col-arrow-color, inherit);
-
-  svg {
-    fill: currentcolor;
-  }
-}
-
-// ============================================================
-// Panels
-// ============================================================
-.l4-pdp .tab3col-panels {
-  width: 100%;
-}
-
-.l4-pdp .tab3col-panel {
-  display: none;
-
-  &.is-active {
-    display: flex;
-  }
-}
-
-// Media slot — nested media-block is authored here by AEM editor
-.l4-pdp .tab3col-media-slot {
-  flex: 1;
-  min-width: 0;
-}
-
-.l4-pdp .tab-3column-item{
-  gap:var(--tab3col-gap);
-}
-
-// Text column
-.l4-pdp .tab3col-text-col {
-  flex-shrink: 0;
-  box-sizing: border-box;
-  width: 12.5cqw;
-}
-
-.l4-pdp .tab3col-title {
-  color: var(--tab3col-title-color, inherit);
-  margin: 0 0 12px;
-}
-
-.l4-pdp .tab3col-info {
-  color: var(--tab3col-info-color, inherit);
-  margin: 0;
-}
-
-// ============================================================
-// Desktop (>= 1024px) — 3-column horizontal layout
-//   [tab-bar vertical] | [media-slot flex:1] | [text-col fixed%]
-// ============================================================
-@media (width >= 1024px) {
-  .l4-pdp .tab3col-component {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+  // ── Text colors (var-based) ──────────────────────────────────
+  .tab3col-title {
+    color: var(--tab3col-title-color, inherit);
   }
 
-  .l4-pdp .tab3col-tab-bar {
-    flex-direction: column;
-    align-items: stretch;
-    flex-shrink: 0;
-
-    // no sticky on desktop
-  }
-
-  .l4-pdp .tab3col-tab-list {
-    flex-direction: column;
-    overflow: visible auto;
-    gap: 4px;
-  }
-
-  .l4-pdp .tab3col-tab-btn {
-    width: 100%;
-    justify-content: flex-start;
-    text-align: left;
-  }
-
-  // Arrows always hidden on desktop
-  .l4-pdp .tab3col-arrow {
-    display: none !important;
-  }
-
-  .l4-pdp .tab3col-panels {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .l4-pdp .tab3col-panel.is-active {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-}
-
-// ============================================================
-// Tablet (480px – 1023px) — stacked layout
-//   tab-bar horizontal, sticky top
-//   media-slot + text-col stack vertically (both 100%)
-// ============================================================
-@media (width >= 480px) and (width <= 1023px) {
-  .l4-pdp .tab3col-component {
-    display: block;
-  }
-
-  .l4-pdp .tab3col-tab-bar {
-    flex-direction: row;
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .l4-pdp .tab3col-tab-list {
-    flex-direction: row;
-    padding: 0 8px;
-  }
-
-  // On tablet: icon sits above text (column layout per tab button)
-  .l4-pdp .tab3col-tab-btn {
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 12px;
-  }
-
-  .l4-pdp .tab3col-panel.is-active {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .l4-pdp .tab3col-media-slot {
-    width: 100%;
-  }
-
-  .l4-pdp .tab3col-text-col {
-    width: 100%;
-    padding: 20px 16px;
-  }
-}
-
-// ============================================================
-// Mobile (< 480px) — fully stacked
-//   media-slot 100%, tab width = 12cols
-//   icon above text, each tab max-width 72px
-//   arrows visible when tab list overflows
-// ============================================================
-@media (width <= 479px) {
-  .l4-pdp .tab3col-component {
-    display: block;
-  }
-
-  .l4-pdp .tab3col-tab-bar {
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .l4-pdp .tab3col-tab-list {
-    flex-direction: row;
-    flex: 1;
-    padding: 0 4px;
-  }
-
-  .l4-pdp .tab3col-tab-btn {
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 6px 8px;
-    min-width: 60px;
-    max-width: 72px;
-    flex-shrink: 0;
-  }
-
-  .l4-pdp .tab3col-tab-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  // Show arrows on mobile (JS toggles display)
-  .l4-pdp .tab3col-arrow {
-    display: flex;
-  }
-
-  .l4-pdp .tab3col-panel.is-active {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .l4-pdp .tab3col-media-slot {
-    width: 100%;
-  }
-
-  .l4-pdp .tab3col-text-col {
-    width: 100%;
-    padding: 16px;
+  .tab3col-info {
+    color: var(--tab3col-info-color, inherit);
   }
 }
