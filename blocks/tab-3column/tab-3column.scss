@@ -73,6 +73,8 @@
 .l4-pdp {
   // ── CSS variables (not expressible in Tailwind) ─────────────
   .tab3col-component {
+    container-type: inline-size;
+
     --tab3col-gap: 40px;
     --tab3col-tab-border-width-default: 1px;
     --tab3col-tab-border-width-hover: 1px;
@@ -122,82 +124,99 @@
   //   - button itself: border:none, position:relative
   //   - ::before: absolute inset, gradient background = border visual
   //     -webkit-mask + mask-composite: exclude → only border area shows
-  .tab3col-tab-btn {
-    position: relative;
-    z-index: 0;
-    border: none;
-    color: var(--tab3col-tab-color-default, inherit);
-    background: var(--tab3col-tab-bg-default, transparent);
-
-    // Gradient border layer
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: inherit;
-      padding: var(--tab3col-tab-border-width-default, 1px);
-      background: linear-gradient(
-        270deg,
-        var(--tab3col-tab-border-from-default) 0%,
-        var(--tab3col-tab-border-to-default) 100%
-      );
-      mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      mask-composite: exclude;
+  .tab3col-tab-bar {
+    &.is-scroll{
+      background: var(--tab3col-tab-bar-bg);
     }
 
-    &:hover {
-      color: var(--tab3col-tab-color-hover, inherit);
-      background: linear-gradient(
-        270deg,
-        var(--tab3col-tab-bg-from-hover) 0%,
-        var(--tab3col-tab-bg-to-hover) 100%
-      );
+    .tab3col-tab-btn {
+      position: relative;
+      z-index: 0;
+      border: none;
+      color: var(--tab3col-tab-color-default, inherit);
+      background: var(--tab3col-tab-bg-default, transparent);
 
+      // Gradient border layer
       &::before {
-        padding: var(--tab3col-tab-border-width-hover, 1px);
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        padding: var(--tab3col-tab-border-width-default, 1px);
         background: linear-gradient(
           270deg,
-          var(--tab3col-tab-border-from-hover) 0%,
-          var(--tab3col-tab-border-to-hover) 100%
+          var(--tab3col-tab-border-from-default) 0%,
+          var(--tab3col-tab-border-to-default) 100%
         );
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask-composite: exclude;
       }
-    }
 
-    &.is-active {
-      color: var(--tab3col-tab-color-select, inherit);
-      background: linear-gradient(
-        270deg,
-        var(--tab3col-tab-bg-from-select) 0%,
-        var(--tab3col-tab-bg-to-select) 100%
-      );
-
-      &::before {
-        padding: var(--tab3col-tab-border-width-select, 1px);
+      &:hover {
+        color: var(--tab3col-tab-color-hover, inherit);
         background: linear-gradient(
           270deg,
-          var(--tab3col-tab-border-from-select) 0%,
-          var(--tab3col-tab-border-to-select) 100%
+          var(--tab3col-tab-bg-from-hover) 0%,
+          var(--tab3col-tab-bg-to-hover) 100%
         );
+
+        &::before {
+          padding: var(--tab3col-tab-border-width-hover, 1px);
+          background: linear-gradient(
+            270deg,
+            var(--tab3col-tab-border-from-hover) 0%,
+            var(--tab3col-tab-border-to-hover) 100%
+          );
+        }
+      }
+
+      &.is-active {
+        color: var(--tab3col-tab-color-select, inherit);
+        background: linear-gradient(
+          270deg,
+          var(--tab3col-tab-bg-from-select) 0%,
+          var(--tab3col-tab-bg-to-select) 100%
+        );
+
+        &::before {
+          padding: var(--tab3col-tab-border-width-select, 1px);
+          background: linear-gradient(
+            270deg,
+            var(--tab3col-tab-border-from-select) 0%,
+            var(--tab3col-tab-border-to-select) 100%
+          );
+        }
       }
     }
   }
 
   // ── Mobile Swiper tab navigation ────────────────────────────
-  .swiper-wrapper {
+  // Mobile: each slide takes full container width (slidesPerView: 1)
+  .swiper-wrapper{
+    align-items: center;
+  }
+
+  .tab3col-swiper-slide {
+    display: flex;
+    justify-content: center;
     align-items: center;
 
-    .tab3col-swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    // width is set by swiper (slidesPerView: 1), do NOT override here
+  }
+
+  // ── Tablet Swiper tab navigation ─────────────────────────────
+  // Tablet: each slide is as wide as its button content
+  .tab3col-swiper-slide-tablet {
+    width: auto !important; // swiper sets width inline; !important needed to keep auto
   }
 
   .tab3col-swiper-prev,
-  .tab3col-swiper-next {
+  .tab3col-swiper-next,
+  .tab3col-swiper-prev-tablet,
+  .tab3col-swiper-next-tablet {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,19 +226,18 @@
     position: relative;
     cursor: pointer;
     color: var(--tab3col-arrow-color, inherit);
+    transition: opacity 0.2s ease;
 
     svg {
       fill: currentcolor;
     }
 
-    &.swiper-button-disabled {
-      opacity: 0.3;
+    // disabled: fully invisible (not pointer-events, just opacity 0)
+    &.tab3col-swiper-btn-hidden {
+      opacity: 0;
       pointer-events: none;
     }
-  }
-  
-  .tab3col-swiper-prev,
-  .tab3col-swiper-next {
+
     &::before {
       content: "";
       position: absolute;
@@ -229,7 +247,11 @@
       border-top-left-radius: 16px;
       border-bottom-left-radius: 16px;
       padding: 1px;
-      background: linear-gradient(90deg, var(--tab3col-arrow-color  ) 0%, transparent 70%);
+      background: linear-gradient(
+        90deg,
+        var(--tab3col-arrow-color) 0%,
+        transparent 70%
+      );
       mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
