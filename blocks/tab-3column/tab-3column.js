@@ -5,6 +5,7 @@
 
 import { getBlockConfigs, getProductLine } from '../../scripts/utils.js';
 import { prefixHex } from '../../components/button/button.js';
+import loadSwiper from '../../vendor/swiper/index.js';
 
 const FONTS = {
   asus: {
@@ -99,35 +100,78 @@ function activateTab(index, tabBtns, panels, tabList, motionEnabled) {
   }
 }
 
-function updateArrows(tabList, prevArrow, nextArrow) {
-  if (!tabList || !prevArrow || !nextArrow) return;
-  const { scrollLeft, scrollWidth, clientWidth } = tabList;
-  prevArrow.style.display = scrollLeft > 1 ? '' : 'none';
-  nextArrow.style.display = scrollLeft + clientWidth < scrollWidth - 1 ? '' : 'none';
+function isMobile() {
+  return window.innerWidth < 750;
 }
 
 function setupInteraction(componentEl, motionEnabled) {
   const tabBtns = [...componentEl.querySelectorAll('.tab3col-tab-btn')];
   const panels = [...componentEl.querySelectorAll('.tab3col-panel')];
   const tabList = componentEl.querySelector('.tab3col-tab-list');
-  const prevArrow = componentEl.querySelector('.tab3col-arrow--prev');
-  const nextArrow = componentEl.querySelector('.tab3col-arrow--next');
-
+  // Shared tab activation (used by both swiper and desktop click)
   tabBtns.forEach((btn, i) => {
-    btn.addEventListener('click', () => activateTab(i, tabBtns, panels, tabList, motionEnabled));
+    btn.addEventListener('click', () => {
+      if (!isMobile()) {
+        activateTab(i, tabBtns, panels, tabList, motionEnabled);
+      }
+    });
   });
 
-  if (tabList) {
-    tabList.addEventListener(
-      'scroll',
-      () => updateArrows(tabList, prevArrow, nextArrow),
-      { passive: true },
-    );
-    setTimeout(() => updateArrows(tabList, prevArrow, nextArrow), 150);
-  }
+  // ── Mobile: Swiper ───────────────────────────────────────────
+  // Wrap each tab-btn in a swiper-slide, init swiper with centeredSlides
+  if (isMobile()) {
+    // Wrap tab buttons in swiper structure
+    const swiperWrapper = document.createElement('div');
+    swiperWrapper.className = 'swiper-wrapper';
+    tabBtns.forEach((btn) => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide tab3col-swiper-slide w-full flex items-center';
+      slide.appendChild(btn);
+      swiperWrapper.appendChild(slide);
+    });
 
-  if (prevArrow) prevArrow.addEventListener('click', () => tabList.scrollBy({ left: -160, behavior: 'smooth' }));
-  if (nextArrow) nextArrow.addEventListener('click', () => tabList.scrollBy({ left: 160, behavior: 'smooth' }));
+    // Swiper prev/next buttons
+    const swiperPrev = document.createElement('div');
+    swiperPrev.className = 'tab3col-swiper-prev';
+    swiperPrev.innerHTML = `<svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M6.69394 11.6916C6.28586 12.1028 5.62504 12.1028 5.21696 11.6916L0.305897 6.74443C-0.101857 6.33324 -0.102073 5.6663 0.305897 5.25525L5.21696 0.308047C5.62496 -0.102684 6.28595 -0.102684 6.69394 0.308047C7.10202 0.719213 7.10202 1.38606 6.69394 1.79723L2.5234 6.00035L6.69394 10.2035C7.10202 10.6146 7.10202 11.2805 6.69394 11.6916Z" fill="currentColor"/>
+                            </svg>`;
+
+    const swiperNext = document.createElement('div');
+    swiperNext.className = 'tab3col-swiper-next';
+    swiperNext.innerHTML = `<svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M0.306058 0.308374C0.714136 -0.102791 1.37496 -0.102791 1.78304 0.308374L6.6941 5.25557C7.10186 5.66676 7.10207 6.3337 6.6941 6.74475L1.78304 11.692C1.37504 12.1027 0.714052 12.1027 0.306056 11.692C-0.102021 11.2808 -0.102021 10.6139 0.306056 10.2028L4.4766 5.99965L0.306058 1.79653C-0.102019 1.38537 -0.102019 0.719539 0.306058 0.308374Z" fill="currentColor"/>
+                            </svg>`;
+
+    // Rebuild tab-bar: [prev] [swiper] [next]
+    tabList.innerHTML = '';
+    tabList.classList.add('swiper', 'tab3col-tab-swiper');
+    tabList.appendChild(swiperWrapper);
+
+    const tabBar = componentEl.querySelector('.tab3col-tab-bar');
+    tabBar.insertBefore(swiperPrev, tabList);
+    tabBar.appendChild(swiperNext);
+
+    loadSwiper().then((Swiper) => {
+      const swiper = new Swiper(tabList, {
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: false,
+        navigation: {
+          prevEl: swiperPrev,
+          nextEl: swiperNext,
+        },
+        on: {
+          slideChange(s) {
+            activateTab(s.activeIndex, tabBtns, panels, null, motionEnabled);
+          },
+        },
+      });
+
+      // Sync initial active tab
+      swiper.slideTo(0, 0);
+    });
+  }
 }
 
 export default async function decorate(block) {
@@ -249,15 +293,9 @@ export default async function decorate(block) {
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
       >
         <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] md:flex-row md:w-full md:sticky md:top-0 md:z-10 sm:flex-row sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10">
-          <button class="tab3col-arrow tab3col-arrow--prev hidden shrink-0 items-center justify-center w-[32px] h-[32px] bg-transparent border-none cursor-pointer sm:flex" aria-label="Scroll tabs left" style="display:none">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-          </button>
-          <div class="tab3col-tab-list sm:w-[87.5%] sm:max-w-[480px] md:w-auto md:max-w-none flex md:gap-[20px] items-center sm:justify-center lg:justify-start grow overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] lg:flex-col lg:overflow-y-auto lg:overflow-x-visible md:flex-row  sm:flex-row sm:grow" role="tablist">
+          <div class="tab3col-tab-list sm:w-[87.5%] sm:max-w-[480px] md:w-auto md:max-w-none flex md:gap-[20px] items-center sm:justify-center lg:justify-start grow overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] lg:flex-col lg:overflow-y-auto lg:overflow-x-visible md:flex-row sm:flex-row sm:grow" role="tablist">
             ${tabBtnsHtml}
           </div>
-          <button class="tab3col-arrow tab3col-arrow--next hidden shrink-0 items-center justify-center w-[32px] h-[32px] bg-transparent border-none cursor-pointer sm:flex" aria-label="Scroll tabs right" style="display:none">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-          </button>
         </div>
         <div class="tab3col-panels w-full lg:grow"></div>
       </div>`);

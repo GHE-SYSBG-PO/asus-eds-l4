@@ -131,15 +131,21 @@
 
     // Gradient border layer
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       z-index: -1;
       border-radius: inherit;
       padding: var(--tab3col-tab-border-width-default, 1px);
-      background: linear-gradient(270deg, var(--tab3col-tab-border-from-default) 0%, var(--tab3col-tab-border-to-default) 100%);
-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-mask-composite: exclude;
+      background: linear-gradient(
+        270deg,
+        var(--tab3col-tab-border-from-default) 0%,
+        var(--tab3col-tab-border-to-default) 100%
+      );
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
     }
 
     &:hover {
@@ -179,13 +185,60 @@ mask-composite: exclude;
     }
   }
 
-  // ── Arrow button: svg fill ───────────────────────────────────
-  .tab3col-arrow {
+  // ── Mobile Swiper tab navigation ────────────────────────────
+  .swiper-wrapper {
+    align-items: center;
+
+    .tab3col-swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .tab3col-swiper-prev,
+  .tab3col-swiper-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 80px;
+    height: 70px;
+    position: relative;
+    cursor: pointer;
     color: var(--tab3col-arrow-color, inherit);
 
     svg {
       fill: currentcolor;
     }
+
+    &.swiper-button-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  }
+  
+  .tab3col-swiper-prev,
+  .tab3col-swiper-next {
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 30px;
+      z-index: -1;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+      padding: 1px;
+      background: linear-gradient(90deg, var(--tab3col-arrow-color  ) 0%, transparent 70%);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+  }
+
+  .tab3col-swiper-prev::before {
+    transform: rotate(180deg) translateX(-50px);
   }
 
   // ── Panel visibility toggle ──────────────────────────────────
