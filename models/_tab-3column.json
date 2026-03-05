@@ -9,13 +9,7 @@
       "...": "../blocks/tab-3column/modelConfig/_style.json#/fields"
     },
     {
-      "...": "../blocks/tab-3column/modelConfig/_width-setting.json#/fields"
-    },
-    {
       "...": "../blocks/tab-3column/modelConfig/_tab-style.json#/fields"
-    },
-    {
-      "...": "../blocks/tab-3column/modelConfig/_tab-container.json#/fields"
     },
     {
       "...": "../blocks/tab-3column/modelConfig/_text-style.json#/fields"

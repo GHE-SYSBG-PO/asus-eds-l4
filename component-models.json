@@ -756,14 +756,10 @@
         "valueType": "boolean"
       },
       {
-        "component": "tab",
-        "label": "width setting",
-        "name": "widthSettingTab"
-      },
-      {
         "component": "container",
         "label": "width setting",
         "name": "widthSettingBasic",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
@@ -782,6 +778,28 @@
         ]
       },
       {
+        "component": "container",
+        "label": "tab bar (T/M)",
+        "name": "tabBarBgColorTM",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "bg-color (T)",
+            "name": "tabBarBgColorValueT",
+            "valueType": "string",
+            "description": "Hex value without #, e.g. ffffff"
+          },
+          {
+            "component": "text",
+            "label": "bg-color (M)",
+            "name": "tabBarBgColorValueM",
+            "valueType": "string",
+            "description": "Hex value without #, e.g. ffffff"
+          }
+        ]
+      },
+      {
         "component": "tab",
         "label": "tab style",
         "name": "tabStyleTab"
@@ -794,22 +812,70 @@
       },
       {
         "component": "container",
-        "label": "tab bar bg-color",
-        "name": "tabBarBgColor",
+        "label": "tab container",
+        "name": "tabContainer",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
-            "label": "bg-color",
-            "name": "tabBarBgColorValue",
-            "valueType": "string",
-            "description": "Hex value without #, e.g. ffffff"
+            "label": "border-width default",
+            "name": "tabContainerBorderWidthDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width hover",
+            "name": "tabContainerBorderWidthHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width select",
+            "name": "tabContainerBorderWidthSelect",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color default",
+            "name": "tabContainerBorderColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color hover",
+            "name": "tabContainerBorderColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color select",
+            "name": "tabContainerBorderColorSelect",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color default",
+            "name": "tabContainerBgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color hover",
+            "name": "tabContainerBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color select",
+            "name": "tabContainerBgColorSelect",
+            "valueType": "string"
           }
         ]
       },
       {
         "component": "container",
-        "label": "tab text (Advanced)",
-        "name": "tabTextAdvanced",
+        "label": "tab style (Advanced)",
+        "name": "tabStyleAdvanced",
         "collapsible": true,
         "fields": [
           {
@@ -829,94 +895,28 @@
             "label": "font-color select",
             "name": "tabFontColorSelect",
             "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "tab",
-        "label": "tab container",
-        "name": "tabContainerTab"
-      },
-      {
-        "component": "text",
-        "label": "border-width default",
-        "name": "tabContainerBorderWidthDefault",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-width hover",
-        "name": "tabContainerBorderWidthHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-width select",
-        "name": "tabContainerBorderWidthSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color default",
-        "name": "tabContainerBorderColorDefault",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color hover",
-        "name": "tabContainerBorderColorHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color select",
-        "name": "tabContainerBorderColorSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color default",
-        "name": "tabContainerBgColorDefault",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color hover",
-        "name": "tabContainerBgColorHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color select",
-        "name": "tabContainerBgColorSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "container",
-        "label": "radius (TL/TR/BR/BL)",
-        "name": "tabContainerRadiusContainer",
-        "fields": [
+          },
           {
             "component": "text",
-            "label": "radius TL",
+            "label": "radius (TL)",
             "name": "tabContainerRadiusTL",
             "valueType": "string"
           },
           {
             "component": "text",
-            "label": "radius TR",
+            "label": "radius (TR)",
             "name": "tabContainerRadiusTR",
             "valueType": "string"
           },
           {
             "component": "text",
-            "label": "radius BR",
+            "label": "radius (BR)",
             "name": "tabContainerRadiusBR",
             "valueType": "string"
           },
           {
             "component": "text",
-            "label": "radius BL",
+            "label": "radius (BL)",
             "name": "tabContainerRadiusBL",
             "valueType": "string"
           }
