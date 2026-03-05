@@ -1,0 +1,27 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "text",
+      "label": "title font color",
+      "name": "titleFontColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "sub title font color",
+      "name": "subtitleFontColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "info font color",
+      "name": "infoFontColor",
+      "valueType": "string"
+    }
+  ]
+}

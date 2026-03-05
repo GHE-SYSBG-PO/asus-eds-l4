@@ -1015,6 +1015,83 @@
     ]
   },
   {
+    "id": "feature-accordion",
+    "fields": [
+      {
+        "component": "hidden",
+        "name": "style",
+        "value": "feature-accordion"
+      },
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "select",
+        "label": "CTA visiblity toggle",
+        "name": "ctaVisiblity",
+        "valueType": "string",
+        "placeholder": "The default value is hide",
+        "options": [
+          {
+            "name": "show",
+            "value": "show"
+          },
+          {
+            "name": "hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "text",
+        "name": "ctaText",
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisiblity"
+            },
+            "show"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "hyperlink",
+        "name": "ctaHyperlink",
+        "condition": {
+          "===": [
+            {
+              "var": "ctaVisiblity"
+            },
+            "show"
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "text",
+        "label": "CTA font color",
+        "name": "ctaFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA arrow color",
+        "name": "ctaArrowColor",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "bar-chart",
     "fields": [
       {
@@ -3266,6 +3343,122 @@
         "name": "L4TagNestedBlock",
         "value": "L4--nested-block--effect-media",
         "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "feature-accordion-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "title",
+        "name": "titleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "sub title",
+        "name": "subtitleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "info",
+        "name": "infoRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "media block content",
+        "name": "mediaBlockContent",
+        "placeholder": ""
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "text",
+        "label": "title font color",
+        "name": "titleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "sub title font color",
+        "name": "subtitleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "info font color",
+        "name": "infoFontColor",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "feature-accordion-sub-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "sub item title",
+        "name": "subItemTitleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "sub item sub title",
+        "name": "subItemSubtitleRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "sub item info",
+        "name": "subItemInfoRichtext",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "label": "sub item media block content",
+        "name": "subItemMediaBlockContent",
+        "placeholder": ""
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "text",
+        "label": "sub item title font color",
+        "name": "subItemTitleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "sub item sub title font color",
+        "name": "subItemSubtitleFontColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "sub item info font color",
+        "name": "subItemInfoFontColor",
+        "valueType": "string"
       }
     ]
   },

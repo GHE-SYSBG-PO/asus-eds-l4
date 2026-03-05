@@ -1,0 +1,34 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "richtext",
+      "label": "title",
+      "name": "titleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "sub title",
+      "name": "subtitleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "info",
+      "name": "infoRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "valueType": "string",
+      "label": "media block content",
+      "name": "mediaBlockContent",
+      "placeholder": ""
+    }
+  ]
+}

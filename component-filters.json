@@ -4,6 +4,7 @@
     "components": [
       "section",
       "container-2cols",
+      "feature-accordion",
       "tab-3column"
     ]
   },
@@ -44,6 +45,18 @@
     ]
   },
   {
+    "id": "feature-accordion",
+    "components": [
+      "feature-accordion-item"
+    ]
+  },
+  {
+    "id": "feature-accordion-item",
+    "components": [
+      "feature-accordion-sub-item"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
@@ -78,6 +91,12 @@
       "media-block",
       "btn",
       "fragment"
+    ]
+  },
+  {
+    "id": "feature-accordion-item",
+    "components": [
+      "feature-accordion-sub-item"
     ]
   },
   {
