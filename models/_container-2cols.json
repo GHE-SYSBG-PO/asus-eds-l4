@@ -3,7 +3,7 @@
     {
       "component": "hidden",
       "name": "style",
-      "value": "container-2cols"
+      "value": "L4CustomSection-container-2cols"
     },
     {
       "component": "tab",
@@ -223,6 +223,17 @@
     },
     {
       "...": "../components/colorGroup/_colorGroup.json#/fields"
+    },
+    {
+      "component": "select",
+      "label": "bgColor",
+      "name": "bgColor",
+      "valueType": "string",
+      "options": [
+        { "name": "default", "value": "" },
+        { "name": "Light", "value": "bg-[#fff]" },
+        { "name": "Dark", "value": "bg-[#000]" }
+      ]
     }
   ]
 }

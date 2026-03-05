@@ -189,7 +189,7 @@
       {
         "component": "hidden",
         "name": "style",
-        "value": "container-2cols"
+        "value": "L4CustomSection-container-2cols"
       },
       {
         "component": "tab",
@@ -668,6 +668,304 @@
           {
             "name": "no",
             "value": "no"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "bgColor",
+        "name": "bgColor",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "bg-[#fff]"
+          },
+          {
+            "name": "Dark",
+            "value": "bg-[#000]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tab-3column",
+    "fields": [
+      {
+        "component": "hidden",
+        "name": "style",
+        "value": "L4CustomSection-tab-3column"
+      },
+      {
+        "component": "tab",
+        "label": "layout",
+        "name": "styleTab"
+      },
+      {
+        "component": "boolean",
+        "label": "motion (on/off)",
+        "name": "motionEnabled",
+        "valueType": "boolean"
+      },
+      {
+        "component": "tab",
+        "label": "width setting",
+        "name": "widthSettingTab"
+      },
+      {
+        "component": "container",
+        "label": "width setting",
+        "name": "widthSettingBasic",
+        "fields": [
+          {
+            "component": "text",
+            "label": "tab area (%)",
+            "name": "widthTabArea",
+            "valueType": "string",
+            "description": "Width percentage for tab area column. Media area is auto-calculated."
+          },
+          {
+            "component": "text",
+            "label": "text area (%)",
+            "name": "widthTextArea",
+            "valueType": "string",
+            "description": "Width percentage for text area column."
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "tab style",
+        "name": "tabStyleTab"
+      },
+      {
+        "component": "boolean",
+        "label": "icon (yes/no)",
+        "name": "tabIconEnabled",
+        "valueType": "boolean"
+      },
+      {
+        "component": "container",
+        "label": "tab bar bg-color",
+        "name": "tabBarBgColor",
+        "fields": [
+          {
+            "component": "text",
+            "label": "bg-color",
+            "name": "tabBarBgColorValue",
+            "valueType": "string",
+            "description": "Hex value without #, e.g. ffffff"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "tab text (Advanced)",
+        "name": "tabTextAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "font-color default",
+            "name": "tabFontColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font-color hover",
+            "name": "tabFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font-color select",
+            "name": "tabFontColorSelect",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "tab container",
+        "name": "tabContainerTab"
+      },
+      {
+        "component": "text",
+        "label": "border-width default",
+        "name": "tabContainerBorderWidthDefault",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "border-width hover",
+        "name": "tabContainerBorderWidthHover",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "border-width select",
+        "name": "tabContainerBorderWidthSelect",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "border-color default",
+        "name": "tabContainerBorderColorDefault",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "border-color hover",
+        "name": "tabContainerBorderColorHover",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "border-color select",
+        "name": "tabContainerBorderColorSelect",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bg-color default",
+        "name": "tabContainerBgColorDefault",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bg-color hover",
+        "name": "tabContainerBgColorHover",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bg-color select",
+        "name": "tabContainerBgColorSelect",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "radius (TL/TR/BR/BL)",
+        "name": "tabContainerRadiusContainer",
+        "fields": [
+          {
+            "component": "text",
+            "label": "radius TL",
+            "name": "tabContainerRadiusTL",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TR",
+            "name": "tabContainerRadiusTR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BR",
+            "name": "tabContainerRadiusBR",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BL",
+            "name": "tabContainerRadiusBL",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "text style",
+        "name": "textStyleTab"
+      },
+      {
+        "component": "container",
+        "label": "title (Advanced)",
+        "name": "titleAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font(DTM)",
+            "name": "titleFontDTM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-md-24",
+                "value": "tt-md-24"
+              },
+              {
+                "name": "tt-bd-24",
+                "value": "tt-bd-24"
+              },
+              {
+                "name": "tt-md-28",
+                "value": "tt-md-28"
+              },
+              {
+                "name": "tt-bd-28",
+                "value": "tt-bd-28"
+              },
+              {
+                "name": "tt-md-32",
+                "value": "tt-md-32"
+              },
+              {
+                "name": "tt-bd-32",
+                "value": "tt-bd-32"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font-color",
+            "name": "titleFontColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "info (Advanced)",
+        "name": "infoAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "font-color",
+            "name": "infoFontColor",
+            "valueType": "string"
           }
         ]
       },
@@ -2541,7 +2839,7 @@
     ]
   },
   {
-    "id": "container-col",
+    "id": "container-2cols-item",
     "fields": [
       {
         "component": "container",
@@ -2830,6 +3128,203 @@
             "value": "off"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "effect-media",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Image",
+        "name": "image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imgAlt",
+        "label": "Image Alt",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "bgColor",
+        "label": "Background Color",
+        "valueType": "string"
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "Text (D)",
+        "name": "textContainerD",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthD",
+            "label": "Text max width (D)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
+          {
+            "component": "select",
+            "label": "Text font (D)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-88",
+                "value": "tt-bd-88-lg"
+              },
+              {
+                "name": "tt-bd-92",
+                "value": "tt-bd-92-lg"
+              },
+              {
+                "name": "tt-bd-96",
+                "value": "tt-bd-96-lg"
+              },
+              {
+                "name": "tt-bd-100",
+                "value": "tt-bd-100-lg"
+              },
+              {
+                "name": "tt-bd-104",
+                "value": "tt-bd-104-lg"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text (T)",
+        "name": "textContainerT",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthT",
+            "label": "Text max width (T)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
+          {
+            "component": "select",
+            "label": "Text font (T)",
+            "name": "fontTablet",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-56",
+                "value": "tt-bd-56-md"
+              },
+              {
+                "name": "tt-bd-60",
+                "value": "tt-bd-60-md"
+              },
+              {
+                "name": "tt-bd-64",
+                "value": "tt-bd-64-md"
+              },
+              {
+                "name": "tt-bd-68",
+                "value": "tt-bd-68-md"
+              },
+              {
+                "name": "tt-bd-72",
+                "value": "tt-bd-72-md"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text (T)",
+        "name": "textContainerM",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "textMaxWidthM",
+            "label": "Text max width (M)",
+            "valueType": "string",
+            "placeholder": "Only px"
+          },
+          {
+            "component": "select",
+            "label": "Text font (M)",
+            "name": "fontMobile",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "tt-bd-32",
+                "value": "tt-bd-32-sm"
+              },
+              {
+                "name": "tt-bd-36",
+                "value": "tt-bd-36-sm"
+              },
+              {
+                "name": "tt-bd-40",
+                "value": "tt-bd-40-sm"
+              },
+              {
+                "name": "tt-bd-44",
+                "value": "tt-bd-44-sm"
+              },
+              {
+                "name": "tt-bd-48",
+                "value": "tt-bd-48-sm"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "font color (hex)",
+        "name": "fontColor",
+        "valueType": "string",
+        "placeholder": "NO NEED #"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imgWidthD",
+        "label": "Image width (D)",
+        "value": "",
+        "placeholder": "vw or px, default 100vw"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imgHeightD",
+        "label": "Image height (D)",
+        "value": "",
+        "placeholder": "vh or px, default 100vh"
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--effect-media",
+        "hidden": true
       }
     ]
   },
@@ -3610,7 +4105,7 @@
       {
         "component": "text",
         "name": "L4TagNestedBlock",
-        "value": "L4--nested-fragment",
+        "value": "L4--nested-block--fragment",
         "hidden": true
       }
     ]
@@ -6176,6 +6671,35 @@
         "name": "L4TagNestedBlock",
         "value": "L4--nested-block--space",
         "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "tab-3column-item",
+    "fields": [
+      {
+        "component": "text",
+        "label": "tab text",
+        "name": "tabText",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "icon asset (if icon=yes)",
+        "name": "tabIconAsset",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "label": "title",
+        "name": "tabTitle",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "info",
+        "name": "tabInfo",
+        "valueType": "string"
       }
     ]
   },

@@ -30,8 +30,24 @@
         }
       }
     },
-     {
-      "title": "Feature Accordion(ID:18)",
+    {
+      "title": "Tab 3Column (ID:15)",
+      "id": "tab-3column",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Tab 3Column",
+              "filter": "tab-3column",
+              "model": "tab-3column"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Feature Accordion (ID:18)",
       "id": "feature-accordion",
       "plugins": {
         "xwalk": {
@@ -39,8 +55,8 @@
             "resourceType": "core/franklin/components/section/v1/section",
             "template": {
               "name": "Feature Accordion",
-              "model": "feature-accordion",
-              "filter": "feature-accordion"
+              "filter": "feature-accordion",
+              "model": "feature-accordion"
             }
           }
         }
@@ -78,11 +94,19 @@
         }
       ]
     },
-      {
+    {
+      "id": "tab-3column",
+      "fields": [
+        {
+          "...": "./_tab-3column.json#/fields"        
+        }
+      ]
+    },
+    {
       "id": "feature-accordion",
       "fields": [
         {
-          "...": "./_feature-accordion.json#/fields"
+          "...": "./_feature-accordion.json#/fields"        
         }
       ]
     }
@@ -107,13 +131,20 @@
         "bar-chart",
         "footnote",
         "featureitem-block",
-        "small-cards"
+        "small-cards",
+        "effect-media"
       ]
     },
     {
       "id": "container-2cols",
       "components": [
-        "container-col"
+        "container-2cols-item"
+      ]
+    },
+    {
+      "id": "tab-3column",
+      "components": [
+        "tab-3column-item"
       ]
     },
     {

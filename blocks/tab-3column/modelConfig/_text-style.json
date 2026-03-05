@@ -1,0 +1,69 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "text style",
+      "name": "textStyleTab"
+    },
+    {
+      "component": "container",
+      "label": "title (Advanced)",
+      "name": "titleAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font(DTM)",
+          "name": "titleFontDTM",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "tt-md-24",
+              "value": "tt-md-24"
+            },
+            {
+              "name": "tt-bd-24",
+              "value": "tt-bd-24"
+            },
+            {
+              "name": "tt-md-28",
+              "value": "tt-md-28"
+            },
+            {
+              "name": "tt-bd-28",
+              "value": "tt-bd-28"
+            },
+            {
+              "name": "tt-md-32",
+              "value": "tt-md-32"
+            },
+            {
+              "name": "tt-bd-32",
+              "value": "tt-bd-32"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font-color",
+          "name": "titleFontColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "info (Advanced)",
+      "name": "infoAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "font-color",
+          "name": "infoFontColor",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

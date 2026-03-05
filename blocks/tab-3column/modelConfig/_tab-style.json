@@ -1,0 +1,55 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "tab style",
+      "name": "tabStyleTab"
+    },
+    {
+      "component": "boolean",
+      "label": "icon (yes/no)",
+      "name": "tabIconEnabled",
+      "valueType": "boolean"
+    },
+    {
+      "component": "container",
+      "label": "tab bar bg-color",
+      "name": "tabBarBgColor",
+      "fields": [
+        {
+          "component": "text",
+          "label": "bg-color",
+          "name": "tabBarBgColorValue",
+          "valueType": "string",
+          "description": "Hex value without #, e.g. ffffff"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "tab text (Advanced)",
+      "name": "tabTextAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "font-color default",
+          "name": "tabFontColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "font-color hover",
+          "name": "tabFontColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "font-color select",
+          "name": "tabFontColorSelect",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}
