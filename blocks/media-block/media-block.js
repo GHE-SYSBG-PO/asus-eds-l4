@@ -1,4 +1,4 @@
-import { getBlockConfigs, getFieldValue, isAuthorUe } from '../../scripts/utils.js';
+import { getBlockConfigs, getFieldValue } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const DEFAULT_CONFIG = {
@@ -170,7 +170,7 @@ const getDeviceConfig = (device, v) => {
     };
   } if (device === 'T') {
     return {
-      assets: v('assetsT', 'text') || v('assetsD', 'text') || '',
+      assets: v('assetsT', 'text') || '',
       widthUnit: v('widthT', 'text') || 'auto',
       widthValue: v('widthValueT', 'text') || '',
       heightUnit: v('heightT', 'text') || 'auto',
@@ -184,7 +184,7 @@ const getDeviceConfig = (device, v) => {
   }
   // Mobile
   return {
-    assets: v('assets', 'text') || v('assetsT', 'text') || v('assetsD', 'text') || '',
+    assets: v('assets', 'text') || '',
     widthUnit: v('widthM', 'text') || 'auto',
     widthValue: v('widthValueM', 'text') || '',
     heightUnit: v('heightM', 'text') || 'auto',
@@ -557,12 +557,10 @@ export default async function decorate(block) {
 
         // Listen for window resize
         let resizeTimer;
-        if (!isAuthorUe()) {
-          window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(updateVideoSource, 200);
-          });
-        }
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(updateVideoSource, 200);
+        });
 
         // Requirements:
         // 1. When pauseAndPlayBtn is configured as true: all videos show play/pause buttons

@@ -13,8 +13,8 @@
       "fields": [
         {
           "component": "select",
-          "label": "font(DTM)",
-          "name": "titleFontDTM",
+          "label": "font D",
+          "name": "titleFontD",
           "valueType": "string",
           "options": [
             {
@@ -44,6 +44,62 @@
           ]
         },
         {
+          "component": "select",
+          "label": "font T",
+          "name": "titleFontT",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "tt-md-24",
+              "value": "tt-md-24"
+            },
+            {
+              "name": "tt-bd-24",
+              "value": "tt-bd-24"
+            },
+            {
+              "name": "tt-md-28",
+              "value": "tt-md-28"
+            },
+            {
+              "name": "tt-bd-28",
+              "value": "tt-bd-28"
+            },
+            {
+              "name": "tt-md-32",
+              "value": "tt-md-32"
+            },
+            {
+              "name": "tt-bd-32",
+              "value": "tt-bd-32"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font M",
+          "name": "titleFontM",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "tt-md-24",
+              "value": "tt-md-24"
+            },
+            {
+              "name": "tt-bd-24",
+              "value": "tt-bd-24"
+            },
+            {
+              "name": "tt-md-28",
+              "value": "tt-md-28"
+            },
+            {
+              "name": "tt-bd-28",
+              "value": "tt-bd-28"
+            }
+          ]
+        },
+        {
           "component": "text",
           "label": "font-color",
           "name": "titleFontColor",
@@ -57,6 +113,66 @@
       "name": "infoAdvanced",
       "collapsible": true,
       "fields": [
+        {
+          "component": "select",
+          "label": "font D",
+          "name": "infoFontD",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-rg-14",
+              "value": "ro-rg-14"
+            },
+            {
+              "name": "ro-rg-16",
+              "value": "ro-rg-16"
+            },
+            {
+              "name": "ro-rg-18",
+              "value": "ro-rg-18"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font T",
+          "name": "infoFontT",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-rg-14",
+              "value": "ro-rg-14"
+            },
+            {
+              "name": "ro-rg-16",
+              "value": "ro-rg-16"
+            },
+            {
+              "name": "ro-rg-18",
+              "value": "ro-rg-18"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font M",
+          "name": "infoFontM",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-rg-12",
+              "value": "ro-rg-12"
+            },
+            {
+              "name": "ro-rg-14",
+              "value": "ro-rg-14"
+            },
+            {
+              "name": "ro-rg-16",
+              "value": "ro-rg-16"
+            }
+          ]
+        },
         {
           "component": "text",
           "label": "font-color",

@@ -1,7 +1,10 @@
 import { decorateBlock, loadBlock } from './aem.js';
 
-export function isAuthorUe() {
-  return window?.top?.location?.href?.includes('@asustek/aem/universal-editor');
+export function isAuthorEnvironment() {
+  if (window?.location?.origin?.includes('author')) {
+    return true;
+  }
+  return false;
 }
 
 // Recursively collect all field names, excluding container component name values
@@ -100,7 +103,7 @@ export const getBlockConfigs = async (block, defaults = {}, blockName = '') => {
               // Extract value from cell or use default
               let value = cell?.textContent.trim() || (config[fieldName] || '');
               let html = '';
-              if (isAuthorUe()) {
+              if (isAuthorEnvironment()) {
                 html = cell?.innerHTML.trim() || (config[fieldName] || '');
               } else {
                 html = row?.innerHTML.trim() || (config[fieldName] || '');
