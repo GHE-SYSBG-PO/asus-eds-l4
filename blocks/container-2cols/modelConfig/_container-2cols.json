@@ -222,7 +222,18 @@
       ]
     },
     {
-      "...": "../components/colorGroup/_colorGroup.json#/fields"
+      "...": "../../../components/colorGroup/_colorGroup.json#/fields"
+    },
+    {
+      "component": "select",
+      "label": "bgColor",
+      "name": "bgColor",
+      "valueType": "string",
+      "options": [
+        { "name": "default", "value": "" },
+        { "name": "Light", "value": "bg-[#fff]" },
+        { "name": "Dark", "value": "bg-[#000]" }
+      ]
     }
   ]
 }
