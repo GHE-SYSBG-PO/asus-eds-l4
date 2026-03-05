@@ -86,6 +86,11 @@ const handleMotion = (block) => {
  */
 export default async function decorate(block) {
   try {
+    // Skip decoration in Universal Editor authoring mode
+    if (window.location.pathname.includes('.html')) {
+      return;
+    }
+
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'feature-ksp-list');
     const v = getFieldValue(config);
 
@@ -93,6 +98,14 @@ export default async function decorate(block) {
     // First 9 divs are layout config, rest are items
     const LAYOUT_FIELDS_COUNT = 9;
     const allRows = Array.from(block.children);
+
+    // Guard against missing children
+    if (!allRows || allRows.length <= LAYOUT_FIELDS_COUNT) {
+      // eslint-disable-next-line no-console
+      console.warn('feature-ksp-list: Not enough rows for items');
+      return;
+    }
+
     const itemRows = allRows.slice(LAYOUT_FIELDS_COUNT);
 
     const items = itemRows.map((row) => {
