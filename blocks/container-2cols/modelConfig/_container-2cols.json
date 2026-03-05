@@ -222,7 +222,7 @@
       ]
     },
     {
-      "...": "../components/colorGroup/_colorGroup.json#/fields"
+      "...": "../../../components/colorGroup/_colorGroup.json#/fields"
     },
     {
       "component": "select",
