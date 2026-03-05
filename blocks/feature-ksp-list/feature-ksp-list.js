@@ -82,43 +82,47 @@ const handleMotion = (block) => {
 };
 
 /**
- * Extract value from a div element (similar to small-cards approach)
- */
-function extractValue(div) {
-  // If it contains picture → extract image URL
-  const img = div.querySelector('img');
-  if (img) {
-    return img.getAttribute('src') || '';
-  }
-
-  // If it contains <p>
-  const p = div.querySelector(':scope > p');
-  if (p) {
-    return p.textContent.trim();
-  }
-
-  // Fallback: direct text
-  const text = div.textContent.trim();
-  return text || '';
-}
-
-/**
  * Main decorate function
  */
 export default async function decorate(block) {
   try {
-    // Check if we're in Universal Editor authoring mode
-    const isAuthorMode = document.body.classList.contains('adobe-ue-edit') 
-      || window.location.pathname.includes('.html');
-
-    // In author mode, just add CSS classes to existing DOM structure
-    if (isAuthorMode) {
-      block.classList.add('feature-ksp-list', 'feature-ksp-list--author-mode');
-      return;
-    }
-
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'feature-ksp-list');
     const v = getFieldValue(config);
+
+    // Parse items directly from block DOM
+    // First 9 divs are layout config, rest are items
+    const LAYOUT_FIELDS_COUNT = 9;
+    const allRows = Array.from(block.children);
+    const itemRows = allRows.slice(LAYOUT_FIELDS_COUNT);
+
+    const items = itemRows.map((row) => {
+      const cells = Array.from(row.children);
+      const getValue = (index) => {
+        const cell = cells[index];
+        if (!cell) return '';
+        // Check for image
+        const img = cell.querySelector('img');
+        if (img) return img.src;
+        // Get text content
+        const p = cell.querySelector('p');
+        return p ? p.textContent.trim() : cell.textContent.trim();
+      };
+
+      return {
+        asset: getValue(0),
+        title: getValue(1),
+        info: getValue(2),
+        ctaText: getValue(3),
+        ctaSectionId: getValue(4),
+        titleFont: getValue(5),
+        titleFontColor: getValue(6),
+        infoFont: getValue(7),
+        infoFontColor: getValue(8),
+        ctaFont: getValue(9),
+        ctaFontColor: getValue(10),
+        ctaIconAsset: getValue(11),
+      };
+    });
 
     // Detect product line from DOM using utility functions
     const productLine = getProductLine();
@@ -145,62 +149,20 @@ export default async function decorate(block) {
     const defaultInfoFont = DEFAULT_CONFIG.infoFont[productLine] || 'ro-rg-12';
     const defaultCtaFont = DEFAULT_CONFIG.ctaFont[productLine] || 'ro-md-16-sh';
 
-    // Parse items from block DOM (similar to small-cards)
-    const LAYOUT_FIELDS_COUNT = 9;
-    const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
-    const flatValues = [];
-
-    fieldGroups.forEach((group, index) => {
-      if (index < LAYOUT_FIELDS_COUNT) {
-        // Skip layout config rows
-        return;
-      }
-
-      // Extract item values from remaining rows
-      Array.from(group.children).forEach((child) => {
-        const value = extractValue(child);
-        flatValues.push(value);
-      });
-    });
-
-    // Item field count (12 fields per item based on basic + advanced fields)
-    const ITEM_FIELD_COUNT = 12;
-    const items = [];
-
-    for (let i = 0; i < flatValues.length; i += ITEM_FIELD_COUNT) {
-      const chunk = flatValues.slice(i, i + ITEM_FIELD_COUNT);
-      if (chunk.length === ITEM_FIELD_COUNT) {
-        items.push({
-          asset: chunk[0] || '',
-          title: chunk[1] || '',
-          info: chunk[2] || '',
-          ctaText: chunk[3] || '',
-          ctaSectionId: chunk[4] || '',
-          titleFont: chunk[5] || '',
-          titleFontColor: chunk[6] || '',
-          infoFont: chunk[7] || '',
-          infoFontColor: chunk[8] || '',
-          ctaFont: chunk[9] || '',
-          ctaFontColor: chunk[10] || '',
-          ctaIconAsset: chunk[11] || '',
-        });
-      }
-    }
-
     // Build items HTML
     const itemsHtml = items.map((item, index) => {
-      const asset = item.asset;
-      const title = item.title;
-      const info = item.info;
-      const ctaText = item.ctaText;
-      const ctaSectionId = item.ctaSectionId;
+      const asset = item.asset || '';
+      const title = item.title || '';
+      const info = item.info || '';
+      const ctaText = item.ctaText || '';
+      const ctaSectionId = item.ctaSectionId || '';
       const titleFont = item.titleFont || defaultTitleFont;
-      const titleFontColor = item.titleFontColor;
+      const titleFontColor = item.titleFontColor || '';
       const infoFont = item.infoFont || defaultInfoFont;
-      const infoFontColor = item.infoFontColor;
+      const infoFontColor = item.infoFontColor || '';
       const ctaFont = item.ctaFont || defaultCtaFont;
-      const ctaFontColor = item.ctaFontColor;
-      const ctaIconAsset = item.ctaIconAsset;
+      const ctaFontColor = item.ctaFontColor || '';
+      const ctaIconAsset = item.ctaIconAsset || '';
 
       const titleStyle = titleFontColor ? `color: ${prefixHex(titleFontColor)};` : '';
       const infoStyle = infoFontColor ? `color: ${prefixHex(infoFontColor)};` : '';
