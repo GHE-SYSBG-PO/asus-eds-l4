@@ -309,6 +309,9 @@ export default function decorate(block) {
     if (config.colorgroup) {
       block.classList.add(config.colorgroup);
     }
+    if (config.bgcolor) {
+      block.classList.add(config.bgcolor);
+    }
     block.classList.add('grid', 'grid-cols-12');
     block.append(col1, col2);
   } catch (error) {

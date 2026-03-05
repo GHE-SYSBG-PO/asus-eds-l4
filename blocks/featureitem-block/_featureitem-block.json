@@ -40,7 +40,7 @@
           "...": "./modelConfig/_layout.json#/fields"
         },
         {
-          "...": "../../commonModel/_colorGroup.json#/fields"
+          "...": "../../components/colorGroup/_colorGroup.json#/fields"
         }
       ]
     },

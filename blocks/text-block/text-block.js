@@ -6,6 +6,7 @@ import {
   handleMotion,
   getProductLine,
 } from '../../scripts/utils.js';
+import { buildButtonHtml } from '../../components/button/button.js';
 
 const FONTS = {
   asus: {
@@ -195,11 +196,21 @@ export default async function decorate(block) {
       </div>
     `;
 
+    const ctaLink = `
+      <a href="${v('ctaHyperlink')}" class="text-block-cta ${v('ctaFontD')} ${v('ctaFontT')} ${v('ctaFontM')}" ${ctaFontColor} target="_blank">
+        ${v('ctaText')}
+      </a>
+    `;
+    let catButton = '';
+    if (v('ctaLinkType') === 'button' && v('ctaHyperlink')) {
+      catButton = buildButtonHtml(v).replace(
+        /<a/g,
+        `<a onclick="window.open('${v('ctaHyperlink')}', '_blank')"`,
+      );
+    }
     const cta = `
       <div class='${v('ctaVisible') === 'hide' ? '' : 'mt-[16px]'} break-all ${dBlockAlignment} ${tBlockAlignment} ${mBlockAlignment}'>
-        <a href="${v('ctaHyperlink')}" class="text-block-cta ${v('ctaFontD')} ${v('ctaFontT')} ${v('ctaFontM')}" ${ctaFontColor} target="_blank">
-            ${v('ctaText')}
-          </a>
+        ${v('ctaLinkType') === 'text-link' ? ctaLink : v('ctaLinkType') === 'button' ? catButton : ''}
       </div>
     `;
 

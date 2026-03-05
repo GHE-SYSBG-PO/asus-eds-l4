@@ -1,47 +1,33 @@
-.feature-icon-nested {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
+.l4-pdp {
+  &[data-product="asus"],
+  &[data-product="proart"],
+  &[data-product="rog"],
+  &[data-product="tuf"] {
+    &[data-mode="light"],
+    .section-light {
+      --featureitem-block-top-text-color: #4D4D4D;
+      --featureitem-block-highlight-text-color: #181818;
+      --featureitem-block-bottom-text-color: #4D4D4D;
+    }
 
-  .feature-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 240px; /* 可改 */
-    box-sizing: border-box;
-  }
-
-  /* icon */
-  .icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 8px;
-  }
-
-  /* sub text */
-  .subtext {
-    font-size: 14px;
-    opacity: 0.7;
-  }
-  
-  /* 1. 只有大字 */
-  &.align-text-top {
-    .feature-item {
-      align-items: flex-start;
+    &[data-mode="dark"],
+    .section-dark {
+      --featureitem-block-top-text-color: #DCDCDC;
+      --featureitem-block-highlight-text-color: #FFF;
+      --featureitem-block-bottom-text-color: #DCDCDC;
     }
   }
 
-  /* 2. icon + 大字 */
-  &.align-baseline {
-    .feature-item {
-      align-items: baseline;
-    }
+  .featureitem-block-top-text {
+    color: var(--featureitem-block-top-text-color);
   }
-  
-  /* 3. 只有 icon */
-  &.align-icon-middle {
-    .feature-item {
-      align-items: center;
-    }
+
+  .featureitem-block-highlight-text {
+    color: var(--featureitem-block-highlight-text-color);
+  }
+
+  .featureitem-block-bottom-text {
+    color: var(--featureitem-block-bottom-text-color);
   }
 }
+

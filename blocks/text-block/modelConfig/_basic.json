@@ -50,9 +50,10 @@
       ]
     },
     {
-      "component": "text",
-      "label": "CTA text",
-      "name": "ctaText",
+      "component": "aem-content",
+      "label": "CTA hyperlink (external)",
+      "name": "ctaHyperlink",
+      "multi": false,
       "valueType": "string"
     },
     {

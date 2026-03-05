@@ -3,7 +3,8 @@
     "id": "main",
     "components": [
       "section",
-      "container-2cols"
+      "container-2cols",
+      "tab-3column"
     ]
   },
   {
@@ -26,13 +27,20 @@
       "footnote",
       "featureitem-block",
       "feature-ksp-list",
-      "small-cards"
+      "small-cards",
+      "effect-media"
     ]
   },
   {
     "id": "container-2cols",
     "components": [
-      "container-col"
+      "container-2cols-item"
+    ]
+  },
+  {
+    "id": "tab-3column",
+    "components": [
+      "tab-3column-item"
     ]
   },
   {
@@ -63,12 +71,13 @@
     ]
   },
   {
-    "id": "container-col",
+    "id": "container-2cols-item",
     "components": [
       "text-block",
       "featureitem-block",
       "media-block",
-      "btn"
+      "btn",
+      "fragment"
     ]
   },
   {
@@ -93,6 +102,12 @@
     "id": "small-cards",
     "components": [
       "small-card"
+    ]
+  },
+  {
+    "id": "tab-3column-item",
+    "components": [
+      "media-block"
     ]
   }
 ]

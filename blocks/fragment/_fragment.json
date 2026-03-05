@@ -24,6 +24,12 @@
           "component": "aem-content",
           "name": "reference",
           "label": "Reference"
+        },
+        {
+          "component": "text",
+          "name": "L4TagNestedBlock",
+          "value": "L4--nested-block--fragment",
+          "hidden": true
         }
       ]
     }
