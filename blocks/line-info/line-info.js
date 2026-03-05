@@ -154,6 +154,73 @@ const generateCustomStyles = (properties, propertyType) => {
 };
 
 /**
+ * 根據 styleLayout 獲取圖片預設類名
+ * @param {string|number} styleLayout - 樣式佈局 (1-5)
+ * @returns {Object} 包含響應式圖片類名的物件
+ */
+const getImageDefaultClasses = (styleLayout) => {
+  const style = parseInt(styleLayout, 10);
+
+  // 預設類名架構：根據 styleLayout 和響應式斷點設置
+  const imageClassMap = {
+    1: {
+      // Style 1: Text On Left & Right
+      sm: 'w-full', // Mobile: 全寬
+      md: 'w-10/12', // Tablet: 10/12 寬度
+      lg: 'w-8/12', // Desktop: 8/12 寬度
+      base: 'max-w-4xl', // 基礎最大寬度限制
+    },
+    2: {
+      // Style 2: Text On Left / Right Sides
+      sm: 'w-full', // Mobile: 全寬
+      md: 'w-10/12', // Tablet: 10/12 寬度
+      lg: 'w-8/12', // Desktop: 8/12 寬度
+      base: 'max-w-4xl', // 基礎最大寬度限制
+    },
+    3: {
+      // Style 3: Text Below
+      sm: 'w-full', // Mobile: 全寬
+      md: 'w-full', // Tablet: 全寬
+      lg: 'w-full', // Desktop: 全寬
+      base: 'max-w-6xl', // 基礎最大寬度限制
+    },
+    4: {
+      // Style 4: Freeform
+      sm: 'w-full', // Mobile: 全寬
+      md: 'w-full', // Tablet: 全寬
+      lg: 'w-full', // Desktop: 全寬
+      base: 'max-w-6xl', // 基礎最大寬度限制
+    },
+    5: {
+      // Style 5: Freeform Dialog Box
+      sm: 'w-full', // Mobile: 全寬
+      md: 'w-full', // Tablet: 全寬
+      lg: 'w-full', // Desktop: 全寬
+      base: 'max-w-6xl', // 基礎最大寬度限制
+    },
+  };
+
+  // 獲取對應的類名配置，如果找不到則使用預設值
+  const config = imageClassMap[style] || imageClassMap[1];
+
+  // 組合響應式類名
+  const responsiveClasses = [
+    config.sm, // Mobile (預設)
+    `md:${config.md}`, // Tablet
+    `lg:${config.lg}`, // Desktop
+    config.base, // 基礎類名
+  ].join(' ');
+
+  return {
+    responsive: responsiveClasses,
+    mobile: config.sm,
+    tablet: config.md,
+    desktop: config.lg,
+    base: config.base,
+  };
+};
+
+/**
  * 生成圖片 HTML 結構
  * @param {Object} params - 參數物件
  * @param {string} params.assetDesktop - 桌面版圖片路徑
@@ -161,8 +228,7 @@ const generateCustomStyles = (properties, propertyType) => {
  * @param {string} params.assetMobile - 手機版圖片路徑
  * @param {string} params.imgWidth - 圖片寬度
  * @param {string} params.textItemsHtml - 文字項目 HTML
- * @param {string} params.textContainerClasses - 文字容器 Tailwind 類名
- * @param {string} params.textContainerStyles - 文字容器自定義樣式
+ * @param {string|number} params.styleLayout - 樣式佈局
  * @returns {string} 圖片區塊 HTML
  */
 const generatePictureHtml = ({
@@ -171,13 +237,15 @@ const generatePictureHtml = ({
   assetMobile,
   imgWidth,
   textItemsHtml,
-  textContainerClasses,
-  textContainerStyles,
+  styleLayout,
 }) => {
   // RWD breakpoints: Mobile (≤730px), Tablet (731px-1279px), Desktop (≥1280px)
   const mobileSource = assetMobile ? `<source media="(max-width: 730px)" srcset="${assetMobile}">` : '';
   const tabletSource = assetTablet ? `<source media="(min-width: 731px) and (max-width: 1279px)" srcset="${assetTablet}">` : '';
   const defaultImgSrc = assetDesktop || assetTablet || assetMobile || '';
+
+  // 獲取圖片預設類名
+  const defaultClasses = getImageDefaultClasses(styleLayout);
 
   // 處理圖片寬度 - 轉換為 Tailwind 或自定義樣式
   let imgWidthClass = '';
@@ -192,18 +260,20 @@ const generatePictureHtml = ({
     }
   }
 
-  const imgClasses = `block w-full h-auto mx-auto ${imgWidthClass}`.trim();
+  // 組合最終的圖片類名：預設響應式類名 + 自定義寬度類名（如果有）
+  const finalImgClasses = imgWidthClass
+    ? `block h-auto mx-auto ${imgWidthClass}`
+    : `block h-auto mx-auto ${defaultClasses.responsive}`;
 
   return `
-    <div class="block relative left-1/2 transform -translate-x-1/2" ${imgWidthStyle ? `style="${imgWidthStyle}"` : ''}>
+    <div class="block relative left-1/2 transform -translate-x-1/2" 
+      ${imgWidthStyle ? `style="${imgWidthStyle}"` : `class="${finalImgClasses}"`}>
       <picture>
         ${mobileSource}
         ${tabletSource}
-        <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy" class="${imgClasses}">
+        <img src="${defaultImgSrc}" alt="Line Info Product Image" loading="lazy">
       </picture>
-      <div class="absolute top-0 left-0 w-full ${textContainerClasses}" ${textContainerStyles ? `style="${textContainerStyles}"` : ''}>
-        ${textItemsHtml}
-      </div>
+      ${textItemsHtml}
     </div>
   `;
 };
@@ -261,10 +331,11 @@ const generateAdvancedStyles = (config) => {
  * @param {string|number} params.styleLayout - 樣式佈局
  * @param {string} params.blockId - 區塊唯一識別碼
  * @param {Object} params.advancedStyles - Advanced 樣式設置
+ * @param {string} params.textWidthPercent - 文字容器寬度百分比（style1和style2使用）
  * @returns {string} 文字項目 HTML
  */
 const generateTextItemsHtml = ({
-  textItems, styleLayout, blockId, advancedStyles,
+  textItems, styleLayout, blockId, advancedStyles, textWidthPercent,
 }) => {
   if (textItems.length === 0) {
     return '';
@@ -287,6 +358,7 @@ const generateTextItemsHtml = ({
     const alignment = item.alignment?.text || 'left';
     const side = item.side?.text || 'left';
     const layoutStyle = item.layoutStyle?.text || 'left';
+    let responsiveStyle = '';
 
     // eslint-disable-next-line no-console
     console.log(`Item ${index} extracted values:`, {
@@ -312,18 +384,18 @@ const generateTextItemsHtml = ({
         // Style 1: Text On Left & Right (yValue is DT - Desktop/Tablet only)
         // Style 2: Text On Left / Right Sides (yValue is DT)
 
-        if (styleLayout === '1') {
+        if (styleLayout === 1) {
           // Style 1: side-based positioning
           if (side === 'right') {
-            itemClasses += ' lg:-right-5 items-end text-right';
+            itemClasses += ' lg:-right-5 items-end text-left translate-x-full';
           } else {
-            itemClasses += ' lg:-left-5 items-start text-left';
+            itemClasses += ' lg:-left-5 items-start text-right -translate-x-full';
           }
         } else if (layoutStyle === 'right') {
           // Style 2: layout-based positioning
-          itemClasses += ' lg:-right-5 items-end text-right';
+          itemClasses += ' lg:-right-5 items-end text-left translate-x-full';
         } else {
-          itemClasses += ' lg:-left-5 items-start text-left';
+          itemClasses += ' lg:-left-5 items-start text-right -translate-x-full';
         }
 
         // 處理 yValue 的響應式定位
@@ -337,8 +409,39 @@ const generateTextItemsHtml = ({
           }
         }
 
+        // 在 style1 和 style2 中使用 textWidthPercent 而不是個別的 textWidth
+        const widthToUse = textWidthPercent || textWidth;
+        if (widthToUse && widthToUse !== 'auto') {
+          const { className, customStyle } = convertToTailwindSpacing(widthToUse);
+          if (className) {
+            // Mobile: 使用預設，Tablet/Desktop: 使用指定值
+            itemClasses += ` md:w-${className} lg:w-${className}`;
+          } else if (customStyle) {
+            customStyles += `--width-md: ${customStyle}; --width-lg: ${customStyle};`;
+          }
+        }
+
         // 預設寬度設定
-        itemClasses += ' w-[16.6%] max-w-[276px] -translate-x-full';
+        itemClasses += ' w-[16.6%] max-w-[276px] ';
+
+        if (customStyles.includes('--')) {
+          responsiveStyle = `
+            <style>
+              @media (min-width: 768px) {
+                .${itemId} {
+                  top: var(--top-md, auto) !important; 
+                  width: var(--width-md, auto) !important;
+                }
+              }
+              @media (min-width: 1280px) {
+                .${itemId} {
+                  top: var(--top-lg, auto) !important; 
+                  width: var(--width-lg, auto) !important;
+                }
+              }
+            </style>
+          `;
+        }
         break;
       }
 
@@ -405,29 +508,6 @@ const generateTextItemsHtml = ({
         }
     }
 
-    // 處理 CSS 自定義屬性的響應式樣式
-    let responsiveStyle = '';
-    if (customStyles.includes('--')) {
-      responsiveStyle = `
-        <style>
-          @media (min-width: 768px) {
-            .${itemId} {
-              top: var(--top-md, auto) !important;
-              left: var(--left-md, auto) !important;
-              width: var(--width-md, auto) !important;
-            }
-          }
-          @media (min-width: 1280px) {
-            .${itemId} {
-              top: var(--top-lg, auto) !important;
-              left: var(--left-lg, auto) !important;
-              width: var(--width-lg, auto) !important;
-            }
-          }
-        </style>
-      `;
-    }
-
     const styleAttribute = customStyles ? `style="${customStyles}"` : '';
 
     return `
@@ -480,7 +560,6 @@ export default async function decorate(block) {
 
     const imgWidth = v('imgWidth');
     const textWidthPercent = v('textWidthPercent');
-    const textMaxWidth = v('textMaxWidth');
 
     // 4. Get Multifield Data (L4TagMulti- rows or data-aue-prop format)
     // Try new format first (data-aue-prop), then fall back to L4TagMulti- format
@@ -501,32 +580,12 @@ export default async function decorate(block) {
     // Generate unique class ID for this block instance to avoid style conflicts
     const blockId = `line-info-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
-    // 處理文字容器的寬度和最大寬度
-    let textContainerClasses = '';
-    let textContainerStyles = '';
-
-    if (textWidthPercent) {
-      const { customStyle } = convertToTailwindSpacing(textWidthPercent);
-      if (customStyle && customStyle.includes('%')) {
-        textContainerStyles += `width: ${customStyle}; `;
-      }
-    }
-
-    if (textMaxWidth) {
-      const { className, customStyle } = convertToTailwindSpacing(textMaxWidth);
-      if (className && !customStyle) {
-        textContainerClasses += ` max-w-${className}`;
-      } else if (customStyle) {
-        textContainerStyles += `max-width: ${customStyle}; `;
-      }
-    }
-
     // 4.5. Get Advanced Styles (pass block for manual parsing)
     const advancedStyles = generateAdvancedStyles(advancedConfig, block);
 
     // 5. Generate Text Items HTML using function
     const textItemsHtml = generateTextItemsHtml({
-      textItems, styleLayout, blockId, advancedStyles,
+      textItems, styleLayout, blockId, advancedStyles, textWidthPercent,
     });
 
     // 6. Generate Picture HTML (includes textItems inside line-info-image)
@@ -536,8 +595,7 @@ export default async function decorate(block) {
       assetMobile,
       imgWidth,
       textItemsHtml,
-      textContainerClasses,
-      textContainerStyles: textContainerStyles.trim(),
+      styleLayout,
     });
 
     // 7. 生成容器的 Tailwind 響應式類名
