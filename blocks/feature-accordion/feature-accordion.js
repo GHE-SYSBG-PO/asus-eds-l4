@@ -1172,6 +1172,28 @@ const decorateAccordionItem = async (block, scaffold, itemsInScope, isFirstAccor
   });
   const topContentWrapper = ensureTopContentWrapper(block, [titleRow, subtitleRow, infoRow, mediaRow]);
 
+  // Create wrapper for subtitle and info rows
+  const descriptionWrapper = document.createElement('div');
+  descriptionWrapper.classList.add('feature-accordion-item__description');
+  let hasDescriptionContent = false;
+
+  if (subtitleRow?.isConnected) {
+    descriptionWrapper.appendChild(subtitleRow);
+    hasDescriptionContent = true;
+  }
+  if (infoRow?.isConnected) {
+    descriptionWrapper.appendChild(infoRow);
+    hasDescriptionContent = true;
+  }
+
+  if (hasDescriptionContent && topContentWrapper) {
+    if (titleRow?.isConnected) {
+      titleRow.parentElement?.insertBefore(descriptionWrapper, titleRow.nextSibling);
+    } else {
+      topContentWrapper.appendChild(descriptionWrapper);
+    }
+  }
+
   const getMediaTargets = (inlineCell) => {
     const targets = [inlineCell];
     if (scaffold?.mediaGroup) targets.push(scaffold.mediaGroup);
