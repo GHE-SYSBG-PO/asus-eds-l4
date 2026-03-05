@@ -3,7 +3,11 @@
  * ID:15 TAB_3COLUMN
  */
 
-import { getBlockConfigs, getProductLine, isAuthorUe } from '../../scripts/utils.js';
+import {
+  getBlockConfigs,
+  getProductLine,
+  isAuthorUe,
+} from '../../scripts/utils.js';
 import { prefixHex } from '../../components/button/button.js';
 import loadSwiper from '../../vendor/swiper/index.js';
 
@@ -47,7 +51,7 @@ const productFonts = FONTS[PRODUCT_LINE];
 
 const DEFAULT_CONFIG = {
   motionEnabled: false,
-  tabIconEnabled: true,
+  tabIconEnabled: false,
 };
 
 const ITEM_DEFAULT_CONFIG = {
@@ -71,7 +75,7 @@ function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
     <button
       class="tab3col-tab-btn flex items-center m-0 border border-solid rounded-[28px] sm:max-w-[172px] md:max-w-none cursor-pointer font-[inherit] transition-[background] duration-250 ease sm:h-auto md:h-[56px] px-[16px] justify-start text-left lg:w-full md:flex-col md:items-center md:gap-[6px] px-[10px] py-[6px] sm:flex-col md:flex-row sm:items-center sm:gap-[4px] sm:shrink-0${isActive ? ' is-active' : ''} ${productFonts.tabText}"
       data-tab-index="${index}"
-    >${iconHtml}<span class="tab3col-tab-text block truncate">${tabText || ''}</span></button>`;
+    >${iconHtml}<span class="tab3col-tab-text block truncate max-w-full">${tabText || ''}</span></button>`;
 }
 
 function activateTab(index, tabBtns, panels, motionEnabled) {
@@ -103,26 +107,30 @@ function activateTab(index, tabBtns, panels, motionEnabled) {
     next.offsetHeight;
     // Step 3: trigger fade-in transition
     next.classList.add('tab3col-panel-visible');
-    next.addEventListener('transitionend', () => {
-      next.classList.remove('tab3col-panel-fade-in', 'tab3col-panel-visible');
-    }, { once: true });
+    next.addEventListener(
+      'transitionend',
+      () => {
+        next.classList.remove('tab3col-panel-fade-in', 'tab3col-panel-visible');
+      },
+      { once: true },
+    );
   };
 
   if (current) {
     // Step 1: fade out — add class that keeps display:flex while animating opacity→0
     current.classList.add('tab3col-panel-fade-out');
-    current.addEventListener('transitionend', () => {
-      // Back to display:none after fade-out so media inside is no longer rendered
-      current.classList.remove('is-active', 'tab3col-panel-fade-out');
-      doFadeIn();
-    }, { once: true });
+    current.addEventListener(
+      'transitionend',
+      () => {
+        // Back to display:none after fade-out so media inside is no longer rendered
+        current.classList.remove('is-active', 'tab3col-panel-fade-out');
+        doFadeIn();
+      },
+      { once: true },
+    );
   } else {
     doFadeIn();
   }
-}
-
-function isMobile() {
-  return window.innerWidth < 750;
 }
 
 function createSwiperArrows() {
@@ -155,49 +163,7 @@ function setupInteraction(componentEl, motionEnabled) {
     header.classList.toggle('is-scroll', rect.top <= 0);
   });
 
-  // ── Mobile: centeredSlides swiper, one tab at a time ─────────
-  if (isMobile()) {
-    // Desktop click not needed on mobile (swiper slideChange handles it)
-    const swiperWrapper = document.createElement('div');
-    swiperWrapper.className = 'swiper-wrapper';
-    tabBtns.forEach((btn) => {
-      const slide = document.createElement('div');
-      slide.className = 'swiper-slide tab3col-swiper-slide flex items-center justify-center';
-      slide.appendChild(btn);
-      swiperWrapper.appendChild(slide);
-    });
-
-    const { prev, next } = createSwiperArrows();
-
-    tabList.innerHTML = '';
-    tabList.classList.add('swiper', 'tab3col-tab-swiper');
-    tabList.appendChild(swiperWrapper);
-    tabBar.insertBefore(prev, tabList);
-    tabBar.appendChild(next);
-
-    loadSwiper().then((Swiper) => {
-      const swiper = new Swiper(tabList, {
-        centeredSlides: true,
-        slidesPerView: 1,
-        loop: false,
-        navigation: {
-          prevEl: prev,
-          nextEl: next,
-          disabledClass: 'tab3col-swiper-btn-hidden',
-        },
-        on: {
-          slideChange(s) {
-            activateTab(s.activeIndex, tabBtns, panels, motionEnabled);
-          },
-        },
-      });
-      swiper.slideTo(0, 0);
-    });
-    return;
-  }
-
   // ── Desktop: plain click ─────────────────────────────────────
-  // (lg: has no swiper, tabs are in a vertical list)
   if (window.innerWidth >= 1280) {
     tabBtns.forEach((btn, i) => {
       btn.addEventListener('click', () => activateTab(i, tabBtns, panels, motionEnabled));
@@ -205,13 +171,13 @@ function setupInteraction(componentEl, motionEnabled) {
     return;
   }
 
-  // ── Tablet (750px – 1280px): swiper, no centeredSlides ───────
+  // ── Tablet/Mobile
   // tabs keep their natural width, arrows appear only when overflowing
   const swiperWrapper = document.createElement('div');
   swiperWrapper.className = 'swiper-wrapper';
   tabBtns.forEach((btn) => {
     const slide = document.createElement('div');
-    slide.className = 'swiper-slide tab3col-swiper-slide-tablet';
+    slide.className = 'swiper-slide tab3col-swiper-slide';
     // width is controlled by CSS (width: auto via .tab3col-swiper-slide-tablet)
     slide.appendChild(btn);
     swiperWrapper.appendChild(slide);
@@ -219,11 +185,11 @@ function setupInteraction(componentEl, motionEnabled) {
 
   const { prev, next } = createSwiperArrows();
   // Tablet arrows: smaller, no decorative border
-  prev.classList.add('tab3col-swiper-prev-tablet');
-  next.classList.add('tab3col-swiper-next-tablet');
+  prev.classList.add('tab3col-swiper-prev');
+  next.classList.add('tab3col-swiper-next');
 
   tabList.innerHTML = '';
-  tabList.classList.add('swiper', 'tab3col-tab-swiper--tablet');
+  tabList.classList.add('swiper');
   tabList.appendChild(swiperWrapper);
   tabBar.insertBefore(prev, tabList);
   tabBar.appendChild(next);
@@ -261,12 +227,13 @@ async function decoratePage(block) {
   // tab-3column data
   const tabContainer = block;
   const tabData = tabContainer.dataset;
-  const motionEnabled = tabData.motionenabled || DEFAULT_CONFIG.motionEnabled;
+  const motionEnabled = tabData.motionenabled === 'true' || DEFAULT_CONFIG.motionEnabled;
   const colorGroup = tabData.colorgroup || '';
   const widthTabArea = tabData.widthtabarea || '';
   const widthTextArea = tabData.widthtextarea || '';
-  const tabIconEnabled = tabData.tabiconenabled || DEFAULT_CONFIG.tabIconEnabled;
-  const tabBarBgColor = prefixHex(tabData.tabbarbgcolorvalue || '');
+  const tabIconEnabled = tabData.tabiconenabled === 'true' || DEFAULT_CONFIG.tabIconEnabled;
+  const tabBarBgColorT = prefixHex(tabData.tabbarbgcolorvaluet || '');
+  const tabBarBgColorM = prefixHex(tabData.tabbarbgcolorvaluem || '');
   const tabFontColorDefault = prefixHex(tabData.tabfontcolordefault || '');
   const tabFontColorHover = prefixHex(tabData.tabfontcolorhover || '');
   const tabFontColorSelect = prefixHex(tabData.tabfontcolorselect || '');
@@ -282,19 +249,29 @@ async function decoratePage(block) {
     return { from: parts[0], to: parts[1] || parts[0] };
   };
 
-  const tabBorderGradientDefault = parseGradient(tabData.tabcontainerbordercolordefault || '');
-  const tabBorderGradientHover = parseGradient(tabData.tabcontainerbordercolorhover || '');
-  const tabBorderGradientSelect = parseGradient(tabData.tabcontainerbordercolorselect || '');
+  const tabBorderGradientDefault = parseGradient(
+    tabData.tabcontainerbordercolordefault || '',
+  );
+  const tabBorderGradientHover = parseGradient(
+    tabData.tabcontainerbordercolorhover || '',
+  );
+  const tabBorderGradientSelect = parseGradient(
+    tabData.tabcontainerbordercolorselect || '',
+  );
   const tabBgDefault = prefixHex(tabData.tabcontainerbgcolordefault || '');
-  const tabBgGradientHover = parseGradient(tabData.tabcontainerbgcolorhover || '');
-  const tabBgGradientSelect = parseGradient(tabData.tabcontainerbgcolorselect || '');
+  const tabBgGradientHover = parseGradient(
+    tabData.tabcontainerbgcolorhover || '',
+  );
+  const tabBgGradientSelect = parseGradient(
+    tabData.tabcontainerbgcolorselect || '',
+  );
   const tabRadiusValue = buildRadiusValue(
     tabData.tabcontainerradiustl || '',
     tabData.tabcontainerradiustr || '',
     tabData.tabcontainerradiusbr || '',
     tabData.tabcontainerradiusbl || '',
   );
-  const titleFontDTM = tabData.titleFontDTM || DEFAULT_CONFIG.titleFontDTM;
+  const titleFontDTM = tabData.titlefontdtm || DEFAULT_CONFIG.titleFontDTM;
   const titleFontColor = prefixHex(tabData.titlefontcolor || '');
   const infoFontColor = prefixHex(tabData.infofontcolor || '');
 
@@ -312,48 +289,54 @@ async function decoratePage(block) {
         ITEM_DEFAULT_CONFIG,
         'tab-3column-item',
       );
-      console.log('tab item data', itemConfig);
       return itemConfig;
     }),
   );
 
-  // ── Inline CSS variables ─────────────────────────────────────
-  let inlineStyle = '';
-  if (widthTabArea) inlineStyle += `--tab3col-tab-area-width: ${widthTabArea}%;`;
-  if (widthTextArea) inlineStyle += `--tab3col-text-area-width: ${widthTextArea}%;`;
-  if (tabBarBgColor) inlineStyle += `--tab3col-tab-bar-bg: ${tabBarBgColor};`;
-  if (tabFontColorDefault) inlineStyle += `--tab3col-tab-color-default: ${tabFontColorDefault};`;
-  if (tabFontColorHover) inlineStyle += `--tab3col-tab-color-hover: ${tabFontColorHover};`;
-  if (tabFontColorSelect) inlineStyle += `--tab3col-tab-color-select: ${tabFontColorSelect};`;
-  if (tabBorderWidthDefault) inlineStyle += `--tab3col-tab-border-width-default: ${tabBorderWidthDefault}px;`;
-  if (tabBorderWidthHover) inlineStyle += `--tab3col-tab-border-width-hover: ${tabBorderWidthHover}px;`;
-  if (tabBorderWidthSelect) inlineStyle += `--tab3col-tab-border-width-select: ${tabBorderWidthSelect}px;`;
+  // ── Tab Container Inline CSS variables ─────────────────────────────────────
+  let tabContainerStyle = '';
+  if (tabBarBgColorT) tabContainerStyle += `--tab3col-tab-bar-bg-t: ${tabBarBgColorT};`;
+  if (tabBarBgColorM) tabContainerStyle += `--tab3col-tab-bar-bg-m: ${tabBarBgColorM};`;
+  if (tabFontColorDefault) tabContainerStyle += `--tab3col-tab-color-default: ${tabFontColorDefault};`;
+  if (tabFontColorHover) tabContainerStyle += `--tab3col-tab-color-hover: ${tabFontColorHover};`;
+  if (tabFontColorSelect) tabContainerStyle += `--tab3col-tab-color-select: ${tabFontColorSelect};`;
+  if (tabBorderWidthDefault) tabContainerStyle += `--tab3col-tab-border-width-default: ${tabBorderWidthDefault}px;`;
+  if (tabBorderWidthHover) tabContainerStyle += `--tab3col-tab-border-width-hover: ${tabBorderWidthHover}px;`;
+  if (tabBorderWidthSelect) tabContainerStyle += `--tab3col-tab-border-width-select: ${tabBorderWidthSelect}px;`;
   // Border gradient stops per state
   if (tabBorderGradientDefault) {
-    inlineStyle += `--tab3col-tab-border-from-default: ${tabBorderGradientDefault.from};`;
-    inlineStyle += `--tab3col-tab-border-to-default: ${tabBorderGradientDefault.to};`;
+    tabContainerStyle += `--tab3col-tab-border-from-default: ${tabBorderGradientDefault.from};`;
+    tabContainerStyle += `--tab3col-tab-border-to-default: ${tabBorderGradientDefault.to};`;
   }
   if (tabBorderGradientHover) {
-    inlineStyle += `--tab3col-tab-border-from-hover: ${tabBorderGradientHover.from};`;
-    inlineStyle += `--tab3col-tab-border-to-hover: ${tabBorderGradientHover.to};`;
+    tabContainerStyle += `--tab3col-tab-border-from-hover: ${tabBorderGradientHover.from};`;
+    tabContainerStyle += `--tab3col-tab-border-to-hover: ${tabBorderGradientHover.to};`;
   }
   if (tabBorderGradientSelect) {
-    inlineStyle += `--tab3col-tab-border-from-select: ${tabBorderGradientSelect.from};`;
-    inlineStyle += `--tab3col-tab-border-to-select: ${tabBorderGradientSelect.to};`;
+    tabContainerStyle += `--tab3col-tab-border-from-select: ${tabBorderGradientSelect.from};`;
+    tabContainerStyle += `--tab3col-tab-border-to-select: ${tabBorderGradientSelect.to};`;
   }
   // Bg: default solid, hover/select gradient stops
-  if (tabBgDefault) inlineStyle += `--tab3col-tab-bg-default: ${tabBgDefault};`;
+  if (tabBgDefault) tabContainerStyle += `--tab3col-tab-bg-default: ${tabBgDefault};`;
   if (tabBgGradientHover) {
-    inlineStyle += `--tab3col-tab-bg-from-hover: ${tabBgGradientHover.from};`;
-    inlineStyle += `--tab3col-tab-bg-to-hover: ${tabBgGradientHover.to};`;
+    tabContainerStyle += `--tab3col-tab-bg-from-hover: ${tabBgGradientHover.from};`;
+    tabContainerStyle += `--tab3col-tab-bg-to-hover: ${tabBgGradientHover.to};`;
   }
   if (tabBgGradientSelect) {
-    inlineStyle += `--tab3col-tab-bg-from-select: ${tabBgGradientSelect.from};`;
-    inlineStyle += `--tab3col-tab-bg-to-select: ${tabBgGradientSelect.to};`;
+    tabContainerStyle += `--tab3col-tab-bg-from-select: ${tabBgGradientSelect.from};`;
+    tabContainerStyle += `--tab3col-tab-bg-to-select: ${tabBgGradientSelect.to};`;
   }
-  if (tabRadiusValue) inlineStyle += `--tab3col-tab-radius: ${tabRadiusValue};`;
-  if (titleFontColor) inlineStyle += `--tab3col-title-color: ${titleFontColor};`;
-  if (infoFontColor) inlineStyle += `--tab3col-info-color: ${infoFontColor};`;
+  if (tabRadiusValue) tabContainerStyle += `--tab3col-tab-radius: ${tabRadiusValue};`;
+  if (titleFontColor) tabContainerStyle += `--tab3col-title-color: ${titleFontColor};`;
+  if (infoFontColor) tabContainerStyle += `--tab3col-info-color: ${infoFontColor};`;
+
+  // ── Tab Bar Inline Style ─────────────────────────────────────
+  let tabBarStyle = '';
+  if (widthTabArea) tabBarStyle += `width: ${widthTabArea}%;`;
+
+  // ── Text Area Inline Style ───
+  let textAreaStyle = '';
+  if (widthTextArea) textAreaStyle += `width: ${widthTextArea}%;`;
 
   // ── Build tab buttons HTML ───────────────────────────────────
   const tabBtnsHtml = tabs
@@ -370,10 +353,12 @@ async function decoratePage(block) {
   const componentHtml = document.createRange().createContextualFragment(`
       <div
         class="tab3col-component box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full md:max-w-[896px] lg:max-w-[1260px] sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid ${colorGroup}"
-        ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
+        ${tabContainerStyle ? `style="${tabContainerStyle.trim()}"` : ''}
       >
-        <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] lg:relative md:flex-row md:w-full md:top-0 md:z-10 sm:flex-row md:gap-[20px] sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10">
-          <div class="tab3col-tab-list flex items-center sm:w-[calc(100cqw-160px)] sm:justify-center sm:flex-row md:max-w-none md:gap-[20px] lg:justify-start lg:w-full scroll-smooth lg:flex-col lg:overflow-y-auto lg:overflow-x-visible md:flex-row overflow-clip" role="tablist">
+        <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] lg:relative md:flex-row md:w-full md:top-0 md:z-10 sm:flex-row md:gap-[20px] sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10"
+          style="${tabBarStyle}"
+        >
+          <div class="tab3col-tab-list flex items-center sm:w-[calc(100cqw-160px)] sm:justify-center sm:flex-row md:max-w-none lg:justify-start lg:w-full scroll-smooth lg:flex-col lg:overflow-y-auto lg:overflow-x-visible lg:gap-[20px] md:flex-row overflow-clip" role="tablist">
             ${tabBtnsHtml}
           </div>
         </div>
@@ -387,7 +372,14 @@ async function decoratePage(block) {
   // ── Build each panel, move per-item instrumentation ──────────
   // eslint-disable-next-line no-inner-declarations
   async function renderTabItemHtml(itemEl, tab, oldEl) {
-    itemEl.classList.add('tab3col-panel', 'lg:gap-[40px]', 'md:gap-[32px]', 'sm:gap-[24px]', 'lg:flex-row', 'sm:flex-col');
+    itemEl.classList.add(
+      'tab3col-panel',
+      'lg:gap-[40px]',
+      'md:gap-[32px]',
+      'sm:gap-[24px]',
+      'lg:flex-row',
+      'sm:flex-col',
+    );
     const isActive = oldEl ? oldEl.classList.contains('is-active') : false;
     if (isActive) {
       itemEl.classList.add('is-active');
@@ -397,7 +389,7 @@ async function decoratePage(block) {
 
     const newItem = document.createRange().createContextualFragment(`
         <div class="tab3col-media-slot sm:order-2 lg:order-1 grow min-w-0 md:w-full sm:w-full"></div>
-        <div class="tab3col-text-col sm:order-1 lg:order-2 sm:text-center lg:text-left shrink-0 box-border sm:w-full lg:w-[12.5cqw]">
+        <div class="tab3col-text-col sm:order-1 lg:order-2 sm:text-center lg:text-left shrink-0 box-border sm:w-full lg:w-[12.5cqw]" style="${textAreaStyle}">
           <h3 class="tab3col-title ${productFonts.tabTitle} sm:mb-[8px] md:mb-[12px] ${titleFontDTM || ''}">${tab.tabTitle.html || ''}</h3>
           <div class="tab3col-info m-0 ${productFonts.tabInfo.fontDT} ${productFonts.tabInfo.fontM}">${tab.tabInfo.html || ''}</div>
         </div>
@@ -427,28 +419,25 @@ async function decoratePage(block) {
   setupInteraction(block.querySelector('.tab3col-component'), motionEnabled);
 
   // update item dom data from block tab-3column-item
-  block.addEventListener(
-    'asus-l4--section-tab-3column',
-    async ({ detail }) => {
-      const tab = await getBlockConfigs(
-        detail,
-        ITEM_DEFAULT_CONFIG,
-        'tab-3column-item',
-      );
+  block.addEventListener('asus-l4--section-tab-3column', async ({ detail }) => {
+    const tab = await getBlockConfigs(
+      detail,
+      ITEM_DEFAULT_CONFIG,
+      'tab-3column-item',
+    );
 
-      // update menu text
-      const doms = [...block.querySelectorAll('.tab-3column-item')];
-      const index = doms.findIndex(
-        (r) => r.dataset.aueResource === detail.dataset.aueResource,
-      );
-      const menuDom = block.querySelectorAll('.tab3col-tab-text')[index];
-      if (menuDom) {
-        menuDom.innerHTML = tab.tabText.text;
-      }
+    // update menu text
+    const doms = [...block.querySelectorAll('.tab-3column-item')];
+    const index = doms.findIndex(
+      (r) => r.dataset.aueResource === detail.dataset.aueResource,
+    );
+    const menuDom = block.querySelectorAll('.tab3col-tab-text')[index];
+    if (menuDom) {
+      menuDom.innerHTML = tab.tabText.text;
+    }
 
-      renderTabItemHtml(detail, tab, doms[index]);
-    },
-  );
+    renderTabItemHtml(detail, tab, doms[index]);
+  });
 }
 
 export default async function decorate(block) {

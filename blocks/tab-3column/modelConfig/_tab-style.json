@@ -6,6 +6,9 @@
       "name": "tabStyleTab"
     },
     {
+      "...": "./_tab-container.json#/fields"
+    },
+    {
       "component": "boolean",
       "label": "icon (yes/no)",
       "name": "tabIconEnabled",
@@ -13,23 +16,8 @@
     },
     {
       "component": "container",
-      "label": "tab bar bg-color",
-      "name": "tabBarBgColor",
-      "fields": [
-        {
-          "component": "text",
-          "label": "bg-color",
-          "name": "tabBarBgColorValue",
-          "valueType": "string",
-          "description": "Hex value without #, e.g. ffffff"
-        }
-      ]
-    },
-    {
-      "component": "container",
-      "label": "tab text (Advanced)",
-      "name": "tabTextAdvanced",
-      "collapsible": true,
+      "label": "tab style (Advanced)",
+      "name": "tabStyleAdvanced",
       "fields": [
         {
           "component": "text",
@@ -47,6 +35,30 @@
           "component": "text",
           "label": "font-color select",
           "name": "tabFontColorSelect",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "radius (TL)",
+          "name": "tabContainerRadiusTL",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "radius (TR)",
+          "name": "tabContainerRadiusTR",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "radius (BR)",
+          "name": "tabContainerRadiusBR",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "radius (BL)",
+          "name": "tabContainerRadiusBL",
           "valueType": "string"
         }
       ]

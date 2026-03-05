@@ -88,7 +88,8 @@
     --tab3col-tab-bg-default: transparent;
     --tab3col-tab-bg-hover: #4379b1;
     --tab3col-tab-bg-select: #4379b1;
-    --tab3col-tab-bar-bg: #fff;
+    --tab3col-tab-bar-bg-t: #fff;
+    --tab3col-tab-bar-bg-m: #fff;
     --tab3col-title-color: #181818;
     --tab3col-info-color: #4a4a4a;
     --tab3col-arrow-color: #00438a;
@@ -107,7 +108,7 @@
     --tab3col-tab-border-from-select: #00438a;
     --tab3col-tab-border-to-select: #00438a;
 
-    @media (480px <= width <= 730px) {
+    @media (width <= 730px) {
       width: 420px;
     }
   }
@@ -126,7 +127,11 @@
   //     -webkit-mask + mask-composite: exclude → only border area shows
   .tab3col-tab-bar {
     &.is-scroll{
-      background: var(--tab3col-tab-bar-bg);
+      background: var(--tab3col-tab-bar-bg-m);
+
+      @media (width > 730px) {
+        background: var(--tab3col-tab-bar-bg-t);
+      }
     }
 
     .tab3col-tab-btn {
@@ -203,14 +208,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    // width is set by swiper (slidesPerView: 1), do NOT override here
-  }
-
-  // ── Tablet Swiper tab navigation ─────────────────────────────
-  // Tablet: each slide is as wide as its button content
-  .tab3col-swiper-slide-tablet {
-    width: auto !important; // swiper sets width inline; !important needed to keep auto
+    width:auto;
   }
 
   .tab3col-swiper-prev,
