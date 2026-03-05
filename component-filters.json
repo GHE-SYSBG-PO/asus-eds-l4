@@ -26,6 +26,7 @@
       "bar-chart",
       "footnote",
       "featureitem-block",
+      "feature-ksp-list",
       "small-cards",
       "effect-media"
     ]
@@ -77,6 +78,12 @@
       "media-block",
       "btn",
       "fragment"
+    ]
+  },
+  {
+    "id": "feature-ksp-list",
+    "components": [
+      "feature-ksp-item"
     ]
   },
   {
