@@ -52,7 +52,21 @@
       "id": "section",
       "fields": [
         {
-          "...": "../blocks/section/modelConfig/_section.json#/fields"
+          "component": "text",
+          "name": "name",
+          "label": "Section Name",
+          "description": "The label shown for this section in the Content Tree"
+        },
+        {
+          "component": "multiselect",
+          "name": "style",
+          "label": "Style",
+          "options": [
+            {
+              "name": "Highlight",
+              "value": "highlight"
+            }
+          ]
         }
       ]
     },
@@ -60,7 +74,7 @@
       "id": "container-2cols",
       "fields": [
         {
-          "...": "../blocks/container-2cols/modelConfig/_container-2cols.json#/fields"
+          "...": "./_container-2cols.json#/fields"
         }
       ]
     },
@@ -93,7 +107,6 @@
         "bar-chart",
         "footnote",
         "featureitem-block",
-        "feature-ksp-list",
         "small-cards",
         "effect-media"
       ]
@@ -101,7 +114,7 @@
     {
       "id": "container-2cols",
       "components": [
-        "container-2cols-item"
+        "container-col"
       ]
     },
     {

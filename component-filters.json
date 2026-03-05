@@ -26,7 +26,6 @@
       "bar-chart",
       "footnote",
       "featureitem-block",
-      "feature-ksp-list",
       "small-cards",
       "effect-media"
     ]
@@ -34,7 +33,7 @@
   {
     "id": "container-2cols",
     "components": [
-      "container-2cols-item"
+      "container-col"
     ]
   },
   {
@@ -71,19 +70,13 @@
     ]
   },
   {
-    "id": "container-2cols-item",
+    "id": "container-col",
     "components": [
       "text-block",
       "featureitem-block",
       "media-block",
       "btn",
       "fragment"
-    ]
-  },
-  {
-    "id": "feature-ksp-list",
-    "components": [
-      "feature-ksp-item"
     ]
   },
   {

@@ -32,6 +32,46 @@
       "collapsible": true,
       "fields": [
         {
+          "component": "select",
+          "label": "font (D/T)",
+          "name": "tabFontDT",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-14",
+              "value": "ro-md-14"
+            },
+            {
+              "name": "ro-md-16",
+              "value": "ro-md-16"
+            },
+            {
+              "name": "ro-md-18",
+              "value": "ro-md-18"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "tabFontM",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-12",
+              "value": "ro-md-12"
+            },
+            {
+              "name": "ro-md-14",
+              "value": "ro-md-14"
+            },
+            {
+              "name": "ro-md-16",
+              "value": "ro-md-16"
+            }
+          ]
+        },
+        {
           "component": "text",
           "label": "font-color default",
           "name": "tabFontColorDefault",
