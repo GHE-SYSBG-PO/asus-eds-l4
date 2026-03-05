@@ -4,7 +4,6 @@
       "component": "container",
       "label": "tab container",
       "name": "tabContainer",
-      "collapsible": false,
       "fields": [
         {
           "component": "text",

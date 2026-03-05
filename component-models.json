@@ -768,7 +768,6 @@
         "component": "container",
         "label": "tab container",
         "name": "tabContainer",
-        "collapsible": false,
         "fields": [
           {
             "component": "text",
@@ -836,6 +835,7 @@
         "component": "container",
         "label": "tab style (Advanced)",
         "name": "tabStyleAdvanced",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
