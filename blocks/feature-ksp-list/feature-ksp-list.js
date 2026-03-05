@@ -2,7 +2,6 @@ import {
   getBlockConfigs,
   getFieldValue,
   getProductLine,
-  getBlockRepeatConfigs,
 } from '../../scripts/utils.js';
 
 // DEFAULT CONFIGURATION
@@ -83,15 +82,33 @@ const handleMotion = (block) => {
 };
 
 /**
+ * Extract value from a div element (similar to small-cards approach)
+ */
+function extractValue(div) {
+  // If it contains picture → extract image URL
+  const img = div.querySelector('img');
+  if (img) {
+    return img.getAttribute('src') || '';
+  }
+
+  // If it contains <p>
+  const p = div.querySelector(':scope > p');
+  if (p) {
+    return p.textContent.trim();
+  }
+
+  // Fallback: direct text
+  const text = div.textContent.trim();
+  return text || '';
+}
+
+/**
  * Main decorate function
  */
 export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'feature-ksp-list');
     const v = getFieldValue(config);
-
-    // Get items using getBlockRepeatConfigs
-    const [items = []] = getBlockRepeatConfigs(block);
 
     // Detect product line from DOM using utility functions
     const productLine = getProductLine();
@@ -118,26 +135,62 @@ export default async function decorate(block) {
     const defaultInfoFont = DEFAULT_CONFIG.infoFont[productLine] || 'ro-rg-12';
     const defaultCtaFont = DEFAULT_CONFIG.ctaFont[productLine] || 'ro-md-16-sh';
 
+    // Parse items from block DOM (similar to small-cards)
+    const LAYOUT_FIELDS_COUNT = 9;
+    const fieldGroups = Array.from(block.querySelectorAll(':scope > div'));
+    const flatValues = [];
+
+    fieldGroups.forEach((group, index) => {
+      if (index < LAYOUT_FIELDS_COUNT) {
+        // Skip layout config rows
+        return;
+      }
+
+      // Extract item values from remaining rows
+      Array.from(group.children).forEach((child) => {
+        const value = extractValue(child);
+        flatValues.push(value);
+      });
+    });
+
+    // Item field count (12 fields per item)
+    const ITEM_FIELD_COUNT = 12;
+    const items = [];
+
+    for (let i = 0; i < flatValues.length; i += ITEM_FIELD_COUNT) {
+      const chunk = flatValues.slice(i, i + ITEM_FIELD_COUNT);
+      if (chunk.length === ITEM_FIELD_COUNT) {
+        items.push({
+          asset: chunk[0] || '',
+          title: chunk[1] || '',
+          info: chunk[2] || '',
+          ctaText: chunk[3] || '',
+          ctaSectionId: chunk[4] || '',
+          titleFont: chunk[5] || '',
+          titleFontColor: chunk[6] || '',
+          infoFont: chunk[7] || '',
+          infoFontColor: chunk[8] || '',
+          ctaFont: chunk[9] || '',
+          ctaFontColor: chunk[10] || '',
+          ctaIconAsset: chunk[11] || '',
+        });
+      }
+    }
+
     // Build items HTML
     const itemsHtml = items.map((item, index) => {
-      // Helper to extract value from richtext or string
-      const getValue = (field) => {
-        if (!field) return '';
-        return field.text || field.html || field || '';
-      };
-
-      const asset = getValue(item.asset);
-      const title = getValue(item.title);
-      const info = getValue(item.info);
-      const ctaText = getValue(item.ctaText);
-      const ctaSectionId = getValue(item.ctaSectionId);
-      const titleFont = getValue(item.titleFont) || defaultTitleFont;
-      const titleFontColor = getValue(item.titleFontColor);
-      const infoFont = getValue(item.infoFont) || defaultInfoFont;
-      const infoFontColor = getValue(item.infoFontColor);
-      const ctaFont = getValue(item.ctaFont) || defaultCtaFont;
-      const ctaFontColor = getValue(item.ctaFontColor);
-      const ctaIconAsset = getValue(item.ctaIconAsset);
+      const asset = item.asset;
+      const title = item.title;
+      const info = item.info;
+      const ctaText = item.ctaText;
+      const ctaSectionId = item.ctaSectionId;
+      const titleFont = item.titleFont || defaultTitleFont;
+      const titleFontColor = item.titleFontColor;
+      const infoFont = item.infoFont || defaultInfoFont;
+      const infoFontColor = item.infoFontColor;
+      const ctaFont = item.ctaFont || defaultCtaFont;
+      const ctaFontColor = item.ctaFontColor;
+      const ctaIconAsset = item.ctaIconAsset;
 
       const titleStyle = titleFontColor ? `color: ${prefixHex(titleFontColor)};` : '';
       const infoStyle = infoFontColor ? `color: ${prefixHex(infoFontColor)};` : '';
