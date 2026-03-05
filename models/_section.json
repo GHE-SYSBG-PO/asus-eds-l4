@@ -68,21 +68,7 @@
       "id": "section",
       "fields": [
         {
-          "component": "text",
-          "name": "name",
-          "label": "Section Name",
-          "description": "The label shown for this section in the Content Tree"
-        },
-        {
-          "component": "multiselect",
-          "name": "style",
-          "label": "Style",
-          "options": [
-            {
-              "name": "Highlight",
-              "value": "highlight"
-            }
-          ]
+          "...": "../blocks/section/modelConfig/_section.json#/fields"
         }
       ]
     },
@@ -90,7 +76,7 @@
       "id": "container-2cols",
       "fields": [
         {
-          "...": "./_container-2cols.json#/fields"
+          "...": "../blocks/container-2cols/modelConfig/_container-2cols.json#/fields"
         }
       ]
     },
