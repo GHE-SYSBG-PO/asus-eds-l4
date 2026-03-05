@@ -635,14 +635,17 @@
   .feature-accordion-subitem__media {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+
+    // aspect-ratio: 16 / 9;
     overflow: hidden;
   }
 
   .feature-accordion-media-group,
   .feature-accordion-media-slot {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height:100%;
+
+    // aspect-ratio: 16 / 9;
     overflow: hidden;
   }
 
