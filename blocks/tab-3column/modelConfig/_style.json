@@ -10,6 +10,50 @@
       "label": "motion (on/off)",
       "name": "motionEnabled",
       "valueType": "boolean"
+    },
+    {
+      "component": "container",
+      "label": "width setting",
+      "name": "widthSettingBasic",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "tab area (%)",
+          "name": "widthTabArea",
+          "valueType": "string",
+          "description": "Width percentage for tab area column. Media area is auto-calculated."
+        },
+        {
+          "component": "text",
+          "label": "text area (%)",
+          "name": "widthTextArea",
+          "valueType": "string",
+          "description": "Width percentage for text area column."
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "tab bar (T/M)",
+      "name": "tabBarBgColorTM",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "bg-color (T)",
+          "name": "tabBarBgColorValueT",
+          "valueType": "string",
+          "description": "Hex value without #, e.g. ffffff"
+        },
+        {
+          "component": "text",
+          "label": "bg-color (M)",
+          "name": "tabBarBgColorValueM",
+          "valueType": "string",
+          "description": "Hex value without #, e.g. ffffff"
+        }
+      ]
     }
   ]
 }

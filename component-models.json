@@ -756,14 +756,10 @@
         "valueType": "boolean"
       },
       {
-        "component": "tab",
-        "label": "width setting",
-        "name": "widthSettingTab"
-      },
-      {
         "component": "container",
         "label": "width setting",
         "name": "widthSettingBasic",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
@@ -782,6 +778,28 @@
         ]
       },
       {
+        "component": "container",
+        "label": "tab bar (T/M)",
+        "name": "tabBarBgColorTM",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "bg-color (T)",
+            "name": "tabBarBgColorValueT",
+            "valueType": "string",
+            "description": "Hex value without #, e.g. ffffff"
+          },
+          {
+            "component": "text",
+            "label": "bg-color (M)",
+            "name": "tabBarBgColorValueM",
+            "valueType": "string",
+            "description": "Hex value without #, e.g. ffffff"
+          }
+        ]
+      },
+      {
         "component": "tab",
         "label": "tab style",
         "name": "tabStyleTab"
@@ -794,22 +812,70 @@
       },
       {
         "component": "container",
-        "label": "tab bar bg-color",
-        "name": "tabBarBgColor",
+        "label": "tab container",
+        "name": "tabContainer",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
-            "label": "bg-color",
-            "name": "tabBarBgColorValue",
-            "valueType": "string",
-            "description": "Hex value without #, e.g. ffffff"
+            "label": "border-width default",
+            "name": "tabContainerBorderWidthDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width hover",
+            "name": "tabContainerBorderWidthHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width select",
+            "name": "tabContainerBorderWidthSelect",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color default",
+            "name": "tabContainerBorderColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color hover",
+            "name": "tabContainerBorderColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color select",
+            "name": "tabContainerBorderColorSelect",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color default",
+            "name": "tabContainerBgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color hover",
+            "name": "tabContainerBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color select",
+            "name": "tabContainerBgColorSelect",
+            "valueType": "string"
           }
         ]
       },
       {
         "component": "container",
-        "label": "tab text (Advanced)",
-        "name": "tabTextAdvanced",
+        "label": "tab style (Advanced)",
+        "name": "tabStyleAdvanced",
         "collapsible": true,
         "fields": [
           {
@@ -829,94 +895,28 @@
             "label": "font-color select",
             "name": "tabFontColorSelect",
             "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "tab",
-        "label": "tab container",
-        "name": "tabContainerTab"
-      },
-      {
-        "component": "text",
-        "label": "border-width default",
-        "name": "tabContainerBorderWidthDefault",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-width hover",
-        "name": "tabContainerBorderWidthHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-width select",
-        "name": "tabContainerBorderWidthSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color default",
-        "name": "tabContainerBorderColorDefault",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color hover",
-        "name": "tabContainerBorderColorHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color select",
-        "name": "tabContainerBorderColorSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color default",
-        "name": "tabContainerBgColorDefault",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color hover",
-        "name": "tabContainerBgColorHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color select",
-        "name": "tabContainerBgColorSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "container",
-        "label": "radius (TL/TR/BR/BL)",
-        "name": "tabContainerRadiusContainer",
-        "fields": [
+          },
           {
             "component": "text",
-            "label": "radius TL",
+            "label": "radius (TL)",
             "name": "tabContainerRadiusTL",
             "valueType": "string"
           },
           {
             "component": "text",
-            "label": "radius TR",
+            "label": "radius (TR)",
             "name": "tabContainerRadiusTR",
             "valueType": "string"
           },
           {
             "component": "text",
-            "label": "radius BR",
+            "label": "radius (BR)",
             "name": "tabContainerRadiusBR",
             "valueType": "string"
           },
           {
             "component": "text",
-            "label": "radius BL",
+            "label": "radius (BL)",
             "name": "tabContainerRadiusBL",
             "valueType": "string"
           }
@@ -3459,6 +3459,264 @@
         "label": "sub item info font color",
         "name": "subItemInfoFontColor",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "feature-ksp-list",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "layout",
+        "name": "layout"
+      },
+      {
+        "component": "select",
+        "label": "Line Visibility",
+        "name": "lineVisibility",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "show"
+          },
+          {
+            "name": "Hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "Line Color",
+        "name": "lineColor",
+        "valueType": "string",
+        "description": "Hex without #"
+      },
+      {
+        "component": "text",
+        "label": "Line Width (px)",
+        "name": "lineWidth",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "BG Color Default",
+        "name": "bgColorDefault",
+        "valueType": "string",
+        "description": "Hex without #"
+      },
+      {
+        "component": "text",
+        "label": "BG Color Hover",
+        "name": "bgColorHover",
+        "valueType": "string",
+        "description": "Hex without #"
+      },
+      {
+        "component": "text",
+        "label": "BG Color Pressed",
+        "name": "bgColorPressed",
+        "valueType": "string",
+        "description": "Hex without #"
+      },
+      {
+        "component": "select",
+        "label": "Card Alignment",
+        "name": "cardAlignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Center",
+            "value": "center"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "CTA Visibility",
+        "name": "ctaVisibility",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Show",
+            "value": "show"
+          },
+          {
+            "name": "Hide",
+            "value": "hide"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "label": "motion",
+        "name": "motion",
+        "valueType": "boolean"
+      }
+    ]
+  },
+  {
+    "id": "feature-ksp-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "reference",
+        "label": "Asset",
+        "name": "asset",
+        "valueType": "string",
+        "description": "Icon/Image for the item",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "label": "Title",
+        "name": "title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "Info",
+        "name": "info",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA Text",
+        "name": "ctaText",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA Section ID",
+        "name": "ctaSectionId",
+        "valueType": "string",
+        "description": "ID of the section to scroll to"
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "Title Style",
+        "name": "titleStyle",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font",
+            "name": "titleFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "titleFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Info Style",
+        "name": "infoStyle",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font",
+            "name": "infoFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-10",
+                "value": "ro-rg-10"
+              },
+              {
+                "name": "ro-rg-12",
+                "value": "ro-rg-12"
+              },
+              {
+                "name": "ro-rg-14",
+                "value": "ro-rg-14"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "infoFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "CTA Style",
+        "name": "ctaStyle",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font",
+            "name": "ctaFont",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "Font Color",
+            "name": "ctaFontColor",
+            "valueType": "string",
+            "description": "Hex without #"
+          },
+          {
+            "component": "reference",
+            "label": "Icon Asset",
+            "name": "ctaIconAsset",
+            "valueType": "string",
+            "multi": false
+          }
+        ]
       }
     ]
   },

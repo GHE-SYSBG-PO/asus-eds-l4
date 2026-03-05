@@ -1,0 +1,97 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "layout",
+      "name": "layout"
+    },
+    {
+      "component": "select",
+      "label": "Line Visibility",
+      "name": "lineVisibility",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Show",
+          "value": "show"
+        },
+        {
+          "name": "Hide",
+          "value": "hide"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Line Color",
+      "name": "lineColor",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "text",
+      "label": "Line Width (px)",
+      "name": "lineWidth",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "BG Color Default",
+      "name": "bgColorDefault",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "text",
+      "label": "BG Color Hover",
+      "name": "bgColorHover",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "text",
+      "label": "BG Color Pressed",
+      "name": "bgColorPressed",
+      "valueType": "string",
+      "description": "Hex without #"
+    },
+    {
+      "component": "select",
+      "label": "Card Alignment",
+      "name": "cardAlignment",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Left",
+          "value": "left"
+        },
+        {
+          "name": "Center",
+          "value": "center"
+        }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "CTA Visibility",
+      "name": "ctaVisibility",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Show",
+          "value": "show"
+        },
+        {
+          "name": "Hide",
+          "value": "hide"
+        }
+      ]
+    },
+    {
+      "component": "boolean",
+      "label": "motion",
+      "name": "motion",
+      "valueType": "boolean"
+    }
+  ]
+}
