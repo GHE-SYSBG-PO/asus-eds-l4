@@ -1,8 +1,6 @@
 export default async function decorate(block) {
   try {
-    console.log(block);
     const config = block.dataset;
-    console.log(config);
     const sectionid = config.sectionid || '';
     const bgcolor = config.bgcolor || '';
     const paddingleft = config.paddingleft || '';
