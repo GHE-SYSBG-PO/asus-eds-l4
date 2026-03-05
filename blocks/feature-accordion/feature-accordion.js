@@ -63,6 +63,17 @@ const SUBITEM_FIELD_ORDER_WITH_PARENT_COLOR = [
   'subItemInfoFontColor',
 ];
 
+/**
+ * Normalizes a color value to a valid CSS color format.
+ *
+ * - Trims whitespace and validates input
+ * - Returns valid hex, rgb, hsl, or var() values as-is
+ * - Prefixes valid hex codes without # with #
+ * - Returns empty string for invalid inputs
+ *
+ * @param {string} color - The color value to normalize
+ * @returns {string} The normalized color value or empty string
+ */
 const normalizeColor = (color) => {
   if (!color || typeof color !== 'string') return '';
   const value = color.trim();
@@ -71,6 +82,16 @@ const normalizeColor = (color) => {
   return /^[0-9a-fA-F]{3,8}$/.test(value) ? `#${value}` : value;
 };
 
+/**
+ * Checks if a value is likely a color token.
+ *
+ * - Validates string input and trims whitespace
+ * - Recognizes hex codes, rgb/hsl functions, and CSS variables
+ * - Returns false for empty or non-string inputs
+ *
+ * @param {string} value - The value to check
+ * @returns {boolean} True if the value appears to be a color token
+ */
 const isLikelyColorToken = (value) => {
   if (!value || typeof value !== 'string') return false;
   const token = value.trim();
@@ -95,6 +116,16 @@ let mediaControlDelegationBound = false;
 const nestedExpandTimerByBlock = new WeakMap();
 const CTA_DATA_KEYS = ['ctavisiblity', 'ctatext', 'ctahyperlink', 'ctafontcolor'];
 
+/**
+ * Runs multiple async loaders with controlled concurrency.
+ *
+ * - Limits the number of concurrent executions to prevent overload
+ * - Uses a worker pool pattern for efficient processing
+ * - Handles errors gracefully without stopping other loaders
+ *
+ * @param {Function[]} loaders - Array of async loader functions
+ * @param {number} concurrency - Maximum number of concurrent loaders (default: PREFETCH_CONCURRENCY)
+ */
 const runLoadersWithConcurrency = async (loaders, concurrency = PREFETCH_CONCURRENCY) => {
   if (!loaders.length) return;
   let pointer = 0;
@@ -114,6 +145,13 @@ const runLoadersWithConcurrency = async (loaders, concurrency = PREFETCH_CONCURR
   await Promise.allSettled(Array.from({ length: workerCount }, () => worker()));
 };
 
+/**
+ * Runs prefetching for all registered delayed media loaders.
+ *
+ * - Prevents multiple executions with a started flag
+ * - Collects all registered loaders and runs them concurrently
+ * - Used when the delayed media event fires
+ */
 const runDelayedMediaPrefetch = async () => {
   if (delayedMediaPrefetchStarted) return;
   delayedMediaPrefetchStarted = true;
@@ -122,6 +160,15 @@ const runDelayedMediaPrefetch = async () => {
   await runLoadersWithConcurrency(loaders, PREFETCH_CONCURRENCY);
 };
 
+/**
+ * Registers a loader function for delayed media prefetching.
+ *
+ * - Adds the loader to the registry if it's a valid function
+ * - Triggers prefetch immediately if the delayed event has already fired
+ * - Handles errors gracefully during prefetch triggering
+ *
+ * @param {Function} loader - The async loader function to register
+ */
 const registerDelayedMediaLoader = (loader) => {
   if (typeof loader !== 'function') return;
   delayedMediaRegistry.add(loader);
@@ -133,6 +180,13 @@ const registerDelayedMediaLoader = (loader) => {
   }
 };
 
+/**
+ * Binds a listener for the 'delayed-loaded' event to trigger media prefetch.
+ *
+ * - Prevents multiple bindings with a flag
+ * - Listens for the delayed-loaded event once
+ * - Runs prefetch when the event fires, handling errors gracefully
+ */
 const bindDelayedMediaListener = () => {
   if (delayedMediaListenerBound) return;
   delayedMediaListenerBound = true;
@@ -145,6 +199,16 @@ const bindDelayedMediaListener = () => {
   }, { once: true });
 };
 
+/**
+ * Synchronizes video control button visibility with video state.
+ *
+ * - Shows replay button when video has ended
+ * - Shows play button when video is paused
+ * - Shows pause button when video is playing
+ * - Hides irrelevant buttons based on current state
+ *
+ * @param {HTMLVideoElement} video - The video element to sync controls for
+ */
 const syncVideoControls = (video) => {
   if (!video) return;
   const container = video.closest('.media-block-video-container');
@@ -171,6 +235,16 @@ const syncVideoControls = (video) => {
   if (replayBtn) replayBtn.style.display = 'none';
 };
 
+/**
+ * Synchronizes video playback within an accordion context.
+ *
+ * - Pauses all videos outside the active container
+ * - Plays the video in the active container if present
+ * - Updates control visibility for all affected videos
+ * - Handles play promise rejections gracefully
+ *
+ * @param {HTMLElement} activeContainer - The currently active media container
+ */
 const syncAccordionVideoPlayback = (activeContainer) => {
   if (!activeContainer) return;
   const accordionContainer = activeContainer.closest('.feature-accordion-item-container');
@@ -193,6 +267,14 @@ const syncAccordionVideoPlayback = (activeContainer) => {
   }
 };
 
+/**
+ * Binds event delegation for media control buttons and video events.
+ *
+ * - Handles click events for play, pause, and replay buttons
+ * - Listens for video play, pause, and ended events
+ * - Updates control visibility and video state accordingly
+ * - Uses capture phase for reliable event handling
+ */
 const bindMediaControlDelegation = () => {
   if (mediaControlDelegationBound) return;
   mediaControlDelegationBound = true;
@@ -257,6 +339,16 @@ const bindMediaControlDelegation = () => {
   }, true);
 };
 
+/**
+ * Syncs CTA-related dataset attributes from container to group element.
+ *
+ * - Copies visibility, text, hyperlink, and font color data
+ * - Only copies attributes that exist on the container
+ * - Used to propagate CTA settings to the group wrapper
+ *
+ * @param {HTMLElement} container - The source container element
+ * @param {HTMLElement} group - The target group element
+ */
 const syncContainerCtaDatasetToGroup = (container, group) => {
   if (!container || !group) return;
   CTA_DATA_KEYS.forEach((key) => {
@@ -266,6 +358,17 @@ const syncContainerCtaDatasetToGroup = (container, group) => {
   });
 };
 
+/**
+ * Creates a CTA (Call-to-Action) element for the accordion.
+ *
+ * - Returns null if visibility is not 'show' or required fields are missing
+ * - Creates a wrapper div with link, text span, and arrow icon
+ * - Applies custom font color if provided
+ * - Includes proper ARIA attributes for accessibility
+ *
+ * @param {Object} dataset - The dataset object containing CTA configuration
+ * @returns {HTMLElement|null} The created CTA element or null
+ */
 const createAccordionCta = (dataset) => {
   if (!dataset || dataset.ctavisiblity !== 'show') return null;
   const text = dataset.ctatext?.trim();
@@ -309,6 +412,17 @@ const createAccordionCta = (dataset) => {
   return wrapper;
 };
 
+/**
+ * Ensures a CTA element is present in the accordion list group.
+ *
+ * - Syncs dataset from container to group
+ * - Removes existing CTA if new one is null
+ * - Creates and appends new CTA if valid
+ * - Replaces existing CTA with new one if both exist
+ *
+ * @param {HTMLElement} container - The accordion container
+ * @param {HTMLElement} group - The accordion group element
+ */
 const ensureAccordionListCta = (container, group) => {
   if (!container || !group) return;
   syncContainerCtaDatasetToGroup(container, group);
@@ -324,6 +438,17 @@ const ensureAccordionListCta = (container, group) => {
   group.append(cta);
 };
 
+/**
+ * Ensures the accordion group wrapper structure exists.
+ *
+ * - Creates list-group wrapper for accordion items if missing
+ * - Creates media-group wrapper for shared media if missing
+ * - Moves existing wrappers into the group structure
+ * - Ensures CTA is properly set up in the group
+ *
+ * @param {HTMLElement} block - The accordion block element
+ * @returns {Object|null} Object with container, group, and mediaGroup elements
+ */
 const ensureAccordionGroupWrapper = (block) => {
   const container = block.closest('.feature-accordion-item-container');
   if (!container) return null;
@@ -350,8 +475,30 @@ const ensureAccordionGroupWrapper = (block) => {
 };
 
 // Variant-2 compact markup: top-level model occupies first 7 rows.
+/**
+ * Detects sub-item rows in compact markup variant.
+ *
+ * - Filters rows starting from index 7 (after top-level config)
+ * - Requires at least 5 cells per row for valid sub-items
+ * - Used for nested accordion structures
+ *
+ * @param {HTMLElement} block - The accordion block element
+ * @returns {HTMLElement[]} Array of sub-item row elements
+ */
 const detectSubItemRows = (block) => [...block.children].filter((row, index) => index >= 7 && row.children.length >= 5);
 
+/**
+ * Ensures a nested wrapper exists for sub-item rows.
+ *
+ * - Creates the wrapper div if it doesn't exist
+ * - Inserts the wrapper before the first sub-item row
+ * - Moves all sub-item rows into the wrapper
+ * - Returns the wrapper element
+ *
+ * @param {HTMLElement} block - The accordion block element
+ * @param {HTMLElement[]} subItemRows - Array of sub-item row elements
+ * @returns {HTMLElement|null} The nested wrapper element
+ */
 const ensureNestedWrapper = (block, subItemRows) => {
   if (!block || !subItemRows.length) return null;
 
@@ -369,6 +516,18 @@ const ensureNestedWrapper = (block, subItemRows) => {
   return nestedWrapper;
 };
 
+/**
+ * Ensures a top content wrapper exists for accordion rows.
+ *
+ * - Creates the wrapper div if it doesn't exist
+ * - Inserts the wrapper before the first row
+ * - Moves all connected rows into the wrapper
+ * - Returns the wrapper element
+ *
+ * @param {HTMLElement} block - The accordion block element
+ * @param {HTMLElement[]} rows - Array of row elements to wrap
+ * @returns {HTMLElement|null} The content wrapper element
+ */
 const ensureTopContentWrapper = (block, rows) => {
   if (!block || !rows.length) return null;
 
@@ -389,6 +548,16 @@ const ensureTopContentWrapper = (block, rows) => {
   return contentWrapper;
 };
 
+/**
+ * Converts a table cell to a field value object.
+ *
+ * - Extracts both HTML and text content
+ * - Trims whitespace from both values
+ * - Returns empty strings if cell is null
+ *
+ * @param {HTMLElement} cell - The table cell element
+ * @returns {Object} Object with html and text properties
+ */
 const toFieldValue = (cell) => {
   if (!cell) return { html: '', text: '' };
   return {
@@ -397,6 +566,17 @@ const toFieldValue = (cell) => {
   };
 };
 
+/**
+ * Parses sub-item configuration from a compact row.
+ *
+ * - Builds configs using different field order patterns
+ * - Handles legacy and parent color variants
+ * - Scores configs by field completeness
+ * - Returns the best matching configuration
+ *
+ * @param {HTMLElement} row - The compact row element
+ * @returns {Object|null} The parsed sub-item configuration
+ */
 const parseSubItemFromCompactRow = (row) => {
   const cells = [...row.children];
   if (cells.length < 5) return null;
@@ -441,6 +621,17 @@ const parseSubItemFromCompactRow = (row) => {
   ), configs[0]);
 };
 
+/**
+ * Resolves a fragment URL to a full path.
+ *
+ * - Returns absolute URLs unchanged
+ * - Resolves relative paths using page base path
+ * - Handles AEM author environment path adjustments
+ * - Constructs full URLs for relative fragments
+ *
+ * @param {string} fragmentUrl - The fragment URL to resolve
+ * @returns {string} The resolved full path
+ */
 const resolveFragmentPath = (fragmentUrl) => {
   let path = fragmentUrl;
   if (!fragmentUrl || fragmentUrl.startsWith('http')) return path;
@@ -457,6 +648,16 @@ const resolveFragmentPath = (fragmentUrl) => {
   return path;
 };
 
+/**
+ * Extracts plain text path from HTML content.
+ *
+ * - Creates a temporary div to parse HTML
+ * - Returns the text content trimmed
+ * - Returns empty string if no HTML provided
+ *
+ * @param {string} html - The HTML content to extract from
+ * @returns {string} The extracted text path
+ */
 const extractPathFromHtml = (html) => {
   if (!html) return '';
   const wrapper = document.createElement('div');
@@ -464,17 +665,48 @@ const extractPathFromHtml = (html) => {
   return wrapper.textContent?.trim() || '';
 };
 
+/**
+ * Checks if a value is likely a fragment path.
+ *
+ * - Validates string input and trims whitespace
+ * - Recognizes relative paths (./), absolute paths (/), and URLs (http)
+ * - Returns false for empty or non-string inputs
+ *
+ * @param {string} value - The value to check
+ * @returns {boolean} True if the value appears to be a path
+ */
 const isLikelyFragmentPath = (value) => {
   if (!value || typeof value !== 'string') return false;
   const path = value.trim();
   return path.startsWith('./') || path.startsWith('/') || path.startsWith('http');
 };
 
+/**
+ * Gets a likely path from a table cell.
+ *
+ * - Extracts both text and HTML content from the cell
+ * - Checks both for valid path patterns
+ * - Returns the first valid path found or empty string
+ *
+ * @param {HTMLElement} cell - The table cell element
+ * @returns {string} The extracted path or empty string
+ */
 const getLikelyPathFromCell = (cell) => {
   const value = toFieldValue(cell);
   return [value.text, extractPathFromHtml(value.html)].find(isLikelyFragmentPath) || '';
 };
 
+/**
+ * Resolves cell indexes for sub-item content.
+ *
+ * - Finds the media cell by detecting path content
+ * - Calculates relative positions for header, subtitle, info
+ * - Provides fallback positioning if media detection fails
+ * - Returns an object with index mappings
+ *
+ * @param {HTMLElement[]} cells - Array of cell elements
+ * @returns {Object} Object with header, subtitle, info, and media indexes
+ */
 const resolveSubItemCellIndexes = (cells) => {
   const mediaIndex = cells.findIndex((cell) => isLikelyFragmentPath(getLikelyPathFromCell(cell)));
   const safeMediaIndex = mediaIndex >= 3 ? mediaIndex : Math.min(4, Math.max(cells.length - 1, 0));
@@ -487,6 +719,18 @@ const resolveSubItemCellIndexes = (cells) => {
   };
 };
 
+/**
+ * Makes an element an interactive accordion trigger.
+ *
+ * - Sets ARIA attributes for accessibility
+ * - Handles click and keyboard events (Enter/Space)
+ * - Manages focus when opening panels
+ * - Calls the provided toggle callback
+ *
+ * @param {HTMLElement} el - The element to make interactive
+ * @param {Function} onToggle - Callback function called with new expanded state
+ * @param {boolean} initialOpen - Initial expanded state
+ */
 const makeInteractiveTrigger = (el, onToggle, initialOpen = false) => {
   if (!el) return;
   el.setAttribute('role', 'button');
@@ -498,6 +742,23 @@ const makeInteractiveTrigger = (el, onToggle, initialOpen = false) => {
     const next = !expanded;
     el.setAttribute('aria-expanded', next ? 'true' : 'false');
     onToggle(next);
+
+    // Focus management: If opening, focus first content element
+    if (next) {
+      requestAnimationFrame(() => {
+        const panel = el.closest('.feature-accordion-item__entry')
+          ?.querySelector('.feature-accordion-item__panel-row');
+        if (panel) {
+          const focusable = panel.querySelector('a, button, [tabindex]');
+          if (focusable) {
+            focusable.focus();
+          } else {
+            panel.setAttribute('tabindex', '-1');
+            panel.focus();
+          }
+        }
+      });
+    }
   };
 
   el.addEventListener('click', handler);
@@ -509,6 +770,20 @@ const makeInteractiveTrigger = (el, onToggle, initialOpen = false) => {
   });
 };
 
+/**
+ * Animates a row's expand/collapse with staggered timing.
+ *
+ * - Supports immediate state changes without animation
+ * - Uses max-height and opacity transitions
+ * - Applies staggered delays for sequential animations
+ * - Manages animation state to prevent conflicts
+ *
+ * @param {HTMLElement} row - The row element to animate
+ * @param {boolean} open - Whether to expand or collapse
+ * @param {boolean} immediate - Skip animation if true
+ * @param {number} index - Position in animation sequence
+ * @param {number} total - Total number of rows animating
+ */
 const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
   if (!row) return;
   const currentState = rowAnimationState.get(row);
@@ -598,21 +873,46 @@ const reserveMediaSpace = (cell) => {
 
 const renderIntoTarget = (target, fragment, fallbackHtml = '') => {
   if (!target) return;
+
+  // Add aria-live for status updates
+  if (!target.hasAttribute('aria-live')) {
+    target.setAttribute('aria-live', 'polite');
+    target.setAttribute('aria-atomic', 'true');
+  }
+  target.setAttribute('aria-busy', 'true');
+
   target.classList.remove('is-media-enter');
   target.classList.add('is-media-switching');
   target.innerHTML = '';
+
   if (fragment instanceof HTMLTemplateElement) {
     target.append(fragment.content.cloneNode(true));
   } else if (fragment?.childNodes?.length) {
     target.append(...fragment.childNodes);
   } else if (fallbackHtml) {
-    target.innerHTML = fallbackHtml;
+    // Sanitize HTML content to prevent XSS
+    if (window.DOMPurify) {
+      target.innerHTML = window.DOMPurify.sanitize(fallbackHtml);
+    } else {
+      // Fallback: create wrapper to safely handle content
+      const wrapper = document.createElement('div');
+      wrapper.textContent = fallbackHtml;
+      target.append(wrapper);
+      // eslint-disable-next-line no-console
+      console.warn('DOMPurify not available - content rendered as text only');
+    }
   }
+
   // Force style recalc so transition class restarts reliably.
   // eslint-disable-next-line no-unused-expressions
   target.offsetHeight;
   target.classList.add('is-media-enter');
   target.classList.remove('is-media-switching');
+
+  // Clear busy state when rendering completes
+  requestAnimationFrame(() => {
+    target.setAttribute('aria-busy', 'false');
+  });
 };
 
 const activateMediaGroupSlot = (slot) => {
