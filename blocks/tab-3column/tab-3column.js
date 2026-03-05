@@ -171,7 +171,7 @@ function setupInteraction(componentEl) {
     return;
   }
 
-  // ── Tablet (750px – 1023px): swiper, no centeredSlides ───────
+  // ── Tablet (750px – 1280px): swiper, no centeredSlides ───────
   // tabs keep their natural width, arrows appear only when overflowing
   const swiperWrapper = document.createElement('div');
   swiperWrapper.className = 'swiper-wrapper';
@@ -212,7 +212,10 @@ function setupInteraction(componentEl) {
           const btn = s.clickedSlide?.querySelector('.tab3col-tab-btn');
           if (btn) {
             const idx = tabBtns.indexOf(btn);
-            if (idx !== -1) activateTab(idx, tabBtns, panels);
+            if (idx !== -1) {
+              activateTab(idx, tabBtns, panels);
+              s.slideTo(idx, 300);
+            }
           }
         },
       },
@@ -333,8 +336,6 @@ async function decoratePage(block) {
   const componentHtml = document.createRange().createContextualFragment(`
       <div
         class="tab3col-component box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full md:max-w-[896px] lg:max-w-[1260px] sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid ${colorGroup}"
-        data-motion="${motionEnabled}"
-        data-icon="${tabIconEnabled}"
         ${inlineStyle ? `style="${inlineStyle.trim()}"` : ''}
       >
         <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] lg:relative md:flex-row md:w-full md:top-0 md:z-10 sm:flex-row md:gap-[20px] sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10">
@@ -342,7 +343,7 @@ async function decoratePage(block) {
             ${tabBtnsHtml}
           </div>
         </div>
-        <div class="tab3col-panels w-full lg:grow"></div>
+        <div class="tab3col-panels ${motionEnabled ? 'transition-all' : ''} w-full lg:grow"></div>
       </div>`);
 
   // ── Move block-level instrumentation to component wrapper ────
