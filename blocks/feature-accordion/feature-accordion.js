@@ -1,5 +1,6 @@
 export default function decorate(block) {
   try {
+    console.log('feature accordion section', block);
     const [col1, col2] = [...block.children];
     const config = block.dataset;
     if (col1) {
