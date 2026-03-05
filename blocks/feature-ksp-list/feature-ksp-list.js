@@ -69,17 +69,17 @@ const setupAnimation = (block) => {
 /**
  * Handle animation execution
  */
-const handleMotion = (block) => {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setupAnimation(block);
-    });
-  } else {
-    setTimeout(() => {
-      setupAnimation(block);
-    }, 0);
-  }
-};
+// const handleMotion = (block) => {
+//   if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', () => {
+//       setupAnimation(block);
+//     });
+//   } else {
+//     setTimeout(() => {
+//       setupAnimation(block);
+//     }, 0);
+//   }
+// };
 
 /**
  * Main decorate function
