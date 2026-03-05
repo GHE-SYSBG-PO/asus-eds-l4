@@ -86,6 +86,16 @@ const handleMotion = (block) => {
  */
 export default async function decorate(block) {
   try {
+    // Detect Universal Editor authoring mode
+    const isAuthorMode = document.body.classList.contains('adobe-ue-edit')
+      || window.location.pathname.includes('.html');
+
+    if (isAuthorMode) {
+      // In author mode: preserve DOM structure for content tree
+      block.classList.add('feature-ksp-list', 'feature-ksp-list--author-mode');
+      return;
+    }
+
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'feature-ksp-list');
     const v = getFieldValue(config);
 
