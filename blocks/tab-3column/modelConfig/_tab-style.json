@@ -6,13 +6,13 @@
       "name": "tabStyleTab"
     },
     {
-      "...": "./_tab-container.json#/fields"
-    },
-    {
       "component": "boolean",
       "label": "icon (yes/no)",
       "name": "tabIconEnabled",
       "valueType": "boolean"
+    },
+    {
+      "...": "./_tab-container.json#/fields"
     },
     {
       "component": "container",

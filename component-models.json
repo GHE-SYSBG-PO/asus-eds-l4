@@ -721,6 +721,7 @@
         "component": "container",
         "label": "width setting",
         "name": "widthSettingBasic",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
@@ -742,6 +743,7 @@
         "component": "container",
         "label": "tab bar (T/M)",
         "name": "tabBarBgColorTM",
+        "collapsible": true,
         "fields": [
           {
             "component": "text",
@@ -763,6 +765,12 @@
         "component": "tab",
         "label": "tab style",
         "name": "tabStyleTab"
+      },
+      {
+        "component": "boolean",
+        "label": "icon (yes/no)",
+        "name": "tabIconEnabled",
+        "valueType": "boolean"
       },
       {
         "component": "container",
@@ -825,12 +833,6 @@
             "valueType": "string"
           }
         ]
-      },
-      {
-        "component": "boolean",
-        "label": "icon (yes/no)",
-        "name": "tabIconEnabled",
-        "valueType": "boolean"
       },
       {
         "component": "container",
