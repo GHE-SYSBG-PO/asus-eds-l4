@@ -45,6 +45,12 @@
     ]
   },
   {
+    "id": "nav-hero",
+    "components": [
+      "nav-hero-item"
+    ]
+  },
+  {
     "id": "feature-accordion",
     "components": [
       "feature-accordion-item"
