@@ -1,132 +1,156 @@
 // ============================================================
 // ID:15 TAB_3COLUMN
 // ============================================================
+// Depends on theme.scss — all --cs-* and --brand-* tokens
+// are defined there. No hex values in this file.
+// ============================================================
 
-// ============================================================
-// Brand Tokens — ASUS Light
-// ============================================================
-// .l4-pdp[data-product="asus"][data-mode="light"],
-// .l4-pdp[data-product="asus"] .section-light {
-//   .tab3col-component {
-//     --tab3col-tab-bg-from-hover: #4379b1;
-//     --tab3col-tab-bg-to-hover: #5977a1;
-//     --tab3col-tab-bg-from-select: #4379b1;
-//     --tab3col-tab-bg-to-select: #5977a1;
-//     --tab3col-tab-border-from-default: #00438a;
-//     --tab3col-tab-border-to-default: #00438a;
-//     --tab3col-tab-border-from-hover: #4379b1;
-//     --tab3col-tab-border-to-hover: #5977a1;
-//     --tab3col-tab-border-from-select: #4379b1;
-//     --tab3col-tab-border-to-select: #5977a1;
-//   }
-// }
-
-// ============================================================
-// Brand Tokens — ASUS Dark
-// ============================================================
-// .l4-pdp[data-product="asus"][data-mode="dark"],
-// .l4-pdp[data-product="asus"] .section-dark {
-//   .tab3col-component {
-//     --tab3col-tab-bg-from-hover: #4379b1;
-//     --tab3col-tab-bg-to-hover: #5977a1;
-//     --tab3col-tab-bg-from-select: #4379b1;
-//     --tab3col-tab-bg-to-select: #5977a1;
-//     --tab3col-tab-border-from-default: #00438a;
-//     --tab3col-tab-border-to-default: #00438a;
-//     --tab3col-tab-border-from-hover: #4379b1;
-//     --tab3col-tab-border-to-hover: #5977a1;
-//     --tab3col-tab-border-from-select: #4379b1;
-//     --tab3col-tab-border-to-select: #5977a1;
-//   }
-// }
-
-// ProArt / ROG / TUF — reserved, fill later
-// (same variable structure as ASUS above)
-// .l4-pdp[data-product="proart"][data-mode="light"],
-// .l4-pdp[data-product="proart"] .section-light {
-//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
-// }
-// .l4-pdp[data-product="proart"][data-mode="dark"],
-// .l4-pdp[data-product="proart"] .section-dark {
-//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
-// }
-// .l4-pdp[data-product="rog"][data-mode="light"],
-// .l4-pdp[data-product="rog"] .section-light {
-//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
-// }
-// .l4-pdp[data-product="rog"][data-mode="dark"],
-// .l4-pdp[data-product="rog"] .section-dark {
-//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
-// }
-// .l4-pdp[data-product="tuf"][data-mode="light"],
-// .l4-pdp[data-product="tuf"] .section-light {
-//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
-// }
-// .l4-pdp[data-product="tuf"][data-mode="dark"],
-// .l4-pdp[data-product="tuf"] .section-dark {
-//   .tab3col-component { --tab3col-tab-bg-from-hover: ; --tab3col-tab-bg-to-hover: ; ... }
-// }
-
-// ============================================================
-// Component
-// ============================================================
 .l4-pdp {
-  // ── CSS variables (not expressible in Tailwind) ─────────────
+  // ============================================================
+  // Layer 3 — Component variable mapping
+  // Reads from Color_Light / Color_Dark tables.
+  // All values reference --cs-* or --brand-* from theme.scss.
+  // ============================================================
+
+  // ── Fixed: identical across all products and modes ──────────
   .tab3col-component {
     container-type: inline-size;
 
-    --tab3col-gap: 40px;
+    // tab style/tab container/border/width = 1px (all products)
     --tab3col-tab-border-width-default: 1px;
     --tab3col-tab-border-width-hover: 1px;
     --tab3col-tab-border-width-select: 1px;
-    --tab3col-tab-color-default: #4a4a4a;
-    --tab3col-tab-color-hover: #fff;
-    --tab3col-tab-color-select: #fff;
-    --tab3col-tab-border-color-default: #00438a;
-    --tab3col-tab-border-color-hover: #00438a;
-    --tab3col-tab-border-color-select: #00438a;
+
+    // tab style/tab container/border/color — hover & press = "-" (none)
+    --tab3col-tab-border-from-hover: transparent;
+    --tab3col-tab-border-to-hover: transparent;
+    --tab3col-tab-border-from-select: transparent;
+    --tab3col-tab-border-to-select: transparent;
+
+    // tab style/tab container/bg-color — default = "-" (none)
     --tab3col-tab-bg-default: transparent;
-    --tab3col-tab-bg-hover: #4379b1;
-    --tab3col-tab-bg-select: #4379b1;
-    --tab3col-tab-bar-bg-t: #fff;
-    --tab3col-tab-bar-bg-m: #fff;
-    --tab3col-title-color: #181818;
-    --tab3col-info-color: #4a4a4a;
-    --tab3col-arrow-color: #00438a;
-
-    // bg gradient stops — hover & select independent
-    --tab3col-tab-bg-from-hover: #4379b1;
-    --tab3col-tab-bg-to-hover: #4379b1;
-    --tab3col-tab-bg-from-select: #4379b1;
-    --tab3col-tab-bg-to-select: #4379b1;
-
-    // border gradient stops per state
-    --tab3col-tab-border-from-default: #00438a;
-    --tab3col-tab-border-to-default: #00438a;
-    --tab3col-tab-border-from-hover: #00438a;
-    --tab3col-tab-border-to-hover: #00438a;
-    --tab3col-tab-border-from-select: #00438a;
-    --tab3col-tab-border-to-select: #00438a;
 
     @media (width <= 730px) {
       width: 420px;
     }
   }
 
-  // ── Tab list: hide scrollbar (not expressible in Tailwind) ──
+  // ── Shared light + dark: CS_token → tab3col ─────────────────
+  // tab bar bg, tab text color, title, info are identical across
+  // all 4 products — only mode (light/dark) changes the value.
+  // Values cascade from theme.scss Layer 1.
+  &[data-mode="light"],
+  & .section-light,
+  &[data-mode="dark"],
+  & .section-dark {
+    .tab3col-component {
+      // tab bar(T/M)/bg-color → background/White or Black
+      --tab3col-tab-bar-bg-t: var(--cs-background);
+      --tab3col-tab-bar-bg-m: var(--cs-background);
+
+      // tab style/tab text/font-color
+      --tab3col-tab-color-default: var(--cs-button-neutral-outlined-label);
+      --tab3col-tab-color-hover: var(--cs-button-neutral-filled-label);
+      --tab3col-tab-color-select: var(--cs-button-neutral-filled-label);
+
+      // tab/title → text/primary
+      --tab3col-title-color: var(--cs-text-primary);
+
+      // tab/info → text/secondary
+      --tab3col-info-color: var(--cs-text-secondary);
+    }
+  }
+
+  // ── ASUS + ProArt: tab container/radius = 999 ───────────────
+  &[data-product="asus"],
+  &[data-product="proart"] {
+    .tab3col-component {
+      --tab3col-tab-radius: 999px;
+    }
+  }
+
+  // ── ROG + TUF: tab container/radius = 0 ─────────────────────
+  &[data-product="rog"],
+  &[data-product="tuf"] {
+    .tab3col-component {
+      --tab3col-tab-radius: 0px;
+    }
+  }
+
+  // ── ASUS / ProArt / ROG: brand token → tab3col ──────────────
+  // tab border default → brand btn outline default
+  // tab bg hover       → brand btn default
+  // tab bg press       → brand btn press
+  // arrow              → brand footnote arrow default
+  &[data-product="asus"],
+  &[data-product="proart"],
+  &[data-product="rog"] {
+    .tab3col-component {
+      --tab3col-tab-border-from-default: var(--brand-btn-outline-default-from);
+      --tab3col-tab-border-to-default: var(--brand-btn-outline-default-to);
+      --tab3col-tab-bg-from-hover: var(--brand-btn-default-from);
+      --tab3col-tab-bg-to-hover: var(--brand-btn-default-to);
+      --tab3col-tab-bg-from-select: var(--brand-btn-press-from);
+      --tab3col-tab-bg-to-select: var(--brand-btn-press-to);
+      --tab3col-arrow-color: var(--brand-footnote-arrow-default);
+    }
+  }
+
+  // ── TUF ──────────────────────────────────────────────────────
+  // border default → Button/neutral/outlined/border (--cs-*)
+  // arrow          → Button/neutral/outlined/border (--cs-*)
+  // bg hover/press light → Button/neutral/filled/container (--cs-*)
+  // bg hover/press dark  → brand btn dark (--brand-*)
+  &[data-product="tuf"] {
+    .tab3col-component {
+      --tab3col-tab-border-from-default: var(
+        --cs-button-neutral-outlined-border
+      );
+      --tab3col-tab-border-to-default: var(--cs-button-neutral-outlined-border);
+      --tab3col-arrow-color: var(--cs-button-neutral-outlined-border);
+    }
+
+    &[data-mode="light"],
+    & .section-light {
+      .tab3col-component {
+        // tab bg hover/press → Button/neutral/filled/container (Layer 1 cs token)
+        --tab3col-tab-bg-from-hover: var(--cs-button-neutral-filled-container);
+        --tab3col-tab-bg-to-hover: var(--cs-button-neutral-filled-container);
+        --tab3col-tab-bg-from-select: var(
+          --cs-button-neutral-filled-container-press
+        );
+        --tab3col-tab-bg-to-select: var(
+          --cs-button-neutral-filled-container-press
+        );
+      }
+    }
+
+    &[data-mode="dark"],
+    & .section-dark {
+      .tab3col-component {
+        // tab bg hover/press → brand btn dark (Layer 2 brand token)
+        --tab3col-tab-bg-from-hover: var(--brand-btn-default-from);
+        --tab3col-tab-bg-to-hover: var(--brand-btn-default-to);
+        --tab3col-tab-bg-from-select: var(--brand-btn-press-from);
+        --tab3col-tab-bg-to-select: var(--brand-btn-press-to);
+      }
+    }
+  }
+
+  // ============================================================
+  // Component styles
+  // ============================================================
+
+  // ── Tab list: hide scrollbar ──────────────────────────────
   .tab3col-tab-list {
     &::-webkit-scrollbar {
       display: none;
     }
   }
 
-  // ── Tab button: gradient bg + gradient border via ::before ────
-  // Gradient border technique:
-  //   - button itself: border:none, position:relative
-  //   - ::before: absolute inset, gradient background = border visual
-  //     -webkit-mask + mask-composite: exclude → only border area shows
+  // ── Tab bar ───────────────────────────────────────────────
   .tab3col-tab-bar {
-    &.is-scroll{
+    &.is-scroll {
       background: var(--tab3col-tab-bar-bg-m);
 
       @media (width > 730px) {
@@ -134,14 +158,18 @@
       }
     }
 
+    // Gradient border technique:
+    //   button: border:none, position:relative
+    //   ::before: absolute inset with gradient bg
+    //   mask-composite:exclude → only border area visible
     .tab3col-tab-btn {
       position: relative;
       z-index: 0;
       border: none;
+      border-radius: var(--tab3col-tab-radius, 999px);
       color: var(--tab3col-tab-color-default, inherit);
       background: var(--tab3col-tab-bg-default, transparent);
 
-      // Gradient border layer
       &::before {
         content: "";
         position: absolute;
@@ -198,9 +226,8 @@
     }
   }
 
-  // ── Mobile Swiper tab navigation ────────────────────────────
-  // Mobile: each slide takes full container width (slidesPerView: 1)
-  .swiper-wrapper{
+  // ── Swiper ────────────────────────────────────────────────
+  .swiper-wrapper {
     align-items: center;
   }
 
@@ -208,7 +235,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width:auto;
+    width: auto;
   }
 
   .tab3col-swiper-prev,
@@ -230,7 +257,6 @@
       fill: currentcolor;
     }
 
-    // disabled: fully invisible (not pointer-events, just opacity 0)
     &.tab3col-swiper-btn-hidden {
       opacity: 0;
       pointer-events: none;
@@ -257,39 +283,39 @@
     }
   }
 
-  .tab3col-swiper-prev::before {
-    transform: rotate(180deg) translateX(-50px);
+  .tab3col-swiper-prev {
+    &::before {
+      transform: rotate(180deg) translateX(-50px);
+    }
   }
 
+  // ── Panel fade transition ─────────────────────────────────
   .tab3col-panel {
-    display: none;     
+    display: none;
 
     &.is-active {
       display: flex;
       opacity: 1;
     }
 
-    // Keep in layout while fading out (opacity 0 via transition)
     &.tab3col-panel-fade-out {
       display: flex;
       opacity: 0;
       transition: opacity 0.25s ease;
     }
 
-    // Step 1 of fade-in: in layout but invisible (no transition yet)
     &.tab3col-panel-fade-in {
       display: flex;
       opacity: 0;
-    }
 
-    // Step 2 of fade-in: trigger opacity transition to 1
-    &.tab3col-panel-fade-in.tab3col-panel-visible {
-      opacity: 1;
-      transition: opacity 0.25s ease;
+      &.tab3col-panel-visible {
+        opacity: 1;
+        transition: opacity 0.25s ease;
+      }
     }
   }
 
-  // ── Text colors (var-based) ──────────────────────────────────
+  // ── Typography ────────────────────────────────────────────
   .tab3col-title {
     color: var(--tab3col-title-color, inherit);
   }
