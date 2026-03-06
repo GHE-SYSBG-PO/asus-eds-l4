@@ -2,15 +2,26 @@ import {
   getBlockConfigs, getFieldValue, getBlockRepeatConfigs, getBlockRepeatConfigsByDataAueProps,
 } from '../../scripts/utils.js';
 
+const BASIC_DEFAULTS = {
+  styleLayout: 1,
+  paddingTopDesktop: 120,
+  paddingTopTablet: 80,
+  paddingTopMobile: 64,
+  paddingBottomDesktop: 120,
+  paddingBottomTablet: 80,
+  paddingBottomMobile: 64,
+  imgWidth: 706,
+};
+
 // Advanced 字段的預設配置
 const ADVANCED_DEFAULTS = {
   titleFontDTselect: 'ro-md-14-sh',
   titleFontMselect: 'small_ro-md-13',
   infoFontDTselect: 'ro-rg-13',
   infoFontMselect: 'small_ro-rg-12',
-  titleFontColor: '',
-  infoFontColor: '',
-  circleNameColorM: '',
+  titleFontColor: '#000',
+  infoFontColor: '#000',
+  circleNameColorM: '#000',
 };
 
 /**
@@ -266,7 +277,7 @@ const generatePictureHtml = ({
     : `block h-auto mx-auto ${defaultClasses.responsive}`;
 
   return `
-    <div class="block relative left-1/2 transform -translate-x-1/2" 
+    <div class="line-info-item block relative"
       ${imgWidthStyle ? `style="${imgWidthStyle}"` : `class="${finalImgClasses}"`}>
       <picture>
         ${mobileSource}
@@ -371,7 +382,6 @@ const generateTextItemsHtml = ({
       textWidth,
     });
 
-    // 基礎類名
     let itemClasses = 'absolute flex flex-col bg-[#F23711] pointer-events-auto';
     let customStyles = '';
 
@@ -421,8 +431,9 @@ const generateTextItemsHtml = ({
           }
         }
 
-        // 預設寬度設定
-        itemClasses += ' w-[16.6%] max-w-[276px] ';
+        // 預設寬度設定 - 使用 CSS calc() 計算 grid 容器的2格寬度
+        itemClasses += ' max-w-[276px]';
+        // customStyles += 'width: calc(var(--grid-col-width, 8.33%) * 2); ';
 
         if (customStyles.includes('--')) {
           responsiveStyle = `
@@ -489,8 +500,9 @@ const generateTextItemsHtml = ({
             customStyles += `--width-md: ${customStyle}; --width-lg: ${customStyle};`;
           }
         } else {
-          // 預設寬度
-          itemClasses += ' w-1/6 max-w-xs';
+          // 預設寬度 - 2格 grid 寬度
+          itemClasses += ' max-w-[276px]';
+          customStyles += 'width: calc(var(--grid-col-width, 8.33%) * 2); ';
         }
         break;
       }
@@ -512,7 +524,7 @@ const generateTextItemsHtml = ({
 
     return `
       ${responsiveStyle}
-      <div class="${itemClasses} ${itemId}" ${styleAttribute}>
+      <div class="text-item ${itemClasses} ${itemId}" ${styleAttribute}>
         <div class="title mb-2 w-full ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${titleRichtext}</div>
         <div class="info w-full ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${infoRichtext}</div>
       </div>
@@ -551,15 +563,15 @@ export default async function decorate(block) {
 
     // 3. Get Layout Styles (RWD breakpoints)
     // Padding values for different breakpoints
-    const paddingTopDesktop = v('paddingTopDesktop');
-    const paddingTopTablet = v('paddingTopTablet');
-    const paddingTopMobile = v('paddingTopMobile');
-    const paddingBottomDesktop = v('paddingBottomDesktop');
-    const paddingBottomTablet = v('paddingBottomTablet');
-    const paddingBottomMobile = v('paddingBottomMobile');
+    const paddingTopDesktop = v('paddingTopDesktop') || BASIC_DEFAULTS.paddingTopDesktop;
+    const paddingTopTablet = v('paddingTopTablet') || BASIC_DEFAULTS.paddingTopTablet;
+    const paddingTopMobile = v('paddingTopMobile') || BASIC_DEFAULTS.paddingTopMobile;
+    const paddingBottomDesktop = v('paddingBottomDesktop') || BASIC_DEFAULTS.paddingBottomDesktop;
+    const paddingBottomTablet = v('paddingBottomTablet') || BASIC_DEFAULTS.paddingBottomTablet;
+    const paddingBottomMobile = v('paddingBottomMobile') || BASIC_DEFAULTS.paddingBottomMobile;
 
-    const imgWidth = v('imgWidth');
-    const textWidthPercent = v('textWidthPercent');
+    const imgWidth = v('imgWidth') || BASIC_DEFAULTS.imgWidth;
+    const textWidthPercent = v('textWidthPercent') || BASIC_DEFAULTS.textWidthPercent;
 
     // 4. Get Multifield Data (L4TagMulti- rows or data-aue-prop format)
     // Try new format first (data-aue-prop), then fall back to L4TagMulti- format
@@ -599,7 +611,7 @@ export default async function decorate(block) {
     });
 
     // 7. 生成容器的 Tailwind 響應式類名
-    let containerClasses = `relative w-full max-w-screen-xl mx-auto box-border line-info--style${styleLayout} ${blockId}`;
+    let containerClasses = `grid grid-cols-12 relative w-full max-w-screen-xl mx-auto box-border line-info--style${styleLayout} ${blockId}`;
     let containerStyles = '';
 
     // 處理 padding-top
@@ -636,33 +648,37 @@ export default async function decorate(block) {
     containerStyles = `${paddingTopCustom}${paddingBottomCustom}`.trim();
 
     // 生成響應式 CSS 變數樣式
-    let responsiveContainerStyle = '';
+    let responsiveContainerStyle = `
+      <style>
+        .${blockId} {
+          --grid-col-width: 8.33%; /* 100% / 12 = 8.33% per grid column */
+          ${containerStyles}
+        }`;
+
     if (containerStyles) {
-      responsiveContainerStyle = `
-        <style>
+      responsiveContainerStyle += `
+        @media (min-width: 768px) {
           .${blockId} {
-            ${containerStyles}
+            padding-top: var(--padding-top-md, auto);
+            padding-bottom: var(--padding-bottom-md, auto);
           }
-          @media (min-width: 768px) {
-            .${blockId} {
-              padding-top: var(--padding-top-md, auto);
-              padding-bottom: var(--padding-bottom-md, auto);
-            }
+        }
+        @media (min-width: 1280px) {
+          .${blockId} {
+            padding-top: var(--padding-top-lg, auto);
+            padding-bottom: var(--padding-bottom-lg, auto);
           }
-          @media (min-width: 1280px) {
-            .${blockId} {
-              padding-top: var(--padding-top-lg, auto);
-              padding-bottom: var(--padding-bottom-lg, auto);
-            }
-          }
-        </style>
-      `;
+        }`;
     }
+
+    responsiveContainerStyle += `
+      </style>
+    `;
 
     // 8. Render with Tailwind classes
     block.innerHTML = `
       ${responsiveContainerStyle}
-      <div class="${containerClasses}">
+      <div class="line-info-block ${containerClasses}">
         ${pictureHtml}
       </div>
     `;
