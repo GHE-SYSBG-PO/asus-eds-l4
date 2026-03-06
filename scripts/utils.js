@@ -395,11 +395,11 @@ export const getBlockRepeatConfigs = (block) => {
  * Syntax:
  *   //[id=VALUE]content//
  *   - Delimited by opening and closing //
- *   - [id=VALUE] sets the id attribute on the parent element
- *   - content is the text that remains after processing
+ *   - [id=VALUE] transforms into footnote link structure
  *
  * Example:
- *   <sup>//[id=100]some link//</sup>  →  <sup id="100">some link</sup>
+ *   <sup>//[id=dynamic id]some link//</sup>
+ *   → <sup class="footnote-num"><a href="#footnote-dynamicid" class="footnote-dynamicid" aria-label="Footnote dynamicid">dynamicid</a></sup>
  *
  * @param {HTMLElement} container - The container element to process
  */
@@ -428,15 +428,31 @@ export const processInlineIdSyntax = (container) => {
     pattern.lastIndex = 0;
     let match = pattern.exec(originalText);
     while (match !== null) {
-      const [fullMatch, id, content] = match;
-      parent.id = id;
-      // Use a function to avoid $ being interpreted as a replacement pattern
-      newText = newText.replace(fullMatch, () => content);
+      const [fullMatch, id] = match;
+      // Sanitize id: remove spaces and special chars, keep alphanumeric and dashes
+      const sanitizedId = id.replace(/[^a-zA-Z0-9-]/g, '').toLowerCase();
+
+      // Create footnote link structure wrapped in <sup> with class
+      const footnoteLink = `<sup class="footnote-num"><a href="#footnote-${sanitizedId}" class="footnote-${sanitizedId}" aria-label="Footnote ${sanitizedId}" tabindex="-1" style="scroll-margin-top: 12px;">[${sanitizedId}]</a></sup>`;
+
+      // Replace the full match with the footnote link
+      newText = newText.replace(fullMatch, footnoteLink);
+
       match = pattern.exec(originalText);
     }
 
     if (newText !== originalText) {
-      textNode.textContent = newText;
+      // Create a temporary container to parse the HTML
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = newText;
+
+      // Replace the text node with the parsed content
+      while (tempDiv.firstChild) {
+        parent.insertBefore(tempDiv.firstChild, textNode);
+      }
+      textNode.remove();
+
+      // class applied within markup, nothing else to do
     }
   });
 };

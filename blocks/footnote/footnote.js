@@ -135,7 +135,7 @@ export default async function decorate(block) {
         const normalizedId = sourceId.startsWith('footnote-')
           ? sourceId.slice('footnote-'.length)
           : sourceId;
-        const target = document.querySelector(`.footnote-${normalizedId}`);
+        const target = document.querySelector(`.footnote-num .footnote-${normalizedId}`);
         if (!target) return;
 
         scrollToTargetWithHeaderOffset(target);
