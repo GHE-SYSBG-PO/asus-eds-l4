@@ -47,6 +47,22 @@
       }
     },
     {
+      "title": "Nav Hero (ID:3)",
+      "id": "nav-hero",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Nav Hero",
+              "filter": "nav-hero",
+              "model": "nav-hero"
+            }
+          }
+        }
+      }
+    },
+    {
       "title": "Feature Accordion (ID:18)",
       "id": "feature-accordion",
       "plugins": {

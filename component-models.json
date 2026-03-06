@@ -4988,6 +4988,44 @@
     ]
   },
   {
+    "id": "nav-hero-item",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Item Name",
+        "name": "itemName",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Setion ID",
+        "name": "sectionId",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Jump Point Offset (D)",
+        "name": "jumpPointOffsetD",
+        "valueType": "string",
+        "placeholder": "px, default to 0 if not set"
+      },
+      {
+        "component": "text",
+        "label": "Jump Point Offset (T)",
+        "name": "jumpPointOffsetT",
+        "valueType": "string",
+        "placeholder": "px, default to 0 if not set"
+      },
+      {
+        "component": "text",
+        "label": "Jump Point Offset (M)",
+        "name": "jumpPointOffsetM",
+        "valueType": "string",
+        "placeholder": "px, default to 0 if not set"
+      }
+    ]
+  },
+  {
     "id": "small-cards",
     "fields": [
       {

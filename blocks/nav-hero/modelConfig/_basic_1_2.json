@@ -1,0 +1,115 @@
+{
+  "fields": [
+    {
+      "component": "container",
+      "label": "Item Top",
+      "name": "textContainerItemTop12",
+      "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "1",
+          "2"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Icon Color",
+          "name": "iconColor",
+          "valueType": "string"
+        }
+      ]
+    },
+
+    {
+      "component": "container",
+      "label": "Item Dot",
+      "name": "textContainerItemDot12",
+      "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "1",
+          "2"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Border Color - Default",
+          "name": "itemDotBorderColorDefault",
+          "valueType": "string",
+          "description": "* 框線在內"
+        },
+        {
+          "component": "text",
+          "label": "Border Color - Hover",
+          "name": "itemDotBorderColorHover",
+          "valueType": "string",
+          "description": "* 框線在內"
+        },
+        {
+          "component": "text",
+          "label": "Border Color - Select",
+          "name": "itemDotBorderColorSelect",
+          "valueType": "string",
+          "description": "* 框線在內"
+        },
+        {
+          "component": "text",
+          "label": "Bg Color - Default",
+          "name": "itemDotBgColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Bg Color - Hover",
+          "name": "itemDotBgColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Bg Color - Select",
+          "name": "itemDotBgColorSelect",
+          "valueType": "string"
+        }
+      ]      
+    },
+
+    {
+      "component": "container",
+      "label": "Item Label",
+      "name": "textContainerItemLabel12",
+      "collapsible": true,
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "1",
+          "2"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Bg Color",
+          "name": "ItemLabelBgColor",
+          "valueType": "string",
+          "description": "* 三裝置共用"
+        },
+        {
+          "component": "text",
+          "label": "Radius",
+          "name": "ItemLabelRadius",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

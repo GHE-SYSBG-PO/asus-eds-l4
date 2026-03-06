@@ -252,8 +252,40 @@ function getPageMetadata() {
   });
 }
 
+/**
+ * Initialize global GA click tracking for elements with the .wdga class
+ */
+function initGATracking() {
+  document.body.addEventListener('click', (e) => {
+    const el = e.target.closest('.wdga');
+
+    if (!el) return;
+
+    const category = el.getAttribute('data-category');
+    const action = el.getAttribute('data-action');
+    const galabel = el.getAttribute('data-galabel');
+    const eventname = el.getAttribute('data-eventname');
+
+    const pushData = {
+      event: 'data_layer_event',
+      event_name_ga4: eventname || 'click_tracking',
+      event_category_DL: category || 'buttons',
+      event_action_DL: action || 'clicked',
+      event_label_DL: galabel || '',
+      event_value_DL: 0,
+    };
+
+    // eslint-disable-next-line no-console
+    console.log('GA tracking - pushData', pushData);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(pushData);
+  });
+}
+
 async function loadPage() {
   getPageMetadata();
+  initGATracking();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();

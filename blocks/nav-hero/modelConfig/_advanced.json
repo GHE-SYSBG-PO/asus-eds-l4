@@ -1,0 +1,180 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    
+    {
+      "component": "container",
+      "label": "Item Top",
+      "name": "textContainerItemTop34",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "3", "4"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "itemTopStyle"
+              },
+              "default"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Item Top Width",
+          "name": "itemTopWidth",
+          "valueType": "string",
+          "placeholder": "[1x, px]"
+        },
+        {
+          "component": "text",
+          "label": "Item Top Height",
+          "name": "itemTopHeight",
+          "valueType": "string",
+          "placeholder": "[1x, px]"
+        },
+        {
+          "component": "text",
+          "label": "Item Top Asset",
+          "name": "itemTopAsset",
+          "valueType": "string",
+          "description": "* png/jpg/svg/webp/avif"
+        }
+      ]
+    },
+
+    {
+      "component": "container",
+      "label": "Item Dot",
+      "name": "textContainerItemDot34Advanced",
+      "collapsible": true,
+       "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "3", "4"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "itemDotStyle"
+              },
+              "default"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Item Dot Width",
+          "name": "itemDotWidth",
+          "valueType": "string",
+          "placeholder": "[1x, px]"
+        },
+        {
+          "component": "text",
+          "label": "Item Dot Height",
+          "name": "itemDotHeight",
+          "valueType": "string",
+          "placeholder": "[1x, px]"
+        },
+        {
+          "component": "text",
+          "label": "Item Dot Asset Default",
+          "name": "itemDotAssetDefault",
+          "valueType": "string",
+          "description": "* png/jpg/svg/webp/avif"
+        },
+        {
+          "component": "text",
+          "label": "Item Dot Asset Hover",
+          "name": "itemDotAssetHover",
+          "valueType": "string",
+          "description": "* png/jpg/svg/webp/avif"
+        },
+        {
+          "component": "text",
+          "label": "Item Dot Asset Select ",
+          "name": "itemDotAssetSelect",
+          "valueType": "string",
+          "description": "* png/jpg/svg/webp/avif"
+        }
+      ]
+    },
+
+    {
+      "component": "container",
+      "label": "Top Img",
+      "name": "textContainerTopImg34",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "3", "4"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "itemImgStyle"
+              },
+              "default"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "Top Width",
+          "name": "topImgWidth",
+          "valueType": "string",
+          "placeholder": "[1x, px]"
+        },
+        {
+          "component": "text",
+          "label": "Top Height",
+          "name": "topImgHeight",
+          "valueType": "string",
+          "placeholder": "[1x, px]"
+        },
+        {
+          "component": "text",
+          "label": "Top Img Asset",
+          "name": "topImgAsset",
+          "valueType": "string",
+          "description": "* png/jpg/svg/webp/avif"
+        }
+      ]
+    }
+    
+  ]
+}

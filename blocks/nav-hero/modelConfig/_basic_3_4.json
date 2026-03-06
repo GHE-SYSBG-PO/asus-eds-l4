@@ -1,0 +1,188 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "item Top Style",
+      "name": "itemTopStyle",
+      "valueType": "string",
+      "options": [
+        { "name": "Default", "value": "default" },
+        { "name": "Customized", "value": "customized" }
+      ],
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "3",
+          "4"
+        ]
+      }
+    },
+
+    {
+      "component": "text",
+      "label": "item Top Icon Color",
+      "name": "itemTopIconColor",
+      "valueType": "string",
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              "3",
+              "4"
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "itemTopStyle"
+              },
+              "default"
+            ]
+          }
+        ]
+      }
+    },
+
+    {
+      "component": "select",
+      "label": "item Dot Style",
+      "name": "itemDotStyle",
+      "valueType": "string",
+      "options": [
+        { "name": "Default", "value": "default" },
+        { "name": "Customized", "value": "customized" }
+      ],
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "3",
+          "4"
+        ]
+      }
+    },
+
+    {
+      "component": "container",
+      "label": "Item Dot",
+      "name": "textContainerItemDot34Basic",
+      "collapsible": false,
+      "fields": [
+        {
+          "component": "text",
+          "label": "Border Color Default",
+          "name": "borderColorDefault",
+          "valueType": "string",
+          "description": "* 框線在內"
+        },
+        {
+          "component": "text",
+          "label": "Border Color Hover",
+          "name": "borderColorHover",
+          "valueType": "string",
+          "description": "* 框線在內"
+        },
+        {
+          "component": "text",
+          "label": "Border Color Select",
+          "name": "borderColorSelect",
+          "valueType": "string",
+          "description": "* 框線在內"
+        },
+        {
+          "component": "text",
+          "label": "Bg Color Default",
+          "name": "bgColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Bg Color Hover",
+          "name": "bgColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Bg Color Select",
+          "name": "bgColorSelect",
+          "valueType": "string"
+        }
+      ],
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              "3",
+              "4"
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "itemDotStyle"
+              },
+              "default"
+            ]
+          }
+        ]
+      }
+    },
+
+    {
+      "component": "select",
+      "label": "item Img Style",
+      "name": "itemImgStyle",
+      "valueType": "string",
+      "options": [
+        { "name": "Default", "value": "default" },
+        { "name": "Customized", "value": "customized" }
+      ],
+      "condition": {
+        "===": [
+          {
+            "var": "styleLayout"
+          },
+          "3",
+          "4"
+        ]
+      }
+    },
+
+    {
+      "component": "text",
+      "label": "Top Img Color",
+      "name": "topImgColor",
+      "valueType": "string",
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              "3",
+              "4"
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "itemImgStyle"
+              },
+              "default"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
