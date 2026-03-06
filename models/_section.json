@@ -84,7 +84,7 @@
       "id": "tab-3column",
       "fields": [
         {
-          "...": "./_tab-3column.json#/fields"        
+          "...": "./_tab-3column.json#/fields"
         }
       ]
     },
@@ -92,7 +92,7 @@
       "id": "feature-accordion",
       "fields": [
         {
-          "...": "./_feature-accordion.json#/fields"        
+          "...": "./_feature-accordion.json#/fields"
         }
       ]
     }
@@ -118,6 +118,7 @@
         "footnote",
         "featureitem-block",
         "feature-ksp-list",
+        "line-info",
         "small-cards",
         "effect-media"
       ]
@@ -139,7 +140,8 @@
       "components": [
         "feature-accordion-item"
       ]
-    },{
+    },
+    {
       "id": "feature-accordion-item",
       "components": [
         "feature-accordion-sub-item"

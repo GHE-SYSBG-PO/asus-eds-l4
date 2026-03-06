@@ -577,7 +577,7 @@ export default async function decorate(block) {
     // Try new format first (data-aue-prop), then fall back to L4TagMulti- format
     const textItemsKey = `textItems${styleLayout}`;
     let textItems = parseL4TagMulti(block);
-
+    // console.log('textItems', textItems);
     // If new format returned empty, try old L4TagMulti- format
     if (textItems.length === 0) {
       const [oldFormatItems = []] = getBlockRepeatConfigs(block);
