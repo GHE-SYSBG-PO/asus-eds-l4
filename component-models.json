@@ -4465,16 +4465,37 @@
             "multi": false
           },
           {
+            "component": "text",
+            "label": "img width(D)",
+            "name": "assetDesktopImgWidth",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
             "component": "reference",
             "label": "asset (T)",
             "name": "assetTablet",
             "multi": false
           },
           {
+            "component": "text",
+            "label": "img width(T)",
+            "name": "assetTabletImgWidth",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
             "component": "reference",
             "label": "asset (M)",
             "name": "assetMobile",
             "multi": false
+          },
+          {
+            "component": "text",
+            "label": "img width(M)",
+            "name": "assetMobileImgWidth",
+            "valueType": "string",
+            "placeholder": "px"
           }
         ]
       },
@@ -4496,53 +4517,42 @@
             "label": "top padding(T)",
             "name": "paddingTopTablet",
             "valueType": "string",
-            "placeholder": "%|px|vh|vw|em|rem"
+            "placeholder": "%|px"
           },
           {
             "component": "text",
             "label": "top padding(M)",
             "name": "paddingTopMobile",
             "valueType": "string",
-            "placeholder": "%|px|vh|vw|em|rem"
+            "placeholder": "%|px"
           },
           {
             "component": "text",
             "label": "bottom padding(D)",
             "name": "paddingBottomDesktop",
             "valueType": "string",
-            "placeholder": "%|px|vh|vw|em|rem"
+            "placeholder": "%|px"
           },
           {
             "component": "text",
             "label": "bottom padding(T)",
             "name": "paddingBottomTablet",
             "valueType": "string",
-            "placeholder": "%|px|vh|vw|em|rem"
+            "placeholder": "%|px"
           },
           {
             "component": "text",
             "label": "bottom padding(M)",
             "name": "paddingBottomMobile",
             "valueType": "string",
-            "placeholder": "%|px|vh|vw|em|rem"
+            "placeholder": "%|px"
           },
           {
             "component": "text",
             "label": "img width",
             "name": "imgWidth",
             "valueType": "string",
-            "placeholder": "%|px|vh|vw|em|rem",
-            "condition": {
-              "in": [
-                {
-                  "var": "styleLayout"
-                },
-                [
-                  "1",
-                  "2"
-                ]
-              ]
-            }
+            "placeholder": "px"
           },
           {
             "component": "text",
@@ -5121,21 +5131,21 @@
           },
           {
             "component": "text",
-            "label": "width",
+            "label": "border width",
             "name": "dialogBoxBorderWidth",
             "valueType": "string",
             "placeholder": "px"
           },
           {
             "component": "text",
-            "label": "color",
+            "label": "border color",
             "name": "dialogBoxBorderColor",
             "valueType": "string",
             "placeholder": "#000"
           },
           {
             "component": "text",
-            "label": "bg color",
+            "label": "background color",
             "name": "dialogBoxBgColor",
             "valueType": "string",
             "placeholder": "#000"
@@ -5167,22 +5177,6 @@
             "name": "dialogBoxPaddingBottom",
             "valueType": "string",
             "placeholder": "px"
-          },
-          {
-            "valueType": "string",
-            "component": "select",
-            "label": "content alignment (left/center)",
-            "name": "dialogBoxContentAlignment",
-            "options": [
-              {
-                "name": "left",
-                "value": "left"
-              },
-              {
-                "name": "center",
-                "value": "center"
-              }
-            ]
           }
         ]
       },
@@ -5307,6 +5301,31 @@
         "name": "circleNameColorM",
         "valueType": "string",
         "placeholder": "#000"
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
       },
       {
         "component": "text",

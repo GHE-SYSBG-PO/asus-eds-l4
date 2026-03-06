@@ -174,19 +174,19 @@
       ]
     },
     {
-      "...": "./textItem1Fields.json#/fields"
+      "...": "./_textItem1Fields.json#/fields"
     },
     {
-      "...": "./textItem2Fields.json#/fields"
+      "...": "./_textItem2Fields.json#/fields"
     },
     {
-      "...": "./textItem3Fields.json#/fields"
+      "...": "./_textItem3Fields.json#/fields"
     },
     {
-      "...": "./textItem4Fields.json#/fields"
+      "...": "./_textItem4Fields.json#/fields"
     },
     {
-      "...": "./textItem5Fields.json#/fields"
+      "...": "./_textItem5Fields.json#/fields"
     },
     {
       "...": "./_dialogBoxStyle.json#/fields"
