@@ -29,7 +29,8 @@
       "featureitem-block",
       "feature-ksp-list",
       "small-cards",
-      "effect-media"
+      "effect-media",
+      "medium-cards"
     ]
   },
   {
@@ -127,6 +128,12 @@
     "id": "tab-3column-item",
     "components": [
       "media-block"
+    ]
+  },
+  {
+    "id": "medium-cards",
+    "components": [
+      "medium-card"
     ]
   }
 ]
