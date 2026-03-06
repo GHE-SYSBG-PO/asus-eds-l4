@@ -147,7 +147,7 @@
           {
             "===": [
               {
-                "var": "itemImgStyle"
+                "var": "topImgStyle"
               },
               "customized"
             ]
