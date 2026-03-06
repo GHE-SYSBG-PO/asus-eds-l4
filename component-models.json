@@ -1015,6 +1015,570 @@
     ]
   },
   {
+    "id": "nav-hero",
+    "fields": [
+      {
+        "component": "hidden",
+        "name": "style",
+        "value": "L4CustomSection-nav-hero"
+      },
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "select",
+        "label": "layout group",
+        "name": "styleLayout",
+        "valueType": "string",
+        "placeholder": "default(Variant 1 - Generic Style)",
+        "options": [
+          {
+            "name": "Variant 1 - Generic Style",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 - default_2 style",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 - ROG/cutomized_style_1",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 - ROG/cutomized_style_2",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Bar Bg",
+        "name": "textContainerBg",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "Bg Color",
+            "name": "bgColor",
+            "valueType": "string",
+            "placeholder": ""
+          },
+          {
+            "component": "text",
+            "label": "Opacity",
+            "name": "opacity",
+            "valueType": "string",
+            "placeholder": "[0-1]"
+          },
+          {
+            "component": "text",
+            "label": "Radius",
+            "name": "radius",
+            "valueType": "string",
+            "placeholder": "(左上/右上/右下/左下)"
+          },
+          {
+            "component": "text",
+            "label": "Width",
+            "name": "width",
+            "valueType": "string",
+            "value": "24px",
+            "description": "* default=24px"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Item Top",
+        "name": "textContainerItemTop12",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "styleLayout"
+            },
+            "1",
+            "2"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Icon Color",
+            "name": "iconColor",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Item Dot",
+        "name": "textContainerItemDot12",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "styleLayout"
+            },
+            "1",
+            "2"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Border Color - Default",
+            "name": "itemDotBorderColorDefault",
+            "valueType": "string",
+            "description": "* 框線在內"
+          },
+          {
+            "component": "text",
+            "label": "Border Color - Hover",
+            "name": "itemDotBorderColorHover",
+            "valueType": "string",
+            "description": "* 框線在內"
+          },
+          {
+            "component": "text",
+            "label": "Border Color - Select",
+            "name": "itemDotBorderColorSelect",
+            "valueType": "string",
+            "description": "* 框線在內"
+          },
+          {
+            "component": "text",
+            "label": "Bg Color - Default",
+            "name": "itemDotBgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bg Color - Hover",
+            "name": "itemDotBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bg Color - Select",
+            "name": "itemDotBgColorSelect",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Item Label",
+        "name": "textContainerItemLabel12",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "styleLayout"
+            },
+            "1",
+            "2"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Bg Color",
+            "name": "ItemLabelBgColor",
+            "valueType": "string",
+            "description": "* 三裝置共用"
+          },
+          {
+            "component": "text",
+            "label": "Radius",
+            "name": "ItemLabelRadius",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "item Top Style",
+        "name": "itemTopStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Customized",
+            "value": "customized"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "styleLayout"
+            },
+            "3",
+            "4"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "item Top Icon Color",
+        "name": "itemTopIconColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                "3",
+                "4"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "itemTopStyle"
+                },
+                "default"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "item Dot Style",
+        "name": "itemDotStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Customized",
+            "value": "customized"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "styleLayout"
+            },
+            "3",
+            "4"
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "Item Dot",
+        "name": "textContainerItemDot34Basic",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "text",
+            "label": "Border Color Default",
+            "name": "borderColorDefault",
+            "valueType": "string",
+            "description": "* 框線在內"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Hover",
+            "name": "borderColorHover",
+            "valueType": "string",
+            "description": "* 框線在內"
+          },
+          {
+            "component": "text",
+            "label": "Border Color Select",
+            "name": "borderColorSelect",
+            "valueType": "string",
+            "description": "* 框線在內"
+          },
+          {
+            "component": "text",
+            "label": "Bg Color Default",
+            "name": "bgColorDefault",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bg Color Hover",
+            "name": "bgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Bg Color Select",
+            "name": "bgColorSelect",
+            "valueType": "string"
+          }
+        ],
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                "3",
+                "4"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "itemDotStyle"
+                },
+                "default"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "item Img Style",
+        "name": "itemImgStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "Customized",
+            "value": "customized"
+          }
+        ],
+        "condition": {
+          "===": [
+            {
+              "var": "styleLayout"
+            },
+            "3",
+            "4"
+          ]
+        }
+      },
+      {
+        "component": "text",
+        "label": "Top Img Color",
+        "name": "topImgColor",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                "3",
+                "4"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "itemImgStyle"
+                },
+                "default"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "Item Top",
+        "name": "textContainerItemTop34",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "itemTopStyle"
+                },
+                "default"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Item Top Width",
+            "name": "itemTopWidth",
+            "valueType": "string",
+            "placeholder": "[1x, px]"
+          },
+          {
+            "component": "text",
+            "label": "Item Top Height",
+            "name": "itemTopHeight",
+            "valueType": "string",
+            "placeholder": "[1x, px]"
+          },
+          {
+            "component": "text",
+            "label": "Item Top Asset",
+            "name": "itemTopAsset",
+            "valueType": "string",
+            "description": "* png/jpg/svg/webp/avif"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Item Dot",
+        "name": "textContainerItemDot34Advanced",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "itemDotStyle"
+                },
+                "default"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Item Dot Width",
+            "name": "itemDotWidth",
+            "valueType": "string",
+            "placeholder": "[1x, px]"
+          },
+          {
+            "component": "text",
+            "label": "Item Dot Height",
+            "name": "itemDotHeight",
+            "valueType": "string",
+            "placeholder": "[1x, px]"
+          },
+          {
+            "component": "text",
+            "label": "Item Dot Asset Default",
+            "name": "itemDotAssetDefault",
+            "valueType": "string",
+            "description": "* png/jpg/svg/webp/avif"
+          },
+          {
+            "component": "text",
+            "label": "Item Dot Asset Hover",
+            "name": "itemDotAssetHover",
+            "valueType": "string",
+            "description": "* png/jpg/svg/webp/avif"
+          },
+          {
+            "component": "text",
+            "label": "Item Dot Asset Select ",
+            "name": "itemDotAssetSelect",
+            "valueType": "string",
+            "description": "* png/jpg/svg/webp/avif"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Top Img",
+        "name": "textContainerTopImg34",
+        "collapsible": true,
+        "condition": {
+          "and": [
+            {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "3",
+                  "4"
+                ]
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "itemImgStyle"
+                },
+                "default"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "Top Width",
+            "name": "topImgWidth",
+            "valueType": "string",
+            "placeholder": "[1x, px]"
+          },
+          {
+            "component": "text",
+            "label": "Top Height",
+            "name": "topImgHeight",
+            "valueType": "string",
+            "placeholder": "[1x, px]"
+          },
+          {
+            "component": "text",
+            "label": "Top Img Asset",
+            "name": "topImgAsset",
+            "valueType": "string",
+            "description": "* png/jpg/svg/webp/avif"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--nav-hero",
+        "hidden": true
+      }
+    ]
+  },
+  {
     "id": "feature-accordion",
     "fields": [
       {

@@ -105,6 +105,14 @@
       ]
     },
     {
+      "id": "nav-hero",
+      "fields": [
+        {
+          "...": "./_nav-hero.json#/fields"        
+        }
+      ]
+    },
+    {
       "id": "feature-accordion",
       "fields": [
         {
