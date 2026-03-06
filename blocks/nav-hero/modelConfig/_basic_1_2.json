@@ -6,7 +6,7 @@
       "name": "textContainerItemTop12",
       "collapsible": true,
       "condition": {
-        "===": [
+        "in": [
           {
             "var": "styleLayout"
           },
@@ -30,7 +30,7 @@
       "name": "textContainerItemDot12",
       "collapsible": true,
       "condition": {
-        "===": [
+        "in": [
           {
             "var": "styleLayout"
           },
@@ -87,7 +87,7 @@
       "name": "textContainerItemLabel12",
       "collapsible": true,
       "condition": {
-        "===": [
+        "in": [
           {
             "var": "styleLayout"
           },

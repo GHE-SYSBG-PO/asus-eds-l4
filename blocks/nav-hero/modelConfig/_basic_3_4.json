@@ -10,7 +10,7 @@
         { "name": "Customized", "value": "customized" }
       ],
       "condition": {
-        "===": [
+        "in": [
           {
             "var": "styleLayout"
           },
@@ -58,7 +58,7 @@
         { "name": "Customized", "value": "customized" }
       ],
       "condition": {
-        "===": [
+        "in": [
           {
             "var": "styleLayout"
           },
@@ -73,6 +73,27 @@
       "label": "Item Dot",
       "name": "textContainerItemDot34Basic",
       "collapsible": false,
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              "3",
+              "4"
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "itemDotStyle"
+              },
+              "default"
+            ]
+          }
+        ]
+      },
       "fields": [
         {
           "component": "text",
@@ -113,28 +134,7 @@
           "name": "bgColorSelect",
           "valueType": "string"
         }
-      ],
-      "condition": {
-        "and": [
-          {
-            "in": [
-              {
-                "var": "styleLayout"
-              },
-              "3",
-              "4"
-            ]
-          },
-          {
-            "===": [
-              {
-                "var": "itemDotStyle"
-              },
-              "default"
-            ]
-          }
-        ]
-      }
+      ]
     },
 
     {
@@ -147,7 +147,7 @@
         { "name": "Customized", "value": "customized" }
       ],
       "condition": {
-        "===": [
+        "in": [
           {
             "var": "styleLayout"
           },
