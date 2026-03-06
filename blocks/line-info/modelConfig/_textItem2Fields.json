@@ -1,0 +1,88 @@
+{
+  "desc": "for styleLayout = 2",
+  "fields": [
+    {
+      "component": "container",
+      "label": "Text Items",
+      "name": "textItems2",
+      "valueType": "string[]",
+      "multi": true,
+      "condition": {
+        "==": [
+          {
+            "var": "styleLayout"
+          },
+          "2"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems2LayoutStyle",
+          "value": "L4TagMulti-textItems2LayoutStyle",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "layout style (left/right)",
+          "name": "textItems2LayoutStyle",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems2YValue",
+          "value": "L4TagMulti-textItems2YValue",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value (top)(DT)",
+          "name": "textItems2YValue",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem",
+          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems2TitleRichtext",
+          "value": "L4TagMulti-textItems2TitleRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "title richtext",
+          "name": "textItems2TitleRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Item Title</p>",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems2InfoRichtext",
+          "value": "L4TagMulti-textItems2InfoRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "info richtext",
+          "name": "textItems2InfoRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Description text here...</p>",
+          "multi": false
+        }
+      ]
+    }
+  ]
+}

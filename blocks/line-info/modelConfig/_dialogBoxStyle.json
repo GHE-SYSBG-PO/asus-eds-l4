@@ -40,21 +40,21 @@
         },
         {
           "component": "text",
-          "label": "width",
+          "label": "border width",
           "name": "dialogBoxBorderWidth",
           "valueType": "string",
           "placeholder": "px"
         },
         {
           "component": "text",
-          "label": "color",
+          "label": "border color",
           "name": "dialogBoxBorderColor",
           "valueType": "string",
           "placeholder": "#000"
         },
         {
           "component": "text",
-          "label": "bg color",
+          "label": "background color",
           "name": "dialogBoxBgColor",
           "valueType": "string",
           "placeholder": "#000"
@@ -86,22 +86,6 @@
           "name": "dialogBoxPaddingBottom",
           "valueType": "string",
           "placeholder": "px"
-        },
-        {
-          "valueType": "string",
-          "component": "select",
-          "label": "content alignment (left/center)",
-          "name": "dialogBoxContentAlignment",
-          "options": [
-            {
-              "name": "left",
-              "value": "left"
-            },
-            {
-              "name": "center",
-              "value": "center"
-            }
-          ]
         }
       ]
     }

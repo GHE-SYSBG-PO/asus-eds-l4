@@ -1,0 +1,116 @@
+{
+  "desc": "for styleLayout = 3",
+  "fields": [
+    {
+      "component": "container",
+      "label": "Text Items",
+      "name": "textItems3",
+      "valueType": "string[]",
+      "multi": true,
+      "condition": {
+        "==": [
+          {
+            "var": "styleLayout"
+          },
+          "3"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems3Alignment",
+          "value": "L4TagMulti-textItems3Alignment",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "alignment (left/right)(DT)",
+          "name": "textItems3Alignment",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems3TextWidth",
+          "value": "L4TagMulti-textItems3TextWidth",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "text width (px)(DT)",
+          "name": "textItems3TextWidth",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems3XValue",
+          "value": "L4TagMulti-textItems3XValue",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "X value (left)(DT)",
+          "name": "textItems3XValue",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems3YValue",
+          "value": "L4TagMulti-textItems3YValue",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value (top)(DT)",
+          "name": "textItems3YValue",
+          "valueType": "string",
+          "placeholder": "%|px|vh|vw|em|rem",
+          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems3TitleRichtext",
+          "value": "L4TagMulti-textItems3TitleRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "title richtext",
+          "name": "textItems3TitleRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Item Title</p>",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems3InfoRichtext",
+          "value": "L4TagMulti-textItems3InfoRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "info richtext",
+          "name": "textItems3InfoRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Description text here...</p>",
+          "multi": false
+        }
+      ]
+    }
+  ]
+}
