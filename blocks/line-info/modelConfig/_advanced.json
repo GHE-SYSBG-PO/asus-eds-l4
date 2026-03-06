@@ -1,0 +1,126 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Advanced",
+      "name": "advancedTab"
+    },
+    {
+      "component": "container",
+      "label": "title richtext",
+      "name": "advancedTitleGroup",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font(DT)",
+          "name": "titleFontDTselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-14-sh",
+              "value": "ro-md-14-sh"
+            },
+            {
+              "name": "ro-md-16-sh",
+              "value": "ro-md-16-sh"
+            },
+            {
+              "name": "ro-md-18-sh",
+              "value": "ro-md-18-sh"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font(M)",
+          "name": "titleFontMselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-md-13",
+              "value": "small_ro-md-13"
+            },
+            {
+              "name": "ro-md-14-sh",
+              "value": "small_ro-md-14-sh"
+            },
+            {
+              "name": "ro-md-16-sh",
+              "value": "small_ro-md-16-sh"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font color",
+          "name": "titleFontColor",
+          "valueType": "string",
+          "placeholder": "#000"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "info richtext",
+      "name": "advancedInfoGroup",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font(DT)",
+          "name": "infoFontDTselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-rg-13",
+              "value": "ro-rg-13"
+            },
+            {
+              "name": "ro-md-14-sh",
+              "value": "ro-md-14-sh"
+            },
+            {
+              "name": "ro-md-16-sh",
+              "value": "ro-md-16-sh"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font(M)",
+          "name": "infoFontMselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "ro-rg-12",
+              "value": "small_ro-rg-12"
+            },
+            {
+              "name": "ro-rg-13",
+              "value": "small_ro-rg-13"
+            },
+            {
+              "name": "ro-rg-14-sh",
+              "value": "small_ro-rg-14-sh"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font color",
+          "name": "infoFontColor",
+          "valueType": "string",
+          "placeholder": "#000"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "circle num color(M)",
+      "name": "circleNameColorM",
+      "valueType": "string",
+      "placeholder": "#000"
+    }
+  ]
+}
