@@ -440,7 +440,9 @@
     max-width: 420px;
 
     .swiper-slide {
-      width: 260px;
+      width: calc(87.5vw - 20px);
+      min-width: 260px;
+      max-width: 400px;
       border-radius: var(--swiper-slide-border-radius);
     }
 
@@ -448,7 +450,13 @@
       max-width: 896px;
 
       .swiper-slide {
-        width: 326px;
+        width: 550px;
+        min-width: 550px;
+        max-width: 550px;
+
+        .block-content {
+          max-width: 480px;
+        }
       }
     }
 
@@ -456,7 +464,13 @@
       max-width: 1260px;
 
       .swiper-slide {
-        width: 407px;
+        width: calc(50% - 10px);
+        min-width: 550px;
+        max-width: 620px;
+
+        .block-content {
+          max-width: 480px;
+        }
       }
     }
 
