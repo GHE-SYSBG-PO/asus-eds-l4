@@ -136,57 +136,64 @@ function _handleCollapseClick(block) {
 
 function _getDialogConfig(data) {
   return {
-    // Basic config
-    // Basic config
-    styleLayout: data.stylelayout || '',
-    // Bar Bg
-    bgColor: data.bgcolor || '',
-    opacity: data.opacity || '',
-    radius: data.radius || '',
-    width: data.width || '24px',
+    basic: {
+      styleLayout: data.stylelayout || '1',
+      // Bar Bg
+      bgColor: data.bgcolor || '',
+      opacity: data.opacity || '',
+      radius: data.radius || '',
+      width: data.width || '24px',
 
-    // Item Top (1/2)
-    iconColor: data.iconcolor || '',
+      // Item Top (1/2)
+      iconColor: data.iconcolor || '',
 
-    // Item Dot (1/2)
-    itemDotBorderColorDefault: data.itemdotbordercolordefault || '',
-    itemDotBorderColorHover: data.itemdotbordercolorhover || '',
-    itemDotBorderColorSelect: data.itemdotbordercolorselect || '',
-    itemDotBgColorDefault: data.itemdotbgcolordefault || '',
-    itemDotBgColorHover: data.itemdotbgcolorhover || '',
-    itemDotBgColorSelect: data.itemdotbgcolorselect || '',
+      // Item Dot (1/2)
+      itemDotBorderColorDefault: data.itemdotbordercolordefault || '',
+      itemDotBorderColorHover: data.itemdotbordercolorhover || '',
+      itemDotBorderColorSelect: data.itemdotbordercolorselect || '',
+      itemDotBgColorDefault: data.itemdotbgcolordefault || '',
+      itemDotBgColorHover: data.itemdotbgcolorhover || '',
+      itemDotBgColorSelect: data.itemdotbgcolorselect || '',
 
-    // Item Label (1/2)
-    itemLabelBgColor: data.itemlabelbgcolor || '',
-    itemLabelRadius: data.itemlabelradius || '',
+      // Item Label (1/2)
+      itemLabelBgColor: data.itemlabelbgcolor || '',
+      itemLabelRadius: data.itemlabelradius || '',
 
-    // Item Top (3/4)
-    itemTopStyle: data.itemtopstyle || 'default',
-    itemTopIconColor: data.itemtopiconcolor || '',
-    itemTopWidth: data.itemtopwidth || '',
-    itemTopHeight: data.itemtopheight || '',
-    itemTopAsset: data.itemtopasset || '',
+      // Item Top (3/4)
+      itemTopStyle: data.itemtopstyle || 'default',
+      itemTopIconColor: data.itemtopiconcolor || '',
 
-    // Item Dot (3/4)
-    itemDotStyle: data.itemdotstyle || 'default',
-    borderColorDefault: data.bordercolordefault || '',
-    borderColorHover: data.bordercolorhover || '',
-    borderColorSelect: data.bordercolorselect || '',
-    bgColorDefault: data.bgcolordefault || '',
-    bgColorHover: data.bgcolorhover || '',
-    bgColorSelect: data.bgcolorselect || '',
-    itemDotWidth: data.itemdotwidth || '',
-    itemDotHeight: data.itemdotheight || '',
-    itemDotAssetDefault: data.itemdotassetdefault || '',
-    itemDotAssetHover: data.itemdotassethover || '',
-    itemDotAssetSelect: data.itemdotassetselect || '',
+      // Item Dot (3/4)
+      itemDotStyle: data.itemdotstyle || 'default',
+      borderColorDefault: data.bordercolordefault || '',
+      borderColorHover: data.bordercolorhover || '',
+      borderColorSelect: data.bordercolorselect || '',
+      bgColorDefault: data.bgcolordefault || '',
+      bgColorHover: data.bgcolorhover || '',
+      bgColorSelect: data.bgcolorselect || '',
 
-    // Top Img (3/4)
-    itemImgStyle: data.itemimgstyle || 'default',
-    topImgColor: data.topimgcolor || '',
-    topImgWidth: data.topimgwidth || '',
-    topImgHeight: data.topimgheight || '',
-    topImgAsset: data.topimgasset || '',
+      // Top Img (3/4)
+      topImgStyle: data.topimgstyle || 'default',
+      topImgColor: data.topimgcolor || '',
+    },
+    advanced: {
+      // Item Top (3/4)
+      itemTopWidth: data.itemtopwidth || '',
+      itemTopHeight: data.itemtopheight || '',
+      itemTopAsset: data.itemtopasset || '',
+
+      // Item Dot (3/4)
+      itemDotWidth: data.itemdotwidth || '',
+      itemDotHeight: data.itemdotheight || '',
+      itemDotAssetDefault: data.itemdotassetdefault || '',
+      itemDotAssetHover: data.itemdotassethover || '',
+      itemDotAssetSelect: data.itemdotassetselect || '',
+
+      // Top Img (3/4)
+      topImgWidth: data.topimgwidth || '',
+      topImgHeight: data.topimgheight || '',
+      topImgAsset: data.topimgasset || '',
+    },
   };
 }
 

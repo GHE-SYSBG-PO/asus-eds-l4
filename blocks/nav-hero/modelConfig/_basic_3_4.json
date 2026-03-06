@@ -5,6 +5,7 @@
       "label": "item Top Style",
       "name": "itemTopStyle",
       "valueType": "string",
+      "value": "default",
       "options": [
         { "name": "Default", "value": "default" },
         { "name": "Customized", "value": "customized" }
@@ -55,6 +56,7 @@
       "label": "item Dot Style",
       "name": "itemDotStyle",
       "valueType": "string",
+      "value": "default",
       "options": [
         { "name": "Default", "value": "default" },
         { "name": "Customized", "value": "customized" }
@@ -145,9 +147,10 @@
 
     {
       "component": "select",
-      "label": "item Img Style",
-      "name": "itemImgStyle",
+      "label": "top Img Style",
+      "name": "topImgStyle",
       "valueType": "string",
+      "value": "default",
       "options": [
         { "name": "Default", "value": "default" },
         { "name": "Customized", "value": "customized" }
@@ -186,7 +189,7 @@
           {
             "===": [
               {
-                "var": "itemImgStyle"
+                "var": "topImgStyle"
               },
               "default"
             ]
