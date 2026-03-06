@@ -6,6 +6,10 @@
 // ============================================================
 
 .l4-pdp {
+  .tab-3column,.tab-3column-item-container{
+    background-color: var(--color-mode);
+  }
+
   // ============================================================
   // Layer 3 — Component variable mapping
   // Reads from Color_Light / Color_Dark tables.
