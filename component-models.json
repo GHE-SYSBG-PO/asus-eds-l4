@@ -1224,10 +1224,8 @@
             {
               "var": "styleLayout"
             },
-            [
-              "3",
-              "4"
-            ]
+            "3",
+            "4"
           ]
         }
       },
@@ -1441,7 +1439,7 @@
                 {
                   "var": "itemTopStyle"
                 },
-                "default"
+                "customized"
               ]
             }
           ]
@@ -1493,7 +1491,7 @@
                 {
                   "var": "itemDotStyle"
                 },
-                "default"
+                "customized"
               ]
             }
           ]
@@ -1559,7 +1557,7 @@
                 {
                   "var": "itemImgStyle"
                 },
-                "default"
+                "customized"
               ]
             }
           ]

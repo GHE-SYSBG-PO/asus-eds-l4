@@ -29,7 +29,7 @@
               {
                 "var": "itemTopStyle"
               },
-              "default"
+              "customized"
             ]
           }
         ]
@@ -82,7 +82,7 @@
               {
                 "var": "itemDotStyle"
               },
-              "default"
+              "customized"
             ]
           }
         ]
@@ -149,7 +149,7 @@
               {
                 "var": "itemImgStyle"
               },
-              "default"
+              "customized"
             ]
           }
         ]
