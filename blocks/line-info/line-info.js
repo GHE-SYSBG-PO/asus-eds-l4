@@ -356,19 +356,20 @@ const generateTextItemsHtml = ({
     // eslint-disable-next-line no-console
     console.log(`\n=== Item ${index} ===`, item);
 
-    // Extract values from {html, text} format
-    const xValue = item.xValue?.text || '0';
-    const yValue = item.yValue?.text || '0';
-    const titleRichtext = item.titleRichtext?.html || '<p>Item Title</p>';
+    // Prefix for field names based on the current styleLayout
+    const prefix = `textItems${styleLayout}`;
 
-    // 根據 styleLayout 讀取對應的 infoRichtext 欄位
-    const infoRichtextFieldName = `infoRichtext${styleLayout}`;
-    const infoRichtext = item[infoRichtextFieldName]?.html || item.infoRichtext?.html || '<p>Description text here...</p>';
+    // Extract values with prefixed names
+    const xValue = item[`${prefix}XValue`]?.text || '0';
+    const yValue = item[`${prefix}YValue`]?.text || '0';
+    const titleRichtext = item[`${prefix}TitleRichtext`]?.html || '<p>Item Title</p>';
+    const infoRichtext = item[`${prefix}InfoRichtext`]?.html || '<p>Description text here...</p>';
 
-    const textWidth = item.textWidth?.text || 'auto';
-    const alignment = item.alignment?.text || 'left';
-    const side = item.side?.text || 'left';
-    const layoutStyle = item.layoutStyle?.text || 'left';
+    const textWidth = item[`${prefix}TextWidth`]?.text || 'auto';
+    const alignment = item[`${prefix}Alignment`]?.text || 'left';
+    const side = item[`${prefix}Side`]?.text || 'left';
+    const layoutStyle = item[`${prefix}LayoutStyle`]?.text || 'left';
+
     let responsiveStyle = '';
 
     // eslint-disable-next-line no-console
@@ -565,12 +566,10 @@ export default async function decorate(block) {
     // Padding values for different breakpoints
     const paddingTopDesktop = v('paddingTopDesktop') || BASIC_DEFAULTS.paddingTopDesktop;
     const paddingTopTablet = v('paddingTopTablet') || BASIC_DEFAULTS.paddingTopTablet;
-    const paddingTopMobile = v('paddingTopMobile') || BASIC_DEFAULTS.paddingTopMobile;
     const paddingBottomDesktop = v('paddingBottomDesktop') || BASIC_DEFAULTS.paddingBottomDesktop;
     const paddingBottomTablet = v('paddingBottomTablet') || BASIC_DEFAULTS.paddingBottomTablet;
-    const paddingBottomMobile = v('paddingBottomMobile') || BASIC_DEFAULTS.paddingBottomMobile;
 
-    const imgWidth = v('imgWidth') || BASIC_DEFAULTS.imgWidth;
+    const imgWidth = v('assetDesktopImgWidth') || v('imgWidth') || BASIC_DEFAULTS.imgWidth;
     const textWidthPercent = v('textWidthPercent') || BASIC_DEFAULTS.textWidthPercent;
 
     // 4. Get Multifield Data (L4TagMulti- rows or data-aue-prop format)
@@ -616,26 +615,22 @@ export default async function decorate(block) {
 
     // 處理 padding-top
     const paddingTopClasses = generateResponsiveClasses({
-      Mobile: paddingTopMobile,
       Tablet: paddingTopTablet,
       Desktop: paddingTopDesktop,
     }, 'padding-top');
 
     const paddingTopCustom = generateCustomStyles({
-      Mobile: paddingTopMobile,
       Tablet: paddingTopTablet,
       Desktop: paddingTopDesktop,
     }, 'padding-top');
 
     // 處理 padding-bottom
     const paddingBottomClasses = generateResponsiveClasses({
-      Mobile: paddingBottomMobile,
       Tablet: paddingBottomTablet,
       Desktop: paddingBottomDesktop,
     }, 'padding-bottom');
 
     const paddingBottomCustom = generateCustomStyles({
-      Mobile: paddingBottomMobile,
       Tablet: paddingBottomTablet,
       Desktop: paddingBottomDesktop,
     }, 'padding-bottom');

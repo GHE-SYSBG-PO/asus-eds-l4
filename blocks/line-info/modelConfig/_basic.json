@@ -88,31 +88,31 @@
       "fields": [
         {
           "component": "text",
-          "label": "top padding(D)",
+          "label": "top padding (D)",
           "name": "paddingTopDesktop",
           "valueType": "string",
           "placeholder": "%|px|vh|vw|em|rem"
         },
         {
           "component": "text",
-          "label": "top padding(T)",
+          "label": "top padding (T)",
           "name": "paddingTopTablet",
           "valueType": "string",
-          "placeholder": "%|px"
+          "placeholder": "%|px|vh|vw|em|rem"
         },
         {
           "component": "text",
-          "label": "bottom padding(D)",
+          "label": "bottom padding (D)",
           "name": "paddingBottomDesktop",
           "valueType": "string",
-          "placeholder": "%|px"
+          "placeholder": "%|px|vh|vw|em|rem"
         },
         {
           "component": "text",
-          "label": "bottom padding(T)",
+          "label": "bottom padding (T)",
           "name": "paddingBottomTablet",
           "valueType": "string",
-          "placeholder": "%|px"
+          "placeholder": "%|px|vh|vw|em|rem"
         },
         {
           "component": "text",
