@@ -1,6 +1,6 @@
 /* styles/theme.css */
 @layer theme {
-  .l4-pdp{
+  .l4-pdp {
     --color-primary: rgb(235 241 246 / 100%);
     --color-mode: #fff;
 
@@ -16,8 +16,431 @@
       --color-primary: rgb(255 158 27 / 70%);
     }
 
-    &[data-mode="dark"] {
+    &[data-mode="dark"],.section-dark {
       --color-mode: #000;
+    }
+
+    // ============================================================
+    // CS_styles — Color Palette
+    // ============================================================
+
+    // Gray
+    --cs-gray-10: #f5f5f5;
+    --cs-gray-20: #dcdcdc;
+    --cs-gray-30: #ccc;
+    --cs-gray-40: #b3b3b3;
+    --cs-gray-50: #999;
+    --cs-gray-60: #818181;
+    --cs-gray-70: #666;
+    --cs-gray-80: #4d4d4d;
+    --cs-gray-90: #262626;
+    --cs-gray-100: #181818;
+
+    // Cool
+    --cs-cool-100: #16151b;
+
+    // Neutral
+    --cs-white: #fff;
+    --cs-black: #000;
+
+    // ============================================================
+    // CS_token — Semantic tokens
+    // ============================================================
+
+    // ── Light mode ───────────────────────────────────────────
+    &[data-mode="light"],
+    & .section-light {
+      // background
+      --cs-background: var(--cs-white);
+
+      // text
+      --cs-text-primary: var(--cs-gray-100);
+      --cs-text-secondary: var(--cs-gray-80);
+      --cs-text-tertiary: var(--cs-gray-70);
+
+      // link/secondary
+      --cs-link-secondary: var(--cs-gray-100);
+      --cs-link-secondary-hover: var(--cs-gray-100);
+      --cs-link-secondary-press: var(--cs-gray-100);
+
+      // Button/neutral/filled/container
+      --cs-button-neutral-filled-container: var(--cs-gray-100);
+      --cs-button-neutral-filled-container-hover: var(--cs-gray-90);
+      --cs-button-neutral-filled-container-press: var(--cs-gray-90);
+
+      // Button/neutral/filled/label
+      --cs-button-neutral-filled-label: var(--cs-white);
+
+      // Button/neutral/outlined/label
+      --cs-button-neutral-outlined-label: var(--cs-gray-100);
+
+      // Button/neutral/outlined/border
+      --cs-button-neutral-outlined-border: var(--cs-gray-100);
+    }
+
+    // ── Dark mode ────────────────────────────────────────────
+    &[data-mode="dark"],
+    & .section-dark {
+      // background
+      --cs-background: var(--cs-black);
+
+      // text
+      --cs-text-primary: var(--cs-white);
+      --cs-text-secondary: var(--cs-gray-20);
+      --cs-text-tertiary: var(--cs-gray-50);
+
+      // link/secondary
+      --cs-link-secondary: var(--cs-white);
+      --cs-link-secondary-hover: var(--cs-white);
+      --cs-link-secondary-press: var(--cs-white);
+
+      // Button/neutral/filled/container
+      --cs-button-neutral-filled-container: var(--cs-white);
+      --cs-button-neutral-filled-container-hover: var(--cs-white);
+      --cs-button-neutral-filled-container-press: var(--cs-white);
+
+      // Button/neutral/filled/label
+      --cs-button-neutral-filled-label: var(--cs-gray-100);
+
+      // Button/neutral/outlined/label
+      --cs-button-neutral-outlined-label: var(--cs-white);
+
+      // Button/neutral/outlined/border
+      --cs-button-neutral-outlined-border: var(--cs-white);
+    }
+
+    // ============================================================
+    // awds_L4 — btn/utility tokens
+    // ============================================================
+
+    // ── Light mode ───────────────────────────────────────────
+    &[data-mode="light"],
+    & .section-light {
+      // btn/utility/container
+      --cs-btn-utility-container: rgb(255 255 255 / 75%);
+      --cs-btn-utility-container-hover: rgb(255 255 255 / 75%);
+      --cs-btn-utility-container-press: rgb(255 255 255 / 75%);
+      --cs-btn-utility-container-disable: rgb(203 205 221 / 42%);
+
+      // btn/utility/icon
+      --cs-btn-utility-icon: #2f2f2f;
+      --cs-btn-utility-icon-hover: #181818;
+      --cs-btn-utility-icon-press: #181818;
+      --cs-btn-utility-icon-disable: rgb(0 0 0 / 42%);
+
+      // btn/utility/border
+      --cs-btn-utility-border: #424242;
+      --cs-btn-utility-border-hover: #424242;
+      --cs-btn-utility-border-press: #424242;
+      --cs-btn-utility-border-disable: rgb(0 0 0 / 30%);
+    }
+
+    // ── Dark mode ────────────────────────────────────────────
+    &[data-mode="dark"],
+    & .section-dark {
+      // btn/utility/container
+      --cs-btn-utility-container: rgb(0 0 0 / 75%);
+      --cs-btn-utility-container-hover: rgb(0 0 0 / 75%);
+      --cs-btn-utility-container-press: rgb(0 0 0 / 75%);
+      --cs-btn-utility-container-disable: rgb(75 75 77 / 42%);
+
+      // btn/utility/icon
+      --cs-btn-utility-icon: #9c9c9c;
+      --cs-btn-utility-icon-hover: #d7d7d7;
+      --cs-btn-utility-icon-press: #d7d7d7;
+      --cs-btn-utility-icon-disable: rgb(255 255 255 / 42%);
+
+      // btn/utility/border
+      --cs-btn-utility-border: #808080;
+      --cs-btn-utility-border-hover: #808080;
+      --cs-btn-utility-border-press: #808080;
+      --cs-btn-utility-border-disable: rgb(255 255 255 / 42%);
+    }
+
+    // ============================================================
+    // Layer 2 — Product line brand tokens
+    // All variables use --brand-* prefix so component files can
+    // reference a single shared name regardless of product.
+    // Values are scoped per &[data-product] so the correct set
+    // cascades automatically.
+    // Gradient colors split into -from / -to.
+    // Empty cells in the table = token not defined, omitted.
+    // ============================================================
+
+    // ── ASUS ─────────────────────────────────────────────────
+    &[data-product="asus"] {
+      &[data-mode="light"],
+      & .section-light {
+        // title_Light: linear-gradient(90deg, #0062CD 0%, #004691 100%)
+        --brand-title-from: #0062cd;
+        --brand-title-to: #004691;
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #1284ff;
+
+        // btn_icon_Light
+        --brand-btn-icon-default: #325a85;
+        --brand-btn-icon-hover: #0e447c;
+        --brand-btn-icon-press: #0e447c;
+
+        // btn outline_Light: linear-gradient(90deg, ...)
+        --brand-btn-outline-default-from: #00438a;
+        --brand-btn-outline-default-to: #274568;
+        --brand-btn-outline-hover-from: #00346b;
+        --brand-btn-outline-hover-to: #192533;
+        --brand-btn-outline-press-from: #00346b;
+        --brand-btn-outline-press-to: #192533;
+
+        // btn_Light: linear-gradient(90deg, ...)
+        --brand-btn-default-from: #4379b1;
+        --brand-btn-default-to: #5977a1;
+        --brand-btn-hover-from: #566e91;
+        --brand-btn-hover-to: #0e447c;
+        --brand-btn-press-from: #566e91;
+        --brand-btn-press-to: #0e447c;
+
+        // footnote arrow
+        --brand-footnote-arrow-default: #0062cd;
+        --brand-footnote-arrow-hover: #287bd7;
+        --brand-footnote-arrow-press: #287bd7;
+      }
+
+      &[data-mode="dark"],
+      & .section-dark {
+        // title_Dark: linear-gradient(90deg, #C3E0FF 0%, #78BCFF 100%)
+        --brand-title-from: #c3e0ff;
+        --brand-title-to: #78bcff;
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #1284ff;
+
+        // btn_icon_Dark
+        --brand-btn-icon-default: #aac1df;
+        --brand-btn-icon-hover: #0e447c;
+        --brand-btn-icon-press: #0e447c;
+
+        // btn outline_Dark: linear-gradient(90deg, ...)
+        --brand-btn-outline-default-from: #a2c2e2;
+        --brand-btn-outline-default-to: #b2c0c7;
+        --brand-btn-outline-hover-from: #c8e1fa;
+        --brand-btn-outline-hover-to: #d8e0e4;
+        --brand-btn-outline-press-from: #c8e1fa;
+        --brand-btn-outline-press-to: #d8e0e4;
+
+        // btn_Dark: linear-gradient(90deg, ...)
+        --brand-btn-default-from: #476991;
+        --brand-btn-default-to: #5c6f80;
+        --brand-btn-hover-from: #98aaba;
+        --brand-btn-hover-to: #658dbc;
+        --brand-btn-press-from: #98aaba;
+        --brand-btn-press-to: #658dbc;
+
+        // footnote arrow
+        --brand-footnote-arrow-default: #0062cd;
+        --brand-footnote-arrow-hover: #287bd7;
+        --brand-footnote-arrow-press: #287bd7;
+      }
+    }
+
+    // ── ProArt ───────────────────────────────────────────────
+    &[data-product="proart"] {
+      &[data-mode="light"],
+      & .section-light {
+        // title_Light: linear-gradient(90deg, #6B4F35 0%, #8D684E 100%)
+        --brand-title-from: #6b4f35;
+        --brand-title-to: #8d684e;
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #a18264;
+
+        // btn_icon_Light
+        --brand-btn-icon-default: #6d5546;
+        --brand-btn-icon-hover: #654313;
+        --brand-btn-icon-press: #654313;
+
+        // btn outline_Light: linear-gradient(90deg, ...)
+        --brand-btn-outline-default-from: #663600;
+        --brand-btn-outline-default-to: #613d00;
+        --brand-btn-outline-hover-from: #2d1d01;
+        --brand-btn-outline-hover-to: #312415;
+        --brand-btn-outline-press-from: #2d1d01;
+        --brand-btn-outline-press-to: #312415;
+
+        // btn_Light: linear-gradient(90deg, ...)
+        --brand-btn-default-from: #806238;
+        --brand-btn-default-to: #87715a;
+        --brand-btn-hover-from: #654313;
+        --brand-btn-hover-to: #665441;
+        --brand-btn-press-from: #654313;
+        --brand-btn-press-to: #665441;
+
+        // footnote arrow
+        --brand-footnote-arrow-default: #936d51;
+        --brand-footnote-arrow-hover: #a88063;
+        --brand-footnote-arrow-press: #a88063;
+      }
+
+      &[data-mode="dark"],
+      & .section-dark {
+        // title_Dark: linear-gradient(90deg, #9F7A56 0%, #DFC9A9 100%)
+        --brand-title-from: #9f7a56;
+        --brand-title-to: #dfc9a9;
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #a18264;
+
+        // btn_icon_Dark
+        --brand-btn-icon-default: #a07f6a;
+        --brand-btn-icon-hover: #a49073;
+        --brand-btn-icon-press: #a49073;
+
+        // btn outline_Dark: linear-gradient(90deg, ...)
+        --brand-btn-outline-default-from: #dab983;
+        --brand-btn-outline-default-to: #d8c5ac;
+        --brand-btn-outline-hover-from: #dfc497;
+        --brand-btn-outline-hover-to: #f2e7d9;
+        --brand-btn-outline-press-from: #dfc497;
+        --brand-btn-outline-press-to: #f2e7d9;
+
+        // btn_Dark: linear-gradient(90deg, ...)
+        --brand-btn-default-from: #84643e;
+        --brand-btn-default-to: #7e6746;
+        --brand-btn-hover-from: #8f6e4d;
+        --brand-btn-hover-to: #a49073;
+        --brand-btn-press-from: #8f6e4d;
+        --brand-btn-press-to: #a49073;
+
+        // footnote arrow
+        --brand-footnote-arrow-default: #936d51;
+        --brand-footnote-arrow-hover: #a88063;
+        --brand-footnote-arrow-press: #a88063;
+      }
+    }
+
+    // ── ROG ──────────────────────────────────────────────────
+    &[data-product="rog"] {
+      &[data-mode="light"],
+      & .section-light {
+        // title_Light (single color)
+        --brand-title-from: #cc000e;
+        --brand-title-to: #cc000e;
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #e20004;
+
+        // btn_icon_Light
+        --brand-btn-icon-default: #b80003;
+        --brand-btn-icon-hover: #a8000c;
+        --brand-btn-icon-press: #a8000c;
+
+        // btn outline_Light (single color)
+        --brand-btn-outline-default-from: #8f0002;
+        --brand-btn-outline-default-to: #8f0002;
+        --brand-btn-outline-hover-from: #7d0003;
+        --brand-btn-outline-hover-to: #7d0003;
+        --brand-btn-outline-press-from: #7d0003;
+        --brand-btn-outline-press-to: #7d0003;
+
+        // btn_Light (single color)
+        --brand-btn-default-from: #db0004;
+        --brand-btn-default-to: #db0004;
+        --brand-btn-hover-from: #a8000c;
+        --brand-btn-hover-to: #a8000c;
+        --brand-btn-press-from: #a8000c;
+        --brand-btn-press-to: #a8000c;
+
+        // footnote arrow
+        --brand-footnote-arrow-default: #e20004;
+        --brand-footnote-arrow-hover: #ed0c10;
+        --brand-footnote-arrow-press: #ed0c10;
+      }
+
+      &[data-mode="dark"],
+      & .section-dark {
+        // title_Dark (single color)
+        --brand-title-from: #ff0f0f;
+        --brand-title-to: #ff0f0f;
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #e20004;
+
+        // btn_icon_Dark
+        --brand-btn-icon-default: #f33;
+        --brand-btn-icon-hover: #da1723;
+        --brand-btn-icon-press: #da1723;
+
+        // btn outline_Dark (single color)
+        --brand-btn-outline-default-from: #ff230f;
+        --brand-btn-outline-default-to: #ff230f;
+        --brand-btn-outline-hover-from: #ff4130;
+        --brand-btn-outline-hover-to: #ff4130;
+        --brand-btn-outline-press-from: #ff4130;
+        --brand-btn-outline-press-to: #ff4130;
+
+        // btn_Dark (single color)
+        --brand-btn-default-from: #d1000e;
+        --brand-btn-default-to: #d1000e;
+        --brand-btn-hover-from: #da1723;
+        --brand-btn-hover-to: #da1723;
+        --brand-btn-press-from: #da1723;
+        --brand-btn-press-to: #da1723;
+
+        // footnote arrow
+        --brand-footnote-arrow-default: #e20004;
+        --brand-footnote-arrow-hover: #ed0c10;
+        --brand-footnote-arrow-press: #ed0c10;
+      }
+    }
+
+    // ── TUF ──────────────────────────────────────────────────
+    &[data-product="tuf"] {
+      &[data-mode="light"],
+      & .section-light {
+        // title_Light: table empty, omitted
+        // btn_icon_Light: table empty, omitted
+        // btn outline_Light: table empty, omitted
+        // btn_Light: table empty, omitted
+        // footnote arrow: table empty, omitted
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #ff9e1b;
+      }
+
+      &[data-mode="dark"],
+      & .section-dark {
+        // title_Dark (single color)
+        --brand-title-from: #ff9e1b;
+        --brand-title-to: #ff9e1b;
+
+        // indicator progress bar
+        --brand-indicator-progress-bar: #ff9e1b;
+
+        // btn_icon_Dark
+        --brand-btn-icon-default: #ffad42;
+        --brand-btn-icon-hover: #d37b00;
+        --brand-btn-icon-press: #d37b00;
+
+        // btn outline_Dark (single color)
+        --brand-btn-outline-default-from: #ffad42;
+        --brand-btn-outline-default-to: #ffad42;
+        --brand-btn-outline-hover-from: #d37b00;
+        --brand-btn-outline-hover-to: #d37b00;
+        --brand-btn-outline-press-from: #d37b00;
+        --brand-btn-outline-press-to: #d37b00;
+
+        // btn_Dark (single color)
+        --brand-btn-default-from: #ff9e1b;
+        --brand-btn-default-to: #ff9e1b;
+        --brand-btn-hover-from: #d37b00;
+        --brand-btn-hover-to: #d37b00;
+        --brand-btn-press-from: #d37b00;
+        --brand-btn-press-to: #d37b00;
+
+        // footnote arrow
+        --brand-footnote-arrow-default: #ff9e1b;
+        --brand-footnote-arrow-hover: #d37b00;
+        --brand-footnote-arrow-press: #d37b00;
+      }
     }
   }
 }

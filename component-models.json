@@ -940,6 +940,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "tt-md-24",
                 "value": "tt-md-24"
               },

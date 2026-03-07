@@ -62,12 +62,23 @@ const ITEM_DEFAULT_CONFIG = {
 };
 
 function buildRadiusValue(tl, tr, br, bl) {
-  if ([tl, tr, br, bl].every((v) => !v)) return '';
-  const px = (v) => (v ? `${v}px` : '0');
-  return `${px(tl)} ${px(tr)} ${px(br)} ${px(bl)}`;
+  // If none are configured, return empty (use CSS default)
+  if (tl === '' && tr === '' && br === '' && bl === '') return '';
+  const radiuses = [];
+  if (tl !== '') radiuses.push(`border-top-left-radius:${tl}px`);
+  if (tr !== '') radiuses.push(`border-top-right-radius:${tr}px`);
+  if (br !== '') radiuses.push(`border-bottom-right-radius:${br}px`);
+  if (bl !== '') radiuses.push(`border-bottom-left-radius:${bl}px`);
+  if (radiuses.length === 4) {
+    return `border-radius: ${tl}px ${tr}px ${br}px ${bl}px;`;
+  }
+  if (radiuses.length > 0) {
+    return `${radiuses.join(';')};`;
+  }
+  return '';
 }
 
-function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
+function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled, tabRadiusValue) {
   const iconHtml = iconEnabled && tabIconAsset
     ? `<img class="tab3col-tab-icon object-contain shrink-0 h-[36px] mr-[12px] sm:mr-0 md:mr-0" src="${tabIconAsset}" alt="" aria-hidden="true" />`
     : '';
@@ -75,6 +86,7 @@ function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled) {
     <button
       class="tab3col-tab-btn flex items-center m-0 border border-solid rounded-[28px] sm:max-w-[172px] md:max-w-none cursor-pointer font-[inherit] transition-[background] duration-250 ease sm:h-auto md:h-[56px] px-[16px] justify-start text-left lg:w-full md:flex-col md:items-center md:gap-[6px] px-[10px] py-[6px] sm:flex-col md:flex-row sm:items-center sm:gap-[4px] sm:shrink-0${isActive ? ' is-active' : ''} ${productFonts.tabText}"
       data-tab-index="${index}"
+      style="${tabRadiusValue}"
     >${iconHtml}<span class="tab3col-tab-text block truncate max-w-full">${tabText || ''}</span></button>`;
 }
 
@@ -326,7 +338,6 @@ async function decoratePage(block) {
     tabContainerStyle += `--tab3col-tab-bg-from-select: ${tabBgGradientSelect.from};`;
     tabContainerStyle += `--tab3col-tab-bg-to-select: ${tabBgGradientSelect.to};`;
   }
-  if (tabRadiusValue) tabContainerStyle += `--tab3col-tab-radius: ${tabRadiusValue};`;
   if (titleFontColor) tabContainerStyle += `--tab3col-title-color: ${titleFontColor};`;
   if (infoFontColor) tabContainerStyle += `--tab3col-info-color: ${infoFontColor};`;
 
@@ -346,13 +357,14 @@ async function decoratePage(block) {
       i,
       i === 0,
       tabIconEnabled,
+      tabRadiusValue,
     ))
     .join('');
 
   // ── Build component shell ────────────────────────────────────
   const componentHtml = document.createRange().createContextualFragment(`
       <div
-        class="tab3col-component box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full md:max-w-[896px] lg:max-w-[1260px] sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid ${colorGroup}"
+        class="tab3col-component box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full md:max-w-[896px] lg:max-w-[1260px] sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid"
         ${tabContainerStyle ? `style="${tabContainerStyle.trim()}"` : ''}
       >
         <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] lg:relative md:flex-row md:w-full md:top-0 md:z-10 sm:flex-row md:gap-[20px] sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10"
@@ -364,6 +376,10 @@ async function decoratePage(block) {
         </div>
         <div class="tab3col-panels w-full lg:grow"></div>
       </div>`);
+
+  if (colorGroup) {
+    block.classList.add(colorGroup);
+  }
 
   // ── Move block-level instrumentation to component wrapper ────
 
