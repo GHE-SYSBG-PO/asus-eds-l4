@@ -216,7 +216,9 @@ export default async function decorate(block) {
     // Get basic configuration
     const mediaType = v('mediaType', 'text') || 'image';
     const radius = v('radius', 'text') || '0px';
-    const imageAlt = v('imageAlt', 'text') || '';
+    const dImageAlt = v('desktopImageAlt', 'text') || '';
+    const tImageAlt = v('TabletImageAlt', 'text') || '';
+    const mImageAlt = v('MobileImageAlt', 'text') || '';
     const videoAutoPlay = v('videoAutoPlay', 'text') === 'true';
     const loop = v('loop', 'text') === 'true';
     const pauseAndPlayBtn = v('pauseAndPlayBtn', 'text') === 'true';
@@ -234,7 +236,7 @@ export default async function decorate(block) {
 
     // Build border-radius style
     const radiusStyle = getRadiusStyle(radius);
-    const containerRadiusStyle = radiusStyle ? `border-radius: ${radiusStyle};` : '';
+    const containerRadiusStyle = radiusStyle ? `border-radius: ${radiusStyle}; overflow:hidden;` : '';
 
     // Build style objects for each device
     const stylesM = {
@@ -259,11 +261,14 @@ export default async function decorate(block) {
       const baseStyle = `position: relative; overflow-hidden; ${containerRadiusStyle} ${stylesToInline(styles)}`;
 
       let dClass = 'hidden lg:block';
+      let imageAlt = dImageAlt;
       if (device === 'M') {
         dClass = 'md:hidden lg:hidden';
+        imageAlt = mImageAlt;
       }
       if (device === 'T') {
         dClass = 'hidden md:block lg:hidden';
+        imageAlt = tImageAlt;
       }
       return `
         <div class="device-${device} ${dClass}" style="${baseStyle}">
@@ -308,14 +313,16 @@ export default async function decorate(block) {
             </button>
           </div>
           ${
-  !loop && `<button
-            class="media-block-replay-btn absolute ${pausePlayBtnPosition} z-10 rounded-full flex items-center justify-center transition-all"
+  !loop ? `<div class="media-block-controls absolute ${pausePlayBtnPosition} z-10">
+             <button
+            class="media-block-replay-btn  rounded-full flex items-center justify-center transition-all"
             style="display: ${initialPauseBtnDisplay};  border: 1px solid ${pausePlayBtnColor};display:none"
           >
             <svg viewBox="0 0 36 36" fill="${pausePlayBtnColor}">
               <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" transform="translate(6,6)"/>
             </svg>
-          </button>`
+          </button>
+          </div>` : ''
 }
         `;
 

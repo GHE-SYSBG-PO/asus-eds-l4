@@ -4448,20 +4448,6 @@
         "valueType": "string"
       },
       {
-        "component": "text",
-        "label": "image alt text",
-        "name": "imageAlt",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "mediaType"
-            },
-            "image"
-          ]
-        }
-      },
-      {
         "component": "boolean",
         "label": "video auto play(on / off)",
         "name": "videoAutoPlay",
@@ -4562,6 +4548,20 @@
             "multi": false
           },
           {
+            "component": "text",
+            "label": "image alt text",
+            "name": "desktopImageAlt",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "mediaType"
+                },
+                "image"
+              ]
+            }
+          },
+          {
             "component": "select",
             "label": "width",
             "name": "widthD",
@@ -4642,7 +4642,8 @@
             "component": "text",
             "label": "ratio value(customized)",
             "name": "ratioValueCustomizedD",
-            "valueType": "string"
+            "valueType": "string",
+            "description": "please Use W:H format as 16:9, 4:3 or 1:1 to force the block's aspect. Select 'auto' to keep the image's native dimensions. Use presets when possible."
           },
           {
             "component": "select",
@@ -4681,6 +4682,20 @@
             "label": "assets",
             "name": "assetsT",
             "multi": false
+          },
+          {
+            "component": "text",
+            "label": "image alt text",
+            "name": "TabletImageAlt",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "mediaType"
+                },
+                "image"
+              ]
+            }
           },
           {
             "component": "select",
@@ -4763,7 +4778,8 @@
             "component": "text",
             "label": "ratio value(customized)",
             "name": "ratioValueCustomizedT",
-            "valueType": "string"
+            "valueType": "string",
+            "description": "please Use W:H format as 16:9, 4:3 or 1:1 to force the block's aspect. Select 'auto' to keep the image's native dimensions. Use presets when possible."
           },
           {
             "component": "select",
@@ -4802,6 +4818,20 @@
             "label": "assetsM",
             "name": "assets",
             "multi": false
+          },
+          {
+            "component": "text",
+            "label": "image alt text",
+            "name": "MobileImageAlt",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "mediaType"
+                },
+                "image"
+              ]
+            }
           },
           {
             "component": "select",
@@ -4884,7 +4914,8 @@
             "component": "text",
             "label": "ratio value(customized)",
             "name": "ratioValueCustomizedM",
-            "valueType": "string"
+            "valueType": "string",
+            "description": "please Use W:H format as 16:9, 4:3 or 1:1 to force the block's aspect. Select 'auto' to keep the image's native dimensions. Use presets when possible."
           },
           {
             "component": "select",
