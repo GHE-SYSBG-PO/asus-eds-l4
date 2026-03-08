@@ -3,7 +3,7 @@
     {
       "component": "hidden",
       "name": "style",
-      "value": "L4CustomSection-section"
+      "value": "L4CustomSection-section l4-column-width-12"
     },
     {
       "component": "text",
