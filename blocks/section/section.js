@@ -6,6 +6,10 @@ export default async function decorate(block) {
     const paddingleft = config.paddingleft || '';
     const paddingright = config.paddingright || '';
 
+    block.querySelectorAll(':scope > *').forEach((child) => {
+      child.classList.add('l4-column-width-12');
+    });
+
     if (sectionid) {
       block.id = sectionid;
     }
