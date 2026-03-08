@@ -260,7 +260,8 @@
         "featureitem-block",
         "media-block",
         "btn",
-        "fragment"
+        "fragment",
+        "bar-chart"
       ]
     }
   ]

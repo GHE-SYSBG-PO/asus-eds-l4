@@ -1,3 +1,5 @@
+import buildSecitonClass from '../../components/section/section.js';
+
 /**
  * Get desktop column proportions
  * @param {*} scale Proportion parameter
@@ -240,6 +242,8 @@ export default function decorate(block) {
   try {
     // Exit early if there are fewer than 2 children
     if (!block.children || block.children.length < 2) return;
+
+    buildSecitonClass(block);
     const [col1, col2] = [...block.children];
     col1.classList.add('md:row-1', 'lg:row-1', 'md:order-1', 'md:z-1');
     col2.classList.add('md:row-1', 'lg:row-1', 'md:order-2');
@@ -308,9 +312,6 @@ export default function decorate(block) {
     }
     if (config.colorgroup) {
       block.classList.add(config.colorgroup);
-    }
-    if (config.bgcolor) {
-      block.classList.add(config.bgcolor);
     }
     block.classList.add('grid', 'grid-cols-12');
     block.append(col1, col2);
