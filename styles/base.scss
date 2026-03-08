@@ -1,3 +1,5 @@
+@use './variable' as v;
+
 .l4-pdp {
   .g-block-animation {
     &>a,
@@ -13,5 +15,33 @@
       transform: translateZ(0) translateY(30px);
       transition: opacity .4s cubic-bezier(.4, 0, .2, 1), transform .4s cubic-bezier(.4, 0, .2, 1);
     }
+  }
+    
+  // Responsive versions
+  @media (max-width: v.$small-upper-bound) {
+    --l4-column-width-12: min(87.5vw, 420px);
+
+    div.section > div {
+      width: var(--l4-column-width-12);
+      margin: 0 auto;
+    };
+  }
+  
+  @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+    --l4-column-width-12: min(87.5vw, 896px);
+
+    div.section > div {
+      width: var(--l4-column-width-12);
+      margin: 0 auto;
+    };
+  }
+  
+  @media (min-width: v.$large-lower-bound) {
+    --l4-column-width-12: min(87.5vw, 1260px);
+
+    div.section > div {
+      width: var(--l4-column-width-12);
+      margin: 0 auto;
+    };
   }
 }

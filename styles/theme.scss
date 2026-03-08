@@ -1,5 +1,4 @@
 /* styles/theme.css */
-@use './variable' as v;
 
 @layer theme {
   .l4-pdp{
@@ -20,31 +19,6 @@
 
     &[data-mode="dark"] {
       --color-mode: #000;
-    }
-    
-    // Responsive versions
-    @media (max-width: v.$large-lower-bound) {
-      --l4-column-width-12: min(87.5vw, 1260px);
-
-      .l4-column-width-12 {
-        width: var(--column-width-12);
-      };
-    }
-    
-    @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
-      --l4-column-width-12: min(87.5vw, 896px);
-
-      .l4-column-width-12 {
-        width: var(--column-width-12);
-      };
-    }
-
-    @media (min-width: v.$small-upper-bound) {
-      --l4-column-width-12: min(87.5vw, 420px);
-
-      .l4-column-width-12 {
-        width: var(--column-width-12);
-      };
     }
   }
 }
