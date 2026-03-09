@@ -1,6 +1,9 @@
 import { getBlockConfigs, getFieldValue, isAuthorUe } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+// Base path for media sources
+const MEDIA_BASE_PATH = 'https://publish-p165753-e1767020.adobeaemcloud.com';
+
 const DEFAULT_CONFIG = {
   mediaType: '',
   radius: '',
@@ -77,6 +80,24 @@ const getDevice = () => {
   const isDesktop = window.innerWidth >= 1024;
   return isTablet ? 'T' : (isDesktop ? 'D' : 'M');
 };
+
+/**
+ * Resolve media source URL with base path if needed
+ * - Returns full URLs unchanged
+ * - Prepends MEDIA_BASE_PATH to relative paths
+ * - Returns empty string if path is falsy
+ */
+const getMediaSourceUrl = (path) => {
+  if (!path) return '';
+  // If already a full URL, return as-is
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  // Prepend base path to relative paths
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${MEDIA_BASE_PATH}${cleanPath}`;
+};
+
 /**
  * Build size style object
  */
@@ -337,16 +358,22 @@ export default async function decorate(block) {
       // eslint-disable-next-line no-nested-ternary
       const curDevice = window.innerWidth >= 1024 ? 'D' : ((window.innerWidth >= 768 && window.innerWidth < 1024) ? 'T' : 'M');
 
+      // Resolve media source URLs with base path
+      const videoSrcM = getMediaSourceUrl(configM.assets);
+      const videoSrcT = getMediaSourceUrl(configT.assets);
+      const videoSrcD = getMediaSourceUrl(configD.assets);
+      const videoSrcDefault = getMediaSourceUrl(defaultAssets);
+
       return `
         <div class="device-${curDevice} media-block-video-container relative" style="position: relative; overflow-hidden; ${containerRadiusStyle} ${stylesToInline(defaultStyles)}">
           <video
-            data-src-m="${configM.assets || ''}"
-            data-src-t="${configT.assets || ''}"
-            data-src-d="${configD.assets || ''}"
+            data-src-m="${videoSrcM}"
+            data-src-t="${videoSrcT}"
+            data-src-d="${videoSrcD}"
             data-object-position-m="${objectPositionM}"
             data-object-position-t="${objectPositionT}"
             data-object-position-d="${objectPositionD}"
-            src="${defaultAssets}"
+            src="${videoSrcDefault}"
             class="w-full h-full object-cover"
             style="object-position: ${defaultObjectPosition};"
             ${videoAttrs}
