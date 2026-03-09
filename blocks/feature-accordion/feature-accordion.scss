@@ -358,6 +358,10 @@
         &-container {
             max-width: 420px;
             margin: 0 auto;
+            
+            /* Prevent scroll jumps during accordion animations */
+            scroll-margin-top: 80px;
+            scroll-margin-bottom: 80px;
 
             @media (width >=730px) {
                 max-width: 560px;
@@ -394,6 +398,7 @@
                     top: 0;
                     min-height: 0;
                     align-self: start;
+                    padding-bottom:60%;
                 }
 
                 .feature-accordion-item__media,
@@ -414,6 +419,9 @@
             border-top: 0;
             border-bottom: 0;
             padding: 18px 0;
+            
+            /* Layout containment for content wrapper - not the animated children */
+            contain: layout;
 
             @media (width >=768px) {
                 padding: 24px 0;
@@ -514,6 +522,10 @@
             background: transparent;
             border-top: 0;
             border-bottom: 0;
+            
+            /* Improve layout isolation for nested content */
+            contain: layout;
+            contain-intrinsic-size: auto 0;
 
             @media (width >=768px) {
                 padding: 24px 0;
@@ -644,6 +656,9 @@
 
         /* Dynamic aspect ratio handled via media block - do not override */
         overflow: hidden;
+        
+        /* Preserve aspect ratio to minimize CLS */
+        contain-intrinsic-size: auto 200px;
     }
 
     .feature-accordion-media-group,
@@ -653,6 +668,9 @@
 
         /* Dynamic sizing - space reserved via JS reserveMediaSpace() */
         overflow: hidden;
+        
+        /* Prevent layout shifts in media group transitions - using layout/style for better compatibility */
+        contain: layout style;
     }
 
     .feature-accordion-media-group {
@@ -667,9 +685,12 @@
         transform: translateY(10px) scale(0.985);
         pointer-events: none;
         transition:
-            opacity 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
-            transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+            opacity 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+            transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
         will-change: opacity, transform;
+        
+        /* Contain layout to prevent CLS in media groups */
+        contain: layout style;
     }
 
     .feature-accordion-media-slot.is-active {
@@ -705,27 +726,32 @@
 
     .feature-accordion-item__panel-row,
     .feature-accordion-subitem__panel-row {
-        /* Layout containment to reduce CLS during transitions */
-        contain: layout style paint;
+        /* Do NOT use containment on animating elements - breaks transitions */
 
-        /* Reserve intrinsic size to prevent layout shifts */
-        contain-intrinsic-size: auto 0;
+        /* Containment applied at parent level instead */
+        
+        /* Do NOT use contain-intrinsic-size on animated elements */
         will-change: max-height, opacity;
         transition:
-            max-height 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
-            opacity 0.8s ease;
+            max-height 0.38s cubic-bezier(0.22, 0.61, 0.36, 1),
+            opacity 0.38s ease;
+        
+        /* Prevent layout shifts when hidden */
+        &[hidden] {
+            display: none;
+        }
     }
 
     .feature-accordion-item__media,
     .feature-accordion-subitem__media {
-        transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+        transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
     .feature-accordion-item__media>*,
     .feature-accordion-subitem__media>* {
         opacity: 0;
         transform: translateY(12px) scale(0.985);
-        transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+        transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
         will-change: opacity, transform;
     }
 
