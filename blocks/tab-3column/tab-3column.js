@@ -366,7 +366,7 @@ async function decoratePage(block) {
   // ── Build component shell ────────────────────────────────────
   const componentHtml = document.createRange().createContextualFragment(`
       <div
-        class="tab3col-component box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full md:max-w-[896px] lg:max-w-[1260px] sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid"
+        class="tab3col-component l4-column-width-12 box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid"
         ${tabContainerStyle ? `style="${tabContainerStyle.trim()}"` : ''}
       >
         <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] lg:relative md:flex-row md:w-full md:top-0 md:z-10 sm:flex-row md:gap-[20px] sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10"
