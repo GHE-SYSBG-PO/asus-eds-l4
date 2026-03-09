@@ -5034,22 +5034,22 @@
         },
         "fields": [
           {
-            "component": "text",
+            "component": "reference",
             "label": "default asset",
             "name": "anchorDefaultAsset",
-            "valueType": "string"
+            "multi": false
           },
           {
-            "component": "text",
+            "component": "reference",
             "label": "hover asset",
             "name": "anchorHoverAsset",
-            "valueType": "string"
+            "multi": false
           },
           {
-            "component": "text",
+            "component": "reference",
             "label": "press asset",
             "name": "anchorPressAsset",
-            "valueType": "string"
+            "multi": false
           }
         ]
       },
