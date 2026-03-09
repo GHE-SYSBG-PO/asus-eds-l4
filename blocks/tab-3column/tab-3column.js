@@ -164,7 +164,6 @@ function createSwiperArrows() {
 
 function setupInteraction(componentEl, motionEnabled) {
   const tabBtns = [...componentEl.querySelectorAll('.tab3col-tab-btn')];
-  const panels = [...componentEl.querySelectorAll('.tab3col-panel')];
   const tabList = componentEl.querySelector('.tab3col-tab-list');
   const tabBar = componentEl.querySelector('.tab3col-tab-bar');
 
@@ -179,7 +178,10 @@ function setupInteraction(componentEl, motionEnabled) {
   // ── Desktop: plain click ─────────────────────────────────────
   if (window.innerWidth >= 1280) {
     tabBtns.forEach((btn, i) => {
-      btn.addEventListener('click', () => activateTab(i, tabBtns, panels, motionEnabled));
+      btn.addEventListener('click', () => {
+        const panels = [...componentEl.querySelectorAll('.tab3col-panel')];// new panels
+        activateTab(i, tabBtns, panels, motionEnabled);
+      });
     });
     return;
   }
@@ -226,6 +228,7 @@ function setupInteraction(componentEl, motionEnabled) {
           if (btn) {
             const idx = tabBtns.indexOf(btn);
             if (idx !== -1) {
+              const panels = [...componentEl.querySelectorAll('.tab3col-panel')];
               activateTab(idx, tabBtns, panels, motionEnabled);
               s.slideTo(idx, 300);
             }
