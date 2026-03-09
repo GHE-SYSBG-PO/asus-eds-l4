@@ -5330,8 +5330,50 @@
           },
           {
             "component": "text",
-            "label": "text width",
-            "name": "itemTextWidth",
+            "label": "text width (D)",
+            "name": "itemTextWidthD",
+            "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "layoutVariantD"
+                },
+                [
+                  "left",
+                  "right",
+                  "topLeft",
+                  "topRight",
+                  "bottomLeft",
+                  "bottomRight"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text width (T)",
+            "name": "itemTextWidthT",
+            "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "layoutVariantT"
+                },
+                [
+                  "left",
+                  "right",
+                  "topLeft",
+                  "topRight",
+                  "bottomLeft",
+                  "bottomRight"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text width (M)",
+            "name": "itemTextWidthM",
             "valueType": "string",
             "condition": {
               "in": [
