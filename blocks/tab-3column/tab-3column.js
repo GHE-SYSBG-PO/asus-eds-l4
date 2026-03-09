@@ -10,6 +10,7 @@ import {
 } from '../../scripts/utils.js';
 import { prefixHex } from '../../components/button/button.js';
 import loadSwiper from '../../vendor/swiper/index.js';
+import buildSecitonClass from '../../components/section/section.js';
 
 const FONTS = {
   asus: {
@@ -236,6 +237,7 @@ function setupInteraction(componentEl, motionEnabled) {
 }
 
 async function decoratePage(block) {
+  buildSecitonClass(block);
   // tab-3column data
   const tabContainer = block;
   const tabData = tabContainer.dataset;
@@ -364,7 +366,7 @@ async function decoratePage(block) {
   // ── Build component shell ────────────────────────────────────
   const componentHtml = document.createRange().createContextualFragment(`
       <div
-        class="tab3col-component box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full md:max-w-[896px] lg:max-w-[1260px] sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid"
+        class="tab3col-component l4-column-width-12 box-border container-inline sm:w-full md:w-[87.5%] sm:max-w-full sm:gap-[20px] md:gap-[24px]  lg:gap-[40px] lg:flex lg:flex-row lg:items-start md:grid sm:grid"
         ${tabContainerStyle ? `style="${tabContainerStyle.trim()}"` : ''}
       >
         <div class="tab3col-tab-bar order-0 flex items-center lg:flex-col lg:items-stretch lg:shrink-0 lg:w-[185px] lg:relative md:flex-row md:w-full md:top-0 md:z-10 sm:flex-row md:gap-[20px] sm:items-center sm:w-full sm:sticky sm:top-0 sm:z-10"
@@ -405,7 +407,7 @@ async function decoratePage(block) {
 
     const newItem = document.createRange().createContextualFragment(`
         <div class="tab3col-media-slot sm:order-2 lg:order-1 grow min-w-0 md:w-full sm:w-full"></div>
-        <div class="tab3col-text-col sm:order-1 lg:order-2 sm:text-center lg:text-left shrink-0 box-border sm:w-full lg:w-[12.5cqw]" style="${textAreaStyle}">
+        <div class="tab3col-text-col sm:order-1 lg:order-2 sm:text-center lg:text-left shrink-0 box-border" style="${textAreaStyle}">
           <h3 class="tab3col-title ${productFonts.tabTitle} sm:mb-[8px] md:mb-[12px] ${titleFontDTM || ''}">${tab.tabTitle.html || ''}</h3>
           <div class="tab3col-info m-0 ${productFonts.tabInfo.fontDT} ${productFonts.tabInfo.fontM}">${tab.tabInfo.html || ''}</div>
         </div>

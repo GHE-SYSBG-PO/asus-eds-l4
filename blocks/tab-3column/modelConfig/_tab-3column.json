@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "component": "hidden",
+      "name": "style",
+      "value": "L4CustomSection-tab-3column"
+    },
+    {
+      "...": "./_style.json#/fields"
+    },
+    {
+      "...": "./_tab-style.json#/fields"
+    },
+    {
+      "...": "./_text-style.json#/fields"
+    },
+    {
+      "...": "../../../components/colorGroup/_colorGroup.json#/fields"
+    },
+    {
+      "...": "../../../components/section/_section.json#/fields"
+    }
+  ]
+}
