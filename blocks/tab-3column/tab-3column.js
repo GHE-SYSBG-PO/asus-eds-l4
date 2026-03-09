@@ -10,6 +10,7 @@ import {
 } from '../../scripts/utils.js';
 import { prefixHex } from '../../components/button/button.js';
 import loadSwiper from '../../vendor/swiper/index.js';
+import buildSecitonClass from '../../components/section/section.js';
 
 const FONTS = {
   asus: {
@@ -236,6 +237,7 @@ function setupInteraction(componentEl, motionEnabled) {
 }
 
 async function decoratePage(block) {
+  buildSecitonClass(block);
   // tab-3column data
   const tabContainer = block;
   const tabData = tabContainer.dataset;
