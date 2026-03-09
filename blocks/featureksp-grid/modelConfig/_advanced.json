@@ -1,0 +1,240 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Advanced",
+      "name": "Advanced"
+    },
+    {
+      "component": "container",
+      "label": "top text style",
+      "name": "topTextStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font (D)",
+          "name": "topTextStyleFontD",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh-lg" },
+            { "name": "ro-rg-20-sh", "value": "ro-rg-20-sh-lg" },
+            { "name": "ro-rg-24", "value": "ro-rg-24-lg" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (T)",
+          "name": "topTextStyleFontT",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-16-sh", "value": "ro-rg-16-sh-md" },
+            { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh-md" },
+            { "name": "ro-rg-20-sh", "value": "ro-rg-20-sh-md" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "topTextStyleFontM",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-14-sh", "value": "ro-rg-14-sh-sm" },
+            { "name": "ro-rg-16-sh", "value": "ro-rg-16-sh-sm" },
+            { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh-sm" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font color",
+          "name": "topTextStyleFontColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "title text style",
+      "name": "titleTextStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font (D)",
+          "name": "titleTextStyleFontD",
+          "valueType": "string",
+          "options": [
+            { "name": "tt-bd-36", "value": "tt-bd-36-lg" },
+            { "name": "tt-bd-40", "value": "tt-bd-40-lg" },
+            { "name": "tt-bd-44", "value": "tt-bd-44-lg" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (T)",
+          "name": "titleTextStyleFontT",
+          "valueType": "string",
+          "options": [
+            { "name": "tt-bd-28", "value": "tt-bd-28-md" },
+            { "name": "tt-bd-32", "value": "tt-bd-32-md" },
+            { "name": "tt-bd-36", "value": "tt-bd-36-md" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "titleTextStyleFontM",
+          "valueType": "string",
+          "options": [
+            { "name": "tt-bd-24", "value": "tt-bd-24-sm" },
+            { "name": "tt-bd-28", "value": "tt-bd-28-sm" },
+            { "name": "tt-bd-32", "value": "tt-bd-32-sm" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font color",
+          "name": "titleTextStyleFontColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "bottom text style",
+      "name": "bottomTextStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font (D)",
+          "name": "bottomTextStyleFontD",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh-lg" },
+            { "name": "ro-rg-20-sh", "value": "ro-rg-20-sh-lg" },
+            { "name": "ro-rg-24", "value": "ro-rg-24-lg" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (T)",
+          "name": "bottomTextStyleFontT",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-16-sh", "value": "ro-rg-16-sh-md" },
+            { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh-md" },
+            { "name": "ro-rg-20-sh", "value": "ro-rg-20-sh-md" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font (M)",
+          "name": "bottomTextStyleFontM",
+          "valueType": "string",
+          "options": [
+            { "name": "ro-rg-14-sh", "value": "ro-rg-14-sh-sm" },
+            { "name": "ro-rg-16-sh", "value": "ro-rg-16-sh-sm" },
+            { "name": "ro-rg-18-sh", "value": "ro-rg-18-sh-sm" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font color",
+          "name": "bottomTextStyleFontColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "item",
+      "name": "item",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "layoutStyle" }, "media" ]
+      },
+      "fields": [
+        {
+          "component": "select",
+          "label": "img vertical alignment",
+          "name": "itemImgVerticalAlignment",
+          "valueType": "string",
+          "options": [
+            { "name": "top", "value": "top" },
+            { "name": "bottom", "value": "bottom" },
+            { "name": "center", "value": "center" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "text width",
+          "name": "itemTextWidth",
+          "valueType": "string",
+          "condition": {
+            "in": [
+              {
+                "var": "layoutVariantM"
+              },
+              [
+                "left",
+                "right",
+                "topLeft",
+                "topRight",
+                "bottomLeft",
+                "bottomRight"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "anchor style",
+      "name": "advancedAnchorStyle",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "anchorStyle" }, "svg" ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "border width default",
+          "name": "borderWidthDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "border width hover",
+          "name": "borderWidthHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "border width press",
+          "name": "borderWidthPress",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "border color default",
+          "name": "borderColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "border color hover",
+          "name": "borderColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "border color press",
+          "name": "borderColorPress",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}

@@ -113,6 +113,12 @@
     ]
   },
   {
+    "id": "featureksp-grid",
+    "components": [
+      "featureksp-grid-item"
+    ]
+  },
+  {
     "id": "footnote",
     "components": [
       "footnoteitem"

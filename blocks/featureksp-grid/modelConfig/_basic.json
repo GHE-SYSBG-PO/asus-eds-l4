@@ -1,0 +1,481 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "container",
+      "label": "layout",
+      "name": "layout",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "style",
+          "name": "layoutStyle",
+          "valueType": "string",
+          "options": [
+            { "name": "media", "value": "media" },
+            { "name": "icon", "value": "icon" },
+            { "name": "text", "value": "text" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (D)",
+          "name": "mediaColumnSpanD",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "12" },
+            { "name": "6", "value": "6" },
+            { "name": "4", "value": "4" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (T)",
+          "name": "mediaColumnSpanT",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "12" },
+            { "name": "6", "value": "6" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (D)",
+          "name": "iconColumnSpanD",
+          "valueType": "string",
+          "options": [
+            { "name": "6", "value": "6" },
+            { "name": "4", "value": "4" },
+            { "name": "3", "value": "3" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (T)",
+          "name": "iconColumnSpanT",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "12" },
+            { "name": "6", "value": "6" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (D)",
+          "name": "textColumnSpanD",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "12" },
+            { "name": "6", "value": "6" },
+            { "name": "4", "value": "4" },
+            { "name": "3", "value": "3" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (T)",
+          "name": "textColumnSpanT",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "12" },
+            { "name": "6", "value": "6" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "layout variant (D)",
+          "name": "layoutVariantD",
+          "valueType": "string",
+          "options": [
+            { "name": "left", "value": "left" },
+            { "name": "right", "value": "right" },
+            { "name": "top", "value": "top" },
+            { "name": "bottom", "value": "bottom" },
+            { "name": "top left", "value": "topLeft" },
+            { "name": "top right", "value": "topRight" },
+            { "name": "bottom left", "value": "bottomLeft" },
+            { "name": "bottom right", "value": "bottomRight" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "layout variant (T)",
+          "name": "layoutVariantT",
+          "valueType": "string",
+          "options": [
+            { "name": "left", "value": "left" },
+            { "name": "right", "value": "right" },
+            { "name": "top", "value": "top" },
+            { "name": "bottom", "value": "bottom" },
+            { "name": "top left", "value": "topLeft" },
+            { "name": "top right", "value": "topRight" },
+            { "name": "bottom left", "value": "bottomLeft" },
+            { "name": "bottom right", "value": "bottomRight" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "layout variant (M)",
+          "name": "layoutVariantM",
+          "valueType": "string",
+          "options": [
+            { "name": "left", "value": "left" },
+            { "name": "right", "value": "right" },
+            { "name": "top", "value": "top" },
+            { "name": "bottom", "value": "bottom" },
+            { "name": "top left", "value": "topLeft" },
+            { "name": "top right", "value": "topRight" },
+            { "name": "bottom left", "value": "bottomLeft" },
+            { "name": "bottom right", "value": "bottomRight" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "row span (D)",
+          "name": "layoutRowSpanD",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bg color",
+          "name": "layoutBgColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "media",
+      "name": "media",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "layoutStyle" }, "media" ]
+      },
+      "fields": [
+        {
+          "component": "select",
+          "label": "media type",
+          "name": "mediaType",
+          "valueType": "string",
+          "options": [
+            { "name": "image", "value": "image" },
+            { "name": "video", "value": "video" }
+          ]
+        },
+        {
+          "component": "reference",
+          "label": "bg asset(img / video)(D)",
+          "name": "mediaBgAssetD",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "label": "bg asset(img / video)(T)",
+          "name": "mediaBgAssetT",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "label": "bg asset(img / video)(M)",
+          "name": "mediaBgAssetM",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "label": "media container ratio (DTM)",
+          "name": "mediaContainerRatio",
+          "valueType": "string",
+          "description": "(Width-to-height ratio value) (1:X)"
+        },
+        {
+          "component": "text",
+          "label": "image Alt text",
+          "name": "mediaImageAltText",
+          "valueType": "string",
+          "condition": {
+            "===": [ { "var": "mediaType" }, "image" ]
+          }
+        },
+        {
+          "component": "boolean",
+          "label": "video auto play(on / off)",
+          "name": "mediaVideoAutoPlay",
+          "valueType": "boolean",
+          "condition": {
+            "===": [
+              {
+                "var": "mediaType"
+              },
+              "video"
+            ]
+          }
+        },
+        {
+          "component": "boolean",
+          "label": "loop(on / off)",
+          "name": "mediaVideoloop",
+          "valueType": "boolean",
+          "condition": {
+            "===": [
+              {
+                "var": "mediaType"
+              },
+              "video"
+            ]
+          }
+        },
+        {
+          "component": "boolean",
+          "label": "pause and play btn(show / hide)",
+          "name": "mediaVideoPauseAndPlayBtn",
+          "valueType": "boolean",
+          "condition": {
+            "===": [
+              {
+                "var": "mediaType"
+              },
+              "video"
+            ]
+          }
+        },
+        {
+          "component": "select",
+          "label": "pause and play btn position",
+          "name": "mediaVideoPauseAndPlayBtnPosition",
+          "valueType": "string",
+          "condition": {
+            "===": [
+              {
+                "var": "mediaType"
+              },
+              "video"
+            ]
+          },
+          "options": [
+            {
+              "name": "TL",
+              "value": "top-left"
+            },
+            {
+              "name": "TR",
+              "value": "top-right"
+            },
+            {
+              "name": "BL",
+              "value": "bottom-left"
+            },
+            {
+              "name": "BR",
+              "value": "bottom-right"
+            }
+          ]
+        },
+        {
+          "component": "boolean",
+          "label": "replay btn(yes / no)",
+          "name": "mediaVideoReplayBtn",
+          "valueType": "boolean",
+          "condition": {
+            "===": [
+              {
+                "var": "mediaType"
+              },
+              "video"
+            ]
+          }
+        },
+        {
+          "component": "select",
+          "label": "btn theme",
+          "name": "mediaVideoBtnTheme",
+          "valueType": "string",
+          "condition": {
+            "===": [
+              {
+                "var": "mediaType"
+              },
+              "video"
+            ]
+          },
+          "options": [
+            {
+              "name": "light",
+              "value": "light"
+            },
+            {
+              "name": "dark",
+              "value": "dark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "text",
+      "name": "text",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "richtext",
+          "label": "top richtext",
+          "name": "textTopRichtext",
+          "valueType": "string",
+          "condition": {
+            "!==": [ { "var": "layoutStyle" }, "icon" ]
+          }
+        },
+        {
+          "component": "richtext",
+          "label": "title richtext",
+          "name": "textTitleRichtext",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "bottom richtext",
+          "name": "textBottomRichtext",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "label": "alignment",
+          "name": "textAlignment",
+          "valueType": "string",
+          "options": [
+            { "name": "default", "value": "" },
+            { "name": "left", "value": "left" },
+            { "name": "center", "value": "center" },
+            { "name": "right", "value": "right" }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "anchor",
+      "name": "anchor",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "boolean",
+          "label": "visibility toggle",
+          "name": "anchorVisibilityToggle",
+          "valueType": "boolean"
+        },
+        {
+          "component": "text",
+          "label": "section Id",
+          "name": "anchorSectionId",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "label": "anchor style",
+          "name": "anchorStyle",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "svg",
+              "value": "svg"
+            },
+            {
+              "name": "png",
+              "value": "png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "anchor svg",
+      "name": "anchorSvg",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "anchorStyle" }, "svg" ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "anchor color default",
+          "name": "anchorColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "anchor color hover",
+          "name": "anchorColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "anchor color press",
+          "name": "anchorColorPress",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bg color default",
+          "name": "anchorBgColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bg color hover",
+          "name": "anchorBgColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bg color press",
+          "name": "anchorBgColorPress",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "anchor png",
+      "name": "anchorPng",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "anchorStyle" }, "png" ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "default asset",
+          "name": "anchorDefaultAsset",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "hover asset",
+          "name": "anchorHoverAsset",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "press asset",
+          "name": "anchorPressAsset",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "reference",
+      "label": "icon asset",
+      "name": "iconAsset",
+      "multi": false,
+      "condition": {
+        "===": [ { "var": "layoutStyle" }, "icon" ]
+      }
+    }
+  ]
+}
