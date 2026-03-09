@@ -105,7 +105,8 @@ const isLikelyColorToken = (value) => {
 const mediaStateByCell = new WeakMap();
 const fragmentTemplateByPath = new Map();
 const rowAnimationState = new WeakMap();
-const ROW_ANIMATION_MS = 420;
+// Reduced animation duration to minimize CLS during transitions
+const ROW_ANIMATION_MS = 280;
 const ROW_STAGGER_MS = 0;
 const PREFETCH_CONCURRENCY = 2;
 const delayedMediaRegistry = new Set();
@@ -1295,6 +1296,8 @@ const decorateAccordionItem = async (block, scaffold, itemsInScope, isFirstAccor
     nestedWrapper?.classList.toggle('is-expanded', isOpen);
   };
 
+  // For the first accordion item, expand immediately without animation to prevent layout shift
+  // Subsequent interactions will use smooth animations
   setRowsOpenState(topPanelRows, isFirstAccordionItem, true);
   setTopWrapperExpandedState(isFirstAccordionItem);
   makeInteractiveTrigger(titleCell, (isOpen) => {
@@ -1326,6 +1329,10 @@ const decorateAccordionItem = async (block, scaffold, itemsInScope, isFirstAccor
   }, isFirstAccordionItem);
 
   if (isFirstAccordionItem && isNestedVariant) {
+    // Reserve space immediately for first item's media to prevent layout shift
+    if (hasTopMedia && mediaCell) {
+      reserveMediaSpace(mediaCell);
+    }
     if (hasTopMedia) {
       ensureTopMediaLoaded()
         .then(() => {
@@ -1338,6 +1345,10 @@ const decorateAccordionItem = async (block, scaffold, itemsInScope, isFirstAccor
     }
     expandFirstNested(block);
   } else if (isFirstAccordionItem) {
+    // Reserve space immediately for first item's media to prevent layout shift
+    if (hasTopMedia && mediaCell) {
+      reserveMediaSpace(mediaCell);
+    }
     if (hasTopMedia) {
       ensureTopMediaLoaded()
         .then(() => {

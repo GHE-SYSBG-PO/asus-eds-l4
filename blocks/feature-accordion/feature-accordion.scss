@@ -642,7 +642,7 @@
         position: relative;
         width: 100%;
 
-        // aspect-ratio: 16 / 9;
+        /* Dynamic aspect ratio handled via media block - do not override */
         overflow: hidden;
     }
 
@@ -651,7 +651,7 @@
         width: 100%;
         height: 100%;
 
-        // aspect-ratio: 16 / 9;
+        /* Dynamic sizing - space reserved via JS reserveMediaSpace() */
         overflow: hidden;
     }
 
@@ -667,8 +667,8 @@
         transform: translateY(10px) scale(0.985);
         pointer-events: none;
         transition:
-            opacity 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
-            transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+            opacity 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+            transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
         will-change: opacity, transform;
     }
 
@@ -705,22 +705,27 @@
 
     .feature-accordion-item__panel-row,
     .feature-accordion-subitem__panel-row {
+        /* Layout containment to reduce CLS during transitions */
+        contain: layout style paint;
+
+        /* Reserve intrinsic size to prevent layout shifts */
+        contain-intrinsic-size: auto 0;
         will-change: max-height, opacity;
         transition:
-            max-height 0.42s cubic-bezier(0.22, 0.61, 0.36, 1),
+            max-height 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
             opacity 0.8s ease;
     }
 
     .feature-accordion-item__media,
     .feature-accordion-subitem__media {
-        transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
     .feature-accordion-item__media>*,
     .feature-accordion-subitem__media>* {
         opacity: 0;
         transform: translateY(12px) scale(0.985);
-        transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
         will-change: opacity, transform;
     }
 
