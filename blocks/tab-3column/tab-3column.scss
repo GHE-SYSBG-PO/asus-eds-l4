@@ -1,3 +1,5 @@
+@use "../../styles/variable.scss" as v;
+
 // ============================================================
 // ID:15 TAB_3COLUMN
 // ============================================================
@@ -6,10 +8,6 @@
 // ============================================================
 
 .l4-pdp {
-  .tab-3column,.tab-3column-item-container{
-    background-color: var(--color-mode);
-  }
-
   // ============================================================
   // Layer 3 — Component variable mapping
   // Reads from Color_Light / Color_Dark tables.
@@ -34,7 +32,11 @@
     // tab style/tab container/bg-color — default = "-" (none)
     --tab3col-tab-bg-default: transparent;
 
-    @media (width <= 730px) {
+    @media (width <= v.$tiny-upper-bound) {
+      width: 100%;
+    }
+
+    @media (min-width: v.$small-lower-bound) and (max-width: v.$small-upper-bound) {
       width: 420px;
     }
   }
@@ -154,10 +156,27 @@
 
   // ── Tab bar ───────────────────────────────────────────────
   .tab3col-tab-bar {
+    margin: 0 auto;
+
+    // tiny mobile
+    @media (max-width: v.$tiny-upper-bound) {
+      width: var(--l4-column-width-12);
+    }
+
+    // small mobile
+    @media (min-width: v.$small-lower-bound) and (max-width: v.$small-upper-bound) {
+      width: 100%;
+    }
+
+    // tablet
+    @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+      width: min(72.91vw,746px);
+    }
+
     &.is-scroll {
       background: var(--tab3col-tab-bar-bg-m);
 
-      @media (width > 730px) {
+      @media (min-width: v.$medium-lower-bound) {
         background: var(--tab3col-tab-bar-bg-t);
       }
     }
@@ -294,6 +313,14 @@
   }
 
   // ── Panel fade transition ─────────────────────────────────
+  .tab3col-panels{
+    // tablet
+    @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+      width: min(72.91vw,746px);
+      margin:0 auto;
+    }
+  }
+
   .tab3col-panel {
     display: none;
 
@@ -320,6 +347,21 @@
   }
 
   // ── Typography ────────────────────────────────────────────
+  .tab3col-text-col {
+    margin: 0 auto;
+    width: min(14.58vw,210px);
+
+    // ~481px
+    @media (max-width: v.$tiny-upper-bound) {
+      width: var(--l4-column-width-12);
+    }
+
+    // 481px - 1279.5px
+    @media (min-width: v.$small-lower-bound) and (max-width: v.$medium-upper-bound) {
+      width: 100%;
+    }
+  }
+
   .tab3col-title {
     color: var(--tab3col-title-color, inherit);
   }

@@ -17,3 +17,13 @@ $medium-lower-bound: 731px;
 /// @group 01-variable
 /// @type Pixel
 $small-upper-bound: 730.5px;
+
+/// Device Small width下限
+/// @group 01-variable
+/// @type Pixel
+$small-lower-bound: 481px;
+
+/// Device Tiny width上限
+/// @group 01-variable
+/// @type Pixel
+$tiny-upper-bound: 480.5px;
