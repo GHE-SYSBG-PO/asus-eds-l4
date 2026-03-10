@@ -232,17 +232,50 @@ function addTextContent(block, v) {
   }
 }
 
+// 布局表
+const layoutVariant = {
+  D: {
+    left: 'lg:justify-start lg:items-center',
+    right: 'lg:justify-end lg:items-center',
+    top: 'lg:justify-center lg:items-start',
+    bottom: 'lg:justify-center lg:items-end',
+    topLeft: 'lg:justify-start lg:items-start',
+    topRight: 'lg:justify-end lg:items-start',
+    bottomLeft: 'lg:justify-start lg:items-end',
+    bottomRight: 'lg:justify-end lg:items-end',
+  },
+  T: {
+    left: 'md:justify-start md:items-center',
+    right: 'md:justify-end md:items-center',
+    top: 'md:justify-center md:items-start',
+    bottom: 'md:justify-center md:items-end',
+    topLeft: 'md:justify-start md:items-start',
+    topRight: 'md:justify-end md:items-start',
+    bottomLeft: 'md:justify-start md:items-end',
+    bottomRight: 'md:justify-end md:items-end',
+  },
+  M: {
+    left: 'justify-start items-center',
+    right: 'justify-end items-center',
+    top: 'justify-center items-start',
+    bottom: 'justify-center items-end',
+    topLeft: 'justify-start items-start',
+    topRight: 'justify-end items-start',
+    bottomLeft: 'justify-start items-end',
+    bottomRight: 'justify-end items-end',
+  },
+};
+
 // 处理文本区域位置
 const handleLayoutVariant = (block, v) => {
-  console.log('处理文本区域位置', block);
   if (v('layoutVariantD')) {
-    block.classList.add(v('layoutVariantD'));
+    block.className += ` ${layoutVariant.D?.[v('layoutVariantD')]}`;
   }
   if (v('layoutVariantT')) {
-    block.classList.add(v('layoutVariantT'));
+    block.className += ` ${layoutVariant.T?.[v('layoutVariantT')]}`;
   }
   if (v('layoutVariantM')) {
-    block.classList.add(v('layoutVariantM'));
+    block.className += ` ${layoutVariant.M?.[v('layoutVariantM')]}`;
   }
 };
 
@@ -264,7 +297,7 @@ const handleIcon = (block, v) => {
   if (v('iconColumnSpanT')) {
     block.classList.add(v('iconColumnSpanT'));
   }
-  handleLayoutVariant(block, v);
+  // handleLayoutVariant(block, v);
 };
 // 处理文字
 const handleText = (block, v) => {
@@ -280,16 +313,30 @@ const handleText = (block, v) => {
 // 处理锚点
 const handleAnchor = (block, v) => {
   console.log(block, v);
-//   // 处理锚点
-//   if (v('anchorVisibilityToggle') === 'true' && v('anchorSectionId')) {
-//     const anchor = document.createElement('a');
-//     anchor.href = `#${v('anchorSectionId')}`;
-//     anchor.className = 'featureksp-grid-anchor';
-//     anchor.setAttribute('aria-label', `Anchor to section ${v('anchorSectionId')}`);
-//     gridItem.appendChild(anchor);
-//   }
+  if (v('anchorVisibilityToggle') === true && v('layoutStyle') === 'icon') {
+    if (v('layoutVariantD') === 'bottom') {
+      block.classList.add('lg:pb-[80px]');
+    }
+    if (v('layoutVariantT') === 'bottom') {
+      block.classList.add('md:pb-[80px]');
+    }
+    if (v('layoutVariantM') === 'bottom') {
+      block.classList.add('pb-[80px]');
+    }
+  }
+  // 处理锚点
+  if (v('anchorVisibilityToggle') === 'true') {
+    const anchor = document.createElement('a');
+    anchor.href = v('anchorSectionId') ? `#${v('anchorSectionId')}` : '#';
+    anchor.setAttribute('aria-label', `Anchor to section ${v('anchorSectionId')}`);
+    block.appendChild(anchor);
+  }
 };
 
+// DEFAULT
+const DEFAULT_CONFIG = {
+  anchorVisibilityToggle: true,
+};
 export default async function decorate(block) {
   try {
     // 获取网格容器配置
@@ -313,7 +360,7 @@ export default async function decorate(block) {
           return;
         }
         // 每一项各自配置
-        const itemConfig = await getBlockConfigs(wrap, {}, 'featureksp-grid-item');
+        const itemConfig = await getBlockConfigs(wrap, DEFAULT_CONFIG, 'featureksp-grid-item');
         const v = getFieldValue(itemConfig);
         // 每一项的通用配置
         inlineStyle = '';

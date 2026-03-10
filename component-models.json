@@ -4415,35 +4415,35 @@
             "options": [
               {
                 "name": "left",
-                "value": "lg:justify-start lg:items-center"
+                "value": "left"
               },
               {
                 "name": "right",
-                "value": "lg:justify-end lg:items-center"
+                "value": "right"
               },
               {
                 "name": "top",
-                "value": "lg:justify-center lg:items-start"
+                "value": "top"
               },
               {
                 "name": "bottom",
-                "value": "lg:justify-center lg:items-end"
+                "value": "bottom"
               },
               {
                 "name": "top left",
-                "value": "lg:justify-start lg:items-start"
+                "value": "topLeft"
               },
               {
                 "name": "top right",
-                "value": "lg:justify-end lg:items-start"
+                "value": "topRight"
               },
               {
                 "name": "bottom left",
-                "value": "lg:justify-start lg:items-end"
+                "value": "bottomLeft"
               },
               {
                 "name": "bottom right",
-                "value": "lg:justify-end lg:items-end"
+                "value": "bottomRight"
               }
             ]
           },
@@ -4466,35 +4466,35 @@
             "options": [
               {
                 "name": "left",
-                "value": "md:justify-start md:items-center"
+                "value": "left"
               },
               {
                 "name": "right",
-                "value": "md:justify-end md:items-center"
+                "value": "right"
               },
               {
                 "name": "top",
-                "value": "md:justify-center md:items-start"
+                "value": "top"
               },
               {
                 "name": "bottom",
-                "value": "md:justify-center md:items-end"
+                "value": "bottom"
               },
               {
                 "name": "top left",
-                "value": "md:justify-start md:items-start"
+                "value": "topLeft"
               },
               {
                 "name": "top right",
-                "value": "md:justify-end md:items-start"
+                "value": "topRight"
               },
               {
                 "name": "bottom left",
-                "value": "md:justify-start md:items-end"
+                "value": "bottomLeft"
               },
               {
                 "name": "bottom right",
-                "value": "md:justify-end md:items-end"
+                "value": "bottomRight"
               }
             ]
           },
@@ -4517,35 +4517,35 @@
             "options": [
               {
                 "name": "left",
-                "value": "justify-start items-center"
+                "value": "left"
               },
               {
                 "name": "right",
-                "value": "justify-end items-center"
+                "value": "right"
               },
               {
                 "name": "top",
-                "value": "justify-center items-start"
+                "value": "top"
               },
               {
                 "name": "bottom",
-                "value": "justify-center items-end"
+                "value": "bottom"
               },
               {
                 "name": "top left",
-                "value": "justify-start items-start"
+                "value": "topLeft"
               },
               {
                 "name": "top right",
-                "value": "justify-end items-start"
+                "value": "topRight"
               },
               {
                 "name": "bottom left",
-                "value": "justify-start items-end"
+                "value": "bottomLeft"
               },
               {
                 "name": "bottom right",
-                "value": "justify-end items-end"
+                "value": "bottomRight"
               }
             ]
           },
