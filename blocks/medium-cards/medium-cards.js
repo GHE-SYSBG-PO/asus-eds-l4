@@ -388,7 +388,11 @@ function getNoiseCancelingHTML(style, noiseCancelingAsset, imageAlt) {
                   aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
                   <figure class="img img__noise grace-show show animated" role="presentation" aria-hidden="true">
                     <div class="img__voice">
-                        <img src="${noiseCancelingAsset}" alt="${imageAlt}">
+                        <img 
+                        src="${noiseCancelingAsset}" 
+                        alt="${imageAlt}"
+                        loading="lazy"
+                        decoding="async">
                     </div>
                     <canvas class="noise__left" width="800" height="400"></canvas>
                     <canvas class="noise__right" width="800" height="400"></canvas>
@@ -461,7 +465,9 @@ function getImageHTML(asset, imageAlt) {
         <div class="block-img">
           <img class="img img__bg"
               src="${asset}"
-              alt="${imageAlt}">
+              alt="${imageAlt}"
+              loading="lazy"
+              decoding="async">
         </div>`;
 }
 
