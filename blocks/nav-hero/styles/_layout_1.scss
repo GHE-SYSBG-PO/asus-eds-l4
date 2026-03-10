@@ -1,0 +1,47 @@
+@use '../../../styles/variable' as v;
+
+@media all and (min-width: v.$large-lower-bound) {
+  .l4-pdp {
+    .nav-hero-item-container {
+      &.style-layout-1 {
+        .nav-hero-container {
+          .container-items {
+            .item {
+              &:hover {
+                .item-dot::after {
+                  border: 0;
+                }
+              }
+
+              &.enter {
+                .item-dot::after {
+                  box-sizing: content-box;
+                }
+              }
+            }
+          }
+
+          &.item-top-customized {
+            .container-items .item.item-0 {
+              .item-dot {
+                img {
+                  display: none;
+                }
+              }
+            }
+          }
+
+          &.item-dot-customized {
+            .container-items .item {
+              .item-dot {
+                img {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

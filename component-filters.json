@@ -5,7 +5,8 @@
       "section",
       "container-2cols",
       "feature-accordion",
-      "tab-3column"
+      "tab-3column",
+      "nav-hero"
     ]
   },
   {
@@ -29,7 +30,8 @@
       "featureitem-block",
       "feature-ksp-list",
       "small-cards",
-      "effect-media"
+      "effect-media",
+      "medium-cards"
     ]
   },
   {
@@ -42,6 +44,12 @@
     "id": "tab-3column",
     "components": [
       "tab-3column-item"
+    ]
+  },
+  {
+    "id": "nav-hero",
+    "components": [
+      "nav-hero-item"
     ]
   },
   {
@@ -116,6 +124,18 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
+    ]
+  },
+  {
+    "id": "medium-cards",
+    "components": [
+      "medium-card"
+    ]
+  },
+  {
+    "id": "nav-hero-item",
+    "components": [
+      "media-block"
     ]
   },
   {

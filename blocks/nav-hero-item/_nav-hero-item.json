@@ -1,0 +1,66 @@
+{
+  "definitions": [
+    {
+      "title": "Nav Hero Item",
+      "id": "nav-hero-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Nav Hero Item",
+              "filter": "nav-hero-item",
+              "model": "nav-hero-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "nav-hero-item",
+      "fields": [
+        {
+          "component": "text",
+          "label": "Label Name",
+          "name": "labelName",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Setion ID",
+          "name": "sectionId",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Jump Point Offset (D)",
+          "name": "jumpPointOffsetD",
+          "valueType": "string",
+          "placeholder": "px, default to 0 if not set"
+        },
+        {
+          "component": "text",
+          "label": "Jump Point Offset (T)",
+          "name": "jumpPointOffsetT",
+          "valueType": "string",
+          "placeholder": "px, default to 0 if not set"
+        },
+        {
+          "component": "text",
+          "label": "Jump Point Offset (M)",
+          "name": "jumpPointOffsetM",
+          "valueType": "string",
+          "placeholder": "px, default to 0 if not set"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "nav-hero-item",
+      "components": ["media-block"]
+    }
+  ]
+}

@@ -252,8 +252,87 @@ function getPageMetadata() {
   });
 }
 
+/**
+ * Initialize global GA click tracking for elements with the .wdga class
+ */
+function initGATracking() {
+  document.body.addEventListener('click', (e) => {
+    const el = e.target.closest('.wdga');
+
+    if (!el) return;
+
+    const category = el.getAttribute('data-category');
+    const action = el.getAttribute('data-action');
+    const galabel = el.getAttribute('data-galabel');
+    const eventname = el.getAttribute('data-eventname');
+
+    const pushData = {
+      event: 'data_layer_event',
+      event_name_ga4: eventname || 'click_tracking',
+      event_category_DL: category || 'buttons',
+      event_action_DL: action || 'clicked',
+      event_label_DL: galabel || '',
+      event_value_DL: 0,
+    };
+
+    // eslint-disable-next-line no-console
+    console.log('GA tracking - pushData', pushData);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(pushData);
+  });
+}
+
+window.large_lower_bound = 1280;
+window.medium_upper_bound = 1279;
+window.medium_lower_bound = 731;
+window.small_upper_bound = 730;
+window.small_lower_bound = 320;
+
+window.getRwdType = () => {
+  const _getJsRWD = () => {
+    const windowWidth = window.innerWidth;
+    let rwdJs = 'tablet';
+
+    if (windowWidth > window.medium_upper_bound) {
+      rwdJs = 'desktop';
+    } else if (windowWidth < window.medium_lower_bound) {
+      rwdJs = 'mobile';
+    }
+    return rwdJs;
+  };
+
+  const _getCssRWD = () => {
+    const main = document.querySelector('main');
+    if (!main) return '';
+
+    const content = window.getComputedStyle(main, '::before').getPropertyValue('content');
+    if (content && content !== 'none' && content !== 'normal') {
+      return content.replace(/["']/g, ''); // Remove quotes around the content
+    }
+    return '';
+  };
+
+  const rwdType = _getCssRWD() || _getJsRWD();
+  return rwdType;
+};
+
+function set1vhHeight() {
+  const { userAgent } = navigator;
+  const isiPhoneChrone = /iPhone/.test(userAgent) && /CriOS/.test(userAgent);
+
+  if (isiPhoneChrone) {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--cmdvh', `${vh}px`);
+  } else {
+    document.documentElement.style.setProperty('--cmdvh', '1vh');
+  }
+}
+
 async function loadPage() {
   getPageMetadata();
+  initGATracking();
+  set1vhHeight();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();

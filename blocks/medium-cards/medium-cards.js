@@ -388,7 +388,11 @@ function getNoiseCancelingHTML(style, noiseCancelingAsset, imageAlt) {
                   aria-label="(Baby crying and dog barking) Flip the switch below this test recording to enable or disable the ASUS AI Noise Canceling Technology and experience its power and accuracy for yourself.">
                   <figure class="img img__noise grace-show show animated" role="presentation" aria-hidden="true">
                     <div class="img__voice">
-                        <img src="${noiseCancelingAsset}" alt="${imageAlt}">
+                        <img 
+                        src="${noiseCancelingAsset}" 
+                        alt="${imageAlt}"
+                        loading="lazy"
+                        decoding="async">
                     </div>
                     <canvas class="noise__left" width="800" height="400"></canvas>
                     <canvas class="noise__right" width="800" height="400"></canvas>
@@ -541,7 +545,7 @@ function getCardContentHTML(data, titleFont, infoFont) {
 
   let ctaHTML = '';
   if (ctaVisible === 'show') {
-    const fontClass = `${ctaFontDT} small_${ctaFontM}`;
+    const fontClass = `${ctaFontDT} medium_${ctaFontM}`;
     const style = ctaFontColor ? `style="background: none; -webkit-text-fill-color: initial; color: #${ctaFontColor}"` : 'style="background: none; -webkit-text-fill-color: initial; color: var(--link-font-color-start)"';
 
     if (ctaLinkType === 'button' && styleLayoutCTA) {
@@ -721,7 +725,7 @@ function getCardHTML(data) {
   const borderStyle = borderWidth ? `${borderWidth}px solid #${borderColor}` : 'var(--swiper-slide-border-width) solid var(--swiper-slide-border-color)';
 
   return `
-      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white small-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft} ${cardBlockType}" 
+      <div class="block block__scroll-item block-1 block-imgstyle-scale column-span-2  column-span-medium-2 theme-white medium-cards-list swiper-slide ${borderRadiusTopLeft} ${borderRadiusTopRight} ${borderRadiusBottomRight} ${borderRadiusBottomLeft} ${cardBlockType}" 
            data-blocktype="aiNoise" 
            style="${containerStyle}; 
            border: ${borderStyle};
@@ -758,12 +762,12 @@ function setEqualHeight(block) {
 }
 
 /**
- * Builds the small cards container.
+ * Builds the medium cards container.
  * @param {object} data The card data.
  * @param {object} config The alignment configuration.
- * @returns {HTMLElement} The small cards container element.
+ * @returns {HTMLElement} The medium cards container element.
  */
-function buildSmallCardsContainer(data, config) {
+function buildMediumCardsContainer(data, config) {
   const {
     arrowStyle,
     arrowContainerBgColorDefault,
@@ -807,10 +811,10 @@ function buildSmallCardsContainer(data, config) {
     if (arrowBorderColorDisable) arrowStyleVars += `--arrow-border-color-disable: #${arrowBorderColorDisable};`;
   }
 
-  const smallCardsContainer = document.createElement('div');
-  smallCardsContainer.className = 'small-cards-containers';
+  const mediumCardsContainer = document.createElement('div');
+  mediumCardsContainer.className = 'medium-cards-containers';
   if (arrowStyleVars) {
-    smallCardsContainer.style.cssText = arrowStyleVars;
+    mediumCardsContainer.style.cssText = arrowStyleVars;
   }
 
   const cardHTML = Array.isArray(data)
@@ -842,8 +846,8 @@ function buildSmallCardsContainer(data, config) {
     </div>
   </div>`;
 
-  smallCardsContainer.innerHTML = html;
-  return smallCardsContainer;
+  mediumCardsContainer.innerHTML = html;
+  return mediumCardsContainer;
 }
 
 /**
@@ -962,22 +966,22 @@ function addVideoEventListeners(container) {
 /**
  * Finalizes the block structure by adding styles and appending the container.
  * @param {HTMLElement} block The block element.
- * @param {HTMLElement} smallCardsContainer The container element.
+ * @param {HTMLElement} mediumCardsContainer The container element.
  * @param {object|Array} data The card data.
  * @param {object} config The alignment configuration.
  */
-function finalizeBlockStructure(block, smallCardsContainer, data, config) {
+function finalizeBlockStructure(block, mediumCardsContainer, data, config) {
   const slideCount = Array.isArray(data) ? data.length : 1;
 
   const style = document.createElement('style');
   style.textContent = `
     @media (min-width: 768px) {
-      .small-cards-containers .swiper-wrapper {
+      .medium-cards-containers .swiper-wrapper {
         justify-content: ${slideCount <= 2 && config.tabletAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     @media (min-width: 1025px) {
-      .small-cards-containers .swiper-wrapper {
+      .medium-cards-containers .swiper-wrapper {
         justify-content: ${slideCount <= 3 && config.desktopAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
@@ -986,8 +990,8 @@ function finalizeBlockStructure(block, smallCardsContainer, data, config) {
   if (slideCount <= 3) {
     style.textContent += `
       @media (width > 1024px) {
-        .small-cards-containers .swiper-button-prev,
-        .small-cards-containers .swiper-button-next {
+        .medium-cards-containers .swiper-button-prev,
+        .medium-cards-containers .swiper-button-next {
           display: none !important;
         }
       }
@@ -996,8 +1000,8 @@ function finalizeBlockStructure(block, smallCardsContainer, data, config) {
   if (slideCount <= 2) {
     style.textContent += `
       @media (width >= 768px) and (width <= 1024px) {
-        .small-cards-containers .swiper-button-prev,
-        .small-cards-containers .swiper-button-next {
+        .medium-cards-containers .swiper-button-prev,
+        .medium-cards-containers .swiper-button-next {
           display: none !important;
         }
       }
@@ -1006,20 +1010,20 @@ function finalizeBlockStructure(block, smallCardsContainer, data, config) {
   if (slideCount <= 1) {
     style.textContent += `
       @media (max-width: 767px) {
-        .small-cards-containers .swiper-button-prev,
-        .small-cards-containers .swiper-button-next {
+        .medium-cards-containers .swiper-button-prev,
+        .medium-cards-containers .swiper-button-next {
           display: none !important;
         }
       }
     `;
   }
 
-  smallCardsContainer.appendChild(style);
+  mediumCardsContainer.appendChild(style);
 
-  block.appendChild(smallCardsContainer);
+  block.appendChild(mediumCardsContainer);
 
   Array.from(block.children).forEach((child) => {
-    if (child !== smallCardsContainer) {
+    if (child !== mediumCardsContainer) {
       child.style.display = 'none';
       Array.from(child.children).forEach((grandchild) => grandchild.remove());
     }
@@ -1036,13 +1040,13 @@ async function renderCard(block) {
 
   console.log('Extracted chunk, Final Card Data:', data);
 
-  const smallCardsContainer = buildSmallCardsContainer(data, alignmentConfig);
+  const mediumCardsContainer = buildMediumCardsContainer(data, alignmentConfig);
 
-  await processButtonPlaceholders(smallCardsContainer, data);
+  await processButtonPlaceholders(mediumCardsContainer, data);
 
-  addVideoEventListeners(smallCardsContainer);
+  addVideoEventListeners(mediumCardsContainer);
 
-  finalizeBlockStructure(block, smallCardsContainer, data, alignmentConfig);
+  finalizeBlockStructure(block, mediumCardsContainer, data, alignmentConfig);
 }
 
 /**
@@ -1080,7 +1084,7 @@ export default async function decorate(block) {
     }
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error decorating small cards block:', error);
+    console.error('Error decorating medium cards block:', error);
   }
 }
 
