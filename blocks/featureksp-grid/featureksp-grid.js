@@ -279,7 +279,8 @@ const getRadiusStyle = (tl, tr, br, bl) => {
 
 // 添加文本内容
 function addTextContent(block, v) {
-  const textContainer = document.createElement('div');
+  const alignmentClass = v('textAlignment') || 'text-left';
+  let html = '';
 
   // // 应用文本宽度
   // if (v('textWidth')) {
@@ -290,36 +291,22 @@ function addTextContent(block, v) {
 
   // 添加顶部富文本
   if (v('textTopRichtext', 'html') && v('layoutStyle') !== 'icon') {
-    const topText = document.createElement('div');
-    if (v('textAlignment')) {
-      topText.classList.add('text-left');
-    }
-    topText.innerHTML = v('textTopRichtext', 'html');
-    textContainer.appendChild(topText);
+    html += `<div class="${alignmentClass}">${v('textTopRichtext', 'html')}</div>`;
   }
 
   // 添加标题富文本
   if (v('textTitleRichtext', 'html')) {
-    const titleText = document.createElement('div');
-    if (v('textAlignment')) {
-      titleText.classList.add('text-left');
-    }
-    titleText.innerHTML = v('textTitleRichtext', 'html');
-    textContainer.appendChild(titleText);
+    html += `<div class="${alignmentClass}">${v('textTitleRichtext', 'html')}</div>`;
   }
 
   // 添加底部富文本
   if (v('textBottomRichtext', 'html')) {
-    const bottomText = document.createElement('div');
-    if (v('textAlignment')) {
-      bottomText.classList.add('text-left');
-    }
-    bottomText.innerHTML = v('textBottomRichtext', 'html');
-    textContainer.appendChild(bottomText);
+    html += `<div class="${alignmentClass}">${v('textBottomRichtext', 'html')}</div>`;
   }
 
-  if (textContainer.children.length > 0) {
-    block.appendChild(textContainer);
+  // 使用 innerHTML 添加内容
+  if (html) {
+    block.innerHTML += `<div class="flex flex-col">${html}</div>`;
   }
 }
 
@@ -405,8 +392,13 @@ export default async function decorate(block) {
         } else if (layoutStyle === 'text') {
           handleText(wrap, v);
         }
+        // 先清空
+        wrap.innerHTML = '';
         // 通用配置
         addTextContent(wrap, v);
+        if (v('layoutRowSpanD')) {
+          wrap.classList.add(v('layoutRowSpanD'));
+        }
 
         // const gridItem = createGridItem(itemConfig);
         // if (gridItem) {

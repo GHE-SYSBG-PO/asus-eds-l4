@@ -4517,7 +4517,7 @@
             ]
           },
           {
-            "component": "text",
+            "component": "select",
             "label": "row span (D)",
             "name": "layoutRowSpanD",
             "valueType": "string",
