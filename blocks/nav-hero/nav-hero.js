@@ -498,6 +498,7 @@ const _setContainerStyle = (containerEl, config) => {
 };
 
 const _handleIsHiddenEvent = (containerEl) => {
+  // HO TO USE:
   // document.body.dispatchEvent(new Event('nav-hero-show'));
   // document.body.dispatchEvent(new Event('nav-hero-hidden'));
 
