@@ -4415,35 +4415,35 @@
             "options": [
               {
                 "name": "left",
-                "value": "left"
+                "value": "lg:justify-start lg:items-center"
               },
               {
                 "name": "right",
-                "value": "right"
+                "value": "lg:justify-end lg:items-center"
               },
               {
                 "name": "top",
-                "value": "top"
+                "value": "lg:justify-center lg:items-start"
               },
               {
                 "name": "bottom",
-                "value": "bottom"
+                "value": "lg:justify-center lg:items-end"
               },
               {
                 "name": "top left",
-                "value": "topLeft"
+                "value": "lg:justify-start lg:items-start"
               },
               {
                 "name": "top right",
-                "value": "topRight"
+                "value": "lg:justify-end lg:items-start"
               },
               {
                 "name": "bottom left",
-                "value": "bottomLeft"
+                "value": "lg:justify-start lg:items-end"
               },
               {
                 "name": "bottom right",
-                "value": "bottomRight"
+                "value": "lg:justify-end lg:items-end"
               }
             ]
           },
@@ -4466,35 +4466,35 @@
             "options": [
               {
                 "name": "left",
-                "value": "left"
+                "value": "md:justify-start md:items-center"
               },
               {
                 "name": "right",
-                "value": "right"
+                "value": "md:justify-end md:items-center"
               },
               {
                 "name": "top",
-                "value": "top"
+                "value": "md:justify-center md:items-start"
               },
               {
                 "name": "bottom",
-                "value": "bottom"
+                "value": "md:justify-center md:items-end"
               },
               {
                 "name": "top left",
-                "value": "topLeft"
+                "value": "md:justify-start md:items-start"
               },
               {
                 "name": "top right",
-                "value": "topRight"
+                "value": "md:justify-end md:items-start"
               },
               {
                 "name": "bottom left",
-                "value": "bottomLeft"
+                "value": "md:justify-start md:items-end"
               },
               {
                 "name": "bottom right",
-                "value": "bottomRight"
+                "value": "md:justify-end md:items-end"
               }
             ]
           },
@@ -4517,35 +4517,35 @@
             "options": [
               {
                 "name": "left",
-                "value": "left"
+                "value": "justify-start items-center"
               },
               {
                 "name": "right",
-                "value": "right"
+                "value": "justify-end items-center"
               },
               {
                 "name": "top",
-                "value": "top"
+                "value": "justify-center items-start"
               },
               {
                 "name": "bottom",
-                "value": "bottom"
+                "value": "justify-center items-end"
               },
               {
                 "name": "top left",
-                "value": "topLeft"
+                "value": "justify-start items-start"
               },
               {
                 "name": "top right",
-                "value": "topRight"
+                "value": "justify-end items-start"
               },
               {
                 "name": "bottom left",
-                "value": "bottomLeft"
+                "value": "justify-start items-end"
               },
               {
                 "name": "bottom right",
-                "value": "bottomRight"
+                "value": "justify-end items-end"
               }
             ]
           },

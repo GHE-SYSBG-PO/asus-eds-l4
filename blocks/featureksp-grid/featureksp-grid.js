@@ -45,25 +45,6 @@ import {
 //   });
 // }
 
-// 设置统一高度
-// function setUnifiedHeight(grid) {
-//   const gridItems = grid.querySelectorAll('.featureksp-grid-item');
-//   let maxHeight = 0;
-
-//   // 计算最大高度
-//   gridItems.forEach((item) => {
-//     const height = item.offsetHeight;
-//     if (height > maxHeight) {
-//       maxHeight = height;
-//     }
-//   });
-
-//   // 应用最大高度
-//   gridItems.forEach((item) => {
-//     item.style.minHeight = `${maxHeight}px`;
-//   });
-// }
-
 // // 创建媒体内容
 // function createMediaContent(gridItem, v) {
 //   const mediaContainer = document.createElement('div');
@@ -201,65 +182,6 @@ import {
 //   addTextContent(gridItem, v);
 // }
 
-// // 创建网格项
-// function createGridItem(itemConfig) {
-//   const v = getFieldValue(itemConfig);
-//   const gridItem = document.createElement('div');
-//   gridItem.className = 'featureksp-grid-item';
-
-//   // 应用列跨度
-//   if (v('layoutColumnSpanD')) {
-//     gridItem.style.gridColumn = `span ${v('layoutColumnSpanD')}`;
-//   }
-
-//   // 应用行跨度
-//   if (v('layoutRowSpanD')) {
-//     gridItem.style.gridRow = `span ${v('layoutRowSpanD')}`;
-//   }
-
-//   // 应用背景颜色
-//   if (v('layoutBgColor')) {
-//     gridItem.style.backgroundColor = v('layoutBgColor');
-//   }
-
-//   // 应用对齐方式
-//   if (v('textAlignment')) {
-//     gridItem.style.textAlign = v('textAlignment');
-//   }
-
-//   // 应用布局变体
-//   const layoutStyle = v('layoutStyle');
-//   if (layoutStyle) {
-//     gridItem.classList.add(`style-${layoutStyle}`);
-//   }
-
-//   // 处理不同类型的内容
-//   switch (layoutStyle) {
-//     case 'media':
-//       createMediaContent(gridItem, v);
-//       break;
-//     case 'icon':
-//       createIconContent(gridItem, v);
-//       break;
-//     case 'text':
-//       createTextContent(gridItem, v);
-//       break;
-//     default:
-//       createTextContent(gridItem, v);
-//   }
-
-//   // 处理锚点
-//   if (v('anchorVisibilityToggle') === 'true' && v('anchorSectionId')) {
-//     const anchor = document.createElement('a');
-//     anchor.href = `#${v('anchorSectionId')}`;
-//     anchor.className = 'featureksp-grid-anchor';
-//     anchor.setAttribute('aria-label', `Anchor to section ${v('anchorSectionId')}`);
-//     gridItem.appendChild(anchor);
-//   }
-
-//   return gridItem;
-// }
-
 const getRadiusStyle = (tl, tr, br, bl) => {
   // If none are configured, return empty (use CSS default)
   if (tl === '' && tr === '' && br === '' && bl === '') return '';
@@ -306,9 +228,23 @@ function addTextContent(block, v) {
 
   // 使用 innerHTML 添加内容
   if (html) {
-    block.innerHTML += `<div id="featureksp-grid-item-text" class="flex flex-col gap-[4px] md:gap-[8px]">${html}</div>`;
+    block.innerHTML += `<div class="grid gap-[4px] md:gap-[8px]">${html}</div>`;
   }
 }
+
+// 处理文本区域位置
+const handleLayoutVariant = (block, v) => {
+  console.log('处理文本区域位置', block);
+  if (v('layoutVariantD')) {
+    block.classList.add(v('layoutVariantD'));
+  }
+  if (v('layoutVariantT')) {
+    block.classList.add(v('layoutVariantT'));
+  }
+  if (v('layoutVariantM')) {
+    block.classList.add(v('layoutVariantM'));
+  }
+};
 
 // 处理媒体
 const handleMedia = (block, v) => {
@@ -318,6 +254,7 @@ const handleMedia = (block, v) => {
   if (v('mediaColumnSpanT')) {
     block.classList.add(v('mediaColumnSpanT'));
   }
+  handleLayoutVariant(block, v);
 };
 // 处理图标
 const handleIcon = (block, v) => {
@@ -327,6 +264,7 @@ const handleIcon = (block, v) => {
   if (v('iconColumnSpanT')) {
     block.classList.add(v('iconColumnSpanT'));
   }
+  handleLayoutVariant(block, v);
 };
 // 处理文字
 const handleText = (block, v) => {
@@ -336,8 +274,20 @@ const handleText = (block, v) => {
   if (v('textColumnSpanT')) {
     block.classList.add(v('textColumnSpanT'));
   }
-  const textblock = block.querySelector('#featureksp-grid-item-text');
-  textblock.classList.add('h-full', 'justify-center');
+  block.classList.add('justify-center', 'items-center');
+};
+
+// 处理锚点
+const handleAnchor = (block, v) => {
+  console.log(block, v);
+//   // 处理锚点
+//   if (v('anchorVisibilityToggle') === 'true' && v('anchorSectionId')) {
+//     const anchor = document.createElement('a');
+//     anchor.href = `#${v('anchorSectionId')}`;
+//     anchor.className = 'featureksp-grid-anchor';
+//     anchor.setAttribute('aria-label', `Anchor to section ${v('anchorSectionId')}`);
+//     gridItem.appendChild(anchor);
+//   }
 };
 
 export default async function decorate(block) {
@@ -355,8 +305,6 @@ export default async function decorate(block) {
 
     // 获取每一项item
     const wrappers = block.querySelectorAll(':scope > div');
-    // 处理每个包装器
-    // const gridItems = [];
     let inlineStyle = '';
     Array.from(wrappers).forEach(async (wrap) => {
       try {
@@ -370,7 +318,7 @@ export default async function decorate(block) {
         // 每一项的通用配置
         inlineStyle = '';
         // 添加初始class
-        wrap.classList.add('featureksp-grid-item-block');
+        wrap.classList.add('featureksp-grid-item-block', 'p-[40px]');
         if (c('borderColor')) {
           inlineStyle += `--featureksp-grid-item-border-color: #${c('borderColor')};`;
         }
@@ -383,18 +331,12 @@ export default async function decorate(block) {
         wrap.style.cssText += getRadiusStyle(c('radiusTL'), c('radiusTR'), c('radiusBR'), c('radiusBL'));
         wrap.style.cssText += inlineStyle;
 
-        console.log('wrap', wrap);
         // inlineStyle = '';
         // 添加初始class
-        wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12');
+        wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12', 'flex');
         console.log('itemConfig', itemConfig);
         // 先清空
         wrap.innerHTML = '';
-        // 通用配置
-        addTextContent(wrap, v);
-        if (v('layoutRowSpanD')) {
-          wrap.classList.add(v('layoutRowSpanD'));
-        }
         // 选择样式
         const layoutStyle = v('layoutStyle');
         if (layoutStyle === 'media') {
@@ -404,73 +346,18 @@ export default async function decorate(block) {
         } else if (layoutStyle === 'text') {
           handleText(wrap, v);
         }
-
-        // const gridItem = createGridItem(itemConfig);
-        // if (gridItem) {
-        //   gridItems.push(gridItem);
-        //   grid.appendChild(gridItem);
-        // }
+        // 通用配置
+        addTextContent(wrap, v);
+        if (v('layoutRowSpanD')) {
+          wrap.classList.add(v('layoutRowSpanD'));
+        }
+        // 处理锚点
+        handleAnchor(wrap, v);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error decorating grid item:', error);
       }
     });
-
-    // 替换原始内容
-    // block.innerHTML = '';
-    // block.appendChild(grid);
-
-    // // 设置统一高度
-    // setTimeout(() => {
-    //   setUnifiedHeight(grid);
-    // }, 500);
-
-    // block.innerHTML = `
-    //   <section class="grid grid-cols-12 gap-[10px] auto-rows-[minmax(50px,auto)] grid-flow-row-dense">
-    //     <div class="bg-red-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-12 lg:col-span-12">
-    //       <span class="text-[#fff]">1111111111111111111111111111</span>
-    //     </div>
-
-    //     <div class="bg-blue-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-4">
-    //       <span class="text-[#fff]">2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222</span>
-    //     </div>
-    //     <div class="bg-purple-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-4">
-    //       <div class="text-[#fff]">
-    //         3333
-    //         <img class="w-[500px] h-[500px] object-scale-down" src="https://q0.itc.cn/q_70/images01/20240912/8c6724ed6dbb43728ea659a6d430f5d1.png" alt="">
-    //       </div>
-    //     </div>
-    //     <div class="bg-orange-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-4">
-    //       <span class="text-[#fff]">4444</span>
-    //     </div>
-
-    //     <div class="bg-blue-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-6">
-    //       <div class="text-[#fff]">
-    //         5555
-    //         <img class="w-[200px] h-[200px] object-scale-down" src="https://q0.itc.cn/q_70/images01/20240912/8c6724ed6dbb43728ea659a6d430f5d1.png" alt="">
-    //       </div>
-    //     </div>
-    //     <div class="bg-purple-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-12 lg:col-span-6 lg:row-span-3">
-    //       <span class="text-[#fff]">666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666</span>
-    //     </div>
-    //     <div class="bg-orange-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-6">
-    //       <span class="text-[#fff]">7777</span>
-    //     </div>
-    //     <div class="bg-black overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-6">
-    //       <span class="text-[#fff]">88888</span>
-    //     </div>
-
-    //     <div class="bg-blue-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-12 lg:col-span-6 lg:row-span-2">
-    //       <span class="text-[#fff]">99999</span>
-    //     </div>
-    //     <div class="bg-purple-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-6">
-    //       <span class="text-[#fff]">101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010</span>
-    //     </div>
-    //     <div class="bg-orange-900 overflow-auto wrap-anywhere rounded-[10px] col-span-12 md:col-span-6 lg:col-span-6">
-    //       <span class="text-[#fff]">11111111</span>
-    //     </div>
-    //   </section>
-    // `;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating featureksp-grid block:', error);
