@@ -122,30 +122,6 @@
               "video"
             ]
           }
-        },
-        {
-          "component": "select",
-          "label": "btn theme",
-          "name": "mediaVideoBtnTheme",
-          "valueType": "string",
-          "condition": {
-            "===": [
-              {
-                "var": "mediaType"
-              },
-              "video"
-            ]
-          },
-          "options": [
-            {
-              "name": "light",
-              "value": "light"
-            },
-            {
-              "name": "dark",
-              "value": "dark"
-            }
-          ]
         }
       ]
     }

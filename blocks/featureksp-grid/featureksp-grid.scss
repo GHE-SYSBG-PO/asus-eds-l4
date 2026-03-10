@@ -1,11 +1,13 @@
 .l4-pdp {
   --featureksp-grid-item-border-color: transparent;
   --featureksp-grid-item-border-width: 0px;
+  --featureksp-grid-item-bg-color: transparent;
 
   .featureksp-grid-item-block {
     border-color: var(--featureksp-grid-item-border-color);
     border-width: var(--featureksp-grid-item-border-width);
     border-style: solid;
+    background-color: var(--featureksp-grid-item-bg-color);
   }
 
   .featureksp-grid-block {

@@ -306,7 +306,7 @@ function addTextContent(block, v) {
 
   // 使用 innerHTML 添加内容
   if (html) {
-    block.innerHTML += `<div class="flex flex-col">${html}</div>`;
+    block.innerHTML += `<div id="featureksp-grid-item-text" class="flex flex-col gap-[4px] md:gap-[8px]">${html}</div>`;
   }
 }
 
@@ -336,6 +336,8 @@ const handleText = (block, v) => {
   if (v('textColumnSpanT')) {
     block.classList.add(v('textColumnSpanT'));
   }
+  const textblock = block.querySelector('#featureksp-grid-item-text');
+  textblock.classList.add('h-full', 'justify-center');
 };
 
 export default async function decorate(block) {
@@ -362,6 +364,9 @@ export default async function decorate(block) {
           wrap.remove();
           return;
         }
+        // 每一项各自配置
+        const itemConfig = await getBlockConfigs(wrap, {}, 'featureksp-grid-item');
+        const v = getFieldValue(itemConfig);
         // 每一项的通用配置
         inlineStyle = '';
         // 添加初始class
@@ -372,17 +377,24 @@ export default async function decorate(block) {
         if (c('borderWidth')) {
           inlineStyle += `--featureksp-grid-item-border-width: ${c('borderWidth')}px;`;
         }
+        if (v('layoutBgColor')) {
+          inlineStyle += `--featureksp-grid-item-bg-color: #${v('layoutBgColor')};`;
+        }
         wrap.style.cssText += getRadiusStyle(c('radiusTL'), c('radiusTR'), c('radiusBR'), c('radiusBL'));
         wrap.style.cssText += inlineStyle;
 
         console.log('wrap', wrap);
-        // 每一项各自配置
-        inlineStyle = '';
-        const itemConfig = await getBlockConfigs(wrap, {}, 'featureksp-grid-item');
-        const v = getFieldValue(itemConfig);
+        // inlineStyle = '';
         // 添加初始class
         wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12');
         console.log('itemConfig', itemConfig);
+        // 先清空
+        wrap.innerHTML = '';
+        // 通用配置
+        addTextContent(wrap, v);
+        if (v('layoutRowSpanD')) {
+          wrap.classList.add(v('layoutRowSpanD'));
+        }
         // 选择样式
         const layoutStyle = v('layoutStyle');
         if (layoutStyle === 'media') {
@@ -391,13 +403,6 @@ export default async function decorate(block) {
           handleIcon(wrap, v);
         } else if (layoutStyle === 'text') {
           handleText(wrap, v);
-        }
-        // 先清空
-        wrap.innerHTML = '';
-        // 通用配置
-        addTextContent(wrap, v);
-        if (v('layoutRowSpanD')) {
-          wrap.classList.add(v('layoutRowSpanD'));
         }
 
         // const gridItem = createGridItem(itemConfig);

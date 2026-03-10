@@ -4401,6 +4401,17 @@
             "label": "layout variant (D)",
             "name": "layoutVariantD",
             "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "layoutStyle"
+                },
+                [
+                  "media",
+                  "icon"
+                ]
+              ]
+            },
             "options": [
               {
                 "name": "left",
@@ -4441,6 +4452,17 @@
             "label": "layout variant (T)",
             "name": "layoutVariantT",
             "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "layoutStyle"
+                },
+                [
+                  "media",
+                  "icon"
+                ]
+              ]
+            },
             "options": [
               {
                 "name": "left",
@@ -4481,6 +4503,17 @@
             "label": "layout variant (M)",
             "name": "layoutVariantM",
             "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "layoutStyle"
+                },
+                [
+                  "media",
+                  "icon"
+                ]
+              ]
+            },
             "options": [
               {
                 "name": "left",
@@ -4854,30 +4887,6 @@
                 "video"
               ]
             }
-          },
-          {
-            "component": "select",
-            "label": "btn theme",
-            "name": "mediaVideoBtnTheme",
-            "valueType": "string",
-            "condition": {
-              "===": [
-                {
-                  "var": "mediaType"
-                },
-                "video"
-              ]
-            },
-            "options": [
-              {
-                "name": "light",
-                "value": "light"
-              },
-              {
-                "name": "dark",
-                "value": "dark"
-              }
-            ]
           }
         ]
       },
