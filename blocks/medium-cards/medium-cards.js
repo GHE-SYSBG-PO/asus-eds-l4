@@ -1051,10 +1051,12 @@ async function renderCard(block) {
 export default async function decorate(block) {
 
   try {
-    await loadSwiper();
-    await loadAnimationFun();
-    await loadGsapFun();
-    await loadScrollTriggerFun();
+    await Promise.all([
+      loadSwiper(),
+      loadAnimationFun(),
+      loadGsapFun(),
+      loadScrollTriggerFun(),
+    ]);
     if (window.gsap && window.ScrollTrigger) {
       window.gsap.registerPlugin(window.ScrollTrigger);
     }
