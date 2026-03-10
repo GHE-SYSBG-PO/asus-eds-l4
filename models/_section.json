@@ -70,7 +70,7 @@
           "page": {
             "resourceType": "core/franklin/components/section/v1/section",
             "template": {
-              "name": "Tab Navigator",
+              "name": "Tab",
               "filter": "tab-navigator",
               "model": "tab-navigator"
             }
