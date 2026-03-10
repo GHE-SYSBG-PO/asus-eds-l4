@@ -460,14 +460,19 @@ function getVideoHTML(asset, videoAutoPlay, loop, navReplay, pauseAndPlayBtn, pa
  * @param {string} imageAlt The alt text for the image.
  * @returns {string} The HTML string.
  */
-function getImageHTML(asset, imageAlt) {
+function getImageHTML(asset, imageAlt, index) {
+  const isFirst = index === 0;
+  const fetchPriority = isFirst ? 'fetchpriority="high"' : '';
+  const loading = isFirst ? 'eager' : 'lazy';
+
   return `
         <div class="block-img">
           <img class="img img__bg"
               src="${asset}"
               alt="${imageAlt}"
-              loading="lazy"
-              decoding="async">
+              loading="${loading}"
+              decoding="async"
+              ${fetchPriority}>
         </div>`;
 }
 
@@ -476,7 +481,7 @@ function getImageHTML(asset, imageAlt) {
  * @param {object} data The card data.
  * @returns {string} The HTML string for the media content.
  */
-function getMediaHTML(data) {
+function getMediaHTML(data, index) {
   const {
     mediaType, imageAlt, videoAutoPlay, loop, navReplay, title, noiseWaveColor, voiceWaveColor, noiseCancelingAsset,
     pauseAndPlayBtn, pausePlayBtnColor, pausePlayBtnPosition,
@@ -495,7 +500,7 @@ function getMediaHTML(data) {
       break;
     default:
       if (asset) {
-        content = getImageHTML(asset, imageAlt);
+        content = getImageHTML(asset, imageAlt, index);
       }
       break;
   }
@@ -712,7 +717,7 @@ function getCardHTML(data) {
       break;
   }
 
-  const mediaHTML = showMedia ? getMediaHTML(data) : '';
+  const mediaHTML = showMedia ? getMediaHTML(data, data.cardIndex) : '';
   const containerStyle = `transform: translateY(0px); opacity: 1; display: flex; flex-direction: ${flexDirection}; height: auto; position: relative; overflow: hidden;`;
 
   const iconHTML = getAnchorHTML(data);
