@@ -13,6 +13,22 @@
           }
         }
       }
+    },
+    {
+      "title": "Container 2Cols(ID:12)",
+      "id": "container-2cols",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Container 2Cols",
+              "model": "container-2cols",
+              "filter": "container-2cols"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -37,6 +53,14 @@
           ]
         }
       ]
+    },
+    {
+      "id": "container-2cols",
+      "fields": [
+        {
+          "...": "./_container-2cols.json#/fields"
+        }
+      ]
     }
   ],
   "filters": [
@@ -50,7 +74,21 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "text-block",
+        "media-block",
+        "btn",
+        "chart-advanced",
+        "space",
+        "bar-chart",
+        "footnote",
+        "featureitem-block"
+      ]
+    },
+    {
+      "id": "container-2cols",
+      "components": [
+        "container-col"
       ]
     }
   ]

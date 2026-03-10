@@ -1,0 +1,77 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "...": "./_category.json#/fields"
+    },
+    {
+      "component": "container",
+      "label": "title",
+      "name": "titleAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_title.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "body",
+      "name": "bodyAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_body.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "disclaimer",
+      "name": "disclaimerAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "...": "./_disclaimer.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "CTA textLink style",
+      "name": "ctaAdvanced",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{"var" : "ctaLinkType"}, "text-link"] }
+        ]
+      },
+      "fields": [
+        {
+          "...": "./_cta.json#/fields"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "CTA button style",
+      "name": "cTAButtonStyle",
+      "collapsible": true,
+      "condition": {
+        "and": [
+          { "===": [{"var" : "ctaLinkType"}, "button"] }
+        ]
+      },
+      "fields": [
+        {
+          "...": "../../../components/button/_button.json#/fields"
+        }
+      ]
+    }
+  ]
+}

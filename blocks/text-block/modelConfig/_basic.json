@@ -1,0 +1,69 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "richtext",
+      "label": "category",
+      "name": "categoryRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "title",
+      "name": "titleRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "body",
+      "name": "bodyRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "richtext",
+      "label": "disclaimer",
+      "name": "disclaimerRichtext",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "motion",
+      "name": "motion",
+      "valueType": "string",
+      "options": [
+        { "name": "On", "value": "on" },
+        { "name": "Off", "value": "off" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "CTA Visibility Toggle",
+      "name": "ctaVisible",
+      "valueType": "string",
+      "options": [
+        { "name": "Show", "value": "show" },
+        { "name": "Hide", "value": "hide" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "CTA text",
+      "name": "ctaText",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "CTA link type",
+      "name": "ctaLinkType",
+      "valueType": "string",
+      "options": [
+        { "name": "Text Link", "value": "text-link" },
+        { "name": "Button", "value": "button" }
+      ]
+    }
+  ]
+}

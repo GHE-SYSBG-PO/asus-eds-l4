@@ -1,0 +1,47 @@
+.feature-icon-nested {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 240px; /* 可改 */
+    box-sizing: border-box;
+  }
+
+  /* icon */
+  .icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 8px;
+  }
+
+  /* sub text */
+  .subtext {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+  
+  /* 1. 只有大字 */
+  &.align-text-top {
+    .feature-item {
+      align-items: flex-start;
+    }
+  }
+
+  /* 2. icon + 大字 */
+  &.align-baseline {
+    .feature-item {
+      align-items: baseline;
+    }
+  }
+  
+  /* 3. 只有 icon */
+  &.align-icon-middle {
+    .feature-item {
+      align-items: center;
+    }
+  }
+}

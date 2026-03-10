@@ -10,7 +10,9 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  getMetadata,
 } from './aem.js';
+import { loadSectionBlockJs, isAuthorEnvironment, processInlineIdSyntax } from './utils.js';
 
 /**
  * Moves all the attributes from a given elmenet to another given element.
@@ -118,10 +120,15 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  await loadSectionBlockJs(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
+
+  main.querySelectorAll('.default-content-wrapper').forEach((wrapper) => {
+    processInlineIdSyntax(wrapper);
+  });
 
   loadFooter(doc.querySelector('footer'));
 
@@ -139,7 +146,19 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+function getPageMetadata() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const productLine = getMetadata('productline') || 'asus';
+    const mode = getMetadata('mode') || 'light';
+    const main = isAuthorEnvironment() ? document.body : document.body.querySelector('main');
+    main.dataset.product = productLine;
+    main.dataset.mode = mode;
+    main.classList.add('l4-pdp');
+  });
+}
+
 async function loadPage() {
+  getPageMetadata();
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();

@@ -1,0 +1,250 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "icon style",
+      "name": "iconStyle",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "SVG",
+          "value": "svg"
+        },
+        {
+          "name": "PNG",
+          "value": "png"
+        }
+      ],
+      "condition": {
+        "in": [
+          {
+            "var": "styleLayout"
+          },
+          [
+            "2",
+            "3",
+            "5",
+            "6"
+          ]
+        ]
+      }
+    },
+    {
+      "component": "text",
+      "label": "icon color",
+      "name": "iconColor",
+      "valueType": "string",
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "2",
+                "3",
+                "5",
+                "6"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "iconStyle"
+              },
+              "svg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "text",
+      "label": "icon-bg color default",
+      "name": "iconBgColorDefault",
+      "valueType": "string",
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "2",
+                "3",
+                "5",
+                "6"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "iconStyle"
+              },
+              "svg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "text",
+      "label": "icon-bg color hover",
+      "name": "iconBgColorHover",
+      "valueType": "string",
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "2",
+                "3",
+                "5",
+                "6"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "iconStyle"
+              },
+              "svg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "text",
+      "label": "icon-bg color active",
+      "name": "iconBgColorActive",
+      "valueType": "string",
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "2",
+                "3",
+                "5",
+                "6"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "iconStyle"
+              },
+              "svg"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "reference",
+      "label": "default asset",
+      "name": "iconAssetDefault",
+      "multi": false,
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "2",
+                "3",
+                "5",
+                "6"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "iconStyle"
+              },
+              "png"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "reference",
+      "label": "hover asset",
+      "name": "iconAssetHover",
+      "multi": false,
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "2",
+                "3",
+                "5",
+                "6"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "iconStyle"
+              },
+              "png"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "reference",
+      "label": "active asset",
+      "name": "iconAssetActive",
+      "multi": false,
+      "condition": {
+        "and": [
+          {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "2",
+                "3",
+                "5",
+                "6"
+              ]
+            ]
+          },
+          {
+            "===": [
+              {
+                "var": "iconStyle"
+              },
+              "png"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "fields": [
+    {
+      "component": "text",
+      "label": "Font",
+      "name": "disclaimerFont",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "Font Color",
+      "name": "disclaimerFontColor",
+      "valueType": "string",
+      "description": "Hex without #"
+    }
+  ]
+}
