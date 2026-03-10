@@ -1215,139 +1215,147 @@
         "description": "Hex without #, e.g. 0062cd"
       },
       {
-        "component": "text",
-        "label": "default color (style 1, 3, 4 only)",
-        "name": "tabDefaultColor",
-        "valueType": "string",
-        "description": "Hex without #",
-        "condition": {
-          "in": [
-            {
-              "var": "tabStyle"
-            },
-            [
-              "1",
-              "3",
-              "4"
-            ]
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "line width (style 1, 3 only)",
-        "name": "tabLineWidth",
-        "valueType": "string",
-        "description": "Number only, unit px, e.g. 2",
-        "condition": {
-          "in": [
-            {
-              "var": "tabStyle"
-            },
-            [
-              "1",
-              "3"
-            ]
-          ]
-        }
-      },
-      {
-        "component": "select",
-        "label": "line endpoints (style 1, 3 only)",
-        "name": "tabLineEndpoints",
-        "valueType": "string",
-        "condition": {
-          "in": [
-            {
-              "var": "tabStyle"
-            },
-            [
-              "1",
-              "3"
-            ]
-          ]
-        },
-        "options": [
+        "component": "container",
+        "label": "theme tab (Advanced)",
+        "name": "themeTabAdvanced",
+        "collapsible": true,
+        "fields": [
           {
-            "name": "round",
-            "value": "round"
+            "component": "text",
+            "label": "default color (style 1, 3, 4 only)",
+            "name": "tabDefaultColor",
+            "valueType": "string",
+            "description": "Hex without #",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "1",
+                  "3",
+                  "4"
+                ]
+              ]
+            }
           },
           {
-            "name": "square",
-            "value": "square"
+            "component": "text",
+            "label": "line width (style 1, 3 only)",
+            "name": "tabLineWidth",
+            "valueType": "string",
+            "description": "Number only, unit px, e.g. 2",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "1",
+                  "3"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "select",
+            "label": "line endpoints (style 1, 3 only)",
+            "name": "tabLineEndpoints",
+            "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "1",
+                  "3"
+                ]
+              ]
+            },
+            "options": [
+              {
+                "name": "round",
+                "value": "round"
+              },
+              {
+                "name": "square",
+                "value": "square"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "corner decoration color (style 4 only)",
+            "name": "tabCornerDecorationColor",
+            "valueType": "string",
+            "description": "Hex without #",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "4"
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "radius TL (style 2 only)",
+            "name": "tabRadiusTl",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "2"
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "radius TR (style 2 only)",
+            "name": "tabRadiusTr",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "2"
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "radius BR (style 2 only)",
+            "name": "tabRadiusBr",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "2"
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "radius BL (style 2 only)",
+            "name": "tabRadiusBl",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "2"
+              ]
+            }
           }
         ]
-      },
-      {
-        "component": "text",
-        "label": "corner decoration color (style 4 only)",
-        "name": "tabCornerDecorationColor",
-        "valueType": "string",
-        "description": "Hex without #",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "4"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius TL (style 2 only)",
-        "name": "tabRadiusTl",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius TR (style 2 only)",
-        "name": "tabRadiusTr",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius BR (style 2 only)",
-        "name": "tabRadiusBr",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius BL (style 2 only)",
-        "name": "tabRadiusBl",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
       },
       {
         "component": "tab",
@@ -1374,242 +1382,250 @@
         "valueType": "string"
       },
       {
-        "component": "select",
-        "label": "font (D) — style 1",
-        "name": "tabFontD1",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
+        "component": "container",
+        "label": "tab text (Advanced)",
+        "name": "tabTextAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font (D) — style 1",
+            "name": "tabFontD1",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "1"
+              ]
             },
-            "1"
-          ]
-        },
-        "options": [
-          {
-            "name": "ro-md-14",
-            "value": "ro-md-14-lg"
-          },
-          {
-            "name": "ro-md-16",
-            "value": "ro-md-16-lg"
-          },
-          {
-            "name": "ro-md-18",
-            "value": "ro-md-18-lg"
-          },
-          {
-            "name": "ro-md-20",
-            "value": "ro-md-20-lg"
-          },
-          {
-            "name": "ro-md-24",
-            "value": "ro-md-24-lg"
-          },
-          {
-            "name": "ro-md-28",
-            "value": "ro-md-28-lg"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "font (T) — style 1",
-        "name": "tabFontT1",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "1"
-          ]
-        },
-        "options": [
-          {
-            "name": "ro-md-14",
-            "value": "ro-md-14-md"
-          },
-          {
-            "name": "ro-md-16",
-            "value": "ro-md-16-md"
-          },
-          {
-            "name": "ro-md-18",
-            "value": "ro-md-18-md"
-          },
-          {
-            "name": "ro-md-20",
-            "value": "ro-md-20-md"
-          },
-          {
-            "name": "ro-md-24",
-            "value": "ro-md-24-md"
-          },
-          {
-            "name": "ro-md-28",
-            "value": "ro-md-28-md"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "font (M) — style 1",
-        "name": "tabFontM1",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "1"
-          ]
-        },
-        "options": [
-          {
-            "name": "ro-md-14",
-            "value": "ro-md-14-sm"
-          },
-          {
-            "name": "ro-md-16",
-            "value": "ro-md-16-sm"
-          },
-          {
-            "name": "ro-md-18",
-            "value": "ro-md-18-sm"
-          },
-          {
-            "name": "ro-md-20",
-            "value": "ro-md-20-sm"
-          },
-          {
-            "name": "ro-md-24",
-            "value": "ro-md-24-sm"
-          },
-          {
-            "name": "ro-md-28",
-            "value": "ro-md-28-sm"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "font (D) — style 2, 3, 4",
-        "name": "tabFontD234",
-        "valueType": "string",
-        "condition": {
-          "in": [
-            {
-              "var": "tabStyle"
-            },
-            [
-              "2",
-              "3",
-              "4"
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14-lg"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-lg"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-lg"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-lg"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-lg"
+              },
+              {
+                "name": "ro-md-28",
+                "value": "ro-md-28-lg"
+              }
             ]
-          ]
-        },
-        "options": [
-          {
-            "name": "ro-md-14",
-            "value": "ro-md-14-lg"
           },
           {
-            "name": "ro-md-16",
-            "value": "ro-md-16-lg"
-          },
-          {
-            "name": "ro-md-18",
-            "value": "ro-md-18-lg"
-          },
-          {
-            "name": "ro-md-20",
-            "value": "ro-md-20-lg"
-          },
-          {
-            "name": "ro-md-24",
-            "value": "ro-md-24-lg"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "font (T) — style 2, 3, 4",
-        "name": "tabFontT234",
-        "valueType": "string",
-        "condition": {
-          "in": [
-            {
-              "var": "tabStyle"
+            "component": "select",
+            "label": "font (T) — style 1",
+            "name": "tabFontT1",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "1"
+              ]
             },
-            [
-              "2",
-              "3",
-              "4"
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14-md"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-md"
+              },
+              {
+                "name": "ro-md-28",
+                "value": "ro-md-28-md"
+              }
             ]
-          ]
-        },
-        "options": [
-          {
-            "name": "ro-md-14",
-            "value": "ro-md-14-md"
           },
           {
-            "name": "ro-md-16",
-            "value": "ro-md-16-md"
-          },
-          {
-            "name": "ro-md-18",
-            "value": "ro-md-18-md"
-          },
-          {
-            "name": "ro-md-20",
-            "value": "ro-md-20-md"
-          },
-          {
-            "name": "ro-md-24",
-            "value": "ro-md-24-md"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "label": "font (M) — style 2, 3, 4",
-        "name": "tabFontM234",
-        "valueType": "string",
-        "condition": {
-          "in": [
-            {
-              "var": "tabStyle"
+            "component": "select",
+            "label": "font (M) — style 1",
+            "name": "tabFontM1",
+            "valueType": "string",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "1"
+              ]
             },
-            [
-              "2",
-              "3",
-              "4"
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14-sm"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-sm"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-sm"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-sm"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-sm"
+              },
+              {
+                "name": "ro-md-28",
+                "value": "ro-md-28-sm"
+              }
             ]
-          ]
-        },
-        "options": [
-          {
-            "name": "ro-md-14",
-            "value": "ro-md-14-sm"
           },
           {
-            "name": "ro-md-16",
-            "value": "ro-md-16-sm"
+            "component": "select",
+            "label": "font (D) — style 2, 3, 4",
+            "name": "tabFontD234",
+            "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "2",
+                  "3",
+                  "4"
+                ]
+              ]
+            },
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14-lg"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-lg"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-lg"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-lg"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-lg"
+              }
+            ]
           },
           {
-            "name": "ro-md-18",
-            "value": "ro-md-18-sm"
+            "component": "select",
+            "label": "font (T) — style 2, 3, 4",
+            "name": "tabFontT234",
+            "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "2",
+                  "3",
+                  "4"
+                ]
+              ]
+            },
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14-md"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-md"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-md"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-md"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-md"
+              }
+            ]
           },
           {
-            "name": "ro-md-20",
-            "value": "ro-md-20-sm"
-          },
-          {
-            "name": "ro-md-24",
-            "value": "ro-md-24-sm"
+            "component": "select",
+            "label": "font (M) — style 2, 3, 4",
+            "name": "tabFontM234",
+            "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "2",
+                  "3",
+                  "4"
+                ]
+              ]
+            },
+            "options": [
+              {
+                "name": "ro-md-14",
+                "value": "ro-md-14-sm"
+              },
+              {
+                "name": "ro-md-16",
+                "value": "ro-md-16-sm"
+              },
+              {
+                "name": "ro-md-18",
+                "value": "ro-md-18-sm"
+              },
+              {
+                "name": "ro-md-20",
+                "value": "ro-md-20-sm"
+              },
+              {
+                "name": "ro-md-24",
+                "value": "ro-md-24-sm"
+              }
+            ]
           }
         ]
       },
@@ -1617,25 +1633,6 @@
         "component": "tab",
         "label": "tab container",
         "name": "tabContainerTab"
-      },
-      {
-        "component": "text",
-        "label": "bg color (style 1, 3, 4)",
-        "name": "tabBgColor134",
-        "valueType": "string",
-        "description": "Hex without #. For gradient: colorA,colorB",
-        "condition": {
-          "in": [
-            {
-              "var": "tabStyle"
-            },
-            [
-              "1",
-              "3",
-              "4"
-            ]
-          ]
-        }
       },
       {
         "component": "text",
@@ -1654,198 +1651,88 @@
       },
       {
         "component": "text",
-        "label": "bg color (style 2)",
-        "name": "tabBgColor2",
-        "valueType": "string",
-        "description": "Hex without #. For gradient: colorA,colorB",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "border width default (style 2)",
-        "name": "tabBorderWidthDefault2",
-        "valueType": "string",
-        "description": "Number only, unit px, e.g. 1",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "border width hover (style 2)",
-        "name": "tabBorderWidthHover2",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "border width select (style 2)",
-        "name": "tabBorderWidthSelect2",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius TL (style 2)",
-        "name": "tabContainerRadiusTl2",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius TR (style 2)",
-        "name": "tabContainerRadiusTr2",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius BR (style 2)",
-        "name": "tabContainerRadiusBr2",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "radius BL (style 2)",
-        "name": "tabContainerRadiusBl2",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "tabStyle"
-            },
-            "2"
-          ]
-        }
-      },
-      {
-        "component": "text",
-        "label": "border-width default",
-        "name": "tabContainerBorderWidthDefault",
-        "valueType": "string",
-        "description": "Number only, unit px, e.g. 1"
-      },
-      {
-        "component": "text",
-        "label": "border-width hover",
-        "name": "tabContainerBorderWidthHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-width select",
-        "name": "tabContainerBorderWidthSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color default",
-        "name": "tabContainerBorderColorDefault",
+        "label": "bg color",
+        "name": "tabBgColor",
         "valueType": "string",
         "description": "Hex without #. For gradient: colorA,colorB"
       },
       {
-        "component": "text",
-        "label": "border-color hover",
-        "name": "tabContainerBorderColorHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "border-color select",
-        "name": "tabContainerBorderColorSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color default",
-        "name": "tabContainerBgColorDefault",
-        "valueType": "string",
-        "description": "Hex without #. For gradient: colorA,colorB"
-      },
-      {
-        "component": "text",
-        "label": "bg-color hover",
-        "name": "tabContainerBgColorHover",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "bg-color select",
-        "name": "tabContainerBgColorSelect",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "radius TL",
-        "name": "tabContainerRadiusTl",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "radius TR",
-        "name": "tabContainerRadiusTr",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "radius BR",
-        "name": "tabContainerRadiusBr",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "radius BL",
-        "name": "tabContainerRadiusBl",
-        "valueType": "string"
+        "component": "container",
+        "label": "tab container (Advanced)",
+        "name": "tabContainerAdvanced",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "tabStyle"
+            },
+            "2"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "border width default (style 2)",
+            "name": "tabBorderWidthDefault",
+            "valueType": "string",
+            "description": "Number only, unit px, e.g. 1"
+          },
+          {
+            "component": "text",
+            "label": "border width hover (style 2)",
+            "name": "tabBorderWidthHover2",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border width select (style 2)",
+            "name": "tabBorderWidthSelect2",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TL (style 2)",
+            "name": "tabContainerRadiusTl2",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius TR (style 2)",
+            "name": "tabContainerRadiusTr2",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BR (style 2)",
+            "name": "tabContainerRadiusBr2",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "radius BL (style 2)",
+            "name": "tabContainerRadiusBl2",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color default",
+            "name": "tabContainerBorderColorDefault",
+            "valueType": "string",
+            "description": "Hex without #. For gradient: colorA,colorB"
+          },
+          {
+            "component": "text",
+            "label": "border-color hover",
+            "name": "tabContainerBorderColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color select",
+            "name": "tabContainerBorderColorSelect",
+            "valueType": "string"
+          }
+        ]
       },
       {
         "component": "container",

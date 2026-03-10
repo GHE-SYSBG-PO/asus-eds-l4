@@ -58,37 +58,20 @@ const DEFAULT_CONFIG = {
   tabLineWidth: '',
   tabLineEndpoints: '',
   tabCornerDecorationColor: '',
-  tabRadiusTl: '',
-  tabRadiusTr: '',
-  tabRadiusBr: '',
-  tabRadiusBl: '',
-  // tab container style 1/3/4
-  tabBgColor134: '',
-  // tab container style 2 basic
+  // tab container
   tabBorderColor2: '',
-  tabBgColor2: '',
-  // tab container style 2 advanced
-  tabBorderWidthDefault2: '',
+  tabBgColor: '',
+  tabBorderWidthDefault: '',
   tabBorderWidthHover2: '',
   tabBorderWidthSelect2: '',
   tabContainerRadiusTl2: '',
   tabContainerRadiusTr2: '',
   tabContainerRadiusBr2: '',
   tabContainerRadiusBl2: '',
-  // tab container advanced (shared _tab-container.json)
-  tabContainerBorderWidthDefault: '',
-  tabContainerBorderWidthHover: '',
-  tabContainerBorderWidthSelect: '',
   tabContainerBorderColorDefault: '',
   tabContainerBorderColorHover: '',
   tabContainerBorderColorSelect: '',
-  tabContainerBgColorDefault: '',
-  tabContainerBgColorHover: '',
-  tabContainerBgColorSelect: '',
-  tabContainerRadiusTl: '',
-  tabContainerRadiusTr: '',
-  tabContainerRadiusBr: '',
-  tabContainerRadiusBl: '',
+
   // tab text font colors
   tabFontColorDefault: '',
   tabFontColorHover: '',
@@ -590,44 +573,24 @@ async function decoratePage(block) {
   const tabLineEndpoints = data.tablineendpoints || ''; // 'round' | 'square'
   const tabCornerDecorationColor = prefixHexRaw('tabcornerdecorationcolor');
 
-  // radius: style 2 uses tabRadiusTl/Tr/Br/Bl; others use tabContainerRadiusTl/Tr/Br/Bl
-  const tabRadiusStyle = (() => {
-    if (tabStyle === '2') {
-      return buildRadiusValue(
-        data.tabradiustl || '',
-        data.tabradiustr || '',
-        data.tabradiusbr || '',
-        data.tabradiusbl || '',
-      );
-    }
-    return buildRadiusValue(
-      data.tabcontainerradiustl || '',
-      data.tabcontainerradiustr || '',
-      data.tabcontainerradiusbr || '',
-      data.tabcontainerradiusbl || '',
-    );
-  })();
+  // radius: style 2 only
+  const tabRadiusStyle = buildRadiusValue(
+    data.tabcontainerradiustl2 || '',
+    data.tabcontainerradiustr2 || '',
+    data.tabcontainerradiusbr2 || '',
+    data.tabcontainerradiusbl2 || '',
+  );
 
-  // ── Tab container style 1/3/4 ────────────────────────────────
-  const tabBgColor134 = parseGradientRaw('tabbgcolor134');
-
-  // ── Tab container style 2 ────────────────────────────────────
+  // ── Tab container ────────────────────────────────────────────
   const tabBorderColor2 = parseGradientRaw('tabbordercolor2');
-  const tabBgColor2 = parseGradientRaw('tabbgcolor2');
-  const tabBorderWidthDefault2 = data.tabborderwidthdefault2 || '';
+  const tabBgColor = parseGradientRaw('tabbgcolor');
+  const tabBorderWidthDefault = data.tabborderwidthdefault || '';
   const tabBorderWidthHover2 = data.tabborderwidthhover2 || '';
   const tabBorderWidthSelect2 = data.tabborderwidthselect2 || '';
 
-  // ── Tab container advanced (shared) ──────────────────────────
-  const tabBorderWidthDefault = data.tabcontainerborderwidthdefault || '';
-  const tabBorderWidthHover = data.tabcontainerborderwidthhover || '';
-  const tabBorderWidthSelect = data.tabcontainerborderwidthselect || '';
   const tabBorderGradientDefault = parseGradientRaw('tabcontainerbordercolordefault');
   const tabBorderGradientHover = parseGradientRaw('tabcontainerbordercolorhover');
   const tabBorderGradientSelect = parseGradientRaw('tabcontainerbordercolorselect');
-  const tabBgDefault = prefixHexRaw('tabcontainerbgcolordefault');
-  const tabBgGradientHover = parseGradientRaw('tabcontainerbgcolorhover');
-  const tabBgGradientSelect = parseGradientRaw('tabcontainerbgcolorselect');
 
   // ── Tab text font color ───────────────────────────────────────
   const tabFontColorDefault = prefixHexRaw('tabfontcolordefault');
@@ -667,31 +630,18 @@ async function decoratePage(block) {
   if (tabLineWidth) componentStyle += `--tab-line-width: ${tabLineWidth}px;`;
   if (tabCornerDecorationColor) componentStyle += `--tab-corner-decoration-color: ${tabCornerDecorationColor};`;
 
-  // tab container style 1/3/4 bg
-  if (tabBgColor134) {
-    componentStyle += `--tab-bg-from-default: ${tabBgColor134.from};`;
-    componentStyle += `--tab-bg-to-default: ${tabBgColor134.to};`;
-  }
-
-  // tab container style 2 basic
+  // tab container
   if (tabBorderColor2) {
     componentStyle += `--tab-border-from-default: ${tabBorderColor2.from};`;
     componentStyle += `--tab-border-to-default: ${tabBorderColor2.to};`;
   }
-  if (tabBgColor2) {
-    componentStyle += `--tab-bg-from-default: ${tabBgColor2.from};`;
-    componentStyle += `--tab-bg-to-default: ${tabBgColor2.to};`;
+  if (tabBgColor) {
+    componentStyle += `--tab-bg-from-default: ${tabBgColor.from};`;
+    componentStyle += `--tab-bg-to-default: ${tabBgColor.to};`;
   }
-
-  // tab container style 2 advanced border width
-  if (tabBorderWidthDefault2) componentStyle += `--tab-border-width-default: ${tabBorderWidthDefault2}px;`;
+  if (tabBorderWidthDefault) componentStyle += `--tab-border-width-default: ${tabBorderWidthDefault}px;`;
   if (tabBorderWidthHover2) componentStyle += `--tab-border-width-hover: ${tabBorderWidthHover2}px;`;
   if (tabBorderWidthSelect2) componentStyle += `--tab-border-width-select: ${tabBorderWidthSelect2}px;`;
-
-  // tab container shared advanced
-  if (tabBorderWidthDefault) componentStyle += `--tab-border-width-default: ${tabBorderWidthDefault}px;`;
-  if (tabBorderWidthHover) componentStyle += `--tab-border-width-hover: ${tabBorderWidthHover}px;`;
-  if (tabBorderWidthSelect) componentStyle += `--tab-border-width-select: ${tabBorderWidthSelect}px;`;
   if (tabBorderGradientDefault) {
     componentStyle += `--tab-border-from-default: ${tabBorderGradientDefault.from};`;
     componentStyle += `--tab-border-to-default: ${tabBorderGradientDefault.to};`;
@@ -703,15 +653,6 @@ async function decoratePage(block) {
   if (tabBorderGradientSelect) {
     componentStyle += `--tab-border-from-select: ${tabBorderGradientSelect.from};`;
     componentStyle += `--tab-border-to-select: ${tabBorderGradientSelect.to};`;
-  }
-  if (tabBgDefault) componentStyle += `--tab-bg-default: ${tabBgDefault};`;
-  if (tabBgGradientHover) {
-    componentStyle += `--tab-bg-from-hover: ${tabBgGradientHover.from};`;
-    componentStyle += `--tab-bg-to-hover: ${tabBgGradientHover.to};`;
-  }
-  if (tabBgGradientSelect) {
-    componentStyle += `--tab-bg-from-select: ${tabBgGradientSelect.from};`;
-    componentStyle += `--tab-bg-to-select: ${tabBgGradientSelect.to};`;
   }
 
   // tab text colors
