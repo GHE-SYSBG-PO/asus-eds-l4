@@ -19,7 +19,7 @@
     },
     {
       "...": "./_second-tab.json#/fields"
-    },
+    }, 
     {
       "...": "../../../components/colorGroup/_colorGroup.json#/fields"
     },

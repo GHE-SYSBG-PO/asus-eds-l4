@@ -28,13 +28,14 @@
         },
         {
           "component": "reference",
-          "label": "icon asset (if show icon = yes)",
+          "label": "icon asset",
+          "description": "display when show icon = yes",
           "name": "tabItemIconAsset",
           "multi": false
         },
         {
-          "component": "text",
-          "label": "fragment URL (ID12 page path)",
+          "component": "aem-content",
+          "label": "fragment URL",
           "name": "tabItemFragmentUrl",
           "valueType": "string",
           "description": "Used when 2nd layer tab = no. Path to the ID12 container-2cols page.",
