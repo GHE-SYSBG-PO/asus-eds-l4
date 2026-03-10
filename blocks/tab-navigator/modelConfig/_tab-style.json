@@ -1,0 +1,90 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "tab style",
+      "name": "tabStyleTab"
+    },
+    {
+      "component": "select",
+      "label": "tab style (Tab Style Group)",
+      "name": "tabStyle",
+      "valueType": "string",
+      "options": [
+        { "name": "1 — Underlined_1 (default)", "value": "1" },
+        { "name": "2 — Pill", "value": "2" },
+        { "name": "3 — Underlined_2", "value": "3" },
+        { "name": "4 — Gaming_1", "value": "4" }
+      ]
+    },
+    {
+      "component": "boolean",
+      "label": "show icon (yes/no)",
+      "name": "showIcon",
+      "valueType": "boolean",
+      "condition": {
+        "in": [{ "var": "tabStyle" }, ["1", "2", "3"]]
+      }
+    },
+    {
+      "component": "select",
+      "label": "2nd tab style (Tab Style Group) — layout 4 only",
+      "name": "secondTabStyle",
+      "valueType": "string",
+      "condition": {
+        "===": [{ "var": "layoutStyle" }, "4"]
+      },
+      "options": [
+        { "name": "1 — Underlined_1 (default)", "value": "1" },
+        { "name": "2 — Pill", "value": "2" },
+        { "name": "3 — Underlined_2", "value": "3" },
+        { "name": "4 — Gaming_1", "value": "4" }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "tab text (Advanced)",
+      "name": "tabTextAdvanced",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "font-color default",
+          "name": "tabFontColorDefault",
+          "valueType": "string",
+          "description": "Hex without #, e.g. 181818"
+        },
+        {
+          "component": "text",
+          "label": "font-color hover",
+          "name": "tabFontColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "font-color select",
+          "name": "tabFontColorSelect",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "summary richtext (Advanced) — layout 4 only",
+      "name": "summaryAdvanced",
+      "collapsible": true,
+      "condition": {
+        "===": [{ "var": "layoutStyle" }, "4"]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "font-color",
+          "name": "summaryFontColor",
+          "valueType": "string",
+          "description": "Hex without #, e.g. 4a4a4a"
+        }
+      ]
+    }
+  ]
+}

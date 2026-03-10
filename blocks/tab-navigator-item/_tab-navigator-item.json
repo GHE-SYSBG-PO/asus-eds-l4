@@ -1,0 +1,150 @@
+{
+  "definitions": [
+    {
+      "title": "Tab Item",
+      "id": "tab-navigator-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Tab Item",
+              "model": "tab-navigator-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "tab-3column-item",
+      "fields": [
+        {
+          "component": "text",
+          "label": "tab text",
+          "name": "tabItemText",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "icon asset (if show icon = yes)",
+          "name": "tabItemIconAsset",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "label": "fragment URL (ID12 page path)",
+          "name": "tabItemFragmentUrl",
+          "valueType": "string",
+          "description": "Used when 2nd layer tab = no. Path to the ID12 container-2cols page.",
+          "condition": {
+            "!==": [
+              {
+                "var": "secondLayerTab"
+              },
+              "yes"
+            ]
+          }
+        },
+        {
+          "component": "select",
+          "label": "2nd layer tab (layout 4 only)",
+          "name": "secondLayerTab",
+          "valueType": "string",
+          "condition": {
+            "===": [
+              {
+                "var": "layoutStyle"
+              },
+              "4"
+            ]
+          },
+          "options": [
+            {
+              "name": "no",
+              "value": "no"
+            },
+            {
+              "name": "yes",
+              "value": "yes"
+            }
+          ]
+        },
+        {
+          "component": "richtext",
+          "label": "summary richtext (layout 4 + 2nd layer tab = yes)",
+          "name": "summaryRichtext",
+          "valueType": "string",
+          "condition": {
+            "and": [
+              {
+                "===": [
+                  {
+                    "var": "layoutStyle"
+                  },
+                  "4"
+                ]
+              },
+              {
+                "===": [
+                  {
+                    "var": "secondLayerTab"
+                  },
+                  "yes"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "component": "container",
+          "label": "sub items",
+          "name": "subItems",
+          "multi": true,
+          "condition": {
+            "and": [
+              {
+                "===": [
+                  {
+                    "var": "layoutStyle"
+                  },
+                  "4"
+                ]
+              },
+              {
+                "===": [
+                  {
+                    "var": "secondLayerTab"
+                  },
+                  "yes"
+                ]
+              }
+            ]
+          },
+          "fields": [
+            {
+              "component": "text",
+              "label": "tab text",
+              "name": "subItemText",
+              "valueType": "string"
+            },
+            {
+              "component": "reference",
+              "label": "icon asset (if show icon = yes)",
+              "name": "subItemIconAsset",
+              "multi": false
+            },
+            {
+              "component": "text",
+              "label": "fragment URL (ID12 page path)",
+              "name": "subItemFragmentUrl",
+              "valueType": "string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

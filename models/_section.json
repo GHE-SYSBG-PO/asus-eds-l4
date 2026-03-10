@@ -61,6 +61,22 @@
           }
         }
       }
+    },
+    {
+      "title": "Tab (ID:8)",
+      "id": "tab-navigator",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Tab Navigator",
+              "filter": "tab-navigator",
+              "model": "tab-navigator"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -93,6 +109,14 @@
       "fields": [
         {
           "...": "./_feature-accordion.json#/fields"        
+        }
+      ]
+    },
+    {
+      "id": "tab-navigator",
+      "fields": [
+        {
+          "...": "../blocks/tab-navigator/modelConfig/_tab-navigator.json#/fields"        
         }
       ]
     }
@@ -139,10 +163,17 @@
       "components": [
         "feature-accordion-item"
       ]
-    },{
+    },
+    {
       "id": "feature-accordion-item",
       "components": [
         "feature-accordion-sub-item"
+      ]
+    },
+    {
+      "id": "tab-navigator",
+      "components": [
+        "tab-navigator-item"
       ]
     }
   ]

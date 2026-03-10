@@ -1124,6 +1124,330 @@
     ]
   },
   {
+    "id": "tab-navigator",
+    "fields": [
+      {
+        "component": "hidden",
+        "name": "style",
+        "value": "L4CustomSection-tab"
+      },
+      {
+        "component": "tab",
+        "label": "layout",
+        "name": "styleTab"
+      },
+      {
+        "component": "select",
+        "label": "layout style (Layout Group)",
+        "name": "layoutStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "1 — tab on top",
+            "value": "1"
+          },
+          {
+            "name": "2 — tab in middle",
+            "value": "2"
+          },
+          {
+            "name": "3 — tab on top, split container",
+            "value": "3"
+          },
+          {
+            "name": "4 — double tab",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "label": "motion (on/off)",
+        "name": "motionEnabled",
+        "valueType": "boolean"
+      },
+      {
+        "component": "tab",
+        "label": "tab style",
+        "name": "tabStyleTab"
+      },
+      {
+        "component": "select",
+        "label": "tab style (Tab Style Group)",
+        "name": "tabStyle",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "1 — Underlined_1 (default)",
+            "value": "1"
+          },
+          {
+            "name": "2 — Pill",
+            "value": "2"
+          },
+          {
+            "name": "3 — Underlined_2",
+            "value": "3"
+          },
+          {
+            "name": "4 — Gaming_1",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "label": "show icon (yes/no)",
+        "name": "showIcon",
+        "valueType": "boolean",
+        "condition": {
+          "in": [
+            {
+              "var": "tabStyle"
+            },
+            [
+              "1",
+              "2",
+              "3"
+            ]
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2nd tab style (Tab Style Group) — layout 4 only",
+        "name": "secondTabStyle",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "layoutStyle"
+            },
+            "4"
+          ]
+        },
+        "options": [
+          {
+            "name": "1 — Underlined_1 (default)",
+            "value": "1"
+          },
+          {
+            "name": "2 — Pill",
+            "value": "2"
+          },
+          {
+            "name": "3 — Underlined_2",
+            "value": "3"
+          },
+          {
+            "name": "4 — Gaming_1",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "tab text (Advanced)",
+        "name": "tabTextAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "font-color default",
+            "name": "tabFontColorDefault",
+            "valueType": "string",
+            "description": "Hex without #, e.g. 181818"
+          },
+          {
+            "component": "text",
+            "label": "font-color hover",
+            "name": "tabFontColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "font-color select",
+            "name": "tabFontColorSelect",
+            "valueType": "string"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "summary richtext (Advanced) — layout 4 only",
+        "name": "summaryAdvanced",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "layoutStyle"
+            },
+            "4"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "font-color",
+            "name": "summaryFontColor",
+            "valueType": "string",
+            "description": "Hex without #, e.g. 4a4a4a"
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "tab container",
+        "name": "tabContainerTab"
+      },
+      {
+        "component": "container",
+        "label": "tab container (Advanced)",
+        "name": "tabContainerAdvanced",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "border-width default",
+            "name": "tabContainerBorderWidthDefault",
+            "valueType": "string",
+            "description": "Number only, unit px, e.g. 1"
+          },
+          {
+            "component": "text",
+            "label": "border-width hover",
+            "name": "tabContainerBorderWidthHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-width select",
+            "name": "tabContainerBorderWidthSelect",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color default",
+            "name": "tabContainerBorderColorDefault",
+            "valueType": "string",
+            "description": "Hex without #. For gradient: colorA,colorB"
+          },
+          {
+            "component": "text",
+            "label": "border-color hover",
+            "name": "tabContainerBorderColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "border-color select",
+            "name": "tabContainerBorderColorSelect",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color default",
+            "name": "tabContainerBgColorDefault",
+            "valueType": "string",
+            "description": "Hex without #. For gradient: colorA,colorB"
+          },
+          {
+            "component": "text",
+            "label": "bg-color hover",
+            "name": "tabContainerBgColorHover",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "bg-color select",
+            "name": "tabContainerBgColorSelect",
+            "valueType": "string"
+          },
+          {
+            "component": "container",
+            "label": "radius (TL / TR / BR / BL)",
+            "name": "tabContainerRadiusGroup",
+            "fields": [
+              {
+                "component": "text",
+                "label": "radius TL",
+                "name": "tabContainerRadiusTl",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "radius TR",
+                "name": "tabContainerRadiusTr",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "radius BR",
+                "name": "tabContainerRadiusBr",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "radius BL",
+                "name": "tabContainerRadiusBl",
+                "valueType": "string"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "ID",
+        "name": "sectionId",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "bgColor",
+        "name": "bgColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "padding left",
+        "name": "paddingLeft",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "padding right",
+        "name": "paddingRight",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "bar-chart",
     "fields": [
       {
@@ -7039,6 +7363,134 @@
         "label": "info",
         "name": "tabInfo",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "tab-3column-item",
+    "fields": [
+      {
+        "component": "text",
+        "label": "tab text",
+        "name": "tabItemText",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "icon asset (if show icon = yes)",
+        "name": "tabItemIconAsset",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "label": "fragment URL (ID12 page path)",
+        "name": "tabItemFragmentUrl",
+        "valueType": "string",
+        "description": "Used when 2nd layer tab = no. Path to the ID12 container-2cols page.",
+        "condition": {
+          "!==": [
+            {
+              "var": "secondLayerTab"
+            },
+            "yes"
+          ]
+        }
+      },
+      {
+        "component": "select",
+        "label": "2nd layer tab (layout 4 only)",
+        "name": "secondLayerTab",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "layoutStyle"
+            },
+            "4"
+          ]
+        },
+        "options": [
+          {
+            "name": "no",
+            "value": "no"
+          },
+          {
+            "name": "yes",
+            "value": "yes"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "label": "summary richtext (layout 4 + 2nd layer tab = yes)",
+        "name": "summaryRichtext",
+        "valueType": "string",
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "layoutStyle"
+                },
+                "4"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "secondLayerTab"
+                },
+                "yes"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "component": "container",
+        "label": "sub items",
+        "name": "subItems",
+        "multi": true,
+        "condition": {
+          "and": [
+            {
+              "===": [
+                {
+                  "var": "layoutStyle"
+                },
+                "4"
+              ]
+            },
+            {
+              "===": [
+                {
+                  "var": "secondLayerTab"
+                },
+                "yes"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "tab text",
+            "name": "subItemText",
+            "valueType": "string"
+          },
+          {
+            "component": "reference",
+            "label": "icon asset (if show icon = yes)",
+            "name": "subItemIconAsset",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "label": "fragment URL (ID12 page path)",
+            "name": "subItemFragmentUrl",
+            "valueType": "string"
+          }
+        ]
       }
     ]
   },
