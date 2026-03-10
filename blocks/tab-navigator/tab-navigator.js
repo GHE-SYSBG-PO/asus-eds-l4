@@ -51,9 +51,31 @@ const DEFAULT_CONFIG = {
   layoutStyle: '1',
   tabStyle: '1',
   showIcon: 'no',
-  motionEnabled: 'false',
   colorGroup: '',
-  // Advanced: tab container style overrides
+  // tab theme
+  tabSelectedColor: '',
+  tabDefaultColor: '',
+  tabLineWidth: '',
+  tabLineEndpoints: '',
+  tabCornerDecorationColor: '',
+  tabRadiusTl: '',
+  tabRadiusTr: '',
+  tabRadiusBr: '',
+  tabRadiusBl: '',
+  // tab container style 1/3/4
+  tabBgColor134: '',
+  // tab container style 2 basic
+  tabBorderColor2: '',
+  tabBgColor2: '',
+  // tab container style 2 advanced
+  tabBorderWidthDefault2: '',
+  tabBorderWidthHover2: '',
+  tabBorderWidthSelect2: '',
+  tabContainerRadiusTl2: '',
+  tabContainerRadiusTr2: '',
+  tabContainerRadiusBr2: '',
+  tabContainerRadiusBl2: '',
+  // tab container advanced (shared _tab-container.json)
   tabContainerBorderWidthDefault: '',
   tabContainerBorderWidthHover: '',
   tabContainerBorderWidthSelect: '',
@@ -67,9 +89,22 @@ const DEFAULT_CONFIG = {
   tabContainerRadiusTr: '',
   tabContainerRadiusBr: '',
   tabContainerRadiusBl: '',
+  // tab text font colors
   tabFontColorDefault: '',
   tabFontColorHover: '',
   tabFontColorSelect: '',
+  // tab text font size (style 1)
+  tabFontD1: '',
+  tabFontT1: '',
+  tabFontM1: '',
+  // tab text font size (style 2/3/4)
+  tabFontD234: '',
+  tabFontT234: '',
+  tabFontM234: '',
+  // summary richtext (layout 4)
+  summaryFontD: '',
+  summaryFontT: '',
+  summaryFontM: '',
   summaryFontColor: '',
 };
 
@@ -137,13 +172,14 @@ async function loadFragment(url) {
 
 // ── Tab button builder ────────────────────────────────────────
 
-function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled, tabRadiusStyle) {
+function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled, tabRadiusStyle, fontClass) {
   const iconHtml = iconEnabled && tabIconAsset
     ? `<img class="tab-tab-icon object-contain shrink-0 h-[24px]" src="${tabIconAsset}" alt="" aria-hidden="true" />`
     : '';
+  const resolvedFontClass = fontClass || productFonts.tabText;
   return `
     <button
-      class="tab-tab-btn flex items-center justify-center gap-[6px] m-0 border-none cursor-pointer font-[inherit] transition-[color,background] duration-200 ease shrink-0${isActive ? ' is-active' : ''} ${productFonts.tabText}"
+      class="tab-tab-btn flex items-center justify-center gap-[6px] m-0 border-none cursor-pointer font-[inherit] transition-[color,background] duration-200 ease shrink-0${isActive ? ' is-active' : ''} ${resolvedFontClass}"
       data-tab-index="${index}"
       role="tab"
       aria-selected="${isActive ? 'true' : 'false'}"
@@ -154,7 +190,7 @@ function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled, ta
 
 // ── Panel transition ──────────────────────────────────────────
 
-function activateTab(index, tabBtns, panels, motionEnabled) {
+function activateTab(index, tabBtns, panels) {
   tabBtns.forEach((btn, i) => {
     btn.classList.toggle('is-active', i === index);
     btn.setAttribute('aria-selected', i === index ? 'true' : 'false');
@@ -164,31 +200,8 @@ function activateTab(index, tabBtns, panels, motionEnabled) {
   const next = panels[index];
   if (!next || current === next) return;
 
-  if (!motionEnabled) {
-    if (current) current.classList.remove('is-active');
-    next.classList.add('is-active');
-    return;
-  }
-
-  const doFadeIn = () => {
-    next.classList.add('is-active', 'tab-panel-fade-in');
-    // eslint-disable-next-line no-unused-expressions
-    next.offsetHeight;
-    next.classList.add('tab-panel-visible');
-    next.addEventListener('transitionend', () => {
-      next.classList.remove('tab-panel-fade-in', 'tab-panel-visible');
-    }, { once: true });
-  };
-
-  if (current) {
-    current.classList.add('tab-panel-fade-out');
-    current.addEventListener('transitionend', () => {
-      current.classList.remove('is-active', 'tab-panel-fade-out');
-      doFadeIn();
-    }, { once: true });
-  } else {
-    doFadeIn();
-  }
+  if (current) current.classList.remove('is-active');
+  next.classList.add('is-active');
 }
 
 // ── Swiper setup (shared by primary + sub tab) ───────────────
@@ -205,11 +218,11 @@ function createSwiperArrows(prefix) {
   return { prev, next };
 }
 
-function setupSwiper(tabListEl, tabBarEl, tabBtns, panels, motionEnabled, prefix) {
+function setupSwiper(tabListEl, tabBarEl, tabBtns, panels, prefix) {
   if (window.innerWidth >= 1280) {
     // desktop: plain click
     tabBtns.forEach((btn, i) => {
-      btn.addEventListener('click', () => activateTab(i, tabBtns, panels, motionEnabled));
+      btn.addEventListener('click', () => activateTab(i, tabBtns, panels));
     });
     return;
   }
@@ -248,7 +261,7 @@ function setupSwiper(tabListEl, tabBarEl, tabBtns, panels, motionEnabled, prefix
           if (btn) {
             const idx = tabBtns.indexOf(btn);
             if (idx !== -1) {
-              activateTab(idx, tabBtns, panels, motionEnabled);
+              activateTab(idx, tabBtns, panels);
               s.slideTo(idx, 300);
             }
           }
@@ -286,8 +299,11 @@ function buildFragmentSlots(col1, col2) {
  *
  * Mobile: 同上
  */
-async function renderLayout1(componentEl, items, motionEnabled, tabRadiusStyle, tabIconEnabled) {
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle)).join('');
+async function renderLayout1(componentEl, items, cfg) {
+  const {
+    tabRadiusStyle, tabIconEnabled, tabFontSizeClass,
+  } = cfg;
+  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
 
   componentEl.innerHTML = `
     <div class="tab-nav-bar flex items-center w-full sticky top-0 z-10">
@@ -313,7 +329,7 @@ async function renderLayout1(componentEl, items, motionEnabled, tabRadiusStyle, 
 
   const tabBtns = [...componentEl.querySelectorAll('.tab-tab-btn')];
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
-  setupSwiper(tabListEl, tabBarEl, tabBtns, panels, motionEnabled, 'tab');
+  setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
 }
 
 /**
@@ -331,8 +347,11 @@ async function renderLayout1(componentEl, items, motionEnabled, tabRadiusStyle, 
  * Layout 2 多個 container 時，僅第一個 container 的 col1 移到 tab 上方（spec）
  * 這裡只有一組 tab，col1-stage 隨 tab 切換更新。
  */
-async function renderLayout2(componentEl, items, motionEnabled, tabRadiusStyle, tabIconEnabled) {
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle)).join('');
+async function renderLayout2(componentEl, items, cfg) {
+  const {
+    tabRadiusStyle, tabIconEnabled, tabFontSizeClass,
+  } = cfg;
+  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
 
   componentEl.innerHTML = `
     <div class="tab-col1-stage w-full"></div>
@@ -378,7 +397,7 @@ async function renderLayout2(componentEl, items, motionEnabled, tabRadiusStyle, 
   // override activate to also swap col1Stage
   const activateLayout2 = (index) => {
     col1Els.forEach((el, i) => el.classList.toggle('is-active', i === index));
-    activateTab(index, tabBtns, panels, motionEnabled);
+    activateTab(index, tabBtns, panels);
   };
 
   // desktop: plain click
@@ -387,7 +406,7 @@ async function renderLayout2(componentEl, items, motionEnabled, tabRadiusStyle, 
       btn.addEventListener('click', () => activateLayout2(i));
     });
   } else {
-    setupSwiper(tabListEl, tabBarEl, tabBtns, panels, motionEnabled, 'tab');
+    setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
     // also wire col1 swap on swiper click (swiper sets up its own click handler)
     tabBtns.forEach((btn, i) => {
       btn.addEventListener('click', () => {
@@ -410,8 +429,11 @@ async function renderLayout2(componentEl, items, motionEnabled, tabRadiusStyle, 
  *
  * Mobile: col1 col2 上下排列
  */
-async function renderLayout3(componentEl, items, motionEnabled, tabRadiusStyle, tabIconEnabled) {
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle)).join('');
+async function renderLayout3(componentEl, items, cfg) {
+  const {
+    tabRadiusStyle, tabIconEnabled, tabFontSizeClass,
+  } = cfg;
+  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
 
   componentEl.innerHTML = `
     <div class="tab-nav-bar flex items-center w-full sticky top-0 z-10">
@@ -437,7 +459,7 @@ async function renderLayout3(componentEl, items, motionEnabled, tabRadiusStyle, 
 
   const tabBtns = [...componentEl.querySelectorAll('.tab-tab-btn')];
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
-  setupSwiper(tabListEl, tabBarEl, tabBtns, panels, motionEnabled, 'tab');
+  setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
 }
 
 /**
@@ -457,8 +479,11 @@ async function renderLayout3(componentEl, items, motionEnabled, tabRadiusStyle, 
  *     .tab-panel
  *       .tab-col1 / .tab-col2   ← 直接顯示 fragment（視為 layout1）
  */
-async function renderLayout4(componentEl, items, motionEnabled, tabRadiusStyle, tabIconEnabled) {
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle)).join('');
+async function renderLayout4(componentEl, items, cfg) {
+  const {
+    tabRadiusStyle, tabIconEnabled, tabFontSizeClass, summaryFontClass,
+  } = cfg;
+  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
 
   componentEl.innerHTML = `
     <div class="tab-nav-bar flex items-center w-full sticky top-0 z-10">
@@ -487,7 +512,7 @@ async function renderLayout4(componentEl, items, motionEnabled, tabRadiusStyle, 
       // has sub tab
       // summary richtext (hide if empty)
       const summaryEl = document.createElement('div');
-      summaryEl.className = `tab-summary-richtext ${productFonts.summaryText}`;
+      summaryEl.className = `tab-summary-richtext ${summaryFontClass}`;
       if (item.summaryRichtext?.html) {
         summaryEl.innerHTML = item.summaryRichtext.html;
       } else {
@@ -507,7 +532,7 @@ async function renderLayout4(componentEl, items, motionEnabled, tabRadiusStyle, 
       const subTabRadiusStyle = tabRadiusStyle; // same radius token for now
 
       const subItems = item.subItems || [];
-      const subTabBtnsHtml = subItems.map((subItem, j) => buildTabBtnHtml(subItem.subItemText?.text, subItem.subItemIconAsset?.text, j, j === 0, tabIconEnabled, subTabRadiusStyle)).join('');
+      const subTabBtnsHtml = subItems.map((subItem, j) => buildTabBtnHtml(subItem.subItemText?.text, subItem.subItemIconAsset?.text, j, j === 0, tabIconEnabled, subTabRadiusStyle, tabFontSizeClass)).join('');
       subTabList.innerHTML = subTabBtnsHtml;
       subNavBar.appendChild(subTabList);
       panel.appendChild(subNavBar);
@@ -531,7 +556,7 @@ async function renderLayout4(componentEl, items, motionEnabled, tabRadiusStyle, 
       // wire sub tab interaction
       const subBtns = [...subTabList.querySelectorAll('.tab-tab-btn')];
       const subPanels = [...subPanelsEl.querySelectorAll('.tab-sub-panel')];
-      setupSwiper(subTabList, subNavBar, subBtns, subPanels, motionEnabled, 'subtab');
+      setupSwiper(subTabList, subNavBar, subBtns, subPanels, 'subtab');
     }
 
     panelsEl.appendChild(panel);
@@ -539,7 +564,7 @@ async function renderLayout4(componentEl, items, motionEnabled, tabRadiusStyle, 
 
   const tabBtns = [...componentEl.querySelectorAll(':scope > .tab-nav-bar .tab-tab-btn')];
   const panels = [...panelsEl.querySelectorAll(':scope > .tab-panel')];
-  setupSwiper(tabListEl, tabBarEl, tabBtns, panels, motionEnabled, 'tab');
+  setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
 }
 
 // ── Main decorator ────────────────────────────────────────────
@@ -552,13 +577,48 @@ async function decoratePage(block) {
   const layoutStyle = data.layoutstyle || DEFAULT_CONFIG.layoutStyle;
   const tabStyle = data.tabstyle || DEFAULT_CONFIG.tabStyle;
   const showIcon = data.showicon === 'yes';
-  const motionEnabled = data.motionenabled === 'true';
   const colorGroup = data.colorgroup || '';
 
-  // ── Advanced: inline CSS overrides ──────────────────────────
+  // ── Helpers ─────────────────────────────────────────────────
   const parseGradientRaw = (key) => parseGradient(data[key] || '');
   const prefixHexRaw = (key) => prefixHex(data[key] || '');
 
+  // ── Tab theme ────────────────────────────────────────────────
+  const tabSelectedColor = prefixHexRaw('tabselectedcolor');
+  const tabDefaultColor = prefixHexRaw('tabdefaultcolor');
+  const tabLineWidth = data.tablinewidth || '';
+  const tabLineEndpoints = data.tablineendpoints || ''; // 'round' | 'square'
+  const tabCornerDecorationColor = prefixHexRaw('tabcornerdecorationcolor');
+
+  // radius: style 2 uses tabRadiusTl/Tr/Br/Bl; others use tabContainerRadiusTl/Tr/Br/Bl
+  const tabRadiusStyle = (() => {
+    if (tabStyle === '2') {
+      return buildRadiusValue(
+        data.tabradiustl || '',
+        data.tabradiustr || '',
+        data.tabradiusbr || '',
+        data.tabradiusbl || '',
+      );
+    }
+    return buildRadiusValue(
+      data.tabcontainerradiustl || '',
+      data.tabcontainerradiustr || '',
+      data.tabcontainerradiusbr || '',
+      data.tabcontainerradiusbl || '',
+    );
+  })();
+
+  // ── Tab container style 1/3/4 ────────────────────────────────
+  const tabBgColor134 = parseGradientRaw('tabbgcolor134');
+
+  // ── Tab container style 2 ────────────────────────────────────
+  const tabBorderColor2 = parseGradientRaw('tabbordercolor2');
+  const tabBgColor2 = parseGradientRaw('tabbgcolor2');
+  const tabBorderWidthDefault2 = data.tabborderwidthdefault2 || '';
+  const tabBorderWidthHover2 = data.tabborderwidthhover2 || '';
+  const tabBorderWidthSelect2 = data.tabborderwidthselect2 || '';
+
+  // ── Tab container advanced (shared) ──────────────────────────
   const tabBorderWidthDefault = data.tabcontainerborderwidthdefault || '';
   const tabBorderWidthHover = data.tabcontainerborderwidthhover || '';
   const tabBorderWidthSelect = data.tabcontainerborderwidthselect || '';
@@ -568,20 +628,67 @@ async function decoratePage(block) {
   const tabBgDefault = prefixHexRaw('tabcontainerbgcolordefault');
   const tabBgGradientHover = parseGradientRaw('tabcontainerbgcolorhover');
   const tabBgGradientSelect = parseGradientRaw('tabcontainerbgcolorselect');
+
+  // ── Tab text font color ───────────────────────────────────────
   const tabFontColorDefault = prefixHexRaw('tabfontcolordefault');
   const tabFontColorHover = prefixHexRaw('tabfontcolorhover');
   const tabFontColorSelect = prefixHexRaw('tabfontcolorselect');
+
+  // ── Tab text font size ────────────────────────────────────────
+  // style 1: tabFontD1/T1/M1; style 2/3/4: tabFontD234/T234/M234
+  // If author sets these, override productFonts.tabText
+  const tabFontSizeClass = (() => {
+    if (tabStyle === '1') {
+      const d = data.tabfontd1 || '';
+      const t = data.tabfontt1 || '';
+      const m = data.tabfontm1 || '';
+      return (d || t || m) ? [d, t, m].filter(Boolean).join(' ') : '';
+    }
+    const d = data.tabfontd234 || '';
+    const t = data.tabfontt234 || '';
+    const m = data.tabfontm234 || '';
+    return (d || t || m) ? [d, t, m].filter(Boolean).join(' ') : '';
+  })();
+
+  // ── Summary richtext font ─────────────────────────────────────
+  const summaryFontD = data.summaryfontd || '';
+  const summaryFontT = data.summaryfontt || '';
+  const summaryFontM = data.summaryfontm || '';
   const summaryFontColor = prefixHexRaw('summaryfontcolor');
+  const summaryFontClass = [summaryFontD, summaryFontT, summaryFontM].filter(Boolean).join(' ')
+    || productFonts.summaryText;
 
-  const tabRadiusStyle = buildRadiusValue(
-    data.tabcontainerradiustl || '',
-    data.tabcontainerradiustr || '',
-    data.tabcontainerradiusbr || '',
-    data.tabcontainerradiusbl || '',
-  );
-
-  // build component CSS variable string
+  // ── Build component CSS variable string ───────────────────────
   let componentStyle = '';
+
+  // tab theme
+  if (tabSelectedColor) componentStyle += `--tab-selected-color: ${tabSelectedColor};`;
+  if (tabDefaultColor) componentStyle += `--tab-default-color: ${tabDefaultColor};`;
+  if (tabLineWidth) componentStyle += `--tab-line-width: ${tabLineWidth}px;`;
+  if (tabCornerDecorationColor) componentStyle += `--tab-corner-decoration-color: ${tabCornerDecorationColor};`;
+
+  // tab container style 1/3/4 bg
+  if (tabBgColor134) {
+    componentStyle += `--tab-bg-from-default: ${tabBgColor134.from};`;
+    componentStyle += `--tab-bg-to-default: ${tabBgColor134.to};`;
+  }
+
+  // tab container style 2 basic
+  if (tabBorderColor2) {
+    componentStyle += `--tab-border-from-default: ${tabBorderColor2.from};`;
+    componentStyle += `--tab-border-to-default: ${tabBorderColor2.to};`;
+  }
+  if (tabBgColor2) {
+    componentStyle += `--tab-bg-from-default: ${tabBgColor2.from};`;
+    componentStyle += `--tab-bg-to-default: ${tabBgColor2.to};`;
+  }
+
+  // tab container style 2 advanced border width
+  if (tabBorderWidthDefault2) componentStyle += `--tab-border-width-default: ${tabBorderWidthDefault2}px;`;
+  if (tabBorderWidthHover2) componentStyle += `--tab-border-width-hover: ${tabBorderWidthHover2}px;`;
+  if (tabBorderWidthSelect2) componentStyle += `--tab-border-width-select: ${tabBorderWidthSelect2}px;`;
+
+  // tab container shared advanced
   if (tabBorderWidthDefault) componentStyle += `--tab-border-width-default: ${tabBorderWidthDefault}px;`;
   if (tabBorderWidthHover) componentStyle += `--tab-border-width-hover: ${tabBorderWidthHover}px;`;
   if (tabBorderWidthSelect) componentStyle += `--tab-border-width-select: ${tabBorderWidthSelect}px;`;
@@ -606,9 +713,13 @@ async function decoratePage(block) {
     componentStyle += `--tab-bg-from-select: ${tabBgGradientSelect.from};`;
     componentStyle += `--tab-bg-to-select: ${tabBgGradientSelect.to};`;
   }
+
+  // tab text colors
   if (tabFontColorDefault) componentStyle += `--tab-color-default: ${tabFontColorDefault};`;
   if (tabFontColorHover) componentStyle += `--tab-color-hover: ${tabFontColorHover};`;
   if (tabFontColorSelect) componentStyle += `--tab-color-select: ${tabFontColorSelect};`;
+
+  // summary color
   if (summaryFontColor) componentStyle += `--tab-summary-color: ${summaryFontColor};`;
 
   // ── Collect item wrappers ────────────────────────────────────
@@ -638,7 +749,8 @@ async function decoratePage(block) {
 
   // ── Build component shell ────────────────────────────────────
   const componentEl = document.createElement('div');
-  componentEl.className = `tab-component tab-layout${layoutStyle} tab-style${tabStyle} l4-column-width-12 box-border`;
+  const lineEndpointsClass = tabLineEndpoints ? `tab-line-${tabLineEndpoints}` : '';
+  componentEl.className = `tab-component tab-layout${layoutStyle} tab-style${tabStyle} l4-column-width-12 box-border ${lineEndpointsClass}`.trim();
   if (componentStyle) componentEl.setAttribute('style', componentStyle.trim());
 
   if (colorGroup) block.classList.add(colorGroup);
@@ -654,7 +766,13 @@ async function decoratePage(block) {
     4: renderLayout4,
   };
   const render = renderers[layoutStyle] || renderers[1];
-  await render(componentEl, items, motionEnabled, tabRadiusStyle, showIcon);
+  const tabRenderConfig = {
+    tabRadiusStyle,
+    tabIconEnabled: showIcon,
+    tabFontSizeClass,
+    summaryFontClass,
+  };
+  await render(componentEl, items, tabRenderConfig);
 
   // ── UE author live-update ────────────────────────────────────
   block.addEventListener('asus-l4--section-tab', async ({ detail }) => {

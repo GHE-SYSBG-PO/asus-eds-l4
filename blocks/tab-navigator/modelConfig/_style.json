@@ -7,21 +7,15 @@
     },
     {
       "component": "select",
-      "label": "layout style (Layout Group)",
+      "label": "layout style",
       "name": "layoutStyle",
       "valueType": "string",
       "options": [
-        { "name": "1 — tab on top", "value": "1" },
-        { "name": "2 — tab in middle", "value": "2" },
-        { "name": "3 — tab on top, split container", "value": "3" },
-        { "name": "4 — double tab", "value": "4" }
+        { "name": "Layout style 1 - tab on top", "value": "1" },
+        { "name": "Layout style 2 -tab in middle", "value": "2" },
+        { "name": "Layout style 3 -tab on top, split container", "value": "3" },
+        { "name": "Layout style 4 -Double tab", "value": "4" }
       ]
-    },
-    {
-      "component": "boolean",
-      "label": "motion (on/off)",
-      "name": "motionEnabled",
-      "valueType": "boolean"
     }
   ]
 }

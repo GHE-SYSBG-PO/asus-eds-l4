@@ -1138,33 +1138,27 @@
       },
       {
         "component": "select",
-        "label": "layout style (Layout Group)",
+        "label": "layout style",
         "name": "layoutStyle",
         "valueType": "string",
         "options": [
           {
-            "name": "1 — tab on top",
+            "name": "Layout style 1 - tab on top",
             "value": "1"
           },
           {
-            "name": "2 — tab in middle",
+            "name": "Layout style 2 -tab in middle",
             "value": "2"
           },
           {
-            "name": "3 — tab on top, split container",
+            "name": "Layout style 3 -tab on top, split container",
             "value": "3"
           },
           {
-            "name": "4 — double tab",
+            "name": "Layout style 4 -Double tab",
             "value": "4"
           }
         ]
-      },
-      {
-        "component": "boolean",
-        "label": "motion (on/off)",
-        "name": "motionEnabled",
-        "valueType": "boolean"
       },
       {
         "component": "tab",
@@ -1173,24 +1167,24 @@
       },
       {
         "component": "select",
-        "label": "tab style (Tab Style Group)",
+        "label": "tab style",
         "name": "tabStyle",
         "valueType": "string",
         "options": [
           {
-            "name": "1 — Underlined_1 (default)",
+            "name": "tab style 1 - Underlined_1",
             "value": "1"
           },
           {
-            "name": "2 — Pill",
+            "name": "tab style 2 - Pill",
             "value": "2"
           },
           {
-            "name": "3 — Underlined_2",
+            "name": "tab style 3 -Underlined_2",
             "value": "3"
           },
           {
-            "name": "4 — Gaming_1",
+            "name": "tab style 4 - Gaming_1",
             "value": "4"
           }
         ]
@@ -1214,41 +1208,257 @@
         }
       },
       {
-        "component": "select",
-        "label": "2nd tab style (Tab Style Group) — layout 4 only",
-        "name": "secondTabStyle",
-        "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "layoutStyle"
+        "component": "container",
+        "label": "tab theme",
+        "name": "tabTheme",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "selected color",
+            "name": "tabSelectedColor",
+            "valueType": "string",
+            "description": "Hex without #, e.g. 0062cd"
+          },
+          {
+            "component": "text",
+            "label": "default color (style 1, 3, 4 only)",
+            "name": "tabDefaultColor",
+            "valueType": "string",
+            "description": "Hex without #",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "1",
+                  "3",
+                  "4"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "line width (style 1, 3 only)",
+            "name": "tabLineWidth",
+            "valueType": "string",
+            "description": "Number only, unit px, e.g. 2",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "1",
+                  "3"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "select",
+            "label": "line endpoints (style 1, 3 only)",
+            "name": "tabLineEndpoints",
+            "valueType": "string",
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "1",
+                  "3"
+                ]
+              ]
             },
-            "4"
-          ]
-        },
-        "options": [
-          {
-            "name": "1 — Underlined_1 (default)",
-            "value": "1"
+            "options": [
+              {
+                "name": "round",
+                "value": "round"
+              },
+              {
+                "name": "square",
+                "value": "square"
+              }
+            ]
           },
           {
-            "name": "2 — Pill",
-            "value": "2"
+            "component": "text",
+            "label": "corner decoration color (style 4 only)",
+            "name": "tabCornerDecorationColor",
+            "valueType": "string",
+            "description": "Hex without #",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "4"
+              ]
+            }
           },
           {
-            "name": "3 — Underlined_2",
-            "value": "3"
-          },
-          {
-            "name": "4 — Gaming_1",
-            "value": "4"
+            "component": "container",
+            "label": "tab radius (style 2 only)",
+            "name": "tabRadiusGroup",
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "2"
+              ]
+            },
+            "fields": [
+              {
+                "component": "text",
+                "label": "radius TL",
+                "name": "tabRadiusTl",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "radius TR",
+                "name": "tabRadiusTr",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "radius BR",
+                "name": "tabRadiusBr",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "radius BL",
+                "name": "tabRadiusBl",
+                "valueType": "string"
+              }
+            ]
           }
         ]
       },
       {
         "component": "container",
-        "label": "tab text (Advanced)",
-        "name": "tabTextAdvanced",
+        "label": "tab container — bg color (style 1, 3, 4)",
+        "name": "tabContainerBasic134",
+        "collapsible": true,
+        "condition": {
+          "in": [
+            {
+              "var": "tabStyle"
+            },
+            [
+              "1",
+              "3",
+              "4"
+            ]
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "bg color",
+            "name": "tabBgColor134",
+            "valueType": "string",
+            "description": "Hex without #. For gradient: colorA,colorB"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "tab container — border & bg (style 2)",
+        "name": "tabContainerBasic2",
+        "collapsible": true,
+        "condition": {
+          "===": [
+            {
+              "var": "tabStyle"
+            },
+            "2"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "border color",
+            "name": "tabBorderColor2",
+            "valueType": "string",
+            "description": "Hex without #. For gradient: colorA,colorB"
+          },
+          {
+            "component": "text",
+            "label": "bg color",
+            "name": "tabBgColor2",
+            "valueType": "string",
+            "description": "Hex without #. For gradient: colorA,colorB"
+          },
+          {
+            "component": "container",
+            "label": "Advanced",
+            "name": "tabContainerAdvanced2",
+            "collapsible": true,
+            "fields": [
+              {
+                "component": "text",
+                "label": "border width default",
+                "name": "tabBorderWidthDefault2",
+                "valueType": "string",
+                "description": "Number only, unit px, e.g. 1"
+              },
+              {
+                "component": "text",
+                "label": "border width hover",
+                "name": "tabBorderWidthHover2",
+                "valueType": "string"
+              },
+              {
+                "component": "text",
+                "label": "border width select",
+                "name": "tabBorderWidthSelect2",
+                "valueType": "string"
+              },
+              {
+                "component": "container",
+                "label": "radius (TL / TR / BR / BL)",
+                "name": "tabContainerRadius2",
+                "fields": [
+                  {
+                    "component": "text",
+                    "label": "radius TL",
+                    "name": "tabContainerRadiusTl2",
+                    "valueType": "string"
+                  },
+                  {
+                    "component": "text",
+                    "label": "radius TR",
+                    "name": "tabContainerRadiusTr2",
+                    "valueType": "string"
+                  },
+                  {
+                    "component": "text",
+                    "label": "radius BR",
+                    "name": "tabContainerRadiusBr2",
+                    "valueType": "string"
+                  },
+                  {
+                    "component": "text",
+                    "label": "radius BL",
+                    "name": "tabContainerRadiusBl2",
+                    "valueType": "string"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "tab text",
+        "name": "tabTextGroup",
         "collapsible": true,
         "fields": [
           {
@@ -1269,13 +1479,261 @@
             "label": "font-color select",
             "name": "tabFontColorSelect",
             "valueType": "string"
+          },
+          {
+            "component": "container",
+            "label": "Advanced — font size (style 1)",
+            "name": "tabTextAdvanced1",
+            "collapsible": true,
+            "condition": {
+              "===": [
+                {
+                  "var": "tabStyle"
+                },
+                "1"
+              ]
+            },
+            "fields": [
+              {
+                "component": "select",
+                "label": "font (D)",
+                "name": "tabFontD1",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-14",
+                    "value": "ro-md-14-lg"
+                  },
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16-lg"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18-lg"
+                  },
+                  {
+                    "name": "ro-md-20",
+                    "value": "ro-md-20-lg"
+                  },
+                  {
+                    "name": "ro-md-24",
+                    "value": "ro-md-24-lg"
+                  },
+                  {
+                    "name": "ro-md-28",
+                    "value": "ro-md-28-lg"
+                  }
+                ]
+              },
+              {
+                "component": "select",
+                "label": "font (T)",
+                "name": "tabFontT1",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-14",
+                    "value": "ro-md-14-md"
+                  },
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16-md"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18-md"
+                  },
+                  {
+                    "name": "ro-md-20",
+                    "value": "ro-md-20-md"
+                  },
+                  {
+                    "name": "ro-md-24",
+                    "value": "ro-md-24-md"
+                  },
+                  {
+                    "name": "ro-md-28",
+                    "value": "ro-md-28-md"
+                  }
+                ]
+              },
+              {
+                "component": "select",
+                "label": "font (M)",
+                "name": "tabFontM1",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-14",
+                    "value": "ro-md-14-sm"
+                  },
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16-sm"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18-sm"
+                  },
+                  {
+                    "name": "ro-md-20",
+                    "value": "ro-md-20-sm"
+                  },
+                  {
+                    "name": "ro-md-24",
+                    "value": "ro-md-24-sm"
+                  },
+                  {
+                    "name": "ro-md-28",
+                    "value": "ro-md-28-sm"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "component": "container",
+            "label": "Advanced — font size (style 2, 3, 4)",
+            "name": "tabTextAdvanced234",
+            "collapsible": true,
+            "condition": {
+              "in": [
+                {
+                  "var": "tabStyle"
+                },
+                [
+                  "2",
+                  "3",
+                  "4"
+                ]
+              ]
+            },
+            "fields": [
+              {
+                "component": "select",
+                "label": "font (D)",
+                "name": "tabFontD234",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-14",
+                    "value": "ro-md-14-lg"
+                  },
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16-lg"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18-lg"
+                  },
+                  {
+                    "name": "ro-md-20",
+                    "value": "ro-md-20-lg"
+                  },
+                  {
+                    "name": "ro-md-24",
+                    "value": "ro-md-24-lg"
+                  }
+                ]
+              },
+              {
+                "component": "select",
+                "label": "font (T)",
+                "name": "tabFontT234",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-14",
+                    "value": "ro-md-14-md"
+                  },
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16-md"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18-md"
+                  },
+                  {
+                    "name": "ro-md-20",
+                    "value": "ro-md-20-md"
+                  },
+                  {
+                    "name": "ro-md-24",
+                    "value": "ro-md-24-md"
+                  }
+                ]
+              },
+              {
+                "component": "select",
+                "label": "font (M)",
+                "name": "tabFontM234",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "ro-md-14",
+                    "value": "ro-md-14-sm"
+                  },
+                  {
+                    "name": "ro-md-16",
+                    "value": "ro-md-16-sm"
+                  },
+                  {
+                    "name": "ro-md-18",
+                    "value": "ro-md-18-sm"
+                  },
+                  {
+                    "name": "ro-md-20",
+                    "value": "ro-md-20-sm"
+                  },
+                  {
+                    "name": "ro-md-24",
+                    "value": "ro-md-24-sm"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "2nd tab style (layout 4 only)",
+        "name": "secondTabStyle",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "layoutStyle"
+            },
+            "4"
+          ]
+        },
+        "options": [
+          {
+            "name": "tab style 1 - Underlined_1",
+            "value": "1"
+          },
+          {
+            "name": "tab style 2 - Pill",
+            "value": "2"
+          },
+          {
+            "name": "tab style 3 -Underlined_2",
+            "value": "3"
+          },
+          {
+            "name": "tab style 4 - Gaming_1",
+            "value": "4"
           }
         ]
       },
       {
         "component": "container",
-        "label": "summary richtext (Advanced) — layout 4 only",
-        "name": "summaryAdvanced",
+        "label": "summary richtext (layout 4 only)",
+        "name": "summaryGroup",
         "collapsible": true,
         "condition": {
           "===": [
@@ -1287,8 +1745,56 @@
         },
         "fields": [
           {
+            "component": "select",
+            "label": "font (D)",
+            "name": "summaryFontD",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-20",
+                "value": "ro-rg-20-lg"
+              },
+              {
+                "name": "ro-rg-24",
+                "value": "ro-rg-24-lg"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (T)",
+            "name": "summaryFontT",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-20",
+                "value": "ro-rg-20-md"
+              },
+              {
+                "name": "ro-rg-24",
+                "value": "ro-rg-24-md"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font (M)",
+            "name": "summaryFontM",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "ro-rg-18",
+                "value": "ro-rg-18-sm"
+              },
+              {
+                "name": "ro-rg-20",
+                "value": "ro-rg-20-sm"
+              }
+            ]
+          },
+          {
             "component": "text",
-            "label": "font-color",
+            "label": "font color",
             "name": "summaryFontColor",
             "valueType": "string",
             "description": "Hex without #, e.g. 4a4a4a"
