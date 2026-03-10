@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   getBlockConfigs,
   getFieldValue,
@@ -234,7 +235,7 @@ function addTextContent(block, v) {
 
 // 布局表
 const layoutVariant = {
-  D: {
+  layoutVariantD: {
     left: 'lg:justify-start lg:items-center',
     right: 'lg:justify-end lg:items-center',
     top: 'lg:justify-center lg:items-start',
@@ -244,7 +245,7 @@ const layoutVariant = {
     bottomLeft: 'lg:justify-start lg:items-end',
     bottomRight: 'lg:justify-end lg:items-end',
   },
-  T: {
+  layoutVariantT: {
     left: 'md:justify-start md:items-center',
     right: 'md:justify-end md:items-center',
     top: 'md:justify-center md:items-start',
@@ -254,7 +255,7 @@ const layoutVariant = {
     bottomLeft: 'md:justify-start md:items-end',
     bottomRight: 'md:justify-end md:items-end',
   },
-  M: {
+  layoutVariantM: {
     left: 'justify-start items-center',
     right: 'justify-end items-center',
     top: 'justify-center items-start',
@@ -268,51 +269,46 @@ const layoutVariant = {
 
 // 处理文本区域位置
 const handleLayoutVariant = (block, v) => {
-  if (v('layoutVariantD')) {
-    block.className += ` ${layoutVariant.D?.[v('layoutVariantD')]}`;
-  }
-  if (v('layoutVariantT')) {
-    block.className += ` ${layoutVariant.T?.[v('layoutVariantT')]}`;
-  }
-  if (v('layoutVariantM')) {
-    block.className += ` ${layoutVariant.M?.[v('layoutVariantM')]}`;
-  }
+  ['layoutVariantD', 'layoutVariantT', 'layoutVariantM'].forEach((key) => {
+    const val = v(key);
+    if (val) {
+      block.classList.add(...layoutVariant[key][val].split(' '));
+    }
+  });
 };
 
 // 处理媒体
 const handleMedia = (block, v) => {
-  if (v('mediaColumnSpanD')) {
-    block.classList.add(v('mediaColumnSpanD'));
-  }
-  if (v('mediaColumnSpanT')) {
-    block.classList.add(v('mediaColumnSpanT'));
-  }
+  ['mediaColumnSpanD', 'mediaColumnSpanT'].forEach((key) => {
+    const classes = v(key);
+    if (classes) {
+      block.classList.add(classes);
+    }
+  });
   handleLayoutVariant(block, v);
 };
 // 处理图标
 const handleIcon = (block, v) => {
-  if (v('iconColumnSpanD')) {
-    block.classList.add(v('iconColumnSpanD'));
-  }
-  if (v('iconColumnSpanT')) {
-    block.classList.add(v('iconColumnSpanT'));
-  }
+  ['iconColumnSpanD', 'iconColumnSpanT'].forEach((key) => {
+    const classes = v(key);
+    if (classes) {
+      block.classList.add(classes);
+    }
+  });
   // handleLayoutVariant(block, v);
 };
 // 处理文字
 const handleText = (block, v) => {
-  if (v('textColumnSpanD')) {
-    block.classList.add(v('textColumnSpanD'));
-  }
-  if (v('textColumnSpanT')) {
-    block.classList.add(v('textColumnSpanT'));
-  }
-  block.classList.add('justify-center', 'items-center');
+  ['textColumnSpanD', 'textColumnSpanT'].forEach((key) => {
+    const classes = v(key);
+    if (classes) {
+      block.classList.add(classes);
+    }
+  });
 };
 
 // 处理锚点
 const handleAnchor = (block, v) => {
-  console.log(block, v);
   if (v('anchorVisibilityToggle') === true && v('layoutStyle') === 'icon') {
     if (v('layoutVariantD') === 'bottom') {
       block.classList.add('lg:pb-[80px]');
@@ -329,6 +325,12 @@ const handleAnchor = (block, v) => {
     const anchor = document.createElement('a');
     anchor.href = v('anchorSectionId') ? `#${v('anchorSectionId')}` : '#';
     anchor.setAttribute('aria-label', `Anchor to section ${v('anchorSectionId')}`);
+    anchor.innerHTML = `
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="17" fill="white" fill-opacity="0.8" stroke="#2F2F2F" stroke-width="2"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2731 13.9609C25.7752 14.463 25.7752 15.2771 25.2731 15.7792L18.9091 22.1432C18.407 22.6453 17.593 22.6453 17.0909 22.1432L10.7269 15.7792C10.2248 15.2771 10.2248 14.463 10.7269 13.9609C11.229 13.4588 12.0431 13.4588 12.5452 13.9609L18 19.4158L23.4548 13.9609C23.9569 13.4588 24.771 13.4588 25.2731 13.9609Z" fill="#2F2F2F"/>
+      </svg>
+    `;
     block.appendChild(anchor);
   }
 };
@@ -380,7 +382,7 @@ export default async function decorate(block) {
 
         // inlineStyle = '';
         // 添加初始class
-        wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12', 'flex');
+        wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12', 'flex', 'justify-center', 'items-center');
         console.log('itemConfig', itemConfig);
         // 先清空
         wrap.innerHTML = '';
