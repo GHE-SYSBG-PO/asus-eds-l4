@@ -3,7 +3,7 @@
     {
       "component": "hidden",
       "name": "style",
-      "value": "L4CustomSection-tab"
+      "value": "L4CustomSection-tab-navigator"
     },
     {
       "...": "./_style.json#/fields"

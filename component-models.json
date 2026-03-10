@@ -1129,7 +1129,7 @@
       {
         "component": "hidden",
         "name": "style",
-        "value": "L4CustomSection-tab"
+        "value": "L4CustomSection-tab-navigator"
       },
       {
         "component": "tab",
@@ -7810,8 +7810,7 @@
       },
       {
         "component": "reference",
-        "label": "icon asset",
-        "description": "display when show icon = yes",
+        "label": "icon assets (if show icon=yes)",
         "name": "tabItemIconAsset",
         "multi": false
       },

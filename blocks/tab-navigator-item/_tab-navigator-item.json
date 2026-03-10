@@ -28,8 +28,7 @@
         },
         {
           "component": "reference",
-          "label": "icon asset",
-          "description": "display when show icon = yes",
+          "label": "icon assets (if show icon=yes)",
           "name": "tabItemIconAsset",
           "multi": false
         },

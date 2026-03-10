@@ -664,11 +664,11 @@ async function decoratePage(block) {
   if (summaryFontColor) componentStyle += `--tab-summary-color: ${summaryFontColor};`;
 
   // ── Collect item wrappers ────────────────────────────────────
-  const itemWrappers = [...block.querySelectorAll('.tab-item-wrapper')];
+  const itemWrappers = [...block.querySelectorAll('.tab-navigator-item-wrapper')];
 
   const items = await Promise.all(itemWrappers.map(async (wrapper) => {
-    const itemEl = wrapper.querySelector('.tab-item');
-    const itemConfig = await getBlockConfigs(itemEl, ITEM_DEFAULT_CONFIG, 'tab-item');
+    const itemEl = wrapper.querySelector('.tab-navigator-item');
+    const itemConfig = await getBlockConfigs(itemEl, ITEM_DEFAULT_CONFIG, 'tab-navigator-item');
 
     const result = {
       tabText: itemConfig.tabItemText,
@@ -717,8 +717,8 @@ async function decoratePage(block) {
 
   // ── UE author live-update ────────────────────────────────────
   block.addEventListener('asus-l4--section-tab', async ({ detail }) => {
-    const itemConfig = await getBlockConfigs(detail, ITEM_DEFAULT_CONFIG, 'tab-item');
-    const allItemEls = [...block.querySelectorAll('.tab-item')];
+    const itemConfig = await getBlockConfigs(detail, ITEM_DEFAULT_CONFIG, 'tab-navigator-item');
+    const allItemEls = [...block.querySelectorAll('.tab-navigator-item')];
     const idx = allItemEls.findIndex((el) => el.dataset.aueResource === detail.dataset.aueResource);
     // update tab button text
     const menuDom = block.querySelectorAll('.tab-tab-text')[idx];
