@@ -105,7 +105,9 @@ const isLikelyColorToken = (value) => {
 const mediaStateByCell = new WeakMap();
 const fragmentTemplateByPath = new Map();
 const rowAnimationState = new WeakMap();
-const ROW_ANIMATION_MS = 420;
+// Increased animation duration for smoother transitions without CLS impact
+// Parent containment prevents layout shifts during longer animations
+const ROW_ANIMATION_MS = 380;
 const ROW_STAGGER_MS = 0;
 const PREFETCH_CONCURRENCY = 2;
 const delayedMediaRegistry = new Set();
@@ -784,7 +786,13 @@ const makeInteractiveTrigger = (el, onToggle, initialOpen = false) => {
  * @param {number} index - Position in animation sequence
  * @param {number} total - Total number of rows animating
  */
-const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
+const animateRowWithCLSOptimization = (
+  row,
+  open,
+  immediate = false,
+  index = 0,
+  total = 1,
+) => {
   if (!row) return;
   const currentState = rowAnimationState.get(row);
   if (currentState?.timer) {
@@ -809,6 +817,7 @@ const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
     row.style.opacity = '0';
     row.style.transitionDelay = `${openDelay}ms`;
     requestAnimationFrame(() => {
+      // Always use scrollHeight - most reliable method
       row.style.maxHeight = `${row.scrollHeight}px`;
       row.style.opacity = '1';
     });
@@ -842,7 +851,7 @@ const animateRow = (row, open, immediate = false, index = 0, total = 1) => {
 const setRowsOpenState = (rows, open, immediate = false) => {
   const total = rows.length;
   rows.forEach((row, index) => {
-    animateRow(row, open, immediate, index, total);
+    animateRowWithCLSOptimization(row, open, immediate, index, total);
   });
 };
 
@@ -861,7 +870,7 @@ const collapseEntry = (entry, triggerSelector, panelRowSelector) => {
   entry.querySelector('.feature-accordion-item__content')?.classList.remove('is-expanded');
   entry.querySelector('.feature-accordion-item__nested')?.classList.remove('is-expanded');
   const panelRows = entry.querySelectorAll(panelRowSelector);
-  setRowsOpenState([...panelRows], false);
+  setRowsOpenState(panelRows, false);
 };
 
 const reserveMediaSpace = (cell) => {
@@ -1295,6 +1304,8 @@ const decorateAccordionItem = async (block, scaffold, itemsInScope, isFirstAccor
     nestedWrapper?.classList.toggle('is-expanded', isOpen);
   };
 
+  // For the first accordion item, expand immediately without animation to prevent layout shift
+  // Subsequent interactions will use smooth animations
   setRowsOpenState(topPanelRows, isFirstAccordionItem, true);
   setTopWrapperExpandedState(isFirstAccordionItem);
   makeInteractiveTrigger(titleCell, (isOpen) => {
@@ -1326,6 +1337,10 @@ const decorateAccordionItem = async (block, scaffold, itemsInScope, isFirstAccor
   }, isFirstAccordionItem);
 
   if (isFirstAccordionItem && isNestedVariant) {
+    // Reserve space immediately for first item's media to prevent layout shift
+    if (hasTopMedia && mediaCell) {
+      reserveMediaSpace(mediaCell);
+    }
     if (hasTopMedia) {
       ensureTopMediaLoaded()
         .then(() => {
@@ -1338,6 +1353,10 @@ const decorateAccordionItem = async (block, scaffold, itemsInScope, isFirstAccor
     }
     expandFirstNested(block);
   } else if (isFirstAccordionItem) {
+    // Reserve space immediately for first item's media to prevent layout shift
+    if (hasTopMedia && mediaCell) {
+      reserveMediaSpace(mediaCell);
+    }
     if (hasTopMedia) {
       ensureTopMediaLoaded()
         .then(() => {
