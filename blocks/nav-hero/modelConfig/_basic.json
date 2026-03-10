@@ -1,0 +1,117 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "select",
+      "label": "layout group",
+      "name": "styleLayout",
+      "valueType": "string",
+      "placeholder": "default(Variant 1 - Generic Style)",
+      "options": [
+        {
+          "name": "Variant 1 - Generic Style",
+          "value": "1"
+        },
+        {
+          "name": "Variant 2 - default_2 style",
+          "value": "2"
+        },
+        {
+          "name": "Variant 3 - ROG/cutomized_style_1",
+          "value": "3"
+        },
+        {
+          "name": "Variant 4 - ROG/cutomized_style_2",
+          "value": "4"
+        }
+      ]
+    },
+
+    {
+      "component": "container",
+      "label": "Bar Bg",
+      "name": "textContainerBg",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "Bg Color",
+          "name": "bgColor",
+          "valueType": "string",
+          "placeholder": "#000000"
+        },
+        {
+          "component": "text",
+          "label": "Opacity",
+          "name": "opacity",
+          "valueType": "string",
+          "placeholder": "[0-1]"
+        },
+        {
+          "component": "text",
+          "label": "Radius (左上/右上/右下/左下)",
+          "name": "radius",
+          "valueType": "string",
+          "placeholder": "18px 18px 18px 18px"
+        },
+        {
+          "component": "text",
+          "label": "Width",
+          "name": "width",
+          "valueType": "string",
+          "value": "24px",
+          "description": "* default=24px"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "Show Menu ID",
+      "name": "showMenuId",
+      "valueType": "string",
+      "description": "* 錨點出現位子 section id"
+    },
+    {
+      "...": "./_basic_1_2.json#/fields"
+    },
+
+    {
+      "...": "./_basic_3_4.json#/fields"
+    },
+
+    {
+      "component": "container",
+      "label": "Item Label",
+      "name": "textContainerItemLabel12",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "Text Color",
+          "name": "ItemLabelTextColor",
+          "valueType": "string",
+          "description": "* 三裝置共用, linear-gradient"
+        },
+        {
+          "component": "text",
+          "label": "Bg Color",
+          "name": "ItemLabelBgColor",
+          "valueType": "string",
+          "description": "* 三裝置共用"
+        },
+        {
+          "component": "text",
+          "label": "Radius",
+          "name": "ItemLabelRadius",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}
+
+

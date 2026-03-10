@@ -5,7 +5,8 @@
       "section",
       "container-2cols",
       "feature-accordion",
-      "tab-3column"
+      "tab-3column",
+      "nav-hero"
     ]
   },
   {
@@ -43,6 +44,12 @@
     "id": "tab-3column",
     "components": [
       "tab-3column-item"
+    ]
+  },
+  {
+    "id": "nav-hero",
+    "components": [
+      "nav-hero-item"
     ]
   },
   {
@@ -123,6 +130,12 @@
     "id": "medium-cards",
     "components": [
       "medium-card"
+    ]
+  },
+  {
+    "id": "nav-hero-item",
+    "components": [
+      "media-block"
     ]
   },
   {

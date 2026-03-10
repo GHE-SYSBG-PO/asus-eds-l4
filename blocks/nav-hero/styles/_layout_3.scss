@@ -1,0 +1,170 @@
+@use '../../../styles/variable' as v;
+
+@media all and (min-width: v.$large-lower-bound) {
+  .l4-pdp {
+    .nav-hero-item-container {
+      &.style-layout-3 {
+        .nav-hero-container {
+          .container-decorator {
+            bottom: calc(100% - -8px);
+
+            .icon-container {
+              width: var(--icon-width, 0);
+              height: var(--icon-height, 0);
+            }
+          }
+
+          .container-bg {
+            width: var(--width, 24px);
+          }
+
+          .container-items {
+            .item {
+              width: var(--width, 24px);
+              height: var(--height, 40px);
+            }
+
+            .item {
+              &:hover {
+                .item-dot::after {
+                  border: 0;
+                }
+              }
+
+              &.enter {
+                .item-dot::after {
+                  box-sizing: content-box;
+                }
+              }
+            }
+          }
+
+
+          &.item-top-customized {
+            .container-items .item.item-0 {
+              .item-dot {
+                &::before {
+                  display: none;
+                }
+
+                img {
+                  opacity: 1;
+                }
+              }
+            }
+          }
+
+          &.item-dot-customized {
+            .container-items .item {
+              .item-dot {
+                &::after {
+                  display: none;
+                }
+
+                img {
+                  opacity: 0;
+
+                  &.icon-default {
+                    opacity: 1;
+                  }
+                }
+              }
+
+              &.enter {
+                .item-dot {
+                  img {
+                    &.icon-default {
+                      opacity: 0;
+                    }
+
+                    &.icon-select {
+                      opacity: 1;
+                    }
+                  }
+                }
+              }
+
+              &:hover {
+                .item-dot {
+                  img {
+                    &.icon-default {
+                      opacity: 0;
+                    }
+
+                    &.icon-hover {
+                      opacity: 1;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &.item-top-customized,
+          &.item-dot-customized,
+          &.top-img-customized{
+           .container-bg {
+              margin-top: -8px;
+              height: calc(100% + 16px);
+            }
+          }
+        }
+
+        // dialog style
+        .nav-hero-container {
+          .container-items {
+            .item {
+              .item-label {
+                .label-name {
+                  background-image: var(--sidenav-label-name-bg-color, var(--base-label-bg-linear));
+                  text-wrap: nowrap;
+
+                  span {
+                    background: var(--item-label-text-color, var(--base-label-text-color));
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                  }
+                }
+              }
+
+              .item-dot {
+                &::after {
+                  border: 1px solid var(--border-color-default, var(--base-item-dot-border-color-default));
+                  background-color: transparent;
+                }
+              }
+
+              &:hover {
+                .item-dot {
+                  &::after {
+                    background: var(--bg-color-hover, var(--base-item-dot-bg-color-default));
+                  }
+                }
+              }
+            }
+
+            .item {
+              &.enter {
+                .item-dot::after {
+                  box-sizing: content-box;
+                  border: 2px solid var(--border-color-select, var(--base-item-dot-border-color-select));
+                  background: var(--bg-color-select, var(--base-item-dot-bg-color-select));
+                }
+              }
+            }
+
+            .item {
+              &.item-0 {
+                .item-dot {
+                  &::before {
+                    background-color: var(--item-top-icon-color, var(--base-item-top-icon-color));
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
