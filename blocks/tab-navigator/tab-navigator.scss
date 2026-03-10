@@ -1,89 +1,203 @@
 @use "../../styles/variable.scss" as v;
 
 // ============================================================
-// ID:8 TAB
+// ID:8 TAB NAVIGATOR
 // ============================================================
-// Depends on theme.scss for --cs-* and --brand-* tokens.
+// Layer 3 — reads --cs-* and --brand-* from theme.scss.
 // No hex values in this file.
-// Product line tokens: reserved, not applied yet.
+// Spec token mapping:
+//   tab selected color      → --brand-title-from/to (brand gradient)
+//   tab font select         → --brand-title-from
+//   tab font default        → Light: Gray/70  Dark: Gray/60
+//   tab font hover          → Light: Gray/100  Dark: Gray/10
+//   underline default color → Light: Gray/30  Dark: Gray/80 (style 1/3/4, 框線在外)
+//   style2 border           → Light: Gray/30  Dark: Gray/80 (框線在內, 2px)
+//   style2 fill bg          → White / Black
+//   style2 selected bg      → brand btn_Light/Dark
+//   tab bar bg              → White / Black (arrow gradient same)
+//   arrow default           → Light: Gray/70  Dark: Gray/60
+//   arrow hover/press       → Light: Gray/100  Dark: Gray/10
+//   corner decoration (s4)  → --brand-title-from
+//   TUF light selected      → Gray/100 (cs-button-neutral-filled-container)
 // ============================================================
 
 .l4-pdp {
   // ============================================================
-  // Layer 3 — Component token mapping
+  // Layer 3 — Token defaults (shared, all products & modes)
   // ============================================================
 
-  // ── Fixed: identical across all products and modes ──────────
   .tab-component {
     container-type: inline-size;
 
-    --tab-border-width-default: 1px;
-    --tab-border-width-hover:   1px;
-    --tab-border-width-select:  1px;
+    // border widths (style2 only)
+    --tab-border-width-default:     2px;
+    --tab-border-width-hover:       2px;
+    --tab-border-width-select:      2px;
 
-    // hover & press border = none (design spec "-")
-    --tab-border-from-hover:    transparent;
-    --tab-border-to-hover:      transparent;
-    --tab-border-from-select:   transparent;
-    --tab-border-to-select:     transparent;
+    // hover/select border → transparent (no border on these states)
+    --tab-border-from-hover:        transparent;
+    --tab-border-to-hover:          transparent;
+    --tab-border-from-select:       transparent;
+    --tab-border-to-select:         transparent;
 
-    // default bg = transparent
-    --tab-bg-default:           transparent;
+    // default bg → transparent
+    --tab-bg-from-default:          transparent;
+    --tab-bg-to-default:            transparent;
   }
 
-  // ── Light + Dark: CS_token → component vars ─────────────────
+  // ── Light mode token mapping ─────────────────────────────────
   &[data-mode="light"],
-  & .section-light,
+  & .section-light {
+    .tab-component {
+      --tab-bar-bg:                var(--cs-white);
+      --tab-color-default:         var(--cs-gray-70);
+      --tab-color-hover:           var(--cs-gray-100);
+
+      // underline default & style2 border: Gray/30
+      --tab-default-color-from:    var(--cs-gray-30);
+      --tab-default-color-to:      var(--cs-gray-30);
+      --tab-border-from-default:   var(--cs-gray-30);
+      --tab-border-to-default:     var(--cs-gray-30);
+
+      // style2 container bg
+      --tab-container-bg-color:    var(--cs-white);
+
+      // arrow
+      --tab-arrow-default:         var(--cs-gray-70);
+      --tab-arrow-hover:           var(--cs-gray-100);
+    }
+  }
+
+  // ── Dark mode token mapping ──────────────────────────────────
   &[data-mode="dark"],
   & .section-dark {
     .tab-component {
-      --tab-bar-bg:         var(--cs-background);
-      --tab-color-default:  var(--cs-button-neutral-outlined-label);
-      --tab-color-hover:    var(--cs-button-neutral-filled-label);
-      --tab-color-select:   var(--cs-button-neutral-filled-label);
+      --tab-bar-bg:                var(--cs-black);
+      --tab-color-default:         var(--cs-gray-60);
+      --tab-color-hover:           var(--cs-gray-10);
+
+      // underline default & style2 border: Gray/80
+      --tab-default-color-from:    var(--cs-gray-80);
+      --tab-default-color-to:      var(--cs-gray-80);
+      --tab-border-from-default:   var(--cs-gray-80);
+      --tab-border-to-default:     var(--cs-gray-80);
+
+      // style2 container bg
+      --tab-container-bg-color:    var(--cs-black);
+
+      // arrow
+      --tab-arrow-default:         var(--cs-gray-60);
+      --tab-arrow-hover:           var(--cs-gray-10);
     }
   }
 
-  // ── ASUS / ProArt / ROG: brand token → component vars ───────
-  &[data-product="asus"],
-  &[data-product="proart"],
-  &[data-product="rog"] {
-    .tab-component {
-      --tab-border-from-default: var(--brand-btn-outline-default-from);
-      --tab-border-to-default:   var(--brand-btn-outline-default-to);
-      --tab-bg-from-hover:       var(--brand-btn-default-from);
-      --tab-bg-to-hover:         var(--brand-btn-default-to);
-      --tab-bg-from-select:      var(--brand-btn-press-from);
-      --tab-bg-to-select:        var(--brand-btn-press-to);
-      --tab-arrow-color:         var(--brand-footnote-arrow-default);
-    }
-  }
-
-  // ── TUF: border/arrow from CS_token, bg split by mode ───────
-  &[data-product="tuf"] {
-    .tab-component {
-      --tab-border-from-default: var(--cs-button-neutral-outlined-border);
-      --tab-border-to-default:   var(--cs-button-neutral-outlined-border);
-      --tab-arrow-color:         var(--cs-button-neutral-outlined-border);
-    }
-
+  // ── ASUS ─────────────────────────────────────────────────────
+  &[data-product="asus"] {
     &[data-mode="light"],
     & .section-light {
       .tab-component {
-        --tab-bg-from-hover:  var(--cs-button-neutral-filled-container);
-        --tab-bg-to-hover:    var(--cs-button-neutral-filled-container);
-        --tab-bg-from-select: var(--cs-button-neutral-filled-container-press);
-        --tab-bg-to-select:   var(--cs-button-neutral-filled-container-press);
+        --tab-selected-color-from:       var(--brand-title-from);
+        --tab-selected-color-to:         var(--brand-title-to);
+        --tab-color-select:              var(--brand-title-from);
+        --tab-corner-decoration-color:   var(--brand-title-from);
+        --tab-bg-from-select:            var(--brand-btn-default-from);
+        --tab-bg-to-select:              var(--brand-btn-default-to);
       }
     }
 
     &[data-mode="dark"],
     & .section-dark {
       .tab-component {
-        --tab-bg-from-hover:  var(--brand-btn-default-from);
-        --tab-bg-to-hover:    var(--brand-btn-default-to);
-        --tab-bg-from-select: var(--brand-btn-press-from);
-        --tab-bg-to-select:   var(--brand-btn-press-to);
+        --tab-selected-color-from:       var(--brand-title-from);
+        --tab-selected-color-to:         var(--brand-title-to);
+        --tab-color-select:              var(--brand-title-from);
+        --tab-corner-decoration-color:   var(--brand-title-from);
+        --tab-bg-from-select:            var(--brand-btn-default-from);
+        --tab-bg-to-select:              var(--brand-btn-default-to);
+      }
+    }
+  }
+
+  // ── ProArt ───────────────────────────────────────────────────
+  &[data-product="proart"] {
+    &[data-mode="light"],
+    & .section-light {
+      .tab-component {
+        --tab-selected-color-from:       var(--brand-title-from);
+        --tab-selected-color-to:         var(--brand-title-to);
+        --tab-color-select:              var(--brand-title-from);
+        --tab-corner-decoration-color:   var(--brand-title-from);
+        --tab-bg-from-select:            var(--brand-btn-default-from);
+        --tab-bg-to-select:              var(--brand-btn-default-to);
+      }
+    }
+
+    &[data-mode="dark"],
+    & .section-dark {
+      .tab-component {
+        --tab-selected-color-from:       var(--brand-title-from);
+        --tab-selected-color-to:         var(--brand-title-to);
+        --tab-color-select:              var(--brand-title-from);
+        --tab-corner-decoration-color:   var(--brand-title-from);
+        --tab-bg-from-select:            var(--brand-btn-default-from);
+        --tab-bg-to-select:              var(--brand-btn-default-to);
+      }
+    }
+  }
+
+  // ── ROG ──────────────────────────────────────────────────────
+  // ROG: tab & container radius = 0 (via JS inline style default)
+  &[data-product="rog"] {
+    &[data-mode="light"],
+    & .section-light {
+      .tab-component {
+        --tab-selected-color-from:       var(--brand-title-from);
+        --tab-selected-color-to:         var(--brand-title-to);
+        --tab-color-select:              var(--brand-title-from);
+        --tab-corner-decoration-color:   var(--brand-title-from);
+        --tab-bg-from-select:            var(--brand-btn-default-from);
+        --tab-bg-to-select:              var(--brand-btn-default-to);
+      }
+    }
+
+    &[data-mode="dark"],
+    & .section-dark {
+      .tab-component {
+        --tab-selected-color-from:       var(--brand-title-from);
+        --tab-selected-color-to:         var(--brand-title-to);
+        --tab-color-select:              var(--brand-title-from);
+        --tab-corner-decoration-color:   var(--brand-title-from);
+        --tab-bg-from-select:            var(--brand-btn-default-from);
+        --tab-bg-to-select:              var(--brand-btn-default-to);
+      }
+    }
+  }
+
+  // ── TUF ──────────────────────────────────────────────────────
+  // Light: selected = Gray/100 (cs-button-neutral-filled-container)
+  // Dark:  selected = TUF/title_Dark
+  &[data-product="tuf"] {
+    &[data-mode="light"],
+    & .section-light {
+      .tab-component {
+        --tab-selected-color-from:       var(--cs-gray-100);
+        --tab-selected-color-to:         var(--cs-gray-100);
+        --tab-color-select:              var(--cs-gray-100);
+        --tab-corner-decoration-color:   var(--cs-gray-100);
+        --tab-bg-from-select:            var(--cs-button-neutral-filled-container);
+        --tab-bg-to-select:              var(--cs-button-neutral-filled-container);
+      }
+    }
+
+    &[data-mode="dark"],
+    & .section-dark {
+      .tab-component {
+        --tab-selected-color-from:       var(--brand-title-from);
+        --tab-selected-color-to:         var(--brand-title-to);
+        --tab-color-select:              var(--brand-title-from);
+        --tab-corner-decoration-color:   var(--brand-title-from);
+        --tab-bg-from-select:            var(--brand-btn-default-from);
+        --tab-bg-to-select:              var(--brand-btn-default-to);
       }
     }
   }
@@ -97,28 +211,25 @@
     box-sizing: border-box;
   }
 
-  // ── Tab nav bar ─────────────────────────────────────────────
-  // sticky, full-width, bg from token
+  // ── Tab nav bar ───────────────────────────────────────────────
   .tab-nav-bar {
     background: var(--tab-bar-bg);
 
-    // tiny mobile
     @media (max-width: v.$tiny-upper-bound) {
       width: var(--l4-column-width-12);
       margin: 0 auto;
     }
 
-    // small mobile → tablet
     @media (min-width: v.$small-lower-bound) and (max-width: v.$medium-upper-bound) {
       width: min(72.91vw, 746px);
       margin: 0 auto;
     }
   }
 
-  // sub nav bar is also sticky, just below primary nav
+  // ── Sub nav bar ───────────────────────────────────────────────
   .tab-subnav-bar {
     background: var(--tab-bar-bg);
-    top: 0; // will stack after primary if both sticky in same stacking context
+    top: 0;
     z-index: 9;
 
     @media (max-width: v.$tiny-upper-bound) {
@@ -132,73 +243,27 @@
     }
   }
 
-  // ── Tab list / sub tab list ─────────────────────────────────
+  // ── Tab list ─────────────────────────────────────────────────
   .tab-tab-list,
   .tab-subtab-list {
     &::-webkit-scrollbar { display: none; }
   }
 
-  // ── Tab buttons (shared by primary + sub) ───────────────────
-  // Gradient border via ::before — same technique as ID15
+  // ── Tab button base (shared by all styles) ───────────────────
   .tab-tab-btn {
     position: relative;
     z-index: 0;
     border: none;
     color: var(--tab-color-default, inherit);
-    background: var(--tab-bg-default, transparent);
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: inherit;
-      padding: var(--tab-border-width-default, 1px);
-      background: linear-gradient(
-        90deg,
-        var(--tab-border-from-default) 0%,
-        var(--tab-border-to-default) 100%
-      );
-      mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      mask-composite: exclude;
-    }
+    background: transparent;
+    transition: color 0.2s ease, background 0.2s ease;
 
     &:hover {
       color: var(--tab-color-hover, inherit);
-      background: linear-gradient(
-        90deg,
-        var(--tab-bg-from-hover) 0%,
-        var(--tab-bg-to-hover) 100%
-      );
-
-      &::before {
-        padding: var(--tab-border-width-hover, 1px);
-        background: linear-gradient(
-          90deg,
-          var(--tab-border-from-hover) 0%,
-          var(--tab-border-to-hover) 100%
-        );
-      }
     }
 
     &.is-active {
       color: var(--tab-color-select, inherit);
-      background: linear-gradient(
-        90deg,
-        var(--tab-bg-from-select) 0%,
-        var(--tab-bg-to-select) 100%
-      );
-
-      &::before {
-        padding: var(--tab-border-width-select, 1px);
-        background: linear-gradient(
-          90deg,
-          var(--tab-border-from-select) 0%,
-          var(--tab-border-to-select) 100%
-        );
-      }
     }
 
     .tab-tab-icon {
@@ -208,15 +273,13 @@
     }
   }
 
-  // ── Tab style variants ───────────────────────────────────────
-
-  // Style 1: Underlined_1 — underline indicator, no fill
+  // ── Style 1: Underlined_1 ─────────────────────────────────────
+  // No bg fill. Bottom underline: default=gray, hover/selected=brand gradient.
+  // 框線在外 (outside border).
   .tab-style1 {
     .tab-tab-btn {
       border-radius: 0;
       padding: 12px 16px;
-
-      &::before { display: none; }
 
       &::after {
         content: "";
@@ -224,37 +287,92 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 2px;
-        background: transparent;
+        height: var(--tab-line-width, 2px);
+        background: linear-gradient(
+          90deg,
+          var(--tab-default-color-from) 0%,
+          var(--tab-default-color-to)   100%
+        );
         transition: background 0.2s ease;
+
+        .tab-line-round & { border-radius: 999px; }
       }
 
       &:hover::after,
       &.is-active::after {
         background: linear-gradient(
           90deg,
-          var(--tab-bg-from-select) 0%,
-          var(--tab-bg-to-select) 100%
+          var(--tab-selected-color-from) 0%,
+          var(--tab-selected-color-to)   100%
         );
       }
 
-      // style1 has no fill bg
       &:hover,
+      &.is-active { background: transparent; }
+    }
+  }
+
+  // ── Style 2: Pill ─────────────────────────────────────────────
+  // 框線在內 gradient border + bg fill on selected.
+  // Radius: ASUS/ProArt with-icon=16, no-icon=999; ROG/TUF=0 (via JS).
+  .tab-style2 {
+    .tab-tab-btn {
+      padding: 8px 20px;
+      background: var(--tab-container-bg-color, transparent);
+
+      // gradient border (inset)
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        padding: var(--tab-border-width-default, 2px);
+        background: linear-gradient(
+          90deg,
+          var(--tab-border-from-default) 0%,
+          var(--tab-border-to-default)   100%
+        );
+        mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+      }
+
+      &:hover {
+        background: var(--tab-container-bg-color, transparent);
+
+        &::before {
+          padding: var(--tab-border-width-hover, 2px);
+          background: linear-gradient(
+            90deg,
+            var(--tab-border-from-hover) 0%,
+            var(--tab-border-to-hover)   100%
+          );
+        }
+      }
+
       &.is-active {
-        background: transparent;
+        background: linear-gradient(
+          90deg,
+          var(--tab-bg-from-select) 0%,
+          var(--tab-bg-to-select)   100%
+        );
+
+        &::before {
+          padding: var(--tab-border-width-select, 2px);
+          background: linear-gradient(
+            90deg,
+            var(--tab-border-from-select) 0%,
+            var(--tab-border-to-select)   100%
+          );
+        }
       }
     }
   }
 
-  // Style 2: Pill — pill shape with bg fill + border
-  .tab-style2 {
-    .tab-tab-btn {
-      border-radius: 999px;
-      padding: 8px 20px;
-    }
-  }
-
-  // Style 3: Underlined_2 — equal columns, underline + larger font, max 6 tabs
+  // ── Style 3: Underlined_2 ─────────────────────────────────────
+  // Equal-width columns, thicker underline, icon supported, max 6 tabs.
   .tab-style3 {
     .tab-tab-list,
     .tab-subtab-list {
@@ -268,40 +386,94 @@
       border-radius: 0;
       padding: 16px 8px;
 
-      &::before { display: none; }
-
       &::after {
         content: "";
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        height: 3px;
-        background: transparent;
+        height: var(--tab-line-width, 3px);
+        background: linear-gradient(
+          90deg,
+          var(--tab-default-color-from) 0%,
+          var(--tab-default-color-to)   100%
+        );
+        transition: background 0.2s ease;
+
+        .tab-line-round & { border-radius: 999px; }
+      }
+
+      &.is-active::after {
+        background: linear-gradient(
+          90deg,
+          var(--tab-selected-color-from) 0%,
+          var(--tab-selected-color-to)   100%
+        );
+      }
+
+      &:hover,
+      &.is-active { background: transparent; }
+    }
+  }
+
+  // ── Style 4: Gaming_1 ─────────────────────────────────────────
+  // Rectangular, max 6 tabs.
+  // Selected: brand color underline + corner decoration marks at TL/TR.
+  .tab-style4 {
+    .tab-tab-btn {
+      border-radius: 0;
+      padding: 10px 24px;
+
+      // bottom line (same logic as style1)
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--tab-line-width, 2px);
+        background: linear-gradient(
+          90deg,
+          var(--tab-default-color-from) 0%,
+          var(--tab-default-color-to)   100%
+        );
         transition: background 0.2s ease;
       }
 
       &.is-active::after {
         background: linear-gradient(
           90deg,
-          var(--tab-bg-from-select) 0%,
-          var(--tab-bg-to-select) 100%
+          var(--tab-selected-color-from) 0%,
+          var(--tab-selected-color-to)   100%
         );
       }
 
-      // style3 has no fill bg
-      &:hover,
-      &.is-active {
-        background: transparent;
+      // corner decoration on selected: small accent at TL + TR
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        background:
+          linear-gradient(
+            to right,
+            var(--tab-corner-decoration-color, transparent) 6px,
+            transparent 6px
+          ) top left / 6px 6px no-repeat,
+          linear-gradient(
+            to left,
+            var(--tab-corner-decoration-color, transparent) 6px,
+            transparent 6px
+          ) top right / 6px 6px no-repeat;
+        opacity: 0;
+        transition: opacity 0.2s ease;
       }
-    }
-  }
 
-  // Style 4: Gaming_1 — rectangular, max 6 tabs
-  .tab-style4 {
-    .tab-tab-btn {
-      border-radius: 0;
-      padding: 10px 24px;
+      &.is-active::before { opacity: 1; }
+
+      &:hover,
+      &.is-active { background: transparent; }
     }
   }
 
@@ -324,29 +496,10 @@
     &.is-active {
       display: flex;
       flex-direction: column;
-      opacity: 1;
-    }
-
-    // fade transition classes (set by JS)
-    &.tab-panel-fade-out {
-      display: flex;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-
-    &.tab-panel-fade-in {
-      display: flex;
-      opacity: 0;
-
-      &.tab-panel-visible {
-        opacity: 1;
-        transition: opacity 0.25s ease;
-      }
     }
   }
 
-  // ── col1 / col2 slots ────────────────────────────────────────
-  // Default: full-width stacked (layout 1 and layout 4 no-subtab)
+  // ── col1 / col2 slots ─────────────────────────────────────────
   .tab-col1,
   .tab-col2 {
     width: 100%;
@@ -354,10 +507,7 @@
     box-sizing: border-box;
   }
 
-  // ── Layout 1: full-width, col1 上 col2 下 ───────────────────
-  // col1 and col2 both full-width stacked — default panel direction covers this.
-
-  // ── Layout 2: tab in middle ─────────────────────────────────
+  // ── Layout 2: tab in middle ───────────────────────────────────
   .tab-col1-stage {
     width: 100%;
   }
@@ -369,13 +519,11 @@
     &.is-active { display: block; }
   }
 
-  // ── Layout 3: split container, col1 | col2 並排 ──────────────
+  // ── Layout 3: split container ─────────────────────────────────
   .tab-panel-layout3 {
     &.is-active {
-      // mobile: stacked
       flex-direction: column;
 
-      // tablet+: side by side
       @media (min-width: v.$medium-lower-bound) {
         flex-direction: row;
         align-items: stretch;
@@ -390,7 +538,7 @@
     }
   }
 
-  // ── Layout 4: double tab ─────────────────────────────────────
+  // ── Layout 4: double tab ──────────────────────────────────────
   .tab-panel-layout4 {
     &.is-active {
       flex-direction: column;
@@ -419,7 +567,7 @@
     }
   }
 
-  // ── Swiper arrows (primary + sub) ───────────────────────────
+  // ── Swiper arrows ─────────────────────────────────────────────
   .tab-swiper-prev,
   .tab-swiper-next,
   .subtab-swiper-prev,
@@ -432,8 +580,12 @@
     height: 70px;
     position: relative;
     cursor: pointer;
-    color: var(--tab-arrow-color, inherit);
-    transition: opacity 0.2s ease;
+    color: var(--tab-arrow-default, inherit);
+    transition: color 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
+      color: var(--tab-arrow-hover, inherit);
+    }
 
     svg { fill: currentcolor; }
 
@@ -454,7 +606,7 @@
       padding: 1px;
       background: linear-gradient(
         90deg,
-        var(--tab-arrow-color) 0%,
+        var(--tab-arrow-default) 0%,
         transparent 70%
       );
       mask:
@@ -471,7 +623,7 @@
     }
   }
 
-  // swiper slide
+  // ── Swiper slides ─────────────────────────────────────────────
   .tab-swiper-slide,
   .subtab-swiper-slide {
     display: flex;

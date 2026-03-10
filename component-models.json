@@ -7834,14 +7834,6 @@
         "label": "2nd layer tab (layout 4 only)",
         "name": "secondLayerTab",
         "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": "layoutStyle"
-            },
-            "4"
-          ]
-        },
         "options": [
           {
             "name": "no",
@@ -7863,14 +7855,6 @@
             {
               "===": [
                 {
-                  "var": "layoutStyle"
-                },
-                "4"
-              ]
-            },
-            {
-              "===": [
-                {
                   "var": "secondLayerTab"
                 },
                 "yes"
@@ -7886,14 +7870,6 @@
         "multi": true,
         "condition": {
           "and": [
-            {
-              "===": [
-                {
-                  "var": "layoutStyle"
-                },
-                "4"
-              ]
-            },
             {
               "===": [
                 {

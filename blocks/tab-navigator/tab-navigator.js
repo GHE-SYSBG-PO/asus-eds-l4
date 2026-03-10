@@ -153,22 +153,54 @@ async function loadFragment(url) {
   }
 }
 
-// ── Tab button builder ────────────────────────────────────────
+// ── Tab item decorator ───────────────────────────────────────
+// 保留原始 .tab-navigator-item DOM（含所有 data-aue-* 屬性），
+// 只替換其內部視覺內容，並補上 tab button 所需的 class / aria。
 
-function buildTabBtnHtml(tabText, tabIconAsset, index, isActive, iconEnabled, tabRadiusStyle, fontClass) {
-  const iconHtml = iconEnabled && tabIconAsset
-    ? `<img class="tab-tab-icon object-contain shrink-0 h-[24px]" src="${tabIconAsset}" alt="" aria-hidden="true" />`
-    : '';
+function decorateItemEl(itemEl, tabText, tabIconAsset, index, isActive, iconEnabled, tabRadiusStyle, fontClass) {
   const resolvedFontClass = fontClass || productFonts.tabText;
-  return `
-    <button
-      class="tab-tab-btn flex items-center justify-center gap-[6px] m-0 border-none cursor-pointer font-[inherit] transition-[color,background] duration-200 ease shrink-0${isActive ? ' is-active' : ''} ${resolvedFontClass}"
-      data-tab-index="${index}"
-      role="tab"
-      aria-selected="${isActive ? 'true' : 'false'}"
-      ${tabRadiusStyle ? `style="${tabRadiusStyle}"` : ''}
-    >${iconHtml}<span class="tab-tab-text block">${tabText || ''}</span>
-    </button>`;
+
+  // 補上 tab button 所需屬性（不覆蓋已有的 data-aue-* 屬性）
+  itemEl.classList.add(
+    'tab-tab-btn',
+    'flex',
+    'items-center',
+    'justify-center',
+    'gap-[6px]',
+    'm-0',
+    'border-none',
+    'cursor-pointer',
+    'font-[inherit]',
+    'transition-[color,background]',
+    'duration-200',
+    'ease',
+    'shrink-0',
+    ...resolvedFontClass.split(' ').filter(Boolean),
+  );
+  if (isActive) itemEl.classList.add('is-active');
+  itemEl.setAttribute('data-tab-index', index);
+  itemEl.setAttribute('role', 'tab');
+  itemEl.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  if (tabRadiusStyle) {
+    // append to existing inline style if any
+    const existing = itemEl.getAttribute('style') || '';
+    itemEl.setAttribute('style', existing + tabRadiusStyle);
+  }
+
+  // 替換內部視覺內容
+  itemEl.innerHTML = '';
+  if (iconEnabled && tabIconAsset) {
+    const img = document.createElement('img');
+    img.className = 'tab-tab-icon object-contain shrink-0 h-[24px]';
+    img.src = tabIconAsset;
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    itemEl.appendChild(img);
+  }
+  const span = document.createElement('span');
+  span.className = 'tab-tab-text block';
+  span.textContent = tabText || '';
+  itemEl.appendChild(span);
 }
 
 // ── Panel transition ──────────────────────────────────────────
@@ -283,22 +315,23 @@ function buildFragmentSlots(col1, col2) {
  * Mobile: 同上
  */
 async function renderLayout1(componentEl, items, cfg) {
-  const {
-    tabRadiusStyle, tabIconEnabled, tabFontSizeClass,
-  } = cfg;
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
+  const { tabRadiusStyle, tabIconEnabled, tabFontSizeClass } = cfg;
 
   componentEl.innerHTML = `
     <div class="tab-nav-bar flex items-center w-full sticky top-0 z-10">
-      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist">
-        ${tabBtnsHtml}
-      </div>
+      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist"></div>
     </div>
     <div class="tab-panels w-full"></div>`;
 
   const panelsEl = componentEl.querySelector('.tab-panels');
   const tabBarEl = componentEl.querySelector('.tab-nav-bar');
   const tabListEl = componentEl.querySelector('.tab-tab-list');
+
+  // move + decorate each item el into tab-tab-list
+  items.forEach((item, i) => {
+    decorateItemEl(item.el, item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass);
+    tabListEl.appendChild(item.el);
+  });
 
   await Promise.all(items.map(async (item, i) => {
     const { col1, col2 } = await loadFragment(item.fragmentUrl?.text);
@@ -310,7 +343,7 @@ async function renderLayout1(componentEl, items, cfg) {
     panelsEl.append(panel);
   }));
 
-  const tabBtns = [...componentEl.querySelectorAll('.tab-tab-btn')];
+  const tabBtns = items.map((item) => item.el);
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
   setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
 }
@@ -331,17 +364,12 @@ async function renderLayout1(componentEl, items, cfg) {
  * 這裡只有一組 tab，col1-stage 隨 tab 切換更新。
  */
 async function renderLayout2(componentEl, items, cfg) {
-  const {
-    tabRadiusStyle, tabIconEnabled, tabFontSizeClass,
-  } = cfg;
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
+  const { tabRadiusStyle, tabIconEnabled, tabFontSizeClass } = cfg;
 
   componentEl.innerHTML = `
     <div class="tab-col1-stage w-full"></div>
     <div class="tab-nav-bar flex items-center w-full sticky top-0 z-10">
-      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist">
-        ${tabBtnsHtml}
-      </div>
+      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist"></div>
     </div>
     <div class="tab-panels w-full"></div>`;
 
@@ -350,20 +378,23 @@ async function renderLayout2(componentEl, items, cfg) {
   const tabBarEl = componentEl.querySelector('.tab-nav-bar');
   const tabListEl = componentEl.querySelector('.tab-tab-list');
 
-  // store all col1 elements, swap on tab change
+  // move + decorate each item el into tab-tab-list
+  items.forEach((item, i) => {
+    decorateItemEl(item.el, item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass);
+    tabListEl.appendChild(item.el);
+  });
+
   const col1Els = [];
 
   await Promise.all(items.map(async (item, i) => {
     const { col1, col2 } = await loadFragment(item.fragmentUrl?.text);
 
-    // col1 slot goes into stage
     const col1Slot = document.createElement('div');
     col1Slot.className = `tab-col1-slot${i === 0 ? ' is-active' : ''}`;
     if (col1) col1Slot.appendChild(col1);
     col1Els.push(col1Slot);
     col1Stage.appendChild(col1Slot);
 
-    // panel only holds col2
     const panel = document.createElement('div');
     panel.className = `tab-panel tab-panel-layout2${i === 0 ? ' is-active' : ''}`;
     panel.setAttribute('role', 'tabpanel');
@@ -374,23 +405,20 @@ async function renderLayout2(componentEl, items, cfg) {
     panelsEl.appendChild(panel);
   }));
 
-  const tabBtns = [...componentEl.querySelectorAll('.tab-tab-btn')];
+  const tabBtns = items.map((item) => item.el);
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
 
-  // override activate to also swap col1Stage
   const activateLayout2 = (index) => {
     col1Els.forEach((el, i) => el.classList.toggle('is-active', i === index));
     activateTab(index, tabBtns, panels);
   };
 
-  // desktop: plain click
   if (window.innerWidth >= 1280) {
     tabBtns.forEach((btn, i) => {
       btn.addEventListener('click', () => activateLayout2(i));
     });
   } else {
     setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
-    // also wire col1 swap on swiper click (swiper sets up its own click handler)
     tabBtns.forEach((btn, i) => {
       btn.addEventListener('click', () => {
         col1Els.forEach((el, j) => el.classList.toggle('is-active', j === i));
@@ -413,22 +441,22 @@ async function renderLayout2(componentEl, items, cfg) {
  * Mobile: col1 col2 上下排列
  */
 async function renderLayout3(componentEl, items, cfg) {
-  const {
-    tabRadiusStyle, tabIconEnabled, tabFontSizeClass,
-  } = cfg;
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
+  const { tabRadiusStyle, tabIconEnabled, tabFontSizeClass } = cfg;
 
   componentEl.innerHTML = `
     <div class="tab-nav-bar flex items-center w-full sticky top-0 z-10">
-      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist">
-        ${tabBtnsHtml}
-      </div>
+      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist"></div>
     </div>
     <div class="tab-panels w-full"></div>`;
 
   const panelsEl = componentEl.querySelector('.tab-panels');
   const tabBarEl = componentEl.querySelector('.tab-nav-bar');
   const tabListEl = componentEl.querySelector('.tab-tab-list');
+
+  items.forEach((item, i) => {
+    decorateItemEl(item.el, item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass);
+    tabListEl.appendChild(item.el);
+  });
 
   await Promise.all(items.map(async (item, i) => {
     const { col1, col2 } = await loadFragment(item.fragmentUrl?.text);
@@ -440,7 +468,7 @@ async function renderLayout3(componentEl, items, cfg) {
     panelsEl.append(panel);
   }));
 
-  const tabBtns = [...componentEl.querySelectorAll('.tab-tab-btn')];
+  const tabBtns = items.map((item) => item.el);
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
   setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
 }
@@ -466,19 +494,22 @@ async function renderLayout4(componentEl, items, cfg) {
   const {
     tabRadiusStyle, tabIconEnabled, tabFontSizeClass, summaryFontClass,
   } = cfg;
-  const tabBtnsHtml = items.map((item, i) => buildTabBtnHtml(item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass)).join('');
 
   componentEl.innerHTML = `
     <div class="tab-nav-bar flex items-center w-full sticky top-0 z-10">
-      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist">
-        ${tabBtnsHtml}
-      </div>
+      <div class="tab-tab-list flex flex-row items-center w-full overflow-hidden" role="tablist"></div>
     </div>
     <div class="tab-panels w-full"></div>`;
 
   const panelsEl = componentEl.querySelector('.tab-panels');
   const tabBarEl = componentEl.querySelector('.tab-nav-bar');
   const tabListEl = componentEl.querySelector('.tab-tab-list');
+
+  // move + decorate each item el into tab-tab-list
+  items.forEach((item, i) => {
+    decorateItemEl(item.el, item.tabText?.text, item.tabIconAsset?.text, i, i === 0, tabIconEnabled, tabRadiusStyle, tabFontSizeClass);
+    tabListEl.appendChild(item.el);
+  });
 
   await Promise.all(items.map(async (item, i) => {
     const hasSubTab = item.secondLayerTab === 'yes';
@@ -515,8 +546,11 @@ async function renderLayout4(componentEl, items, cfg) {
       const subTabRadiusStyle = tabRadiusStyle; // same radius token for now
 
       const subItems = item.subItems || [];
-      const subTabBtnsHtml = subItems.map((subItem, j) => buildTabBtnHtml(subItem.subItemText?.text, subItem.subItemIconAsset?.text, j, j === 0, tabIconEnabled, subTabRadiusStyle, tabFontSizeClass)).join('');
-      subTabList.innerHTML = subTabBtnsHtml;
+      subItems.forEach((subItem, j) => {
+        const subBtn = document.createElement('div');
+        decorateItemEl(subBtn, subItem.subItemText?.text, subItem.subItemIconAsset?.text, j, j === 0, tabIconEnabled, subTabRadiusStyle, tabFontSizeClass);
+        subTabList.appendChild(subBtn);
+      });
       subNavBar.appendChild(subTabList);
       panel.appendChild(subNavBar);
 
@@ -545,7 +579,7 @@ async function renderLayout4(componentEl, items, cfg) {
     panelsEl.appendChild(panel);
   }));
 
-  const tabBtns = [...componentEl.querySelectorAll(':scope > .tab-nav-bar .tab-tab-btn')];
+  const tabBtns = items.map((item) => item.el);
   const panels = [...panelsEl.querySelectorAll(':scope > .tab-panel')];
   setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
 }
@@ -567,8 +601,9 @@ async function decoratePage(block) {
   const prefixHexRaw = (key) => prefixHex(data[key] || '');
 
   // ── Tab theme ────────────────────────────────────────────────
-  const tabSelectedColor = prefixHexRaw('tabselectedcolor');
-  const tabDefaultColor = prefixHexRaw('tabdefaultcolor');
+  // tabSelectedColor / tabDefaultColor support gradient "colorA,colorB" format
+  const tabSelectedColor = parseGradientRaw('tabselectedcolor');
+  const tabDefaultColor = parseGradientRaw('tabdefaultcolor');
   const tabLineWidth = data.tablinewidth || '';
   const tabLineEndpoints = data.tablineendpoints || ''; // 'round' | 'square'
   const tabCornerDecorationColor = prefixHexRaw('tabcornerdecorationcolor');
@@ -625,8 +660,14 @@ async function decoratePage(block) {
   let componentStyle = '';
 
   // tab theme
-  if (tabSelectedColor) componentStyle += `--tab-selected-color: ${tabSelectedColor};`;
-  if (tabDefaultColor) componentStyle += `--tab-default-color: ${tabDefaultColor};`;
+  if (tabSelectedColor) {
+    componentStyle += `--tab-selected-color-from: ${tabSelectedColor.from};`;
+    componentStyle += `--tab-selected-color-to: ${tabSelectedColor.to};`;
+  }
+  if (tabDefaultColor) {
+    componentStyle += `--tab-default-color-from: ${tabDefaultColor.from};`;
+    componentStyle += `--tab-default-color-to: ${tabDefaultColor.to};`;
+  }
   if (tabLineWidth) componentStyle += `--tab-line-width: ${tabLineWidth}px;`;
   if (tabCornerDecorationColor) componentStyle += `--tab-corner-decoration-color: ${tabCornerDecorationColor};`;
 
@@ -664,6 +705,8 @@ async function decoratePage(block) {
   if (summaryFontColor) componentStyle += `--tab-summary-color: ${summaryFontColor};`;
 
   // ── Collect item wrappers ────────────────────────────────────
+  // 保留原始 itemEl DOM，取數後直接在原地 decorate，
+  // 再將其 move 進 tab-tab-list，維持 UE data-aue-* 結構。
   const itemWrappers = [...block.querySelectorAll('.tab-navigator-item-wrapper')];
 
   const items = await Promise.all(itemWrappers.map(async (wrapper) => {
@@ -671,6 +714,7 @@ async function decoratePage(block) {
     const itemConfig = await getBlockConfigs(itemEl, ITEM_DEFAULT_CONFIG, 'tab-navigator-item');
 
     const result = {
+      el: itemEl,
       tabText: itemConfig.tabItemText,
       tabIconAsset: itemConfig.tabItemIconAsset,
       fragmentUrl: itemConfig.tabItemFragmentUrl,
@@ -679,8 +723,6 @@ async function decoratePage(block) {
       subItems: [],
     };
 
-    // layout 4: sub-items come from the multi container field "subItems"
-    // getBlockConfigs returns multi fields as an array on itemConfig.subItems
     if (layoutStyle === '4' && result.secondLayerTab === 'yes') {
       result.subItems = itemConfig.subItems || [];
     }
@@ -696,8 +738,11 @@ async function decoratePage(block) {
 
   if (colorGroup) block.classList.add(colorGroup);
 
-  block.innerHTML = '';
-  block.appendChild(componentEl);
+  // 將 itemWrapper 之外的其他子節點清除，itemWrapper 暫時保留（renderer 會 move itemEl）
+  [...block.children].forEach((child) => {
+    if (!child.classList.contains('tab-navigator-item-wrapper')) child.remove();
+  });
+  block.insertBefore(componentEl, block.firstChild);
 
   // ── Dispatch to layout renderer ──────────────────────────────
   const renderers = {
@@ -714,6 +759,9 @@ async function decoratePage(block) {
     summaryFontClass,
   };
   await render(componentEl, items, tabRenderConfig);
+
+  // itemEl 已被 move 進 componentEl，移除剩餘的空 wrapper
+  itemWrappers.forEach((wrapper) => wrapper.remove());
 
   // ── UE author live-update ────────────────────────────────────
   block.addEventListener('asus-l4--section-tab', async ({ detail }) => {
