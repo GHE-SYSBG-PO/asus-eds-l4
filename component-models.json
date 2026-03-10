@@ -7367,7 +7367,7 @@
     ]
   },
   {
-    "id": "tab-3column-item",
+    "id": "tab-navigator-item",
     "fields": [
       {
         "component": "text",
