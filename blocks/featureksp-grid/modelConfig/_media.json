@@ -20,24 +20,6 @@
           ]
         },
         {
-          "component": "reference",
-          "label": "bg asset(img / video)(D)",
-          "name": "mediaBgAssetD",
-          "multi": false
-        },
-        {
-          "component": "reference",
-          "label": "bg asset(img / video)(T)",
-          "name": "mediaBgAssetT",
-          "multi": false
-        },
-        {
-          "component": "reference",
-          "label": "bg asset(img / video)(M)",
-          "name": "mediaBgAssetM",
-          "multi": false
-        },
-        {
           "component": "text",
           "label": "media container ratio (DTM)",
           "name": "mediaContainerRatio",

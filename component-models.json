@@ -4523,27 +4523,27 @@
             "valueType": "string",
             "options": [
               {
-                "name": "row1",
+                "name": "1",
                 "value": "lg:row-span-1"
               },
               {
-                "name": "row2",
+                "name": "2",
                 "value": "lg:row-span-2"
               },
               {
-                "name": "row3",
+                "name": "3",
                 "value": "lg:row-span-3"
               },
               {
-                "name": "row4",
+                "name": "4",
                 "value": "lg:row-span-4"
               },
               {
-                "name": "row5",
+                "name": "5",
                 "value": "lg:row-span-5"
               },
               {
-                "name": "row6",
+                "name": "6",
                 "value": "lg:row-span-6"
               }
             ]
@@ -4747,24 +4747,6 @@
             ]
           },
           {
-            "component": "reference",
-            "label": "bg asset(img / video)(D)",
-            "name": "mediaBgAssetD",
-            "multi": false
-          },
-          {
-            "component": "reference",
-            "label": "bg asset(img / video)(T)",
-            "name": "mediaBgAssetT",
-            "multi": false
-          },
-          {
-            "component": "reference",
-            "label": "bg asset(img / video)(M)",
-            "name": "mediaBgAssetM",
-            "multi": false
-          },
-          {
             "component": "text",
             "label": "media container ratio (DTM)",
             "name": "mediaContainerRatio",
@@ -4943,17 +4925,43 @@
               },
               {
                 "name": "left",
-                "value": "left"
+                "value": "text-left"
               },
               {
                 "name": "center",
-                "value": "center"
+                "value": "text-center"
               },
               {
                 "name": "right",
-                "value": "right"
+                "value": "text-right"
               }
             ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "bg asset",
+        "name": "bgAsset",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "bg asset(img / video)(D)",
+            "name": "bgAssetD",
+            "multi": false
+          },
+          {
+            "component": "reference",
+            "label": "bg asset(img / video)(T)",
+            "name": "bgAssetT",
+            "multi": false
+          },
+          {
+            "component": "reference",
+            "label": "bg asset(img / video)(M)",
+            "name": "bgAssetM",
+            "multi": false
           }
         ]
       },

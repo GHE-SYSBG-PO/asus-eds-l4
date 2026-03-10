@@ -64,47 +64,6 @@ import {
 //   });
 // }
 
-// // 添加文本内容
-// function addTextContent(gridItem, v) {
-//   const textContainer = document.createElement('div');
-//   textContainer.className = 'text-container';
-
-//   // 应用文本宽度
-//   if (v('textWidth')) {
-//     textContainer.style.width = v('textWidth');
-//   } else {
-//     textContainer.style.width = '50%'; // 默认 50%
-//   }
-
-//   // 添加顶部富文本
-//   if (v('textTopRichtext', 'html')) {
-//     const topText = document.createElement('div');
-//     topText.className = 'top-richtext';
-//     topText.innerHTML = v('textTopRichtext', 'html');
-//     textContainer.appendChild(topText);
-//   }
-
-//   // 添加标题富文本
-//   if (v('textTitleRichtext', 'html')) {
-//     const titleText = document.createElement('div');
-//     titleText.className = 'title-richtext';
-//     titleText.innerHTML = v('textTitleRichtext', 'html');
-//     textContainer.appendChild(titleText);
-//   }
-
-//   // 添加底部富文本
-//   if (v('textBottomRichtext', 'html')) {
-//     const bottomText = document.createElement('div');
-//     bottomText.className = 'bottom-richtext';
-//     bottomText.innerHTML = v('textBottomRichtext', 'html');
-//     textContainer.appendChild(bottomText);
-//   }
-
-//   if (textContainer.children.length > 0) {
-//     gridItem.appendChild(textContainer);
-//   }
-// }
-
 // // 创建媒体内容
 // function createMediaContent(gridItem, v) {
 //   const mediaContainer = document.createElement('div');
@@ -318,6 +277,52 @@ const getRadiusStyle = (tl, tr, br, bl) => {
   return '';
 };
 
+// 添加文本内容
+function addTextContent(block, v) {
+  const textContainer = document.createElement('div');
+
+  // // 应用文本宽度
+  // if (v('textWidth')) {
+  //   textContainer.style.width = v('textWidth');
+  // } else {
+  //   textContainer.style.width = '50%'; // 默认 50%
+  // }
+
+  // 添加顶部富文本
+  if (v('textTopRichtext', 'html') && v('layoutStyle') !== 'icon') {
+    const topText = document.createElement('div');
+    if (v('textAlignment')) {
+      topText.classList.add('text-left');
+    }
+    topText.innerHTML = v('textTopRichtext', 'html');
+    textContainer.appendChild(topText);
+  }
+
+  // 添加标题富文本
+  if (v('textTitleRichtext', 'html')) {
+    const titleText = document.createElement('div');
+    if (v('textAlignment')) {
+      titleText.classList.add('text-left');
+    }
+    titleText.innerHTML = v('textTitleRichtext', 'html');
+    textContainer.appendChild(titleText);
+  }
+
+  // 添加底部富文本
+  if (v('textBottomRichtext', 'html')) {
+    const bottomText = document.createElement('div');
+    if (v('textAlignment')) {
+      bottomText.classList.add('text-left');
+    }
+    bottomText.innerHTML = v('textBottomRichtext', 'html');
+    textContainer.appendChild(bottomText);
+  }
+
+  if (textContainer.children.length > 0) {
+    block.appendChild(textContainer);
+  }
+}
+
 // 处理媒体
 const handleMedia = (block, v) => {
   if (v('mediaColumnSpanD')) {
@@ -401,6 +406,7 @@ export default async function decorate(block) {
           handleText(wrap, v);
         }
         // 通用配置
+        addTextContent(wrap, v);
 
         // const gridItem = createGridItem(itemConfig);
         // if (gridItem) {
