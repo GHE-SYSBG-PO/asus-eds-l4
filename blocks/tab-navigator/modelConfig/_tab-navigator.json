@@ -12,7 +12,13 @@
       "...": "./_tab-style.json#/fields"
     },
     {
+      "...": "./_tab-text.json#/fields"
+    },
+    {
       "...": "./_tab-container.json#/fields"
+    },
+    {
+      "...": "./_second-tab.json#/fields"
     },
     {
       "...": "../../../components/colorGroup/_colorGroup.json#/fields"

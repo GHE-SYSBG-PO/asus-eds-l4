@@ -1,0 +1,127 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "tab text",
+      "name": "tabTextTab"
+    },
+    {
+      "component": "text",
+      "label": "font-color default",
+      "name": "tabFontColorDefault",
+      "valueType": "string",
+      "description": "Hex without #, e.g. 181818"
+    },
+    {
+      "component": "text",
+      "label": "font-color hover",
+      "name": "tabFontColorHover",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "font-color select",
+      "name": "tabFontColorSelect",
+      "valueType": "string"
+    },
+    {
+      "component": "select",
+      "label": "font (D) — style 1",
+      "name": "tabFontD1",
+      "valueType": "string",
+      "condition": {
+        "===": [{ "var": "tabStyle" }, "1"]
+      },
+      "options": [
+        { "name": "ro-md-14", "value": "ro-md-14-lg" },
+        { "name": "ro-md-16", "value": "ro-md-16-lg" },
+        { "name": "ro-md-18", "value": "ro-md-18-lg" },
+        { "name": "ro-md-20", "value": "ro-md-20-lg" },
+        { "name": "ro-md-24", "value": "ro-md-24-lg" },
+        { "name": "ro-md-28", "value": "ro-md-28-lg" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (T) — style 1",
+      "name": "tabFontT1",
+      "valueType": "string",
+      "condition": {
+        "===": [{ "var": "tabStyle" }, "1"]
+      },
+      "options": [
+        { "name": "ro-md-14", "value": "ro-md-14-md" },
+        { "name": "ro-md-16", "value": "ro-md-16-md" },
+        { "name": "ro-md-18", "value": "ro-md-18-md" },
+        { "name": "ro-md-20", "value": "ro-md-20-md" },
+        { "name": "ro-md-24", "value": "ro-md-24-md" },
+        { "name": "ro-md-28", "value": "ro-md-28-md" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (M) — style 1",
+      "name": "tabFontM1",
+      "valueType": "string",
+      "condition": {
+        "===": [{ "var": "tabStyle" }, "1"]
+      },
+      "options": [
+        { "name": "ro-md-14", "value": "ro-md-14-sm" },
+        { "name": "ro-md-16", "value": "ro-md-16-sm" },
+        { "name": "ro-md-18", "value": "ro-md-18-sm" },
+        { "name": "ro-md-20", "value": "ro-md-20-sm" },
+        { "name": "ro-md-24", "value": "ro-md-24-sm" },
+        { "name": "ro-md-28", "value": "ro-md-28-sm" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (D) — style 2, 3, 4",
+      "name": "tabFontD234",
+      "valueType": "string",
+      "condition": {
+        "in": [{ "var": "tabStyle" }, ["2", "3", "4"]]
+      },
+      "options": [
+        { "name": "ro-md-14", "value": "ro-md-14-lg" },
+        { "name": "ro-md-16", "value": "ro-md-16-lg" },
+        { "name": "ro-md-18", "value": "ro-md-18-lg" },
+        { "name": "ro-md-20", "value": "ro-md-20-lg" },
+        { "name": "ro-md-24", "value": "ro-md-24-lg" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (T) — style 2, 3, 4",
+      "name": "tabFontT234",
+      "valueType": "string",
+      "condition": {
+        "in": [{ "var": "tabStyle" }, ["2", "3", "4"]]
+      },
+      "options": [
+        { "name": "ro-md-14", "value": "ro-md-14-md" },
+        { "name": "ro-md-16", "value": "ro-md-16-md" },
+        { "name": "ro-md-18", "value": "ro-md-18-md" },
+        { "name": "ro-md-20", "value": "ro-md-20-md" },
+        { "name": "ro-md-24", "value": "ro-md-24-md" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (M) — style 2, 3, 4",
+      "name": "tabFontM234",
+      "valueType": "string",
+      "condition": {
+        "in": [{ "var": "tabStyle" }, ["2", "3", "4"]]
+      },
+      "options": [
+        { "name": "ro-md-14", "value": "ro-md-14-sm" },
+        { "name": "ro-md-16", "value": "ro-md-16-sm" },
+        { "name": "ro-md-18", "value": "ro-md-18-sm" },
+        { "name": "ro-md-20", "value": "ro-md-20-sm" },
+        { "name": "ro-md-24", "value": "ro-md-24-sm" }
+      ]
+    }
+  ]
+}

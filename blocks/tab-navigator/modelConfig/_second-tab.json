@@ -1,0 +1,62 @@
+{
+  "fields": {
+    "component": "container",
+    "label": "2nd tab style",
+    "name": "secondTabContainer",
+    "collapsible": true,
+    "condition": {
+      "===": [{ "var": "layoutStyle" }, "4"]
+    },
+    "fields": [
+      {
+        "component": "select",
+        "label": "2nd tab style (layout 4 only)",
+        "name": "secondTabStyle",
+        "valueType": "string",
+        "options": [
+          { "name": "tab style 1 - Underlined_1", "value": "1" },
+          { "name": "tab style 2 - Pill", "value": "2" },
+          { "name": "tab style 3 -Underlined_2", "value": "3" },
+          { "name": "tab style 4 - Gaming_1", "value": "4" }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "summary font (D) — layout 4 only",
+        "name": "summaryFontD",
+        "valueType": "string",
+        "options": [
+          { "name": "ro-rg-20", "value": "ro-rg-20-lg" },
+          { "name": "ro-rg-24", "value": "ro-rg-24-lg" }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "summary font (T) — layout 4 only",
+        "name": "summaryFontT",
+        "valueType": "string",
+        "options": [
+          { "name": "ro-rg-20", "value": "ro-rg-20-md" },
+          { "name": "ro-rg-24", "value": "ro-rg-24-md" }
+        ]
+      },
+      {
+        "component": "select",
+        "label": "summary font (M) — layout 4 only",
+        "name": "summaryFontM",
+        "valueType": "string",
+        "options": [
+          { "name": "ro-rg-18", "value": "ro-rg-18-sm" },
+          { "name": "ro-rg-20", "value": "ro-rg-20-sm" }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "summary font color — layout 4 only",
+        "name": "summaryFontColor",
+        "valueType": "string",
+        "description": "Hex without #, e.g. 4a4a4a"
+      }
+    ]
+  }
+}

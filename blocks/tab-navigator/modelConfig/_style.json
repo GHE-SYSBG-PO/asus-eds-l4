@@ -16,6 +16,27 @@
         { "name": "Layout style 3 -tab on top, split container", "value": "3" },
         { "name": "Layout style 4 -Double tab", "value": "4" }
       ]
+    },
+    {
+      "component": "select",
+      "label": "tab style",
+      "name": "tabStyle",
+      "valueType": "string",
+      "options": [
+        { "name": "tab style 1 - Underlined_1", "value": "1" },
+        { "name": "tab style 2 - Pill", "value": "2" },
+        { "name": "tab style 3 -Underlined_2", "value": "3" },
+        { "name": "tab style 4 - Gaming_1", "value": "4" }
+      ]
+    },
+    {
+      "component": "boolean",
+      "label": "show icon (yes/no)",
+      "name": "showIcon",
+      "valueType": "boolean",
+      "condition": {
+        "in": [{ "var": "tabStyle" }, ["1", "2", "3"]]
+      }
     }
   ]
 }
