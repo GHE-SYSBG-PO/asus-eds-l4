@@ -29,7 +29,8 @@
       "featureitem-block",
       "feature-ksp-list",
       "small-cards",
-      "effect-media"
+      "effect-media",
+      "medium-cards"
     ]
   },
   {
@@ -116,6 +117,12 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
+    ]
+  },
+  {
+    "id": "medium-cards",
+    "components": [
+      "medium-card"
     ]
   },
   {
