@@ -4520,7 +4520,33 @@
             "component": "text",
             "label": "row span (D)",
             "name": "layoutRowSpanD",
-            "valueType": "string"
+            "valueType": "string",
+            "options": [
+              {
+                "name": "row1",
+                "value": "lg:row-span-1"
+              },
+              {
+                "name": "row2",
+                "value": "lg:row-span-2"
+              },
+              {
+                "name": "row3",
+                "value": "lg:row-span-3"
+              },
+              {
+                "name": "row4",
+                "value": "lg:row-span-4"
+              },
+              {
+                "name": "row5",
+                "value": "lg:row-span-5"
+              },
+              {
+                "name": "row6",
+                "value": "lg:row-span-6"
+              }
+            ]
           },
           {
             "component": "text",
@@ -4552,15 +4578,15 @@
             "options": [
               {
                 "name": "12",
-                "value": "12"
+                "value": "lg:col-span-12"
               },
               {
                 "name": "6",
-                "value": "6"
+                "value": "lg:col-span-6"
               },
               {
                 "name": "4",
-                "value": "4"
+                "value": "lg:col-span-4"
               }
             ]
           },
@@ -4572,11 +4598,11 @@
             "options": [
               {
                 "name": "12",
-                "value": "12"
+                "value": "md:col-span-12"
               },
               {
                 "name": "6",
-                "value": "6"
+                "value": "md:col-span-6"
               }
             ]
           }
@@ -4604,15 +4630,15 @@
             "options": [
               {
                 "name": "6",
-                "value": "6"
+                "value": "lg:col-span-6"
               },
               {
                 "name": "4",
-                "value": "4"
+                "value": "lg:col-span-4"
               },
               {
                 "name": "3",
-                "value": "3"
+                "value": "lg:col-span-3"
               }
             ]
           },
@@ -4624,11 +4650,11 @@
             "options": [
               {
                 "name": "12",
-                "value": "12"
+                "value": "md:col-span-12"
               },
               {
                 "name": "6",
-                "value": "6"
+                "value": "md:col-span-6"
               }
             ]
           }
@@ -4656,19 +4682,19 @@
             "options": [
               {
                 "name": "12",
-                "value": "12"
+                "value": "lg:col-span-12"
               },
               {
                 "name": "6",
-                "value": "6"
+                "value": "lg:col-span-6"
               },
               {
                 "name": "4",
-                "value": "4"
+                "value": "lg:col-span-4"
               },
               {
                 "name": "3",
-                "value": "3"
+                "value": "lg:col-span-3"
               }
             ]
           },
@@ -4680,11 +4706,11 @@
             "options": [
               {
                 "name": "12",
-                "value": "12"
+                "value": "md:col-span-12"
               },
               {
                 "name": "6",
-                "value": "6"
+                "value": "md:col-span-6"
               }
             ]
           }

@@ -1,306 +1,160 @@
-// .featureksp-grid {
-//   display: grid;
-//   grid-template-columns: repeat(12, 1fr);
-//   gap: 1rem;
-//   width: 100%;
-//   box-sizing: border-box;
-// }
+.l4-pdp {
+  --featureksp-grid-item-border-color: transparent;
+  --featureksp-grid-item-border-width: 0px;
 
-// .featureksp-grid-item {
-//   display: flex;
-//   flex-direction: column;
-//   box-sizing: border-box;
-//   overflow: hidden;
-//   position: relative;
-//   transition: all 0.3s ease;
+  .featureksp-grid-item-block {
+    border-color: var(--featureksp-grid-item-border-color);
+    border-width: var(--featureksp-grid-item-border-width);
+    border-style: solid;
+  }
 
-//   // 响应式设计
-//   @media (width <= 768px) {
-//     grid-column: span 12 !important;
-//   }
-
-//   @media (769px <= width <= 1024px) {
-//     grid-column: span 6 !important;
-//   }
-
-//   @media (width >= 1025px) {
-//     // 桌面端使用配置的列跨度
-//   }
-// }
-
-// // 不同样式类型的基础样式
-// .featureksp-grid-item.style-media {
-//   // 媒体样式基础
-// }
-
-// .featureksp-grid-item.style-icon {
-//   // 图标样式基础
-//   align-items: center;
-//   text-align: center;
-
-//   .icon-container {
-//     flex: 0 0 auto;
-//   }
-
-//   .text-container {
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//   }
-// }
-
-// .featureksp-grid-item.style-text {
-//   // 文本样式基础
-//   align-items: flex-start;
-//   justify-content: center;
-// }
-
-// // 布局变体样式
-// .featureksp-grid-item.layout-left {
-//   flex-direction: row;
-
-//   .media-container {
-//     flex: 1;
-//     margin-right: 1rem;
-//   }
-
-//   .text-container {
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//   }
-// }
-
-// .featureksp-grid-item.layout-right {
-//   flex-direction: row-reverse;
-
-//   .media-container {
-//     flex: 1;
-//     margin-left: 1rem;
-//   }
-
-//   .text-container {
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//   }
-// }
-
-// .featureksp-grid-item.layout-top,
-// .featureksp-grid-item.layout-top-left,
-// .featureksp-grid-item.layout-top-right {
-//   flex-direction: column;
-
-//   .media-container {
-//     margin-bottom: 1rem;
-//   }
-
-//   .text-container {
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//   }
-// }
-
-// .featureksp-grid-item.layout-bottom,
-// .featureksp-grid-item.layout-bottom-left,
-// .featureksp-grid-item.layout-bottom-right {
-//   flex-direction: column-reverse;
-
-//   .media-container {
-//     margin-top: 1rem;
-//   }
-
-//   .text-container {
-//     flex: 1;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//   }
-// }
-
-// // 媒体容器样式
-// .media-container {
-//   position: relative;
-//   width: 100%;
-//   overflow: hidden;
-
-//   .media-image {
-//     width: 100%;
-//     height: 100%;
-//     object-fit: cover;
-//   }
-
-//   .media-video {
-//     width: 100%;
-//     height: 100%;
-//     object-fit: cover;
-//   }
-// }
-
-// // 图标容器样式
-// .icon-container {
-//   position: relative;
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   margin-bottom: 1rem;
-
-//   .icon-image {
-//     max-width: 100%;
-//     height: auto;
-//   }
-// }
-
-// // 文本容器样式
-// .text-container {
-//   padding: 1rem;
-//   box-sizing: border-box;
-
-//   .top-richtext,
-//   .title-richtext,
-//   .bottom-richtext {
-//     margin-bottom: 0.5rem;
-
-//     &:last-child {
-//       margin-bottom: 0;
-//     }
-//   }
-
-//   .title-richtext {
-//     font-weight: bold;
-//   }
-// }
-
-// // 锚点样式
-// .featureksp-grid-anchor {
-//   position: absolute;
-//   bottom: 1rem;
-//   right: 1rem;
-//   width: 40px;
-//   height: 40px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   opacity: 0;
-//   transition: opacity 0.3s ease;
-//   z-index: 10;
-
-//   &:hover {
-//     opacity: 1;
-//   }
-
-//   &::after {
-//     content: '';
-//     width: 40px;
-//     height: 40px;
-//     background-color: rgb(0 0 0 / 50%);
-//     border-radius: 50%;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     color: white;
-//     font-size: 20px;
-//   }
-// }
-
-// // 响应式设计调整
-// @media (width <= 768px) {
-//   .featureksp-grid-item.layout-left,
-//   .featureksp-grid-item.layout-right {
-//     flex-direction: column;
-
-//     .media-container {
-//       margin-right: 0;
-//       margin-left: 0;
-//       margin-bottom: 1rem;
-//     }
-//   }
-// }
-
-// // 高度填充功能
-// .featureksp-grid-item {
-//   min-height: 0;
-//   flex: 1;
-// }
-
-// // 图标垂直居中
-// .featureksp-grid-item.style-icon {
-//   .icon-container {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//   }
-// }
-
-// // 媒体垂直对齐
-// .featureksp-grid-item.style-media {
-//   .media-container {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//   }
-// }
-
-// // 文本垂直居中
-// .featureksp-grid-item.style-text {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-
-// // 主题颜色变量
-// .l4-pdp {
-//   &[data-product="asus"] {
-//     &[data-mode="light"],
-//     .section-light {
-//       --featureksp-grid-category-color: #666;
-//     }
-
-//     &[data-mode="dark"],
-//     .section-dark {
-//       --featureksp-grid-category-color: #666;
-//     }
-//   }
-
-//   &[data-product="proart"] {
-//     &[data-mode="light"],
-//     .section-light {
-//       --featureksp-grid-category-color: #666;
-//     }
-
-//     &[data-mode="dark"],
-//     .section-dark {
-//       --featureksp-grid-category-color: #666;
-//     }
-//   }
-
-//   &[data-product="rog"] {
-//     &[data-mode="light"],
-//     .section-light {
-//       --featureksp-grid-category-color: #666;
-//     }
-
-//     &[data-mode="dark"],
-//     .section-dark {
-//       --featureksp-grid-category-color: #666;
-//     }
-//   }
-
-//   &[data-product="tuf"] {
-//     &[data-mode="light"],
-//     .section-light {
-//       --featureksp-grid-category-color: #666;
-//     }
-
-//     &[data-mode="dark"],
-//     .section-dark {
-//       --featureksp-grid-category-color: #666;
-//     }
-//   }
-// }
-
+  .featureksp-grid-block {
+    width: 100%;
+    
+    .featureksp-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      width: 100%;
+      
+      .featureksp-grid-item {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-sizing: border-box;
+        
+        // 响应式布局
+        @media (width <= 768px) {
+          grid-column: span 12 !important;
+        }
+        
+        @media (769px <= width <= 1024px) {
+          &[style*="grid-column: span 12"] {
+            grid-column: span 12;
+          }
+          
+          &[style*="grid-column: span 6"] {
+            grid-column: span 6;
+          }
+          
+          &[style*="grid-column: span 4"] {
+            grid-column: span 6;
+          }
+          
+          &[style*="grid-column: span 3"] {
+            grid-column: span 6;
+          }
+        }
+        
+        // 媒体样式
+        &.style-media {
+          .media-container {
+            position: relative;
+            width: 100%;
+            
+            .media-image {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+            
+            .media-video {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+            
+            .video-controls {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              z-index: 10;
+              
+              button {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 1px solid white;
+                background: rgb(0 0 0 / 50%);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                margin-left: 10px;
+                
+                &:hover {
+                  background: rgb(0 0 0 / 70%);
+                }
+                
+                svg {
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+              
+              .play-btn,
+              .pause-btn,
+              .replay-btn {
+                display: none;
+              }
+            }
+          }
+          
+          .text-container {
+            margin-top: 15px;
+          }
+        }
+        
+        // 图标样式
+        &.style-icon {
+          .icon-container {
+            .icon-image {
+              width: 60px;
+              height: 60px;
+              object-fit: contain;
+              flex-shrink: 0;
+            }
+          }
+          
+          .text-container {
+            margin-top: 15px;
+          }
+        }
+        
+        // 文本样式
+        &.style-text {
+          .text-container {
+            width: 100%;
+          }
+        }
+        
+        // 文本容器
+        .text-container {
+          flex: 1;
+          
+          .top-richtext,
+          .title-richtext,
+          .bottom-richtext {
+            margin-bottom: 10px;
+            
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+        
+        // 锚点
+        .featureksp-grid-anchor {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 5;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

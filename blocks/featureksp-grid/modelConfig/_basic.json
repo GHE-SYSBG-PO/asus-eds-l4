@@ -74,7 +74,15 @@
           "component": "text",
           "label": "row span (D)",
           "name": "layoutRowSpanD",
-          "valueType": "string"
+          "valueType": "string",
+          "options": [
+            { "name": "row1", "value": "lg:row-span-1" },
+            { "name": "row2", "value": "lg:row-span-2" },
+            { "name": "row3", "value": "lg:row-span-3" },
+            { "name": "row4", "value": "lg:row-span-4" },
+            { "name": "row5", "value": "lg:row-span-5" },
+            { "name": "row6", "value": "lg:row-span-6" }
+          ]
         },
         {
           "component": "text",
