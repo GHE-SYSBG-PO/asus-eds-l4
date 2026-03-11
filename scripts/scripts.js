@@ -329,6 +329,14 @@ function set1vhHeight() {
   }
 }
 
+let vhWindowWidth = window.innerWidth;
+window.addEventListener('resize', () => {
+  if (window.innerWidth !== vhWindowWidth) {
+    vhWindowWidth = window.innerWidth;
+    set1vhHeight();
+  }
+});
+
 async function loadPage() {
   getPageMetadata();
   initGATracking();

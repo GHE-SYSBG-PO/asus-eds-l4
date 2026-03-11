@@ -20,7 +20,13 @@
   .l4-column-width-12 {
     width: var(--l4-column-width-12);
     margin: 0 auto;
-  };
+  }
+
+  // Prevent CLS for nav-hero before its block CSS is fully loaded
+  .nav-hero-item-container,
+  .l4customsection-nav-hero {
+    position: fixed;
+  }
     
   // Responsive versions
   @media (max-width: v.$small-upper-bound) {
