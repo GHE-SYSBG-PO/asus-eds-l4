@@ -255,7 +255,7 @@ function _handleItemClick(block) {
       // Handle navigation logic here
       if (sectionId) {
         // Scroll to section
-        const targetSection = document.querySelector(`[data-sectionid="${sectionId}"]`) || document.getElementById(sectionId);
+        const targetSection = document.querySelector(`.section[data-sectionid="${sectionId}"]`) || document.getElementById(sectionId);
         if (targetSection) {
           // Determine offset based on RWD type
           const rwdType = window.getRwdType ? window.getRwdType() : 'desktop';
@@ -396,7 +396,7 @@ function _handleSectionEnter(block) {
   items.forEach((item) => {
     const sectionId = item.dataset.sectionid;
     if (!sectionId) return;
-    const section = document.querySelector(`[data-sectionid="${sectionId}"]`)
+    const section = document.querySelector(`.section[data-sectionid="${sectionId}"]`)
       || document.getElementById(sectionId);
     if (section) {
       sectionMap.push({ item, section });
@@ -448,8 +448,9 @@ const _handleNavShowUp = (block, config) => {
     // If showMenuId is configured, use that element's offsetTop
     if (showMenuId) {
       const target = document.getElementById(showMenuId)
-        || document.querySelector(`[data-sectionid="${showMenuId}"]`);
-      if (target) return target.offsetTop;
+        || document.querySelector(`.section[data-sectionid="${showMenuId}"]`);
+      // Only use offsetTop if the target is visible (not display: none)
+      if (target && target.offsetHeight > 0) return target.offsetTop;
     }
 
     // Fallback to RWD default values
