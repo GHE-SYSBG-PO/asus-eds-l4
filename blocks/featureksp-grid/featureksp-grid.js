@@ -475,9 +475,9 @@ const handleVideo = (wrap, v) => {
 const handleBgAsset = (wrap, v) => {
   if (['icon', 'text'].includes(v('layoutStyle')) || (v('layoutStyle') === 'media' && v('mediaType') === 'image')) {
     const config = {
-      bgAssetD: 'featureksp-grid-item-bg-asset-lg hidden',
-      bgAssetT: 'featureksp-grid-item-bg-asset-md hidden',
-      bgAssetM: 'featureksp-grid-item-bg-asset-sm hidden',
+      bgAssetD: 'hidden lg:block',
+      bgAssetT: 'hidden md:block lg:hidden',
+      bgAssetM: 'md:hidden lg:hidden',
     };
     Object.entries(config).forEach(([key, classes]) => {
       if (v(key, 'html')) {
