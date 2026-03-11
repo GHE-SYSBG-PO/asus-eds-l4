@@ -110,6 +110,7 @@ function addTextContent(wrap, v) {
     const fontT = v('topTextStyleFontT');
     const fontM = v('topTextStyleFontM');
     const color = prefixHex(v('topTextStyleFontColor'));
+    // 使用新变量或直接设置颜色
     const colorStyle = color ? `style="--featureksp-grid-text-color: ${color};"` : '';
     html += `<div class="${alignmentClass} ${fontD} ${fontT} ${fontM} featureksp-grid-item-text-top" ${colorStyle}>${v('textTopRichtext', 'html')}</div>`;
   }
@@ -780,7 +781,25 @@ export default async function decorate(block) {
         if (v('layoutBgColor')) {
           inlineStyle += `--featureksp-grid-item-bg-color: ${prefixHex(v('layoutBgColor'))};`;
         }
-        wrap.style.cssText += getRadiusStyle(c('radiusTL'), c('radiusTR'), c('radiusBR'), c('radiusBL'));
+
+        // 使用 v() 获取合并了默认值的 radius
+        wrap.style.cssText += getRadiusStyle(v('radiusTL'), v('radiusTR'), v('radiusBR'), v('radiusBL'));
+        // 处理标题和顶部/底部文本颜色（使用全局变量默认值）
+        const titleFontColor = prefixHex(v('titleTextStyleFontColor'));
+        if (titleFontColor) {
+          inlineStyle += `--featureksp-grid-title-color: ${titleFontColor};`;
+        }
+
+        const topFontColor = prefixHex(v('topTextStyleFontColor'));
+        if (topFontColor) {
+          inlineStyle += `--featureksp-grid-top-text-color: ${topFontColor};`;
+        }
+
+        const bottomFontColor = prefixHex(v('bottomTextStyleFontColor'));
+        if (bottomFontColor) {
+          inlineStyle += `--featureksp-grid-bottom-text-color: ${bottomFontColor};`;
+        }
+
         wrap.style.cssText += inlineStyle;
 
         // 添加初始class

@@ -8,6 +8,17 @@
   --featureksp-grid-item-text-content-width-md: 100%;
   --featureksp-grid-item-text-content-width-lg: 100%;
   
+  // Default Radius based on Product Line (can be overridden by JS)
+  &[data-product="rog"],
+  &[data-product="tuf"] {
+    --featureksp-grid-radius-default: 0px;
+  }
+  
+  &[data-product="asus"],
+  &[data-product="proart"] {
+    --featureksp-grid-radius-default: 28px;
+  }
+
   // Anchor variables
   --anchor-color-default: #2F2F2F;
   --anchor-color-hover: #2F2F2F;
@@ -27,12 +38,18 @@
     border-width: var(--featureksp-grid-item-border-width);
     border-style: solid;
     background-color: var(--featureksp-grid-item-bg-color);
+    
+    // Default Radius
+    border-radius: var(--featureksp-grid-radius-default);
+  }
+
+  .featureksp-grid-item-text-title {
+    color: var(--featureksp-grid-title-color, var(--cs-text-primary));
   }
 
   .featureksp-grid-item-text-top,
-  .featureksp-grid-item-text-title,
   .featureksp-grid-item-text-bottom {
-    color: var(--featureksp-grid-text-color, inherit);
+    color: var(--featureksp-grid-top-text-color, var(--cs-text-secondary));
   }
 
   // Responsive versions
