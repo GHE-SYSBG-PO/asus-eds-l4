@@ -197,7 +197,7 @@ const handleVideo = (wrap, v) => {
     // Build control buttons
     let controlButtons = '';
     controlButtons = `
-        <div class="featureksp-grid-controls absolute ${mediaVideoPauseAndPlayBtnPosition} z-10">
+        <div class="featureksp-grid-controls absolute top-[20px] right-[20px] ${mediaVideoPauseAndPlayBtnPosition} z-10">
           <button
             class="featureksp-grid-play-btn rounded-full flex items-center justify-center transition-all"
             style="display: ${initialPlayBtnDisplay};  border: 1px solid #ffffff;"
@@ -240,7 +240,7 @@ const handleVideo = (wrap, v) => {
     const mediaContainerRatio = v('mediaContainerRatio') ? `aspect-ratio: ${v('mediaContainerRatio')};` : '';
 
     return `
-      <div class="featureksp-grid-container device-${curDevice} relative" style="position: relative; overflow-hidden; ${mediaContainerRatio}">
+      <div class="featureksp-grid-container device-${curDevice}" style="overflow-hidden; ${mediaContainerRatio}">
         <video
           data-src-m="${configM.assets || ''}"
           data-src-t="${configT.assets || ''}"
@@ -276,7 +276,7 @@ const handleVideo = (wrap, v) => {
   // Add video control logic and responsive source switching
   setTimeout(() => {
     const videoElement = wrap.querySelector('video');
-    const container = wrap.querySelector('.featureksp-grid-container');
+    const container = wrap;
     if (!container) {
       return false;
     }
