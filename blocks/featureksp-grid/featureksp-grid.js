@@ -223,12 +223,12 @@ function addTextContent(wrap, v) {
   // 使用 innerHTML 添加内容
   if (html) {
     wrap.innerHTML += `<div class="flex z-1 w-full">
-      <div class="featureksp-grid-item-textContent" class="grid gap-[4px] md:gap-[8px]">${html}</div>
+      <div class="featureksp-grid-item-text-content" class="grid gap-[4px] md:gap-[8px]">${html}</div>
     </div>`;
 
     // 文本内容宽度
     if (v('layoutStyle') === 'media') {
-      const textBlock = wrap.querySelector('.featureksp-grid-item-textContent');
+      const textBlock = wrap.querySelector('.featureksp-grid-item-text-content');
       ['layoutVariantD', 'layoutVariantT', 'layoutVariantM'].forEach((item) => {
         if (['left', 'right', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight'].includes(v(item))) {
           if (item === 'layoutVariantD') {
@@ -357,7 +357,7 @@ const handleMedia = (wrap, v) => {
     }
   });
   wrap.classList.add('justify-center', 'items-center');
-  const textBlock = wrap.querySelector('.featureksp-grid-item-textContent');
+  const textBlock = wrap.querySelector('.featureksp-grid-item-text-content');
   const textBlockParent = textBlock.parentElement;
   handleLayoutVariant(textBlockParent, v, mediaLayoutVariant);
 };
@@ -371,7 +371,7 @@ const handleIcon = (wrap, v) => {
   });
   wrap.classList.add('justify-center', 'items-center');
   try {
-    const textBlock = wrap.querySelector('.featureksp-grid-item-textContent');
+    const textBlock = wrap.querySelector('.featureksp-grid-item-text-content');
     const textBlockParent = textBlock.parentElement;
     textBlockParent.classList.add('gap-[28px]');
     if (v('iconAsset', 'html')) {

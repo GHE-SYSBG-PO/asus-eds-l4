@@ -17,27 +17,30 @@
 
   // Responsive versions
   @media (max-width: v.$small-upper-bound) {
-    .featureksp-grid-item-textContent {
+    .featureksp-grid-item-text-content {
       width: var(--featureksp-grid-item-text-content-width-sm);
     }
+
     .featureksp-grid-item-bg-asset-sm {
       display: block;
     }
   }
   
   @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
-    .featureksp-grid-item-textContent {
+    .featureksp-grid-item-text-content {
       width: var(--featureksp-grid-item-text-content-width-md);
     }
+
     .featureksp-grid-item-bg-asset-md {
       display: block;
     }
   }
 
   @media (min-width: v.$large-lower-bound) {
-    .featureksp-grid-item-textContent {
+    .featureksp-grid-item-text-content {
       width: var(--featureksp-grid-item-text-content-width-lg);
     }
+    
     .featureksp-grid-item-bg-asset-lg {
       display: block;
     }
