@@ -9,12 +9,14 @@
     pointer-events: none;
     transition: opacity 400ms linear;
 
-    &.is-hidden {
-      opacity: 0 !important;
+    .nav-hero {
+      &.is-hidden {
+        opacity: 0 !important;
 
-      * {
-        user-select: none !important;
-        pointer-events: none !important;
+        * {
+          user-select: none !important;
+          pointer-events: none !important;
+        }
       }
     }
 

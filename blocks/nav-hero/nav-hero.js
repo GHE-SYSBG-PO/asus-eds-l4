@@ -176,30 +176,32 @@ const _renderShell = (config, containerStyle) => {
   `;
 
   return `
-    <div class="nav-hero-container ${containerStyle}">
-      <div class="container-decorator absolute">
-        ${DEFAULT_CONFIG.customizeHtml.customTopImgHtml}
-      </div>
-      <div class="container-bg" ${DEFAULT_CONFIG.customizeHtml.bgColorStyle}></div>
-      <div class="container-collapse is-close" tabindex="0" role="button">
-        <div class="collapse-open">
-          <span class="visuallyhidden">Open side navigation</span>
-          <div class="img-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 11H19M3 4H19M3 18H19" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round"/>
-            </svg>
+    <div class="nav-hero is-hidden">
+      <div class="nav-hero-container ${containerStyle}">
+        <div class="container-decorator absolute">
+          ${DEFAULT_CONFIG.customizeHtml.customTopImgHtml}
+        </div>
+        <div class="container-bg" ${DEFAULT_CONFIG.customizeHtml.bgColorStyle}></div>
+        <div class="container-collapse is-close" tabindex="0" role="button">
+          <div class="collapse-open">
+            <span class="visuallyhidden">Open side navigation</span>
+            <div class="img-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 11H19M3 4H19M3 18H19" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="collapse-close">
+            <span class="visuallyhidden">Close side navigation</span>
+            <div class="img-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 6L18.44 18.44M6 18.44L18.44 6" stroke="#F5F5F5" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round"/>
+              </svg>
+            </div>
           </div>
         </div>
-        <div class="collapse-close">
-          <span class="visuallyhidden">Close side navigation</span>
-          <div class="img-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 6L18.44 18.44M6 18.44L18.44 6" stroke="#F5F5F5" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round"/>
-            </svg>
-          </div>
-        </div>
+        <ul class="container-items" ${barBgPadding}></ul>
       </div>
-      <ul class="container-items" ${barBgPadding}></ul>
     </div>
   `;
 };
@@ -502,12 +504,29 @@ const _handleIsHiddenEvent = (containerEl) => {
   // document.body.dispatchEvent(new Event('nav-hero-show'));
   // document.body.dispatchEvent(new Event('nav-hero-hidden'));
 
-  if (!containerEl) return;
   document.body.addEventListener('nav-hero-hidden', () => {
-    containerEl.classList.add('is-hidden');
+    // Dynamically query the element in case the DOM was updated/re-rendered
+    const navHero = containerEl.querySelector('.nav-hero');
+    if (navHero) {
+      navHero.classList.add('is-hidden');
+    }
   });
+
   document.body.addEventListener('nav-hero-show', () => {
-    containerEl.classList.remove('is-hidden');
+    const navHero = containerEl.querySelector('.nav-hero');
+    if (navHero) {
+      navHero.classList.remove('is-hidden');
+    }
+  });
+
+  // Also listen on document as a fallback, just in case other scripts dispatch on document
+  document.addEventListener('nav-hero-hidden', () => {
+    const navHero = containerEl.querySelector('.nav-hero');
+    if (navHero) navHero.classList.add('is-hidden');
+  });
+  document.addEventListener('nav-hero-show', () => {
+    const navHero = containerEl.querySelector('.nav-hero');
+    if (navHero) navHero.classList.remove('is-hidden');
   });
 };
 
@@ -576,6 +595,10 @@ export default async function decorate(block) {
     _handleSectionEnter(block);
     _handleNavShowUp(block, config);
     _handleIsHiddenEvent(containerEl);
+
+    setTimeout(() => {
+      containerEl.querySelector('.nav-hero').classList.remove('is-hidden');
+    }, 500);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating nav-hero: ', error);
