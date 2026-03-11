@@ -3996,6 +3996,311 @@
     ]
   },
   {
+    "id": "faqs",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "richtext",
+        "label": "Title",
+        "name": "toptitle",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "label": "Selection",
+        "name": "selection",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "richtext",
+            "label": "Right",
+            "name": "right",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "label": "Left",
+            "name": "left",
+            "valueType": "string"
+          }
+        ],
+        "description": ""
+      },
+      {
+        "component": "container",
+        "label": "Menu Style",
+        "name": "menuStyle",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "Title Color",
+            "name": "titleColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Info Color",
+            "name": "infoColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Menu CTA Color",
+            "name": "menuCtaColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "CTA Arrow Color",
+            "name": "ctaArrowColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Menu Border Color",
+            "name": "menuBorderColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Menu Arrow Color",
+            "name": "menuArrowColor",
+            "valueType": "string"
+          }
+        ],
+        "description": ""
+      },
+      {
+        "component": "container",
+        "label": "Collapse Item",
+        "name": "collapseItem",
+        "valueType": "string[]",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-collapseItem",
+            "value": "L4TagMulti-collapseItem",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Title",
+            "name": "collapseItemTitle",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Info",
+            "name": "collapseItemInfo",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "CTA Text",
+            "name": "ctaText",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "CTA color",
+            "name": "ctaColor",
+            "valueType": "string"
+          },
+          {
+            "component": "aem-content",
+            "label": "CTA hyperlink",
+            "name": "ctaHyperlink",
+            "multi": false,
+            "valueType": "string"
+          },
+          {
+            "component": "reference",
+            "label": "Image Asset (D)",
+            "name": "collapseItemImageD",
+            "multi": false,
+            "description": ""
+          },
+          {
+            "component": "reference",
+            "label": "Image Asset (T)",
+            "name": "collapseItemImageT",
+            "multi": false,
+            "description": ""
+          },
+          {
+            "component": "reference",
+            "label": "Image Asset (M)",
+            "name": "collapseItemImageM",
+            "multi": false,
+            "description": ""
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "advanced",
+        "name": "advanced"
+      },
+      {
+        "component": "container",
+        "label": "Text",
+        "name": "textContainerD",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "select",
+            "label": "Font (D)",
+            "name": "fontDesktop",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "64",
+                "value": "64"
+              },
+              {
+                "name": "72",
+                "value": "72"
+              },
+              {
+                "name": "96",
+                "value": "96"
+              },
+              {
+                "name": "120",
+                "value": "120"
+              },
+              {
+                "name": "128",
+                "value": "128"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "textMaxWidthD",
+            "label": "Font Max Width (D)",
+            "valueType": "string",
+            "description": "* Only px"
+          },
+          {
+            "component": "select",
+            "label": "Font (T)",
+            "name": "fontTablet",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "52",
+                "value": "52"
+              },
+              {
+                "name": "56",
+                "value": "56"
+              },
+              {
+                "name": "64",
+                "value": "64"
+              },
+              {
+                "name": "72",
+                "value": "72"
+              },
+              {
+                "name": "96",
+                "value": "96"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "textMaxWidthT",
+            "label": "Font Max Width (T)",
+            "valueType": "string",
+            "description": "* Only px"
+          },
+          {
+            "component": "select",
+            "label": "Font (M)",
+            "name": "fontMobile",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "32",
+                "value": "32"
+              },
+              {
+                "name": "36",
+                "value": "36"
+              },
+              {
+                "name": "40",
+                "value": "40"
+              },
+              {
+                "name": "44",
+                "value": "44"
+              },
+              {
+                "name": "48",
+                "value": "48"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "textMaxWidthM",
+            "label": "Font Max Width (M)",
+            "valueType": "string",
+            "description": "* Only px"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "font color (hex)",
+        "name": "fontColor",
+        "valueType": "string",
+        "description": "* NO NEED #"
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--faqs",
+        "hidden": true
+      }
+    ]
+  },
+  {
     "id": "feature-accordion-item",
     "fields": [
       {

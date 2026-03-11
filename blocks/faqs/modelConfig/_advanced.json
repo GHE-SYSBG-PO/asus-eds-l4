@@ -1,0 +1,85 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "label": "Text",
+      "name": "textContainerD",
+      "collapsible": true,
+      "fields": [
+        
+        {
+          "component": "select",
+          "label": "Font (D)",
+          "name": "fontDesktop",
+          "valueType": "string",
+          "options": [
+            { "name": "64", "value": "64" },
+            { "name": "72", "value": "72" },
+            { "name": "96", "value": "96" },
+            { "name": "120", "value": "120" },
+            { "name": "128", "value": "128" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "textMaxWidthD",
+          "label": "Font Max Width (D)",
+          "valueType": "string",
+          "description": "* Only px"
+        },
+        {
+          "component": "select",
+          "label": "Font (T)",
+          "name": "fontTablet",
+          "valueType": "string",
+          "options": [
+            { "name": "52", "value": "52" },
+            { "name": "56", "value": "56" },
+            { "name": "64", "value": "64" },
+            { "name": "72", "value": "72" },
+            { "name": "96", "value": "96" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "textMaxWidthT",
+          "label": "Font Max Width (T)",
+          "valueType": "string",
+          "description": "* Only px"
+        },
+        {
+          "component": "select",
+          "label": "Font (M)",
+          "name": "fontMobile",
+          "valueType": "string",
+          "options": [
+            { "name": "32", "value": "32" },
+            { "name": "36", "value": "36" },
+            { "name": "40", "value": "40" },
+            { "name": "44", "value": "44" },
+            { "name": "48", "value": "48" }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "textMaxWidthM",
+          "label": "Font Max Width (M)",
+          "valueType": "string",
+          "description": "* Only px"
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "font color (hex)",
+      "name": "fontColor",
+      "valueType": "string",
+      "description": "* NO NEED #"
+    }
+  ]
+}
