@@ -812,7 +812,7 @@ function buildMediumCardsContainer(data, config) {
   }
 
   const mediumCardsContainer = document.createElement('div');
-  mediumCardsContainer.className = 'medium-cards-containers';
+  mediumCardsContainer.className = 'large-cards-containers';
   if (arrowStyleVars) {
     mediumCardsContainer.style.cssText = arrowStyleVars;
   }
@@ -976,12 +976,12 @@ function finalizeBlockStructure(block, mediumCardsContainer, data, config) {
   const style = document.createElement('style');
   style.textContent = `
     @media (min-width: 768px) {
-      .medium-cards-containers .swiper-wrapper {
+      .large-cards-containers .swiper-wrapper {
         justify-content: ${slideCount <= 2 && config.tabletAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
     @media (min-width: 1025px) {
-      .medium-cards-containers .swiper-wrapper {
+      .large-cards-containers .swiper-wrapper {
         justify-content: ${slideCount <= 3 && config.desktopAlignment === 'center' ? 'center' : 'flex-start'};
       }
     }
@@ -990,8 +990,8 @@ function finalizeBlockStructure(block, mediumCardsContainer, data, config) {
   if (slideCount <= 3) {
     style.textContent += `
       @media (width > 1024px) {
-        .medium-cards-containers .swiper-button-prev,
-        .medium-cards-containers .swiper-button-next {
+        .large-cards-containers .swiper-button-prev,
+        .large-cards-containers .swiper-button-next {
           display: none !important;
         }
       }
@@ -1000,8 +1000,8 @@ function finalizeBlockStructure(block, mediumCardsContainer, data, config) {
   if (slideCount <= 2) {
     style.textContent += `
       @media (width >= 768px) and (width <= 1024px) {
-        .medium-cards-containers .swiper-button-prev,
-        .medium-cards-containers .swiper-button-next {
+        .large-cards-containers .swiper-button-prev,
+        .large-cards-containers .swiper-button-next {
           display: none !important;
         }
       }
@@ -1010,8 +1010,8 @@ function finalizeBlockStructure(block, mediumCardsContainer, data, config) {
   if (slideCount <= 1) {
     style.textContent += `
       @media (max-width: 767px) {
-        .medium-cards-containers .swiper-button-prev,
-        .medium-cards-containers .swiper-button-next {
+        .large-cards-containers .swiper-button-prev,
+        .large-cards-containers .swiper-button-next {
           display: none !important;
         }
       }
