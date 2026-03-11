@@ -44,7 +44,7 @@ function addTextContent(wrap, v) {
 
   // 使用 innerHTML 添加内容
   if (html) {
-    wrap.innerHTML += `<div class="flex z-1 w-full">
+    wrap.innerHTML += `<div class="flex z-3 w-full">
       <div class="featureksp-grid-item-text-content" class="grid gap-[4px] md:gap-[8px]">${html}</div>
     </div>`;
 
@@ -240,7 +240,7 @@ const handleVideo = (wrap, v) => {
     const mediaContainerRatio = v('mediaContainerRatio') ? `aspect-ratio: ${v('mediaContainerRatio')};` : '';
 
     return `
-      <div class="device-${curDevice} media-block-video-container" style="${mediaContainerRatio}">
+      <div class="device-${curDevice} media-block-video-container relative" style="position: relative; overflow-hidden; ${mediaContainerRatio}">
         <video
           data-src-m="${configM.assets || ''}"
           data-src-t="${configT.assets || ''}"
@@ -272,7 +272,7 @@ const handleVideo = (wrap, v) => {
   }
 
   wrap.innerHTML += `
-    <div class="media-block-container relative">
+    <div class="media-block-container">
       ${mediaContent}
     </div>
   `;
