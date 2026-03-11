@@ -29,6 +29,12 @@
     background-color: var(--featureksp-grid-item-bg-color);
   }
 
+  .featureksp-grid-item-text-top,
+  .featureksp-grid-item-text-title,
+  .featureksp-grid-item-text-bottom {
+    color: var(--featureksp-grid-text-color, inherit);
+  }
+
   // Responsive versions
   @media (max-width: v.$small-upper-bound) {
     .featureksp-grid-item-text-content {

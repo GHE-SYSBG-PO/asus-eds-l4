@@ -3,7 +3,71 @@ import {
   getBlockConfigs,
   getFieldValue,
   isAuthorUe,
+  getProductLine,
 } from '../../scripts/utils.js';
+
+const FONTS = {
+  asus: {
+    topTextStyleFontD: 'ro-rg-20-sh-lg',
+    topTextStyleFontT: 'ro-rg-18-sh-md',
+    topTextStyleFontM: 'ro-rg-16-sh-sm',
+    titleTextStyleFontD: 'tt-bd-40-lg',
+    titleTextStyleFontT: 'tt-bd-32-md',
+    titleTextStyleFontM: 'tt-bd-28-sm',
+    bottomTextStyleFontD: 'ro-rg-20-sh-lg',
+    bottomTextStyleFontT: 'ro-rg-18-sh-md',
+    bottomTextStyleFontM: 'ro-rg-16-sh-sm',
+  },
+  proart: {
+    topTextStyleFontD: 'ro-rg-20-sh-lg',
+    topTextStyleFontT: 'ro-rg-18-sh-md',
+    topTextStyleFontM: 'ro-rg-16-sh-sm',
+    titleTextStyleFontD: 'tt-bd-40-lg',
+    titleTextStyleFontT: 'tt-bd-32-md',
+    titleTextStyleFontM: 'tt-bd-28-sm',
+    bottomTextStyleFontD: 'ro-rg-20-sh-lg',
+    bottomTextStyleFontT: 'ro-rg-18-sh-md',
+    bottomTextStyleFontM: 'ro-rg-16-sh-sm',
+  },
+  rog: {
+    topTextStyleFontD: 'rc-rg-20-lg',
+    topTextStyleFontT: 'rc-rg-18-md',
+    topTextStyleFontM: 'rc-rg-16-sm',
+    titleTextStyleFontD: 'tg-bd-40-lg',
+    titleTextStyleFontT: 'tg-bd-32-md',
+    titleTextStyleFontM: 'tg-bd-28-sm',
+    bottomTextStyleFontD: 'rc-rg-20-lg',
+    bottomTextStyleFontT: 'rc-rg-18-md',
+    bottomTextStyleFontM: 'rc-rg-16-sm',
+  },
+  tuf: {
+    topTextStyleFontD: 'ro-rg-20-sh-lg',
+    topTextStyleFontT: 'ro-rg-18-sh-md',
+    topTextStyleFontM: 'ro-rg-16-sh-sm',
+    titleTextStyleFontD: 'dp-cb-40-lg',
+    titleTextStyleFontT: 'dp-cb-32-md',
+    titleTextStyleFontM: 'dp-cb-28-sm',
+    bottomTextStyleFontD: 'ro-rg-20-sh-lg',
+    bottomTextStyleFontT: 'ro-rg-18-sh-md',
+    bottomTextStyleFontM: 'ro-rg-16-sh-sm',
+  },
+};
+
+const PRODUCT_LINE = getProductLine();
+// DEFAULT
+const DEFAULT_CONFIG = {
+  anchorVisibilityToggle: 'true',
+  anchorStyle: 'svg',
+  topTextStyleFontD: FONTS[PRODUCT_LINE].topTextStyleFontD,
+  topTextStyleFontT: FONTS[PRODUCT_LINE].topTextStyleFontT,
+  topTextStyleFontM: FONTS[PRODUCT_LINE].topTextStyleFontM,
+  titleTextStyleFontD: FONTS[PRODUCT_LINE].titleTextStyleFontD,
+  titleTextStyleFontT: FONTS[PRODUCT_LINE].titleTextStyleFontT,
+  titleTextStyleFontM: FONTS[PRODUCT_LINE].titleTextStyleFontM,
+  bottomTextStyleFontD: FONTS[PRODUCT_LINE].bottomTextStyleFontD,
+  bottomTextStyleFontT: FONTS[PRODUCT_LINE].bottomTextStyleFontT,
+  bottomTextStyleFontM: FONTS[PRODUCT_LINE].bottomTextStyleFontM,
+};
 
 const getRadiusStyle = (tl, tr, br, bl) => {
   // If none are configured, return empty (use CSS default)
@@ -42,17 +106,32 @@ function addTextContent(wrap, v) {
 
   // 添加顶部富文本
   if (v('textTopRichtext', 'html') && v('layoutStyle') !== 'icon') {
-    html += `<div class="${alignmentClass}">${v('textTopRichtext', 'html')}</div>`;
+    const fontD = v('topTextStyleFontD');
+    const fontT = v('topTextStyleFontT');
+    const fontM = v('topTextStyleFontM');
+    const color = prefixHex(v('topTextStyleFontColor'));
+    const colorStyle = color ? `style="--featureksp-grid-text-color: ${color};"` : '';
+    html += `<div class="${alignmentClass} ${fontD} ${fontT} ${fontM} featureksp-grid-item-text-top" ${colorStyle}>${v('textTopRichtext', 'html')}</div>`;
   }
 
   // 添加标题富文本
   if (v('textTitleRichtext', 'html')) {
-    html += `<div class="${alignmentClass}">${v('textTitleRichtext', 'html')}</div>`;
+    const fontD = v('titleTextStyleFontD');
+    const fontT = v('titleTextStyleFontT');
+    const fontM = v('titleTextStyleFontM');
+    const color = prefixHex(v('titleTextStyleFontColor'));
+    const colorStyle = color ? `style="--featureksp-grid-text-color: ${color};"` : '';
+    html += `<div class="${alignmentClass} ${fontD} ${fontT} ${fontM} featureksp-grid-item-text-title" ${colorStyle}>${v('textTitleRichtext', 'html')}</div>`;
   }
 
   // 添加底部富文本
   if (v('textBottomRichtext', 'html')) {
-    html += `<div class="${alignmentClass}">${v('textBottomRichtext', 'html')}</div>`;
+    const fontD = v('bottomTextStyleFontD');
+    const fontT = v('bottomTextStyleFontT');
+    const fontM = v('bottomTextStyleFontM');
+    const color = prefixHex(v('bottomTextStyleFontColor'));
+    const colorStyle = color ? `style="--featureksp-grid-text-color: ${color};"` : '';
+    html += `<div class="${alignmentClass} ${fontD} ${fontT} ${fontM} featureksp-grid-item-text-bottom" ${colorStyle}>${v('textBottomRichtext', 'html')}</div>`;
   }
 
   // 使用 innerHTML 添加内容
@@ -663,11 +742,6 @@ const handleAnchor = (wrap, v) => {
   }
 };
 
-// DEFAULT
-const DEFAULT_CONFIG = {
-  anchorVisibilityToggle: 'true',
-  anchorStyle: 'svg',
-};
 export default async function decorate(block) {
   try {
     // 获取网格容器配置
