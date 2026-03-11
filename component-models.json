@@ -3860,24 +3860,24 @@
             "valueType": "string",
             "options": [
               {
-                "name": "tt-bd-88",
-                "value": "tt-bd-88-lg"
+                "name": "64",
+                "value": "64"
               },
               {
-                "name": "tt-bd-92",
-                "value": "tt-bd-92-lg"
+                "name": "72",
+                "value": "72"
               },
               {
-                "name": "tt-bd-96",
-                "value": "tt-bd-96-lg"
+                "name": "96",
+                "value": "96"
               },
               {
-                "name": "tt-bd-100",
-                "value": "tt-bd-100-lg"
+                "name": "120",
+                "value": "120"
               },
               {
-                "name": "tt-bd-104",
-                "value": "tt-bd-104-lg"
+                "name": "128",
+                "value": "128"
               }
             ]
           }
@@ -3903,24 +3903,24 @@
             "valueType": "string",
             "options": [
               {
-                "name": "tt-bd-56",
-                "value": "tt-bd-56-md"
+                "name": "52",
+                "value": "52"
               },
               {
-                "name": "tt-bd-60",
-                "value": "tt-bd-60-md"
+                "name": "56",
+                "value": "56"
               },
               {
-                "name": "tt-bd-64",
-                "value": "tt-bd-64-md"
+                "name": "64",
+                "value": "64"
               },
               {
-                "name": "tt-bd-68",
-                "value": "tt-bd-68-md"
+                "name": "72",
+                "value": "72"
               },
               {
-                "name": "tt-bd-72",
-                "value": "tt-bd-72-md"
+                "name": "96",
+                "value": "96"
               }
             ]
           }
@@ -3946,24 +3946,24 @@
             "valueType": "string",
             "options": [
               {
-                "name": "tt-bd-32",
-                "value": "tt-bd-32-sm"
+                "name": "32",
+                "value": "32"
               },
               {
-                "name": "tt-bd-36",
-                "value": "tt-bd-36-sm"
+                "name": "36",
+                "value": "36"
               },
               {
-                "name": "tt-bd-40",
-                "value": "tt-bd-40-sm"
+                "name": "40",
+                "value": "40"
               },
               {
-                "name": "tt-bd-44",
-                "value": "tt-bd-44-sm"
+                "name": "44",
+                "value": "44"
               },
               {
-                "name": "tt-bd-48",
-                "value": "tt-bd-48-sm"
+                "name": "48",
+                "value": "48"
               }
             ]
           }
@@ -3991,6 +3991,27 @@
         "label": "Image height (D)",
         "value": "",
         "placeholder": "vh or px, default 100vh"
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "Light (default)",
+            "value": "theme-light"
+          },
+          {
+            "name": "Dark",
+            "value": "theme-dark"
+          }
+        ]
       },
       {
         "component": "text",

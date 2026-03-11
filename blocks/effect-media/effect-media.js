@@ -126,6 +126,23 @@ const _getTextMaxWidth = (device, v) => {
   return textMaxWidth ? `${textMaxWidth}px` : '';
 };
 
+const _getTextFontClass = (dFontSize, tFontSize, mFontSize) => {
+  const main = document.querySelector('main');
+  const product = main ? main.dataset.product : 'asus';
+
+  switch (product) {
+    case 'rog':
+      return `tg-bd-${dFontSize} tg-bd-${tFontSize}-md tg-bd-${mFontSize}-sm`;
+    case 'tuf':
+      return `dp-cb-${dFontSize} dp-cb-${tFontSize}-md dp-cb-${mFontSize}-sm`;
+    case 'proart':
+      return `tt-bd-${dFontSize} tt-bd-${tFontSize}-md tt-bd-${mFontSize}-sm`;
+    case 'asus':
+    default:
+      return `tt-bd-${dFontSize} tt-bd-${tFontSize}-md tt-bd-${mFontSize}-sm`;
+  }
+};
+
 const _renderMediaHTML = (props) => {
   const {
     imageSrc,
@@ -135,14 +152,17 @@ const _renderMediaHTML = (props) => {
     fontColorStyle,
     fonts,
     maxW,
+    colorGroup,
   } = props;
 
   const maxWidthDesktop = maxW.D ? `--max-w-desktop: ${maxW.D};` : '';
   const maxWidthTablet = maxW.T ? `--max-w-tablet: ${maxW.T};` : '';
   const maxWidthMobile = maxW.M ? `--max-w-mobile: ${maxW.M};` : '';
 
+  const textFontClass = _getTextFontClass(fonts.D, fonts.T, fonts.M);
+
   const htmlImg = imageSrc ? `
-    <div class="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container">
+    <div class="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container ${colorGroup}">
       <img
         src="${imageSrc}"
         alt="${imgAlt}"
@@ -153,7 +173,7 @@ const _renderMediaHTML = (props) => {
 
   const htmlText = text ? `
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-container">
-      <p class="ani-text relative text-center ml-auto mr-auto w-[87.5%] ${fonts.D} ${fonts.T} ${fonts.M}" style="${fontColorStyle}${maxWidthDesktop}${maxWidthTablet}${maxWidthMobile}">${text}</p>
+      <p class="ani-text relative text-center ml-auto mr-auto w-[87.5%] ${textFontClass}" style="${fontColorStyle}${maxWidthDesktop}${maxWidthTablet}${maxWidthMobile}">${text}</p>
     </div>
   ` : '';
 
@@ -181,6 +201,8 @@ export default async function decorate(block) {
     const bgColor = v('bgColor', 'text') || '';
     const bgColorStyle = bgColor ? `background-color: #${bgColor};` : '';
 
+    const colorGroup = v('colorGroup', 'text') || 'theme-light';
+
     const fonts = {
       D: getFontSize('D', v),
       T: getFontSize('T', v),
@@ -204,6 +226,7 @@ export default async function decorate(block) {
       fontColorStyle,
       fonts,
       maxW,
+      colorGroup,
     };
 
     const sceneContent = _renderMediaHTML(prop);
