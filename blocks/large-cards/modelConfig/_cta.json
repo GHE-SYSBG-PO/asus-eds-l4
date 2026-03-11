@@ -1,0 +1,37 @@
+{
+  "fields": [
+    {
+      "component": "select",
+      "label": "font (D/T)",
+      "name": "ctaFontDT",
+      "valueType": "string",
+      "options": [
+        { "name": "ro-md-20", "value": "ro-md-20-md" },
+        { "name": "ro-md-24", "value": "ro-md-24-md" }
+      ]
+    },
+    {
+      "component": "select",
+      "label": "font (M)",
+      "name": "ctaFontM",
+      "valueType": "string",
+      "options": [
+        { "name": "ro-md-18", "value": "ro-md-18" },
+        { "name": "ro-md-20", "value": "ro-rg-20" }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "font color",
+      "name": "ctaFontColor",
+      "valueType": "string"
+    },
+    {
+      "component": "aem-content",
+      "label": "hyperlink (external)",
+      "name": "ctaHyperlink",
+      "multi": false,
+      "valueType": "string"
+    }
+  ]
+}
