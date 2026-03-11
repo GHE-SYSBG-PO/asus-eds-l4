@@ -7,6 +7,20 @@
   --featureksp-grid-item-text-content-width-sm: 100%;
   --featureksp-grid-item-text-content-width-md: 100%;
   --featureksp-grid-item-text-content-width-lg: 100%;
+  
+  // Anchor variables
+  --anchor-color-default: #2F2F2F;
+  --anchor-color-hover: #2F2F2F;
+  --anchor-color-press: #2F2F2F;
+  --anchor-bg-default: rgba(255, 255, 255, 0.8);
+  --anchor-bg-hover: rgba(255, 255, 255, 0.9);
+  --anchor-bg-press: rgba(255, 255, 255, 1);
+  --anchor-border-width-default: 2px;
+  --anchor-border-width-hover: 2px;
+  --anchor-border-width-press: 2px;
+  --anchor-border-color-default: #2F2F2F;
+  --anchor-border-color-hover: #2F2F2F;
+  --anchor-border-color-press: #2F2F2F;
 
   .featureksp-grid-item-block {
     border-color: var(--featureksp-grid-item-border-color);
@@ -132,6 +146,66 @@
 
       100% {
         transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .featureksp-grid-anchor {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      overflow: hidden;
+
+      &[data-anchor-style="svg"] {
+        .anchor-bg-circle {
+          fill: var(--anchor-bg-default);
+          stroke: var(--anchor-border-color-default);
+          stroke-width: var(--anchor-border-width-default);
+          transition: all 0.3s ease;
+        }
+
+        .anchor-icon-path {
+          fill: var(--anchor-color-default);
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          .anchor-bg-circle {
+            fill: var(--anchor-bg-hover);
+            stroke: var(--anchor-border-color-hover);
+            stroke-width: var(--anchor-border-width-hover);
+          }
+          .anchor-icon-path {
+            fill: var(--anchor-color-hover);
+          }
+        }
+
+        &:active {
+          .anchor-bg-circle {
+            fill: var(--anchor-bg-press);
+            stroke: var(--anchor-border-color-press);
+            stroke-width: var(--anchor-border-width-press);
+          }
+          .anchor-icon-path {
+            fill: var(--anchor-color-press);
+          }
+        }
+      }
+
+      &[data-anchor-style="png"] {
+        &:hover {
+          .anchor-png-default { display: none; }
+          .anchor-png-hover { display: block; }
+          .anchor-png-press { display: none; }
+        }
+
+        &:active {
+          .anchor-png-default { display: none; }
+          .anchor-png-hover { display: none; }
+          .anchor-png-press { display: block; }
+        }
       }
     }
   }

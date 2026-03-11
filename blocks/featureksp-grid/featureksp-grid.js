@@ -22,6 +22,14 @@ const getRadiusStyle = (tl, tr, br, bl) => {
   return '';
 };
 
+function prefixHex(colors) {
+  if (typeof colors === 'object') {
+    return colors.filter((c) => c).map((c) => (c.startsWith('#') ? c : `#${c}`));
+  }
+  if (!colors) return '';
+  return colors.startsWith('#') ? colors : `#${colors}`;
+}
+
 // 添加文本内容
 function addTextContent(wrap, v) {
   const alignmentClass = v('textAlignment') || 'text-left';
@@ -592,13 +600,60 @@ const handleAnchor = (wrap, v) => {
     const anchor = document.createElement('a');
     anchor.href = v('anchorSectionId') ? `#${v('anchorSectionId')}` : '#';
     anchor.setAttribute('aria-label', `Anchor to section ${v('anchorSectionId')}`);
-    anchor.innerHTML = `
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="18" cy="18" r="17" fill="white" fill-opacity="0.8" stroke="#2F2F2F" stroke-width="2"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2731 13.9609C25.7752 14.463 25.7752 15.2771 25.2731 15.7792L18.9091 22.1432C18.407 22.6453 17.593 22.6453 17.0909 22.1432L10.7269 15.7792C10.2248 15.2771 10.2248 14.463 10.7269 13.9609C11.229 13.4588 12.0431 13.4588 12.5452 13.9609L18 19.4158L23.4548 13.9609C23.9569 13.4588 24.771 13.4588 25.2731 13.9609Z" fill="#2F2F2F"/>
-      </svg>
-    `;
-    anchor.classList.add('absolute', 'right-[20px]', 'bottom-[20px]', 'z-9');
+    anchor.classList.add('featureksp-grid-anchor', 'absolute', 'right-[20px]', 'bottom-[20px]', 'z-[9]', 'transition-all', 'duration-300');
+
+    const style = v('anchorStyle') || 'svg';
+    anchor.setAttribute('data-anchor-style', style);
+
+    let inlineStyle = '';
+    if (style === 'svg') {
+      const anchorColorDefault = prefixHex(v('anchorColorDefault'));
+      const anchorColorHover = prefixHex(v('anchorColorHover'));
+      const anchorColorPress = prefixHex(v('anchorColorPress'));
+      const anchorBgColorDefault = prefixHex(v('anchorBgColorDefault'));
+      const anchorBgColorHover = prefixHex(v('anchorBgColorHover'));
+      const anchorBgColorPress = prefixHex(v('anchorBgColorPress'));
+      const borderWidthDefault = v('borderWidthDefault');
+      const borderWidthHover = v('borderWidthHover');
+      const borderWidthPress = v('borderWidthPress');
+      const borderColorDefault = prefixHex(v('borderColorDefault'));
+      const borderColorHover = prefixHex(v('borderColorHover'));
+      const borderColorPress = prefixHex(v('borderColorPress'));
+
+      if (anchorColorDefault) inlineStyle += `--anchor-color-default: ${anchorColorDefault};`;
+      if (anchorColorHover) inlineStyle += `--anchor-color-hover: ${anchorColorHover};`;
+      if (anchorColorPress) inlineStyle += `--anchor-color-press: ${anchorColorPress};`;
+      if (anchorBgColorDefault) inlineStyle += `--anchor-bg-default: ${anchorBgColorDefault};`;
+      if (anchorBgColorHover) inlineStyle += `--anchor-bg-hover: ${anchorBgColorHover};`;
+      if (anchorBgColorPress) inlineStyle += `--anchor-bg-press: ${anchorBgColorPress};`;
+      if (borderWidthDefault) inlineStyle += `--anchor-border-width-default: ${borderWidthDefault}px;`;
+      if (borderWidthHover) inlineStyle += `--anchor-border-width-hover: ${borderWidthHover}px;`;
+      if (borderWidthPress) inlineStyle += `--anchor-border-width-press: ${borderWidthPress}px;`;
+      if (borderColorDefault) inlineStyle += `--anchor-border-color-default: ${borderColorDefault};`;
+      if (borderColorHover) inlineStyle += `--anchor-border-color-hover: ${borderColorHover};`;
+      if (borderColorPress) inlineStyle += `--anchor-border-color-press: ${borderColorPress};`;
+
+      anchor.innerHTML = `
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" class="anchor-bg-circle" />
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2731 13.9609C25.7752 14.463 25.7752 15.2771 25.2731 15.7792L18.9091 22.1432C18.407 22.6453 17.593 22.6453 17.0909 22.1432L10.7269 15.7792C10.2248 15.2771 10.2248 14.463 10.7269 13.9609C11.229 13.4588 12.0431 13.4588 12.5452 13.9609L18 19.4158L23.4548 13.9609C23.9569 13.4588 24.771 13.4588 25.2731 13.9609Z" class="anchor-icon-path" />
+        </svg>
+      `;
+    } else {
+      const anchorDefaultAsset = v('anchorDefaultAsset');
+      const anchorHoverAsset = v('anchorHoverAsset');
+      const anchorPressAsset = v('anchorPressAsset');
+
+      anchor.innerHTML = `
+        <div class="anchor-png-wrapper w-[36px] h-[36px] relative">
+          <img src="${anchorDefaultAsset}" alt="anchor" class="anchor-png-default absolute inset-0 w-full h-full object-contain" />
+          ${anchorHoverAsset ? `<img src="${anchorHoverAsset}" alt="anchor hover" class="anchor-png-hover absolute inset-0 w-full h-full object-contain hidden" />` : ''}
+          ${anchorPressAsset ? `<img src="${anchorPressAsset}" alt="anchor press" class="anchor-png-press absolute inset-0 w-full h-full object-contain hidden" />` : ''}
+        </div>
+      `;
+    }
+
+    if (inlineStyle) anchor.style.cssText = inlineStyle;
     wrap.appendChild(anchor);
   }
 };
