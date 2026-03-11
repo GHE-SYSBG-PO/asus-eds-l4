@@ -651,9 +651,9 @@ const handleAnchor = (wrap, v) => {
 
       anchor.innerHTML = `
         <div class="anchor-png-wrapper w-[36px] h-[36px] relative">
+          ${anchorPressAsset ? `<img src="${anchorPressAsset}" alt="anchor press" class="anchor-png-press absolute inset-0 w-full h-full object-contain" />` : ''}
+          ${anchorHoverAsset ? `<img src="${anchorHoverAsset}" alt="anchor hover" class="anchor-png-hover absolute inset-0 w-full h-full object-contain" />` : ''}
           <img src="${anchorDefaultAsset}" alt="anchor" class="anchor-png-default absolute inset-0 w-full h-full object-contain" />
-          ${anchorHoverAsset ? `<img src="${anchorHoverAsset}" alt="anchor hover" class="anchor-png-hover absolute inset-0 w-full h-full object-contain hidden" />` : ''}
-          ${anchorPressAsset ? `<img src="${anchorPressAsset}" alt="anchor press" class="anchor-png-press absolute inset-0 w-full h-full object-contain hidden" />` : ''}
         </div>
       `;
     }

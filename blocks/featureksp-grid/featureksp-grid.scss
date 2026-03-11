@@ -196,16 +196,24 @@
     }
 
     &[data-anchor-style="png"] {
+      .anchor-png-hover,
+      .anchor-png-press {
+        display: none;
+      }
+
       &:hover {
-        .anchor-png-default { display: none; }
-        .anchor-png-hover { display: block; }
-        .anchor-png-press { display: none; }
+        .anchor-png-hover {
+          display: block;
+          ~ .anchor-png-default { display: none; }
+        }
       }
 
       &:active {
-        .anchor-png-default { display: none; }
-        .anchor-png-hover { display: none; }
-        .anchor-png-press { display: block; }
+        .anchor-png-press {
+          display: block;
+          ~ .anchor-png-default { display: none; }
+          ~ .anchor-png-hover { display: none; }
+        }
       }
     }
   }
