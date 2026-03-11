@@ -240,7 +240,7 @@ const handleVideo = (wrap, v) => {
     const mediaContainerRatio = v('mediaContainerRatio') ? `aspect-ratio: ${v('mediaContainerRatio')};` : '';
 
     return `
-      <div class="device-${curDevice} featureksp-grid-video-container relative" style="position: relative; overflow-hidden; ${mediaContainerRatio}">
+      <div class="featureksp-grid-container device-${curDevice} relative" style="position: relative; overflow-hidden; ${mediaContainerRatio}">
         <video
           data-src-m="${configM.assets || ''}"
           data-src-t="${configT.assets || ''}"
@@ -271,16 +271,12 @@ const handleVideo = (wrap, v) => {
     mediaContent = createVideoElement(configM);
   }
 
-  wrap.innerHTML += `
-    <div class="featureksp-grid-container">
-      ${mediaContent}
-    </div>
-  `;
+  wrap.innerHTML += `${mediaContent}`;
 
   // Add video control logic and responsive source switching
   setTimeout(() => {
     const videoElement = wrap.querySelector('video');
-    const container = wrap.querySelector('.featureksp-grid-video-container');
+    const container = wrap.querySelector('.featureksp-grid-container');
     if (!container) {
       return false;
     }
