@@ -254,8 +254,8 @@ const handleVideo = (wrap, v) => {
           ${videoAttrs}
           playsinline
         ></video>
-        ${controlButtons}
       </div>
+      ${controlButtons}
     `;
   };
 
