@@ -8,17 +8,6 @@
   --featureksp-grid-item-text-content-width-md: 100%;
   --featureksp-grid-item-text-content-width-lg: 100%;
   
-  // Default Radius based on Product Line (can be overridden by JS)
-  &[data-product="rog"],
-  &[data-product="tuf"] {
-    --featureksp-grid-radius-default: 0px;
-  }
-  
-  &[data-product="asus"],
-  &[data-product="proart"] {
-    --featureksp-grid-radius-default: 28px;
-  }
-
   // Anchor variables
   --anchor-color-default: #2F2F2F;
   --anchor-color-hover: #2F2F2F;
@@ -33,6 +22,31 @@
   --anchor-border-color-hover: #2F2F2F;
   --anchor-border-color-press: #2F2F2F;
 
+  // ── Shared light + dark: CS_token → featureksp-grid ─────────────────
+  &[data-mode="light"],
+  .section-light,
+  &[data-mode="dark"],
+  .section-dark {
+    // text/title → text/primary
+    --featureksp-grid-title-color: var(--cs-text-primary);
+
+    // text/top/bottom → text/secondary
+    --featureksp-grid-top-text-color: var(--cs-text-secondary);
+    --featureksp-grid-bottom-text-color: var(--cs-text-secondary);
+  }
+
+  // ── ASUS + ProArt: radius = 28px ───────────────
+  &[data-product="asus"],
+  &[data-product="proart"] {
+    --featureksp-grid-radius-default: 28px;
+  }
+
+  // ── ROG + TUF: radius = 0px ─────────────────────
+  &[data-product="rog"],
+  &[data-product="tuf"] {
+    --featureksp-grid-radius-default: 0px;
+  }
+
   .featureksp-grid-item-block {
     border-color: var(--featureksp-grid-item-border-color);
     border-width: var(--featureksp-grid-item-border-width);
@@ -44,12 +58,15 @@
   }
 
   .featureksp-grid-item-text-title {
-    color: var(--featureksp-grid-title-color, var(--cs-text-primary));
+    color: var(--featureksp-grid-title-color);
   }
 
-  .featureksp-grid-item-text-top,
+  .featureksp-grid-item-text-top {
+    color: var(--featureksp-grid-top-text-color);
+  }
+
   .featureksp-grid-item-text-bottom {
-    color: var(--featureksp-grid-top-text-color, var(--cs-text-secondary));
+    color: var(--featureksp-grid-bottom-text-color);
   }
 
   // Responsive versions
