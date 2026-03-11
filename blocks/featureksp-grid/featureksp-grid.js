@@ -137,7 +137,7 @@ function addTextContent(wrap, v) {
   // 使用 innerHTML 添加内容
   if (html) {
     wrap.innerHTML += `<div class="flex z-3 w-full">
-      <div class="featureksp-grid-item-text-content" class="grid gap-[4px] md:gap-[8px]">${html}</div>
+      <div class="featureksp-grid-item-text-content grid gap-[4px] md:gap-[8px]">${html}</div>
     </div>`;
 
     // 文本内容宽度
