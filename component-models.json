@@ -7894,8 +7894,8 @@
             "multi": false
           },
           {
-            "component": "text",
-            "label": "fragment URL (ID12 page path)",
+            "component": "aem-content",
+            "label": "fragment URL",
             "name": "subItemFragmentUrl",
             "valueType": "string"
           }
