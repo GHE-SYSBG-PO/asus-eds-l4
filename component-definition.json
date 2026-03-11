@@ -437,6 +437,37 @@
           }
         },
         {
+          "title": "Large Cards (ID:16)",
+          "id": "large-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Large Cards",
+                  "model": "large-cards",
+                  "filter": "large-cards"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Large Card",
+          "id": "large-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Large Card",
+                  "model": "large-card"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Media Block(ID:5)",
           "id": "media-block",
           "plugins": {

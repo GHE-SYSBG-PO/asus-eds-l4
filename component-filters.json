@@ -31,7 +31,8 @@
       "feature-ksp-list",
       "small-cards",
       "effect-media",
-      "medium-cards"
+      "medium-cards",
+      "large-cards"
     ]
   },
   {
@@ -124,6 +125,12 @@
     "id": "footnote",
     "components": [
       "footnoteitem"
+    ]
+  },
+  {
+    "id": "large-cards",
+    "components": [
+      "large-card"
     ]
   },
   {
