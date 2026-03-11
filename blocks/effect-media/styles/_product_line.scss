@@ -3,13 +3,13 @@
 .l4-pdp {
   &[data-product="asus"] {
     &[data-mode="light"] .effect-media,
-    .effect-media.section-light {
+    .effect-media-wrapper .effect-media.section-light {
       --base-text-color: #181818;
       --base-bg-color: #FFF;
     }
 
     &[data-mode="dark"] .effect-media,
-    .effect-media.section-dark {
+    .effect-media-wrapper .effect-media.section-dark {
       --base-text-color: #FFF;
       --base-bg-color: #000;
     }
@@ -17,13 +17,13 @@
 
   &[data-product="proart"] {
     &[data-mode="light"] .effect-media,
-    .effect-media.section-light {
+    .effect-media-wrapper .effect-media.section-light {
       --base-text-color: #181818;
       --base-bg-color: #FFF;
     }
 
     &[data-mode="dark"] .effect-media,
-    .effect-media.section-dark {
+    .effect-media-wrapper .effect-media.section-dark {
       --base-text-color: #FFF;
       --base-bg-color: #000;
     }
@@ -31,13 +31,13 @@
 
   &[data-product="rog"] {
     &[data-mode="light"] .effect-media,
-    .effect-media.section-light {
+    .effect-media-wrapper .effect-media.section-light {
       --base-text-color: #181818;
       --base-bg-color: #FFF;
     }
 
     &[data-mode="dark"] .effect-media,
-    .effect-media.section-dark {
+    .effect-media-wrapper .effect-media.section-dark {
       --base-text-color: #FFF;
       --base-bg-color: #000;
     }
@@ -45,13 +45,13 @@
 
   &[data-product="tuf"] {
     &[data-mode="light"] .effect-media,
-    .effect-media.section-light {
+    .effect-media-wrapper .effect-media.section-light {
       --base-text-color: #181818;
       --base-bg-color: #FFF;
     }
 
     &[data-mode="dark"] .effect-media,
-    .effect-media.section-dark {
+    .effect-media-wrapper .effect-media.section-dark {
       --base-text-color: #FFF;
       --base-bg-color: #000;
     }
