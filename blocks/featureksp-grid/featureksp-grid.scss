@@ -64,7 +64,8 @@
   }
 
   .media-block-container {
-    position: relative;
+    position: absolute;
+    z-index: 0;
     overflow: clip;
     transition: all 0.3s ease;
 
