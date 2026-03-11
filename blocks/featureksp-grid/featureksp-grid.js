@@ -322,12 +322,12 @@ const handleBgAsset = (wrap, v) => {
     };
     Object.entries(config).forEach(([key, classes]) => {
       if (v(key, 'html')) {
-        wrap.innerHTML += `<div class="h-full absolute z-0 ${classes}">${v(key, 'html')}</div>`;
+        wrap.innerHTML += `<div class="absolute z-0 ${classes}">${v(key, 'html')}</div>`;
       }
     });
     // 图片高度100%
     wrap.querySelectorAll('img').forEach((img) => {
-      img.classList.add('h-full', 'object-cover');
+      img.classList.add('h-full');
     });
     if (v('layoutStyle') === 'media' && v('mediaType') === 'image') {
       const altText = v('mediaImageAltText');
@@ -463,7 +463,7 @@ export default async function decorate(block) {
         // 每一项的通用配置
         inlineStyle = '';
         // 添加初始class
-        wrap.classList.add('featureksp-grid-item-block', 'p-[40px]');
+        wrap.classList.add('featureksp-grid-item-block', 'overflow-clip', 'p-[40px]');
         if (c('borderColor')) {
           inlineStyle += `--featureksp-grid-item-border-color: #${c('borderColor')};`;
         }

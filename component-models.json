@@ -4796,7 +4796,7 @@
             "label": "media container ratio (DTM)",
             "name": "mediaContainerRatio",
             "valueType": "string",
-            "description": "(Width-to-height ratio value) (1:X)"
+            "description": "(Width-to-height ratio value) (1/X)"
           },
           {
             "component": "text",
