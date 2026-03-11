@@ -23,11 +23,16 @@ const getRadiusStyle = (tl, tr, br, bl) => {
 };
 
 function prefixHex(colors) {
-  if (typeof colors === 'object') {
-    return colors.filter((c) => c).map((c) => (c.startsWith('#') ? c : `#${c}`));
+  if (colors === null || colors === undefined || colors === '') return '';
+
+  if (Array.isArray(colors)) {
+    return colors.map((c) => prefixHex(c)).filter((c) => c);
   }
-  if (!colors) return '';
-  return colors.startsWith('#') ? colors : `#${colors}`;
+
+  const c = String(colors).trim();
+  if (!c) return '';
+  if (c.startsWith('#')) return c;
+  return `#${c}`;
 }
 
 // 添加文本内容
@@ -693,13 +698,13 @@ export default async function decorate(block) {
         // 添加初始class
         wrap.classList.add('featureksp-grid-item-block', 'overflow-clip', 'p-[40px]');
         if (c('borderColor')) {
-          inlineStyle += `--featureksp-grid-item-border-color: #${c('borderColor')};`;
+          inlineStyle += `--featureksp-grid-item-border-color: ${prefixHex(c('borderColor'))};`;
         }
         if (c('borderWidth')) {
           inlineStyle += `--featureksp-grid-item-border-width: ${c('borderWidth')}px;`;
         }
         if (v('layoutBgColor')) {
-          inlineStyle += `--featureksp-grid-item-bg-color: #${v('layoutBgColor')};`;
+          inlineStyle += `--featureksp-grid-item-bg-color: ${prefixHex(v('layoutBgColor'))};`;
         }
         wrap.style.cssText += getRadiusStyle(c('radiusTL'), c('radiusTR'), c('radiusBR'), c('radiusBL'));
         wrap.style.cssText += inlineStyle;
