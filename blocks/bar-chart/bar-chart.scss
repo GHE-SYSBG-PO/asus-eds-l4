@@ -229,6 +229,35 @@
       @media (width >=730px) {
         gap: 12px;
       }
+
+      &--motion-ready {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+
+        .bar-chart__arrow-icon {
+          transform: translateY(16px) scale(0.96);
+          transform-origin: center bottom;
+          transition: transform 0.5s ease-out;
+        }
+
+        .bar-chart__arrow-content {
+          opacity: 0;
+          transform: translateY(12px);
+          transition: opacity 0.4s ease-out 0.1s, transform 0.4s ease-out 0.1s;
+        }
+
+        &.bar-chart__arrow-block--visible {
+          opacity: 1;
+          transform: translateY(0);
+
+          .bar-chart__arrow-icon,
+          .bar-chart__arrow-content {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+      }
     }
 
     &__arrow-icon {

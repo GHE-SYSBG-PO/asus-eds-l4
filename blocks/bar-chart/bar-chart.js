@@ -168,7 +168,7 @@ const buildArrowSVG = (colors) => {
 /**
  * Build arrow block HTML
  */
-const buildArrowBlock = (v, productLine, theme) => {
+const buildArrowBlock = (v, productLine, theme, motionEnabled = false) => {
   const variant = v('style');
   const hasArrow = [2, 4, 6].includes(variant);
 
@@ -199,7 +199,7 @@ const buildArrowBlock = (v, productLine, theme) => {
   }
 
   return `
-    <div class="bar-chart__arrow-block" ${curDevice !== 'M' ? `style="width:${v('arrowNumWidth')}%;"` : ''};">
+    <div class="bar-chart__arrow-block ${motionEnabled ? 'bar-chart__arrow-block--motion-ready' : ''}" ${curDevice !== 'M' ? `style="width:${v('arrowNumWidth')}%;"` : ''};">
       ${arrowIcon}
       <div class="bar-chart__arrow-content">
         <div class="bar-chart__arrow-num ${arrowNumFont}" ${arrowNumColor}>
@@ -327,6 +327,7 @@ const setupAnimation = (block) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const barItems = entry.target.querySelectorAll('.bar-chart__bar-item');
+        const arrowBlock = entry.target.querySelector('.bar-chart__arrow-block--motion-ready');
         let delay = 0;
 
         barItems.forEach((item) => {
@@ -339,6 +340,12 @@ const setupAnimation = (block) => {
             delay += 150; // Stagger animation
           }
         });
+
+        if (arrowBlock) {
+          setTimeout(() => {
+            arrowBlock.classList.add('bar-chart__arrow-block--visible');
+          }, delay);
+        }
 
         observer.unobserve(entry.target);
       }
@@ -419,7 +426,7 @@ export default async function decorate(block) {
     }).join('');
 
     // Build arrow block if needed
-    const arrowHtml = buildArrowBlock(v, productLine, theme);
+    const arrowHtml = buildArrowBlock(v, productLine, theme, motionEnabled);
 
     // Get fonts with product+device-specific defaults
     const defaultTitleFont = getProductDefault('titleFont', productLine, curDevice, 'tt-bd-28');
