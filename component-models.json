@@ -7899,15 +7899,33 @@
         "fields": [
           {
             "component": "text",
+            "name": "L4TagMulti-subItemText",
+            "value": "L4TagMulti-subItemText",
+            "hidden": true
+          },
+          {
+            "component": "text",
             "label": "tab text",
             "name": "subItemText",
             "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-subItemIconAsset",
+            "value": "L4TagMulti-subItemIconAsset",
+            "hidden": true
           },
           {
             "component": "reference",
             "label": "icon asset (if show icon = yes)",
             "name": "subItemIconAsset",
             "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-subItemFragmentUrl",
+            "value": "L4TagMulti-subItemFragmentUrl",
+            "hidden": true
           },
           {
             "component": "aem-content",

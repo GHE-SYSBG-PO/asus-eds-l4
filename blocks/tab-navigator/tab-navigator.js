@@ -18,6 +18,7 @@ import {
   getBlockConfigs,
   getProductLine,
   isAuthorUe,
+  getBlockRepeatConfigs,
 } from '../../scripts/utils.js';
 import { prefixHex } from '../../components/button/button.js';
 import loadSwiper from '../../vendor/swiper/index.js';
@@ -301,6 +302,37 @@ function buildFragmentSlots(col1, col2) {
   return { slot1, slot2 };
 }
 
+// ── Panel content updater ─────────────────────────────────────
+// 根據 layoutStyle 和 idx，將新的 col1/col2 更新到對應的 panel 容器內。
+// layout2: col1 在 col1-stage > .tab-col1-slot，col2 在 .tab-panel > .tab-col2
+// 其他:    col1/col2 都在 .tab-panel > .tab-col1 / .tab-col2
+
+async function refreshPanelContent(componentEl, layoutStyle, idx, fragmentUrl) {
+  const { col1, col2 } = await loadFragmentCols(fragmentUrl);
+
+  if (layoutStyle === '2') {
+    const col1Stage = componentEl.querySelector('.tab-col1-stage');
+    const col1Slots = col1Stage ? [...col1Stage.querySelectorAll('.tab-col1-slot')] : [];
+    if (col1Slots[idx]) {
+      col1Slots[idx].innerHTML = '';
+      if (col1) col1Slots[idx].appendChild(col1);
+    }
+    const panels = [...componentEl.querySelectorAll('.tab-panel')];
+    if (panels[idx]) {
+      const slot2 = panels[idx].querySelector('.tab-col2');
+      if (slot2) { slot2.innerHTML = ''; if (col2) slot2.appendChild(col2); }
+    }
+  } else {
+    const panels = [...componentEl.querySelectorAll('.tab-panel')];
+    if (panels[idx]) {
+      const slot1 = panels[idx].querySelector('.tab-col1');
+      const slot2 = panels[idx].querySelector('.tab-col2');
+      if (slot1) { slot1.innerHTML = ''; if (col1) slot1.appendChild(col1); }
+      if (slot2) { slot2.innerHTML = ''; if (col2) slot2.appendChild(col2); }
+    }
+  }
+}
+
 // ── Layout renderers ──────────────────────────────────────────
 
 /**
@@ -476,12 +508,93 @@ async function renderLayout3(componentEl, items, cfg) {
   setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
 }
 
+// ── Layout4 單個 panel 建立器 ────────────────────────────────
+// 供 renderLayout4 初次渲染 和 UE 事件二次更新共用。
+// isActive: 決定 is-active class；cfg: tabRenderConfig
+
+async function buildLayout4Panel(item, i, isActive, cfg) {
+  const {
+    tabRadiusStyle, tabIconEnabled, tabFontSizeClass, summaryFontClass,
+  } = cfg;
+
+  const hasSubTab = item.secondLayerTab === 'yes';
+  const panel = document.createElement('div');
+  panel.className = `tab-panel tab-panel-layout4${isActive ? ' is-active' : ''}`;
+  panel.setAttribute('role', 'tabpanel');
+
+  if (!hasSubTab) {
+    const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
+    const { slot1, slot2 } = buildFragmentSlots(col1, col2);
+    panel.append(slot1, slot2);
+  } else {
+    // summary richtext
+    const summaryEl = document.createElement('div');
+    summaryEl.className = `tab-summary-richtext ${summaryFontClass}`;
+    if (item.summaryRichtext?.html) {
+      summaryEl.innerHTML = item.summaryRichtext.html;
+    } else {
+      summaryEl.hidden = true;
+    }
+    panel.appendChild(summaryEl);
+
+    // sub nav bar
+    const subNavBar = document.createElement('div');
+    subNavBar.className = 'tab-subnav-bar flex items-center w-full sticky z-9';
+
+    const subTabList = document.createElement('div');
+    subTabList.className = 'tab-subtab-list flex flex-row items-center w-full overflow-hidden';
+    subTabList.setAttribute('role', 'tablist');
+
+    const subItems = item.subItems || [];
+    subItems.forEach((subItem, j) => {
+      const subBtn = document.createElement('div');
+      decorateItemEl(
+        subBtn,
+        subItem.subItemText?.text,
+        subItem.subItemIconAsset?.text,
+        j,
+        j === 0,
+        tabIconEnabled,
+        tabRadiusStyle,
+        tabFontSizeClass,
+      );
+      subTabList.appendChild(subBtn);
+    });
+    subNavBar.appendChild(subTabList);
+    panel.appendChild(subNavBar);
+
+    // sub panels
+    const subPanelsEl = document.createElement('div');
+    subPanelsEl.className = 'tab-sub-panels w-full';
+
+    await Promise.all(
+      subItems.map(async (subItem, j) => {
+        const { col1, col2 } = await loadFragmentCols(subItem.subItemFragmentUrl?.text);
+        const subPanel = document.createElement('div');
+        subPanel.className = `tab-sub-panel${j === 0 ? ' is-active' : ''}`;
+        subPanel.setAttribute('role', 'tabpanel');
+        const { slot1, slot2 } = buildFragmentSlots(col1, col2);
+        subPanel.append(slot1, slot2);
+        subPanelsEl.appendChild(subPanel);
+      }),
+    );
+
+    panel.appendChild(subPanelsEl);
+
+    const subBtns = [...subTabList.querySelectorAll('.tab-tab-btn')];
+    const subPanels = [...subPanelsEl.querySelectorAll('.tab-sub-panel')];
+    setupSwiper(subTabList, subNavBar, subBtns, subPanels, 'subtab');
+  }
+
+  return panel;
+}
+
 /**
  * Layout 4 — Double tab
  */
 async function renderLayout4(componentEl, items, cfg) {
   const {
-    tabRadiusStyle, tabIconEnabled, tabFontSizeClass, summaryFontClass,
+    tabRadiusStyle, tabIconEnabled, tabFontSizeClass,
   } = cfg;
 
   componentEl.innerHTML = `
@@ -511,83 +624,7 @@ async function renderLayout4(componentEl, items, cfg) {
 
   await Promise.all(
     items.map(async (item, i) => {
-      const hasSubTab = item.secondLayerTab === 'yes';
-      const panel = document.createElement('div');
-      panel.className = `tab-panel tab-panel-layout4${i === 0 ? ' is-active' : ''}`;
-      panel.setAttribute('role', 'tabpanel');
-
-      if (!hasSubTab) {
-        // no sub tab → direct fragment display (col1/col2)
-        const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
-        const { slot1, slot2 } = buildFragmentSlots(col1, col2);
-        panel.append(slot1, slot2);
-      } else {
-        // has sub tab
-        // summary richtext (hide if empty)
-        const summaryEl = document.createElement('div');
-        summaryEl.className = `tab-summary-richtext ${summaryFontClass}`;
-        if (item.summaryRichtext?.html) {
-          summaryEl.innerHTML = item.summaryRichtext.html;
-        } else {
-          summaryEl.hidden = true;
-        }
-        panel.appendChild(summaryEl);
-
-        // sub nav bar
-        const subNavBar = document.createElement('div');
-        subNavBar.className = 'tab-subnav-bar flex items-center w-full sticky z-9';
-
-        const subTabList = document.createElement('div');
-        subTabList.className = 'tab-subtab-list flex flex-row items-center w-full overflow-hidden';
-        subTabList.setAttribute('role', 'tablist');
-
-        // sub tab style: use item.secondTabStyle if available
-        const subTabRadiusStyle = tabRadiusStyle; // same radius token for now
-
-        const subItems = item.subItems || [];
-        subItems.forEach((subItem, j) => {
-          const subBtn = document.createElement('div');
-          decorateItemEl(
-            subBtn,
-            subItem.subItemText?.text,
-            subItem.subItemIconAsset?.text,
-            j,
-            j === 0,
-            tabIconEnabled,
-            subTabRadiusStyle,
-            tabFontSizeClass,
-          );
-          subTabList.appendChild(subBtn);
-        });
-        subNavBar.appendChild(subTabList);
-        panel.appendChild(subNavBar);
-
-        // sub panels
-        const subPanelsEl = document.createElement('div');
-        subPanelsEl.className = 'tab-sub-panels w-full';
-
-        await Promise.all(
-          subItems.map(async (subItem, j) => {
-            const { col1, col2 } = await loadFragmentCols(
-              subItem.subItemFragmentUrl?.text,
-            );
-            const subPanel = document.createElement('div');
-            subPanel.className = `tab-sub-panel${j === 0 ? ' is-active' : ''}`;
-            subPanel.setAttribute('role', 'tabpanel');
-            const { slot1, slot2 } = buildFragmentSlots(col1, col2);
-            subPanel.append(slot1, slot2);
-            subPanelsEl.appendChild(subPanel);
-          }),
-        );
-
-        panel.appendChild(subPanelsEl);
-
-        // wire sub tab interaction
-        const subBtns = [...subTabList.querySelectorAll('.tab-tab-btn')];
-        const subPanels = [...subPanelsEl.querySelectorAll('.tab-sub-panel')];
-        setupSwiper(subTabList, subNavBar, subBtns, subPanels, 'subtab');
-      }
-
+      const panel = await buildLayout4Panel(item, i, i === 0, cfg);
       panelsEl.appendChild(panel);
     }),
   );
@@ -739,7 +776,8 @@ async function decoratePage(block) {
         ITEM_DEFAULT_CONFIG,
         'tab-navigator-item',
       );
-
+      const listData = getBlockRepeatConfigs(wrapper);
+      console.log(listData);
       const result = {
         el: itemEl,
         tabText: itemConfig.tabItemText,
@@ -757,6 +795,9 @@ async function decoratePage(block) {
       return result;
     }),
   );
+
+  // 記錄每個 item 當前的 fragmentUrl，UE 更新時用於比對是否需要重新 fetch
+  const fragmentUrlMap = items.map((item) => item.fragmentUrl?.text || '');
 
   // ── Build component shell ────────────────────────────────────
   const componentEl = document.createElement('div');
@@ -794,19 +835,82 @@ async function decoratePage(block) {
   itemWrappers.forEach((wrapper) => wrapper.remove());
 
   // ── UE author live-update ────────────────────────────────────
+  //
+  // 框架行為：作者在 UE dialog 編輯某個 item 後，會在 block 下注入一個
+  // display:none 的原始帶資料 DOM（即 detail = 新的 itemEl）。
+  // 框架隨後會刪除舊的渲染好的 itemEl，讓 detail 顯示出來。
+  //
+  // 因此我們必須：
+  //   1. 從 detail 讀取最新 itemConfig
+  //   2. 用 detail 本身取代舊的 tab button（decorateItemEl in-place）
+  //      並將其插入 tab-tab-list 的正確位置
+  //   3. 重新 fetch fragment，更新對應的 tab-panel 內容
+  //   4. layout2 額外更新 col1-slot
+
   block.addEventListener('asus-l4--section-tab', async ({ detail }) => {
+    if (!componentEl) return;
+
     const itemConfig = await getBlockConfigs(
       detail,
       ITEM_DEFAULT_CONFIG,
       'tab-navigator-item',
     );
-    const allItemEls = [...block.querySelectorAll('.tab-navigator-item')];
-    const idx = allItemEls.findIndex(
+
+    // 找到這個 item 是第幾個（用 data-aue-resource 比對 tab-tab-list 裡現有的 btn）
+    const tabListEl = componentEl.querySelector('.tab-tab-list');
+    const existingBtns = tabListEl ? [...tabListEl.querySelectorAll('.tab-tab-btn')] : [];
+    const idx = existingBtns.findIndex(
       (el) => el.dataset.aueResource === detail.dataset.aueResource,
     );
-    // update tab button text
-    const menuDom = block.querySelectorAll('.tab-tab-text')[idx];
-    if (menuDom) menuDom.textContent = itemConfig.tabItemText?.text || '';
+    if (idx === -1) return;
+
+    const isActive = existingBtns[idx].classList.contains('is-active');
+
+    // 1. decorateItemEl in-place on detail（保留 data-aue-* 屬性）
+    decorateItemEl(
+      detail,
+      itemConfig.tabItemText?.text,
+      itemConfig.tabItemIconAsset?.text,
+      idx,
+      isActive,
+      tabRenderConfig.tabIconEnabled,
+      tabRenderConfig.tabRadiusStyle,
+      tabRenderConfig.tabFontSizeClass,
+    );
+
+    // 2. 替換 tab-tab-list 中舊的 btn 為 detail
+    if (tabListEl) {
+      tabListEl.replaceChild(detail, existingBtns[idx]);
+    }
+
+    // 3. 更新對應 tab-panel
+    if (layoutStyle === '4') {
+      // layout4: secondLayerTab 可能改變，需整個 panel 結構重建
+      const newSecondLayerTab = itemConfig.secondLayerTab?.text || 'no';
+      const newSubItems = newSecondLayerTab === 'yes' ? (itemConfig.subItems || []) : [];
+      const updatedItem = {
+        secondLayerTab: newSecondLayerTab,
+        fragmentUrl: itemConfig.tabItemFragmentUrl,
+        summaryRichtext: itemConfig.summaryRichtext,
+        subItems: newSubItems,
+      };
+      const panelsEl = componentEl.querySelector('.tab-panels');
+      const existingPanels = panelsEl
+        ? [...panelsEl.querySelectorAll(':scope > .tab-panel')]
+        : [];
+      if (existingPanels[idx]) {
+        const newPanel = await buildLayout4Panel(updatedItem, idx, isActive, tabRenderConfig);
+        panelsEl.replaceChild(newPanel, existingPanels[idx]);
+      }
+      fragmentUrlMap[idx] = itemConfig.tabItemFragmentUrl?.text || '';
+    } else {
+      // layout1/2/3: 只需更新 fragment 內容（url 沒變則跳過）
+      const newFragmentUrl = itemConfig.tabItemFragmentUrl?.text || '';
+      if (newFragmentUrl !== fragmentUrlMap[idx]) {
+        fragmentUrlMap[idx] = newFragmentUrl;
+        await refreshPanelContent(componentEl, layoutStyle, idx, newFragmentUrl);
+      }
+    }
   });
 }
 
