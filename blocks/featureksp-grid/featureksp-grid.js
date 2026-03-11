@@ -240,7 +240,7 @@ const handleVideo = (wrap, v) => {
     const mediaContainerRatio = v('mediaContainerRatio') ? `aspect-ratio: ${v('mediaContainerRatio')};` : '';
 
     return `
-      <div class="device-${curDevice} media-block-video-container relative" style="position: relative; overflow-hidden; ${containerRadiusStyle} ${mediaContainerRatio}">
+      <div class="device-${curDevice} media-block-video-container relative" style="position: relative; overflow-hidden; ${mediaContainerRatio}">
         <video
           data-src-m="${configM.assets || ''}"
           data-src-t="${configT.assets || ''}"
