@@ -12,9 +12,9 @@
   --anchor-color-default: #2F2F2F;
   --anchor-color-hover: #2F2F2F;
   --anchor-color-press: #2F2F2F;
-  --anchor-bg-default: rgba(255, 255, 255, 0.8);
-  --anchor-bg-hover: rgba(255, 255, 255, 0.9);
-  --anchor-bg-press: rgba(255, 255, 255, 1);
+  --anchor-bg-default: rgb(255 255 255 / 80%);
+  --anchor-bg-hover: rgb(255 255 255 / 90%);
+  --anchor-bg-press: rgb(255 255 255 / 100%);
   --anchor-border-width-default: 2px;
   --anchor-border-width-hover: 2px;
   --anchor-border-width-press: 2px;
@@ -178,6 +178,7 @@
           stroke: var(--anchor-border-color-hover);
           stroke-width: var(--anchor-border-width-hover);
         }
+        
         .anchor-icon-path {
           fill: var(--anchor-color-hover);
         }
@@ -189,6 +190,7 @@
           stroke: var(--anchor-border-color-press);
           stroke-width: var(--anchor-border-width-press);
         }
+
         .anchor-icon-path {
           fill: var(--anchor-color-press);
         }

@@ -709,10 +709,8 @@ export default async function decorate(block) {
         wrap.style.cssText += getRadiusStyle(c('radiusTL'), c('radiusTR'), c('radiusBR'), c('radiusBL'));
         wrap.style.cssText += inlineStyle;
 
-        // inlineStyle = '';
         // 添加初始class
         wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12', 'flex', 'relative');
-        console.log('itemConfig', itemConfig);
         // 先清空
         wrap.innerHTML = '';
         // 通用配置
