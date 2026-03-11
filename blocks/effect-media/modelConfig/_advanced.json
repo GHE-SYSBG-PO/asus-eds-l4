@@ -7,115 +7,79 @@
     },
     {
       "component": "container",
-      "label": "Text (D)",
+      "label": "Text",
       "name": "textContainerD",
       "collapsible": true,
       "fields": [
-        {
-          "component": "text",
-          "name": "textMaxWidthD",
-          "label": "Text max width (D)",
-          "valueType": "string",
-          "placeholder": "Only px"
-        },
+        
         {
           "component": "select",
-          "label": "Text font (D)",
+          "label": "Font (D)",
           "name": "fontDesktop",
           "valueType": "string",
           "options": [
-            { "name": "tt-bd-88", "value": "tt-bd-88-lg" },
-            { "name": "tt-bd-92", "value": "tt-bd-92-lg" },
-            { "name": "tt-bd-96", "value": "tt-bd-96-lg" },
-            { "name": "tt-bd-100", "value": "tt-bd-100-lg" },
-            { "name": "tt-bd-104", "value": "tt-bd-104-lg" }
+            { "name": "64", "value": "64" },
+            { "name": "72", "value": "72" },
+            { "name": "96", "value": "96" },
+            { "name": "120", "value": "120" },
+            { "name": "128", "value": "128" }
           ]
-        }
-      ]
-    },
-
-    {
-      "component": "container",
-      "label": "Text (T)",
-      "name": "textContainerT",
-      "collapsible": true,
-      "fields": [
+        },
         {
           "component": "text",
-          "name": "textMaxWidthT",
-          "label": "Text max width (T)",
+          "name": "textMaxWidthD",
+          "label": "Font Max Width (D)",
           "valueType": "string",
-          "placeholder": "Only px"
+          "description": "* Only px"
         },
         {
           "component": "select",
-          "label": "Text font (T)",
+          "label": "Font (T)",
           "name": "fontTablet",
           "valueType": "string",
           "options": [
-            { "name": "tt-bd-56", "value": "tt-bd-56-md" },
-            { "name": "tt-bd-60", "value": "tt-bd-60-md" },
-            { "name": "tt-bd-64", "value": "tt-bd-64-md" },
-            { "name": "tt-bd-68", "value": "tt-bd-68-md" },
-            { "name": "tt-bd-72", "value": "tt-bd-72-md" }
+            { "name": "52", "value": "52" },
+            { "name": "56", "value": "56" },
+            { "name": "64", "value": "64" },
+            { "name": "72", "value": "72" },
+            { "name": "96", "value": "96" }
           ]
-        }
-      ]
-    },
-
-    {
-      "component": "container",
-      "label": "Text (T)",
-      "name": "textContainerM",
-      "collapsible": true,
-      "fields": [
+        },
         {
           "component": "text",
-          "name": "textMaxWidthM",
-          "label": "Text max width (M)",
+          "name": "textMaxWidthT",
+          "label": "Font Max Width (T)",
           "valueType": "string",
-          "placeholder": "Only px"
+          "description": "* Only px"
         },
         {
           "component": "select",
-          "label": "Text font (M)",
+          "label": "Font (M)",
           "name": "fontMobile",
           "valueType": "string",
           "options": [
-            { "name": "tt-bd-32", "value": "tt-bd-32-sm" },
-            { "name": "tt-bd-36", "value": "tt-bd-36-sm" },
-            { "name": "tt-bd-40", "value": "tt-bd-40-sm" },
-            { "name": "tt-bd-44", "value": "tt-bd-44-sm" },
-            { "name": "tt-bd-48", "value": "tt-bd-48-sm" }
+            { "name": "32", "value": "32" },
+            { "name": "36", "value": "36" },
+            { "name": "40", "value": "40" },
+            { "name": "44", "value": "44" },
+            { "name": "48", "value": "48" }
           ]
+        },
+        {
+          "component": "text",
+          "name": "textMaxWidthM",
+          "label": "Font Max Width (M)",
+          "valueType": "string",
+          "description": "* Only px"
         }
       ]
     },
-
     {
       "component": "text",
       "label": "font color (hex)",
       "name": "fontColor",
       "valueType": "string",
-      "placeholder": "NO NEED #"
-    },
-
-    {
-      "component": "text",
-      "valueType": "string",
-      "name": "imgWidthD",
-      "label": "Image width (D)",
-      "value": "",
-      "placeholder": "vw or px, default 100vw"
-    },
-
-    {
-      "component": "text",
-      "valueType": "string",
-      "name": "imgHeightD",
-      "label": "Image height (D)",
-      "value": "",
-      "placeholder": "vh or px, default 100vh"
+      "description": "* NO NEED #"
     }
   ]
 }

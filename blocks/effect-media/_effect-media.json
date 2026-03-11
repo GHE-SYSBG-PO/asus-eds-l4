@@ -27,6 +27,9 @@
           "...": "./modelConfig/_advanced.json#/fields"
         },
         {
+          "...": "../../components/colorGroup/_colorGroup.json#/fields"
+        },
+        {
           "component": "text",
           "name": "L4TagNestedBlock",
           "value": "L4--nested-block--effect-media",

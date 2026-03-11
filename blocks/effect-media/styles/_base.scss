@@ -1,0 +1,69 @@
+@use '../../../styles/variable' as v;
+
+.l4-pdp {
+  .effect-media-wrapper {
+    max-width: unset;
+    padding: 0;
+  }
+    
+  .effect-media {
+    background-color: var(--base-bg-color, transparent);
+
+    .effect-media-container {
+      height: var(--container-height, auto);
+
+      .scene-1 {
+        height: calc(100 * var(--cmdvh));
+      }
+    }
+
+    .ani-text {
+      color: var(--base-text-color);
+    }
+  }
+}
+
+// handle RWD
+// Desktop
+@media all and (min-width: v.$large-lower-bound) {
+  .l4-pdp {
+    .effect-media {
+      .ani-text {
+        max-width: var(--max-w-desktop, 1260px);
+      }
+    }
+  }
+}
+
+// Tablet
+@media all and (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+  .l4-pdp {
+    .effect-media {
+      .ani-text {
+        max-width: var(--max-w-tablet, 896px);
+      }
+    }
+  }
+}
+
+// Mobile
+@media all and (max-width: v.$small-upper-bound) {
+  .l4-pdp {
+    .effect-media {
+      .ani-text {
+        max-width: var(--max-w-mobile, 420px);
+      }
+    }
+  }
+}
+
+// fix image overflow issue in another module setting
+.l4-pdp {
+  .effect-media {
+    .animation-img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
