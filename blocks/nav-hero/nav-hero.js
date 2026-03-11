@@ -140,8 +140,6 @@ const _getLabelFontClass = () => {
 
 // ── Shared item template ──────────────────────────────────────
 const _renderItemHtml = (_config, index) => {
-  // eslint-disable-next-line no-console
-  console.log('_renderItemHtml: ', _config);
   const name = _config?.labelName?.text ?? _config?.labelName ?? '';
   const sectionId = _config?.sectionId?.text ?? _config?.sectionId ?? '';
   const gaLabel = _config ? name.toLowerCase() : 'go to top';
@@ -535,11 +533,7 @@ const _handleIsHiddenEvent = (containerEl) => {
 export default async function decorate(block) {
   try {
     const data = block.dataset;
-    // eslint-disable-next-line no-console
-    console.log('data: ', data);
     const config = _getDialogConfig(data);
-    // eslint-disable-next-line no-console
-    console.log(config);
 
     // gen style 3/4 custom html
     DEFAULT_CONFIG.customizeHtml = {
