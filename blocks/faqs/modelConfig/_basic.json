@@ -1,0 +1,36 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "text",
+      "label": "Text",
+      "name": "text",
+      "valueType": "string",
+      "description": "* max line number: D=3, T=4, M=5"
+    },
+
+    {
+      "component": "reference",
+      "label": "Image",
+      "name": "image",
+      "multi": false,
+      "description": "* jpg/png/svg/avif,三裝置共用5120x2880px (2x)"
+    },
+    {
+      "component": "text",
+      "name": "imgAlt",
+      "label": "Image Alt",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "name": "bgColor",
+      "label": "Background Color",
+      "valueType": "string"
+    }
+  ]
+}
