@@ -39,15 +39,6 @@ const getFontSize = (device, v) => {
 /**
  * Build image size dict
  */
-const _getImageStyle = (imgWidthD, imgHeightD) => {
-  const widthStyle = imgWidthD ? `lg:w-[${imgWidthD}]` : 'lg:w-[100vw]';
-  const heightStyle = imgHeightD ? `lg:h-[${imgHeightD}]` : 'lg:h-[100vh]';
-
-  const imgStyle = `w-full h-full ${widthStyle} ${heightStyle}`;
-
-  return imgStyle;
-};
-
 const getAnimationType = (imageSrc) => (imageSrc ? 'type-1' : 'type-2');
 
 const _scrollTriggerAnimation = (block, AnimeJS) => {
@@ -147,7 +138,6 @@ const _renderMediaHTML = (props) => {
   const {
     imageSrc,
     imgAlt,
-    imageStyle,
     text,
     fontColorStyle,
     fonts,
@@ -161,7 +151,7 @@ const _renderMediaHTML = (props) => {
   const textFontClass = _getTextFontClass(fonts.D, fonts.T, fonts.M);
 
   const htmlImg = imageSrc ? `
-    <div class="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container">
+    <div class="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 img-container">
       <img
         src="${imageSrc}"
         alt="${imgAlt}"
@@ -201,7 +191,7 @@ export default async function decorate(block) {
     const bgColorStyle = bgColor ? `background-color: #${bgColor};` : '';
 
     const colorGroup = v('colorGroup', 'text') || '';
-    block.classList.add(colorGroup);
+    if (colorGroup) block.classList.add(colorGroup);
 
     const fonts = {
       D: getFontSize('D', v),
@@ -215,13 +205,11 @@ export default async function decorate(block) {
       M: _getTextMaxWidth('M', v),
     };
 
-    const imageStyle = _getImageStyle(v('imgWidthD', 'text'), v('imgHeightD', 'text'));
     const animationType = getAnimationType(imageSrc);
 
     const prop = {
       imageSrc,
       imgAlt,
-      imageStyle,
       text,
       fontColorStyle,
       fonts,
@@ -231,12 +219,13 @@ export default async function decorate(block) {
     const sceneContent = _renderMediaHTML(prop);
 
     // configure animation layout
-    let containerHeight = `--container-height: ${DEFAULT_CONFIG.animationLength * 100}vh;`;
+    const containerHeightIndex = DEFAULT_CONFIG.animationLength * 100;
+    let containerHeight = `--container-height:  calc(${containerHeightIndex} * var(--cmdvh));`;
     let animationPosition = 'sticky top-0';
     const isUeType = isUE ? 'is-ue' : '';
 
     if (isUE) {
-      containerHeight = '--container-height: 100vh;';
+      containerHeight = '--container-height: calc(100 * var(--cmdvh));';
       animationPosition = 'relative';
     }
 
@@ -245,7 +234,7 @@ export default async function decorate(block) {
 
     block.innerHTML = `
       <div class="${containerClass}" style="${bgColorStyle}${containerHeight}">
-        <div class="${animationPosition} w-full h-[100vh] scene-1">
+        <div class="${animationPosition} w-full scene-1">
           ${sceneContent}
         </div>
       </div>

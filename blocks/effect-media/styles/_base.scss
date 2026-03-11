@@ -7,12 +7,18 @@
   }
     
   .effect-media {
+    background-color: var(--base-bg-color, transparent);
+
     .effect-media-container {
       height: var(--container-height, auto);
+
+      .scene-1 {
+        height: calc(100 * var(--cmdvh));
+      }
     }
 
     .ani-text {
-      color: var(--text-block-body-color);
+      color: var(--base-text-color);
     }
   }
 }

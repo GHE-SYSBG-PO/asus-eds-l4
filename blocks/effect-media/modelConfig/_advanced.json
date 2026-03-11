@@ -7,20 +7,14 @@
     },
     {
       "component": "container",
-      "label": "Text (D)",
+      "label": "Text",
       "name": "textContainerD",
       "collapsible": true,
       "fields": [
-        {
-          "component": "text",
-          "name": "textMaxWidthD",
-          "label": "Text max width (D)",
-          "valueType": "string",
-          "placeholder": "Only px"
-        },
+        
         {
           "component": "select",
-          "label": "Text font (D)",
+          "label": "Font (D)",
           "name": "fontDesktop",
           "valueType": "string",
           "options": [
@@ -30,26 +24,17 @@
             { "name": "120", "value": "120" },
             { "name": "128", "value": "128" }
           ]
-        }
-      ]
-    },
-
-    {
-      "component": "container",
-      "label": "Text (T)",
-      "name": "textContainerT",
-      "collapsible": true,
-      "fields": [
+        },
         {
           "component": "text",
-          "name": "textMaxWidthT",
-          "label": "Text max width (T)",
+          "name": "textMaxWidthD",
+          "label": "Font Max Width (D)",
           "valueType": "string",
-          "placeholder": "Only px"
+          "description": "* Only px"
         },
         {
           "component": "select",
-          "label": "Text font (T)",
+          "label": "Font (T)",
           "name": "fontTablet",
           "valueType": "string",
           "options": [
@@ -59,26 +44,17 @@
             { "name": "72", "value": "72" },
             { "name": "96", "value": "96" }
           ]
-        }
-      ]
-    },
-
-    {
-      "component": "container",
-      "label": "Text (T)",
-      "name": "textContainerM",
-      "collapsible": true,
-      "fields": [
+        },
         {
           "component": "text",
-          "name": "textMaxWidthM",
-          "label": "Text max width (M)",
+          "name": "textMaxWidthT",
+          "label": "Font Max Width (T)",
           "valueType": "string",
-          "placeholder": "Only px"
+          "description": "* Only px"
         },
         {
           "component": "select",
-          "label": "Text font (M)",
+          "label": "Font (M)",
           "name": "fontMobile",
           "valueType": "string",
           "options": [
@@ -88,34 +64,22 @@
             { "name": "44", "value": "44" },
             { "name": "48", "value": "48" }
           ]
+        },
+        {
+          "component": "text",
+          "name": "textMaxWidthM",
+          "label": "Font Max Width (M)",
+          "valueType": "string",
+          "description": "* Only px"
         }
       ]
     },
-
     {
       "component": "text",
       "label": "font color (hex)",
       "name": "fontColor",
       "valueType": "string",
-      "placeholder": "NO NEED #"
-    },
-
-    {
-      "component": "text",
-      "valueType": "string",
-      "name": "imgWidthD",
-      "label": "Image width (D)",
-      "value": "",
-      "placeholder": "vw or px, default 100vw"
-    },
-
-    {
-      "component": "text",
-      "valueType": "string",
-      "name": "imgHeightD",
-      "label": "Image height (D)",
-      "value": "",
-      "placeholder": "vh or px, default 100vh"
+      "description": "* NO NEED #"
     }
   ]
 }
