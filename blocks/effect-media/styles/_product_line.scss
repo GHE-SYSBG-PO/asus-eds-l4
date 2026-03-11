@@ -1,0 +1,51 @@
+@use '../../../styles/variable' as v;
+
+.l4-pdp {
+  &[data-product="asus"] {
+    &[data-mode="light"] .effect-media,
+    .effect-media.section-light {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"] .effect-media,
+    .effect-media.section-dark {
+      --text-block-body-color: #FFF;
+    }
+  }
+
+  &[data-product="proart"] {
+    &[data-mode="light"] .effect-media,
+    .effect-media.section-light {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"] .effect-media,
+    .effect-media.section-dark {
+      --text-block-body-color: #FFF;
+    }
+  }
+
+  &[data-product="rog"] {
+    &[data-mode="light"] .effect-media,
+    .effect-media.section-light {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"] .effect-media,
+    .effect-media.section-dark {
+      --text-block-body-color: #FFF;
+    }
+  }
+
+  &[data-product="tuf"] {
+    &[data-mode="light"] .effect-media,
+    .effect-media.section-light {
+      --text-block-body-color: #181818;
+    }
+
+    &[data-mode="dark"] .effect-media,
+    .effect-media.section-dark {
+      --text-block-body-color: #FFF;
+    }
+  }
+}

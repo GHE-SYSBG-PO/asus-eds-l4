@@ -4004,12 +4004,16 @@
         "label": "Color Group",
         "options": [
           {
-            "name": "Light (default)",
-            "value": "theme-light"
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
           },
           {
             "name": "Dark",
-            "value": "theme-dark"
+            "value": "section-dark"
           }
         ]
       },

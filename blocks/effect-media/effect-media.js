@@ -27,13 +27,13 @@ const DEFAULT_CONFIG = {
  */
 const getFontSize = (device, v) => {
   if (device === 'D') {
-    return v('fontDesktop', 'text') || 'tt-bd-96-lg';
+    return v('fontDesktop', 'text') || '96';
   } if (device === 'T') {
-    return v('fontTablet', 'text') || 'tt-bd-64-md';
+    return v('fontTablet', 'text') || '64';
   }
 
   // Mobile
-  return v('fontMobile', 'text') || 'tt-bd-40-sm';
+  return v('fontMobile', 'text') || '40';
 };
 
 /**
@@ -152,7 +152,6 @@ const _renderMediaHTML = (props) => {
     fontColorStyle,
     fonts,
     maxW,
-    colorGroup,
   } = props;
 
   const maxWidthDesktop = maxW.D ? `--max-w-desktop: ${maxW.D};` : '';
@@ -162,7 +161,7 @@ const _renderMediaHTML = (props) => {
   const textFontClass = _getTextFontClass(fonts.D, fonts.T, fonts.M);
 
   const htmlImg = imageSrc ? `
-    <div class="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container ${colorGroup}">
+    <div class="absolute w-full h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${imageStyle} img-container">
       <img
         src="${imageSrc}"
         alt="${imgAlt}"
@@ -201,7 +200,8 @@ export default async function decorate(block) {
     const bgColor = v('bgColor', 'text') || '';
     const bgColorStyle = bgColor ? `background-color: #${bgColor};` : '';
 
-    const colorGroup = v('colorGroup', 'text') || 'theme-light';
+    const colorGroup = v('colorGroup', 'text') || '';
+    block.classList.add(colorGroup);
 
     const fonts = {
       D: getFontSize('D', v),
@@ -226,7 +226,6 @@ export default async function decorate(block) {
       fontColorStyle,
       fonts,
       maxW,
-      colorGroup,
     };
 
     const sceneContent = _renderMediaHTML(prop);
