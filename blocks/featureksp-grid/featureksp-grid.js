@@ -2,186 +2,8 @@
 import {
   getBlockConfigs,
   getFieldValue,
+  isAuthorUe,
 } from '../../scripts/utils.js';
-
-// 初始化视频播放控制
-// function initVideoControls() {
-//   const videos = document.querySelectorAll('.featureksp-grid-item .media-video');
-//   videos.forEach((video) => {
-//     const playBtn = video.parentElement.querySelector('.play-btn');
-//     const pauseBtn = video.parentElement.querySelector('.pause-btn');
-//     const replayBtn = video.parentElement.querySelector('.replay-btn');
-
-//     if (playBtn) {
-//       playBtn.addEventListener('click', () => {
-//         video.play();
-//         playBtn.style.display = 'none';
-//         pauseBtn.style.display = 'flex';
-//       });
-//     }
-
-//     if (pauseBtn) {
-//       pauseBtn.addEventListener('click', () => {
-//         video.pause();
-//         pauseBtn.style.display = 'none';
-//         playBtn.style.display = 'flex';
-//       });
-//     }
-
-//     if (replayBtn) {
-//       replayBtn.addEventListener('click', () => {
-//         video.currentTime = 0;
-//         video.play();
-//         replayBtn.style.display = 'none';
-//         pauseBtn.style.display = 'flex';
-//       });
-//     }
-
-//     video.addEventListener('ended', () => {
-//       if (replayBtn) {
-//         replayBtn.style.display = 'flex';
-//         pauseBtn.style.display = 'none';
-//       }
-//     });
-//   });
-// }
-
-// // 创建媒体内容
-// function createMediaContent(gridItem, v) {
-//   const mediaContainer = document.createElement('div');
-//   mediaContainer.className = 'media-container';
-
-//   // 应用媒体容器比例
-//   if (v('mediaContainerRatio')) {
-//     mediaContainer.style.aspectRatio = v('mediaContainerRatio');
-//   }
-
-//   if (v('mediaType') === 'image' && (v('mediaBgAssetD') || v('mediaBgAssetT') || v('mediaBgAssetM'))) {
-//     // 处理图片
-//     const img = document.createElement('img');
-//     // 根据设备选择不同的图片
-//     const isDesktop = window.innerWidth >= 1024;
-//     const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-
-//     if (isDesktop && v('mediaBgAssetD')) {
-//       img.src = v('mediaBgAssetD');
-//     } else if (isTablet && v('mediaBgAssetT')) {
-//       img.src = v('mediaBgAssetT');
-//     } else if (v('mediaBgAssetM')) {
-//       img.src = v('mediaBgAssetM');
-//     }
-
-//     img.alt = v('mediaImageAltText') || '';
-//     img.className = 'media-image';
-//     mediaContainer.appendChild(img);
-//   } else if (v('mediaType') === 'video' && (v('mediaBgAssetD') || v('mediaBgAssetT') || v('mediaBgAssetM'))) {
-//     // 处理视频
-//     const video = document.createElement('video');
-//     // 根据设备选择不同的视频
-//     const isDesktop = window.innerWidth >= 1024;
-//     const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-
-//     if (isDesktop && v('mediaBgAssetD')) {
-//       video.src = v('mediaBgAssetD');
-//     } else if (isTablet && v('mediaBgAssetT')) {
-//       video.src = v('mediaBgAssetT');
-//     } else if (v('mediaBgAssetM')) {
-//       video.src = v('mediaBgAssetM');
-//     }
-
-//     video.alt = v('mediaImageAltText') || '';
-//     video.className = 'media-video';
-
-//     // 应用视频配置
-//     if (v('mediaVideoAutoPlay') === 'true') {
-//       video.autoplay = true;
-//       video.muted = true;
-//     }
-//     if (v('mediaVideoloop') === 'true') {
-//       video.loop = true;
-//     }
-//     if (v('mediaVideoPauseAndPlayBtn') === 'true') {
-//       // 创建播放/暂停按钮
-//       const controlsContainer = document.createElement('div');
-//       controlsContainer.className = 'video-controls';
-
-//       const playBtn = document.createElement('button');
-//       playBtn.className = 'play-btn';
-//       playBtn.innerHTML = '<svg viewBox="0 0 36 36" fill="currentColor"><path d="M8 5v14l11-7z" transform="translate(6,6)"></path></svg>';
-//       controlsContainer.appendChild(playBtn);
-
-//       const pauseBtn = document.createElement('button');
-//       pauseBtn.className = 'pause-btn';
-//       pauseBtn.innerHTML = '<svg viewBox="0 0 36 36" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" transform="translate(6,6)"/></svg>';
-//       pauseBtn.style.display = 'none';
-//       controlsContainer.appendChild(pauseBtn);
-
-//       if (v('mediaVideoReplayBtn') === 'true' && v('mediaVideoloop') !== 'true') {
-//         const replayBtn = document.createElement('button');
-//         replayBtn.className = 'replay-btn';
-//         replayBtn.innerHTML = '<svg viewBox="0 0 36 36" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" transform="translate(6,6)"></path></svg>';
-//         replayBtn.style.display = 'none';
-//         controlsContainer.appendChild(replayBtn);
-//       }
-
-//       mediaContainer.appendChild(controlsContainer);
-//     }
-
-//     mediaContainer.appendChild(video);
-//   }
-
-//   // 应用垂直对齐
-//   if (v('mediaVerticalAlignment')) {
-//     mediaContainer.style.alignSelf = v('mediaVerticalAlignment');
-//   }
-
-//   gridItem.appendChild(mediaContainer);
-
-//   // 添加文本内容
-//   addTextContent(gridItem, v);
-// }
-
-// // 创建图标内容
-// function createIconContent(gridItem, v) {
-//   if (v('iconAsset')) {
-//     const iconContainer = document.createElement('div');
-//     iconContainer.className = 'icon-container';
-
-//     const img = document.createElement('img');
-//     img.src = v('iconAsset');
-//     img.alt = '';
-//     img.className = 'icon-image';
-
-//     iconContainer.appendChild(img);
-//     gridItem.appendChild(iconContainer);
-//   }
-
-//   // 添加文本内容
-//   addTextContent(gridItem, v);
-// }
-
-// // 创建文本内容
-// function createTextContent(gridItem, v) {
-//   // 应用背景图片
-//   if (v('mediaBgAssetD') || v('mediaBgAssetT') || v('mediaBgAssetM')) {
-//     const isDesktop = window.innerWidth >= 1024;
-//     const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-
-//     if (isDesktop && v('mediaBgAssetD')) {
-//       gridItem.style.backgroundImage = `url(${v('mediaBgAssetD')})`;
-//     } else if (isTablet && v('mediaBgAssetT')) {
-//       gridItem.style.backgroundImage = `url(${v('mediaBgAssetT')})`;
-//     } else if (v('mediaBgAssetM')) {
-//       gridItem.style.backgroundImage = `url(${v('mediaBgAssetM')})`;
-//     }
-
-//     gridItem.style.backgroundSize = 'cover';
-//     gridItem.style.backgroundPosition = 'center';
-//   }
-
-//   // 添加文本内容
-//   addTextContent(gridItem, v);
-// }
 
 const getRadiusStyle = (tl, tr, br, bl) => {
   // If none are configured, return empty (use CSS default)
@@ -312,7 +134,348 @@ const handleLayoutVariant = (wrap, v, layoutVariant) => {
   });
 };
 
-// 处理背景图片
+/**
+ * Generate video control button position style
+ */
+const getButtonPositionClass = (position) => {
+  const positionMap = {
+    'top-left': 'top-4 left-4',
+    'top-right': 'top-4 right-4',
+    'bottom-left': 'bottom-4 left-4',
+    'bottom-right': 'bottom-4 right-4',
+  };
+  return positionMap[position] || 'bottom-4 right-4';
+};
+
+/**
+ * Get current device
+ */
+const getDevice = () => {
+  const isTablet = window.innerWidth >= 731 && window.innerWidth < 1279.5;
+  const isDesktop = window.innerWidth >= 1280;
+  return isTablet ? 'T' : (isDesktop ? 'D' : 'M');
+};
+
+/**
+ * Get configuration for the current device
+ */
+const getDeviceConfig = (device, v) => {
+  if (device === 'D') {
+    return {
+      assets: v('bgAssetD', 'text') || '',
+    };
+  } if (device === 'T') {
+    return {
+      assets: v('bgAssetT', 'text') || v('bgAssetD', 'text') || '',
+    };
+  }
+  // Mobile
+  return {
+    assets: v('bgAssetM', 'text') || v('bgAssetT', 'text') || v('bgAssetD', 'text') || '',
+  };
+};
+
+// 处理视频
+const handleVideo = (wrap, v) => {
+  const mediaVideoAutoPlay = v('mediaVideoAutoPlay') === 'true';
+  const mediaVideoloop = v('mediaVideoloop') === 'true';
+  const mediaVideoPauseAndPlayBtn = v('mediaVideoPauseAndPlayBtn') === 'true';
+  const mediaVideoPauseAndPlayBtnPosition = getButtonPositionClass(v('mediaVideoPauseAndPlayBtnPosition'));
+
+  const configD = getDeviceConfig('D', v);
+  const configT = getDeviceConfig('T', v);
+  const configM = getDeviceConfig('M', v);
+  // Create video element
+  const createVideoElement = (defaultConfig) => {
+    const { assets: defaultAssets } = defaultConfig;
+    if (!defaultAssets) return '';
+
+    // Determine initial button display state
+    const initialPlayBtnDisplay = mediaVideoAutoPlay ? 'none' : 'flex';
+    const initialPauseBtnDisplay = mediaVideoAutoPlay ? 'flex' : 'none';
+
+    // Build control buttons
+    let controlButtons = '';
+    controlButtons = `
+        <div class="media-block-controls absolute ${mediaVideoPauseAndPlayBtnPosition} z-10">
+          <button
+            class="media-block-play-btn rounded-full flex items-center justify-center transition-all"
+            style="display: ${initialPlayBtnDisplay};  border: 1px solid #ffffff;"
+          >
+            <svg viewBox="0 0 36 36" fill="#ffffff" >
+              <path d="M8 5v14l11-7z" transform="translate(6,6)"></path>
+            </svg>
+          </button>
+          <button
+            class="media-block-pause-btn rounded-full flex items-center justify-center transition-all"
+            style="display: ${initialPauseBtnDisplay};  border: 1px solid #ffffff;"
+          >
+            <svg viewBox="0 0 36 36" fill="#ffffff">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" transform="translate(6,6)"/>
+            </svg>
+          </button>
+        </div>
+        ${!mediaVideoloop ? `<div class="media-block-controls absolute ${mediaVideoPauseAndPlayBtnPosition} z-10">
+            <button
+          class="media-block-replay-btn  rounded-full flex items-center justify-center transition-all"
+          style="display: ${initialPauseBtnDisplay};  border: 1px solid #ffffff;display:none"
+        >
+          <svg viewBox="0 0 36 36" fill="#ffffff">
+            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" transform="translate(6,6)"/>
+          </svg>
+        </button>
+        </div>` : ''}
+    `;
+
+    let videoAttrs = '';
+    if (mediaVideoAutoPlay) {
+      videoAttrs += 'autoplay muted ';
+    }
+    if (mediaVideoloop) {
+      videoAttrs += 'loop ';
+    }
+
+    // eslint-disable-next-line no-nested-ternary
+    const curDevice = window.innerWidth >= 1280 ? 'D' : ((window.innerWidth >= 731 && window.innerWidth < 1279.5) ? 'T' : 'M');
+    const mediaContainerRatio = v('mediaContainerRatio') ? `aspect-ratio: ${v('mediaContainerRatio')};` : '';
+
+    return `
+      <div class="device-${curDevice} media-block-video-container relative" style="position: relative; overflow-hidden; ${containerRadiusStyle} ${mediaContainerRatio}">
+        <video
+          data-src-m="${configM.assets || ''}"
+          data-src-t="${configT.assets || ''}"
+          data-src-d="${configD.assets || ''}"
+          data-object-position-m="center"
+          data-object-position-t="center"
+          data-object-position-d="center"
+          src="${defaultAssets}"
+          class="w-full h-full object-cover"
+          style="object-position: center;"
+          ${videoAttrs}
+          playsinline
+        ></video>
+        ${controlButtons}
+      </div>
+    `;
+  };
+
+  // Render content based on media type
+  let mediaContent = '';
+  // Video: create a single video element, switch source dynamically via JS
+  const device = getDevice();
+  if (device === 'D') {
+    mediaContent = createVideoElement(configD);
+  } else if (device === 'T') {
+    mediaContent = createVideoElement(configT);
+  } else {
+    mediaContent = createVideoElement(configM);
+  }
+
+  wrap.innerHTML += `
+    <div class="media-block-container relative">
+      ${mediaContent}
+    </div>
+  `;
+
+  // Add video control logic and responsive source switching
+  setTimeout(() => {
+    const videoElement = wrap.querySelector('video');
+    const container = wrap.querySelector('.media-block-video-container');
+    if (!container) {
+      return false;
+    }
+    const existingControlsDiv = container.querySelector('.media-block-controls');
+    if (!videoElement || !container) return;
+
+    // Disable native controls
+    videoElement.removeAttribute('controls');
+    videoElement.controls = false;
+
+    const playBtn = container.querySelector('.media-block-play-btn');
+    const pauseBtn = container.querySelector('.media-block-pause-btn');
+    const controlsDiv = container.querySelector('.media-block-controls');
+    const replayBtnElement = container.querySelector('.media-block-replay-btn');
+
+    // Button event binding
+    const bindButtonEvents = (playBtnEl, pauseBtnEl) => {
+      if (playBtnEl) {
+        playBtnEl.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          videoElement.play();
+        });
+      }
+
+      if (pauseBtnEl) {
+        pauseBtnEl.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          videoElement.pause();
+        });
+      }
+    };
+
+    // If initial buttons exist, bind events directly
+    if (playBtn && pauseBtn) {
+      bindButtonEvents(playBtn, pauseBtn);
+    }
+
+    // Play/pause event listeners (unified control for button show/hide)
+    const handlePlay = () => {
+      const currentPlayBtn = container.querySelector('.media-block-play-btn');
+      const currentPauseBtn = container.querySelector('.media-block-pause-btn');
+      if (currentPlayBtn) currentPlayBtn.style.display = 'none';
+      if (currentPauseBtn) currentPauseBtn.style.display = 'flex';
+      if (replayBtnElement) replayBtnElement.style.display = 'none';
+      const { duration } = videoElement;
+      if (mediaVideoPauseAndPlayBtn === true || (mediaVideoPauseAndPlayBtn === false && duration > 5)) {
+        existingControlsDiv.style.display = 'block';
+      }
+    };
+
+    const handlePause = () => {
+      const currentPlayBtn = container.querySelector('.media-block-play-btn');
+      const currentPauseBtn = container.querySelector('.media-block-pause-btn');
+      if (currentPlayBtn) currentPlayBtn.style.display = 'flex';
+      if (currentPauseBtn) currentPauseBtn.style.display = 'none';
+    };
+
+    // Bind video event listeners
+    videoElement.addEventListener('play', handlePlay);
+    videoElement.addEventListener('pause', handlePause);
+
+    // Replay button event binding
+    if (replayBtnElement) {
+      replayBtnElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        videoElement.currentTime = 0;
+        videoElement.play();
+      });
+    }
+
+    // Responsive video source switching function
+    const updateVideoSource = () => {
+      const isTablet = window.innerWidth >= 731 && window.innerWidth < 1279.5;
+      const isDesktop = window.innerWidth >= 1280;
+
+      const srcD = videoElement.getAttribute('data-src-d');
+      const srcT = videoElement.getAttribute('data-src-t');
+      const srcM = videoElement.getAttribute('data-src-m');
+      const posD = videoElement.getAttribute('data-object-position-d');
+      const posT = videoElement.getAttribute('data-object-position-t');
+      const posM = videoElement.getAttribute('data-object-position-m');
+
+      let newSrc = '';
+      let newObjectPosition = '';
+
+      if (isDesktop) {
+        if (srcD) newSrc = srcD;
+        if (posD) newObjectPosition = posD;
+      } else if (isTablet) {
+        if (srcT) newSrc = srcT;
+        if (posT) newObjectPosition = posT;
+      } else {
+        if (srcM) newSrc = srcM;
+        if (posM) newObjectPosition = posM;
+      }
+
+      // Switch video source
+      if (newSrc && newSrc !== videoElement.src) {
+        const { currentTime } = videoElement;
+        const wasPlaying = !videoElement.paused;
+
+        videoElement.src = newSrc;
+
+        // Restore playback state
+        if (currentTime > 0) {
+          videoElement.currentTime = currentTime;
+          if (wasPlaying) {
+            videoElement.play().catch((err) => {
+              // eslint-disable-next-line no-console
+              console.warn('Video playback failed:', err);
+            });
+          }
+        }
+      }
+
+      if (newSrc === '') {
+        videoElement.src = '';
+      }
+
+      if (newObjectPosition) {
+        videoElement.style.objectPosition = newObjectPosition;
+      }
+
+      if (mediaVideoPauseAndPlayBtn === false) {
+        const currentControlsDiv = container.querySelector('.media-block-controls');
+
+        if (currentControlsDiv) {
+          currentControlsDiv.style.display = 'none';
+        }
+      } else {
+        const currentControlsDiv = container.querySelector('.media-block-controls');
+        if (currentControlsDiv) {
+          currentControlsDiv.style.display = 'flex';
+        }
+      }
+    };
+
+    // Listen for window resize
+    let resizeTimer;
+    if (!isAuthorUe()) {
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateVideoSource, 200);
+      });
+    }
+
+    // Requirements:
+    // 1. When mediaVideoPauseAndPlayBtn is configured as true: all videos show play/pause buttons
+    // 2. When mediaVideoPauseAndPlayBtn is configured as false: only videos longer than 5 seconds force display of buttons
+
+    // Only when configured as 'false' and video is longer than 5 seconds, dynamically add buttons
+    const needToAddButtonsDynamically = mediaVideoPauseAndPlayBtn === false;
+
+    // When mediaVideoPauseAndPlayBtn is false initially, dynamically add/hide buttons
+    const addButtonsIfNeeded = () => {
+      if (!needToAddButtonsDynamically) return;
+
+      const { duration } = videoElement;
+
+      if (duration > 5) {
+        // Video is longer than 5 seconds, need to show buttons
+        existingControlsDiv.style.display = 'flex';
+
+        // Reset button state: show play button, hide pause button
+        const currentPlayBtn = existingControlsDiv.querySelector('.media-block-play-btn');
+        const currentPauseBtn = existingControlsDiv.querySelector('.media-block-pause-btn');
+        if (currentPlayBtn) currentPlayBtn.style.display = 'flex';
+        if (currentPauseBtn) currentPauseBtn.style.display = 'none';
+      } else {
+        // Video is not longer than 5 seconds, no need to show buttons
+        // eslint-disable-next-line no-lonely-if
+        if (existingControlsDiv) {
+          existingControlsDiv.style.display = 'none';
+        }
+      }
+    };
+
+    videoElement.addEventListener('loadedmetadata', addButtonsIfNeeded);
+
+    updateVideoSource();
+
+    // Play end event (when mediaVideoloop === false, show replay button after video ends)
+    if (replayBtnElement && !mediaVideoloop) {
+      videoElement.addEventListener('ended', () => {
+        replayBtnElement.style.display = 'flex';
+        if (controlsDiv) controlsDiv.style.display = 'none';
+      });
+    }
+  }, 100);
+};
+
+// 处理背景图片或者视频
 const handleBgAsset = (wrap, v) => {
   if (['icon', 'text'].includes(v('layoutStyle')) || (v('layoutStyle') === 'media' && v('mediaType') === 'image')) {
     const config = {
@@ -322,12 +485,14 @@ const handleBgAsset = (wrap, v) => {
     };
     Object.entries(config).forEach(([key, classes]) => {
       if (v(key, 'html')) {
-        wrap.innerHTML += `<div class="absolute z-0 ${classes}">${v(key, 'html')}</div>`;
+        wrap.innerHTML += `<div class="absolute z-0 ${classes}">
+          <img
+            src="${v(key)}"
+            class="object-cover"
+            style="object-position: center;"
+          />
+        </div>`;
       }
-    });
-    // 图片高度100%
-    wrap.querySelectorAll('img').forEach((img) => {
-      img.classList.add('h-full');
     });
     if (v('layoutStyle') === 'media' && v('mediaType') === 'image') {
       const altText = v('mediaImageAltText');
@@ -344,7 +509,19 @@ const handleBgAsset = (wrap, v) => {
           img.style.aspectRatio = containerRatio;
         });
       }
+      // 图片高度100%
+      wrap.querySelectorAll('img').forEach((img) => {
+        img.classList.add('w-full', 'h-auto');
+      });
+    } else { // 'icon', 'text'
+      // 图片高度100%
+      wrap.querySelectorAll('img').forEach((img) => {
+        img.classList.add('h-full', 'w-auto');
+      });
     }
+  } else if (v('layoutStyle') === 'media' && v('mediaType') === 'video') {
+    // 处理视频
+    handleVideo(wrap, v);
   }
 };
 
@@ -510,8 +687,3 @@ export default async function decorate(block) {
     block.innerHTML = '<div class="error-message">Failed to load featureksp-grid block</div>';
   }
 }
-
-// // 页面加载完成后初始化
-// if (typeof window !== 'undefined') {
-//   window.addEventListener('DOMContentLoaded', initVideoControls);
-// }

@@ -46,152 +46,103 @@
     }
   }
 
-  .featureksp-grid-block {
-    width: 100%;
-    
-    .featureksp-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
+  @mixin media-block-btn {
+    border-radius: 50%;
+    display: flex;
+    height: 36px;
+    width: 36px;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .media-block-container {
+    position: relative;
+    overflow: clip;
+    transition: all 0.3s ease;
+
+    img,
+    video {
+      display: block;
       width: 100%;
-      
-      .featureksp-grid-item {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        box-sizing: border-box;
-        
-        // 响应式布局
-        @media (width <= 768px) {
-          grid-column: span 12 !important;
-        }
-        
-        @media (769px <= width <= 1024px) {
-          &[style*="grid-column: span 12"] {
-            grid-column: span 12;
-          }
-          
-          &[style*="grid-column: span 6"] {
-            grid-column: span 6;
-          }
-          
-          &[style*="grid-column: span 4"] {
-            grid-column: span 6;
-          }
-          
-          &[style*="grid-column: span 3"] {
-            grid-column: span 6;
-          }
-        }
-        
-        // 媒体样式
-        &.style-media {
-          .media-container {
-            position: relative;
-            width: 100%;
-            
-            .media-image {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
-            
-            .media-video {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
-            
-            .video-controls {
-              position: absolute;
-              top: 10px;
-              right: 10px;
-              z-index: 10;
-              
-              button {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                border: 1px solid white;
-                background: rgb(0 0 0 / 50%);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                margin-left: 10px;
-                
-                &:hover {
-                  background: rgb(0 0 0 / 70%);
-                }
-                
-                svg {
-                  width: 20px;
-                  height: 20px;
-                }
-              }
-              
-              .play-btn,
-              .pause-btn,
-              .replay-btn {
-                display: none;
-              }
-            }
-          }
-          
-          .text-container {
-            margin-top: 15px;
-          }
-        }
-        
-        // 图标样式
-        &.style-icon {
-          .icon-container {
-            .icon-image {
-              width: 60px;
-              height: 60px;
-              object-fit: contain;
-              flex-shrink: 0;
-            }
-          }
-          
-          .text-container {
-            margin-top: 15px;
-          }
-        }
-        
-        // 文本样式
-        &.style-text {
-          .text-container {
-            width: 100%;
-          }
-        }
-        
-        // 文本容器
-        .text-container {
-          flex: 1;
-          
-          .top-richtext,
-          .title-richtext,
-          .bottom-richtext {
-            margin-bottom: 10px;
-            
-            &:last-child {
-              margin-bottom: 0;
-            }
-          }
-        }
-        
-        // 锚点
-        .featureksp-grid-anchor {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 5;
-          opacity: 0;
-        }
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Media Object Positioning */
+    .object-position-left {
+      object-position: left center;
+    }
+
+    .object-position-right {
+      object-position: right center;
+    }
+
+    .object-position-center {
+      object-position: center center;
+    }
+
+    /* Loading State */
+    &.loading {
+      min-height: 200px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+    }
+
+    /* Error State */
+    &.error {
+      background-color: #ffebee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+
+      &::before {
+        content: "⚠️ Media Load Failed";
+        color: #d32f2f;
+        font-size: 14px;
+      }
+    }
+
+    /* Video Control Buttons */
+    .media-block-controls {
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+
+      .media-block-play-btn,
+      .media-block-pause-btn,
+      .media-block-replay-btn {
+        @include media-block-btn;
+      }
+    }
+
+    /* Rotation Animation Keyframes */
+    @keyframes spin {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
       }
     }
   }
