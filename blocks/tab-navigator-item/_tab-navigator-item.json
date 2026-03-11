@@ -21,33 +21,6 @@
       "id": "tab-navigator-item",
       "fields": [
         {
-          "component": "text",
-          "label": "tab text",
-          "name": "tabItemText",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "label": "icon assets (if show icon=yes)",
-          "name": "tabItemIconAsset",
-          "multi": false
-        },
-        {
-          "component": "aem-content",
-          "label": "fragment URL",
-          "name": "tabItemFragmentUrl",
-          "valueType": "string",
-          "description": "Used when 2nd layer tab = no. Path to the ID12 container-2cols page.",
-          "condition": {
-            "!==": [
-              {
-                "var": "secondLayerTab"
-              },
-              "yes"
-            ]
-          }
-        },
-        {
           "component": "select",
           "label": "2nd layer tab (layout 4 only)",
           "name": "secondLayerTab",
@@ -62,6 +35,49 @@
               "value": "yes"
             }
           ]
+        },
+        {
+          "component": "text",
+          "label": "tab text",
+          "name": "tabItemText",
+          "valueType": "string",
+          "condition": {
+            "===": [
+              {
+                "var": "secondLayerTab"
+              },
+              "no"
+            ]
+          }
+        },
+        {
+          "component": "reference",
+          "label": "icon assets (if show icon=yes)",
+          "name": "tabItemIconAsset",
+          "multi": false,
+          "condition": {
+            "===": [
+              {
+                "var": "secondLayerTab"
+              },
+              "no"
+            ]
+          }
+        },
+        {
+          "component": "aem-content",
+          "label": "fragment URL",
+          "name": "tabItemFragmentUrl",
+          "valueType": "string",
+          "description": "Used when 2nd layer tab = no. Path to the ID12 container-2cols page.",
+          "condition": {
+            "===": [
+              {
+                "var": "secondLayerTab"
+              },
+              "no"
+            ]
+          }
         },
         {
           "component": "richtext",

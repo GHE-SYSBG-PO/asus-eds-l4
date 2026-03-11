@@ -53,7 +53,7 @@ const productFonts = FONTS[PRODUCT_LINE] || FONTS.asus;
 const DEFAULT_CONFIG = {
   layoutStyle: '1',
   tabStyle: '1',
-  showIcon: 'no',
+  showIcon: 'false',
   colorGroup: '',
   // tab theme
   tabSelectedColor: '',
@@ -128,8 +128,6 @@ function buildRadiusValue(tl, tr, br, bl) {
 }
 
 // ── Tab item decorator ───────────────────────────────────────
-// 保留原始 .tab-navigator-item DOM（含所有 data-aue-* 屬性），
-// 只替換其內部視覺內容，並補上 tab button 所需的 class / aria。
 
 function decorateItemEl(
   itemEl,
@@ -270,9 +268,6 @@ function setupSwiper(tabListEl, tabBarEl, tabBtns, panels, prefix) {
 }
 
 // ── Fragment loader ───────────────────────────────────────────
-// 輕量版：只做 fetch + DOMParser，不觸發 decorateMain/loadSections，
-// 避免遞迴呼叫 tab-navigator 的 decorate()。
-
 async function loadFragmentCols(url) {
   if (!url) return { col1: null, col2: null };
   try {
@@ -310,15 +305,6 @@ function buildFragmentSlots(col1, col2) {
 
 /**
  * Layout 1 — tab on top, col1 上 col2 下，全寬，上下排列
- *
- * Desktop/Tablet:
- *   .tab-nav-bar (sticky)
- *   .tab-panels
- *     .tab-panel
- *       .tab-col1   ← 綠框，全寬
- *       .tab-col2   ← 紫框，全寬，在 col1 下方
- *
- * Mobile: 同上
  */
 async function renderLayout1(componentEl, items, cfg) {
   const { tabRadiusStyle, tabIconEnabled, tabFontSizeClass } = cfg;
@@ -367,18 +353,6 @@ async function renderLayout1(componentEl, items, cfg) {
 
 /**
  * Layout 2 — tab in middle
- *   col1 (綠框) 在 tab bar 上方，隨 tab 切換
- *   col2 (紫框) 在 tab bar 下方
- *
- * Desktop:
- *   .tab-col1-stage  ← 只顯示 active item 的 col1
- *   .tab-nav-bar
- *   .tab-panels
- *     .tab-panel
- *       .tab-col2
- *
- * Layout 2 多個 container 時，僅第一個 container 的 col1 移到 tab 上方（spec）
- * 這裡只有一組 tab，col1-stage 隨 tab 切換更新。
  */
 async function renderLayout2(componentEl, items, cfg) {
   const { tabRadiusStyle, tabIconEnabled, tabFontSizeClass } = cfg;
@@ -457,16 +431,6 @@ async function renderLayout2(componentEl, items, cfg) {
 
 /**
  * Layout 3 — tab on top, split container
- *   col1 (綠框) 和 col2 (紫框) 在 tab 下方左右並排
- *
- * Desktop/Tablet:
- *   .tab-nav-bar
- *   .tab-panels
- *     .tab-panel.tab-panel-layout3   ← flex-row
- *       .tab-col1   ← 左 (綠框)
- *       .tab-col2   ← 右 (紫框)
- *
- * Mobile: col1 col2 上下排列
  */
 async function renderLayout3(componentEl, items, cfg) {
   const { tabRadiusStyle, tabIconEnabled, tabFontSizeClass } = cfg;
@@ -514,20 +478,6 @@ async function renderLayout3(componentEl, items, cfg) {
 
 /**
  * Layout 4 — Double tab
- *   每個 primary tab item 底下有 sub-tab (second layer)，
- *   每個 sub-item 各自 fetch 一個 fragment。
- *
- *   若 secondLayerTab = 'yes':
- *     .tab-panel
- *       .tab-summary-richtext   ← 空值則隱藏
- *       .tab-subnav-bar         ← sub tab nav
- *       .tab-sub-panels
- *         .tab-sub-panel
- *           .tab-col1 / .tab-col2
- *
- *   若 secondLayerTab = 'no':
- *     .tab-panel
- *       .tab-col1 / .tab-col2   ← 直接顯示 fragment（視為 layout1）
  */
 async function renderLayout4(componentEl, items, cfg) {
   const {
@@ -656,7 +606,8 @@ async function decoratePage(block) {
 
   const layoutStyle = data.layoutstyle || DEFAULT_CONFIG.layoutStyle;
   const tabStyle = data.tabstyle || DEFAULT_CONFIG.tabStyle;
-  const showIcon = data.showicon === 'yes';
+  // showIcon 是 boolean 欄位，EDS 傳來的是字串 "true" / "false"
+  const showIcon = data.showicon === 'true';
   const colorGroup = data.colorgroup || '';
 
   // ── Helpers ─────────────────────────────────────────────────
