@@ -10,6 +10,7 @@
     transition: opacity 400ms linear;
 
     .nav-hero {
+      &.is-collision-hidden,
       &.is-hidden {
         opacity: 0 !important;
 

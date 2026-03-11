@@ -529,6 +529,45 @@ const _handleIsHiddenEvent = (containerEl) => {
   });
 };
 
+const _handleItemCollisionClose = (block) => {
+  const navHero = block.querySelector('.nav-hero');
+  if (!navHero) return;
+
+  const checkCollision = () => {
+    const navRect = navHero.getBoundingClientRect();
+
+    // Skip check if nav-hero is invisible (width/height = 0)
+    if (navRect.width === 0 && navRect.height === 0) return;
+
+    // Query dynamically since collision elements may load after nav-hero
+    const collisionEls = document.querySelectorAll('.nav-hero-collision');
+    let isColliding = false;
+
+    collisionEls.forEach((el) => {
+      const elRect = el.getBoundingClientRect();
+      // AABB overlap check
+      if (
+        navRect.left < elRect.right
+        && navRect.right > elRect.left
+        && navRect.top < elRect.bottom
+        && navRect.bottom > elRect.top
+      ) {
+        isColliding = true;
+      }
+    });
+
+    if (isColliding) {
+      navHero.classList.add('is-collision-hidden');
+    } else {
+      navHero.classList.remove('is-collision-hidden');
+    }
+  };
+
+  window.addEventListener('scroll', checkCollision, { passive: true });
+  window.addEventListener('resize', checkCollision, { passive: true });
+  checkCollision();
+};
+
 // ── Entry point ───────────────────────────────────────────────
 export default async function decorate(block) {
   try {
@@ -590,6 +629,7 @@ export default async function decorate(block) {
     _handleSectionEnter(block);
     _handleNavShowUp(block, config);
     _handleIsHiddenEvent(containerEl);
+    _handleItemCollisionClose(block);
 
     setTimeout(() => {
       containerEl.querySelector('.nav-hero').classList.remove('is-hidden');
