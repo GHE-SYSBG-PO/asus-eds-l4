@@ -33,6 +33,7 @@
           "options": [
             { "name": "left", "value": "left" },
             { "name": "right", "value": "right" },
+            { "name": "center", "value": "center" },
             { "name": "top", "value": "top" },
             { "name": "bottom", "value": "bottom" },
             { "name": "top left", "value": "topLeft" },
@@ -52,6 +53,7 @@
           "options": [
             { "name": "left", "value": "left" },
             { "name": "right", "value": "right" },
+            { "name": "center", "value": "center" },
             { "name": "top", "value": "top" },
             { "name": "bottom", "value": "bottom" },
             { "name": "top left", "value": "topLeft" },
@@ -71,6 +73,7 @@
           "options": [
             { "name": "left", "value": "left" },
             { "name": "right", "value": "right" },
+            { "name": "center", "value": "center" },
             { "name": "top", "value": "top" },
             { "name": "bottom", "value": "bottom" },
             { "name": "top left", "value": "topLeft" },

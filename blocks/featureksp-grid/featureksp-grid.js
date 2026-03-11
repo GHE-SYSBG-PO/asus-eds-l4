@@ -201,7 +201,7 @@ const getRadiusStyle = (tl, tr, br, bl) => {
 };
 
 // 添加文本内容
-function addTextContent(block, v) {
+function addTextContent(wrap, v) {
   const alignmentClass = v('textAlignment') || 'text-left';
   let html = '';
 
@@ -229,15 +229,18 @@ function addTextContent(block, v) {
 
   // 使用 innerHTML 添加内容
   if (html) {
-    block.innerHTML += `<div class="grid gap-[4px] md:gap-[8px]">${html}</div>`;
+    wrap.innerHTML += `<div class="relative z-1">
+      <div id="featureksp-grid-item-textContent" class="grid gap-[4px] md:gap-[8px]">${html}</div>
+    </div>`;
   }
 }
 
-// 布局表
-const layoutVariant = {
+// media布局表
+const mediaLayoutVariant = {
   layoutVariantD: {
     left: 'lg:justify-start lg:items-center',
     right: 'lg:justify-end lg:items-center',
+    center: 'lg:justify-center lg:items-center',
     top: 'lg:justify-center lg:items-start',
     bottom: 'lg:justify-center lg:items-end',
     topLeft: 'lg:justify-start lg:items-start',
@@ -248,6 +251,7 @@ const layoutVariant = {
   layoutVariantT: {
     left: 'md:justify-start md:items-center',
     right: 'md:justify-end md:items-center',
+    center: 'md:justify-center md:items-center',
     top: 'md:justify-center md:items-start',
     bottom: 'md:justify-center md:items-end',
     topLeft: 'md:justify-start md:items-start',
@@ -258,6 +262,7 @@ const layoutVariant = {
   layoutVariantM: {
     left: 'justify-start items-center',
     right: 'justify-end items-center',
+    center: 'justify-center items-center',
     top: 'justify-center items-start',
     bottom: 'justify-center items-end',
     topLeft: 'justify-start items-start',
@@ -267,61 +272,110 @@ const layoutVariant = {
   },
 };
 
+// icon布局表
+const iconLayoutVariant = {
+  layoutVariantD: {
+    right: 'lg:justify-start lg:items-center lg:flex-row',
+    top: 'lg:justify-start lg:items-center lg:flex-col-reverse',
+    bottom: 'lg:justify-start lg:items-center lg:flex-col',
+  },
+  layoutVariantT: {
+    right: 'md:justify-start md:items-center md:flex-row',
+    top: 'md:justify-start md:items-center md:flex-col-reverse',
+    bottom: 'md:justify-start md:items-center md:flex-col',
+  },
+  layoutVariantM: {
+    right: 'justify-start items-center flex-row',
+    top: 'justify-start items-center flex-col-reverse',
+    bottom: 'justify-start items-center flex-col',
+  },
+};
+
 // 处理文本区域位置
-const handleLayoutVariant = (block, v) => {
+const handleLayoutVariant = (wrap, v, layoutVariant) => {
   ['layoutVariantD', 'layoutVariantT', 'layoutVariantM'].forEach((key) => {
     const val = v(key);
     if (val) {
-      block.classList.add(...layoutVariant[key][val].split(' '));
+      wrap.classList.add(...layoutVariant[key][val].split(' '));
     }
   });
 };
 
+// if (v('bgAssetD', 'html')) {
+//     div.innerHTML += `<div class="w-[80px] h-[80px] hidden lg:block">${v('bgAssetD', 'html')}</div>`;
+//   }
+//   if (v('bgAssetT', 'html')) {
+//     div.innerHTML += `<div class="w-[80px] h-[80px] hidden md:block">${v('bgAssetT', 'html')}</div>`;
+//   }
+//   if (v('bgAssetM', 'html')) {
+//     div.innerHTML += `<div class="w-[80px] h-[80px] block md:hidden">${v('bgAssetM', 'html')}</div>`;
+//   }
+
 // 处理媒体
-const handleMedia = (block, v) => {
+const handleMedia = (wrap, v) => {
   ['mediaColumnSpanD', 'mediaColumnSpanT'].forEach((key) => {
     const classes = v(key);
     if (classes) {
-      block.classList.add(classes);
+      wrap.classList.add(classes);
     }
   });
-  handleLayoutVariant(block, v);
+  handleLayoutVariant(wrap, v, mediaLayoutVariant);
 };
 // 处理图标
-const handleIcon = (block, v) => {
+const handleIcon = (wrap, v) => {
   ['iconColumnSpanD', 'iconColumnSpanT'].forEach((key) => {
     const classes = v(key);
     if (classes) {
-      block.classList.add(classes);
+      wrap.classList.add(classes);
     }
   });
-  // handleLayoutVariant(block, v);
+  wrap.classList.add('justify-center', 'items-center');
+  try {
+    const textBlock = wrap.querySelector('#featureksp-grid-item-textContent');
+    const textBlockParent = textBlock.parentElement;
+    textBlockParent.classList.add('flex', 'w-full', 'gap-[28px]');
+    if (v('iconAsset', 'html')) {
+      const temp = textBlockParent.innerHTML;
+      textBlockParent.innerHTML = `<div class="w-[80px] h-[80px] shrink-0 flex justify-center items-center">${v('iconAsset', 'html')}</div>${temp}`;
+    }
+    ['layoutVariantD', 'layoutVariantT', 'layoutVariantM'].forEach((key) => {
+      const val = v(key);
+      // 只有右上下
+      if (['right', 'top', 'bottom'].includes(val)) {
+        handleLayoutVariant(textBlockParent, v, iconLayoutVariant);
+      }
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error:', error);
+  }
 };
 // 处理文字
-const handleText = (block, v) => {
+const handleText = (wrap, v) => {
   ['textColumnSpanD', 'textColumnSpanT'].forEach((key) => {
     const classes = v(key);
     if (classes) {
-      block.classList.add(classes);
+      wrap.classList.add(classes);
     }
   });
+  wrap.classList.add('justify-center', 'items-center');
 };
 
 // 处理锚点
-const handleAnchor = (block, v) => {
-  if (v('anchorVisibilityToggle') === true && v('layoutStyle') === 'icon') {
-    if (v('layoutVariantD') === 'bottom') {
-      block.classList.add('lg:pb-[80px]');
-    }
-    if (v('layoutVariantT') === 'bottom') {
-      block.classList.add('md:pb-[80px]');
-    }
-    if (v('layoutVariantM') === 'bottom') {
-      block.classList.add('pb-[80px]');
-    }
-  }
-  // 处理锚点
+const handleAnchor = (wrap, v) => {
   if (v('anchorVisibilityToggle') === 'true') {
+    if (v('layoutStyle') === 'icon') {
+      if (['bottom', 'right', 'bottomRight'].includes(v('layoutVariantD'))) {
+        wrap.classList.add('lg:pb-[80px]');
+      }
+      if (['bottom', 'right', 'bottomRight'].includes(v('layoutVariantT'))) {
+        wrap.classList.add('md:pb-[80px]');
+      }
+      if (['bottom', 'right', 'bottomRight'].includes(v('layoutVariantM'))) {
+        wrap.classList.add('pb-[80px]');
+      }
+    }
+    // 处理锚点
     const anchor = document.createElement('a');
     anchor.href = v('anchorSectionId') ? `#${v('anchorSectionId')}` : '#';
     anchor.setAttribute('aria-label', `Anchor to section ${v('anchorSectionId')}`);
@@ -331,13 +385,15 @@ const handleAnchor = (block, v) => {
         <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2731 13.9609C25.7752 14.463 25.7752 15.2771 25.2731 15.7792L18.9091 22.1432C18.407 22.6453 17.593 22.6453 17.0909 22.1432L10.7269 15.7792C10.2248 15.2771 10.2248 14.463 10.7269 13.9609C11.229 13.4588 12.0431 13.4588 12.5452 13.9609L18 19.4158L23.4548 13.9609C23.9569 13.4588 24.771 13.4588 25.2731 13.9609Z" fill="#2F2F2F"/>
       </svg>
     `;
-    block.appendChild(anchor);
+    anchor.classList.add('absolute', 'right-[20px]', 'bottom-[20px]', 'z-9');
+    wrap.appendChild(anchor);
   }
 };
 
 // DEFAULT
 const DEFAULT_CONFIG = {
-  anchorVisibilityToggle: true,
+  anchorVisibilityToggle: 'true',
+  anchorStyle: 'svg',
 };
 export default async function decorate(block) {
   try {
@@ -382,10 +438,17 @@ export default async function decorate(block) {
 
         // inlineStyle = '';
         // 添加初始class
-        wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12', 'flex', 'justify-center', 'items-center');
+        wrap.classList.add('col-span-12', 'wrap-anywhere', 'col-span-12', 'flex', 'relative');
         console.log('itemConfig', itemConfig);
         // 先清空
         wrap.innerHTML = '';
+        // 通用配置
+        addTextContent(wrap, v);
+        if (v('layoutRowSpanD')) {
+          wrap.classList.add(v('layoutRowSpanD'));
+        }
+        // 处理锚点
+        handleAnchor(wrap, v);
         // 选择样式
         const layoutStyle = v('layoutStyle');
         if (layoutStyle === 'media') {
@@ -395,13 +458,6 @@ export default async function decorate(block) {
         } else if (layoutStyle === 'text') {
           handleText(wrap, v);
         }
-        // 通用配置
-        addTextContent(wrap, v);
-        if (v('layoutRowSpanD')) {
-          wrap.classList.add(v('layoutRowSpanD'));
-        }
-        // 处理锚点
-        handleAnchor(wrap, v);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error decorating grid item:', error);

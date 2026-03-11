@@ -4422,6 +4422,10 @@
                 "value": "right"
               },
               {
+                "name": "center",
+                "value": "center"
+              },
+              {
                 "name": "top",
                 "value": "top"
               },
@@ -4473,6 +4477,10 @@
                 "value": "right"
               },
               {
+                "name": "center",
+                "value": "center"
+              },
+              {
                 "name": "top",
                 "value": "top"
               },
@@ -4522,6 +4530,10 @@
               {
                 "name": "right",
                 "value": "right"
+              },
+              {
+                "name": "center",
+                "value": "center"
               },
               {
                 "name": "top",
@@ -5351,26 +5363,6 @@
           ]
         },
         "fields": [
-          {
-            "component": "select",
-            "label": "img vertical alignment",
-            "name": "itemImgVerticalAlignment",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "top",
-                "value": "top"
-              },
-              {
-                "name": "bottom",
-                "value": "bottom"
-              },
-              {
-                "name": "center",
-                "value": "center"
-              }
-            ]
-          },
           {
             "component": "text",
             "label": "text width (D)",
