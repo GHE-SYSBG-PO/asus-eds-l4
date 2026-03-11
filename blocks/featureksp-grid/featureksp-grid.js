@@ -205,13 +205,6 @@ function addTextContent(wrap, v) {
   const alignmentClass = v('textAlignment') || 'text-left';
   let html = '';
 
-  // // 应用文本宽度
-  // if (v('textWidth')) {
-  //   textContainer.style.width = v('textWidth');
-  // } else {
-  //   textContainer.style.width = '50%'; // 默认 50%
-  // }
-
   // 添加顶部富文本
   if (v('textTopRichtext', 'html') && v('layoutStyle') !== 'icon') {
     html += `<div class="${alignmentClass}">${v('textTopRichtext', 'html')}</div>`;
@@ -229,9 +222,27 @@ function addTextContent(wrap, v) {
 
   // 使用 innerHTML 添加内容
   if (html) {
-    wrap.innerHTML += `<div class="relative z-1">
-      <div id="featureksp-grid-item-textContent" class="grid gap-[4px] md:gap-[8px]">${html}</div>
+    wrap.innerHTML += `<div class="flex z-1 w-full">
+      <div class="featureksp-grid-item-textContent" class="grid gap-[4px] md:gap-[8px]">${html}</div>
     </div>`;
+
+    // 文本内容宽度
+    if (v('layoutStyle') === 'media') {
+      const textBlock = wrap.querySelector('.featureksp-grid-item-textContent');
+      ['layoutVariantD', 'layoutVariantT', 'layoutVariantM'].forEach((item) => {
+        if (['left', 'right', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight'].includes(v(item))) {
+          if (item === 'layoutVariantD') {
+            textBlock.style.setProperty('--featureksp-grid-item-text-content-width-lg', v('itemTextWidthD') || '50%');
+          }
+          if (item === 'layoutVariantT') {
+            textBlock.style.setProperty('--featureksp-grid-item-text-content-width-md', v('itemTextWidthT') || '50%');
+          }
+          if (item === 'layoutVariantM') {
+            textBlock.style.setProperty('--featureksp-grid-item-text-content-width-sm', v('itemTextWidthM') || '50%');
+          }
+        }
+      });
+    }
   }
 }
 
@@ -301,15 +312,41 @@ const handleLayoutVariant = (wrap, v, layoutVariant) => {
   });
 };
 
-// if (v('bgAssetD', 'html')) {
-//     div.innerHTML += `<div class="w-[80px] h-[80px] hidden lg:block">${v('bgAssetD', 'html')}</div>`;
-//   }
-//   if (v('bgAssetT', 'html')) {
-//     div.innerHTML += `<div class="w-[80px] h-[80px] hidden md:block">${v('bgAssetT', 'html')}</div>`;
-//   }
-//   if (v('bgAssetM', 'html')) {
-//     div.innerHTML += `<div class="w-[80px] h-[80px] block md:hidden">${v('bgAssetM', 'html')}</div>`;
-//   }
+// 处理背景图片
+const handleBgAsset = (wrap, v) => {
+  if (['icon', 'text'].includes(v('layoutStyle')) || (v('layoutStyle') === 'media' && v('mediaType') === 'image')) {
+    const config = {
+      bgAssetD: 'featureksp-grid-item-bg-asset-lg hidden',
+      bgAssetT: 'featureksp-grid-item-bg-asset-md hidden',
+      bgAssetM: 'featureksp-grid-item-bg-asset-sm hidden',
+    };
+    Object.entries(config).forEach(([key, classes]) => {
+      if (v(key, 'html')) {
+        wrap.innerHTML += `<div class="h-full absolute z-0 ${classes}">${v(key, 'html')}</div>`;
+      }
+    });
+    // 图片高度100%
+    wrap.querySelectorAll('img').forEach((img) => {
+      img.classList.add('h-full', 'object-cover');
+    });
+    if (v('layoutStyle') === 'media' && v('mediaType') === 'image') {
+      const altText = v('mediaImageAltText');
+      if (altText) {
+        const imgs = wrap.querySelectorAll('img');
+        imgs.forEach((img) => {
+          img.setAttribute('alt', altText);
+        });
+      }
+      const containerRatio = v('mediaContainerRatio');
+      if (containerRatio) {
+        const imgs = wrap.querySelectorAll('img');
+        imgs.forEach((img) => {
+          img.style.aspectRatio = containerRatio;
+        });
+      }
+    }
+  }
+};
 
 // 处理媒体
 const handleMedia = (wrap, v) => {
@@ -319,7 +356,10 @@ const handleMedia = (wrap, v) => {
       wrap.classList.add(classes);
     }
   });
-  handleLayoutVariant(wrap, v, mediaLayoutVariant);
+  wrap.classList.add('justify-center', 'items-center');
+  const textBlock = wrap.querySelector('.featureksp-grid-item-textContent');
+  const textBlockParent = textBlock.parentElement;
+  handleLayoutVariant(textBlockParent, v, mediaLayoutVariant);
 };
 // 处理图标
 const handleIcon = (wrap, v) => {
@@ -331,9 +371,9 @@ const handleIcon = (wrap, v) => {
   });
   wrap.classList.add('justify-center', 'items-center');
   try {
-    const textBlock = wrap.querySelector('#featureksp-grid-item-textContent');
+    const textBlock = wrap.querySelector('.featureksp-grid-item-textContent');
     const textBlockParent = textBlock.parentElement;
-    textBlockParent.classList.add('flex', 'w-full', 'gap-[28px]');
+    textBlockParent.classList.add('gap-[28px]');
     if (v('iconAsset', 'html')) {
       const temp = textBlockParent.innerHTML;
       textBlockParent.innerHTML = `<div class="w-[80px] h-[80px] shrink-0 flex justify-center items-center">${v('iconAsset', 'html')}</div>${temp}`;
@@ -443,6 +483,7 @@ export default async function decorate(block) {
         // 先清空
         wrap.innerHTML = '';
         // 通用配置
+        handleBgAsset(wrap, v);
         addTextContent(wrap, v);
         if (v('layoutRowSpanD')) {
           wrap.classList.add(v('layoutRowSpanD'));
