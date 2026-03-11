@@ -46,7 +46,7 @@
     }
   }
 
-  @mixin media-block-btn {
+  @mixin featureksp-grid-btn {
     border-radius: 50%;
     display: flex;
     height: 36px;
@@ -63,7 +63,7 @@
     }
   }
 
-  .media-block-container {
+  .featureksp-grid-container {
     position: absolute;
     z-index: 1;
     overflow: clip;
@@ -124,15 +124,15 @@
     }
 
     /* Video Control Buttons */
-    .media-block-controls {
+    .featureksp-grid-controls {
       display: flex;
       gap: 8px;
       z-index: 10;
 
-      .media-block-play-btn,
-      .media-block-pause-btn,
-      .media-block-replay-btn {
-        @include media-block-btn;
+      .featureksp-grid-play-btn,
+      .featureksp-grid-pause-btn,
+      .featureksp-grid-replay-btn {
+        @include featureksp-grid-btn;
       }
     }
 

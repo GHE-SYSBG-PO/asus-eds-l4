@@ -197,9 +197,9 @@ const handleVideo = (wrap, v) => {
     // Build control buttons
     let controlButtons = '';
     controlButtons = `
-        <div class="media-block-controls absolute ${mediaVideoPauseAndPlayBtnPosition} z-10">
+        <div class="featureksp-grid-controls absolute ${mediaVideoPauseAndPlayBtnPosition} z-10">
           <button
-            class="media-block-play-btn rounded-full flex items-center justify-center transition-all"
+            class="featureksp-grid-play-btn rounded-full flex items-center justify-center transition-all"
             style="display: ${initialPlayBtnDisplay};  border: 1px solid #ffffff;"
           >
             <svg viewBox="0 0 36 36" fill="#ffffff" >
@@ -207,7 +207,7 @@ const handleVideo = (wrap, v) => {
             </svg>
           </button>
           <button
-            class="media-block-pause-btn rounded-full flex items-center justify-center transition-all"
+            class="featureksp-grid-pause-btn rounded-full flex items-center justify-center transition-all"
             style="display: ${initialPauseBtnDisplay};  border: 1px solid #ffffff;"
           >
             <svg viewBox="0 0 36 36" fill="#ffffff">
@@ -215,9 +215,9 @@ const handleVideo = (wrap, v) => {
             </svg>
           </button>
         </div>
-        ${!mediaVideoloop ? `<div class="media-block-controls absolute ${mediaVideoPauseAndPlayBtnPosition} z-10">
+        ${!mediaVideoloop ? `<div class="featureksp-grid-controls absolute ${mediaVideoPauseAndPlayBtnPosition} z-10">
             <button
-          class="media-block-replay-btn  rounded-full flex items-center justify-center transition-all"
+          class="featureksp-grid-replay-btn  rounded-full flex items-center justify-center transition-all"
           style="display: ${initialPauseBtnDisplay};  border: 1px solid #ffffff;display:none"
         >
           <svg viewBox="0 0 36 36" fill="#ffffff">
@@ -240,7 +240,7 @@ const handleVideo = (wrap, v) => {
     const mediaContainerRatio = v('mediaContainerRatio') ? `aspect-ratio: ${v('mediaContainerRatio')};` : '';
 
     return `
-      <div class="device-${curDevice} media-block-video-container relative" style="position: relative; overflow-hidden; ${mediaContainerRatio}">
+      <div class="device-${curDevice} featureksp-grid-video-container relative" style="position: relative; overflow-hidden; ${mediaContainerRatio}">
         <video
           data-src-m="${configM.assets || ''}"
           data-src-t="${configT.assets || ''}"
@@ -272,7 +272,7 @@ const handleVideo = (wrap, v) => {
   }
 
   wrap.innerHTML += `
-    <div class="media-block-container">
+    <div class="featureksp-grid-container">
       ${mediaContent}
     </div>
   `;
@@ -280,21 +280,21 @@ const handleVideo = (wrap, v) => {
   // Add video control logic and responsive source switching
   setTimeout(() => {
     const videoElement = wrap.querySelector('video');
-    const container = wrap.querySelector('.media-block-video-container');
+    const container = wrap.querySelector('.featureksp-grid-video-container');
     if (!container) {
       return false;
     }
-    const existingControlsDiv = container.querySelector('.media-block-controls');
+    const existingControlsDiv = container.querySelector('.featureksp-grid-controls');
     if (!videoElement || !container) return;
 
     // Disable native controls
     videoElement.removeAttribute('controls');
     videoElement.controls = false;
 
-    const playBtn = container.querySelector('.media-block-play-btn');
-    const pauseBtn = container.querySelector('.media-block-pause-btn');
-    const controlsDiv = container.querySelector('.media-block-controls');
-    const replayBtnElement = container.querySelector('.media-block-replay-btn');
+    const playBtn = container.querySelector('.featureksp-grid-play-btn');
+    const pauseBtn = container.querySelector('.featureksp-grid-pause-btn');
+    const controlsDiv = container.querySelector('.featureksp-grid-controls');
+    const replayBtnElement = container.querySelector('.featureksp-grid-replay-btn');
 
     // Button event binding
     const bindButtonEvents = (playBtnEl, pauseBtnEl) => {
@@ -322,8 +322,8 @@ const handleVideo = (wrap, v) => {
 
     // Play/pause event listeners (unified control for button show/hide)
     const handlePlay = () => {
-      const currentPlayBtn = container.querySelector('.media-block-play-btn');
-      const currentPauseBtn = container.querySelector('.media-block-pause-btn');
+      const currentPlayBtn = container.querySelector('.featureksp-grid-play-btn');
+      const currentPauseBtn = container.querySelector('.featureksp-grid-pause-btn');
       if (currentPlayBtn) currentPlayBtn.style.display = 'none';
       if (currentPauseBtn) currentPauseBtn.style.display = 'flex';
       if (replayBtnElement) replayBtnElement.style.display = 'none';
@@ -334,8 +334,8 @@ const handleVideo = (wrap, v) => {
     };
 
     const handlePause = () => {
-      const currentPlayBtn = container.querySelector('.media-block-play-btn');
-      const currentPauseBtn = container.querySelector('.media-block-pause-btn');
+      const currentPlayBtn = container.querySelector('.featureksp-grid-play-btn');
+      const currentPauseBtn = container.querySelector('.featureksp-grid-pause-btn');
       if (currentPlayBtn) currentPlayBtn.style.display = 'flex';
       if (currentPauseBtn) currentPauseBtn.style.display = 'none';
     };
@@ -408,13 +408,13 @@ const handleVideo = (wrap, v) => {
       }
 
       if (mediaVideoPauseAndPlayBtn === false) {
-        const currentControlsDiv = container.querySelector('.media-block-controls');
+        const currentControlsDiv = container.querySelector('.featureksp-grid-controls');
 
         if (currentControlsDiv) {
           currentControlsDiv.style.display = 'none';
         }
       } else {
-        const currentControlsDiv = container.querySelector('.media-block-controls');
+        const currentControlsDiv = container.querySelector('.featureksp-grid-controls');
         if (currentControlsDiv) {
           currentControlsDiv.style.display = 'flex';
         }
@@ -448,8 +448,8 @@ const handleVideo = (wrap, v) => {
         existingControlsDiv.style.display = 'flex';
 
         // Reset button state: show play button, hide pause button
-        const currentPlayBtn = existingControlsDiv.querySelector('.media-block-play-btn');
-        const currentPauseBtn = existingControlsDiv.querySelector('.media-block-pause-btn');
+        const currentPlayBtn = existingControlsDiv.querySelector('.featureksp-grid-play-btn');
+        const currentPauseBtn = existingControlsDiv.querySelector('.featureksp-grid-pause-btn');
         if (currentPlayBtn) currentPlayBtn.style.display = 'flex';
         if (currentPauseBtn) currentPauseBtn.style.display = 'none';
       } else {
