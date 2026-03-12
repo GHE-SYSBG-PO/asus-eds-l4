@@ -1,0 +1,230 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Basic",
+      "name": "basicTab"
+    },
+    {
+      "component": "select",
+      "label": "style (layout variant)",
+      "name": "styleLayout",
+      "valueType": "string",
+      "options": [
+        {
+          "name": "Variant 1 - Text On Left & Right",
+          "value": "1"
+        },
+        {
+          "name": "Variant 2 - Text On Left / Right Sides",
+          "value": "2"
+        },
+        {
+          "name": "Variant 3 - Text below",
+          "value": "3"
+        },
+        {
+          "name": "Variant 4 - Freeform",
+          "value": "4"
+        },
+        {
+          "name": "Variant 5 - Freeform-dialog box",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Desktop Asset image",
+      "name": "assetGroupDesktop",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "reference",
+          "label": "asset",
+          "name": "assetDesktop",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "label": "  width",
+          "name": "assetDesktopImgWidth",
+          "valueType": "string",
+          "placeholder": "px"
+        },
+        {
+          "component": "text",
+          "label": "height",
+          "name": "assetDesktopImgHeight",
+          "valueType": "string",
+          "placeholder": "px"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Tablet Asset",
+      "name": "assetGroupTablet",
+      "collapsible": true,
+      "fields": [    
+        {
+          "component": "reference",
+          "label": "asset",
+          "name": "assetTablet",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "label": "img widt",
+          "name": "assetTabletImgWidth",
+          "valueType": "string",
+          "placeholder": "px"
+        },
+        {
+          "component": "text",
+          "label": "height",
+          "name": "assetTabletImgHeight",
+          "valueType": "string",
+          "placeholder": "px"
+        }        
+      ]
+    }, 
+    {
+      "component": "container",
+      "label": "Mobile Asset",
+      "name": "assetGroupMobile",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "reference",
+          "label": "asset (M)",
+          "name": "assetMobile",
+          "multi": false
+        }
+      ]
+    },       
+    {
+      "component": "container",
+      "label": "Module Style",
+      "name": "moduleStyleGroup",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "top padding (D)",
+          "name": "paddingTopDesktop",
+          "valueType": "string",
+          "placeholder": "px"
+        },
+        {
+          "component": "text",
+          "label": "bottom padding (D)",
+          "name": "paddingBottomDesktop",
+          "valueType": "string",
+          "placeholder": "px"
+        },
+        {
+          "component": "text",
+          "label": "text width (D)",
+          "name": "textWidthPercentDesktop",
+          "valueType": "string",
+          "placeholder": "%",
+          "condition": {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        },
+        {
+          "component": "text",
+          "label": "text max width",
+          "name": "textMaxWidthDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "condition": {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        },        
+        {
+          "component": "text",
+          "label": "top padding (T)",
+          "name": "paddingTopTablet",
+          "valueType": "string",
+          "placeholder": "px"
+        },
+        {
+          "component": "text",
+          "label": "bottom padding (T)",
+          "name": "paddingBottomTablet",
+          "valueType": "string",
+          "placeholder": "px"
+        },
+        {
+          "component": "text",
+          "label": "text width",
+          "name": "textWidthPercentTablet",
+          "valueType": "string",
+          "placeholder": "%",
+          "condition": {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        },
+        {
+          "component": "text",
+          "label": "text max width",
+          "name": "textMaxWidthTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "condition": {
+            "in": [
+              {
+                "var": "styleLayout"
+              },
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "...": "./_textItem1Fields.json#/fields"
+    },
+    {
+      "...": "./_textItem2Fields.json#/fields"
+    },
+    {
+      "...": "./_textItem3Fields.json#/fields"
+    },
+    {
+      "...": "./_textItem4Fields.json#/fields"
+    },
+    {
+      "...": "./_textItem5Fields.json#/fields"
+    }
+  ]
+}

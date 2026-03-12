@@ -1,0 +1,145 @@
+@use '../../../styles/variable' as v;
+
+.l4-pdp .line-info{  
+  .text-item {
+    .title{
+      background-image: var(--base-text-item-title-color);
+      background-clip: text;
+      color: transparent;
+    }
+
+    .info {
+      color: var(--base-text-item-info-color);
+    }   
+  }
+}
+
+.l4-pdp {
+  &[data-product="asus"] {
+    &[data-mode="light"] .line-info,
+    .line-info.theme-section-light {
+      --base-bg-color: #fff;
+      --base-text-item-title-color: linear-gradient(to right, #181818 0%, #181818 100%);
+      --base-text-item-info-color: #4D4D4D;
+      --base-text-item-circle-number-color: #181818;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 10px;
+        --base-text-item-bg-color: #fff;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+
+    &[data-mode="dark"] .line-info,
+    .line-info.theme-section-dark {
+      --base-bg-color: #000;
+      --base-text-item-title-color: linear-gradient(to right, #FFF 0%, #FFF 100%);
+      --base-text-item-info-color: #DCDCDC;
+      --base-text-item-circle-number-color: #FFF;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 10px;
+        --base-text-item-bg-color: #000;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+  }
+
+  &[data-product="proart"] {
+    &[data-mode="light"] .line-info,
+    .line-info.theme-section-light {
+      --base-bg-color: #fff;
+      --base-text-item-title-color: linear-gradient(to right, #181818 0%, #181818 100%);
+      --base-text-item-info-color: #4D4D4D;
+      --base-text-item-circle-number-color: #181818;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 10px;
+        --base-text-item-bg-color: #fff;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+
+    &[data-mode="dark"] .line-info,
+    .line-info.theme-section-dark {
+      --base-bg-color: #000;
+      --base-text-item-title-color: linear-gradient(to right, #FFF 0%, #FFF 100%);
+      --base-text-item-info-color: #DCDCDC;
+      --base-text-item-circle-number-color: #FFF;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 10px;
+        --base-text-item-bg-color: #000;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+  }
+
+  &[data-product="rog"] {
+    &[data-mode="light"] .line-info,
+    .line-info.theme-section-light {
+      --base-bg-color: #fff;
+      --base-text-item-title-color: linear-gradient(to right, #181818 0%, #181818 100%);
+      --base-text-item-info-color: #4D4D4D;
+      --base-text-item-circle-number-color: #181818;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 0;
+        --base-text-item-bg-color: #FFF;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+
+    &[data-mode="dark"] .line-info,
+    .line-info.theme-section-dark {
+      --base-bg-color: #000;
+      --base-text-item-title-color: linear-gradient(to right, #FFF 0%, #FFF 100%);
+      --base-text-item-info-color: #DCDCDC;
+      --base-text-item-circle-number-color: #FFF;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 0;
+        --base-text-item-bg-color: #000;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+  }
+
+  &[data-product="tuf"] {
+    &[data-mode="light"] .line-info,
+    .line-info.theme-section-light {
+      --base-bg-color: #fff;
+      --base-text-item-title-color: linear-gradient(to right, #181818 0%, #181818 100%);
+      --base-text-item-info-color: #4D4D4D;
+      --base-text-item-circle-number-color: #181818;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 0;
+        --base-text-item-bg-color: #FFF;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+
+    &[data-mode="dark"] .line-info,
+    .line-info.theme-section-dark {
+      --base-bg-color: #000;
+      --base-text-item-title-color: linear-gradient(to right, #FFF 0%, #FFF 100%);
+      --base-text-item-info-color: #DCDCDC;
+      --base-text-item-circle-number-color: #FFF;
+
+      &.style-layout-5 {
+        --base-text-item-radius: 0;
+        --base-text-item-bg-color: #000;
+        --base-text-item-border-color: none;
+        --base-text-item-border-width: 0px;
+      }
+    }
+  }
+}

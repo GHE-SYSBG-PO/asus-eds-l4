@@ -1,0 +1,102 @@
+@use '../../../styles/variable' as v;
+
+// Variant 4 - Freeform
+.l4-pdp .line-info.style-layout-4 .line-info-block{
+  --line-info-x: 0px;
+  --line-info-x-lg: 0px;
+  --line-info-x-md: 0px;
+  --line-info-y: 0px;
+  --line-info-y-lg: 0px;
+  --line-info-y-md: 0px;
+  --line-info-text-width: 0px;
+  --line-info-text-width-lg: var(--l4-column-width-2);
+  --line-info-text-max-width-lg: 276px;
+  --line-info-text-width-md: var(--l4-column-width-2);
+  --line-info-text-max-width-md: 224px;
+
+  @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+    .line-info-item-img-container{
+      margin-bottom: 20px;
+    }
+
+    .line-info-side.line-info-side-none{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9;
+    }
+
+    .text-item-container {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: center;
+      transform: translateX(var(--line-info-x)) translateY(var(--line-info-y));    
+    }
+
+    .line-info-item-img-container{
+      position: relative;
+      height: fit-content;
+      width: 100%;
+
+      .line-info-item-img{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        transform-origin: center;
+        margin: 0;
+      }
+    }      
+        
+    .line-info-side.line-info-side-none{
+      .text-item-container{
+        --line-info-x: var(--line-info-x-md);
+        --line-info-y: var(--line-info-y-md);
+      }
+    }
+  }
+
+  @media (min-width: v.$large-lower-bound) {
+    .line-info-item-img-container{
+      margin-bottom: 20px;
+    }
+
+    .line-info-side.line-info-side-none{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9;
+    }
+
+    .text-item-container {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: center;
+      transform: translateX(var(--line-info-x)) translateY(var(--line-info-y));    
+    }
+
+    .line-info-item-img-container{
+      position: relative;
+      height: fit-content;
+      width: 100%;
+
+      .line-info-item-img{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        transform-origin: center;
+        margin: 0;
+      }
+    }      
+
+    .line-info-side.line-info-side-none{
+      .text-item-container{
+        --line-info-x: var(--line-info-x-lg); 
+        --line-info-y: var(--line-info-y-lg);
+      }
+    }
+  }     
+}

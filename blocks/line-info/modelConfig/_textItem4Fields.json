@@ -1,0 +1,180 @@
+{
+  "desc": "for styleLayout = 4",
+  "fields": [
+    {
+      "component": "container",
+      "label": "Text Items",
+      "name": "textItems4",
+      "valueType": "string[]",
+      "multi": true,
+      "condition": {
+        "==": [
+          {
+            "var": "styleLayout"
+          },
+          "4"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4AlignmentDesktop",
+          "value": "L4TagMulti-textItems4AlignmentDesktop",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "alignment (left/right)(Desktop)",
+          "name": "textItems4AlignmentDesktop",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4TextWidthDesktop",
+          "value": "L4TagMulti-textItems4TextWidthDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "text width (px)(Desktop)",
+          "name": "textItems4TextWidthDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4XValueDesktop",
+          "value": "L4TagMulti-textItems4XValueDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "X value (Desktop)",
+          "name": "textItems4XValueDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4YValueDesktop",
+          "value": "L4TagMulti-textItems4YValueDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value (Desktop)",
+          "name": "textItems4YValueDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },           
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4AlignmentTablet",
+          "value": "L4TagMulti-textItems4AlignmentTablet",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "alignment (left/right)(Tablet)",
+          "name": "textItems4AlignmentTablet",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4TextWidthTablet",
+          "value": "L4TagMulti-textItems4TextWidthTablet",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "text width (px)(Tablet)",
+          "name": "textItems4TextWidthTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4XValueTablet",
+          "value": "L4TagMulti-textItems4XValueTablet",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "X value (Tablet)",
+          "name": "textItems4XValueTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4YValueTablet",
+          "value": "L4TagMulti-textItems4YValueTablet",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value (Tablet)",
+          "name": "textItems4YValueTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },        
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4TitleRichtext",
+          "value": "L4TagMulti-textItems4TitleRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "title richtext",
+          "name": "textItems4TitleRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Item Title</p>",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems4InfoRichtext",
+          "value": "L4TagMulti-textItems4InfoRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "info richtext",
+          "name": "textItems4InfoRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Description text here...</p>",
+          "multi": false
+        }
+      ]
+    }
+  ]
+}
