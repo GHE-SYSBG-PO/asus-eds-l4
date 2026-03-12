@@ -1,0 +1,101 @@
+{
+  "fields": [
+    {
+      "component": "container",
+      "label": "media column span",
+      "name": "mediaColumnSpan",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "layoutStyle" }, "media" ]
+      },
+      "fields": [
+        {
+          "component": "select",
+          "label": "column span (D)",
+          "name": "mediaColumnSpanD",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "lg:col-span-12" },
+            { "name": "6", "value": "lg:col-span-6" },
+            { "name": "4", "value": "lg:col-span-4" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (T)",
+          "name": "mediaColumnSpanT",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "md:col-span-12" },
+            { "name": "6", "value": "md:col-span-6" }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "icon column span",
+      "name": "iconColumnSpan",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "layoutStyle" }, "icon" ]
+      },
+      "fields": [
+        {
+          "component": "select",
+          "label": "column span (D)",
+          "name": "iconColumnSpanD",
+          "valueType": "string",
+          "options": [
+            { "name": "6", "value": "lg:col-span-6" },
+            { "name": "4", "value": "lg:col-span-4" },
+            { "name": "3", "value": "lg:col-span-3" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (T)",
+          "name": "iconColumnSpanT",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "md:col-span-12" },
+            { "name": "6", "value": "md:col-span-6" }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "text column span",
+      "name": "textColumnSpan",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "layoutStyle" }, "text" ]
+      },
+      "fields": [
+        {
+          "component": "select",
+          "label": "column span (D)",
+          "name": "textColumnSpanD",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "lg:col-span-12" },
+            { "name": "6", "value": "lg:col-span-6" },
+            { "name": "4", "value": "lg:col-span-4" },
+            { "name": "3", "value": "lg:col-span-3" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "column span (T)",
+          "name": "textColumnSpanT",
+          "valueType": "string",
+          "options": [
+            { "name": "12", "value": "md:col-span-12" },
+            { "name": "6", "value": "md:col-span-6" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -31,7 +31,8 @@
       "feature-ksp-list",
       "small-cards",
       "effect-media",
-      "medium-cards"
+      "medium-cards",
+      "featureksp-grid"
     ]
   },
   {
@@ -56,12 +57,6 @@
     "id": "feature-accordion",
     "components": [
       "feature-accordion-item"
-    ]
-  },
-  {
-    "id": "feature-accordion-item",
-    "components": [
-      "feature-accordion-sub-item"
     ]
   },
   {
@@ -118,6 +113,12 @@
     "id": "featureitem-block",
     "components": [
       "featureitem-block-item"
+    ]
+  },
+  {
+    "id": "featureksp-grid",
+    "components": [
+      "featureksp-grid-item"
     ]
   },
   {
