@@ -25,7 +25,8 @@ import loadSwiper from '../../vendor/swiper/index.js';
 import buildSecitonClass from '../../components/section/section.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-const isLocalhost = window.location.href.indexOf('localhost') > -1;
+const authorPrefix = '/content/asus-l4';
+const isAuthor = window.location.pathname.startsWith(authorPrefix);
 
 // ── Font config per product line ─────────────────────────────
 const FONTS = {
@@ -272,7 +273,7 @@ async function loadFragmentCols(url) {
   if (!url) return { col1: null, col2: null };
   try {
     const main = await loadFragment(
-      isLocalhost ? url.replace('/content/asus-l4', '') : url,
+      !isAuthor ? url.replace(authorPrefix, '') : url,
     );
     if (main && main.children.length) {
       const containerPage = main.children[0];
