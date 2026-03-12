@@ -141,7 +141,7 @@ export default async function decorate(block) {
       block.style.setProperty(item.variableName, item.value);
     });
     if (v('backgroundColor')) {
-      block.style.backgroundColor = `${v('backgroundColor')}`;
+      block.style.backgroundColor = `#${v('backgroundColor')}`;
     }
     if (v('clip') === 'on') {
       block.classList.add('overflow-hidden');
