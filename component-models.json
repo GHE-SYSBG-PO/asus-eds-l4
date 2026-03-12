@@ -4004,30 +4004,143 @@
         "name": "basic"
       },
       {
-        "component": "text",
-        "label": "Text",
-        "name": "text",
-        "valueType": "string",
-        "description": "* max line number: D=3, T=4, M=5"
-      },
-      {
-        "component": "reference",
-        "label": "Image",
-        "name": "image",
-        "multi": false,
-        "description": "* jpg/png/svg/avif,三裝置共用5120x2880px (2x)"
-      },
-      {
-        "component": "text",
-        "name": "imgAlt",
-        "label": "Image Alt",
+        "component": "richtext",
+        "label": "Title",
+        "name": "toptitle",
         "valueType": "string"
       },
       {
-        "component": "text",
-        "name": "bgColor",
-        "label": "Background Color",
-        "valueType": "string"
+        "component": "container",
+        "label": "Selection",
+        "name": "selection",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "richtext",
+            "label": "Right",
+            "name": "right",
+            "valueType": "string"
+          },
+          {
+            "component": "richtext",
+            "label": "Left",
+            "name": "left",
+            "valueType": "string"
+          }
+        ],
+        "description": ""
+      },
+      {
+        "component": "container",
+        "label": "Menu Style",
+        "name": "menuStyle",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "Title Color",
+            "name": "titleColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Info Color",
+            "name": "infoColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Menu CTA Color",
+            "name": "menuCtaColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "CTA Arrow Color",
+            "name": "ctaArrowColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Menu Border Color",
+            "name": "menuBorderColor",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Menu Arrow Color",
+            "name": "menuArrowColor",
+            "valueType": "string"
+          }
+        ],
+        "description": ""
+      },
+      {
+        "component": "container",
+        "label": "Collapse Item",
+        "name": "collapseItem",
+        "valueType": "string[]",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-collapseItem",
+            "value": "L4TagMulti-collapseItem",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Title",
+            "name": "collapseItemTitle",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "Info",
+            "name": "collapseItemInfo",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "CTA Text",
+            "name": "ctaText",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "label": "CTA color",
+            "name": "ctaColor",
+            "valueType": "string"
+          },
+          {
+            "component": "aem-content",
+            "label": "CTA hyperlink",
+            "name": "ctaHyperlink",
+            "multi": false,
+            "valueType": "string"
+          },
+          {
+            "component": "reference",
+            "label": "Image Asset (D)",
+            "name": "collapseItemImageD",
+            "multi": false,
+            "description": ""
+          },
+          {
+            "component": "reference",
+            "label": "Image Asset (T)",
+            "name": "collapseItemImageT",
+            "multi": false,
+            "description": ""
+          },
+          {
+            "component": "reference",
+            "label": "Image Asset (M)",
+            "name": "collapseItemImageM",
+            "multi": false,
+            "description": ""
+          }
+        ]
       },
       {
         "component": "tab",
