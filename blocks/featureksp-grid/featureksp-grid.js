@@ -147,13 +147,13 @@ function addTextContent(wrap, v) {
       ['layoutVariantD', 'layoutVariantT', 'layoutVariantM'].forEach((item) => {
         if (['left', 'right', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight'].includes(v(item))) {
           if (item === 'layoutVariantD') {
-            textBlock.style.setProperty('--featureksp-grid-item-text-content-width-lg', v('itemTextWidthD') || '50%');
+            textBlock.style.setProperty('--featureksp-grid-text-content-width-lg', v('itemTextWidthD') || '50%');
           }
           if (item === 'layoutVariantT') {
-            textBlock.style.setProperty('--featureksp-grid-item-text-content-width-md', v('itemTextWidthT') || '50%');
+            textBlock.style.setProperty('--featureksp-grid-text-content-width-md', v('itemTextWidthT') || '50%');
           }
           if (item === 'layoutVariantM') {
-            textBlock.style.setProperty('--featureksp-grid-item-text-content-width-sm', v('itemTextWidthM') || '50%');
+            textBlock.style.setProperty('--featureksp-grid-text-content-width-sm', v('itemTextWidthM') || '50%');
           }
         }
       });
@@ -705,22 +705,22 @@ const handleAnchor = (wrap, v) => {
       const borderColorHover = prefixHex(v('borderColorHover'));
       const borderColorPress = prefixHex(v('borderColorPress'));
 
-      if (anchorColorDefault) inlineStyle += `--anchor-color-default: ${anchorColorDefault};`;
-      if (anchorColorHover) inlineStyle += `--anchor-color-hover: ${anchorColorHover};`;
-      if (anchorColorPress) inlineStyle += `--anchor-color-press: ${anchorColorPress};`;
-      if (anchorBgColorDefault) inlineStyle += `--anchor-bg-default: ${anchorBgColorDefault};`;
-      if (anchorBgColorHover) inlineStyle += `--anchor-bg-hover: ${anchorBgColorHover};`;
-      if (anchorBgColorPress) inlineStyle += `--anchor-bg-press: ${anchorBgColorPress};`;
-      if (borderWidthDefault) inlineStyle += `--anchor-border-width-default: ${borderWidthDefault}px;`;
-      if (borderWidthHover) inlineStyle += `--anchor-border-width-hover: ${borderWidthHover}px;`;
-      if (borderWidthPress) inlineStyle += `--anchor-border-width-press: ${borderWidthPress}px;`;
-      if (borderColorDefault) inlineStyle += `--anchor-border-color-default: ${borderColorDefault};`;
-      if (borderColorHover) inlineStyle += `--anchor-border-color-hover: ${borderColorHover};`;
-      if (borderColorPress) inlineStyle += `--anchor-border-color-press: ${borderColorPress};`;
+      if (anchorColorDefault) inlineStyle += `--featureksp-grid-anchor-color-default: ${anchorColorDefault};`;
+      if (anchorColorHover) inlineStyle += `--featureksp-grid-anchor-color-hover: ${anchorColorHover};`;
+      if (anchorColorPress) inlineStyle += `--featureksp-grid-anchor-color-press: ${anchorColorPress};`;
+      if (anchorBgColorDefault) inlineStyle += `--featureksp-grid-anchor-bg-default: ${anchorBgColorDefault};`;
+      if (anchorBgColorHover) inlineStyle += `--featureksp-grid-anchor-bg-hover: ${anchorBgColorHover};`;
+      if (anchorBgColorPress) inlineStyle += `--featureksp-grid-anchor-bg-press: ${anchorBgColorPress};`;
+      if (borderWidthDefault) inlineStyle += `--featureksp-grid-anchor-border-width-default: ${borderWidthDefault}px;`;
+      if (borderWidthHover) inlineStyle += `--featureksp-grid-anchor-border-width-hover: ${borderWidthHover}px;`;
+      if (borderWidthPress) inlineStyle += `--featureksp-grid-anchor-border-width-press: ${borderWidthPress}px;`;
+      if (borderColorDefault) inlineStyle += `--featureksp-grid-anchor-border-color-default: ${borderColorDefault};`;
+      if (borderColorHover) inlineStyle += `--featureksp-grid-anchor-border-color-hover: ${borderColorHover};`;
+      if (borderColorPress) inlineStyle += `--featureksp-grid-anchor-border-color-press: ${borderColorPress};`;
 
       anchor.innerHTML = `
         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="18" cy="18" r="17" class="anchor-bg-circle" />
+          <circle cx="18" cy="18" r="17" class="featureksp-grid-anchor-bg-circle" />
           <path fill-rule="evenodd" clip-rule="evenodd" d="M25.2731 13.9609C25.7752 14.463 25.7752 15.2771 25.2731 15.7792L18.9091 22.1432C18.407 22.6453 17.593 22.6453 17.0909 22.1432L10.7269 15.7792C10.2248 15.2771 10.2248 14.463 10.7269 13.9609C11.229 13.4588 12.0431 13.4588 12.5452 13.9609L18 19.4158L23.4548 13.9609C23.9569 13.4588 24.771 13.4588 25.2731 13.9609Z" class="anchor-icon-path" />
         </svg>
       `;
@@ -773,13 +773,13 @@ export default async function decorate(block) {
         // 添加初始class
         wrap.classList.add('featureksp-grid-item-block', 'overflow-clip', 'p-[40px]');
         if (c('borderColor')) {
-          inlineStyle += `--featureksp-grid-item-border-color: ${prefixHex(c('borderColor'))};`;
+          inlineStyle += `--featureksp-grid-border-color: ${prefixHex(c('borderColor'))};`;
         }
         if (c('borderWidth')) {
-          inlineStyle += `--featureksp-grid-item-border-width: ${c('borderWidth')}px;`;
+          inlineStyle += `--featureksp-grid-border-width: ${c('borderWidth')}px;`;
         }
         if (v('layoutBgColor')) {
-          inlineStyle += `--featureksp-grid-item-bg-color: ${prefixHex(v('layoutBgColor'))};`;
+          inlineStyle += `--featureksp-grid-bg-color: ${prefixHex(v('layoutBgColor'))};`;
         }
 
         // 使用 v() 获取合并了默认值的 radius

@@ -1,26 +1,26 @@
 @use '../../styles/variable' as v;
 
 .l4-pdp {
-  --featureksp-grid-item-border-color: transparent;
-  --featureksp-grid-item-border-width: 0px;
-  --featureksp-grid-item-bg-color: transparent;
-  --featureksp-grid-item-text-content-width-sm: 100%;
-  --featureksp-grid-item-text-content-width-md: 100%;
-  --featureksp-grid-item-text-content-width-lg: 100%;
+  --featureksp-grid-border-color: transparent;
+  --featureksp-grid-border-width: 0px;
+  --featureksp-grid-bg-color: transparent;
+  --featureksp-grid-text-content-width-sm: 100%;
+  --featureksp-grid-text-content-width-md: 100%;
+  --featureksp-grid-text-content-width-lg: 100%;
   
   // Anchor variables
-  --anchor-color-default: #2F2F2F;
-  --anchor-color-hover: #2F2F2F;
-  --anchor-color-press: #2F2F2F;
-  --anchor-bg-default: rgb(255 255 255 / 80%);
-  --anchor-bg-hover: rgb(255 255 255 / 90%);
-  --anchor-bg-press: rgb(255 255 255 / 100%);
-  --anchor-border-width-default: 2px;
-  --anchor-border-width-hover: 2px;
-  --anchor-border-width-press: 2px;
-  --anchor-border-color-default: #2F2F2F;
-  --anchor-border-color-hover: #2F2F2F;
-  --anchor-border-color-press: #2F2F2F;
+  --featureksp-grid-anchor-color-default: var(--cs-btn-utility-icon);
+  --featureksp-grid-anchor-color-hover: var(--cs-btn-utility-icon-hover);
+  --featureksp-grid-anchor-color-press: var(--cs-btn-utility-icon-press);
+  --featureksp-grid-anchor-bg-default: var(--cs-btn-utility-container);
+  --featureksp-grid-anchor-bg-hover: var(--cs-btn-utility-container-hover);
+  --featureksp-grid-anchor-bg-press: var(--cs-btn-utility-container-press);
+  --featureksp-grid-anchor-border-width-default: 2px;
+  --featureksp-grid-anchor-border-width-hover: 2px;
+  --featureksp-grid-anchor-border-width-press: 2px;
+  --featureksp-grid-anchor-border-color-default: var(--cs-btn-utility-icon);
+  --featureksp-grid-anchor-border-color-hover: var(--cs-btn-utility-icon-hover);
+  --featureksp-grid-anchor-border-color-press: var(--cs-btn-utility-icon-press);
 
   // ── Shared light + dark: CS_token → featureksp-grid ─────────────────
   &[data-mode="light"],
@@ -48,10 +48,10 @@
   }
 
   .featureksp-grid-item-block {
-    border-color: var(--featureksp-grid-item-border-color);
-    border-width: var(--featureksp-grid-item-border-width);
+    border-color: var(--featureksp-grid-border-color);
+    border-width: var(--featureksp-grid-border-width);
     border-style: solid;
-    background-color: var(--featureksp-grid-item-bg-color);
+    background-color: var(--featureksp-grid-bg-color);
     
     // Default Radius
     border-radius: var(--featureksp-grid-radius-default);
@@ -72,19 +72,19 @@
   // Responsive versions
   @media (max-width: v.$small-upper-bound) {
     .featureksp-grid-item-text-content {
-      width: var(--featureksp-grid-item-text-content-width-sm);
+      width: var(--featureksp-grid-text-content-width-sm);
     }
   }
   
   @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
     .featureksp-grid-item-text-content {
-      width: var(--featureksp-grid-item-text-content-width-md);
+      width: var(--featureksp-grid-text-content-width-md);
     }
   }
 
   @media (min-width: v.$large-lower-bound) {
     .featureksp-grid-item-text-content {
-      width: var(--featureksp-grid-item-text-content-width-lg);
+      width: var(--featureksp-grid-text-content-width-lg);
     }
   }
 
@@ -200,39 +200,39 @@
     overflow: hidden;
 
     &[data-anchor-style="svg"] {
-      .anchor-bg-circle {
-        fill: var(--anchor-bg-default);
-        stroke: var(--anchor-border-color-default);
-        stroke-width: var(--anchor-border-width-default);
+      .featureksp-grid-anchor-bg-circle {
+        fill: var(--featureksp-grid-anchor-bg-default);
+        stroke: var(--featureksp-grid-anchor-border-color-default);
+        stroke-width: var(--featureksp-grid-anchor-border-width-default);
         transition: all 0.3s ease;
       }
 
       .anchor-icon-path {
-        fill: var(--anchor-color-default);
+        fill: var(--featureksp-grid-anchor-color-default);
         transition: all 0.3s ease;
       }
 
       &:hover {
-        .anchor-bg-circle {
-          fill: var(--anchor-bg-hover);
-          stroke: var(--anchor-border-color-hover);
-          stroke-width: var(--anchor-border-width-hover);
+        .featureksp-grid-anchor-bg-circle {
+          fill: var(--featureksp-grid-anchor-bg-hover);
+          stroke: var(--featureksp-grid-anchor-border-color-hover);
+          stroke-width: var(--featureksp-grid-anchor-border-width-hover);
         }
         
         .anchor-icon-path {
-          fill: var(--anchor-color-hover);
+          fill: var(--featureksp-grid-anchor-color-hover);
         }
       }
 
       &:active {
-        .anchor-bg-circle {
-          fill: var(--anchor-bg-press);
-          stroke: var(--anchor-border-color-press);
-          stroke-width: var(--anchor-border-width-press);
+        .featureksp-grid-anchor-bg-circle {
+          fill: var(--featureksp-grid-anchor-bg-press);
+          stroke: var(--featureksp-grid-anchor-border-color-press);
+          stroke-width: var(--featureksp-grid-anchor-border-width-press);
         }
 
         .anchor-icon-path {
-          fill: var(--anchor-color-press);
+          fill: var(--featureksp-grid-anchor-color-press);
         }
       }
     }
