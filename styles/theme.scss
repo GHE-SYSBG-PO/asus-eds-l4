@@ -50,7 +50,7 @@
 
     // ── Light mode ───────────────────────────────────────────
     &[data-mode="light"],
-    & .section-light {
+    .section-light {
       // background
       --cs-background: var(--cs-white);
 
@@ -81,7 +81,7 @@
 
     // ── Dark mode ────────────────────────────────────────────
     &[data-mode="dark"],
-    & .section-dark {
+    .section-dark {
       // background
       --cs-background: var(--cs-black);
 
@@ -116,7 +116,7 @@
 
     // ── Light mode ───────────────────────────────────────────
     &[data-mode="light"],
-    & .section-light {
+    .section-light {
       // btn/utility/container
       --cs-btn-utility-container: rgb(255 255 255 / 75%);
       --cs-btn-utility-container-hover: rgb(255 255 255 / 75%);
@@ -138,7 +138,7 @@
 
     // ── Dark mode ────────────────────────────────────────────
     &[data-mode="dark"],
-    & .section-dark {
+    .section-dark {
       // btn/utility/container
       --cs-btn-utility-container: rgb(0 0 0 / 75%);
       --cs-btn-utility-container-hover: rgb(0 0 0 / 75%);
@@ -171,7 +171,7 @@
     // ── ASUS ─────────────────────────────────────────────────
     &[data-product="asus"] {
       &[data-mode="light"],
-      & .section-light {
+      .section-light {
         // title_Light: linear-gradient(90deg, #0062CD 0%, #004691 100%)
         --brand-title-from: #0062cd;
         --brand-title-to: #004691;
@@ -207,7 +207,7 @@
       }
 
       &[data-mode="dark"],
-      & .section-dark {
+      .section-dark {
         // title_Dark: linear-gradient(90deg, #C3E0FF 0%, #78BCFF 100%)
         --brand-title-from: #c3e0ff;
         --brand-title-to: #78bcff;
@@ -246,7 +246,7 @@
     // ── ProArt ───────────────────────────────────────────────
     &[data-product="proart"] {
       &[data-mode="light"],
-      & .section-light {
+      .section-light {
         // title_Light: linear-gradient(90deg, #6B4F35 0%, #8D684E 100%)
         --brand-title-from: #6b4f35;
         --brand-title-to: #8d684e;
@@ -282,7 +282,7 @@
       }
 
       &[data-mode="dark"],
-      & .section-dark {
+      .section-dark {
         // title_Dark: linear-gradient(90deg, #9F7A56 0%, #DFC9A9 100%)
         --brand-title-from: #9f7a56;
         --brand-title-to: #dfc9a9;
@@ -321,7 +321,7 @@
     // ── ROG ──────────────────────────────────────────────────
     &[data-product="rog"] {
       &[data-mode="light"],
-      & .section-light {
+      .section-light {
         // title_Light (single color)
         --brand-title-from: #cc000e;
         --brand-title-to: #cc000e;
@@ -357,7 +357,7 @@
       }
 
       &[data-mode="dark"],
-      & .section-dark {
+      .section-dark {
         // title_Dark (single color)
         --brand-title-from: #ff0f0f;
         --brand-title-to: #ff0f0f;
@@ -396,7 +396,7 @@
     // ── TUF ──────────────────────────────────────────────────
     &[data-product="tuf"] {
       &[data-mode="light"],
-      & .section-light {
+      .section-light {
         // title_Light: table empty, omitted
         // btn_icon_Light: table empty, omitted
         // btn outline_Light: table empty, omitted
@@ -408,7 +408,7 @@
       }
 
       &[data-mode="dark"],
-      & .section-dark {
+      .section-dark {
         // title_Dark (single color)
         --brand-title-from: #ff9e1b;
         --brand-title-to: #ff9e1b;
