@@ -171,6 +171,11 @@
       "components": [
         "feature-accordion-item"
       ]
+    },{
+      "id": "feature-accordion-item",
+      "components": [
+        "feature-accordion-sub-item"
+      ]
     }
   ]
 }
