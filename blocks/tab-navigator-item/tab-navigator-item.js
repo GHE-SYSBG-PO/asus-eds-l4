@@ -1,13 +1,7 @@
-import {
-  nestBlockExecuteJs,
-} from '../../scripts/utils.js';
-
 export default async function decorate(block) {
-  // Execute nested block JavaScript
-  await nestBlockExecuteJs(block, false);
-  const tabParentDom = block.parentNode.parentNode;
+  const tabParentDom = block.closest('.section');
   if (tabParentDom.dataset.sectionStatus === 'loading') return block;
-  tabParentDom.parentNode.dispatchEvent(
+  tabParentDom.dispatchEvent(
     new CustomEvent('asus-l4--section-tab', {
       detail: block,
     }),

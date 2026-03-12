@@ -366,17 +366,17 @@ async function renderLayout1(componentEl, items, cfg) {
     tabListEl.appendChild(item.el);
   });
 
-  await Promise.all(
-    items.map(async (item, i) => {
-      const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
-      const panel = document.createElement('div');
-      panel.className = `tab-panel tab-panel-layout1${i === 0 ? ' is-active' : ''}`;
-      panel.setAttribute('role', 'tabpanel');
-      const { slot1, slot2 } = buildFragmentSlots(col1, col2);
-      panel.append(slot1, slot2);
-      panelsEl.append(panel);
-    }),
-  );
+  for (let i = 0; i < items.length; i += 1) {
+    const item = items[i];
+    // eslint-disable-next-line no-await-in-loop
+    const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
+    const panel = document.createElement('div');
+    panel.className = `tab-panel tab-panel-layout1${i === 0 ? ' is-active' : ''}`;
+    panel.setAttribute('role', 'tabpanel');
+    const { slot1, slot2 } = buildFragmentSlots(col1, col2);
+    panel.append(slot1, slot2);
+    panelsEl.append(panel);
+  }
 
   const tabBtns = items.map((item) => item.el);
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
@@ -418,45 +418,53 @@ async function renderLayout2(componentEl, items, cfg) {
 
   const col1Els = [];
 
-  await Promise.all(
-    items.map(async (item, i) => {
-      const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
-
-      const col1Slot = document.createElement('div');
-      col1Slot.className = `tab-col1-slot${i === 0 ? ' is-active' : ''}`;
-      if (col1) col1Slot.appendChild(col1);
-      col1Els.push(col1Slot);
-      col1Stage.appendChild(col1Slot);
-
-      const panel = document.createElement('div');
-      panel.className = `tab-panel tab-panel-layout2${i === 0 ? ' is-active' : ''}`;
-      panel.setAttribute('role', 'tabpanel');
-      const slot2 = document.createElement('div');
-      slot2.className = 'tab-col2';
-      if (col2) slot2.appendChild(col2);
-      panel.appendChild(slot2);
-      panelsEl.appendChild(panel);
-    }),
-  );
+  for (let i = 0; i < items.length; i += 1) {
+    const item = items[i];
+    // eslint-disable-next-line no-await-in-loop
+    const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
+    const col1Slot = document.createElement('div');
+    col1Slot.className = `tab-col1-slot${i === 0 ? ' is-active' : ''}`;
+    if (col1) col1Slot.appendChild(col1);
+    col1Els.push(col1Slot);
+    col1Stage.appendChild(col1Slot);
+    const panel = document.createElement('div');
+    panel.className = `tab-panel tab-panel-layout2${i === 0 ? ' is-active' : ''}`;
+    panel.setAttribute('role', 'tabpanel');
+    const slot2 = document.createElement('div');
+    slot2.className = 'tab-col2';
+    if (col2) slot2.appendChild(col2);
+    panel.appendChild(slot2);
+    panelsEl.appendChild(panel);
+  }
 
   const tabBtns = items.map((item) => item.el);
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
 
-  const activateLayout2 = (index) => {
-    col1Els.forEach((el, i) => el.classList.toggle('is-active', i === index));
-    activateTab(index, tabBtns, panels);
-  };
-
   if (window.innerWidth >= 1280) {
-    tabBtns.forEach((btn, i) => {
-      btn.addEventListener('click', () => activateLayout2(i));
+    // 事件委托，新增 tab 後自動生效
+    tabListEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab-tab-btn');
+      if (!btn) return;
+      const allBtns = [...tabListEl.querySelectorAll('.tab-tab-btn')];
+      const allPanels = [...componentEl.querySelectorAll('.tab-panel')];
+      const allCol1Slots = [...componentEl.querySelectorAll('.tab-col1-slot')];
+      const idx = allBtns.indexOf(btn);
+      if (idx !== -1) {
+        allCol1Slots.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+        activateTab(idx, allBtns, allPanels);
+      }
     });
   } else {
     setupSwiper(tabListEl, tabBarEl, tabBtns, panels, 'tab');
-    tabBtns.forEach((btn, i) => {
-      btn.addEventListener('click', () => {
-        col1Els.forEach((el, j) => el.classList.toggle('is-active', j === i));
-      });
+    tabListEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab-tab-btn');
+      if (!btn) return;
+      const allBtns = [...tabListEl.querySelectorAll('.tab-tab-btn')];
+      const allCol1Slots = [...componentEl.querySelectorAll('.tab-col1-slot')];
+      const idx = allBtns.indexOf(btn);
+      if (idx !== -1) {
+        allCol1Slots.forEach((el, j) => el.classList.toggle('is-active', j === idx));
+      }
     });
   }
 }
@@ -491,17 +499,17 @@ async function renderLayout3(componentEl, items, cfg) {
     tabListEl.appendChild(item.el);
   });
 
-  await Promise.all(
-    items.map(async (item, i) => {
-      const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
-      const panel = document.createElement('div');
-      panel.className = `tab-panel tab-panel-layout3${i === 0 ? ' is-active' : ''}`;
-      panel.setAttribute('role', 'tabpanel');
-      const { slot1, slot2 } = buildFragmentSlots(col1, col2);
-      panel.append(slot1, slot2);
-      panelsEl.append(panel);
-    }),
-  );
+  for (let i = 0; i < items.length; i += 1) {
+    const item = items[i];
+    // eslint-disable-next-line no-await-in-loop
+    const { col1, col2 } = await loadFragmentCols(item.fragmentUrl?.text);
+    const panel = document.createElement('div');
+    panel.className = `tab-panel tab-panel-layout3${i === 0 ? ' is-active' : ''}`;
+    panel.setAttribute('role', 'tabpanel');
+    const { slot1, slot2 } = buildFragmentSlots(col1, col2);
+    panel.append(slot1, slot2);
+    panelsEl.append(panel);
+  }
 
   const tabBtns = items.map((item) => item.el);
   const panels = [...componentEl.querySelectorAll('.tab-panel')];
@@ -622,12 +630,11 @@ async function renderLayout4(componentEl, items, cfg) {
     tabListEl.appendChild(item.el);
   });
 
-  await Promise.all(
-    items.map(async (item, i) => {
-      const panel = await buildLayout4Panel(item, i, i === 0, cfg);
-      panelsEl.appendChild(panel);
-    }),
-  );
+  for (let i = 0; i < items.length; i += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    const panel = await buildLayout4Panel(items[i], i, i === 0, cfg);
+    panelsEl.appendChild(panel);
+  }
 
   const tabBtns = items.map((item) => item.el);
   const panels = [...panelsEl.querySelectorAll(':scope > .tab-panel')];
@@ -787,7 +794,7 @@ async function decoratePage(block) {
       };
 
       if (layoutStyle === '4' && result.secondLayerTab === 'yes') {
-        result.subItems = getBlockRepeatConfigs(wrapper) || [];
+        result.subItems = getBlockRepeatConfigs(wrapper)[0] || [];
       }
 
       return result;
@@ -855,6 +862,7 @@ async function decoratePage(block) {
     );
 
     // 找到這個 item 是第幾個（用 data-aue-resource 比對 tab-tab-list 裡現有的 btn）
+    const listData = getBlockRepeatConfigs(detail.parentNode)[0] || [];
     const tabListEl = componentEl.querySelector('.tab-tab-list');
     const existingBtns = tabListEl ? [...tabListEl.querySelectorAll('.tab-tab-btn')] : [];
     const idx = existingBtns.findIndex(
@@ -885,7 +893,7 @@ async function decoratePage(block) {
     if (layoutStyle === '4') {
       // layout4: secondLayerTab 可能改變，需整個 panel 結構重建
       const newSecondLayerTab = itemConfig.secondLayerTab?.text || 'no';
-      const newSubItems = newSecondLayerTab === 'yes' ? (itemConfig.subItems || []) : [];
+      const newSubItems = newSecondLayerTab === 'yes' ? listData : [];
       const updatedItem = {
         secondLayerTab: newSecondLayerTab,
         fragmentUrl: itemConfig.tabItemFragmentUrl,
