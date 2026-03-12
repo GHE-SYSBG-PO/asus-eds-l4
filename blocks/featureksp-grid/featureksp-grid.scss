@@ -7,20 +7,6 @@
   --featureksp-grid-text-content-width-sm: 100%;
   --featureksp-grid-text-content-width-md: 100%;
   --featureksp-grid-text-content-width-lg: 100%;
-  
-  // Anchor variables
-  --featureksp-grid-anchor-color-default: var(--cs-btn-utility-icon);
-  --featureksp-grid-anchor-color-hover: var(--cs-btn-utility-icon-hover);
-  --featureksp-grid-anchor-color-press: var(--cs-btn-utility-icon-press);
-  --featureksp-grid-anchor-bg-default: var(--cs-btn-utility-container);
-  --featureksp-grid-anchor-bg-hover: var(--cs-btn-utility-container-hover);
-  --featureksp-grid-anchor-bg-press: var(--cs-btn-utility-container-press);
-  --featureksp-grid-anchor-border-width-default: 2px;
-  --featureksp-grid-anchor-border-width-hover: 2px;
-  --featureksp-grid-anchor-border-width-press: 2px;
-  --featureksp-grid-anchor-border-color-default: var(--cs-btn-utility-icon);
-  --featureksp-grid-anchor-border-color-hover: var(--cs-btn-utility-icon-hover);
-  --featureksp-grid-anchor-border-color-press: var(--cs-btn-utility-icon-press);
 
   // ── Shared light + dark: CS_token → featureksp-grid ─────────────────
   &[data-mode="light"],
@@ -190,76 +176,85 @@
     }
   }
 
-  &[data-mode="light"],
-  .section-light,
-  &[data-mode="dark"],
-  .section-dark {
-    .featureksp-grid-anchor {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      overflow: hidden;
+  .featureksp-grid-anchor {
+    // Anchor variables
+    --featureksp-grid-anchor-color-default: var(--cs-btn-utility-icon);
+    --featureksp-grid-anchor-color-hover: var(--cs-btn-utility-icon-hover);
+    --featureksp-grid-anchor-color-press: var(--cs-btn-utility-icon-press);
+    --featureksp-grid-anchor-bg-default: var(--cs-btn-utility-container);
+    --featureksp-grid-anchor-bg-hover: var(--cs-btn-utility-container-hover);
+    --featureksp-grid-anchor-bg-press: var(--cs-btn-utility-container-press);
+    --featureksp-grid-anchor-border-width-default: 2px;
+    --featureksp-grid-anchor-border-width-hover: 2px;
+    --featureksp-grid-anchor-border-width-press: 2px;
+    --featureksp-grid-anchor-border-color-default: var(--cs-btn-utility-icon);
+    --featureksp-grid-anchor-border-color-hover: var(--cs-btn-utility-icon-hover);
+    --featureksp-grid-anchor-border-color-press: var(--cs-btn-utility-icon-press);
+    
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
 
-      &[data-anchor-style="svg"] {
+    &[data-anchor-style="svg"] {
+      .featureksp-grid-anchor-bg-circle {
+        fill: var(--featureksp-grid-anchor-bg-default);
+        stroke: var(--featureksp-grid-anchor-border-color-default);
+        stroke-width: var(--featureksp-grid-anchor-border-width-default);
+        transition: all 0.3s ease;
+      }
+
+      .anchor-icon-path {
+        fill: var(--featureksp-grid-anchor-color-default);
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
         .featureksp-grid-anchor-bg-circle {
-          fill: var(--featureksp-grid-anchor-bg-default);
-          stroke: var(--featureksp-grid-anchor-border-color-default);
-          stroke-width: var(--featureksp-grid-anchor-border-width-default);
-          transition: all 0.3s ease;
+          fill: var(--featureksp-grid-anchor-bg-hover);
+          stroke: var(--featureksp-grid-anchor-border-color-hover);
+          stroke-width: var(--featureksp-grid-anchor-border-width-hover);
         }
-
+        
         .anchor-icon-path {
-          fill: var(--featureksp-grid-anchor-color-default);
-          transition: all 0.3s ease;
-        }
-
-        &:hover {
-          .featureksp-grid-anchor-bg-circle {
-            fill: var(--featureksp-grid-anchor-bg-hover);
-            stroke: var(--featureksp-grid-anchor-border-color-hover);
-            stroke-width: var(--featureksp-grid-anchor-border-width-hover);
-          }
-          
-          .anchor-icon-path {
-            fill: var(--featureksp-grid-anchor-color-hover);
-          }
-        }
-
-        &:active {
-          .featureksp-grid-anchor-bg-circle {
-            fill: var(--featureksp-grid-anchor-bg-press);
-            stroke: var(--featureksp-grid-anchor-border-color-press);
-            stroke-width: var(--featureksp-grid-anchor-border-width-press);
-          }
-
-          .anchor-icon-path {
-            fill: var(--featureksp-grid-anchor-color-press);
-          }
+          fill: var(--featureksp-grid-anchor-color-hover);
         }
       }
 
-      &[data-anchor-style="png"] {
-        .anchor-png-hover,
+      &:active {
+        .featureksp-grid-anchor-bg-circle {
+          fill: var(--featureksp-grid-anchor-bg-press);
+          stroke: var(--featureksp-grid-anchor-border-color-press);
+          stroke-width: var(--featureksp-grid-anchor-border-width-press);
+        }
+
+        .anchor-icon-path {
+          fill: var(--featureksp-grid-anchor-color-press);
+        }
+      }
+    }
+
+    &[data-anchor-style="png"] {
+      .anchor-png-hover,
+      .anchor-png-press {
+        display: none;
+      }
+
+      &:hover {
+        .anchor-png-hover {
+          display: block;
+          ~ .anchor-png-default { display: none; }
+        }
+      }
+
+      &:active {
         .anchor-png-press {
-          display: none;
-        }
-
-        &:hover {
-          .anchor-png-hover {
-            display: block;
-            ~ .anchor-png-default { display: none; }
-          }
-        }
-
-        &:active {
-          .anchor-png-press {
-            display: block;
-            ~ .anchor-png-default { display: none; }
-            ~ .anchor-png-hover { display: none; }
-          }
+          display: block;
+          ~ .anchor-png-default { display: none; }
+          ~ .anchor-png-hover { display: none; }
         }
       }
     }
