@@ -776,8 +776,6 @@ async function decoratePage(block) {
         ITEM_DEFAULT_CONFIG,
         'tab-navigator-item',
       );
-      const listData = getBlockRepeatConfigs(wrapper);
-      console.log(listData);
       const result = {
         el: itemEl,
         tabText: itemConfig.tabItemText,
@@ -789,7 +787,7 @@ async function decoratePage(block) {
       };
 
       if (layoutStyle === '4' && result.secondLayerTab === 'yes') {
-        result.subItems = itemConfig.subItems || [];
+        result.subItems = getBlockRepeatConfigs(wrapper) || [];
       }
 
       return result;

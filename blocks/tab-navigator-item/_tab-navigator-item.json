@@ -21,6 +21,12 @@
       "id": "tab-navigator-item",
       "fields": [
         {
+          "component": "text",
+          "label": "tab text",
+          "name": "tabItemText",
+          "valueType": "string"
+        },
+        {
           "component": "select",
           "label": "2nd layer tab (layout 4 only)",
           "name": "secondLayerTab",
@@ -35,20 +41,6 @@
               "value": "yes"
             }
           ]
-        },
-        {
-          "component": "text",
-          "label": "tab text",
-          "name": "tabItemText",
-          "valueType": "string",
-          "condition": {
-            "===": [
-              {
-                "var": "secondLayerTab"
-              },
-              "no"
-            ]
-          }
         },
         {
           "component": "reference",
