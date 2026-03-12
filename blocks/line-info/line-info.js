@@ -523,7 +523,6 @@ export default async function decorate(block) {
     ].filter(Boolean).join('; ');
 
     const combinedStyles = [blockStyles, dialogStyle].filter(Boolean).join('; ');
-    console.log(txt);
     // ── 寫入 DOM ──
     block.innerHTML = `
       <div class="line-info-block relative box-border colorGroup-${colorGroup}" ${combinedStyles ? `style="${combinedStyles}"` : ''}>
