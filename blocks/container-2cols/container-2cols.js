@@ -296,7 +296,6 @@ export default function decorate(block) {
     // 桌面端比例
     if (dlayoutvariation) {
       const dcolspan = config[`dcolspan${dlayoutvariation}`];
-      console.log(dlayoutvariation, dcolspan)
       if (dcolspan) {
         const { colClass1, colClass2 } = handlDColSpan(dcolspan);
         col1.classList.add(...colClass1.split(' '));
