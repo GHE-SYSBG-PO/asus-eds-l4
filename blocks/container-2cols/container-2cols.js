@@ -282,7 +282,7 @@ export default function decorate(block) {
     config.dcolspan2 = config.dcolspan2 || '7:6';
     config.dcolspan3 = config.dcolspan3 || '8:5';
     config.dcolspan4 = config.dcolspan4 || '9:4';
-    config.dcolspan5 = config.dcolspan4 || '100vw:12';
+    config.dcolspan5 = config.dcolspan5 || '100vw:12';
     config.tcolspan1 = config.tcolspan1 || '5:7';
     config.tcolspan2 = config.tcolspan2 || '7:6';
     config.tcolspan3 = config.tcolspan3 || '8:5';
@@ -296,6 +296,7 @@ export default function decorate(block) {
     // 桌面端比例
     if (dlayoutvariation) {
       const dcolspan = config[`dcolspan${dlayoutvariation}`];
+      console.log(dlayoutvariation, dcolspan)
       if (dcolspan) {
         const { colClass1, colClass2 } = handlDColSpan(dcolspan);
         col1.classList.add(...colClass1.split(' '));
