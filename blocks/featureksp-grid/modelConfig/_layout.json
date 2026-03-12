@@ -1,0 +1,45 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "item style",
+      "name": "itemStyle"
+    },
+    {
+      "component": "text",
+      "label": "border color",
+      "name": "borderColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "border width",
+      "name": "borderWidth",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius TL",
+      "name": "radiusTL",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius TR",
+      "name": "radiusTR",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius BR",
+      "name": "radiusBR",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "radius BL",
+      "name": "radiusBL",
+      "valueType": "string"
+    }
+  ]
+}

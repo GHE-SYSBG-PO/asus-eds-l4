@@ -1,0 +1,302 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "container",
+      "label": "layout",
+      "name": "layout",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "style",
+          "name": "layoutStyle",
+          "valueType": "string",
+          "options": [
+            { "name": "media", "value": "media" },
+            { "name": "icon", "value": "icon" },
+            { "name": "text", "value": "text" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "layout variant (D)",
+          "name": "layoutVariantD",
+          "valueType": "string",
+          "condition": {
+            "in": [ { "var": "layoutStyle" }, ["media", "icon"] ]
+          },
+          "options": [
+            { "name": "left", "value": "left" },
+            { "name": "right", "value": "right" },
+            { "name": "center", "value": "center" },
+            { "name": "top", "value": "top" },
+            { "name": "bottom", "value": "bottom" },
+            { "name": "top left", "value": "topLeft" },
+            { "name": "top right", "value": "topRight" },
+            { "name": "bottom left", "value": "bottomLeft" },
+            { "name": "bottom right", "value": "bottomRight" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "layout variant (T)",
+          "name": "layoutVariantT",
+          "valueType": "string",
+          "condition": {
+            "in": [ { "var": "layoutStyle" }, ["media", "icon"] ]
+          },
+          "options": [
+            { "name": "left", "value": "left" },
+            { "name": "right", "value": "right" },
+            { "name": "center", "value": "center" },
+            { "name": "top", "value": "top" },
+            { "name": "bottom", "value": "bottom" },
+            { "name": "top left", "value": "topLeft" },
+            { "name": "top right", "value": "topRight" },
+            { "name": "bottom left", "value": "bottomLeft" },
+            { "name": "bottom right", "value": "bottomRight" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "layout variant (M)",
+          "name": "layoutVariantM",
+          "valueType": "string",
+          "condition": {
+            "in": [ { "var": "layoutStyle" }, ["media", "icon"] ]
+          },
+          "options": [
+            { "name": "left", "value": "left" },
+            { "name": "right", "value": "right" },
+            { "name": "center", "value": "center" },
+            { "name": "top", "value": "top" },
+            { "name": "bottom", "value": "bottom" },
+            { "name": "top left", "value": "topLeft" },
+            { "name": "top right", "value": "topRight" },
+            { "name": "bottom left", "value": "bottomLeft" },
+            { "name": "bottom right", "value": "bottomRight" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "row span (D)",
+          "name": "layoutRowSpanD",
+          "valueType": "string",
+          "options": [
+            { "name": "1", "value": "lg:row-span-1" },
+            { "name": "2", "value": "lg:row-span-2" },
+            { "name": "3", "value": "lg:row-span-3" },
+            { "name": "4", "value": "lg:row-span-4" },
+            { "name": "5", "value": "lg:row-span-5" },
+            { "name": "6", "value": "lg:row-span-6" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "bg color",
+          "name": "layoutBgColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "...": "./_column-span.json#/fields"
+    },
+    {
+      "...": "./_media.json#/fields"
+    },
+    {
+      "component": "container",
+      "label": "text",
+      "name": "text",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "richtext",
+          "label": "top richtext",
+          "name": "textTopRichtext",
+          "valueType": "string",
+          "condition": {
+            "!==": [ { "var": "layoutStyle" }, "icon" ]
+          }
+        },
+        {
+          "component": "richtext",
+          "label": "title richtext",
+          "name": "textTitleRichtext",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "bottom richtext",
+          "name": "textBottomRichtext",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "label": "alignment",
+          "name": "textAlignment",
+          "valueType": "string",
+          "options": [
+            { "name": "default", "value": "" },
+            { "name": "left", "value": "text-left" },
+            { "name": "center", "value": "text-center" },
+            { "name": "right", "value": "text-right" }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "bg asset",
+      "name": "bgAsset",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "reference",
+          "label": "bg asset(img / video)(D)",
+          "name": "bgAssetD",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "label": "bg asset(img / video)(T)",
+          "name": "bgAssetT",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "label": "bg asset(img / video)(M)",
+          "name": "bgAssetM",
+          "multi": false
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "anchor",
+      "name": "anchor",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "boolean",
+          "label": "visibility toggle",
+          "name": "anchorVisibilityToggle",
+          "valueType": "boolean"
+        },
+        {
+          "component": "text",
+          "label": "section Id",
+          "name": "anchorSectionId",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "label": "anchor style",
+          "name": "anchorStyle",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "svg",
+              "value": "svg"
+            },
+            {
+              "name": "png",
+              "value": "png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "anchor svg",
+      "name": "anchorSvg",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "anchorStyle" }, "svg" ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "anchor color default",
+          "name": "anchorColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "anchor color hover",
+          "name": "anchorColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "anchor color press",
+          "name": "anchorColorPress",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bg color default",
+          "name": "anchorBgColorDefault",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bg color hover",
+          "name": "anchorBgColorHover",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "bg color press",
+          "name": "anchorBgColorPress",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "anchor png",
+      "name": "anchorPng",
+      "collapsible": true,
+      "condition": {
+        "===": [ { "var": "anchorStyle" }, "png" ]
+      },
+      "fields": [
+        {
+          "component": "reference",
+          "label": "default asset",
+          "name": "anchorDefaultAsset",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "label": "hover asset",
+          "name": "anchorHoverAsset",
+          "multi": false
+        },
+        {
+          "component": "reference",
+          "label": "press asset",
+          "name": "anchorPressAsset",
+          "multi": false
+        }
+      ]
+    },
+    {
+      "component": "reference",
+      "label": "icon asset",
+      "name": "iconAsset",
+      "multi": false,
+      "condition": {
+        "===": [ { "var": "layoutStyle" }, "icon" ]
+      }
+    }
+  ]
+}

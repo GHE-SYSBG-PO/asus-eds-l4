@@ -377,6 +377,37 @@
           }
         },
         {
+          "title": "Featureksp Grid(ID:22)",
+          "id": "featureksp-grid",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Featureksp Grid",
+                  "model": "featureksp-grid",
+                  "filter": "featureksp-grid"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Featureksp Grid Item",
+          "id": "featureksp-grid-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Featureksp Grid Item",
+                  "model": "featureksp-grid-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Footnote(ID:7)",
           "id": "footnote",
           "plugins": {
