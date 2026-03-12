@@ -1,5 +1,45 @@
 import { getBlockConfigs, getFieldValue, isAuthorUe } from '../../scripts/utils.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
+import getConfigValue from '../../scripts/configs.js';
+
+const FALLBACK_MEDIA_BASE_PATH = 'https://publish-p165753-e1767020.adobeaemcloud.com';
+let mediaBasePathPromise;
+
+/**
+ * Normalize base path from config into absolute origin/path without trailing slash
+ */
+const normalizeBasePath = (basePath) => {
+  const rawBasePath = typeof basePath === 'string' ? basePath.trim() : '';
+  if (!rawBasePath) return '';
+
+  const normalizedInput = rawBasePath.startsWith('//')
+    ? `${window.location.protocol}${rawBasePath}`
+    : rawBasePath;
+
+  try {
+    const normalizedUrl = new URL(normalizedInput, window.location.origin);
+    return normalizedUrl.origin === 'null'
+      ? normalizedUrl.toString().replace(/\/+$/, '')
+      : `${normalizedUrl.origin}${normalizedUrl.pathname}`.replace(/\/+$/, '');
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('Invalid api-endpoint in configuration, using fallback:', error);
+    return '';
+  }
+};
+
+/**
+ * Resolve and cache media base path
+ */
+const getMediaBasePath = async () => {
+  if (!mediaBasePathPromise) {
+    mediaBasePathPromise = getConfigValue('api-endpoint')
+      .then((value) => normalizeBasePath(value) || FALLBACK_MEDIA_BASE_PATH)
+      .catch(() => FALLBACK_MEDIA_BASE_PATH);
+  }
+
+  return mediaBasePathPromise;
+};
 
 const DEFAULT_CONFIG = {
   mediaType: '',
@@ -77,6 +117,34 @@ const getDevice = () => {
   const isDesktop = window.innerWidth >= 1024;
   return isTablet ? 'T' : (isDesktop ? 'D' : 'M');
 };
+
+/**
+ * Resolve media source URL with base path if needed
+ * - Returns full URLs unchanged
+ * - Prepends MEDIA_BASE_PATH to relative paths
+ * - Returns empty string if path is falsy
+ */
+const getMediaSourceUrl = (path, mediaBasePath) => {
+  if (!path) return '';
+
+  const rawPath = typeof path === 'string' ? path.trim() : '';
+  if (!rawPath) return '';
+
+  // If already a full URL, return as-is
+  if (rawPath.startsWith('http://') || rawPath.startsWith('https://') || rawPath.startsWith('data:') || rawPath.startsWith('blob:')) {
+    return rawPath;
+  }
+
+  if (rawPath.startsWith('//')) {
+    return `${window.location.protocol}${rawPath}`;
+  }
+
+  // Prepend base path to relative paths
+  const base = (mediaBasePath || FALLBACK_MEDIA_BASE_PATH).replace(/\/+$/, '');
+  const cleanPath = rawPath.startsWith('/') ? rawPath : `/${rawPath}`;
+  return `${base}${cleanPath}`;
+};
+
 /**
  * Build size style object
  */
@@ -210,6 +278,7 @@ const stylesToInline = (styles) => Object.entries(styles)
 
 export default async function decorate(block) {
   try {
+    const mediaBasePath = await getMediaBasePath();
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'media-block');
     const v = getFieldValue(config);
 
@@ -337,16 +406,22 @@ export default async function decorate(block) {
       // eslint-disable-next-line no-nested-ternary
       const curDevice = window.innerWidth >= 1024 ? 'D' : ((window.innerWidth >= 768 && window.innerWidth < 1024) ? 'T' : 'M');
 
+      // Resolve media source URLs with base path
+      const videoSrcM = getMediaSourceUrl(configM.assets, mediaBasePath);
+      const videoSrcT = getMediaSourceUrl(configT.assets, mediaBasePath);
+      const videoSrcD = getMediaSourceUrl(configD.assets, mediaBasePath);
+      const videoSrcDefault = getMediaSourceUrl(defaultAssets, mediaBasePath);
+
       return `
         <div class="device-${curDevice} media-block-video-container relative" style="position: relative; overflow-hidden; ${containerRadiusStyle} ${stylesToInline(defaultStyles)}">
           <video
-            data-src-m="${configM.assets || ''}"
-            data-src-t="${configT.assets || ''}"
-            data-src-d="${configD.assets || ''}"
+            data-src-m="${videoSrcM}"
+            data-src-t="${videoSrcT}"
+            data-src-d="${videoSrcD}"
             data-object-position-m="${objectPositionM}"
             data-object-position-t="${objectPositionT}"
             data-object-position-d="${objectPositionD}"
-            src="${defaultAssets}"
+            src="${videoSrcDefault}"
             class="w-full h-full object-cover"
             style="object-position: ${defaultObjectPosition};"
             ${videoAttrs}
