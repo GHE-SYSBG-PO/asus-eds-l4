@@ -20,14 +20,11 @@
       "name": "selection",
       "collapsible": true,
       "condition": {
-        "in": [
+        "===": [
           {
             "var": "productLine"
           },
-          [
-            "asus",
-            "rog"
-          ]
+          "asus"
         ]
       },
       "fields": [
