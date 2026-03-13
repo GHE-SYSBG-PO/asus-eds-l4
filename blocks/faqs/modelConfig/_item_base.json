@@ -26,27 +26,6 @@
     },
     {
       "...": "./_cta.json#/fields"
-    },
-    {
-      "component": "reference",
-      "label": "Image Asset (D)",
-      "name": "collapseItemImageD",
-      "multi": false,
-      "description": ""
-    },
-    {
-      "component": "reference",
-      "label": "Image Asset (T)",
-      "name": "collapseItemImageT",
-      "multi": false,
-      "description": ""
-    },
-    {
-      "component": "reference",
-      "label": "Image Asset (M)",
-      "name": "collapseItemImageM",
-      "multi": false,
-      "description": ""
     }
   ]
 }

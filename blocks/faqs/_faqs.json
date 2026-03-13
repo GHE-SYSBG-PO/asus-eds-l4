@@ -57,7 +57,10 @@
       "id": "faqs-item",
       "fields": [
         {
-          "...": "./modelConfig/_item.json#/fields"
+          "...": "./modelConfig/_item_base.json#/fields"
+        },
+        {
+          "...": "./modelConfig/_item_img.json#/fields"
         }
       ]
     }

@@ -1,0 +1,88 @@
+
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Image",
+      "name": "Image"
+    },
+
+    {
+      "component": "container",
+      "label": "Desktop",
+      "name": "imgContainerD",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "reference",
+          "label": "Image Asset (D)",
+          "name": "collapseItemImageD",
+          "multi": false,
+          "description": ""
+        },
+        {
+          "component": "select",
+          "label": "Align",
+          "name": "collapseItemImageAlignD",
+          "valueType": "string",
+          "options": [
+            { "name": "Left", "value": "left" },
+            { "name": "Center", "value": "center" }
+          ]
+        }
+      ]
+    },
+    
+    {
+      "component": "container",
+      "label": "Desktop",
+      "name": "imgContainerT",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "reference",
+          "label": "Image Asset (T)",
+          "name": "collapseItemImageT",
+          "multi": false,
+          "description": ""
+        },
+        {
+          "component": "select",
+          "label": "Align",
+          "name": "collapseItemImageAlignT",
+          "valueType": "string",
+          "options": [
+            { "name": "Left", "value": "left" },
+            { "name": "Center", "value": "center" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "component": "container",
+      "label": "Desktop",
+      "name": "imgContainerM",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "reference",
+          "label": "Image Asset (M)",
+          "name": "collapseItemImageM",
+          "multi": false,
+          "description": ""
+        },
+        {
+          "component": "select",
+          "label": "Align",
+          "name": "collapseItemImageAlignM",
+          "valueType": "string",
+          "options": [
+            { "name": "Left", "value": "left" },
+            { "name": "Center", "value": "center" }
+          ]
+        }
+      ]
+    }
+  ]
+}

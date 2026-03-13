@@ -21,14 +21,14 @@
       "collapsible": true,
       "fields": [
         {
-          "component": "richtext",
+          "component": "text",
           "label": "Right",
           "name": "right",
           "valueType": "string"
         },
 
         {
-          "component": "richtext",
+          "component": "text",
           "label": "Left",
           "name": "left",
           "valueType": "string"
