@@ -1,0 +1,138 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "text",
+      "label": "Title",
+      "name": "toptitle",
+      "valueType": "string",
+      "value": "FAQs",
+      "placeholder": "FAQs"
+    },
+
+    {
+      "component": "container",
+      "label": "Selection",
+      "name": "selection",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "richtext",
+          "label": "Right",
+          "name": "right",
+          "valueType": "string"
+        },
+
+        {
+          "component": "richtext",
+          "label": "Left",
+          "name": "left",
+          "valueType": "string"
+        }
+      ],
+      "description": ""
+    },
+
+    {
+      "component": "container",
+      "label": "Menu Style",
+      "name": "menuStyle",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "text",
+          "label": "Title Color",
+          "name": "titleColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Info Color",
+          "name": "infoColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "CTA Color",
+          "name": "menuCtaColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "CTA Arrow Color",
+          "name": "ctaArrowColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Menu Border Color",
+          "name": "menuBorderColor",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Menu Arrow Color",
+          "name": "menuArrowColor",
+          "valueType": "string"
+        }
+      ],
+      "description": ""
+    },
+
+    {
+      "component": "container",
+      "label": "Collapse Item",
+      "name": "collapseItem",
+      "valueType": "string[]",
+      "multi": true,
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-collapseItem",
+          "value": "L4TagMulti-collapseItem",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Title",
+          "name": "collapseItemTitle",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Info",
+          "name": "collapseItemInfo",
+          "valueType": "string"
+        },
+        {
+          "...": "./_cta.json#/fields"
+        },
+        {
+          "component": "reference",
+          "label": "Image Asset (D)",
+          "name": "collapseItemImageD",
+          "multi": false,
+          "description": ""
+        },
+        {
+          "component": "reference",
+          "label": "Image Asset (T)",
+          "name": "collapseItemImageT",
+          "multi": false,
+          "description": ""
+        },
+        {
+          "component": "reference",
+          "label": "Image Asset (M)",
+          "name": "collapseItemImageM",
+          "multi": false,
+          "description": ""
+        }
+      ]
+    }
+  ]
+}

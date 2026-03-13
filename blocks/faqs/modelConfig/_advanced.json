@@ -1,0 +1,100 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "advanced",
+      "name": "advanced"
+    },
+    {
+      "component": "container",
+      "label": "Title",
+      "name": "titleAdvancedContainer",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "Font (DTM)",
+          "name": "titleFontDTM",
+          "valueType": "string",
+          "options": [
+            { "name": "52", "value": "52" },
+            { "name": "56", "value": "56" },
+            { "name": "64", "value": "64" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "Font Color",
+          "name": "titleFontColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "Selection",
+      "name": "selectionAdvancedContainer",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "Font (DTM)",
+          "name": "selectionFontDTM",
+          "valueType": "string",
+          "options": [
+            { "name": "18", "value": "18" },
+            { "name": "20", "value": "20" },
+            { "name": "24", "value": "24" }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "Font Color",
+          "name": "selectionFontColor",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "menu",
+      "name": "menuAdvancedContainer",
+      "collapsible": true,
+      "fields": [
+        {
+          "component": "select",
+          "label": "Title Font (DTM)",
+          "name": "menuTitleFontDTM",
+          "valueType": "string",
+          "options": [
+            { "name": "18", "value": "18" },
+            { "name": "20", "value": "20" },
+            { "name": "24", "value": "24" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "Info Font (DTM)",
+          "name": "menuInfoFontDTM",
+          "valueType": "string",
+          "options": [
+            { "name": "16", "value": "16" },
+            { "name": "18", "value": "18" },
+            { "name": "20", "value": "20" }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "CTA Font (DTM)",
+          "name": "menuCtaFontDTM",
+          "valueType": "string",
+          "options": [
+            { "name": "18", "value": "18" },
+            { "name": "20", "value": "20" },
+            { "name": "24", "value": "24" }
+          ]
+        }
+      ]
+    }
+  ]
+}

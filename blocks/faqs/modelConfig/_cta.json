@@ -1,0 +1,23 @@
+{
+  "fields": [
+    {
+      "component": "text",
+      "label": "CTA Text",
+      "name": "ctaText",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "CTA color",
+      "name": "ctaColor",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "CTA hyperlink",
+      "name": "ctaHyperlink",
+      "multi": false,
+      "valueType": "string"
+    }
+  ]
+}
