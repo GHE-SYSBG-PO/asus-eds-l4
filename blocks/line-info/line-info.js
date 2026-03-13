@@ -91,8 +91,8 @@ const buildWidthStyle = (value, cssVar) => {
  */
 const buildMaxWidthStyle = (value, cssVar) => {
   if (!value) return null;
-  const resolved = value.includes('px') ? value : `${value}px`;
-  return `${cssVar}:${resolved}`;
+  if (value.includes('px')) return `${cssVar}:${value}`;
+  return `${cssVar}:${value}px`;
 };
 
 /** 將非空字串組合成 class string */
@@ -156,8 +156,14 @@ const generatePictureHtml = ({
 
 // ─── Font & Style Helpers ─────────────────────────────────────────────────────
 
-/** 根據字型大小與 prefix 產生 RWD font class string */
-const buildFontClass = (dtSize, mSize, prefix) => `${prefix}-${dtSize}-lg ${prefix}-${dtSize}-md ${prefix}-${mSize}-sm`;
+/**
+ * 根據字型大小與 prefix 產生 RWD font class string。
+ * @param {string} dtSize - desktop 字型大小
+ * @param {string} tSize  - tablet 字型大小（未設定時由呼叫端 fallback 到 dtSize）
+ * @param {string} mSize  - mobile 字型大小
+ * @param {string} prefix - font class prefix
+ */
+const buildFontClass = (dtSize, tSize, mSize, prefix) => `${prefix}-${dtSize}-lg ${prefix}-${tSize}-md ${prefix}-${mSize}-sm`;
 
 /**
  * 根據 config 與 productLine 預設值，產生 title / info 的 font class 與 color style。
@@ -165,19 +171,21 @@ const buildFontClass = (dtSize, mSize, prefix) => `${prefix}-${dtSize}-lg ${pref
 const generateAdvancedStyles = (config, defaults) => {
   const v = getFieldValue(config);
   const titleFontDT = v('titleFontDTselect') || defaults?.titleFontDTselect;
+  const titleFontT = v('titleFontTselect') || defaults?.titleFontTselect || titleFontDT;
   const titleFontM = v('titleFontMselect') || defaults?.titleFontMselect;
   const titleFontColor = v('titleFontColor') || defaults?.titleFontColor;
   const infoFontDT = v('infoFontDTselect') || defaults?.infoFontDTselect;
+  const infoFontT = v('infoFontTselect') || defaults?.infoFontTselect || infoFontDT;
   const infoFontM = v('infoFontMselect') || defaults?.infoFontMselect;
   const infoFontColor = v('infoFontColor') || defaults?.infoFontColor;
 
   return {
     title: {
-      classes: buildFontClass(titleFontDT, titleFontM, FONT_PREFIX.title[PRODUCT_LINE]),
+      classes: buildFontClass(titleFontDT, titleFontT, titleFontM, FONT_PREFIX.title[PRODUCT_LINE]),
       style: titleFontColor ? `--base-text-item-title-color: ${titleFontColor};` : '',
     },
     info: {
-      classes: buildFontClass(infoFontDT, infoFontM, FONT_PREFIX.info[PRODUCT_LINE]),
+      classes: buildFontClass(infoFontDT, infoFontT, infoFontM, FONT_PREFIX.info[PRODUCT_LINE]),
       style: infoFontColor ? `--base-text-item-info-color: ${infoFontColor};` : '',
     },
   };
@@ -482,11 +490,14 @@ const LAYOUT_STRATEGIES = {
 // ─── Block-level Helpers ──────────────────────────────────────────────────────
 
 /**
- * 從所有 repeat config groups 中，找出第一個 item 的 key 以 prefix 開頭的那一組。
+ * 從所有 repeat config groups 中，找出對應 blockLayout 的那一組 items。
  * 使用 startsWith 避免 prefix substring 誤 match（例如 'textItems1' 誤 match 'textItems10'）。
  * 使用 some 掃所有 key，不依賴 key 的排列順序。
+ * @param {Array} allGroups - getBlockRepeatConfigs 的回傳值
+ * @param {number} blockLayout - 目前的 layout 編號
  */
-const findTextItemsByPrefix = (allGroups, prefix) => {
+const findTextItemsByLayout = (allGroups, blockLayout) => {
+  const prefix = `textItems${blockLayout}`;
   const matched = allGroups.find((group) => {
     if (!group || group.length === 0) return false;
     return Object.keys(group[0]).some((key) => key.startsWith(prefix));
@@ -543,7 +554,7 @@ export default async function decorate(block) {
 
     // ── 取得對應 layout 的 text items ──
     const allRepeatGroups = getBlockRepeatConfigs(block);
-    const textItems = findTextItemsByPrefix(allRepeatGroups, `textItems${blockLayout}`);
+    const textItems = findTextItemsByLayout(allRepeatGroups, blockLayout);
 
     // ── text width（layout 1/2 的 block-level 設定）──
     const textWidth = {
