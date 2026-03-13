@@ -7,10 +7,7 @@
       "collapsible": true,
       "condition": {
         "==": [
-          {
-            "var": "styleLayout"
-          },
-          "5"
+          { "var": "styleLayout" }, "5"
         ]
       },
       "fields": [

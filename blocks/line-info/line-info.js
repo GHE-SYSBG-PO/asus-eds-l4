@@ -525,7 +525,7 @@ export default async function decorate(block) {
     const combinedStyles = [blockStyles, dialogStyle].filter(Boolean).join('; ');
     // ── 寫入 DOM ──
     block.innerHTML = `
-      <div class="line-info-block relative box-border colorGroup-${colorGroup}" ${combinedStyles ? `style="${combinedStyles}"` : ''}>
+      <div class="line-info-block relative box-border colorGroup-${colorGroup} test" ${combinedStyles ? `style="${combinedStyles}"` : ''}>
         ${txt.sideLeftDesktop || ''} ${txt.sideLeftTablet || ''}
         ${generatePictureHtml(picParams)}
         ${txt.sideRightDesktop || ''} ${txt.sideRightTablet || ''} ${txt.sideNone || ''}
