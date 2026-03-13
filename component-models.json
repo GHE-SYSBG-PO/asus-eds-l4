@@ -10805,15 +10805,13 @@
         "name": "desktopAlignment",
         "valueType": "string",
         "condition": {
-          "and": [
+          "===": [
             {
-              "===": [
-                {
-                  "var": "page-metadata.productLine"
-                },
-                "rog"
-              ]
-            }
+              "var": {
+                "page-metadata": "productLine"
+              }
+            },
+            "rog"
           ]
         },
         "options": [
