@@ -304,141 +304,72 @@
   }        
 }
 
-.l4-pdp .line-info-block{
+
+// ─── Dialog Direction Mixin ───────────────────────────────────────────────────
+// 每個 breakpoint 呼叫一次即可，$suffix 對應 lg / md / sm。
+// 新增方向只需在此 mixin 內加一組規則。
+@mixin dialog-direction-rules($suffix) {
+  // Top 系列：dialog 在 anchor 上方，text-item 從 anchor 底部往上展開
+  &.top-center-#{$suffix} .text-item {
+    top: unset !important;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, calc(var(--text-item-padding) * -1));
+  }
+
+  &.top-left-#{$suffix} .text-item {
+    top: unset !important;
+    bottom: 0;
+    right: 0;
+    transform: translate(0, calc(var(--text-item-padding) * -1));
+  }
+
+  &.top-right-#{$suffix} .text-item {
+    top: unset !important;
+    bottom: 0;
+    left: 0;
+    transform: translate(0, calc(var(--text-item-padding) * -1));
+  }
+
+  // Bottom 系列：dialog 在 anchor 下方，text-item 從 anchor 頂部往下展開
+  &.bottom-center-#{$suffix} .text-item {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, var(--text-item-padding));
+  }
+
+  &.bottom-left-#{$suffix} .text-item {
+    top: 0;
+    right: 0;
+    transform: translate(0, var(--text-item-padding));
+  }
+
+  &.bottom-right-#{$suffix} .text-item {
+    top: 0;
+    left: 0;
+    transform: translate(0, var(--text-item-padding));
+  }
+}
+
+.l4-pdp .line-info-block {
   --text-item-padding: 0px;
 
   @media (min-width: v.$large-lower-bound) {
-    .text-item-container{
-      // Dialog TC
-      &.top-center-lg .text-item{
-        top: unset !important;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%, calc(var(--text-item-padding) * -1));
-      }
-      
-      // Dialog TL
-      &.top-left-lg .text-item{
-        top: unset !important;
-        bottom: 0;
-        right: 0;
-        transform: translate(0, calc(var(--text-item-padding) * -1));
-      }
-
-      // Dialog TR
-      &.top-right-lg .text-item{
-        top: unset !important;
-        bottom: 0;
-        left: 0;
-        transform: translate(0, calc(var(--text-item-padding) * -1));
-      }
-
-      // Dialog BC
-      &.bottom-center-lg .text-item{
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, var(--text-item-padding));
-      }
-
-      // Dialog BL
-      &.bottom-left-lg .text-item{
-        top: 0;
-        right: 0;
-        transform: translate(0, var(--text-item-padding));
-      }
-
-      // Dialog BR
-      &.bottom-right-lg .text-item{
-        top: 0;
-        left: 0;
-        transform: translate(0, var(--text-item-padding));
-      }
+    .text-item-container {
+      @include dialog-direction-rules(lg);
     }
   }
 
-  @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound){
+  @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
     .text-item-container {
-      &.top-center-md .text-item{
-        top: unset !important;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%, calc(var(--text-item-padding) * -1));
-      }
-      
-      &.top-left-md .text-item{
-        top: unset !important;
-        bottom: 0;
-        right: 0;
-        transform: translate(0, calc(var(--text-item-padding) * -1));
-      }
-
-      &.top-right-md .text-item{
-        top: unset !important;
-        bottom: 0;
-        left: 0;
-        transform: translate(0, calc(var(--text-item-padding) * -1));
-      }
-
-      &.bottom-center-md .text-item{
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, var(--text-item-padding));
-      }
-
-      &.bottom-left-md .text-item{
-        top: 0;
-        right: 0;
-        transform: translate(0, var(--text-item-padding));
-      }
-
-      &.bottom-right-md .text-item{
-        top: 0;
-        left: 0;
-        transform: translate(0, var(--text-item-padding));
-      }
+      @include dialog-direction-rules(md);
     }
   }
 
-  @media all and (max-width: v.$small-upper-bound){
+  @media all and (max-width: v.$small-upper-bound) {
     .text-item-container {
-      &.top-center-sm .text-item{
-        top: unset !important;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%, calc(var(--text-item-padding) * -1));
-      }
-      
-      &.top-left-sm .text-item{
-        top: unset !important;
-        bottom: 0;
-        right: 0;
-        transform: translate(0, calc(var(--text-item-padding) * -1));
-      }
-
-      &.top-right-sm .text-item{
-        top: unset !important;
-        bottom: 0;
-        left: 0;
-        transform: translate(0, calc(var(--text-item-padding) * -1));
-      }
-
-      &.bottom-center-sm .text-item{
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, var(--text-item-padding));
-      }
-
-      &.bottom-left-sm .text-item{
-        top: 0;
-        right: 0;
-        transform: translate(0, var(--text-item-padding));
-      }
-
-      &.bottom-right-sm .text-item{
-        top: 0;
-        left: 0;
-        transform: translate(0, var(--text-item-padding));
-      }
+      @include dialog-direction-rules(sm);
     }
-  }    
+  }
 }
+
