@@ -6,6 +6,7 @@
       "name": "itemTextFont",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "tt-nr-16-sh", "value": "tt-nr-16-sh" },
         { "name": "tt-nr-18-sh", "value": "tt-nr-18-sh" }
       ]
