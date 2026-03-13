@@ -10809,7 +10809,7 @@
             {
               "===": [
                 {
-                  "var": "productLine"
+                  "var": "page-metadata.productLine"
                 },
                 "rog"
               ]

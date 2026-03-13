@@ -12,7 +12,7 @@
       "valueType": "string",
       "condition": {
         "and": [
-          { "===": [{ "var": "productLine" }, "rog"] }
+          { "===": [{ "var": "page-metadata.productLine" }, "rog"] }
         ]
       },
       "options": [
