@@ -1,0 +1,52 @@
+
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "basic",
+      "name": "basic"
+    },
+    {
+      "component": "text",
+      "name": "L4TagMulti-collapseItem",
+      "value": "L4TagMulti-collapseItem",
+      "hidden": true
+    },
+    {
+      "component": "text",
+      "label": "Title",
+      "name": "collapseItemTitle",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "label": "Info",
+      "name": "collapseItemInfo",
+      "valueType": "string"
+    },
+    {
+      "...": "./_cta.json#/fields"
+    },
+    {
+      "component": "reference",
+      "label": "Image Asset (D)",
+      "name": "collapseItemImageD",
+      "multi": false,
+      "description": ""
+    },
+    {
+      "component": "reference",
+      "label": "Image Asset (T)",
+      "name": "collapseItemImageT",
+      "multi": false,
+      "description": ""
+    },
+    {
+      "component": "reference",
+      "label": "Image Asset (M)",
+      "name": "collapseItemImageM",
+      "multi": false,
+      "description": ""
+    }
+  ]
+}

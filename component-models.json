@@ -4059,7 +4059,7 @@
           {
             "component": "text",
             "label": "CTA Arrow Color",
-            "name": "ctaArrowColor",
+            "name": "menuCtaArrowColor",
             "valueType": "string"
           },
           {
@@ -4076,73 +4076,6 @@
           }
         ],
         "description": ""
-      },
-      {
-        "component": "container",
-        "label": "Collapse Item",
-        "name": "collapseItem",
-        "valueType": "string[]",
-        "multi": true,
-        "fields": [
-          {
-            "component": "text",
-            "name": "L4TagMulti-collapseItem",
-            "value": "L4TagMulti-collapseItem",
-            "hidden": true
-          },
-          {
-            "component": "text",
-            "label": "Title",
-            "name": "collapseItemTitle",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "Info",
-            "name": "collapseItemInfo",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "CTA Text",
-            "name": "ctaText",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "CTA color",
-            "name": "ctaColor",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "label": "CTA hyperlink",
-            "name": "ctaHyperlink",
-            "multi": false,
-            "valueType": "string"
-          },
-          {
-            "component": "reference",
-            "label": "Image Asset (D)",
-            "name": "collapseItemImageD",
-            "multi": false,
-            "description": ""
-          },
-          {
-            "component": "reference",
-            "label": "Image Asset (T)",
-            "name": "collapseItemImageT",
-            "multi": false,
-            "description": ""
-          },
-          {
-            "component": "reference",
-            "label": "Image Asset (M)",
-            "name": "collapseItemImageM",
-            "multi": false,
-            "description": ""
-          }
-        ]
       },
       {
         "component": "tab",
@@ -4315,6 +4248,74 @@
         "name": "L4TagNestedBlock",
         "value": "L4--nested-block--faqs",
         "hidden": true
+      }
+    ]
+  },
+  {
+    "id": "faqs-item",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "basic",
+        "name": "basic"
+      },
+      {
+        "component": "text",
+        "name": "L4TagMulti-collapseItem",
+        "value": "L4TagMulti-collapseItem",
+        "hidden": true
+      },
+      {
+        "component": "text",
+        "label": "Title",
+        "name": "collapseItemTitle",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Info",
+        "name": "collapseItemInfo",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA Text",
+        "name": "ctaText",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA color",
+        "name": "ctaColor",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA hyperlink",
+        "name": "ctaHyperlink",
+        "multi": false,
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Image Asset (D)",
+        "name": "collapseItemImageD",
+        "multi": false,
+        "description": ""
+      },
+      {
+        "component": "reference",
+        "label": "Image Asset (T)",
+        "name": "collapseItemImageT",
+        "multi": false,
+        "description": ""
+      },
+      {
+        "component": "reference",
+        "label": "Image Asset (M)",
+        "name": "collapseItemImageM",
+        "multi": false,
+        "description": ""
       }
     ]
   },
