@@ -100,8 +100,18 @@ export default async function decorate(block) {
 
     // Categorize existing rows
     const allRows = Array.from(block.children);
-    const layoutRows = allRows.filter((row) => !row.classList.contains('faqs-item-wrapper') && !row.classList.contains('fold-outer-container'));
-    const itemRows = allRows.filter((row) => row.classList.contains('faqs-item-wrapper'));
+
+    // Identify items: either a nested block wrapper, UE item row, or raw row with the marker
+    const itemRows = allRows.filter((row) => {
+      if (row.classList.contains('faqs-item-wrapper')) return true;
+      if (row.classList.contains('faqs-item')) return true;
+      if (row.dataset && row.dataset.aueModel === 'faqs-item') return true;
+      // Check if any child cell contains the specific item marker
+      return Array.from(row.children).some((cell) => cell.textContent && cell.textContent.includes('L4TagMulti-collapseItem'));
+    });
+
+    // Layout rows: everything else that isn't our UI container or an item
+    const layoutRows = allRows.filter((row) => !row.classList.contains('fold-outer-container') && !itemRows.includes(row));
 
     // Hide layout config rows directly instead of deleting them to preserve UE configs
     layoutRows.forEach((row) => {
@@ -130,40 +140,94 @@ export default async function decorate(block) {
 
     // Process each item block in-place
     await Promise.all(itemRows.map(async (row, index) => {
+      let imgSrc = '';
+      let titleEle = null;
+      let contentEle = null;
+      let titleHtml = '';
+      const num = index + 1;
+
+      // Handle both nested block style and raw row style
       const faqItemBlock = row.querySelector('.faqs-item');
-
-      // Class and styling wrapper matching styles
-      row.classList.add('fold-item', `fold-item-${index + 1}`);
-      row.dataset.index = index + 1;
-
       if (faqItemBlock) {
         const itemConfig = await getBlockConfigs(faqItemBlock, DEFAULT_ITEM_CONFIG, 'faqs-item');
-        const num = index + 1;
+        const titleText = itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '';
+        const contentText = itemConfig.collapseItemInfo?.text ?? itemConfig.collapseItemInfo ?? '';
+        imgSrc = itemConfig.collapseItemImageD ?? '';
+        titleEle = document.createTextNode(titleText);
+        titleHtml = titleText;
 
-        const title = itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '';
-        const content = itemConfig.collapseItemInfo?.text ?? itemConfig.collapseItemInfo ?? '';
-        const imgSrc = itemConfig.collapseItemImageD ?? '';
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = contentText;
+        contentEle = tempDiv;
+      } else {
+        const cells = Array.from(row.children);
+        const getCellElement = (idx) => {
+          const cell = cells[idx];
+          if (!cell) return null;
+          const auePropEle = cell.querySelector('[data-aue-prop]');
+          return auePropEle || cell;
+        };
 
-        faqItemBlock.innerHTML = `
-          <h3 class="content-title no-top-space ro-rg-20 small_ro-rg-18">
-            <button type="button" class="wdga"
-              id="footer_qa_fold_accordion_${num}" 
-              data-galabel="Expand tab ${num}" data-eventname="qa_btn_${num}"
-              aria-label="Expand ${title} tab" aria-controls="footer_qa_fold_accordion_group_${num}"
-              aria-expanded="false" tabindex="0">${title}</button>
-          </h3>
-          <div class="accordion-group" id="footer_qa_fold_accordion_group_${num}" role="region" aria-labelledby="footer_qa_fold_accordion_${num}" aria-hidden="true">
-            <div class="accordion-panel">
-              <div class="content-info-group">
-                <div class="content-info info-1 ro-rg-18 small_ro-rg-16">${content}</div>
-              </div>
-              ${imgSrc ? renderPanelImg(imgSrc) : ''}
-            </div>
-          </div>
-        `;
+        titleEle = getCellElement(1);
+        contentEle = getCellElement(2);
+
+        const imgCell = cells[6];
+        const img = imgCell ? imgCell.querySelector('img') : null;
+        imgSrc = img ? img.src : '';
+        titleHtml = titleEle?.textContent?.trim() || '';
+
+        // Hide original cells (keep them for UE bindings but hide visually)
+        cells.forEach((cell) => { cell.style.display = 'none'; });
       }
 
-      // Move it into the fold container, preserving AEM wrappers hooks
+      // Class and styling wrapper matching styles
+      row.classList.add('fold-item', `fold-item-${num}`);
+      row.dataset.index = num;
+
+      const itemContentDiv = document.createElement('div');
+      itemContentDiv.className = 'faqs-item';
+
+      itemContentDiv.innerHTML = `
+        <h3 class="content-title no-top-space ro-rg-20 small_ro-rg-18">
+          <button type="button" class="wdga"
+            id="footer_qa_fold_accordion_${num}" 
+            data-galabel="Expand tab ${num}" data-eventname="qa_btn_${num}"
+            aria-label="Expand ${titleHtml} tab" aria-controls="footer_qa_fold_accordion_group_${num}"
+            aria-expanded="false" tabindex="0"></button>
+        </h3>
+        <div class="accordion-group" id="footer_qa_fold_accordion_group_${num}" role="region" aria-labelledby="footer_qa_fold_accordion_${num}" aria-hidden="true">
+          <div class="accordion-panel">
+            <div class="content-info-group">
+              <div class="content-info info-1 ro-rg-18 small_ro-rg-16"></div>
+            </div>
+            ${imgSrc ? renderPanelImg(imgSrc) : ''}
+          </div>
+        </div>
+      `;
+
+      // Insert actual elements natively to preserve UE bounds
+      const btn = itemContentDiv.querySelector('button');
+      if (titleEle) {
+        if (titleEle.nodeType === 1 && !titleEle.hasAttribute('data-aue-prop') && titleEle === Array.from(row.children)[1]) {
+          while (titleEle.firstChild) btn.appendChild(titleEle.firstChild);
+        } else {
+          btn.appendChild(titleEle);
+        }
+      }
+
+      const infoContainer = itemContentDiv.querySelector('.content-info');
+      if (contentEle) {
+        if (contentEle.nodeType === 1 && !contentEle.hasAttribute('data-aue-prop') && contentEle === Array.from(row.children)[2]) {
+          while (contentEle.firstChild) infoContainer.appendChild(contentEle.firstChild);
+        } else {
+          infoContainer.appendChild(contentEle);
+        }
+      }
+
+      // Add the new UI wrapper to row
+      row.appendChild(itemContentDiv);
+
+      // Move it into the fold container
       foldItemsContainer.appendChild(row);
     }));
 
