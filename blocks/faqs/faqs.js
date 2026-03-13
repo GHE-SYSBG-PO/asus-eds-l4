@@ -8,6 +8,7 @@ import {
 const DEFAULT_CONFIG = {
   // basic
   toptitle: 'FAQs',
+  toptitleColor: '',
   right: 'Collapse all',
   left: 'Show all',
   titleColor: '',
@@ -88,15 +89,15 @@ const DEFAULT_FONT_CONFIG = {
 };
 
 const _getFontClass = (type, dtmValue, fallbackSizes) => {
-  if (dtmValue) return dtmValue;
+  const sizesToUse = dtmValue ? [String(dtmValue)] : fallbackSizes;
 
   const productLine = getProductLine() || 'asus';
   const config = DEFAULT_FONT_CONFIG[type];
-  if (!config) return fallbackSizes.join(' ');
+  if (!config) return sizesToUse.join(' ');
 
   const fontConfig = config[productLine] || config.asus;
 
-  return fallbackSizes.map((sizeStr) => {
+  return sizesToUse.map((sizeStr) => {
     if (sizeStr.startsWith('small_')) {
       return `small_${fontConfig.prefix}${sizeStr.replace('small_', '')}${fontConfig.suffix}`;
     }
@@ -287,12 +288,20 @@ const _handleLayoutRows = (layoutRows) => {
 };
 
 const _createShell = (block, showAllText, collapseAllText, v) => {
+  const titleFontClass = _getFontClass('toptitle', v && v('titleFontDTM', 'text'), ['20']);
   const controlFontClass = _getFontClass('control', v && v('selectionFontDTM', 'text'), ['20']);
+  const topTitleText = v('title', 'text') || 'FAQs';
+
   let foldContainerOuter = block.querySelector('.fold-outer-container');
   if (!foldContainerOuter) {
     foldContainerOuter = document.createElement('div');
     foldContainerOuter.className = 'fold-outer-container';
     foldContainerOuter.innerHTML = `
+      <div class="fold-header">
+        <div class="fold-title ${titleFontClass}">
+          <div>${topTitleText}</div>
+        </div>
+      </div>
       <div class="fold-control">
         <button type="button" class="fold-btn btn-showall wdga ${controlFontClass}" data-galabel="${showAllText}" aria-label="${showAllText}" data-eventname="faq_btn_show_all_clicked" tabindex="0">${showAllText}</button>
         <div class="fold-btn-split"></div>
@@ -307,6 +316,28 @@ const _createShell = (block, showAllText, collapseAllText, v) => {
   return foldContainerOuter.querySelector('.fold-items');
 };
 
+const _getCommonItemProps = (itemConfig, fallbackImgD = '') => {
+  const getVal = (key) => itemConfig[key]?.text ?? itemConfig[key] ?? '';
+  return {
+    ctaColor: getVal('ctaColor'),
+    ctaText: getVal('ctaText'),
+    ctaHyperlink: getVal('ctaHyperlink'),
+    imgConf: {
+      imgD: getVal('collapseItemImageD') || fallbackImgD,
+      imgAlignD: getVal('collapseItemImageAlignD'),
+      imgWidthD: getVal('collapseItemImageWidthD'),
+      imgHeightD: getVal('collapseItemImageHeightD'),
+      imgT: getVal('collapseItemImageT'),
+      imgAlignT: getVal('collapseItemImageAlignT'),
+      imgWidthT: getVal('collapseItemImageWidthT'),
+      imgHeightT: getVal('collapseItemImageHeightT'),
+      imgM: getVal('collapseItemImageM'),
+      imgAlignM: getVal('collapseItemImageAlignM'),
+      imgWidthM: getVal('collapseItemImageWidthM'),
+      imgHeightM: getVal('collapseItemImageHeightM'),
+    },
+  };
+};
 const _parseFaqItemBlock = async (faqItemBlock) => {
   const itemConfig = await getBlockConfigs(faqItemBlock, DEFAULT_ITEM_CONFIG, 'faqs-item');
   const titleText = itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '';
@@ -315,30 +346,15 @@ const _parseFaqItemBlock = async (faqItemBlock) => {
   tempDiv.innerHTML = contentText;
 
   return {
-    ctaColor: itemConfig.ctaColor ?? '',
-    ctaText: itemConfig.ctaText ?? '',
-    ctaHyperlink: itemConfig.ctaHyperlink ?? '',
-    imgConf: {
-      imgD: itemConfig.collapseItemImageD ?? '',
-      imgAlignD: itemConfig.collapseItemImageAlignD ?? '',
-      imgWidthD: itemConfig.collapseItemImageWidthD ?? '',
-      imgHeightD: itemConfig.collapseItemImageHeightD ?? '',
-      imgT: itemConfig.collapseItemImageT ?? '',
-      imgAlignT: itemConfig.collapseItemImageAlignT ?? '',
-      imgWidthT: itemConfig.collapseItemImageWidthT ?? '',
-      imgHeightT: itemConfig.collapseItemImageHeightT ?? '',
-      imgM: itemConfig.collapseItemImageM ?? '',
-      imgAlignM: itemConfig.collapseItemImageAlignM ?? '',
-      imgWidthM: itemConfig.collapseItemImageWidthM ?? '',
-      imgHeightM: itemConfig.collapseItemImageHeightM ?? '',
-    },
+    ..._getCommonItemProps(itemConfig),
     titleEle: document.createTextNode(titleText),
     titleHtml: titleText,
     contentEle: tempDiv,
   };
 };
 
-const _parseFaqRawRow = (row) => {
+const _parseFaqRawRow = async (row) => {
+  const itemConfig = await getBlockConfigs(row, DEFAULT_ITEM_CONFIG, 'faqs-item');
   const cells = Array.from(row.children);
   const getCellElement = (idx) => {
     const cell = cells[idx];
@@ -357,23 +373,7 @@ const _parseFaqRawRow = (row) => {
   }
 
   return {
-    ctaColor: '',
-    ctaHyperlink: '',
-    ctaText: '',
-    imgConf: {
-      imgD: img ? img.src : '',
-      imgT: '',
-      imgM: '',
-      imgAlignD: '',
-      imgWidthD: '',
-      imgHeightD: '',
-      imgAlignT: '',
-      imgWidthT: '',
-      imgHeightT: '',
-      imgAlignM: '',
-      imgWidthM: '',
-      imgHeightM: '',
-    },
+    ..._getCommonItemProps(itemConfig, img ? img.src : ''),
     titleEle,
     titleHtml: titleEle?.textContent?.trim() || '',
     contentEle: getCellElement(2),
@@ -402,16 +402,18 @@ export default async function decorate(block) {
     const applyCssVar = (el, name, value) => {
       if (value) el.style.setProperty(`--${name}`, value);
     };
-    applyCssVar(foldContainerOuter, 'titleColor', v('titleColor', 'text'));
-    applyCssVar(foldContainerOuter, 'infoColor', v('infoColor', 'text'));
-    applyCssVar(foldContainerOuter, 'menuCtaColor', v('menuCtaColor', 'text'));
-    applyCssVar(foldContainerOuter, 'menuCtaArrowColor', v('menuCtaArrowColor', 'text'));
-    applyCssVar(foldContainerOuter, 'menuBorderColor', v('menuBorderColor', 'text'));
-    applyCssVar(foldContainerOuter, 'menuArrowColor', v('menuArrowColor', 'text'));
+
+    applyCssVar(foldContainerOuter, 'top-title-color', v('toptitleColor', 'text'));
+    applyCssVar(foldContainerOuter, 'title-color', v('titleColor', 'text'));
+    applyCssVar(foldContainerOuter, 'info-color', v('infoColor', 'text'));
+    applyCssVar(foldContainerOuter, 'menu-cta-color', v('menuCtaColor', 'text'));
+    applyCssVar(foldContainerOuter, 'menu-cta-arrow-color', v('menuCtaArrowColor', 'text'));
+    applyCssVar(foldContainerOuter, 'menu-border-color', v('menuBorderColor', 'text'));
+    applyCssVar(foldContainerOuter, 'menu-arrow-color', v('menuArrowColor', 'text'));
 
     const titleFontClass = _getFontClass('title', v('menuTitleFontDTM', 'text'), ['20', 'small_18']);
     const infoFontClass = _getFontClass('info', v('menuInfoFontDTM', 'text'), ['18', 'small_16']);
-    // const ctaFontClass = _getFontClass('cta', v('menuCtaFontDTM', 'text'), ['18']); // Uncomment if CTA is rendered later
+    const ctaFontClass = _getFontClass('cta', v('menuCtaFontDTM', 'text'), ['18']);
 
     // Process each item block in-place
     await Promise.all(itemRows.map(async (row, index) => {
@@ -422,7 +424,7 @@ export default async function decorate(block) {
       if (faqItemBlock) {
         parsedItem = await _parseFaqItemBlock(faqItemBlock);
       } else {
-        parsedItem = _parseFaqRawRow(row);
+        parsedItem = await _parseFaqRawRow(row);
       }
 
       const {
@@ -437,7 +439,7 @@ export default async function decorate(block) {
       itemContentDiv.className = 'faqs-item';
 
       const ctaHtml = ctaText ? `
-        <a class="content__link wdga" aria-label="${ctaText} (opens in new window)" href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer" data-galabel="${ctaText}" data-eventname="faqs_item_${num}_link_click" style="${ctaColor ? `--ctaColor: ${ctaColor}` : ''}">
+        <a class="content__link wdga ${ctaFontClass}" aria-label="${ctaText} (opens in new window)" href="${ctaHyperlink}" target="_blank" rel="noopener noreferrer" data-galabel="${ctaText}" data-eventname="faqs_item_${num}_link_click" style="${ctaColor ? `--ctaColor: ${ctaColor}` : ''}">
           <span>${ctaText}</span>
         </a>
       ` : '';

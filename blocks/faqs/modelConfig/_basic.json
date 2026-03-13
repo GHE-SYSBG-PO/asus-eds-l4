@@ -13,6 +13,12 @@
       "value": "FAQs",
       "placeholder": "FAQs"
     },
+    {
+      "component": "text",
+      "label": "Title Color",
+      "name": "toptitleColor",
+      "valueType": "string"
+    },
 
     {
       "component": "container",
