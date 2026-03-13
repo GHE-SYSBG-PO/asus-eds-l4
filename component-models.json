@@ -10804,16 +10804,6 @@
         "label": "desktop alignment",
         "name": "desktopAlignment",
         "valueType": "string",
-        "condition": {
-          "===": [
-            {
-              "var": {
-                "page-metadata": "productLine"
-              }
-            },
-            "rog"
-          ]
-        },
         "options": [
           {
             "name": "Center",
