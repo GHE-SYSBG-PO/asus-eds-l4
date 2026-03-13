@@ -6628,7 +6628,8 @@
             "label": "  width",
             "name": "assetDesktopImgWidth",
             "valueType": "string",
-            "placeholder": "px"
+            "placeholder": "px",
+            "description": "* if style = 1, width 建議不超過 1412px"
           },
           {
             "component": "text",
@@ -6839,7 +6840,7 @@
             "name": "textItems1YValueDesktop",
             "valueType": "string",
             "placeholder": "px",
-            "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -6877,7 +6878,7 @@
             "name": "textItems1YValueTablet",
             "valueType": "string",
             "placeholder": "px",
-            "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -6962,7 +6963,7 @@
             "name": "textItems2YValueDesktop",
             "valueType": "string",
             "placeholder": "px",
-            "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -6977,7 +6978,7 @@
             "name": "textItems2YValueTablet",
             "valueType": "string",
             "placeholder": "px",
-            "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -7074,6 +7075,7 @@
             "name": "textItems3XValueDesktop",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 可以是負值",
             "multi": false
           },
           {
@@ -7125,6 +7127,7 @@
             "name": "textItems3XValueTablet",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 可以是負值",
             "multi": false
           },
           {
@@ -7221,6 +7224,7 @@
             "name": "textItems4XValueDesktop",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 可以是負值",
             "multi": false
           },
           {
@@ -7235,6 +7239,7 @@
             "name": "textItems4YValueDesktop",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -7286,6 +7291,7 @@
             "name": "textItems4XValueTablet",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 可以是負值",
             "multi": false
           },
           {
@@ -7300,6 +7306,7 @@
             "name": "textItems4YValueTablet",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -7453,6 +7460,7 @@
             "name": "textItems5XValueDesktop",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 可以是負值",
             "multi": false
           },
           {
@@ -7467,6 +7475,7 @@
             "name": "textItems5YValueDesktop",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -7575,6 +7584,7 @@
             "name": "textItems5XValueTablet",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 可以是負值",
             "multi": false
           },
           {
@@ -7589,6 +7599,7 @@
             "name": "textItems5YValueTablet",
             "valueType": "string",
             "placeholder": "px",
+            "description": " * 文案太多可以是負值",
             "multi": false
           },
           {
@@ -7778,7 +7789,7 @@
             "label": "border radius",
             "name": "dialogBoxRadius",
             "valueType": "string",
-            "placeholder": "(上/右/下/左) ex: 10px 20px 20px 10px"
+            "placeholder": "8px 8px 8px 8px"
           },
           {
             "component": "text",
@@ -7807,7 +7818,7 @@
             "label": "padding",
             "name": "dialogBoxPadding",
             "valueType": "string",
-            "placeholder": "(上/右/下/左) ex: 10px 0 0 10px"
+            "placeholder": "10px 0 0 10px"
           }
         ]
       },
