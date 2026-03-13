@@ -459,11 +459,13 @@ export default async function decorate(block) {
     const blockLayout = parseInt(config.styleLayout?.text || config.styleLayout || '1', 10);
     const imageDef = IMAGE_DEFAULTS_BY_LAYOUT[blockLayout] || IMAGE_DEFAULTS_BY_LAYOUT[1];
     const fontDef = FONT_DEFAULTS_BY_PRODUCT_LINE[PRODUCT_LINE] || FONT_DEFAULTS_BY_PRODUCT_LINE.asus;
-    const colorGroup = v('colorGroup') || 'light';
+    const colorGroup = v('colorGroup') || 'section-light';
     const debugEnabled = v('debugEnabled') === 'true';
-    // if (blockLayout === 5) {
-    //   console.log('debugEnabled', v('debugEnabled'));
-    // }
+    if (blockLayout === 1) {
+      console.group('blockLayout', blockLayout);
+      console.log('colorGroup', colorGroup);
+      console.groupEnd();
+    }
     // return block;
 
     // ── Layout 2 專屬：文字擺放側 ──

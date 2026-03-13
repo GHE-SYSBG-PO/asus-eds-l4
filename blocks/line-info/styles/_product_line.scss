@@ -16,6 +16,16 @@
   }
 }
 
+.l4-pdp.debug {
+  &[data-mode="light"] {
+    background-color: #fff;
+  }
+
+  &[data-mode="dark"] {
+    background-color: #000;
+  }
+}
+
 .l4-pdp {
   &[data-product="asus"] {
     &[data-mode="light"] .line-info,
