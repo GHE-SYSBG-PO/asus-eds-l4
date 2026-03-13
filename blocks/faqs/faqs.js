@@ -1,188 +1,77 @@
 import {
   getBlockConfigs,
   getFieldValue,
-  // getProductLine,
-  isAuthorUe,
 } from '../../scripts/utils.js';
-// import { loadAnime } from '../../scripts/scripts.js';
 
-// ── Constants ─────────────────────────────────────────────────
 const DEFAULT_CONFIG = {};
-
-/** Font-family prefix per product line */
-// const PRODUCT_FONT_PREFIX = {
-//   rog: 'tg-bd',
-//   tuf: 'dp-cb',
-//   proart: 'tt-bd',
-//   asus: 'tt-bd',
-// };
-
-/** Base viewport heights used to compute minimum scroll container height */
-// const BASE_VIEWPORT_HEIGHT = { D: 1024, T: 768, M: 736 };
-
-/** Default font sizes when no value is configured */
-// const DEFAULT_FONT_SIZE = { D: '96', T: '64', M: '40' };
-
-/** Config key mapping for font size per device */
-// const FONT_SIZE_KEY = { D: 'fontDesktop', T: 'fontTablet', M: 'fontMobile' };
-
-/** Config key mapping for text max-width per device */
-// const MAX_WIDTH_KEY = { D: 'textMaxWidthD', T: 'textMaxWidthT', M: 'textMaxWidthM' };
-
-// ── Scroll animation timing ───────────────────────────────────
-// const ANIMATION = {
-//   IMG_DURATION: 400,
-//   TEXT_DURATION: 300,
-//   TEXT_OFFSET: 250,
-// };
-
-// ── Helpers ───────────────────────────────────────────────────
-
-/**
- * Get the configured font size for a device, falling back to defaults.
- * @param {'D'|'T'|'M'} device
- * @param {Function} v - field value accessor
- * @returns {string} numeric font size string, e.g. '96'
- */
-// const getFontSize = (device, v) => v(FONT_SIZE_KEY[device], 'text') || DEFAULT_FONT_SIZE[device];
-
-/**
- * Get the configured text max-width for a device.
- * @param {'D'|'T'|'M'} device
- * @param {Function} v - field value accessor
- * @returns {string} e.g. '1260px' or ''
- */
-// const getTextMaxWidth = (device, v) => {
-//   const val = v(MAX_WIDTH_KEY[device], 'text');
-//   return val ? `${val}px` : '';
-// };
-
-/**
- * Build RWD font class string based on current product line.
- * @param {string} dSize - desktop font size
- * @param {string} tSize - tablet font size
- * @param {string} mSize - mobile font size
- * @returns {string} e.g. 'tt-bd-96 tt-bd-64-md tt-bd-40-sm'
- */
-// const getTextFontClass = (dSize, tSize, mSize) => {
-//   const prefix = PRODUCT_FONT_PREFIX[getProductLine()] || PRODUCT_FONT_PREFIX.asus;
-//   return `${prefix}-${dSize} ${prefix}-${tSize}-md ${prefix}-${mSize}-sm`;
-// };
-
-/**
- * Determine animation type based on whether an image is present.
- */
-// const getAnimationType = (imageSrc) => (imageSrc ? 'type-1' : 'type-2');
-
-// ── Render ─────────────────────────────────────────────────────
-const renderPanelImg = (imgSrc) => `
-    <div class="content-img-group">
-      <img src="${imgSrc}" alt="">
-    </div>
-  `;
-
-const renderItemHTML = (item, index) => {
-  const num = index + 1;
-  const title = item.title || '';
-  const content = item.content || '';
-  const imgSrc = item.imgSrc || '';
-  const imgHTML = renderPanelImg(imgSrc);
-
-  return `
-    <div class="fold-item fold-item-${num}" data-index="${num}">
-      <h3 class="content-title no-top-space ro-rg-20 small_ro-rg-18">
-        <button type="button" class="wdga"
-          id="footer_qa_fold_accordion_${num}" 
-          data-galabel="Expand tab ${num}" data-eventname="qa_btn_${num}"
-          aria-label="Expand ${title} tab" aria-controls="footer_qa_fold_accordion_group_${num}"
-          aria-expanded="false" tabindex="0">${title}</button>
-      </h3>
-      <div class="accordion-group" id="footer_qa_fold_accordion_group_${num}" role="region" aria-labelledby="footer_qa_fold_accordion_${num}" aria-hidden="true">
-        <div class="accordion-panel">
-          <div class="content-info-group">
-            <div class="content-info info-1 ro-rg-18 small_ro-rg-16">${content}</div>
-          </div>
-          ${imgHTML}
-        </div>
-      </div>
-    </div>
-  `;
+const DEFAULT_ITEM_CONFIG = {
+  collapseItemTitle: '',
+  collapseItemInfo: '',
+  collapseItemImageD: '',
 };
 
-const renderContainerHTML = () => `
-    <div class="fold-outer-container">
-      <div class="fold-control">
-        <button type="button" class="fold-btn btn-showall wdga ro-rg-20" data-galabel="Show all" aria-label="Click to show all FAQ" data-eventname="faq_btn_show_all_clicked" tabindex="0">Show all</button>
-        <div class="fold-btn-split"></div>
-        <button type="button" class="fold-btn btn-collapseall wdga ro-rg-20" data-galabel="Collapse all" aria-label="Click to collapse all FAQ" data-eventname="faq_btn_collapse_all_clicked" tabindex="0">Collapse all</button>
-      </div>
-      <div class="fold-container">
-        <div class="fold-items">
-        </div>
-      </div>
-    </div>
-  `;
+const renderPanelImg = (imgSrc) => `
+  <div class="content-img-group">
+    <img src="${imgSrc}" alt="">
+  </div>
+`;
 
-// ── Interactions ──────────────────────────────────────────────
-
-/**
- * Initializes FAQ accordion fold clicks and global show/collapse all buttons
- * @param {HTMLElement} block
- */
 const initFAQInteractions = (block) => {
-  const faqContainer = block.querySelector('.faqs-container');
-  if (!faqContainer) return;
+  const items = block.querySelectorAll('.fold-item');
+  const showAllBtn = block.querySelector('.btn-showall');
+  const collapseAllBtn = block.querySelector('.btn-collapseall');
 
-  const items = faqContainer.querySelectorAll('.fold-item');
-  const showAllBtn = faqContainer.querySelector('.btn-showall');
-  const collapseAllBtn = faqContainer.querySelector('.btn-collapseall');
+  const setItemState = (itemEl, expand) => {
+    const btn = itemEl.querySelector('.content-title button');
+    const panelGroup = itemEl.querySelector('.accordion-group');
+    const panelInner = itemEl.querySelector('.accordion-panel');
 
-  // Helper: update single item state
-  const setItemState = (itemWrapper, isExpanded) => {
-    const btn = itemWrapper.querySelector('button[aria-expanded]');
-    const groupDiv = itemWrapper.querySelector('.accordion-group');
+    if (!btn || !panelGroup) return;
 
-    if (isExpanded) {
-      itemWrapper.classList.add('active');
+    if (expand) {
+      itemEl.classList.add('active');
       btn.setAttribute('aria-expanded', 'true');
-      groupDiv.setAttribute('aria-hidden', 'false');
-      groupDiv.style.height = `${groupDiv.scrollHeight}px`; // Basic open height, may need SCSS transiton tuning
-      groupDiv.querySelector('.accordion-panel').style.opacity = '1';
+      panelGroup.style.height = `${panelGroup.scrollHeight}px`;
+      if (panelInner) {
+        panelInner.style.opacity = '1';
+        panelInner.style.pointerEvents = 'auto'; // Re-enable pointer events
+      }
+      setTimeout(() => {
+        panelGroup.style.height = 'auto';
+      }, 300);
     } else {
-      itemWrapper.classList.remove('active');
+      panelGroup.style.height = `${panelGroup.scrollHeight}px`; // Force height for animation
+      // Trigger reflow
+      // eslint-disable-next-line no-unused-expressions
+      panelGroup.offsetHeight;
+
+      itemEl.classList.remove('active');
       btn.setAttribute('aria-expanded', 'false');
-      groupDiv.setAttribute('aria-hidden', 'true');
-      groupDiv.style.height = '0';
-      groupDiv.querySelector('.accordion-panel').style.opacity = '0';
+      panelGroup.style.height = '0px';
+
+      if (panelInner) {
+        panelInner.style.opacity = '0';
+        panelInner.style.pointerEvents = 'none'; // Disable pointer events when collapsed
+      }
     }
   };
 
-  // 1. Single item click toggle
   items.forEach((itemEl) => {
-    // Prevent adding multiple listeners if re-initialized
     if (itemEl.dataset.listenerAttached) return;
     itemEl.dataset.listenerAttached = 'true';
 
     itemEl.addEventListener('click', (e) => {
-      // Prevent toggling if user is actually selecting text inside the content
+      // Prevent toggling when selecting text
       if (window.getSelection().toString().length > 0) return;
 
-      const btn = itemEl.querySelector('.content-title button');
-      if (!btn) return;
+      const isTitleClick = e.target.closest('.content-title');
+      if (!isTitleClick) return;
 
-      // If click originated from the folded panel (which users want to use as a toggle too),
-      // strictly triggering a click ensures the AEM GA logic catches the event on the button proxy.
-      if (e.target !== btn && !btn.contains(e.target)) {
-        btn.click(); // This will trigger the handler below
-        return;
-      }
-
-      const isCurrentlyExpanded = btn.getAttribute('aria-expanded') === 'true';
-      setItemState(itemEl, !isCurrentlyExpanded);
+      const isExpanded = itemEl.classList.contains('active');
+      setItemState(itemEl, !isExpanded);
     });
   });
 
-  // 2. Global buttons
   if (showAllBtn && !showAllBtn.dataset.listenerAttached) {
     showAllBtn.dataset.listenerAttached = 'true';
     showAllBtn.addEventListener('click', () => {
@@ -198,144 +87,91 @@ const initFAQInteractions = (block) => {
   }
 };
 
-const DEFAULT_ITEM_CONFIG = {
-  collapseItemTitle: '',
-  collapseItemInfo: '',
-  collapseItemImageD: '',
-};
-
-// ── Entry point ───────────────────────────────────────────────
-
-// ── UE authoring mode ─────────────────────────────────────────
-function _decorateUE(foldItemsContainer, itemEls, itemsConfigs) {
-  itemEls.forEach((itemEl, index) => {
-    const faqItemBlock = itemEl.querySelector('.faqs-item');
-    if (faqItemBlock && itemsConfigs[index]) {
-      const mappedItem = {
-        title: itemsConfigs[index].collapseItemTitle?.text ?? itemsConfigs[index].collapseItemTitle ?? '',
-        content: itemsConfigs[index].collapseItemInfo?.text ?? itemsConfigs[index].collapseItemInfo ?? '',
-        imgSrc: itemsConfigs[index].collapseItemImageD ?? '',
-      };
-      faqItemBlock.innerHTML = renderItemHTML(mappedItem, index);
-    }
-    foldItemsContainer.appendChild(itemEl);
-  });
-}
-
-// ── Frontend (published page) ─────────────────────────────────
-function _decorateFrontend(foldItemsContainer, itemsConfigs, mockItems) {
-  if (itemsConfigs.length > 0) {
-    itemsConfigs.forEach((itemConfig, index) => {
-      const mappedItem = {
-        title: itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '',
-        content: itemConfig.collapseItemInfo?.text ?? itemConfig.collapseItemInfo ?? '',
-        imgSrc: itemConfig.collapseItemImageD ?? '',
-      };
-      const frag = document.createRange().createContextualFragment(renderItemHTML(mappedItem, index));
-      foldItemsContainer.appendChild(frag);
-    });
-  } else {
-    // Mock data processing if no items authored yet
-    mockItems.forEach((item, index) => {
-      const frag = document.createRange().createContextualFragment(renderItemHTML(item, index));
-      foldItemsContainer.appendChild(frag);
-    });
-  }
-}
-
-// ── Entry point ───────────────────────────────────────────────
-
 export default async function decorate(block) {
   try {
     const config = await getBlockConfigs(block, DEFAULT_CONFIG, 'faqs');
     const v = getFieldValue(config);
-    const isUE = isAuthorUe();
 
-    // Extract item elements from block before wiping it clean
-    const itemEls = [...block.querySelectorAll('.faqs-item-wrapper')];
-    let itemsConfigs = [];
-    if (itemEls.length > 0) {
-      itemsConfigs = await Promise.all(
-        itemEls.map(async (itemEl) => getBlockConfigs(
-          itemEl.querySelector('.faqs-item'),
-          DEFAULT_ITEM_CONFIG,
-          'faqs-item',
-        )),
-      );
-    }
-
-    block.innerHTML = '';
-
-    // --- Field values ---
+    // Apply main config variables
     const colorGroup = v('colorGroup', 'text') || '';
     if (colorGroup) block.classList.add(colorGroup);
 
-    // --- Layout ---
-    const mockItems = [
-      {
-        title: 'What is an AI PC?',
-        content: 'An AI PC, like the ASUS ExpertBook Ultra, is a business laptop powered by AI acceleration, which enhances productivity and efficiency through features like intelligent performance and AI-driven tasks, such as real-time translations and automated meeting summaries.',
-      },
-      {
-        title: 'Is an AI PC better than a standard PC?',
-        content: 'Yes, an AI PC is designed to offer superior performance with dedicated AI capabilities, making it better for tasks that require intelligent automation, enhanced productivity, and enterprise-grade security compared to a standard PC.',
-      },
-      {
-        title: 'What laptop is best for business?',
-        content: 'The ASUS ExpertBook Ultra is an ideal business laptop, offering a blend of powerful AI-driven performance, military-grade durability, advanced security features, and a lightweight design, making it perfect for professionals who need efficiency and mobility.',
-      },
-      {
-        title: 'How much RAM is needed for a business laptop?',
-        content: 'For optimal business performance, a business laptop like the ASUS ExpertBook Ultra can support up to 64 GB of DDR5x memory, ensuring smooth multitasking and handling of demanding tasks.',
-      },
-      {
-        title: 'What laptop do entrepreneurs use?',
-        content: 'Entrepreneurs often choose high-performance laptops like the ASUS ExpertBook Ultra, which combines advanced AI capabilities, durability, and enterprise-grade security to meet the diverse needs of modern business professionals.',
-      },
-    ];
+    block.classList.add('faqs-container');
 
-    block.innerHTML = `
-      <div class="faqs-container">
-        ${renderContainerHTML()}
-      </div>
-    `;
+    // Categorize existing rows
+    const allRows = Array.from(block.children);
+    const layoutRows = allRows.filter((row) => !row.classList.contains('faqs-item-wrapper') && !row.classList.contains('fold-outer-container'));
+    const itemRows = allRows.filter((row) => row.classList.contains('faqs-item-wrapper'));
 
-    const foldItemsContainer = block.querySelector('.fold-items');
+    // Hide layout config rows directly instead of deleting them to preserve UE configs
+    layoutRows.forEach((row) => {
+      row.style.display = 'none';
+    });
 
-    if (isUE) {
-      _decorateUE(foldItemsContainer, itemEls, itemsConfigs);
-
-      // Add Live Edit listener
-      block.addEventListener('asus-l4--section-faqs-item', async ({ detail }) => {
-        const itemConfig = await getBlockConfigs(
-          detail,
-          DEFAULT_ITEM_CONFIG,
-          'faqs-item',
-        );
-        const index = [...foldItemsContainer.querySelectorAll('.faqs-item')].indexOf(detail);
-        const mappedItem = {
-          title: itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '',
-          content: itemConfig.collapseItemInfo?.text ?? itemConfig.collapseItemInfo ?? '',
-          imgSrc: itemConfig.collapseItemImageD ?? '',
-        };
-        detail.innerHTML = renderItemHTML(mappedItem, index);
-        // Re-init listener array length might have changed via UE add/remove
-        initFAQInteractions(block);
-      });
-    } else {
-      _decorateFrontend(foldItemsContainer, itemsConfigs, mockItems);
+    // Create the folding UI wrapper if it doesn't exist
+    let foldContainerOuter = block.querySelector('.fold-outer-container');
+    if (!foldContainerOuter) {
+      foldContainerOuter = document.createElement('div');
+      foldContainerOuter.className = 'fold-outer-container';
+      foldContainerOuter.innerHTML = `
+        <div class="fold-control">
+          <button type="button" class="fold-btn btn-showall wdga ro-rg-20" data-galabel="Show all" aria-label="Click to show all FAQ" data-eventname="faq_btn_show_all_clicked" tabindex="0">Show all</button>
+          <div class="fold-btn-split"></div>
+          <button type="button" class="fold-btn btn-collapseall wdga ro-rg-20" data-galabel="Collapse all" aria-label="Click to collapse all FAQ" data-eventname="faq_btn_collapse_all_clicked" tabindex="0">Collapse all</button>
+        </div>
+        <div class="fold-container">
+          <div class="fold-items"></div>
+        </div>
+      `;
+      block.appendChild(foldContainerOuter);
     }
 
-    // --- Animation ---
-    if (!isUE) {
-      // scroll animation setup
-    }
+    const foldItemsContainer = foldContainerOuter.querySelector('.fold-items');
 
-    // --- Interactions ---
+    // Process each item block in-place
+    await Promise.all(itemRows.map(async (row, index) => {
+      const faqItemBlock = row.querySelector('.faqs-item');
+
+      // Class and styling wrapper matching styles
+      row.classList.add('fold-item', `fold-item-${index + 1}`);
+      row.dataset.index = index + 1;
+
+      if (faqItemBlock) {
+        const itemConfig = await getBlockConfigs(faqItemBlock, DEFAULT_ITEM_CONFIG, 'faqs-item');
+        const num = index + 1;
+
+        const title = itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '';
+        const content = itemConfig.collapseItemInfo?.text ?? itemConfig.collapseItemInfo ?? '';
+        const imgSrc = itemConfig.collapseItemImageD ?? '';
+
+        faqItemBlock.innerHTML = `
+          <h3 class="content-title no-top-space ro-rg-20 small_ro-rg-18">
+            <button type="button" class="wdga"
+              id="footer_qa_fold_accordion_${num}" 
+              data-galabel="Expand tab ${num}" data-eventname="qa_btn_${num}"
+              aria-label="Expand ${title} tab" aria-controls="footer_qa_fold_accordion_group_${num}"
+              aria-expanded="false" tabindex="0">${title}</button>
+          </h3>
+          <div class="accordion-group" id="footer_qa_fold_accordion_group_${num}" role="region" aria-labelledby="footer_qa_fold_accordion_${num}" aria-hidden="true">
+            <div class="accordion-panel">
+              <div class="content-info-group">
+                <div class="content-info info-1 ro-rg-18 small_ro-rg-16">${content}</div>
+              </div>
+              ${imgSrc ? renderPanelImg(imgSrc) : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      // Move it into the fold container, preserving AEM wrappers hooks
+      foldItemsContainer.appendChild(row);
+    }));
+
+    // Initialize interactions
     initFAQInteractions(block);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Error decorating faqs: ', error);
+    console.error('Error decorating faqs block:', error);
     block.innerHTML = '<div class="error-message">Failed to load faqs block</div>';
   }
 }
