@@ -4053,7 +4053,7 @@
           {
             "component": "text",
             "label": "CTA Color",
-            "name": "ctaColor",
+            "name": "menuCtaColor",
             "valueType": "string"
           },
           {
