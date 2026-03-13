@@ -254,7 +254,7 @@ export default async function decorate(block) {
         row.dataset.listenerAttached = 'true'; // Prevent click initialization
         row.classList.add('active');
         btn.setAttribute('aria-expanded', 'true');
-        
+
         const panelGroup = itemContentDiv.querySelector('.accordion-group');
         const panelInner = itemContentDiv.querySelector('.accordion-panel');
         if (panelGroup) {
