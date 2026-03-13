@@ -12,17 +12,17 @@ const PRODUCT_LINE = getProductLine();
 
 /** Font-family prefix per product line */
 const PRODUCT_FONT_PREFIX_TITLE = {
+  asus: 'ro-md',
+  proart: 'ro-md',
   rog: 'rc-bd',
   tuf: 'ro-md',
-  proart: 'ro-md',
-  asus: 'ro-md',
 };
 
 const PRODUCT_FONT_PREFIX_INFO = {
+  asus: 'ro-rg',
+  proart: 'ro-rg',
   rog: 'rc-rg',
   tuf: 'ro-rg',
-  proart: 'ro-rg',
-  asus: 'ro-rg',
 };
 
 /** 每個 product line 的預設字型設定 */
@@ -179,11 +179,11 @@ const generateAdvancedStyles = (config, defaults) => {
   return {
     title: {
       classes: [getTextFontClass(titleFontDT, titleFontDT, titleFontM, PRODUCT_FONT_PREFIX_TITLE[PRODUCT_LINE])].filter(Boolean).join(' '),
-      style: titleFontColor ? `color: ${titleFontColor};` : '',
+      style: titleFontColor ? `--base-text-item-title-color: ${titleFontColor};` : '',
     },
     info: {
       classes: [getTextFontClass(infoFontDT, infoFontDT, infoFontM, PRODUCT_FONT_PREFIX_INFO[PRODUCT_LINE])].filter(Boolean).join(' '),
-      style: infoFontColor ? `color: ${infoFontColor};` : '',
+      style: infoFontColor ? `--base-text-item-info-color: ${infoFontColor};` : '',
     },
   };
 };

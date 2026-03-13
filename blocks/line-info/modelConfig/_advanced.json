@@ -127,7 +127,7 @@
           "label": "font color",
           "name": "infoFontColor",
           "valueType": "string",
-          "placeholder": "#000"
+          "placeholder": ""
         }
       ]
     },
@@ -136,7 +136,7 @@
       "label": "circle num color(M)",
       "name": "circleNameColorM",
       "valueType": "string",
-      "placeholder": "#000"
+      "placeholder": ""
     },
     {
       "...": "./_dialogBoxStyle.json#/fields"
