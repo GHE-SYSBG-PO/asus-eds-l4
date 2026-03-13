@@ -19,14 +19,6 @@
       "label": "Selection",
       "name": "selection",
       "collapsible": true,
-      "condition": {
-        "===": [
-          {
-            "var": "productLine"
-          },
-          "asus"
-        ]
-      },
       "fields": [
         {
           "component": "text",
