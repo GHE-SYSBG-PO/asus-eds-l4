@@ -1,0 +1,53 @@
+{
+  "fields": [
+    {
+      "component": "container",
+      "label": "Dialog Box Style",
+      "name": "dialogBoxStyle",
+      "collapsible": true,
+      "condition": {
+        "==": [
+          { "var": "styleLayout" }, "5"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "label": "border radius",
+          "name": "dialogBoxRadius",
+          "valueType": "string",
+          "placeholder": "8px 8px 8px 8px"
+        },
+        {
+          "component": "text",
+          "label": "border width",
+          "name": "dialogBoxBorderWidth",
+          "valueType": "string",
+          "placeholder": "px"
+        },
+        {
+          "component": "text",
+          "label": "border color",
+          "name": "dialogBoxBorderColor",
+          "valueType": "string",
+          "description": "* 三裝置共用, linear-gradient"
+        },
+        {
+          "component": "text",  
+          "label": "background color",
+          "name": "dialogBoxBgColor",
+          "valueType": "string",
+          "placeholder": "ffffff",
+          "description": "Hex value without #, e.g. ffffff"
+        },
+        {
+          "component": "text",
+          "label": "padding",
+          "name": "dialogBoxPadding",
+          "valueType": "string",
+          "placeholder": "10px 0 0 10px"
+        }
+      ]
+    }
+  ]
+}

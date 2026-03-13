@@ -1,0 +1,151 @@
+{
+  "fields": [
+    {
+      "component": "tab",
+      "label": "Advanced",
+      "name": "advancedTab"
+    },
+    {
+      "component": "container",
+      "label": "title richtext",
+      "name": "advancedTitleGroup",
+      "collapsible": false,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font(DT)",
+          "name": "titleFontDTselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "14-sh",
+              "value": "14-sh"
+            },
+            {
+              "name": "16-sh",
+              "value": "16-sh"
+            },
+            {
+              "name": "18-sh",
+              "value": "18-sh"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font(M)",
+          "name": "titleFontMselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "13",
+              "value": "13"
+            },
+            {
+              "name": "14-sh",
+              "value": "14-sh"
+            },
+            {
+              "name": "16-sh",
+              "value": "16-sh"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font color",
+          "name": "titleFontColor",
+          "valueType": "string",
+          "description": "* 三裝置共用, linear-gradient"
+        }
+      ]
+    },
+    {
+      "component": "container",
+      "label": "info richtext",
+      "name": "advancedInfoGroup",
+      "collapsible": false,
+      "fields": [
+        {
+          "component": "select",
+          "label": "font(DT)",
+          "name": "infoFontDTselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "13",
+              "value": "13"
+            },
+            {
+              "name": "14-sh",
+              "value": "14-sh"
+            },
+            {
+              "name": "16-sh",
+              "value": "16-sh"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "label": "font(M)",
+          "name": "infoFontMselect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "12",
+              "value": "12"
+            },
+            {
+              "name": "13",
+              "value": "13"
+            },
+            {
+              "name": "14-sh",
+              "value": "14-sh"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "label": "font color",
+          "name": "infoFontColor",
+          "valueType": "string",
+          "placeholder": ""
+        }
+      ]
+    },
+    {
+      "component": "text",
+      "label": "circle num color(M)",
+      "name": "circleNameColorM",
+      "valueType": "string",
+      "placeholder": ""
+    },
+    {
+      "...": "./_dialogBoxStyle.json#/fields"
+    },
+    {
+      "component": "boolean",
+      "label": "debug (on/off)",
+      "name": "debugEnabled",
+      "valueType": "boolean"
+    }
+  ]
+}

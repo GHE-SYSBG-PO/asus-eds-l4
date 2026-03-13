@@ -1,0 +1,94 @@
+@use '../../../styles/variable' as v;
+
+// Variant 2 - Text On Left / Right Sides
+.l4-pdp .line-info.style-layout-2 .line-info-block{
+    --line-info-text-width-lg: var(--l4-column-width-2);
+    --line-info-text-max-width-lg: 276px;
+    --line-info-text-width-md: var(--l4-column-width-2);
+    --line-info-text-max-width-md: 224px;
+
+    // Tablet
+    @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+      display: flex;
+      justify-content: center;
+      flex-flow: row nowrap;
+      align-items: stretch;        
+    }
+    
+    // large
+    @media (min-width: v.$large-lower-bound) {
+      display: flex;
+      justify-content: center;
+      flex-flow: row nowrap;
+      align-items: stretch;        
+    }  
+
+    .line-info-side{
+      .text-item-container {
+        // Mobile
+        @media all and (max-width: v.$small-upper-bound) {
+          position: relative;
+          top: 0;
+        }        
+        
+        // Tablet
+        @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+          position: absolute;
+          top: var(--line-info-y-md);
+        }
+        
+        // Mobile
+        @media (min-width: v.$large-lower-bound) {
+          position: absolute;
+          top: var(--line-info-y-lg);
+        }        
+      }
+      
+      .text-item{
+        top: 0;
+        
+        @media all and (max-width: v.$small-upper-bound) {
+          position: relative;
+        }        
+        
+        @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+          position: absolute;
+        }
+    
+        @media (min-width: v.$large-lower-bound) {
+          position: absolute;
+        }                
+      }
+    }
+    
+    @media (min-width: v.$large-lower-bound) {
+      .line-info-side-left-desktop,
+      .line-info-side-right-desktop{
+        display: flex;
+      }
+
+      .line-info-item-img-container{
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+
+    @media (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+      .line-info-side-left-desktop,
+      .line-info-side-right-desktop{
+        display: flex;
+      }
+
+      .line-info-item-img-container{
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+
+    @media all and (max-width: v.$small-upper-bound) {
+      .line-info-item-img-container{
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  } 

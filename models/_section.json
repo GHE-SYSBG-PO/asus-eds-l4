@@ -139,13 +139,15 @@
         "chart-advanced",
         "space",
         "bar-chart",
+        "line-info",
         "footnote",
         "featureitem-block",
         "feature-ksp-list",
         "small-cards",
         "effect-media",
         "medium-cards",
-        "featureksp-grid"
+        "featureksp-grid",
+        "faqs"
       ]
     },
     {

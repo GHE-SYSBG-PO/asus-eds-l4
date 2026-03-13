@@ -6,6 +6,7 @@
       "name": "titleFont",
       "valueType": "string",
       "options": [
+        { "name": "default", "value": "" },
         { "name": "tt-md-24", "value": "tt-md-24" },
         { "name": "tt-bd-24", "value": "tt-bd-24" },
         { "name": "tt-md-28", "value": "tt-md-28" },

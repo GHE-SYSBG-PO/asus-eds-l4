@@ -84,3 +84,65 @@ main {
     }
   }
 }
+
+
+:root {
+  --global-content-max-width-hero: 1260px;
+  --global-content-max-width: 1260px;
+  --global-content-min-width: 1120px;
+  --global-scrollbar-width: 0px;
+}
+
+:root {
+  @media (max-width: v.$medium-upper-bound) and (min-width: v.$medium-lower-bound) {
+    --global-content-max-width-hero: 1120px;
+    --global-content-max-width: 1120px;
+    --global-content-min-width: 638px;
+  }
+}
+
+:root {
+  @media (max-width: v.$small-upper-bound) {
+    --global-content-max-width-hero: 420px;
+    --global-content-max-width: 420px;
+    --global-content-min-width: 280px;
+  }
+}
+
+.l4-pdp {
+  
+  $breakpoints: (
+    large: '(min-width: #{v.$large-lower-bound})',
+    medium: '(max-width: #{v.$medium-upper-bound}) and (min-width: #{v.$medium-lower-bound})',
+    small: '(max-width: #{v.$small-upper-bound})',
+  );
+
+  @for $i from 0 through 12 {
+    --l4-column-min-width-#{$i}: calc(87.5vw / 12 * #{$i} - var(--global-scrollbar-width) / 12 * #{$i});
+  }
+
+  --l4-column-width-0: 0;
+
+  @for $i from 1 through 12 {
+    --l4-column-width-#{$i}: min(var(--l4-column-min-width-#{$i}), var(--global-content-max-width) / 12 * #{$i});
+  }
+
+  @each $name, $media in $breakpoints {
+    @if $name == large {
+      // large 當作預設，不加 @media
+      @for $i from 1 through 12 {
+        .l4-column-width-#{$i} {
+          width: var(--l4-column-width-#{$i});
+        }
+      }
+    } @else {
+      @media #{$media} {
+        @for $i from 1 through 12 {
+          .l4-#{$name}-#{$i} {
+            width: var(--l4-column-width-#{$i});
+          }
+        }
+      }
+    }
+  }  
+}
