@@ -482,10 +482,15 @@ const LAYOUT_STRATEGIES = {
 // ─── Block-level Helpers ──────────────────────────────────────────────────────
 
 /**
- * 從所有 repeat config groups 中，找出 key 包含 prefix 的那一組。
+ * 從所有 repeat config groups 中，找出第一個 item 的 key 以 prefix 開頭的那一組。
+ * 使用 startsWith 避免 prefix substring 誤 match（例如 'textItems1' 誤 match 'textItems10'）。
+ * 使用 some 掃所有 key，不依賴 key 的排列順序。
  */
 const findTextItemsByPrefix = (allGroups, prefix) => {
-  const matched = allGroups.find((group) => Object.keys(group[0])[0].includes(prefix));
+  const matched = allGroups.find((group) => {
+    if (!group || group.length === 0) return false;
+    return Object.keys(group[0]).some((key) => key.startsWith(prefix));
+  });
   return matched || [];
 };
 
