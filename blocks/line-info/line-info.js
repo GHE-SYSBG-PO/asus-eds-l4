@@ -10,19 +10,14 @@ import {
 const PRODUCT_LINE = getProductLine();
 // const PRODUCT_LINE = 'rog';
 
-/** Font-family prefix per product line */
-const PRODUCT_FONT_PREFIX_TITLE = {
-  asus: 'ro-md',
-  proart: 'ro-md',
-  rog: 'rc-bd',
-  tuf: 'ro-md',
-};
-
-const PRODUCT_FONT_PREFIX_INFO = {
-  asus: 'ro-rg',
-  proart: 'ro-rg',
-  rog: 'rc-rg',
-  tuf: 'ro-rg',
+/** Font-family prefix per product line，title 與 info 各自管理 */
+const FONT_PREFIX = {
+  title: {
+    asus: 'ro-md', proart: 'ro-md', rog: 'rc-bd', tuf: 'ro-md',
+  },
+  info: {
+    asus: 'ro-rg', proart: 'ro-rg', rog: 'rc-rg', tuf: 'ro-rg',
+  },
 };
 
 /** 每個 product line 的預設字型設定 */
@@ -40,15 +35,6 @@ const FONT_DEFAULTS_BY_PRODUCT_LINE = {
     titleFontDTselect: '16-sh', titleFontMselect: '14-sh', infoFontDTselect: '13', infoFontMselect: '12',
   },
 };
-
-/**
- * Build RWD font class string based on current product line.
- * @param {string} dSize - desktop font size
- * @param {string} tSize - tablet font size
- * @param {string} mSize - mobile font size
- * @returns {string} e.g. 'tt-bd-96 tt-bd-64-md tt-bd-40-sm'
- */
-const getTextFontClass = (dSize, tSize, mSize, prefix) => `${prefix}-${dSize}-lg ${prefix}-${tSize}-md ${prefix}-${mSize}-sm`;
 
 /** 每種 styleLayout 的預設圖片尺寸 */
 const IMAGE_DEFAULTS_BY_LAYOUT = {
@@ -69,7 +55,8 @@ const IMAGE_DEFAULTS_BY_LAYOUT = {
   },
 };
 
-const dialogDirectionMap = {
+/** dialog 彈出方向對應的 CSS class 名稱 */
+const DIALOG_DIRECTION_MAP = {
   TC: 'top-center',
   TL: 'top-left',
   TR: 'top-right',
@@ -78,34 +65,29 @@ const dialogDirectionMap = {
   BC: 'bottom-center',
 };
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// ─── Generic Helpers ──────────────────────────────────────────────────────────
 
-/** 移除字串中所有空白字元（空格、換行等） */
+/** 移除字串中所有空白字元 */
 const cleanString = (str) => str.replace(/\s/g, '');
 
 /**
- * 將值轉換為 CSS width 變數字串。
- * - 若有 px 直接使用
- * - 若有 % 或純數字，轉為 calc(...) 格式
- * @param {string} value - 原始值（e.g. "50%", "300px", "50"）
- * @param {string} cssVar - CSS 自訂變數名稱（e.g. "--line-info-text-width-lg"）
- * @returns {string|null}
+ * 將值轉換為 CSS width 自訂變數字串。
+ * - 有 px → 直接使用
+ * - 有 % 或純數字 → 轉為 calc(column-width * ratio)
  */
 const buildWidthStyle = (value, cssVar) => {
   if (!value) return null;
   if (value.includes('px')) return `${cssVar}:${value}`;
-  if (value.includes('%') || !Number.isNaN(Number(value))) {
-    return `${cssVar}:calc(var(--l4-column-width-12) * ${parseFloat(value) / 100})`;
+  const numValue = parseFloat(value);
+  if (!Number.isNaN(numValue)) {
+    return `${cssVar}:calc(var(--l4-column-width-12) * ${numValue / 100})`;
   }
   return null;
 };
 
 /**
- * 將值轉換為 CSS max-width 變數字串。
- * 若值沒有單位，自動補上 px。
- * @param {string} value
- * @param {string} cssVar
- * @returns {string|null}
+ * 將值轉換為 CSS max-width 自訂變數字串。
+ * 若值沒有 px 單位，自動補上。
  */
 const buildMaxWidthStyle = (value, cssVar) => {
   if (!value) return null;
@@ -113,11 +95,23 @@ const buildMaxWidthStyle = (value, cssVar) => {
   return `${cssVar}:${resolved}`;
 };
 
+/** 將非空字串組合成 class string */
+const joinClasses = (...parts) => parts.filter(Boolean).join(' ');
+
+/** 將非空樣式組合成 inline style string */
+const joinStyles = (...parts) => parts.filter(Boolean).join('; ');
+
+/** 將 items 包在指定 class 的 div 裡，若 items 為空則回傳空字串 */
+const wrapSide = (items, classes) => {
+  if (items.length === 0) return '';
+  return `<div class="${classes}">${items.join('')}</div>`;
+};
+
 // ─── HTML Generators ─────────────────────────────────────────────────────────
 
 /**
  * 產生 <picture> 區塊的 HTML。
- * 支援 desktop / tablet / mobile 三種圖片來源，並透過 CSS 自訂變數設定尺寸。
+ * 支援 desktop / tablet / mobile 三種圖片來源。
  */
 const generatePictureHtml = ({
   assetDesktop,
@@ -138,14 +132,14 @@ const generatePictureHtml = ({
     : '';
   const defaultImgSrc = assetDesktop || assetTablet || assetMobile || '';
 
-  const styles = [
+  const styles = joinStyles(
     assetDesktopImgWidth && `--img-width-lg: ${assetDesktopImgWidth}`,
     assetDesktopImgHeight && `--img-height-lg: ${assetDesktopImgHeight}`,
     assetTabletImgWidth && `--img-width-md: ${assetTabletImgWidth}`,
     assetTabletImgHeight && `--img-height-md: ${assetTabletImgHeight}`,
     assetMobileImgWidth && `--img-width-sm: ${assetMobileImgWidth}`,
     assetMobileImgHeight && `--img-height-sm: ${assetMobileImgHeight}`,
-  ].filter(Boolean).join('; ');
+  );
 
   return `
     <div class="line-info-item-img-container block relative">
@@ -160,12 +154,13 @@ const generatePictureHtml = ({
   `;
 };
 
-// ─── Text Item Processing ─────────────────────────────────────────────────────
+// ─── Font & Style Helpers ─────────────────────────────────────────────────────
+
+/** 根據字型大小與 prefix 產生 RWD font class string */
+const buildFontClass = (dtSize, mSize, prefix) => `${prefix}-${dtSize}-lg ${prefix}-${dtSize}-md ${prefix}-${mSize}-sm`;
 
 /**
- * 從 config 與 productLine 預設值，產生 title / info 的字型 class 與 color style。
- * @param {object} config - block 的完整設定
- * @param {object} defaults - 對應 productLine 的預設字型設定
+ * 根據 config 與 productLine 預設值，產生 title / info 的 font class 與 color style。
  */
 const generateAdvancedStyles = (config, defaults) => {
   const v = getFieldValue(config);
@@ -178,32 +173,30 @@ const generateAdvancedStyles = (config, defaults) => {
 
   return {
     title: {
-      classes: [getTextFontClass(titleFontDT, titleFontDT, titleFontM, PRODUCT_FONT_PREFIX_TITLE[PRODUCT_LINE])].filter(Boolean).join(' '),
+      classes: buildFontClass(titleFontDT, titleFontM, FONT_PREFIX.title[PRODUCT_LINE]),
       style: titleFontColor ? `--base-text-item-title-color: ${titleFontColor};` : '',
     },
     info: {
-      classes: [getTextFontClass(infoFontDT, infoFontDT, infoFontM, PRODUCT_FONT_PREFIX_INFO[PRODUCT_LINE])].filter(Boolean).join(' '),
+      classes: buildFontClass(infoFontDT, infoFontM, FONT_PREFIX.info[PRODUCT_LINE]),
       style: infoFontColor ? `--base-text-item-info-color: ${infoFontColor};` : '',
     },
   };
 };
 
+// ─── Item Data Extraction ─────────────────────────────────────────────────────
+
 /**
  * 從原始 repeat config 物件，取出對應 styleLayout 的欄位值。
- * @param {object} itemData - 單筆 repeat item 的 raw data
- * @param {string|number} styleLayout - 目前的 layout 編號
- * @param {number} index - item 的索引值
  */
 const extractItemData = (itemData, styleLayout, index) => {
   const prefix = `textItems${styleLayout}`;
   const get = (key, fallback = '') => cleanString(itemData[`${prefix}${key}`]?.text || fallback);
-  const itemDataExtract = {
+
+  return {
     index,
     layoutStyle: get('LayoutStyle', 'left'),
     titleRichtext: itemData[`${prefix}TitleRichtext`]?.text || 'Item Title',
     infoRichtext: itemData[`${prefix}InfoRichtext`]?.text || null,
-    textWidthPercentDesktop: get('TextWidthPercentDesktop'),
-    textWidthPercentTablet: get('TextWidthPercentTablet'),
     textWidthDesktop: get('TextWidthDesktop'),
     textWidthTablet: get('TextWidthTablet'),
     textMaxWidthDesktop: get('TextMaxWidthDesktop'),
@@ -223,126 +216,45 @@ const extractItemData = (itemData, styleLayout, index) => {
     dialogDirectionDesktop: get('DialogDirectionDesktop', 'TL'),
     dialogDirectionTablet: get('DialogDirectionTablet', 'TL'),
   };
-  return itemDataExtract;
 };
 
-/**
- * 根據 styleLayout 產生 text item 的 CSS class 與 inline style。
- *
- * Layout 1/2：圖左右兩側排文字，使用 % 寬計算。
- * Layout 3/4/5：文字絕對定位於圖片底部，使用絕對寬度。
- *
- * @param {object} item - extractItemData 的結果
- * @param {string|number} styleLayout
- * @param {{ desktop: string, tablet: string }|undefined} textWidth  - layout 1/2 專用
- * @param {{ desktop: string, tablet: string }|undefined} textMaxWidth - layout 1/2 專用
- * @param {string} textItems2LayoutStyle - layout 2 的文字側（'left' | 'right'）
- */
-const getItemStyles = (item, styleLayout, textWidth, textMaxWidth, textItems2LayoutStyle) => {
-  const {
-    textWidthDesktop, textWidthTablet,
-    textMaxWidthDesktop, textMaxWidthTablet,
-    alignmentDesktop, alignmentTablet,
-    sideDesktop, sideTablet,
-    xValueDesktop, xValueTablet,
-    yValueDesktop, yValueTablet,
-    dialogBoxWidthDesktop, dialogBoxWidthTablet,
-    maxDialogBoxWidthDesktop, maxDialogBoxWidthTablet,
-    dialogDirectionDesktop, dialogDirectionTablet,
-  } = item;
-
-  const layout = parseInt(styleLayout, 10);
-  const classes = ['absolute flex pointer-events-auto'];
-  const styles = [];
-
-  if (layout === 1 || layout === 2) {
-    // ── Layout 1/2：左右排列，text 寬度用 % 計算 ──
-    if (layout === 1) {
-      classes.push(sideTablet === 'right' ? 'md:text-left' : 'md:text-right');
-      classes.push(sideDesktop === 'right' ? 'lg:text-left' : 'lg:text-right');
-    } else {
-      classes.push(textItems2LayoutStyle === 'right' ? 'text-left' : 'text-right');
-    }
-
-    styles.push(buildWidthStyle(textWidth?.desktop, '--line-info-text-width-lg'));
-    styles.push(buildMaxWidthStyle(textMaxWidth?.desktop, '--line-info-text-max-width-lg'));
-    styles.push(buildWidthStyle(textWidth?.tablet, '--line-info-text-width-md'));
-    styles.push(buildMaxWidthStyle(textMaxWidth?.tablet, '--line-info-text-max-width-md'));
-    if (yValueTablet && yValueTablet !== '0') styles.push(`--line-info-y-md:${yValueTablet}`);
-    if (yValueDesktop && yValueDesktop !== '0') styles.push(`--line-info-y-lg:${yValueDesktop}`);
-  } else if ([3, 4, 5].includes(layout)) {
-    // ── Layout 3/4/5：絕對定位，text 寬度直接用 px 或 % ──
-    if (layout === 3 || layout === 4) {
-      if (alignmentDesktop) classes.push(alignmentDesktop === 'right' ? 'bottom-right-lg lg:text-left' : 'bottom-left-lg lg:text-right');
-      if (alignmentTablet) classes.push(alignmentTablet === 'right' ? 'bottom-right-md md:text-left' : 'bottom-left-md md:text-right');
-    }
-
-    if (layout === 5) {
-      if (dialogDirectionDesktop) {
-        classes.push(`${dialogDirectionMap[dialogDirectionDesktop]}-lg`);
-      }
-      if (dialogDirectionTablet) {
-        classes.push(`${dialogDirectionMap[dialogDirectionTablet]}-md`);
-      }
-
-      if (alignmentDesktop) classes.push(`lg:text-${alignmentDesktop}`);
-      if (alignmentTablet) classes.push(`md:text-${alignmentTablet}`);
-    }
-
-    const dw = layout === 5 ? dialogBoxWidthDesktop : textWidthDesktop;
-    const tw = layout === 5 ? dialogBoxWidthTablet : textWidthTablet;
-    const mdw = layout === 5 ? maxDialogBoxWidthDesktop : textMaxWidthDesktop;
-    const mtw = layout === 5 ? maxDialogBoxWidthTablet : textMaxWidthTablet;
-
-    styles.push(buildWidthStyle(dw, '--line-info-text-width-lg'));
-    styles.push(buildMaxWidthStyle(mdw, '--line-info-text-max-width-lg'));
-    styles.push(buildWidthStyle(tw, '--line-info-text-width-md'));
-    styles.push(buildMaxWidthStyle(mtw, '--line-info-text-max-width-md'));
-    if (xValueDesktop && xValueDesktop !== '0') styles.push(`--line-info-x-lg: ${xValueDesktop}`);
-    if (xValueTablet && xValueTablet !== '0') styles.push(`--line-info-x-md: ${xValueTablet}`);
-    if (yValueTablet && yValueTablet !== '0') styles.push(`--line-info-y-md: ${yValueTablet}`);
-    if (yValueDesktop && yValueDesktop !== '0') styles.push(`--line-info-y-lg: ${yValueDesktop}`);
-  }
-
-  return {
-    className: classes.join(' '),
-    style: styles.filter(Boolean).join('; '),
-  };
-};
+// ─── Item HTML Renderer ───────────────────────────────────────────────────────
 
 /**
  * 產生單一 text item 的 HTML。
- * @param {object} item - extractItemData 的結果
- * @param {string} className
- * @param {string} style
- * @param {object} advancedStyles - generateAdvancedStyles 的結果
- * @param {number} blockLayout - 整個 block 的 layout 編號（用於決定 class）
- * @param {boolean} isMobile - 若為 true，移除絕對定位相關的 class/style（行動版用）
+ * blockLayout 用來決定 text-item-freeform / freeform-dialog class。
+ * isMobile 為 true 時，移除定位相關 class/style（行動版用）。
  */
-const renderItemHtml = (item, className, style, advancedStyles, blockLayout, isMobile = false) => {
-  const containerClass = isMobile ? '' : className;
-  const containerStyle = isMobile ? '' : style;
+const renderItemHtml = (item, itemClasses, itemStyle, advancedStyles, blockLayout, isMobile = false) => {
+  const containerClass = isMobile ? '' : itemClasses;
+  const containerStyle = isMobile ? '' : itemStyle;
 
-  const textItemTypeClasses = [
-    [4, 5].includes(blockLayout) && 'text-item-freeform',
-    blockLayout === 5 && 'text-item-freeform-dialog',
-  ].filter(Boolean).join(' ');
+  const typeClasses = [];
+  if (blockLayout === 4 || blockLayout === 5) typeClasses.push('text-item-freeform');
+  if (blockLayout === 5) typeClasses.push('text-item-freeform-dialog');
 
-  const titleHtml = item.titleRichtext ? `<div class="title w-full ${advancedStyles.title.classes}" style="${advancedStyles.title.style}"><span class="item-title-text">${item.titleRichtext}</span></div>` : '';
-  const infoHtml = item.infoRichtext ? `<div class="info w-full ${advancedStyles.info.classes}" style="${advancedStyles.info.style}"><span class="item-info-text">${item.infoRichtext}</span></div>` : '';
+  const titleHtml = item.titleRichtext
+    ? `<div class="title w-full ${advancedStyles.title.classes}" style="${advancedStyles.title.style}"><span class="item-title-text">${item.titleRichtext}</span></div>`
+    : '';
 
-  let circleNumber = '';
-  if (isMobile || [3, 4, 5].includes(blockLayout)) {
-    circleNumber = `
+  const infoHtml = item.infoRichtext
+    ? `<div class="info w-full ${advancedStyles.info.classes}" style="${advancedStyles.info.style}"><span class="item-info-text">${item.infoRichtext}</span></div>`
+    : '';
+
+  let circleNumberHtml = '';
+  if (isMobile || blockLayout === 3 || blockLayout === 4 || blockLayout === 5) {
+    circleNumberHtml = `
       <div class="lg:hidden md:hidden circle-number ${advancedStyles.title.classes}">
         <span class="number">${item.index + 1}</span>
       </div>
     `;
   }
 
+  const fullClass = joinClasses('text-item-container', ...typeClasses, containerClass, `text-item-${item.index}`);
+
   return `
-    <div class="text-item-container ${textItemTypeClasses} ${containerClass} text-item-${item.index}" style="${containerStyle}" data-index="${item.index}">
-    ${circleNumber}
+    <div class="${fullClass}" style="${containerStyle}" data-index="${item.index}">
+      ${circleNumberHtml}
       <div class="text-item">
         ${titleHtml}
         ${infoHtml}
@@ -351,127 +263,267 @@ const renderItemHtml = (item, className, style, advancedStyles, blockLayout, isM
   `;
 };
 
-/**
- * 將所有 text items 依照 side（left/right）分組，並輸出對應的 HTML 區塊。
- *
- * 回傳的物件鍵對應到不同的容器位置：
- * - sideLeftDesktop / sideRightDesktop：桌機左右側
- * - sideLeftTablet / sideRightTablet：平板左右側
- * - sideNone：行動版（沒有絕對定位）
- *
- * @param {object} params
- * @param {Array} params.textItems
- * @param {string|number} params.styleLayout
- * @param {object} params.advancedStyles
- * @param {{ desktop: string, tablet: string }} params.textWidth
- * @param {{ desktop: string, tablet: string }} params.textMaxWidth
- * @param {number} params.blockLayout
- * @param {string} params.textItems2LayoutStyle
- */
-const generateTextItemsHtml = ({
-  textItems,
-  styleLayout,
-  advancedStyles,
-  textWidth,
-  textMaxWidth,
-  blockLayout,
-  textItems2LayoutStyle,
-}) => {
-  if (!textItems?.length) return {};
+// ─── Layout Strategies ────────────────────────────────────────────────────────
+//
+// 每個 strategy 對外統一簽名：(ctx) => sides
+// sides = { sideLeftDesktop, sideLeftTablet, sideRightDesktop, sideRightTablet, sideNone }
+//
+// ctx = {
+//   textItems, styleLayout, advancedStyles,
+//   textWidth, textMaxWidth, blockLayout, textItems2LayoutStyle
+// }
 
-  const layout = parseInt(styleLayout, 10);
-  const sides = {
+/**
+ * Layout 1：左右兩側分欄。
+ * 桌機依 sideDesktop、平板依 sideTablet 各自分組。
+ */
+const layoutStrategy1 = (ctx) => {
+  const {
+    textItems, styleLayout, advancedStyles, textWidth, textMaxWidth,
+  } = ctx;
+
+  const groups = {
     sideLeftDesktop: [],
-    sideLeftTablet: [],
     sideRightDesktop: [],
+    sideLeftTablet: [],
     sideRightTablet: [],
-    sideNone: [],
+    mobile: [],
   };
 
   textItems.forEach((rawItem, index) => {
     const item = extractItemData(rawItem, styleLayout, index);
-    const { className, style } = getItemStyles(item, styleLayout, textWidth, textMaxWidth, textItems2LayoutStyle);
-    const itemHtml = renderItemHtml(item, className, style, advancedStyles, blockLayout);
-    const mobileHtml = renderItemHtml(item, '', '', advancedStyles, blockLayout, true);
-    if (layout === 1) {
-      if (item.sideDesktop === 'right') sides.sideRightDesktop.push(itemHtml);
-      else sides.sideLeftDesktop.push(itemHtml);
-      if (item.sideTablet === 'right') sides.sideRightTablet.push(itemHtml);
-      else sides.sideLeftTablet.push(itemHtml);
-      sides.sideNone.push(mobileHtml);
-    } else if (layout === 2) {
-      if (textItems2LayoutStyle === 'right') sides.sideRightDesktop.push(itemHtml);
-      else sides.sideLeftDesktop.push(itemHtml);
-      sides.sideNone.push(mobileHtml);
-    } else {
-      sides.sideNone.push(itemHtml);
-    }
+
+    const desktopSideClass = item.sideDesktop === 'right' ? 'lg:text-left' : 'lg:text-right';
+    const tabletSideClass = item.sideTablet === 'right' ? 'md:text-left' : 'md:text-right';
+    const classes = joinClasses('absolute flex pointer-events-auto', desktopSideClass, tabletSideClass);
+
+    const styles = joinStyles(
+      buildWidthStyle(textWidth.desktop, '--line-info-text-width-lg'),
+      buildMaxWidthStyle(textMaxWidth.desktop, '--line-info-text-max-width-lg'),
+      buildWidthStyle(textWidth.tablet, '--line-info-text-width-md'),
+      buildMaxWidthStyle(textMaxWidth.tablet, '--line-info-text-max-width-md'),
+      item.yValueTablet !== '0' && `--line-info-y-md:${item.yValueTablet}`,
+      item.yValueDesktop !== '0' && `--line-info-y-lg:${item.yValueDesktop}`,
+    );
+
+    const itemHtml = renderItemHtml(item, classes, styles, advancedStyles, 1);
+    const mobileHtml = renderItemHtml(item, '', '', advancedStyles, 1, true);
+
+    if (item.sideDesktop === 'right') groups.sideRightDesktop.push(itemHtml);
+    else groups.sideLeftDesktop.push(itemHtml);
+
+    if (item.sideTablet === 'right') groups.sideRightTablet.push(itemHtml);
+    else groups.sideLeftTablet.push(itemHtml);
+
+    groups.mobile.push(mobileHtml);
   });
 
-  const wrap = (items, classes) => (items.length ? `<div class="${classes}">${items.join('')}</div>` : '');
-
-  const sideNoneClass = [3, 4, 5].includes(layout)
-    ? 'line-info-side line-info-side-none'
-    : 'hidden md:hidden sm:block lg:hidden line-info-side line-info-side-none';
   return {
-    sideLeftDesktop: wrap(sides.sideLeftDesktop, 'hidden lg:block md:hidden sm:hidden line-info-side line-info-side-left-desktop'),
-    sideLeftTablet: wrap(sides.sideLeftTablet, 'hidden md:block lg:hidden line-info-side line-info-side-left-tablet'),
-    sideRightDesktop: wrap(sides.sideRightDesktop, 'hidden lg:block md:hidden sm:hidden line-info-side line-info-side-right-desktop'),
-    sideRightTablet: wrap(sides.sideRightTablet, 'hidden md:block lg:hidden line-info-side line-info-side-right-tablet'),
-    sideNone: wrap(sides.sideNone, sideNoneClass),
+    sideLeftDesktop: wrapSide(groups.sideLeftDesktop, 'hidden lg:block md:hidden sm:hidden line-info-side line-info-side-left-desktop'),
+    sideLeftTablet: wrapSide(groups.sideLeftTablet, 'hidden md:block lg:hidden line-info-side line-info-side-left-tablet'),
+    sideRightDesktop: wrapSide(groups.sideRightDesktop, 'hidden lg:block md:hidden sm:hidden line-info-side line-info-side-right-desktop'),
+    sideRightTablet: wrapSide(groups.sideRightTablet, 'hidden md:block lg:hidden line-info-side line-info-side-right-tablet'),
+    sideNone: wrapSide(groups.mobile, 'hidden md:hidden sm:block lg:hidden line-info-side line-info-side-none'),
   };
 };
 
-// ─── Block Config Helpers ─────────────────────────────────────────────────────
+/**
+ * Layout 2：全部 item 統一放同一側。
+ * textItems2LayoutStyle 決定文字在圖片的左側或右側。
+ */
+const layoutStrategy2 = (ctx) => {
+  const {
+    textItems, styleLayout, advancedStyles, textWidth, textMaxWidth, textItems2LayoutStyle,
+  } = ctx;
+
+  const sideItems = [];
+  const mobileItems = [];
+
+  textItems.forEach((rawItem, index) => {
+    const item = extractItemData(rawItem, styleLayout, index);
+
+    const textAlignClass = textItems2LayoutStyle === 'right' ? 'text-left' : 'text-right';
+    const classes = joinClasses('absolute flex pointer-events-auto', textAlignClass);
+
+    const styles = joinStyles(
+      buildWidthStyle(textWidth.desktop, '--line-info-text-width-lg'),
+      buildMaxWidthStyle(textMaxWidth.desktop, '--line-info-text-max-width-lg'),
+      buildWidthStyle(textWidth.tablet, '--line-info-text-width-md'),
+      buildMaxWidthStyle(textMaxWidth.tablet, '--line-info-text-max-width-md'),
+      item.yValueTablet !== '0' && `--line-info-y-md:${item.yValueTablet}`,
+      item.yValueDesktop !== '0' && `--line-info-y-lg:${item.yValueDesktop}`,
+    );
+
+    sideItems.push(renderItemHtml(item, classes, styles, advancedStyles, 2));
+    mobileItems.push(renderItemHtml(item, '', '', advancedStyles, 2, true));
+  });
+
+  const isRight = textItems2LayoutStyle === 'right';
+  const sideWrapClass = isRight
+    ? 'hidden lg:block md:hidden sm:hidden line-info-side line-info-side-right-desktop'
+    : 'hidden lg:block md:hidden sm:hidden line-info-side line-info-side-left-desktop';
+
+  return {
+    sideLeftDesktop: isRight ? '' : wrapSide(sideItems, sideWrapClass),
+    sideLeftTablet: '',
+    sideRightDesktop: isRight ? wrapSide(sideItems, sideWrapClass) : '',
+    sideRightTablet: '',
+    sideNone: wrapSide(mobileItems, 'hidden md:hidden sm:block lg:hidden line-info-side line-info-side-none'),
+  };
+};
 
 /**
- * 從所有的 repeat config groups，找出對應目前 styleLayout 的那一組。
- * 判斷依據：group 內第一個 item 的第一個 key 是否包含 prefix（e.g. "textItems2"）
- * @param {Array<Array>} allGroups
- * @param {string} prefix - e.g. "textItems2"
+ * Layout 3 & 4 共用邏輯：絕對定位，bottom-left / bottom-right 對齊。
+ * Layout 4 會額外加上 text-item-freeform（由 renderItemHtml 依 blockLayout 自動處理）。
+ */
+const buildAbsolutePositionedSides = (ctx) => {
+  const {
+    textItems, styleLayout, advancedStyles, blockLayout,
+  } = ctx;
+
+  const allItems = [];
+
+  textItems.forEach((rawItem, index) => {
+    const item = extractItemData(rawItem, styleLayout, index);
+
+    const classes = ['absolute flex pointer-events-auto'];
+
+    if (item.alignmentDesktop) {
+      classes.push(item.alignmentDesktop === 'right' ? 'bottom-right-lg lg:text-left' : 'bottom-left-lg lg:text-right');
+    }
+    if (item.alignmentTablet) {
+      classes.push(item.alignmentTablet === 'right' ? 'bottom-right-md md:text-left' : 'bottom-left-md md:text-right');
+    }
+
+    const styles = joinStyles(
+      buildWidthStyle(item.textWidthDesktop, '--line-info-text-width-lg'),
+      buildMaxWidthStyle(item.textMaxWidthDesktop, '--line-info-text-max-width-lg'),
+      buildWidthStyle(item.textWidthTablet, '--line-info-text-width-md'),
+      buildMaxWidthStyle(item.textMaxWidthTablet, '--line-info-text-max-width-md'),
+      item.xValueDesktop !== '0' && `--line-info-x-lg: ${item.xValueDesktop}`,
+      item.xValueTablet !== '0' && `--line-info-x-md: ${item.xValueTablet}`,
+      item.yValueTablet !== '0' && `--line-info-y-md: ${item.yValueTablet}`,
+      item.yValueDesktop !== '0' && `--line-info-y-lg: ${item.yValueDesktop}`,
+    );
+
+    allItems.push(renderItemHtml(item, classes.join(' '), styles, advancedStyles, blockLayout));
+  });
+
+  return {
+    sideLeftDesktop: '',
+    sideLeftTablet: '',
+    sideRightDesktop: '',
+    sideRightTablet: '',
+    sideNone: wrapSide(allItems, 'line-info-side line-info-side-none'),
+  };
+};
+
+/** Layout 3：絕對定位，無 freeform */
+const layoutStrategy3 = (ctx) => buildAbsolutePositionedSides(ctx);
+
+/** Layout 4：絕對定位，加 text-item-freeform */
+const layoutStrategy4 = (ctx) => buildAbsolutePositionedSides(ctx);
+
+/**
+ * Layout 5：Dialog popup 模式。
+ * 使用 dialogDirectionMap 決定彈出方向，寬度來自 dialogBoxWidth。
+ */
+const layoutStrategy5 = (ctx) => {
+  const { textItems, styleLayout, advancedStyles } = ctx;
+
+  const allItems = [];
+
+  textItems.forEach((rawItem, index) => {
+    const item = extractItemData(rawItem, styleLayout, index);
+
+    const classes = ['absolute flex pointer-events-auto'];
+
+    const directionDesktop = DIALOG_DIRECTION_MAP[item.dialogDirectionDesktop];
+    if (directionDesktop) classes.push(`${directionDesktop}-lg`);
+
+    const directionTablet = DIALOG_DIRECTION_MAP[item.dialogDirectionTablet];
+    if (directionTablet) classes.push(`${directionTablet}-md`);
+
+    if (item.alignmentDesktop) classes.push(`lg:text-${item.alignmentDesktop}`);
+    if (item.alignmentTablet) classes.push(`md:text-${item.alignmentTablet}`);
+
+    const styles = joinStyles(
+      buildWidthStyle(item.dialogBoxWidthDesktop, '--line-info-text-width-lg'),
+      buildMaxWidthStyle(item.maxDialogBoxWidthDesktop, '--line-info-text-max-width-lg'),
+      buildWidthStyle(item.dialogBoxWidthTablet, '--line-info-text-width-md'),
+      buildMaxWidthStyle(item.maxDialogBoxWidthTablet, '--line-info-text-max-width-md'),
+      item.xValueDesktop !== '0' && `--line-info-x-lg: ${item.xValueDesktop}`,
+      item.xValueTablet !== '0' && `--line-info-x-md: ${item.xValueTablet}`,
+      item.yValueTablet !== '0' && `--line-info-y-md: ${item.yValueTablet}`,
+      item.yValueDesktop !== '0' && `--line-info-y-lg: ${item.yValueDesktop}`,
+    );
+
+    allItems.push(renderItemHtml(item, classes.join(' '), styles, advancedStyles, 5));
+  });
+
+  return {
+    sideLeftDesktop: '',
+    sideLeftTablet: '',
+    sideRightDesktop: '',
+    sideRightTablet: '',
+    sideNone: wrapSide(allItems, 'line-info-side line-info-side-none'),
+  };
+};
+
+/** styleLayout → strategy function 的唯一入口 */
+const LAYOUT_STRATEGIES = {
+  1: layoutStrategy1,
+  2: layoutStrategy2,
+  3: layoutStrategy3,
+  4: layoutStrategy4,
+  5: layoutStrategy5,
+};
+
+// ─── Block-level Helpers ──────────────────────────────────────────────────────
+
+/**
+ * 從所有 repeat config groups 中，找出 key 包含 prefix 的那一組。
  */
 const findTextItemsByPrefix = (allGroups, prefix) => {
   const matched = allGroups.find((group) => Object.keys(group[0])[0].includes(prefix));
   return matched || [];
 };
 
-/**
- * 從 block config 建立 block-level 的 CSS inline style（padding 等）。
- * @param {Function} v - getFieldValue 的回傳函式
- */
-const buildBlockStyles = (v) => [
+/** 產生 block-level 的 padding inline style */
+const buildBlockStyles = (v) => joinStyles(
   v('paddingTopDesktop') && `--line-info-block-pd-top-lg: ${v('paddingTopDesktop')}`,
   v('paddingBottomDesktop') && `--line-info-block-pd-bottom-lg: ${v('paddingBottomDesktop')}`,
   v('paddingTopTablet') && `--line-info-block-pd-top-md: ${v('paddingTopTablet')}`,
   v('paddingBottomTablet') && `--line-info-block-pd-bottom-md: ${v('paddingBottomTablet')}`,
-].filter(Boolean).join('; ');
+);
+
+/** 產生 dialog box 相關的 CSS 變數 inline style */
+const buildDialogStyles = (v) => joinStyles(
+  v('dialogBoxRadius') && `--base-text-item-radius: ${v('dialogBoxRadius')}`,
+  v('dialogBoxBorderWidth') && `--base-text-item-border-width: ${v('dialogBoxBorderWidth')}`,
+  v('dialogBoxBorderColor') && `--base-text-item-border-color: ${v('dialogBoxBorderColor')}`,
+  v('dialogBoxBgColor') && `--base-text-item-bg-color: #${v('dialogBoxBgColor')}`,
+  v('dialogBoxPadding') && `--base-text-item-dialog-padding: ${v('dialogBoxPadding')}`,
+);
 
 // ─── Main Decorator ───────────────────────────────────────────────────────────
 
 export default async function decorate(block) {
-  // console.log(block);
-  // return;
   try {
     const config = await getBlockConfigs(block, {}, 'line-info');
     const v = getFieldValue(config);
 
-    // ── 取得 layout 與預設值 ──
+    // ── 基本設定 ──
     const blockLayout = parseInt(config.styleLayout?.text || config.styleLayout || '1', 10);
     const imageDef = IMAGE_DEFAULTS_BY_LAYOUT[blockLayout] || IMAGE_DEFAULTS_BY_LAYOUT[1];
     const fontDef = FONT_DEFAULTS_BY_PRODUCT_LINE[PRODUCT_LINE] || FONT_DEFAULTS_BY_PRODUCT_LINE.asus;
     const colorGroup = v('colorGroup') || 'section-light';
     const debugEnabled = v('debugEnabled') === 'true';
-    if (blockLayout === 1) {
-      console.group('blockLayout', blockLayout);
-      console.log('colorGroup', colorGroup);
-      console.groupEnd();
-    }
-    // return block;
 
     // ── Layout 2 專屬：文字擺放側 ──
     const textItems2LayoutStyle = blockLayout === 2 ? (v('textItems2LayoutStyle') || 'left') : null;
 
-    // ── 組 <picture> 的參數 ──
+    // ── 圖片參數 ──
     const picParams = {
       assetDesktop: v('assetDesktop'),
       assetDesktopImgWidth: v('assetDesktopImgWidth') || imageDef.imgDesktopWidth,
@@ -484,12 +536,11 @@ export default async function decorate(block) {
       assetMobileImgHeight: v('assetMobileImgHeight') || imageDef.imgMobileHeight,
     };
 
-    // ── 找出對應 layout 的 text items ──
-    const prefix = `textItems${blockLayout}`;
+    // ── 取得對應 layout 的 text items ──
     const allRepeatGroups = getBlockRepeatConfigs(block);
-    const textItems = findTextItemsByPrefix(allRepeatGroups, prefix);
+    const textItems = findTextItemsByPrefix(allRepeatGroups, `textItems${blockLayout}`);
 
-    // ── 計算 text width（layout 1/2 用） ──
+    // ── text width（layout 1/2 的 block-level 設定）──
     const textWidth = {
       desktop: v('textWidthPercentDesktop'),
       tablet: v('textWidthPercentTablet'),
@@ -499,11 +550,12 @@ export default async function decorate(block) {
       tablet: v('textMaxWidthTablet'),
     };
 
-    // ── 產生字型與顏色 class/style ──
+    // ── 字型與顏色 ──
     const advancedStyles = generateAdvancedStyles(config, fontDef);
-    // console.log('advancedStyles', advancedStyles);
-    // ── 產生所有 text items HTML ──
-    const txt = generateTextItemsHtml({
+
+    // ── 以 styleLayout 為唯一入口，執行對應 strategy ──
+    const strategy = LAYOUT_STRATEGIES[blockLayout] || LAYOUT_STRATEGIES[1];
+    const ctx = {
       textItems,
       styleLayout: blockLayout,
       advancedStyles,
@@ -511,33 +563,26 @@ export default async function decorate(block) {
       textMaxWidth,
       blockLayout,
       textItems2LayoutStyle,
-    });
+    };
+    const sides = strategy(ctx);
 
-    // ── 組合 block inline style（padding）──
-    const blockStyles = buildBlockStyles(v);
+    // ── 組合 inline styles ──
+    const combinedStyles = joinStyles(buildBlockStyles(v), buildDialogStyles(v));
 
-    // dialog style
-    const dialogStyle = [
-      v('dialogBoxRadius') && `--base-text-item-radius: ${v('dialogBoxRadius')}`,
-      v('dialogBoxBorderWidth') && `--base-text-item-border-width: ${v('dialogBoxBorderWidth')}`,
-      v('dialogBoxBorderColor') && `--base-text-item-border-color: ${v('dialogBoxBorderColor')}`,
-      v('dialogBoxBgColor') && `--base-text-item-bg-color: #${v('dialogBoxBgColor')}`,
-      v('dialogBoxPadding') && `--base-text-item-dialog-padding: ${v('dialogBoxPadding')}`,
-    ].filter(Boolean).join('; ');
-
-    const combinedStyles = [blockStyles, dialogStyle].filter(Boolean).join('; ');
     // ── 寫入 DOM ──
     block.innerHTML = `
-      <div class="line-info-block relative box-border colorGroup-${colorGroup} test" ${combinedStyles ? `style="${combinedStyles}"` : ''}>
-        ${txt.sideLeftDesktop || ''} ${txt.sideLeftTablet || ''}
+      <div class="line-info-block relative box-border colorGroup-${colorGroup}" ${combinedStyles ? `style="${combinedStyles}"` : ''}>
+        ${sides.sideLeftDesktop}
+        ${sides.sideLeftTablet}
         ${generatePictureHtml(picParams)}
-        ${txt.sideRightDesktop || ''} ${txt.sideRightTablet || ''} ${txt.sideNone || ''}
+        ${sides.sideRightDesktop}
+        ${sides.sideRightTablet}
+        ${sides.sideNone}
       </div>
     `;
 
     block.classList.add(`theme-${colorGroup}`);
     block.classList.add(`style-layout-${blockLayout}`);
-
     if (debugEnabled) block.classList.add('debug-enabled');
   } catch (error) {
     // eslint-disable-next-line no-console
