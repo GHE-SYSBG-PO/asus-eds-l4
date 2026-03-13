@@ -277,8 +277,8 @@ const renderItemHtml = (item, itemClasses, itemStyle, advancedStyles, blockLayou
 // sides = { sideLeftDesktop, sideLeftTablet, sideRightDesktop, sideRightTablet, sideNone }
 //
 // ctx = {
-//   textItems, styleLayout, advancedStyles,
-//   textWidth, textMaxWidth, blockLayout, textItems2LayoutStyle
+//   textItems, blockLayout, advancedStyles,
+//   textWidth, textMaxWidth, textItems2LayoutStyle
 // }
 
 /**
@@ -287,7 +287,7 @@ const renderItemHtml = (item, itemClasses, itemStyle, advancedStyles, blockLayou
  */
 const layoutStrategy1 = (ctx) => {
   const {
-    textItems, styleLayout, advancedStyles, textWidth, textMaxWidth,
+    textItems, blockLayout, advancedStyles, textWidth, textMaxWidth,
   } = ctx;
 
   const groups = {
@@ -299,7 +299,7 @@ const layoutStrategy1 = (ctx) => {
   };
 
   textItems.forEach((rawItem, index) => {
-    const item = extractItemData(rawItem, styleLayout, index);
+    const item = extractItemData(rawItem, blockLayout, index);
 
     const desktopSideClass = item.sideDesktop === 'right' ? 'lg:text-left' : 'lg:text-right';
     const tabletSideClass = item.sideTablet === 'right' ? 'md:text-left' : 'md:text-right';
@@ -314,8 +314,8 @@ const layoutStrategy1 = (ctx) => {
       item.yValueDesktop !== '0' && `--line-info-y-lg:${item.yValueDesktop}`,
     );
 
-    const itemHtml = renderItemHtml(item, classes, styles, advancedStyles, 1);
-    const mobileHtml = renderItemHtml(item, '', '', advancedStyles, 1, true);
+    const itemHtml = renderItemHtml(item, classes, styles, advancedStyles, blockLayout);
+    const mobileHtml = renderItemHtml(item, '', '', advancedStyles, blockLayout, true);
 
     if (item.sideDesktop === 'right') groups.sideRightDesktop.push(itemHtml);
     else groups.sideLeftDesktop.push(itemHtml);
@@ -341,14 +341,14 @@ const layoutStrategy1 = (ctx) => {
  */
 const layoutStrategy2 = (ctx) => {
   const {
-    textItems, styleLayout, advancedStyles, textWidth, textMaxWidth, textItems2LayoutStyle,
+    textItems, blockLayout, advancedStyles, textWidth, textMaxWidth, textItems2LayoutStyle,
   } = ctx;
 
   const sideItems = [];
   const mobileItems = [];
 
   textItems.forEach((rawItem, index) => {
-    const item = extractItemData(rawItem, styleLayout, index);
+    const item = extractItemData(rawItem, blockLayout, index);
 
     const textAlignClass = textItems2LayoutStyle === 'right' ? 'text-left' : 'text-right';
     const classes = joinClasses('absolute flex pointer-events-auto', textAlignClass);
@@ -362,8 +362,8 @@ const layoutStrategy2 = (ctx) => {
       item.yValueDesktop !== '0' && `--line-info-y-lg:${item.yValueDesktop}`,
     );
 
-    sideItems.push(renderItemHtml(item, classes, styles, advancedStyles, 2));
-    mobileItems.push(renderItemHtml(item, '', '', advancedStyles, 2, true));
+    sideItems.push(renderItemHtml(item, classes, styles, advancedStyles, blockLayout));
+    mobileItems.push(renderItemHtml(item, '', '', advancedStyles, blockLayout, true));
   });
 
   const isRight = textItems2LayoutStyle === 'right';
@@ -386,13 +386,13 @@ const layoutStrategy2 = (ctx) => {
  */
 const buildAbsolutePositionedSides = (ctx) => {
   const {
-    textItems, styleLayout, advancedStyles, blockLayout,
+    textItems, blockLayout, advancedStyles,
   } = ctx;
 
   const allItems = [];
 
   textItems.forEach((rawItem, index) => {
-    const item = extractItemData(rawItem, styleLayout, index);
+    const item = extractItemData(rawItem, blockLayout, index);
 
     const classes = ['absolute flex pointer-events-auto'];
 
@@ -426,10 +426,17 @@ const buildAbsolutePositionedSides = (ctx) => {
   };
 };
 
-/** Layout 3：絕對定位，無 freeform */
+/**
+ * Layout 3：絕對定位，bottom-left / bottom-right 對齊，無 freeform class。
+ * ctx.blockLayout === 3，renderItemHtml 不會加 text-item-freeform。
+ */
 const layoutStrategy3 = (ctx) => buildAbsolutePositionedSides(ctx);
 
-/** Layout 4：絕對定位，加 text-item-freeform */
+/**
+ * Layout 4：絕對定位，bottom-left / bottom-right 對齊，加 text-item-freeform class。
+ * ctx.blockLayout === 4，renderItemHtml 內部會自動加上 text-item-freeform。
+ * 定位邏輯與 layout 3 完全相同，差異僅在 HTML class 輸出。
+ */
 const layoutStrategy4 = (ctx) => buildAbsolutePositionedSides(ctx);
 
 /**
@@ -437,12 +444,12 @@ const layoutStrategy4 = (ctx) => buildAbsolutePositionedSides(ctx);
  * 使用 dialogDirectionMap 決定彈出方向，寬度來自 dialogBoxWidth。
  */
 const layoutStrategy5 = (ctx) => {
-  const { textItems, styleLayout, advancedStyles } = ctx;
+  const { textItems, blockLayout, advancedStyles } = ctx;
 
   const allItems = [];
 
   textItems.forEach((rawItem, index) => {
-    const item = extractItemData(rawItem, styleLayout, index);
+    const item = extractItemData(rawItem, blockLayout, index);
 
     const classes = ['absolute flex pointer-events-auto'];
 
@@ -573,11 +580,10 @@ export default async function decorate(block) {
     const strategy = LAYOUT_STRATEGIES[blockLayout] || LAYOUT_STRATEGIES[1];
     const ctx = {
       textItems,
-      styleLayout: blockLayout,
+      blockLayout,
       advancedStyles,
       textWidth,
       textMaxWidth,
-      blockLayout,
       textItems2LayoutStyle,
     };
     const sides = strategy(ctx);
