@@ -6576,6 +6576,1292 @@
     ]
   },
   {
+    "id": "line-info",
+    "fields": [
+      {
+        "component": "tab",
+        "label": "Basic",
+        "name": "basicTab"
+      },
+      {
+        "component": "select",
+        "label": "style (layout variant)",
+        "name": "styleLayout",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Variant 1 - Text On Left & Right",
+            "value": "1"
+          },
+          {
+            "name": "Variant 2 - Text On Left / Right Sides",
+            "value": "2"
+          },
+          {
+            "name": "Variant 3 - Text below",
+            "value": "3"
+          },
+          {
+            "name": "Variant 4 - Freeform",
+            "value": "4"
+          },
+          {
+            "name": "Variant 5 - Freeform-dialog box",
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Desktop Asset image",
+        "name": "assetGroupDesktop",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "asset",
+            "name": "assetDesktop",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "label": "  width",
+            "name": "assetDesktopImgWidth",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": "* if style = 1, width 建議不超過 1412px"
+          },
+          {
+            "component": "text",
+            "label": "height",
+            "name": "assetDesktopImgHeight",
+            "valueType": "string",
+            "placeholder": "px"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Tablet Asset",
+        "name": "assetGroupTablet",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "asset",
+            "name": "assetTablet",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "label": "img widt",
+            "name": "assetTabletImgWidth",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "height",
+            "name": "assetTabletImgHeight",
+            "valueType": "string",
+            "placeholder": "px"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Mobile Asset",
+        "name": "assetGroupMobile",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "reference",
+            "label": "asset (M)",
+            "name": "assetMobile",
+            "multi": false
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Module Style",
+        "name": "moduleStyleGroup",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "label": "top padding (D)",
+            "name": "paddingTopDesktop",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "bottom padding (D)",
+            "name": "paddingBottomDesktop",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "text width (D)",
+            "name": "textWidthPercentDesktop",
+            "valueType": "string",
+            "placeholder": "%",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text max width",
+            "name": "textMaxWidthDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "top padding (T)",
+            "name": "paddingTopTablet",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "bottom padding (T)",
+            "name": "paddingBottomTablet",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "text width",
+            "name": "textWidthPercentTablet",
+            "valueType": "string",
+            "placeholder": "%",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2"
+                ]
+              ]
+            }
+          },
+          {
+            "component": "text",
+            "label": "text max width",
+            "name": "textMaxWidthTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "condition": {
+              "in": [
+                {
+                  "var": "styleLayout"
+                },
+                [
+                  "1",
+                  "2"
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text Items",
+        "name": "textItems1",
+        "valueType": "string[]",
+        "multi": true,
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "1"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems1SideDesktop",
+            "value": "L4TagMulti-textItems1SideDesktop",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "side (left/right)(Desktop)",
+            "name": "textItems1SideDesktop",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems1YValueDesktop",
+            "value": "L4TagMulti-textItems1YValueDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value (top)(Desktop)",
+            "name": "textItems1YValueDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems1SideTablet",
+            "value": "L4TagMulti-textItems1SideTablet",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "side (left/right)(Tablet)",
+            "name": "textItems1SideTablet",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems1YValueTablet",
+            "value": "L4TagMulti-textItems1YValueTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value (top)(Tablet)",
+            "name": "textItems1YValueTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems1TitleRichtext",
+            "value": "L4TagMulti-textItems1TitleRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "title richtext",
+            "name": "textItems1TitleRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Item Title</p>",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems1InfoRichtext",
+            "value": "L4TagMulti-textItems1InfoRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "info richtext",
+            "name": "textItems1InfoRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Description text here...</p>",
+            "multi": false
+          }
+        ]
+      },
+      {
+        "valueType": "string",
+        "component": "select",
+        "label": "layout style (left/right)",
+        "name": "textItems2LayoutStyle",
+        "multi": false,
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "2"
+          ]
+        },
+        "options": [
+          {
+            "name": "left",
+            "value": "left"
+          },
+          {
+            "name": "right",
+            "value": "right"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text Items",
+        "name": "textItems2",
+        "valueType": "string[]",
+        "multi": true,
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "2"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems2YValueDesktop",
+            "value": "L4TagMulti-textItems2YValueDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value (top)(Desktop)",
+            "name": "textItems2YValueDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems2YValueTablet",
+            "value": "L4TagMulti-textItems2YValueTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value (top)(Tablet)",
+            "name": "textItems2YValueTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems2TitleRichtext",
+            "value": "L4TagMulti-textItems2TitleRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "title richtext",
+            "name": "textItems2TitleRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Item Title</p>",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems2InfoRichtext",
+            "value": "L4TagMulti-textItems2InfoRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "info richtext",
+            "name": "textItems2InfoRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Description text here...</p>",
+            "multi": false
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text Items",
+        "name": "textItems3",
+        "valueType": "string[]",
+        "multi": true,
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "3"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3AlignmentDesktop",
+            "value": "L4TagMulti-textItems3AlignmentDesktop",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "alignment (left/right)(Desktop)",
+            "name": "textItems3AlignmentDesktop",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3TextWidthDesktop",
+            "value": "L4TagMulti-textItems3TextWidthDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "text width (px)(Desktop)",
+            "name": "textItems3TextWidthDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3XValueDesktop",
+            "value": "L4TagMulti-textItems3XValueDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "X value (Desktop)",
+            "name": "textItems3XValueDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3AlignmentTablet",
+            "value": "L4TagMulti-textItems3AlignmentTablet",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "alignment (left/right)(Tablet)",
+            "name": "textItems3AlignmentTablet",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3TextWidthTablet",
+            "value": "L4TagMulti-textItems3TextWidthTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "text width (Tablet)",
+            "name": "textItems3TextWidthTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3XValueTablet",
+            "value": "L4TagMulti-textItems3XValueTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "X value (Tablet)",
+            "name": "textItems3XValueTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3TitleRichtext",
+            "value": "L4TagMulti-textItems3TitleRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "title richtext",
+            "name": "textItems3TitleRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Item Title</p>",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems3InfoRichtext",
+            "value": "L4TagMulti-textItems3InfoRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "info richtext",
+            "name": "textItems3InfoRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Description text here...</p>",
+            "multi": false
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text Items",
+        "name": "textItems4",
+        "valueType": "string[]",
+        "multi": true,
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "4"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4AlignmentDesktop",
+            "value": "L4TagMulti-textItems4AlignmentDesktop",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "alignment (left/right)(Desktop)",
+            "name": "textItems4AlignmentDesktop",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4TextWidthDesktop",
+            "value": "L4TagMulti-textItems4TextWidthDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "text width (px)(Desktop)",
+            "name": "textItems4TextWidthDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4XValueDesktop",
+            "value": "L4TagMulti-textItems4XValueDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "X value (Desktop)",
+            "name": "textItems4XValueDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4YValueDesktop",
+            "value": "L4TagMulti-textItems4YValueDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value (Desktop)",
+            "name": "textItems4YValueDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4AlignmentTablet",
+            "value": "L4TagMulti-textItems4AlignmentTablet",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "alignment (left/right)(Tablet)",
+            "name": "textItems4AlignmentTablet",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4TextWidthTablet",
+            "value": "L4TagMulti-textItems4TextWidthTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "text width (px)(Tablet)",
+            "name": "textItems4TextWidthTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4XValueTablet",
+            "value": "L4TagMulti-textItems4XValueTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "X value (Tablet)",
+            "name": "textItems4XValueTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4YValueTablet",
+            "value": "L4TagMulti-textItems4YValueTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value (Tablet)",
+            "name": "textItems4YValueTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4TitleRichtext",
+            "value": "L4TagMulti-textItems4TitleRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "title richtext",
+            "name": "textItems4TitleRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Item Title</p>",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems4InfoRichtext",
+            "value": "L4TagMulti-textItems4InfoRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "info richtext",
+            "name": "textItems4InfoRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Description text here...</p>",
+            "multi": false
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "Text Items",
+        "name": "textItems5",
+        "valueType": "string[]",
+        "multi": true,
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "5"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5DialogDirectionDesktop",
+            "value": "L4TagMulti-textItems5DialogDirectionDesktop",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "dialog direction(TL, TC, TR, BL, BC, BR)(Desktop)",
+            "name": "textItems5DialogDirectionDesktop",
+            "multi": false,
+            "options": [
+              {
+                "name": "TL",
+                "value": "TL"
+              },
+              {
+                "name": "TC",
+                "value": "TC"
+              },
+              {
+                "name": "TR",
+                "value": "TR"
+              },
+              {
+                "name": "BL",
+                "value": "BL"
+              },
+              {
+                "name": "BC",
+                "value": "BC"
+              },
+              {
+                "name": "BR",
+                "value": "BR"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5AlignmentDesktop",
+            "value": "L4TagMulti-textItems5AlignmentDesktop",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "text alignment (left/center/right)(Desktop)",
+            "name": "textItems5AlignmentDesktop",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "center",
+                "value": "center"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5DialogBoxWidthDesktop",
+            "value": "L4TagMulti-textItems5DialogBoxWidthDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "dialog box width (%/px)(Desktop)",
+            "name": "textItems5DialogBoxWidthDesktop",
+            "valueType": "string",
+            "placeholder": "%/px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5MaxDialogBoxWidthDesktop",
+            "value": "L4TagMulti-textItems5MaxDialogBoxWidthDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "max dialog box width(px)(Desktop)",
+            "name": "textItems5MaxDialogBoxWidthDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5XValueDesktop",
+            "value": "L4TagMulti-textItems5XValueDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "X value(left)(Desktop)",
+            "name": "textItems5XValueDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5YValueDesktop",
+            "value": "L4TagMulti-textItems5YValueDesktop",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value(top)(Desktop)",
+            "name": "textItems5YValueDesktop",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5DialogDirectionTablet",
+            "value": "L4TagMulti-textItems5DialogDirectionTablet",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "dialog direction(TL, TC, TR, BL, BC, BR)(Tablet)",
+            "name": "textItems5DialogDirectionTablet",
+            "multi": false,
+            "options": [
+              {
+                "name": "TL",
+                "value": "TL"
+              },
+              {
+                "name": "TC",
+                "value": "TC"
+              },
+              {
+                "name": "TR",
+                "value": "TR"
+              },
+              {
+                "name": "BL",
+                "value": "BL"
+              },
+              {
+                "name": "BC",
+                "value": "BC"
+              },
+              {
+                "name": "BR",
+                "value": "BR"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5AlignmentTablet",
+            "value": "L4TagMulti-textItems5AlignmentTablet",
+            "hidden": true
+          },
+          {
+            "valueType": "string",
+            "component": "select",
+            "label": "text alignment (left/center/right)(Tablet)",
+            "name": "textItems5AlignmentTablet",
+            "multi": false,
+            "options": [
+              {
+                "name": "left",
+                "value": "left"
+              },
+              {
+                "name": "center",
+                "value": "center"
+              },
+              {
+                "name": "right",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5DialogBoxWidthTablet",
+            "value": "L4TagMulti-textItems5DialogBoxWidthTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "dialog box width (%/px)(Tablet)",
+            "name": "textItems5DialogBoxWidthTablet",
+            "valueType": "string",
+            "placeholder": "%/px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5MaxDialogBoxWidthTablet",
+            "value": "L4TagMulti-textItems5MaxDialogBoxWidthTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "max dialog box width(px)(Tablet)",
+            "name": "textItems5MaxDialogBoxWidthTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5XValueTablet",
+            "value": "L4TagMulti-textItems5XValueTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "X value(left)(Tablet)",
+            "name": "textItems5XValueTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5YValueTablet",
+            "value": "L4TagMulti-textItems5YValueTablet",
+            "hidden": true
+          },
+          {
+            "component": "text",
+            "label": "Y value(top)(Tablet)",
+            "name": "textItems5YValueTablet",
+            "valueType": "string",
+            "placeholder": "px",
+            "description": " * 文案太多可以是負值",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5TitleRichtext",
+            "value": "L4TagMulti-textItems5TitleRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "title richtext",
+            "name": "textItems5TitleRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Item Title</p>",
+            "multi": false
+          },
+          {
+            "component": "text",
+            "name": "L4TagMulti-textItems5InfoRichtext",
+            "value": "L4TagMulti-textItems5InfoRichtext",
+            "hidden": true
+          },
+          {
+            "component": "richtext",
+            "label": "info richtext",
+            "name": "textItems5InfoRichtext",
+            "valueType": "string",
+            "placeholder": "<p>Description text here...</p>",
+            "multi": false
+          }
+        ]
+      },
+      {
+        "component": "tab",
+        "label": "Advanced",
+        "name": "advancedTab"
+      },
+      {
+        "component": "container",
+        "label": "title richtext",
+        "name": "advancedTitleGroup",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font(DT)",
+            "name": "titleFontDTselect",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
+              {
+                "name": "14-sh",
+                "value": "14-sh"
+              },
+              {
+                "name": "16-sh",
+                "value": "16-sh"
+              },
+              {
+                "name": "18-sh",
+                "value": "18-sh"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font(M)",
+            "name": "titleFontMselect",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
+              {
+                "name": "13",
+                "value": "13"
+              },
+              {
+                "name": "14-sh",
+                "value": "14-sh"
+              },
+              {
+                "name": "16-sh",
+                "value": "16-sh"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color",
+            "name": "titleFontColor",
+            "valueType": "string",
+            "description": "* 三裝置共用, linear-gradient"
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "label": "info richtext",
+        "name": "advancedInfoGroup",
+        "collapsible": false,
+        "fields": [
+          {
+            "component": "select",
+            "label": "font(DT)",
+            "name": "infoFontDTselect",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
+              {
+                "name": "13",
+                "value": "13"
+              },
+              {
+                "name": "14-sh",
+                "value": "14-sh"
+              },
+              {
+                "name": "16-sh",
+                "value": "16-sh"
+              }
+            ]
+          },
+          {
+            "component": "select",
+            "label": "font(M)",
+            "name": "infoFontMselect",
+            "valueType": "string",
+            "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
+              {
+                "name": "12",
+                "value": "12"
+              },
+              {
+                "name": "13",
+                "value": "13"
+              },
+              {
+                "name": "14-sh",
+                "value": "14-sh"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "label": "font color",
+            "name": "infoFontColor",
+            "valueType": "string",
+            "placeholder": ""
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "label": "circle num color(M)",
+        "name": "circleNameColorM",
+        "valueType": "string",
+        "placeholder": ""
+      },
+      {
+        "component": "container",
+        "label": "Dialog Box Style",
+        "name": "dialogBoxStyle",
+        "collapsible": true,
+        "condition": {
+          "==": [
+            {
+              "var": "styleLayout"
+            },
+            "5"
+          ]
+        },
+        "fields": [
+          {
+            "component": "text",
+            "label": "border radius",
+            "name": "dialogBoxRadius",
+            "valueType": "string",
+            "placeholder": "8px 8px 8px 8px"
+          },
+          {
+            "component": "text",
+            "label": "border width",
+            "name": "dialogBoxBorderWidth",
+            "valueType": "string",
+            "placeholder": "px"
+          },
+          {
+            "component": "text",
+            "label": "border color",
+            "name": "dialogBoxBorderColor",
+            "valueType": "string",
+            "description": "* 三裝置共用, linear-gradient"
+          },
+          {
+            "component": "text",
+            "label": "background color",
+            "name": "dialogBoxBgColor",
+            "valueType": "string",
+            "placeholder": "ffffff",
+            "description": "Hex value without #, e.g. ffffff"
+          },
+          {
+            "component": "text",
+            "label": "padding",
+            "name": "dialogBoxPadding",
+            "valueType": "string",
+            "placeholder": "10px 0 0 10px"
+          }
+        ]
+      },
+      {
+        "component": "boolean",
+        "label": "debug (on/off)",
+        "name": "debugEnabled",
+        "valueType": "boolean"
+      },
+      {
+        "component": "tab",
+        "label": "Color Group",
+        "name": "color"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "colorGroup",
+        "label": "Color Group",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Light",
+            "value": "section-light"
+          },
+          {
+            "name": "Dark",
+            "value": "section-dark"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "L4TagNestedBlock",
+        "value": "L4--nested-block--line-info",
+        "hidden": true
+      }
+    ]
+  },
+  {
     "id": "media-block",
     "fields": [
       {

@@ -1,0 +1,126 @@
+{
+  "desc": "for styleLayout = 1",
+  "fields": [
+    {
+      "component": "container",
+      "label": "Text Items",
+      "name": "textItems1",
+      "valueType": "string[]",
+      "multi": true,
+      "condition": {
+        "==": [
+          {
+            "var": "styleLayout"
+          },
+          "1"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems1SideDesktop",
+          "value": "L4TagMulti-textItems1SideDesktop",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "side (left/right)(Desktop)",
+          "name": "textItems1SideDesktop",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },        
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems1YValueDesktop",
+          "value": "L4TagMulti-textItems1YValueDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value (top)(Desktop)",
+          "name": "textItems1YValueDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "description": " * 文案太多可以是負值",        
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems1SideTablet",
+          "value": "L4TagMulti-textItems1SideTablet",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "side (left/right)(Tablet)",
+          "name": "textItems1SideTablet",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems1YValueTablet",
+          "value": "L4TagMulti-textItems1YValueTablet",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value (top)(Tablet)",
+          "name": "textItems1YValueTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "description": " * 文案太多可以是負值",        
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems1TitleRichtext",
+          "value": "L4TagMulti-textItems1TitleRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "title richtext",
+          "name": "textItems1TitleRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Item Title</p>",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems1InfoRichtext",
+          "value": "L4TagMulti-textItems1InfoRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "info richtext",
+          "name": "textItems1InfoRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Description text here...</p>",
+          "multi": false
+        }
+      ]
+    }
+  ]
+}

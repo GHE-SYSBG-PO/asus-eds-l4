@@ -1,0 +1,263 @@
+{
+  "desc": "for styleLayout = 5",
+  "fields": [
+    {
+      "component": "container",
+      "label": "Text Items",
+      "name": "textItems5",
+      "valueType": "string[]",
+      "multi": true,
+      "condition": {
+        "==": [
+          {
+            "var": "styleLayout"
+          },
+          "5"
+        ]
+      },
+      "fields": [
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5DialogDirectionDesktop",
+          "value": "L4TagMulti-textItems5DialogDirectionDesktop",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "dialog direction(TL, TC, TR, BL, BC, BR)(Desktop)",
+          "name": "textItems5DialogDirectionDesktop",
+          "multi": false,
+          "options": [
+            { "name": "TL", "value": "TL" },
+            { "name": "TC", "value": "TC" },
+            { "name": "TR", "value": "TR" },
+            { "name": "BL", "value": "BL" },
+            { "name": "BC", "value": "BC" },
+            { "name": "BR", "value": "BR" }
+          ]
+        },        
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5AlignmentDesktop",
+          "value": "L4TagMulti-textItems5AlignmentDesktop",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "text alignment (left/center/right)(Desktop)",
+          "name": "textItems5AlignmentDesktop",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "center",
+              "value": "center"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5DialogBoxWidthDesktop",
+          "value": "L4TagMulti-textItems5DialogBoxWidthDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "dialog box width (%/px)(Desktop)",
+          "name": "textItems5DialogBoxWidthDesktop",
+          "valueType": "string",
+          "placeholder": "%/px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5MaxDialogBoxWidthDesktop",
+          "value": "L4TagMulti-textItems5MaxDialogBoxWidthDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "max dialog box width(px)(Desktop)",
+          "name": "textItems5MaxDialogBoxWidthDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5XValueDesktop",
+          "value": "L4TagMulti-textItems5XValueDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "X value(left)(Desktop)",
+          "name": "textItems5XValueDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "description": " * 可以是負值",        
+          "multi": false
+        },        
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5YValueDesktop",
+          "value": "L4TagMulti-textItems5YValueDesktop",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value(top)(Desktop)",
+          "name": "textItems5YValueDesktop",
+          "valueType": "string",
+          "placeholder": "px",
+          "description": " * 文案太多可以是負值",        
+          "multi": false
+        },
+
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5DialogDirectionTablet",
+          "value": "L4TagMulti-textItems5DialogDirectionTablet",
+          "hidden": true
+        },
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "dialog direction(TL, TC, TR, BL, BC, BR)(Tablet)",
+          "name": "textItems5DialogDirectionTablet",
+          "multi": false,
+          "options": [
+            { "name": "TL", "value": "TL" },
+            { "name": "TC", "value": "TC" },
+            { "name": "TR", "value": "TR" },
+            { "name": "BL", "value": "BL" },
+            { "name": "BC", "value": "BC" },
+            { "name": "BR", "value": "BR" }
+          ]
+        },  
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5AlignmentTablet",
+          "value": "L4TagMulti-textItems5AlignmentTablet",
+          "hidden": true
+        },        
+        {
+          "valueType": "string",
+          "component": "select",
+          "label": "text alignment (left/center/right)(Tablet)",
+          "name": "textItems5AlignmentTablet",
+          "multi": false,
+          "options": [
+            {
+              "name": "left",
+              "value": "left"
+            },
+            {
+              "name": "center",
+              "value": "center"
+            },
+            {
+              "name": "right",
+              "value": "right"
+            }
+          ]
+        },              
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5DialogBoxWidthTablet",
+          "value": "L4TagMulti-textItems5DialogBoxWidthTablet",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "dialog box width (%/px)(Tablet)",
+          "name": "textItems5DialogBoxWidthTablet",
+          "valueType": "string",
+          "placeholder": "%/px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5MaxDialogBoxWidthTablet",
+          "value": "L4TagMulti-textItems5MaxDialogBoxWidthTablet",
+          "hidden": true
+        },        
+        {
+          "component": "text",
+          "label": "max dialog box width(px)(Tablet)",
+          "name": "textItems5MaxDialogBoxWidthTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5XValueTablet",
+          "value": "L4TagMulti-textItems5XValueTablet",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "X value(left)(Tablet)",
+          "name": "textItems5XValueTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "description": " * 可以是負值",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5YValueTablet",
+          "value": "L4TagMulti-textItems5YValueTablet",
+          "hidden": true
+        },
+        {
+          "component": "text",
+          "label": "Y value(top)(Tablet)",
+          "name": "textItems5YValueTablet",
+          "valueType": "string",
+          "placeholder": "px",
+          "description": " * 文案太多可以是負值",        
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5TitleRichtext",
+          "value": "L4TagMulti-textItems5TitleRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "title richtext",
+          "name": "textItems5TitleRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Item Title</p>",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "L4TagMulti-textItems5InfoRichtext",
+          "value": "L4TagMulti-textItems5InfoRichtext",
+          "hidden": true
+        },
+        {
+          "component": "richtext",
+          "label": "info richtext",
+          "name": "textItems5InfoRichtext",
+          "valueType": "string",
+          "placeholder": "<p>Description text here...</p>",
+          "multi": false
+        }
+      ]
+    }
+  ]
+}
