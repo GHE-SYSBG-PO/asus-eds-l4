@@ -4329,12 +4329,26 @@
                 "value": "center"
               }
             ]
+          },
+          {
+            "component": "text",
+            "label": "Image Width",
+            "name": "collapseItemImageWidthD",
+            "valueType": "string",
+            "placeholder": "[% or PX]"
+          },
+          {
+            "component": "text",
+            "label": "Image Height",
+            "name": "collapseItemImageHeightD",
+            "valueType": "string",
+            "placeholder": "[% or PX]"
           }
         ]
       },
       {
         "component": "container",
-        "label": "Desktop",
+        "label": "Tablet",
         "name": "imgContainerT",
         "collapsible": true,
         "fields": [
@@ -4360,12 +4374,26 @@
                 "value": "center"
               }
             ]
+          },
+          {
+            "component": "text",
+            "label": "Image Width",
+            "name": "collapseItemImageWidthT",
+            "valueType": "string",
+            "placeholder": "[% or PX]"
+          },
+          {
+            "component": "text",
+            "label": "Image Height",
+            "name": "collapseItemImageHeightT",
+            "valueType": "string",
+            "placeholder": "[% or PX]"
           }
         ]
       },
       {
         "component": "container",
-        "label": "Desktop",
+        "label": "Mobile",
         "name": "imgContainerM",
         "collapsible": true,
         "fields": [
@@ -4391,6 +4419,20 @@
                 "value": "center"
               }
             ]
+          },
+          {
+            "component": "text",
+            "label": "Image Width",
+            "name": "collapseItemImageWidthM",
+            "valueType": "string",
+            "placeholder": "[% or PX]"
+          },
+          {
+            "component": "text",
+            "label": "Image Height",
+            "name": "collapseItemImageHeightM",
+            "valueType": "string",
+            "placeholder": "[% or PX]"
           }
         ]
       }
