@@ -107,6 +107,17 @@ const wrapSide = (items, classes) => {
   return `<div class="${classes}">${items.join('')}</div>`;
 };
 
+/**
+ * 產生 item 的 x/y 絕對定位 CSS 變數。
+ * layout 3/4/5 共用，x = 0 或 y = 0 時跳過（不輸出變數）。
+ */
+const buildXYStyles = (item) => joinStyles(
+  item.xValueDesktop !== '0' && `--line-info-x-lg: ${item.xValueDesktop}`,
+  item.xValueTablet !== '0' && `--line-info-x-md: ${item.xValueTablet}`,
+  item.yValueTablet !== '0' && `--line-info-y-md: ${item.yValueTablet}`,
+  item.yValueDesktop !== '0' && `--line-info-y-lg: ${item.yValueDesktop}`,
+);
+
 // ─── HTML Generators ─────────────────────────────────────────────────────────
 
 /**
@@ -234,8 +245,13 @@ const extractItemData = (itemData, styleLayout, index) => {
  * isMobile 為 true 時，移除定位相關 class/style（行動版用）。
  */
 const renderItemHtml = (item, itemClasses, itemStyle, advancedStyles, blockLayout, isMobile = false) => {
-  const containerClass = isMobile ? '' : itemClasses;
-  const containerStyle = isMobile ? '' : itemStyle;
+  let containerClass = itemClasses;
+  let containerStyle = itemStyle;
+
+  if (isMobile) {
+    containerClass = '';
+    containerStyle = '';
+  }
 
   const typeClasses = [];
   if (blockLayout === 4 || blockLayout === 5) typeClasses.push('text-item-freeform');
@@ -408,10 +424,7 @@ const buildAbsolutePositionedSides = (ctx) => {
       buildMaxWidthStyle(item.textMaxWidthDesktop, '--line-info-text-max-width-lg'),
       buildWidthStyle(item.textWidthTablet, '--line-info-text-width-md'),
       buildMaxWidthStyle(item.textMaxWidthTablet, '--line-info-text-max-width-md'),
-      item.xValueDesktop !== '0' && `--line-info-x-lg: ${item.xValueDesktop}`,
-      item.xValueTablet !== '0' && `--line-info-x-md: ${item.xValueTablet}`,
-      item.yValueTablet !== '0' && `--line-info-y-md: ${item.yValueTablet}`,
-      item.yValueDesktop !== '0' && `--line-info-y-lg: ${item.yValueDesktop}`,
+      buildXYStyles(item),
     );
 
     allItems.push(renderItemHtml(item, classes.join(' '), styles, advancedStyles, blockLayout));
@@ -467,10 +480,7 @@ const layoutStrategy5 = (ctx) => {
       buildMaxWidthStyle(item.maxDialogBoxWidthDesktop, '--line-info-text-max-width-lg'),
       buildWidthStyle(item.dialogBoxWidthTablet, '--line-info-text-width-md'),
       buildMaxWidthStyle(item.maxDialogBoxWidthTablet, '--line-info-text-max-width-md'),
-      item.xValueDesktop !== '0' && `--line-info-x-lg: ${item.xValueDesktop}`,
-      item.xValueTablet !== '0' && `--line-info-x-md: ${item.xValueTablet}`,
-      item.yValueTablet !== '0' && `--line-info-y-md: ${item.yValueTablet}`,
-      item.yValueDesktop !== '0' && `--line-info-y-lg: ${item.yValueDesktop}`,
+      buildXYStyles(item),
     );
 
     allItems.push(renderItemHtml(item, classes.join(' '), styles, advancedStyles, 5));
