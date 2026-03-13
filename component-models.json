@@ -7639,6 +7639,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "14-sh",
                 "value": "14-sh"
               },
@@ -7658,6 +7662,10 @@
             "name": "titleFontMselect",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "13",
                 "value": "13"
@@ -7694,6 +7702,10 @@
             "valueType": "string",
             "options": [
               {
+                "name": "default",
+                "value": ""
+              },
+              {
                 "name": "13",
                 "value": "13"
               },
@@ -7713,6 +7725,10 @@
             "name": "infoFontMselect",
             "valueType": "string",
             "options": [
+              {
+                "name": "default",
+                "value": ""
+              },
               {
                 "name": "12",
                 "value": "12"

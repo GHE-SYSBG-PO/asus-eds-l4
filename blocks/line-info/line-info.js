@@ -8,6 +8,7 @@ import {
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const PRODUCT_LINE = getProductLine();
+// const PRODUCT_LINE = 'rog';
 
 /** Font-family prefix per product line */
 const PRODUCT_FONT_PREFIX_TITLE = {
