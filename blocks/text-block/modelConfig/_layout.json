@@ -10,6 +10,11 @@
       "label": "desktop alignment",
       "name": "desktopAlignment",
       "valueType": "string",
+      "condition": {
+        "and": [
+          { "===": [{ "var": "productLine" }, "rog"] }
+        ]
+      },
       "options": [
         { "name": "Center", "value": "center" },
         { "name": "Left", "value": "left" }
