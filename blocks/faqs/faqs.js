@@ -1,9 +1,14 @@
 import {
   getBlockConfigs,
   getFieldValue,
+  isAuthorUe,
 } from '../../scripts/utils.js';
 
-const DEFAULT_CONFIG = {};
+const DEFAULT_CONFIG = {
+  right: 'Collapse all',
+  left: 'Show all',
+};
+
 const DEFAULT_ITEM_CONFIG = {
   collapseItemTitle: '',
   collapseItemInfo: '',
@@ -113,10 +118,20 @@ export default async function decorate(block) {
     // Layout rows: everything else that isn't our UI container or an item
     const layoutRows = allRows.filter((row) => !row.classList.contains('fold-outer-container') && !itemRows.includes(row));
 
-    // Hide layout config rows directly instead of deleting them to preserve UE configs
-    layoutRows.forEach((row) => {
-      row.style.display = 'none';
-    });
+    // Handle layout config rows
+    if (isAuthorUe()) {
+      // Hide layout config rows directly instead of deleting them to preserve UE configs
+      layoutRows.forEach((row) => {
+        row.style.display = 'none';
+      });
+    } else {
+      layoutRows.forEach((row) => {
+        row.remove();
+      });
+    }
+
+    const showAllText = v('left', 'text') || 'Show all';
+    const collapseAllText = v('right', 'text') || 'Collapse all';
 
     // Create the folding UI wrapper if it doesn't exist
     let foldContainerOuter = block.querySelector('.fold-outer-container');
@@ -125,9 +140,9 @@ export default async function decorate(block) {
       foldContainerOuter.className = 'fold-outer-container';
       foldContainerOuter.innerHTML = `
         <div class="fold-control">
-          <button type="button" class="fold-btn btn-showall wdga ro-rg-20" data-galabel="Show all" aria-label="Click to show all FAQ" data-eventname="faq_btn_show_all_clicked" tabindex="0">Show all</button>
+          <button type="button" class="fold-btn btn-showall wdga ro-rg-20" data-galabel="${showAllText}" aria-label="${showAllText}" data-eventname="faq_btn_show_all_clicked" tabindex="0">${showAllText}</button>
           <div class="fold-btn-split"></div>
-          <button type="button" class="fold-btn btn-collapseall wdga ro-rg-20" data-galabel="Collapse all" aria-label="Click to collapse all FAQ" data-eventname="faq_btn_collapse_all_clicked" tabindex="0">Collapse all</button>
+          <button type="button" class="fold-btn btn-collapseall wdga ro-rg-20" data-galabel="${collapseAllText}" aria-label="${collapseAllText}" data-eventname="faq_btn_collapse_all_clicked" tabindex="0">${collapseAllText}</button>
         </div>
         <div class="fold-container">
           <div class="fold-items"></div>
@@ -176,8 +191,12 @@ export default async function decorate(block) {
         imgSrc = img ? img.src : '';
         titleHtml = titleEle?.textContent?.trim() || '';
 
-        // Hide original cells (keep them for UE bindings but hide visually)
-        cells.forEach((cell) => { cell.style.display = 'none'; });
+        if (isAuthorUe()) {
+          // Hide original cells (keep them for UE bindings but hide visually)
+          cells.forEach((cell) => { cell.style.display = 'none'; });
+        } else {
+          cells.forEach((cell) => { cell.remove(); });
+        }
       }
 
       // Class and styling wrapper matching styles
@@ -229,6 +248,23 @@ export default async function decorate(block) {
 
       // Move it into the fold container
       foldItemsContainer.appendChild(row);
+
+      // Expand automatically if in UE authoring environment
+      if (isAuthorUe()) {
+        row.dataset.listenerAttached = 'true'; // Prevent click initialization
+        row.classList.add('active');
+        btn.setAttribute('aria-expanded', 'true');
+        
+        const panelGroup = itemContentDiv.querySelector('.accordion-group');
+        const panelInner = itemContentDiv.querySelector('.accordion-panel');
+        if (panelGroup) {
+          panelGroup.style.height = 'auto'; // Fully expand without animation
+        }
+        if (panelInner) {
+          panelInner.style.opacity = '1';
+          panelInner.style.pointerEvents = 'auto';
+        }
+      }
     }));
 
     // Initialize interactions
