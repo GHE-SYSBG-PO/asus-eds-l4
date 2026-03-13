@@ -6,10 +6,12 @@
       "name": "basic"
     },
     {
-      "component": "richtext",
+      "component": "text",
       "label": "Title",
       "name": "toptitle",
-      "valueType": "string"
+      "valueType": "string",
+      "value": "FAQs",
+      "placeholder": "FAQs"
     },
 
     {
@@ -55,8 +57,8 @@
         },
         {
           "component": "text",
-          "label": "Menu CTA Color",
-          "name": "menuCtaColor",
+          "label": "CTA Color",
+          "name": "ctaColor",
           "valueType": "string"
         },
         {

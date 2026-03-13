@@ -13,7 +13,7 @@
       "valueType": "string"
     },
     {
-      "component": "aem-content",
+      "component": "text",
       "label": "CTA hyperlink",
       "name": "ctaHyperlink",
       "multi": false,

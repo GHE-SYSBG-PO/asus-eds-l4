@@ -1,9 +1,118 @@
 @use '../../../styles/variable' as v;
 
-// .l4-pdp {
-// }
+.l4-pdp {
+  .faqs {
+    color: #181818; // Adjust to project's typography color variable if necessary
 
-// // handle RWD
+    .faqs-container {
+      width: 100%;
+      max-width: 1200px; // Standard max-width constraints, can be overridden by layout
+      margin: 0 auto;
+    }
+
+    button {
+      all: unset;
+      box-sizing: border-box;
+      cursor: pointer;
+      font-family: inherit;
+      
+      &:focus-visible {
+        outline: 2px solid #5ab0ff;
+        outline-offset: 4px;
+      }
+    }
+
+    .fold-outer-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .fold-control {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 24px;
+      color: #000; // Faded text color for the global toggles
+      
+      .fold-btn {
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #181818;
+        }
+      }
+    }
+
+    .fold-items {
+      border-bottom: 1px solid #181818; // Bottom border for the entire accordion list
+    }
+
+    .fold-item {
+      border-top: 1px solid #181818; // Divider between items
+      
+      &.active {
+        .content-title button::after {
+          transform: translateY(-50%) rotate(-135deg); // Point up when active
+        }
+      }
+    }
+
+    .content-title {
+      margin: 0;
+
+      button {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 0;
+        position: relative;
+        text-align: left;
+
+        // Custom chevron pointing down initially
+        &::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%) rotate(45deg);
+          width: 10px;
+          height: 10px;
+          border-right: 2px solid #5ab0ff;
+          border-bottom: 2px solid #5ab0ff;
+          transition: transform 0.3s ease;
+          pointer-events: none; // Let click pass to the button
+        }
+      }
+    }
+
+    .accordion-group {
+      overflow: hidden;
+      height: 0; // Default collapsed state
+      transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .accordion-panel {
+      padding-bottom: 24px;
+      opacity: 0; // Handled by JS inline styles, but good as fallback
+      transition: opacity 0.3s ease;
+      
+      .content-info {
+        color: #181818;
+      }
+
+      .content-img-group {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        background-color: red;
+      }
+    }
+  }
+}
+
+// handle RWD
 // // Desktop
 // @media all and (min-width: v.$large-lower-bound) {
 //   .l4-pdp {
@@ -12,24 +121,38 @@
 //   }
 // }
 
-// // Tablet
-// @media all and (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
-//   .l4-pdp {
-//     .faqs {
-//     }
-//   }
-// }
+// Tablet
+@media all and (min-width: v.$medium-lower-bound) and (max-width: v.$medium-upper-bound) {
+  .l4-pdp {
+    .faqs {
+      .content-title button {
+        padding: 20px 0;
+      }
 
-// // Mobile
-// @media all and (max-width: v.$small-upper-bound) {
-//   .l4-pdp {
-//     .faqs {
-//     }
-//   }
-// }
+      .accordion-panel {
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
 
-// // fix image overflow issue in another module setting
-// .l4-pdp {
-//   .faqs {
-//   }
-// }
+// Mobile
+@media all and (max-width: v.$small-upper-bound) {
+  .l4-pdp {
+    .faqs {
+      .fold-control {
+        gap: 16px;
+      }
+
+      .content-title button {
+        padding: 16px 0;
+        padding-right: 24px; // prevent text overlapping with chevron
+      }
+
+      .accordion-panel {
+        padding-bottom: 16px;
+      }
+    }
+  }
+}
+

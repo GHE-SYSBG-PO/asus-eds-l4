@@ -75,49 +75,123 @@ const DEFAULT_CONFIG = {};
 // const getAnimationType = (imageSrc) => (imageSrc ? 'type-1' : 'type-2');
 
 // ── Render ─────────────────────────────────────────────────────
+const renderPanelImg = (imgSrc) => `
+    <div class="content-img-group">
+      <img src="${imgSrc}" alt="">
+    </div>
+  `;
 
 const renderItemHTML = (item, index) => {
   const num = index + 1;
   const title = item.title || '';
   const content = item.content || '';
+  const imgSrc = item.imgSrc || '';
+  const imgHTML = renderPanelImg(imgSrc);
+
   return `
-    <div class="fold_item fold_item-${num}" data-index="${num}">
-      <div class="fold_group">
-        <div class="fold_content fold_content-${num}">
-          <div class="wd_content large_text-left medium_text-left small_text-left fold_content-wdcontent">
-            <div class="content_title no-top-space ro-rg-20 small_ro-rg-18"
-              id="footer_qa_fold_accordion_${num}" role="button"
-              data-galabel="Expand tab ${num}" data-eventname="qa_btn_${num}"
-              aria-label="Expand ${title} tab" aria-controls="footer_qa_fold_accordion_group_${num}"
-              aria-expanded="false" aria-hidden="false" tabindex="0">${title}</div>
-            <div class="accordion_group" id="footer_qa_fold_accordion_group_${num}" role="region" aria-labelledby="footer_qa_fold_accordion_${num}" aria-hidden="true">
-              <div class="accordion_panel">
-                <div class="content_info_group">
-                  <div class="content_info info-1 ro-rg-18 small_ro-rg-16">${content}</div>
-                </div>
-              </div>
-            </div>
+    <div class="fold-item fold-item-${num}" data-index="${num}">
+      <h3 class="content-title no-top-space ro-rg-20 small_ro-rg-18">
+        <button type="button" class="wdga"
+          id="footer_qa_fold_accordion_${num}" 
+          data-galabel="Expand tab ${num}" data-eventname="qa_btn_${num}"
+          aria-label="Expand ${title} tab" aria-controls="footer_qa_fold_accordion_group_${num}"
+          aria-expanded="false" tabindex="0">${title}</button>
+      </h3>
+      <div class="accordion-group" id="footer_qa_fold_accordion_group_${num}" role="region" aria-labelledby="footer_qa_fold_accordion_${num}" aria-hidden="true">
+        <div class="accordion-panel">
+          <div class="content-info-group">
+            <div class="content-info info-1 ro-rg-18 small_ro-rg-16">${content}</div>
           </div>
+          ${imgHTML}
         </div>
       </div>
     </div>
   `;
 };
 
-const renderMediaHTML = (items = []) => `
-    <div class="fold_outer-container">
-      <div class="fold_control">
-        <div class="fold_btn btn_showall wdga" role="button" data-galabel="Show all" aria-label="Click to show all FAQ" data-eventname="faq_btn_show_all_clicked" tabindex="0"><span class="ro-rg-20">Show all</span></div>
-        <div class="fold_btn_split"></div>
-        <div class="fold_btn btn_collapseall wdga" role="button" data-galabel="Collapse all" aria-label="Click to collapse all FAQ" data-eventname="faq_btn_collapse_all_clicked" tabindex="0"><span class="ro-rg-20">Collapse all</span></div>
+const renderContainerHTML = (items = []) => `
+    <div class="fold-outer-container">
+      <div class="fold-control">
+        <button type="button" class="fold-btn btn-showall wdga ro-rg-20" data-galabel="Show all" aria-label="Click to show all FAQ" data-eventname="faq_btn_show_all_clicked" tabindex="0">Show all</button>
+        <div class="fold-btn-split"></div>
+        <button type="button" class="fold-btn btn-collapseall wdga ro-rg-20" data-galabel="Collapse all" aria-label="Click to collapse all FAQ" data-eventname="faq_btn_collapse_all_clicked" tabindex="0">Collapse all</button>
       </div>
-      <div class="fold_container">
-        <div class="fold_items">
+      <div class="fold-container">
+        <div class="fold-items">
           ${items.map((item, index) => renderItemHTML(item, index)).join('')}
         </div>
       </div>
     </div>
   `;
+
+// ── Interactions ──────────────────────────────────────────────
+
+/**
+ * Initializes FAQ accordion fold clicks and global show/collapse all buttons
+ * @param {HTMLElement} block
+ */
+const initFAQInteractions = (block) => {
+  const faqContainer = block.querySelector('.faqs-container');
+  if (!faqContainer) return;
+
+  const items = faqContainer.querySelectorAll('.fold-item');
+  const showAllBtn = faqContainer.querySelector('.btn-showall');
+  const collapseAllBtn = faqContainer.querySelector('.btn-collapseall');
+
+  // Helper: update single item state
+  const setItemState = (itemWrapper, isExpanded) => {
+    const btn = itemWrapper.querySelector('button[aria-expanded]');
+    const groupDiv = itemWrapper.querySelector('.accordion-group');
+
+    if (isExpanded) {
+      itemWrapper.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+      groupDiv.setAttribute('aria-hidden', 'false');
+      groupDiv.style.height = `${groupDiv.scrollHeight}px`; // Basic open height, may need SCSS transiton tuning
+      groupDiv.querySelector('.accordion-panel').style.opacity = '1';
+    } else {
+      itemWrapper.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
+      groupDiv.setAttribute('aria-hidden', 'true');
+      groupDiv.style.height = '0';
+      groupDiv.querySelector('.accordion-panel').style.opacity = '0';
+    }
+  };
+
+  // 1. Single item click toggle
+  items.forEach((itemEl) => {
+    itemEl.addEventListener('click', (e) => {
+      // Prevent toggling if user is actually selecting text inside the content
+      if (window.getSelection().toString().length > 0) return;
+
+      const btn = itemEl.querySelector('.content-title button');
+      if (!btn) return;
+
+      // If click originated from the folded panel (which users want to use as a toggle too),
+      // strictly triggering a click ensures the AEM GA logic catches the event on the button proxy.
+      if (e.target !== btn && !btn.contains(e.target)) {
+        btn.click(); // This will trigger the handler below
+        return;
+      }
+
+      const isCurrentlyExpanded = btn.getAttribute('aria-expanded') === 'true';
+      setItemState(itemEl, !isCurrentlyExpanded);
+    });
+  });
+
+  // 2. Global buttons
+  if (showAllBtn) {
+    showAllBtn.addEventListener('click', () => {
+      items.forEach((itemEl) => setItemState(itemEl, true));
+    });
+  }
+
+  if (collapseAllBtn) {
+    collapseAllBtn.addEventListener('click', () => {
+      items.forEach((itemEl) => setItemState(itemEl, false));
+    });
+  }
+};
 
 // ── Entry point ───────────────────────────────────────────────
 
@@ -164,7 +238,7 @@ export default async function decorate(block) {
       },
     ];
 
-    const containerHtml = renderMediaHTML(mockItems);
+    const containerHtml = renderContainerHTML(mockItems);
 
     block.innerHTML = `
       <div class="faqs-container">
@@ -176,6 +250,9 @@ export default async function decorate(block) {
     if (!isUE) {
       // scroll animation setup
     }
+
+    // --- Interactions ---
+    initFAQInteractions(block);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error decorating faqs: ', error);
