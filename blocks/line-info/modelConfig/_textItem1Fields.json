@@ -51,7 +51,7 @@
           "name": "textItems1YValueDesktop",
           "valueType": "string",
           "placeholder": "px",
-          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "description": " * 文案太多可以是負值",        
           "multi": false
         },
         {
@@ -89,7 +89,7 @@
           "name": "textItems1YValueTablet",
           "valueType": "string",
           "placeholder": "px",
-          "description": "Vertical Y axis positioning. Can be negative if content is too long.",
+          "description": " * 文案太多可以是負值",        
           "multi": false
         },
         {

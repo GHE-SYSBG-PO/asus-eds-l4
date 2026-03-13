@@ -65,6 +65,7 @@
           "name": "textItems4XValueDesktop",
           "valueType": "string",
           "placeholder": "px",
+          "description": " * 可以是負值",        
           "multi": false
         },
         {
@@ -79,6 +80,7 @@
           "name": "textItems4YValueDesktop",
           "valueType": "string",
           "placeholder": "px",
+          "description": " * 文案太多可以是負值",        
           "multi": false
         },           
         {
@@ -130,6 +132,7 @@
           "name": "textItems4XValueTablet",
           "valueType": "string",
           "placeholder": "px",
+          "description": " * 可以是負值",        
           "multi": false
         },
         {
@@ -144,6 +147,7 @@
           "name": "textItems4YValueTablet",
           "valueType": "string",
           "placeholder": "px",
+          "description": " * 文案太多可以是負值",        
           "multi": false
         },        
         {

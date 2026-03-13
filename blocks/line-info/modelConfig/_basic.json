@@ -50,7 +50,8 @@
           "label": "  width",
           "name": "assetDesktopImgWidth",
           "valueType": "string",
-          "placeholder": "px"
+          "placeholder": "px",
+          "description": "* if style = 1, width 建議不超過 1412px"
         },
         {
           "component": "text",

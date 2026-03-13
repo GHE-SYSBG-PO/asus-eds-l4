@@ -65,6 +65,7 @@
           "name": "textItems3XValueDesktop",
           "valueType": "string",
           "placeholder": "px",
+          "description": " * 可以是負值",        
           "multi": false
         },
         {
@@ -116,6 +117,7 @@
           "name": "textItems3XValueTablet",
           "valueType": "string",
           "placeholder": "px",
+          "description": " * 可以是負值",        
           "multi": false
         },
         {

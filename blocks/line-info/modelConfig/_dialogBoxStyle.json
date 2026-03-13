@@ -16,7 +16,7 @@
           "label": "border radius",
           "name": "dialogBoxRadius",
           "valueType": "string",
-          "placeholder": "(上/右/下/左) ex: 10px 20px 20px 10px"
+          "placeholder": "8px 8px 8px 8px"
         },
         {
           "component": "text",
@@ -45,7 +45,7 @@
           "label": "padding",
           "name": "dialogBoxPadding",
           "valueType": "string",
-          "placeholder": "(上/右/下/左) ex: 10px 0 0 10px"
+          "placeholder": "10px 0 0 10px"
         }
       ]
     }
