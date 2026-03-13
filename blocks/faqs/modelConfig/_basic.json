@@ -19,6 +19,17 @@
       "label": "Selection",
       "name": "selection",
       "collapsible": true,
+      "condition": {
+        "in": [
+          {
+            "var": "productLine"
+          },
+          [
+            "asus",
+            "rog"
+          ]
+        ]
+      },
       "fields": [
         {
           "component": "text",
