@@ -109,7 +109,7 @@ const renderItemHTML = (item, index) => {
   `;
 };
 
-const renderContainerHTML = (items = []) => `
+const renderContainerHTML = () => `
     <div class="fold-outer-container">
       <div class="fold-control">
         <button type="button" class="fold-btn btn-showall wdga ro-rg-20" data-galabel="Show all" aria-label="Click to show all FAQ" data-eventname="faq_btn_show_all_clicked" tabindex="0">Show all</button>
@@ -118,7 +118,6 @@ const renderContainerHTML = (items = []) => `
       </div>
       <div class="fold-container">
         <div class="fold-items">
-          ${items.map((item, index) => renderItemHTML(item, index)).join('')}
         </div>
       </div>
     </div>
@@ -160,6 +159,10 @@ const initFAQInteractions = (block) => {
 
   // 1. Single item click toggle
   items.forEach((itemEl) => {
+    // Prevent adding multiple listeners if re-initialized
+    if (itemEl.dataset.listenerAttached) return;
+    itemEl.dataset.listenerAttached = 'true';
+
     itemEl.addEventListener('click', (e) => {
       // Prevent toggling if user is actually selecting text inside the content
       if (window.getSelection().toString().length > 0) return;
@@ -180,18 +183,65 @@ const initFAQInteractions = (block) => {
   });
 
   // 2. Global buttons
-  if (showAllBtn) {
+  if (showAllBtn && !showAllBtn.dataset.listenerAttached) {
+    showAllBtn.dataset.listenerAttached = 'true';
     showAllBtn.addEventListener('click', () => {
       items.forEach((itemEl) => setItemState(itemEl, true));
     });
   }
 
-  if (collapseAllBtn) {
+  if (collapseAllBtn && !collapseAllBtn.dataset.listenerAttached) {
+    collapseAllBtn.dataset.listenerAttached = 'true';
     collapseAllBtn.addEventListener('click', () => {
       items.forEach((itemEl) => setItemState(itemEl, false));
     });
   }
 };
+
+const DEFAULT_ITEM_CONFIG = {
+  collapseItemTitle: '',
+  collapseItemInfo: '',
+  collapseItemImageD: '',
+};
+
+// ── Entry point ───────────────────────────────────────────────
+
+// ── UE authoring mode ─────────────────────────────────────────
+function _decorateUE(foldItemsContainer, itemEls, itemsConfigs) {
+  itemEls.forEach((itemEl, index) => {
+    const faqItemBlock = itemEl.querySelector('.faqs-item');
+    if (faqItemBlock && itemsConfigs[index]) {
+      const mappedItem = {
+        title: itemsConfigs[index].collapseItemTitle?.text ?? itemsConfigs[index].collapseItemTitle ?? '',
+        content: itemsConfigs[index].collapseItemInfo?.text ?? itemsConfigs[index].collapseItemInfo ?? '',
+        imgSrc: itemsConfigs[index].collapseItemImageD ?? '',
+      };
+      faqItemBlock.innerHTML = renderItemHTML(mappedItem, index);
+    }
+    foldItemsContainer.appendChild(itemEl);
+  });
+}
+
+// ── Frontend (published page) ─────────────────────────────────
+function _decorateFrontend(foldItemsContainer, itemsConfigs, mockItems) {
+  if (itemsConfigs.length > 0) {
+    itemsConfigs.forEach((itemConfig, index) => {
+      const mappedItem = {
+        title: itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '',
+        content: itemConfig.collapseItemInfo?.text ?? itemConfig.collapseItemInfo ?? '',
+        imgSrc: itemConfig.collapseItemImageD ?? '',
+      };
+      const frag = document.createRange().createContextualFragment(renderItemHTML(mappedItem, index));
+      foldItemsContainer.appendChild(frag);
+    });
+  } else {
+    // Mock data processing if no items authored yet
+    mockItems.forEach((item, index) => {
+      const frag = document.createRange().createContextualFragment(renderItemHTML(item, index));
+      foldItemsContainer.appendChild(frag);
+    });
+  }
+}
 
 // ── Entry point ───────────────────────────────────────────────
 
@@ -201,7 +251,18 @@ export default async function decorate(block) {
     const v = getFieldValue(config);
     const isUE = isAuthorUe();
 
-    // const anime = await loadAnime();
+    // Extract item elements from block before wiping it clean
+    const itemEls = [...block.querySelectorAll('.faqs-item-wrapper')];
+    let itemsConfigs = [];
+    if (itemEls.length > 0) {
+      itemsConfigs = await Promise.all(
+        itemEls.map(async (itemEl) => getBlockConfigs(
+          itemEl.querySelector('.faqs-item'),
+          DEFAULT_ITEM_CONFIG,
+          'faqs-item',
+        )),
+      );
+    }
 
     block.innerHTML = '';
 
@@ -210,11 +271,6 @@ export default async function decorate(block) {
     if (colorGroup) block.classList.add(colorGroup);
 
     // --- Layout ---
-    if (isUE) {
-      // UE-specific layout adjustments
-    }
-
-    // TODO: Fetch items from block or UE config. Mocking data for now based on your content.
     const mockItems = [
       {
         title: 'What is an AI PC?',
@@ -238,13 +294,37 @@ export default async function decorate(block) {
       },
     ];
 
-    const containerHtml = renderContainerHTML(mockItems);
-
     block.innerHTML = `
       <div class="faqs-container">
-        ${containerHtml}
+        ${renderContainerHTML()}
       </div>
     `;
+
+    const foldItemsContainer = block.querySelector('.fold-items');
+
+    if (isUE) {
+      _decorateUE(foldItemsContainer, itemEls, itemsConfigs);
+
+      // Add Live Edit listener
+      block.addEventListener('asus-l4--section-faqs-item', async ({ detail }) => {
+        const itemConfig = await getBlockConfigs(
+          detail,
+          DEFAULT_ITEM_CONFIG,
+          'faqs-item',
+        );
+        const index = [...foldItemsContainer.querySelectorAll('.faqs-item')].indexOf(detail);
+        const mappedItem = {
+          title: itemConfig.collapseItemTitle?.text ?? itemConfig.collapseItemTitle ?? '',
+          content: itemConfig.collapseItemInfo?.text ?? itemConfig.collapseItemInfo ?? '',
+          imgSrc: itemConfig.collapseItemImageD ?? '',
+        };
+        detail.innerHTML = renderItemHTML(mappedItem, index);
+        // Re-init listener array length might have changed via UE add/remove
+        initFAQInteractions(block);
+      });
+    } else {
+      _decorateFrontend(foldItemsContainer, itemsConfigs, mockItems);
+    }
 
     // --- Animation ---
     if (!isUE) {
