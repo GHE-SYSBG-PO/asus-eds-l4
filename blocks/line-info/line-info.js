@@ -328,8 +328,8 @@ const renderItemHtml = (item, className, style, advancedStyles, blockLayout, isM
     blockLayout === 5 && 'text-item-freeform-dialog',
   ].filter(Boolean).join(' ');
 
-  const titleHtml = item.titleRichtext ? `<div class="title w-full ${advancedStyles.title.classes}" style="${advancedStyles.title.style}">${item.titleRichtext}</div>` : '';
-  const infoHtml = item.infoRichtext ? `<div class="info w-full ${advancedStyles.info.classes}" style="${advancedStyles.info.style}">${item.infoRichtext}</div>` : '';
+  const titleHtml = item.titleRichtext ? `<div class="title w-full ${advancedStyles.title.classes}" style="${advancedStyles.title.style}"><span class="item-title-text">${item.titleRichtext}</span></div>` : '';
+  const infoHtml = item.infoRichtext ? `<div class="info w-full ${advancedStyles.info.classes}" style="${advancedStyles.info.style}"><span class="item-info-text">${item.infoRichtext}</span></div>` : '';
 
   let circleNumber = '';
   if (isMobile || [3, 4, 5].includes(blockLayout)) {

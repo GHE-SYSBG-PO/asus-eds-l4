@@ -2,14 +2,16 @@
 
 .l4-pdp .line-info{  
   .text-item {
-    .title{
+    .title .item-title-text{
       background-image: var(--base-text-item-title-color);
       background-clip: text;
       color: transparent;
+      display: inline-block;
     }
 
-    .info {
+    .info .item-info-text{
       color: var(--base-text-item-info-color);
+      display: inline-block;
     }   
   }
 }
