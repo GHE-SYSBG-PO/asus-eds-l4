@@ -205,6 +205,10 @@ const initFAQInteractions = (block) => {
 
     if (!btn || !panelGroup) return;
 
+    if (itemEl.expandTimeout) {
+      clearTimeout(itemEl.expandTimeout);
+    }
+
     if (expand) {
       itemEl.classList.add('active');
       btn.setAttribute('aria-expanded', 'true');
@@ -213,8 +217,10 @@ const initFAQInteractions = (block) => {
         panelInner.style.opacity = '1';
         panelInner.style.pointerEvents = 'auto'; // Re-enable pointer events
       }
-      setTimeout(() => {
-        panelGroup.style.height = 'auto';
+      itemEl.expandTimeout = setTimeout(() => {
+        if (itemEl.classList.contains('active')) {
+          panelGroup.style.height = 'auto';
+        }
       }, 300);
     } else {
       panelGroup.style.height = `${panelGroup.scrollHeight}px`; // Force height for animation
