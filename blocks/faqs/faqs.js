@@ -296,7 +296,7 @@ const _handleLayoutRows = (layoutRows) => {
 const _createShell = (block, showAllText, collapseAllText, v) => {
   const titleFontClass = _getFontClass('toptitle', v && v('titleFontDTM', 'text'), ['20']);
   const controlFontClass = _getFontClass('control', v && v('selectionFontDTM', 'text'), ['20']);
-  const topTitleText = v('title', 'text') || 'FAQs';
+  const topTitleText = v('toptitle', 'text') || 'FAQs';
 
   let foldContainerOuter = block.querySelector('.fold-outer-container');
   if (!foldContainerOuter) {
